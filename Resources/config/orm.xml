@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="sonata.classification.manager.comment.class">Sonata\ClassificationBundle\Entity\CommentManager</parameter>
+        <parameter key="sonata.classification.manager.category.class">Sonata\ClassificationBundle\Entity\CategoryManager</parameter>
+        <parameter key="sonata.classification.manager.tag.class">Sonata\ClassificationBundle\Entity\TagManager</parameter>
+    </parameters>
+
+    <services>
+        <service id="sonata.classification.entity_manager" alias="doctrine.orm.default_entity_manager" />
+
+        <service id="sonata.classification.manager.comment" class="%sonata.classification.manager.comment.class%">
+            <argument type="service" id="sonata.classification.entity_manager" />
+            <argument>%sonata.classification.manager.comment.entity%</argument>
+            <argument type="service" id="sonata.classification.manager.post" />
+        </service>
+
+        <service id="sonata.classification.manager.category" class="%sonata.classification.manager.category.class%">
+            <argument type="service" id="sonata.classification.entity_manager" />
+            <argument>%sonata.classification.manager.category.entity%</argument>
+        </service>
+
+        <service id="sonata.classification.manager.tag" class="%sonata.classification.manager.tag.class%">
+            <argument type="service" id="sonata.classification.entity_manager" />
+            <argument>%sonata.classification.manager.tag.entity%</argument>
+        </service>
+
+        <service id="sonata.classification.manager.post" class="%sonata.classification.manager.post.class%">
+           <argument type="service" id="sonata.classification.entity_manager" />
+           <argument>%sonata.classification.manager.post.entity%</argument>
+        </service>
+
+    </services>
+</container>

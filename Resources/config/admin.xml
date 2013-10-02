@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="sonata.classification.admin.category" class="%sonata.classification.admin.category.class%">
+            <tag name="sonata.admin" manager_type="orm" group="sonata_classification" label="categories"  label_catalogue="%sonata.classification.admin.category.translation_domain%" label_translator_strategy="sonata.admin.label.strategy.underscore" />
+            <argument />
+            <argument>%sonata.classification.admin.category.entity%</argument>
+            <argument>%sonata.classification.admin.category.controller%</argument>
+
+            <call method="setTranslationDomain">
+                <argument>%sonata.classification.admin.category.translation_domain%</argument>
+            </call>
+        </service>
+
+        <service id="sonata.classification.admin.tag" class="%sonata.classification.admin.tag.class%">
+            <tag name="sonata.admin" manager_type="orm" group="sonata_classification" label="tags"  label_catalogue="%sonata.classification.admin.tag.translation_domain%" label_translator_strategy="sonata.admin.label.strategy.underscore" />
+            <argument />
+            <argument>%sonata.classification.admin.tag.entity%</argument>
+            <argument>%sonata.classification.admin.tag.controller%</argument>
+
+            <call method="setTranslationDomain">
+                <argument>%sonata.classification.admin.tag.translation_domain%</argument>
+            </call>
+        </service>
+    </services>
+
+</container>

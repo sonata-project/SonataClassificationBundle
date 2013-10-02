@@ -1,5 +1,5 @@
 {
-    "name": "sonata-project/classificaiton-bundle",
+    "name": "sonata-project/classification-bundle",
     "type": "symfony-bundle",
     "description": "Symfony SonataClassificationBundle",
     "keywords": ["category", "tag", "taxonomy"],

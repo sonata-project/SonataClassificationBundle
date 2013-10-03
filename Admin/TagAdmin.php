@@ -37,7 +37,7 @@ class TagAdmin extends Admin
     {
         $datagridMapper
             ->add('name')
-            ->add('posts')
+            ->add('enabled')
         ;
     }
 
@@ -50,6 +50,8 @@ class TagAdmin extends Admin
             ->addIdentifier('name')
             ->add('slug')
             ->add('enabled', null, array('editable' => true))
+            ->add('createdAt')
+            ->add('updatedAt')
         ;
     }
 }

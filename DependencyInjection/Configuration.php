@@ -59,20 +59,6 @@ class Configuration implements ConfigurationInterface
                         ->end()
                     ->end()
                 ->end()
-
-                ->arrayNode('comment')
-                    ->children()
-                        ->arrayNode('notification')
-                            ->children()
-                                ->arrayNode('emails')
-                                    ->prototype('scalar')->cannotBeEmpty()->end()
-                                ->end()
-                                ->scalarNode('from')->cannotBeEmpty()->end()
-                                ->scalarNode('template')->cannotBeEmpty()->end()
-                            ->end()
-                        ->end()
-                    ->end()
-                ->end()
             ->end()
         ;
 

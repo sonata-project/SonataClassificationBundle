@@ -60,10 +60,12 @@ class SonataClassificationExtension extends Extension
         // admin configuration
         $container->setParameter('sonata.classification.admin.tag.entity',        $config['class']['tag']);
         $container->setParameter('sonata.classification.admin.category.entity',   $config['class']['category']);
+        $container->setParameter('sonata.classification.admin.collection.entity', $config['class']['collection']);
 
         // manager configuration
-        $container->setParameter('sonata.classification.manager.tag.entity',      $config['class']['tag']);
-        $container->setParameter('sonata.classification.manager.category.entity', $config['class']['category']);
+        $container->setParameter('sonata.classification.manager.tag.entity',        $config['class']['tag']);
+        $container->setParameter('sonata.classification.manager.category.entity',   $config['class']['category']);
+        $container->setParameter('sonata.classification.manager.collection.entity', $config['class']['collection']);
     }
 
     /**
@@ -72,13 +74,17 @@ class SonataClassificationExtension extends Extension
      */
     public function configureAdmin($config, ContainerBuilder $container)
     {
-        $container->setParameter('sonata.classification.admin.category.class',              $config['admin']['category']['class']);
-        $container->setParameter('sonata.classification.admin.category.controller',         $config['admin']['category']['controller']);
-        $container->setParameter('sonata.classification.admin.category.translation_domain', $config['admin']['category']['translation']);
+        $container->setParameter('sonata.classification.admin.category.class',                $config['admin']['category']['class']);
+        $container->setParameter('sonata.classification.admin.category.controller',           $config['admin']['category']['controller']);
+        $container->setParameter('sonata.classification.admin.category.translation_domain',   $config['admin']['category']['translation']);
 
-        $container->setParameter('sonata.classification.admin.tag.class',              $config['admin']['tag']['class']);
-        $container->setParameter('sonata.classification.admin.tag.controller',         $config['admin']['tag']['controller']);
-        $container->setParameter('sonata.classification.admin.tag.translation_domain', $config['admin']['tag']['translation']);
+        $container->setParameter('sonata.classification.admin.tag.class',                     $config['admin']['tag']['class']);
+        $container->setParameter('sonata.classification.admin.tag.controller',                $config['admin']['tag']['controller']);
+        $container->setParameter('sonata.classification.admin.tag.translation_domain',        $config['admin']['tag']['translation']);
+
+        $container->setParameter('sonata.classification.admin.collection.class',              $config['admin']['collection']['class']);
+        $container->setParameter('sonata.classification.admin.collection.controller',         $config['admin']['collection']['controller']);
+        $container->setParameter('sonata.classification.admin.collection.translation_domain', $config['admin']['collection']['translation']);
     }
 
     /**

@@ -10,4 +10,5 @@ Reference Guide
 
    reference/introduction
    reference/installation
+   reference/classification_types
    reference/advanced_configuration

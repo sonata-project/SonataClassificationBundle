@@ -114,7 +114,7 @@ interface CategoryInterface
      * @param CategoryInterface $parent
      * @param boolean           $nested
      */
-    public function setParent(CategoryInterface $parent, $nested = false);
+    public function setParent(CategoryInterface $parent = null, $nested = false);
 
     /**
      * Get Parent

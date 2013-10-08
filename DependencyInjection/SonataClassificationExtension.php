@@ -24,15 +24,15 @@ use Sonata\EasyExtendsBundle\Mapper\DoctrineCollector;
 /**
  * SonataClassificationBundleExtension
  *
- * @author      Thomas Rabaix <thomas.rabaix@sonata-project.org>
+ * @author Thomas Rabaix <thomas.rabaix@sonata-project.org>
  */
 class SonataClassificationExtension extends Extension
 {
     /**
      * @throws \InvalidArgumentException
      *
-     * @param array                                                   $configs
-     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
+     * @param array            $configs
+     * @param ContainerBuilder $container
      *
      * @return void
      */
@@ -45,6 +45,7 @@ class SonataClassificationExtension extends Extension
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('admin.xml');
         $loader->load('orm.xml');
+        $loader->load('form.xml');
 
         $this->registerDoctrineMapping($config, $container);
         $this->configureClass($config, $container);

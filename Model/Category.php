@@ -276,11 +276,11 @@ abstract class Category implements CategoryInterface
      * @param CategoryInterface $parent
      * @param boolean           $nested
      */
-    public function setParent(CategoryInterface $parent, $nested = false)
+    public function setParent(CategoryInterface $parent = null, $nested = false)
     {
         $this->parent = $parent;
 
-        if (!$nested) {
+        if (!$nested && $parent) {
             $parent->addChild($this, true);
         }
     }

@@ -78,6 +78,26 @@
                 <source>list.label_updated_at</source>
                 <target>Updated At</target>
             </trans-unit>
+            <trans-unit id="form.label_position">
+                <source>form.label_position</source>
+                <target>Position</target>
+            </trans-unit>
+            <trans-unit id="form.label_parent">
+                <source>form.label_parent</source>
+                <target>Parent</target>
+            </trans-unit>
+            <trans-unit id="list.label_position">
+                <source>list.label_position</source>
+                <target>Position</target>
+            </trans-unit>
+            <trans-unit id="list.label_parent">
+                <source>list.label_parent</source>
+                <target>Parent</target>
+            </trans-unit>
+            <trans-unit id="filter.label_parent">
+                <source>filter.label_parent</source>
+                <target>Parent</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

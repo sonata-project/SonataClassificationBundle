@@ -27,6 +27,13 @@ class CategoryAdmin extends Admin
             ->add('name')
             ->add('description', null, array('required' => false))
             ->add('enabled', null, array('required' => false))
+            ->add('position')
+            ->add('parent', 'sonata_category_selector', array(
+                'category'      => $this->getSubject() ?: null,
+                'model_manager' => $this->getModelManager(),
+                'class'         => $this->getClass(),
+                'required'      => false
+            ))
         ;
     }
 
@@ -38,6 +45,7 @@ class CategoryAdmin extends Admin
         $datagridMapper
             ->add('name')
             ->add('enabled')
+            ->add('parent')
         ;
     }
 
@@ -51,6 +59,8 @@ class CategoryAdmin extends Admin
             ->add('slug')
             ->add('description')
             ->add('enabled', null, array('editable' => true))
+            ->add('position')
+            ->add('parent')
         ;
     }
 }

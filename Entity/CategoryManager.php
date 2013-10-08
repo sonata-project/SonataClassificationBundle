@@ -154,7 +154,7 @@ class CategoryManager extends ModelCategoryManager
             $category->disableChildrenLazyLoading();
 
             if (!$parent) {
-                $root->addChild($category);
+                $root->addChild($category, true);
 
                 continue;
             }

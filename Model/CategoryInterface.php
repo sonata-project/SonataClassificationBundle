@@ -68,4 +68,58 @@ interface CategoryInterface
      * @return string $description
      */
     public function getDescription();
+
+    /**
+     * @param integer $position
+     */
+    public function setPosition($position);
+
+    /**
+     * @return integer
+     */
+    public function getPosition();
+
+    /**
+     * Add Children
+     *
+     * @param CategoryInterface $children
+     * @param boolean           $nested
+     */
+    public function addChild(CategoryInterface $children, $nested = false);
+
+    /**
+     * Get Children
+     *
+     * @return \Doctrine\Common\Collections\Collection $children
+     */
+    public function getChildren();
+
+    /**
+     * Set children
+     *
+     * @param $children
+     */
+    public function setChildren($children);
+
+    /**
+     * Return true if category has children
+     *
+     * @return boolean
+     */
+    public function hasChildren();
+
+    /**
+     * Set Parent
+     *
+     * @param CategoryInterface $parent
+     * @param boolean           $nested
+     */
+    public function setParent(CategoryInterface $parent, $nested = false);
+
+    /**
+     * Get Parent
+     *
+     * @return CategoryInterface $parent
+     */
+    public function getParent();
 }

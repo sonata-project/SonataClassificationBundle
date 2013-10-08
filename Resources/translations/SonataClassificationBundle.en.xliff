@@ -14,6 +14,10 @@
                 <source>label_tags</source>
                 <target>Tags</target>
             </trans-unit>
+            <trans-unit id="label_collections">
+                <source>label_collections</source>
+                <target>Collections</target>
+            </trans-unit>
             <trans-unit id="breadcrumb.link_category_list">
                 <source>breadcrumb.link_category_list</source>
                 <target>Category</target>

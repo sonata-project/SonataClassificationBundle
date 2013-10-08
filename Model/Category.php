@@ -11,6 +11,7 @@
 
 namespace Sonata\ClassificationBundle\Model;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Sonata\ClassificationBundle\Model\CategoryInterface;
 use Sonata\ClassificationBundle\Model\Tag;
 
@@ -27,6 +28,12 @@ abstract class Category implements CategoryInterface
     protected $createdAt;
 
     protected $updatedAt;
+
+    protected $position;
+
+    protected $children;
+
+    protected $parent;
 
     /**
      * Set name
@@ -115,7 +122,7 @@ abstract class Category implements CategoryInterface
      */
     public function __toString()
     {
-        return $this->getName() ?: 'n/a';
+        return $this->getName() ? : 'n/a';
     }
 
     public function prePersist()
@@ -159,5 +166,132 @@ abstract class Category implements CategoryInterface
     public function getUpdatedAt()
     {
         return $this->updatedAt;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setPosition($position)
+    {
+        $this->position = $position;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPosition()
+    {
+        return $this->position;
+    }
+
+    /**
+     * @param CategoryInterface $child
+     *
+     * @deprecated only used by the AdminHelper
+     */
+    public function addChildren(CategoryInterface $child)
+    {
+        $this->addChild($child, true);
+    }
+
+    /**
+     * Add Children
+     *
+     * @param CategoryInterface $child
+     * @param boolean           $nested
+     */
+    public function addChild(CategoryInterface $child, $nested = false)
+    {
+        $this->children[] = $child;
+
+        if (!$nested) {
+            $child->setParent($this, true);
+        }
+    }
+
+    /**
+     * @param CategoryInterface $childToDelete
+     */
+    public function removeChild(CategoryInterface $childToDelete)
+    {
+        foreach ($this->getChildren() as $pos => $child) {
+            if ($childToDelete->getId() && $child->getId() === $childToDelete->getId()) {
+                unset($this->children[$pos]);
+
+                return;
+            }
+
+            if (!$childToDelete->getId() && $child === $childToDelete) {
+                unset($this->children[$pos]);
+
+                return;
+            }
+        }
+    }
+
+    public function disableChildrenLazyLoading()
+    {
+        if (is_object($this->children)) {
+            $this->children->setInitialized(true);
+        }
+    }
+
+    /**
+     * Get Children
+     *
+     * @return \Doctrine\Common\Collections\Collection $children
+     */
+    public function getChildren()
+    {
+        return $this->children;
+    }
+
+    /**
+     * Set children
+     *
+     * @param $children
+     */
+    public function setChildren($children)
+    {
+        $this->children = new ArrayCollection();
+
+        foreach ($children as $category) {
+            $this->addChild($category);
+        }
+    }
+
+    /**
+     * Return true if category has children
+     *
+     * @return boolean
+     */
+    public function hasChildren()
+    {
+        return count($this->children) > 0;
+    }
+
+    /**
+     * Set Parent
+     *
+     * @param CategoryInterface $parent
+     * @param boolean           $nested
+     */
+    public function setParent(CategoryInterface $parent, $nested = false)
+    {
+        $this->parent = $parent;
+
+        if (!$nested) {
+            $parent->addChild($this, true);
+        }
+    }
+
+    /**
+     * Get Parent
+     *
+     * @return CategoryInterface $parent
+     */
+    public function getParent()
+    {
+        return $this->parent;
     }
 }

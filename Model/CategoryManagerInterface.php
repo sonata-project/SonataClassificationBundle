@@ -11,6 +11,8 @@
 
 namespace Sonata\ClassificationBundle\Model;
 
+use Sonata\AdminBundle\Datagrid\PagerInterface;
+
 interface CategoryManagerInterface
 {
     /**
@@ -62,4 +64,35 @@ interface CategoryManagerInterface
      * @return void
      */
     public function save(CategoryInterface $category);
+
+    /**
+     * Returns a pager to iterate over the root category
+     *
+     * @param integer $page
+     * @param integer $limit
+     * @param array   $criteria
+     *
+     * @return mixed
+     */
+    public function getRootCategoriesPager($page = 1, $limit = 25, $criteria = array());
+
+    /**
+     * @param integer $categoryId
+     * @param integer $page
+     * @param integer $limit
+     * @param array   $criteria
+     *
+     * @return PagerInterface
+     */
+    public function getSubCategoriesPager($categoryId, $page = 1, $limit = 25, $criteria = array());
+
+    /**
+     * @return CategoryInterface
+     */
+    public function getRootCategory();
+
+    /**
+     * @return array
+     */
+    public function getCategories();
 }

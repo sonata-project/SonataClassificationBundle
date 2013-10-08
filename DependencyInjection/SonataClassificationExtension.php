@@ -52,8 +52,8 @@ class SonataClassificationExtension extends Extension
     }
 
     /**
-     * @param array                                                   $config
-     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
+     * @param array            $config
+     * @param ContainerBuilder $container
      */
     public function configureClass($config, ContainerBuilder $container)
     {
@@ -69,8 +69,8 @@ class SonataClassificationExtension extends Extension
     }
 
     /**
-     * @param array                                                   $config
-     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
+     * @param array            $config
+     * @param ContainerBuilder $container
      */
     public function configureAdmin($config, ContainerBuilder $container)
     {
@@ -92,12 +92,49 @@ class SonataClassificationExtension extends Extension
      */
     public function registerDoctrineMapping(array $config)
     {
-        $collector = DoctrineCollector::getInstance();
 
         foreach ($config['class'] as $type => $class) {
             if (!class_exists($class)) {
                 return;
             }
         }
+
+        $collector = DoctrineCollector::getInstance();
+
+        $collector->addAssociation($config['class']['category'], 'mapOneToMany', array(
+            'fieldName'     => 'children',
+            'targetEntity'  => $config['class']['category'],
+            'cascade'       => array(
+                'remove',
+                'persist',
+            ),
+            'mappedBy'      => 'parent',
+            'orphanRemoval' => true,
+            'orderBy'       => array(
+                'position'  => 'ASC',
+            ),
+        ));
+
+        $collector->addAssociation($config['class']['category'], 'mapManyToOne', array(
+            'fieldName'     => 'parent',
+            'targetEntity'  => $config['class']['category'],
+            'cascade'       => array(
+                'remove',
+                'persist',
+                'refresh',
+                'merge',
+                'detach',
+            ),
+            'mappedBy'      => NULL,
+            'inversedBy'    => NULL,
+            'joinColumns'   => array(
+                array(
+                 'name'     => 'parent_id',
+                 'referencedColumnName' => 'id',
+                 'onDelete' => 'CASCADE',
+                ),
+            ),
+            'orphanRemoval' => false,
+        ));
     }
 }

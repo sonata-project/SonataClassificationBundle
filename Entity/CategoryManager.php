@@ -44,6 +44,8 @@ class CategoryManager extends ModelCategoryManager
     {
         $this->em->persist($category);
         $this->em->flush();
+
+        $this->categories = null;
     }
 
     /**
@@ -69,6 +71,8 @@ class CategoryManager extends ModelCategoryManager
     {
         $this->em->remove($category);
         $this->em->flush();
+
+        $this->categories = null;
     }
 
     /**
@@ -132,28 +136,31 @@ class CategoryManager extends ModelCategoryManager
 
         $class = $this->getClass();
 
-        $this->categories = $this->em->createQuery(sprintf('SELECT c FROM %s c INDEX BY c.id', $class))
-            ->execute();
-
         $root = $this->create();
         $root->setName('root');
 
-        foreach ($this->categories as $category) {
+        $this->categories = array(
+            0 => $root
+        );
+
+        $categories = $this->em->createQuery(sprintf('SELECT c FROM %s c INDEX BY c.id', $class))
+            ->execute();
+
+        foreach ($categories as $category) {
+            $this->categories[$category->getId()] = $category;
 
             $parent = $category->getParent();
 
             $category->disableChildrenLazyLoading();
 
             if (!$parent) {
-                $root->addChildren($category);
+                $root->addChild($category);
 
                 continue;
             }
 
-            $parent->addChildren($category);
+            $parent->addChild($category);
         }
-
-        $this->categories[0] = $root;
     }
 
     /**

@@ -12,6 +12,7 @@
 namespace Sonata\ClassificationBundle\Model;
 
 use Sonata\ClassificationBundle\Model\Tag;
+use Sonata\MediaBundle\Model\MediaInterface;
 
 abstract class Collection implements CollectionInterface
 {
@@ -26,6 +27,8 @@ abstract class Collection implements CollectionInterface
     protected $createdAt;
 
     protected $updatedAt;
+
+    protected $media;
 
     /**
      * Set name
@@ -158,5 +161,21 @@ abstract class Collection implements CollectionInterface
     public function getUpdatedAt()
     {
         return $this->updatedAt;
+    }
+
+    /**
+     * @param MediaInterface $media
+     */
+    public function setMedia(MediaInterface $media = null)
+    {
+        $this->media = $media;
+    }
+
+    /**
+     * @return MediaInterface
+     */
+    public function getMedia()
+    {
+        return $this->media;
     }
 }

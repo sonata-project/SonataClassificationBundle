@@ -14,6 +14,7 @@ namespace Sonata\ClassificationBundle\Model;
 use Doctrine\Common\Collections\ArrayCollection;
 use Sonata\ClassificationBundle\Model\CategoryInterface;
 use Sonata\ClassificationBundle\Model\Tag;
+use Sonata\MediaBundle\Model\MediaInterface;
 
 abstract class Category implements CategoryInterface
 {
@@ -35,10 +36,10 @@ abstract class Category implements CategoryInterface
 
     protected $parent;
 
+    protected $media;
+
     /**
-     * Set name
-     *
-     * @param string $name
+     * {@inheritdoc}
      */
     public function setName($name)
     {
@@ -48,9 +49,7 @@ abstract class Category implements CategoryInterface
     }
 
     /**
-     * Get name
-     *
-     * @return string $name
+     * {@inheritdoc}
      */
     public function getName()
     {
@@ -58,9 +57,7 @@ abstract class Category implements CategoryInterface
     }
 
     /**
-     * Set enabled
-     *
-     * @param boolean $enabled
+     * {@inheritdoc}
      */
     public function setEnabled($enabled)
     {
@@ -68,9 +65,7 @@ abstract class Category implements CategoryInterface
     }
 
     /**
-     * Get enabled
-     *
-     * @return boolean $enabled
+     * {@inheritdoc}
      */
     public function getEnabled()
     {
@@ -78,9 +73,7 @@ abstract class Category implements CategoryInterface
     }
 
     /**
-     * Set slug
-     *
-     * @param integer $slug
+     * {@inheritdoc}
      */
     public function setSlug($slug)
     {
@@ -88,9 +81,7 @@ abstract class Category implements CategoryInterface
     }
 
     /**
-     * Get slug
-     *
-     * @return integer $slug
+     * {@inheritdoc}
      */
     public function getSlug()
     {
@@ -98,9 +89,7 @@ abstract class Category implements CategoryInterface
     }
 
     /**
-     * Set description
-     *
-     * @param string $description
+     * {@inheritdoc}
      */
     public function setDescription($description)
     {
@@ -108,9 +97,7 @@ abstract class Category implements CategoryInterface
     }
 
     /**
-     * Get description
-     *
-     * @return string $description
+     * {@inheritdoc}
      */
     public function getDescription()
     {
@@ -195,10 +182,7 @@ abstract class Category implements CategoryInterface
     }
 
     /**
-     * Add Children
-     *
-     * @param CategoryInterface $child
-     * @param boolean           $nested
+     * {@inheritdoc}
      */
     public function addChild(CategoryInterface $child, $nested = false)
     {
@@ -210,7 +194,7 @@ abstract class Category implements CategoryInterface
     }
 
     /**
-     * @param CategoryInterface $childToDelete
+     * {@inheritdoc}
      */
     public function removeChild(CategoryInterface $childToDelete)
     {
@@ -229,17 +213,8 @@ abstract class Category implements CategoryInterface
         }
     }
 
-    public function disableChildrenLazyLoading()
-    {
-        if (is_object($this->children)) {
-            $this->children->setInitialized(true);
-        }
-    }
-
     /**
-     * Get Children
-     *
-     * @return \Doctrine\Common\Collections\Collection $children
+     * {@inheritdoc}
      */
     public function getChildren()
     {
@@ -247,9 +222,7 @@ abstract class Category implements CategoryInterface
     }
 
     /**
-     * Set children
-     *
-     * @param $children
+     * {@inheritdoc}
      */
     public function setChildren($children)
     {
@@ -261,9 +234,7 @@ abstract class Category implements CategoryInterface
     }
 
     /**
-     * Return true if category has children
-     *
-     * @return boolean
+     * {@inheritdoc}
      */
     public function hasChildren()
     {
@@ -271,10 +242,7 @@ abstract class Category implements CategoryInterface
     }
 
     /**
-     * Set Parent
-     *
-     * @param CategoryInterface $parent
-     * @param boolean           $nested
+     * {@inheritdoc}
      */
     public function setParent(CategoryInterface $parent = null, $nested = false)
     {
@@ -286,12 +254,26 @@ abstract class Category implements CategoryInterface
     }
 
     /**
-     * Get Parent
-     *
-     * @return CategoryInterface $parent
+     * {@inheritdoc}
      */
     public function getParent()
     {
         return $this->parent;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setMedia(MediaInterface $media = null)
+    {
+        $this->media = $media;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getMedia()
+    {
+        return $this->media;
     }
 }

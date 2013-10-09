@@ -11,6 +11,8 @@
 
 namespace Sonata\ClassificationBundle\Model;
 
+use Sonata\MediaBundle\Model\MediaInterface;
+
 interface CategoryInterface
 {
     /**
@@ -122,4 +124,14 @@ interface CategoryInterface
      * @return CategoryInterface $parent
      */
     public function getParent();
+
+    /**
+     * @param MediaInterface $media
+     */
+    public function setMedia(MediaInterface $media = null);
+
+    /**
+     * @return MediaInterface
+     */
+    public function getMedia();
 }

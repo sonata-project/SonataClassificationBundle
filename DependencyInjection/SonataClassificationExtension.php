@@ -137,5 +137,51 @@ class SonataClassificationExtension extends Extension
             ),
             'orphanRemoval' => false,
         ));
+
+        if (interface_exists('Sonata\MediaBundle\Model\MediaInterface')) {
+            $collector->addAssociation($config['class']['collection'], 'mapManyToOne', array(
+                'fieldName'     => 'media',
+                'targetEntity'  => $config['class']['media'],
+                'cascade'       => array(
+                    'remove',
+                    'persist',
+                    'refresh',
+                    'merge',
+                    'detach',
+                ),
+                'mappedBy'      => NULL,
+                'inversedBy'    => NULL,
+                'joinColumns'   => array(
+                    array(
+                     'name'     => 'media_id',
+                     'referencedColumnName' => 'id',
+                     'onDelete' => 'SET NULL',
+                    ),
+                ),
+                'orphanRemoval' => false,
+            ));
+
+            $collector->addAssociation($config['class']['category'], 'mapManyToOne', array(
+                'fieldName'     => 'media',
+                'targetEntity'  => $config['class']['media'],
+                'cascade'       => array(
+                    'remove',
+                    'persist',
+                    'refresh',
+                    'merge',
+                    'detach',
+                ),
+                'mappedBy'      => NULL,
+                'inversedBy'    => NULL,
+                'joinColumns'   => array(
+                    array(
+                     'name'     => 'media_id',
+                     'referencedColumnName' => 'id',
+                     'onDelete' => 'SET NULL',
+                    ),
+                ),
+                'orphanRemoval' => false,
+            ));
+        }
     }
 }

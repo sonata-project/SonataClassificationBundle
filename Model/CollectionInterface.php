@@ -11,6 +11,8 @@
 
 namespace Sonata\ClassificationBundle\Model;
 
+use Sonata\MediaBundle\Model\MediaInterface;
+
 interface CollectionInterface
 {
     /**
@@ -68,4 +70,34 @@ interface CollectionInterface
      * @return string $description
      */
     public function getDescription();
+
+    /**
+     * @param \DateTime $createdAt
+     */
+    public function setCreatedAt(\DateTime $createdAt);
+
+    /**
+     * @return \DateTime
+     */
+    public function getCreatedAt();
+
+    /**
+     * @param \DateTime $updatedAt
+     */
+    public function setUpdatedAt(\DateTime $updatedAt);
+
+    /**
+     * @return \DateTime
+     */
+    public function getUpdatedAt();
+
+    /**
+     * @param MediaInterface $media
+     */
+    public function setMedia(MediaInterface $media = null);
+
+    /**
+     * @return MediaInterface
+     */
+    public function getMedia();
 }

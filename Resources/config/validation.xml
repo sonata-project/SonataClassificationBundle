@@ -5,7 +5,7 @@
         http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
 
 
-    <class name="Application\Sonata\ClassificationBundle\Entity\Category">
+    <class name="Sonata\ClassificationBundle\Model\CategoryInterface">
         <getter property="name">
             <constraint name="NotBlank" />
             <constraint name="NotNull" />
@@ -16,7 +16,7 @@
         </getter>
     </class>
 
-    <class name="Application\Sonata\ClassificationBundle\Entity\Tag">
+    <class name="Sonata\ClassificationBundle\Model\TagInterface">
         <getter property="name">
             <constraint name="NotBlank" />
             <constraint name="NotNull" />
@@ -27,7 +27,7 @@
         </getter>
     </class>
 
-    <class name="Application\Sonata\ClassificationBundle\Entity\Collection">
+    <class name="Sonata\ClassificationBundle\Model\CollectionInterface">
         <getter property="name">
             <constraint name="NotBlank" />
             <constraint name="NotNull" />

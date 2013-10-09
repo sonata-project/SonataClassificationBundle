@@ -24,9 +24,9 @@ class CategoryAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
+            ->add('enabled', null, array('required' => false))
             ->add('name')
             ->add('description', 'textarea', array('required' => false))
-            ->add('enabled', null, array('required' => false))
             ->add('position', 'integer', array('required' => false, 'data' => 0))
             ->add('parent', 'sonata_category_selector', array(
                 'category'      => $this->getSubject() ?: null,

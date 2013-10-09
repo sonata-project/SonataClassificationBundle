@@ -98,6 +98,10 @@
                 <source>filter.label_parent</source>
                 <target>Parent</target>
             </trans-unit>
+            <trans-unit id="form.label_media">
+                <source>form.label_media</source>
+                <target>Media</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

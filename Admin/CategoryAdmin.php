@@ -25,9 +25,9 @@ class CategoryAdmin extends Admin
     {
         $formMapper
             ->add('name')
-            ->add('description', null, array('required' => false))
+            ->add('description', 'textarea', array('required' => false))
             ->add('enabled', null, array('required' => false))
-            ->add('position')
+            ->add('position', 'integer', array('required' => false, 'data' => 0))
             ->add('parent', 'sonata_category_selector', array(
                 'category'      => $this->getSubject() ?: null,
                 'model_manager' => $this->getModelManager(),

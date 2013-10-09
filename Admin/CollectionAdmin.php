@@ -25,7 +25,7 @@ class CollectionAdmin extends Admin
     {
         $formMapper
             ->add('name')
-            ->add('description', null, array('required' => false))
+            ->add('description', 'textarea', array('required' => false))
             ->add('enabled', null, array('required' => false))
         ;
     }

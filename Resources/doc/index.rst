@@ -12,3 +12,4 @@ Reference Guide
    reference/installation
    reference/classification_types
    reference/advanced_configuration
+   reference/media_bundle_integration

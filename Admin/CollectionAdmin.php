@@ -18,6 +18,10 @@ use Sonata\AdminBundle\Form\FormMapper;
 
 class CollectionAdmin extends Admin
 {
+    protected $formOptions = array(
+        'cascade_validation' => true
+    );
+
     /**
      * {@inheritdoc}
      */

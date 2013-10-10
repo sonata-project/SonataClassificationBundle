@@ -78,6 +78,11 @@ class CategorySelectorType extends AbstractType
      */
     private function childWalker(CategoryInterface $category, Options $options, array &$choices, $level = 1)
     {
+
+        if($category->getChildren() === null ) {
+            return;
+        }
+
         foreach ($category->getChildren() as $child) {
             if ($options['category'] && $options['category']->getId() == $child->getId()) {
                 continue;

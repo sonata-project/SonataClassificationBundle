@@ -11,72 +11,27 @@
 
 namespace Sonata\ClassificationBundle\Entity;
 
-use Sonata\ClassificationBundle\Model\CategoryManager as ModelCategoryManager;
 use Sonata\ClassificationBundle\Model\CategoryInterface;
-
-use Doctrine\ORM\EntityManager;
+use Sonata\CoreBundle\Entity\DoctrineBaseManager;
 use Sonata\DoctrineORMAdminBundle\Datagrid\Pager;
 use Sonata\DoctrineORMAdminBundle\Datagrid\ProxyQuery;
+use Sonata\AdminBundle\Datagrid\PagerInterface;
 
-class CategoryManager extends ModelCategoryManager
+class CategoryManager extends DoctrineBaseManager
 {
     /**
-     * @var \Doctrine\ORM\EntityManager
+     * @var array
      */
-    protected $em;
-
     protected $categories;
 
     /**
-     * @param \Doctrine\ORM\EntityManager $em
-     * @param string                      $class
-     */
-    public function __construct(EntityManager $em, $class)
-    {
-        $this->em    = $em;
-        $this->class = $class;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function save(CategoryInterface $category)
-    {
-        $this->em->persist($category);
-        $this->em->flush();
-
-        $this->categories = null;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function findOneBy(array $criteria)
-    {
-        return $this->em->getRepository($this->class)->findOneBy($criteria);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function findBy(array $criteria)
-    {
-        return $this->em->getRepository($this->class)->findBy($criteria);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function delete(CategoryInterface $category)
-    {
-        $this->em->remove($category);
-        $this->em->flush();
-
-        $this->categories = null;
-    }
-
-    /**
-     * {@inheritDoc}
+     * Returns a pager to iterate over the root category
+     *
+     * @param integer $page
+     * @param integer $limit
+     * @param array   $criteria
+     *
+     * @return mixed
      */
     public function getRootCategoriesPager($page = 1, $limit = 25, $criteria = array())
     {
@@ -96,7 +51,12 @@ class CategoryManager extends ModelCategoryManager
     }
 
     /**
-     * {@inheritDoc}
+     * @param integer $categoryId
+     * @param integer $page
+     * @param integer $limit
+     * @param array   $criteria
+     *
+     * @return PagerInterface
      */
     public function getSubCategoriesPager($categoryId, $page = 1, $limit = 25, $criteria = array())
     {
@@ -115,13 +75,23 @@ class CategoryManager extends ModelCategoryManager
     }
 
     /**
-     * {@inheritDoc}
+     * @return CategoryInterface
      */
     public function getRootCategory()
     {
         $this->loadCategories();
 
         return $this->categories[0];
+    }
+
+    /**
+     * @return array
+     */
+    public function getCategories()
+    {
+        $this->loadCategories();
+
+        return $this->categories;
     }
 
     /**
@@ -161,15 +131,5 @@ class CategoryManager extends ModelCategoryManager
 
             $parent->addChild($category);
         }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getCategories()
-    {
-        $this->loadCategories();
-
-        return $this->categories;
     }
 }

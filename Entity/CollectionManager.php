@@ -11,59 +11,8 @@
 
 namespace Sonata\ClassificationBundle\Entity;
 
-use Sonata\ClassificationBundle\Model\CollectionManager as ModelCollectionManager;
-use Sonata\ClassificationBundle\Model\CollectionInterface;
+use Sonata\CoreBundle\Entity\DoctrineBaseManager;
 
-use Doctrine\ORM\EntityManager;
-
-class CollectionManager extends ModelCollectionManager
+class CollectionManager extends DoctrineBaseManager
 {
-    /**
-     * @var \Doctrine\ORM\EntityManager
-     */
-    protected $em;
-
-    /**
-     * @param \Doctrine\ORM\EntityManager $em
-     * @param string                      $class
-     */
-    public function __construct(EntityManager $em, $class)
-    {
-        $this->em    = $em;
-        $this->class = $class;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function save(CollectionInterface $collection)
-    {
-        $this->em->persist($collection);
-        $this->em->flush();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function findOneBy(array $criteria)
-    {
-        return $this->em->getRepository($this->class)->findOneBy($criteria);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function findBy(array $criteria)
-    {
-        return $this->em->getRepository($this->class)->findBy($criteria);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function delete(CollectionInterface $collection)
-    {
-        $this->em->remove($collection);
-        $this->em->flush();
-    }
 }

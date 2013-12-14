@@ -62,6 +62,10 @@
                 <source>form.label_enabled</source>
                 <target>Enabled</target>
             </trans-unit>
+            <trans-unit id="form.label_slug">
+                <source>form.label_slug</source>
+                <target>Slug</target>
+            </trans-unit>
             <trans-unit id="breadcrumb.link_tag_list">
                 <source>breadcrumb.link_tag_list</source>
                 <target>Tag</target>

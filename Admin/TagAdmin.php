@@ -23,10 +23,13 @@ class TagAdmin extends Admin
      */
     protected function configureFormFields(FormMapper $formMapper)
     {
-        $formMapper
-            ->add('name')
-            ->add('enabled', null, array('required' => false))
-        ;
+        $formMapper->add('name');
+
+        if ($this->hasSubject() && $this->getSubject()->getId()) {
+            $formMapper->add('slug');
+        }
+
+        $formMapper->add('enabled', null, array('required' => false));
     }
 
     /**

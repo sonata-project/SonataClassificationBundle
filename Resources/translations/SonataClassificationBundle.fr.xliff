@@ -62,6 +62,10 @@
                 <source>breadcrumb.link_tag_list</source>
                 <target>breadcrumb.link_tag_list</target>
             </trans-unit>
+            <trans-unit id="form.label_slug">
+                <source>form.label_slug</source>
+                <target>form.label_slug</target>
+            </trans-unit>
             <trans-unit id="form.label_created_at">
                 <source>form.label_created_at</source>
                 <target>form.label_created_at</target>

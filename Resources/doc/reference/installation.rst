@@ -43,7 +43,7 @@ Installation
                     #result_cache_driver: apc
                     mappings:
                         #ApplicationSonataClassificationBundle: ~
-                        SonataClassificaitonBundle: ~
+                        SonataClassificationBundle: ~
 
 * import the ``sonata_classification.yml`` file and enable json type for doctrine ::
 

@@ -41,10 +41,15 @@ class CategoryAdmin extends Admin
         ;
 
         if (interface_exists('Sonata\MediaBundle\Model\MediaInterface')) {
-            $formMapper->add('media', 'sonata_media_type', array(
-                'provider' => 'sonata.media.provider.image',
-                'context'  => 'sonata_category',
-            ));
+            $formMapper->add('media', 'sonata_type_model_list',
+                array('required' => false),
+                array(
+                    'link_parameters' => array(
+                        'provider' => 'sonata.media.provider.image',
+                        'context'  => 'sonata_category',
+                    )
+                )
+            );
         }
     }
 

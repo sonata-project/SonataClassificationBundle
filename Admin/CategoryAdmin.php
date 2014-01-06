@@ -74,7 +74,10 @@ class CategoryAdmin extends Admin
             ->addIdentifier('name')
             ->add('slug')
             ->add('description')
-            ->add('enabled', null, array('editable' => true))
+            ->add('enabled', null, array(
+                'editable'     => true,
+                'confirmation' => true,
+            ))
             ->add('position')
             ->add('parent')
         ;

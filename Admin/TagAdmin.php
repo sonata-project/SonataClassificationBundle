@@ -51,7 +51,10 @@ class TagAdmin extends Admin
         $listMapper
             ->addIdentifier('name')
             ->add('slug')
-            ->add('enabled', null, array('editable' => true))
+            ->add('enabled', null, array(
+                'editable'     => true,
+                'confirmation' => true,
+            ))
             ->add('createdAt')
             ->add('updatedAt')
         ;

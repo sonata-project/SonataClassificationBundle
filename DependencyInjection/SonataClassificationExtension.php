@@ -41,11 +41,15 @@ class SonataClassificationExtension extends Extension
         $processor = new Processor();
         $configuration = new Configuration();
         $config = $processor->processConfiguration($configuration, $configs);
+        $bundles = $container->getParameter('kernel.bundles');
 
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
-        $loader->load('admin.xml');
         $loader->load('orm.xml');
         $loader->load('form.xml');
+
+        if (isset($bundles['SonataAdminBundle'])) {
+            $loader->load('admin.xml');
+        }
 
         $this->registerDoctrineMapping($config, $container);
         $this->configureClass($config, $container);

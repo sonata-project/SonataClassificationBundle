@@ -5,10 +5,10 @@
         <property name="name" type="string" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
         <property name="slug" type="string" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write" />
 
-        <property name="enabled" type="boolean" expose="false" since-version="1.0" groups="sonata_api_write" />
+        <property name="enabled" type="boolean" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write" />
 
-        <property name="createdAt" type="DateTime" expose="false" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
-        <property name="updatedAt" type="DateTime" expose="false" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
+        <property name="createdAt" type="DateTime" expose="true" since-version="1.0" groups="sonata_api_read,sonata_search" />
+        <property name="updatedAt" type="DateTime" expose="true" since-version="1.0" groups="sonata_api_read,sonata_search" />
 
     </class>
 </serializer>

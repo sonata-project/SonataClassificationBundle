@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<serializer>
+    <class name="Sonata\ClassificationBundle\Model\Tag" exclusion-policy="all" xml-root-name="tag">
+
+        <property name="name" type="string" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
+        <property name="slug" type="string" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write" />
+
+        <property name="enabled" type="boolean" expose="false" since-version="1.0" groups="sonata_api_write" />
+
+        <property name="createdAt" type="DateTime" expose="false" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
+        <property name="updatedAt" type="DateTime" expose="false" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
+
+    </class>
+</serializer>

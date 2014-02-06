@@ -37,7 +37,7 @@ class CategoryManager extends DoctrineBaseManager
     {
         $page = (int) $page == 0 ? 1 : (int) $page;
 
-        $queryBuiler = $this->em->createQueryBuilder()
+        $queryBuiler = $this->om->createQueryBuilder()
             ->select('c')
             ->from($this->class, 'c')
             ->andWhere('c.parent IS NULL');
@@ -60,7 +60,7 @@ class CategoryManager extends DoctrineBaseManager
      */
     public function getSubCategoriesPager($categoryId, $page = 1, $limit = 25, $criteria = array())
     {
-        $queryBuiler = $this->em->createQueryBuilder()
+        $queryBuiler = $this->om->createQueryBuilder()
             ->select('c')
             ->from($this->class, 'c')
             ->where('c.parent = :categoryId')
@@ -113,7 +113,7 @@ class CategoryManager extends DoctrineBaseManager
             0 => $root
         );
 
-        $categories = $this->em->createQuery(sprintf('SELECT c FROM %s c INDEX BY c.id', $class))
+        $categories = $this->om->createQuery(sprintf('SELECT c FROM %s c INDEX BY c.id', $class))
             ->execute();
 
         foreach ($categories as $category) {

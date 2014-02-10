@@ -11,8 +11,8 @@
 
 namespace Sonata\ClassificationBundle\Entity;
 
-use Sonata\CoreBundle\Entity\DoctrineBaseManager;
+use Sonata\CoreBundle\Model\BaseEntityManager;
 
-class CollectionManager extends DoctrineBaseManager
+class CollectionManager extends BaseEntityManager
 {
 }

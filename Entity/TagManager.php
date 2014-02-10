@@ -10,8 +10,8 @@
  */
 namespace Sonata\ClassificationBundle\Entity;
 
-use Sonata\CoreBundle\Entity\DoctrineBaseManager;
+use Sonata\CoreBundle\Model\BaseEntityManager;
 
-class TagManager extends DoctrineBaseManager
+class TagManager extends BaseEntityManager
 {
 }

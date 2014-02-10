@@ -10,21 +10,19 @@
     </parameters>
 
     <services>
-        <service id="sonata.classification.entity_manager" alias="doctrine.orm.default_entity_manager" />
-
         <service id="sonata.classification.manager.category" class="%sonata.classification.manager.category.class%">
             <argument>%sonata.classification.manager.category.entity%</argument>
-            <argument type="service" id="sonata.classification.entity_manager" />
+            <argument type="service" id="doctrine" />
         </service>
 
         <service id="sonata.classification.manager.tag" class="%sonata.classification.manager.tag.class%">
             <argument>%sonata.classification.manager.tag.entity%</argument>
-            <argument type="service" id="sonata.classification.entity_manager" />
+            <argument type="service" id="doctrine" />
         </service>
 
         <service id="sonata.classification.manager.collection" class="%sonata.classification.manager.collection.class%">
             <argument>%sonata.classification.manager.collection.entity%</argument>
-            <argument type="service" id="sonata.classification.entity_manager" />
+            <argument type="service" id="doctrine" />
         </service>
     </services>
 </container>

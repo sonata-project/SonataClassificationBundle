@@ -113,7 +113,7 @@ class CategoryManager extends BaseEntityManager
             0 => $root
         );
 
-        $categories = $this->getRepository()->createQuery(sprintf('SELECT c FROM %s c INDEX BY c.id', $class))
+        $categories = $this->getObjectManager()->createQuery(sprintf('SELECT c FROM %s c INDEX BY c.id', $class))
             ->execute();
 
         foreach ($categories as $category) {

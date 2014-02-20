@@ -1,7 +1,7 @@
 Installation
 ============
 
-* Add SonataClassificationBundle to your vendor/bundles dir with the deps file::
+* Add SonataClassificationBundle to your vendor/bundles dir with the deps file
 
 .. code-block:: php
 
@@ -13,7 +13,7 @@ Installation
     }
 
 
-* Add SonataClassificationBundle to your application kernel::
+* Add SonataClassificationBundle to your application kernel
 
 .. code-block:: php
 
@@ -27,7 +27,7 @@ Installation
         );
     }
 
-* Create a configuration file : ``sonata_classification.yml``::
+* Create a configuration file : ``sonata_classification.yml``
 
 .. code-block:: yaml
 
@@ -45,7 +45,7 @@ Installation
                         #ApplicationSonataClassificationBundle: ~
                         SonataClassificationBundle: ~
 
-* import the ``sonata_classification.yml`` file and enable json type for doctrine ::
+* import the ``sonata_classification.yml`` file and enable json type for doctrine
 
 .. code-block:: yaml
 
@@ -53,13 +53,19 @@ Installation
         #...
         - { resource: sonata_classification.yml }
 
+    # ...
+    doctrine:
+        # ...
+        types:
+            json:     Sonata\Doctrine\Types\JsonType
 
-* Run the easy-extends command::
+* Run the easy-extends command
 
-    php app/console sonata:easy-extends:generate SonataClassificationBundle
+.. code-block:: shell
 
-* If the bundle is generated in /app cut application folder and paste it in src/
-* Enable the new bundles::
+    php app/console sonata:easy-extends:generate --dest=src SonataClassificationBundle
+
+* Enable the new bundles
 
 .. code-block:: php
 
@@ -73,3 +79,15 @@ Installation
         );
     }
 
+.. code-block:: yaml
+
+    sonata_classification:
+        # ...
+
+    doctrine:
+        orm:
+            entity_managers:
+                default:
+                    mappings:
+                        ApplicationSonataClassificationBundle: ~
+                        # ...

@@ -61,7 +61,7 @@ Installation
 
 * Run the easy-extends command
 
-.. code-block:: shell
+.. code-block:: bash
 
     php app/console sonata:easy-extends:generate --dest=src SonataClassificationBundle
 

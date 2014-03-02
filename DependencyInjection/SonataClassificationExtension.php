@@ -132,7 +132,7 @@ class SonataClassificationExtension extends Extension
                 'detach',
             ),
             'mappedBy'      => NULL,
-            'inversedBy'    => NULL,
+            'inversedBy'    => 'children',
             'joinColumns'   => array(
                 array(
                  'name'     => 'parent_id',

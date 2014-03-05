@@ -9,12 +9,37 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonata\ClassificationBundle\Document;
-
 use Sonata\CoreBundle\Model\BaseDocumentManager;
 use Sonata\ClassificationBundle\Model\TagManagerInterface;
 
+use Sonata\DoctrineORMAdminBundle\Datagrid\Pager;
+use Sonata\DoctrineORMAdminBundle\Datagrid\ProxyQuery;
+
 class TagManager extends BaseDocumentManager implements TagManagerInterface
 {
+    /**
+     * {@inheritdoc}
+     */
+    public function getPager(array $criteria, $page, $maxPerPage = 10)
+    {
+        $parameters = array();
 
+        $query = $this->getRepository()
+            ->createQueryBuilder('t')
+            ->select('t');
+
+        $criteria['enabled'] = isset($criteria['enabled']) ? $criteria['enabled'] : true;
+        $query->andWhere('t.enabled = :enabled');
+        $parameters['enabled'] = $criteria['enabled'];
+
+        $query->setParameters($parameters);
+
+        $pager = new Pager();
+        $pager->setMaxPerPage($maxPerPage);
+        $pager->setQuery(new ProxyQuery($query));
+        $pager->setPage($page);
+        $pager->init();
+
+        return $pager;
+    }
 }

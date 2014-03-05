@@ -15,5 +15,17 @@ use Sonata\CoreBundle\Model\ManagerInterface;
 
 interface CollectionManagerInterface extends ManagerInterface
 {
-
+    /**
+     * Retrieve collections, based on the criteria, a page at a time.
+     *
+     * Valid criteria are:
+     *    enabled - boolean
+     *
+     * @param array   $criteria
+     * @param integer $page
+     * @param integer $maxPerPage
+     *
+     * @return \Sonata\AdminBundle\Datagrid\Pager
+     */
+    public function getPager(array $criteria, $page, $maxPerPage = 10);
 }

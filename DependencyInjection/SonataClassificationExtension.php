@@ -47,6 +47,8 @@ class SonataClassificationExtension extends Extension
         $loader->load('orm.xml');
         $loader->load('form.xml');
         $loader->load('serializer.xml');
+        $loader->load('api_controllers.xml');
+        $loader->load('api_form.xml');
 
         if (isset($bundles['SonataAdminBundle'])) {
             $loader->load('admin.xml');

@@ -8,10 +8,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace Sonata\ClassificationBundle\Entity;
 
 use Sonata\CoreBundle\Model\BaseEntityManager;
+use Sonata\ClassificationBundle\Model\TagManagerInterface;
 
-class TagManager extends BaseEntityManager
+class TagManager extends BaseEntityManager implements TagManagerInterface
 {
 }

@@ -3,7 +3,7 @@
 /*
  * This file is part of the Sonata project.
  *
- * (c) Sonata Project <https://github.com/sonata-project/SonataClassificationBundle/>
+ * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -12,12 +12,13 @@
 namespace Sonata\ClassificationBundle\Entity;
 
 use Sonata\ClassificationBundle\Model\CategoryInterface;
+use Sonata\ClassificationBundle\Model\CategoryManagerInterface;
 use Sonata\CoreBundle\Model\BaseEntityManager;
 use Sonata\DoctrineORMAdminBundle\Datagrid\Pager;
 use Sonata\DoctrineORMAdminBundle\Datagrid\ProxyQuery;
 use Sonata\AdminBundle\Datagrid\PagerInterface;
 
-class CategoryManager extends BaseEntityManager
+class CategoryManager extends BaseEntityManager implements CategoryManagerInterface
 {
     /**
      * @var array

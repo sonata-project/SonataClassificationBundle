@@ -27,7 +27,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-
 /**
  * Class CollectionController
  *
@@ -119,7 +118,7 @@ class CollectionController
      *  output={"class"="Sonata\ClassificationBundle\Model\Collection", "groups"={"sonata_api_read"}},
      *  statusCodes={
      *      200="Returned when successful",
-     *      400="Returned when an error has occured while collection creation",
+     *      400="Returned when an error has occurred while collection creation",
      *      404="Returned when unable to find collection"
      *  }
      * )
@@ -146,7 +145,7 @@ class CollectionController
      *  output={"class"="Sonata\ClassificationBundle\Model\Collection", "groups"={"sonata_api_read"}},
      *  statusCodes={
      *      200="Returned when successful",
-     *      400="Returned when an error has occured while collection update",
+     *      400="Returned when an error has occurred while collection update",
      *      404="Returned when unable to find collection"
      *  }
      * )
@@ -172,7 +171,7 @@ class CollectionController
      *  },
      *  statusCodes={
      *      200="Returned when collection is successfully deleted",
-     *      400="Returned when an error has occured while collection deletion",
+     *      400="Returned when an error has occurred while collection deletion",
      *      404="Returned when unable to find collection"
      *  }
      * )

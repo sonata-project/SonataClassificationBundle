@@ -14,7 +14,6 @@ namespace Sonata\ClassificationBundle\Tests\Controller\Api;
 use Sonata\ClassificationBundle\Controller\Api\TagController;
 use Symfony\Component\HttpFoundation\Request;
 
-
 /**
  * Class TagControllerTest
  *

@@ -11,7 +11,7 @@
 
 namespace Sonata\ClassificationBundle\Model;
 
-use Sonata\ClassificationBundle\Model\TagInterface;;
+use Sonata\ClassificationBundle\Model\TagInterface;
 
 abstract class Tag implements TagInterface
 {

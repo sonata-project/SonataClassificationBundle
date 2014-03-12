@@ -27,7 +27,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-
 /**
  * Class CategoryController
  *
@@ -119,7 +118,7 @@ class CategoryController
      *  output={"class"="Sonata\ClassificationBundle\Model\Category", "groups"={"sonata_api_read"}},
      *  statusCodes={
      *      200="Returned when successful",
-     *      400="Returned when an error has occured while category creation",
+     *      400="Returned when an error has occurred while category creation",
      *      404="Returned when unable to find category"
      *  }
      * )
@@ -146,7 +145,7 @@ class CategoryController
      *  output={"class"="Sonata\ClassificationBundle\Model\Category", "groups"={"sonata_api_read"}},
      *  statusCodes={
      *      200="Returned when successful",
-     *      400="Returned when an error has occured while category update",
+     *      400="Returned when an error has occurred while category update",
      *      404="Returned when unable to find category"
      *  }
      * )
@@ -172,7 +171,7 @@ class CategoryController
      *  },
      *  statusCodes={
      *      200="Returned when category is successfully deleted",
-     *      400="Returned when an error has occured while category deletion",
+     *      400="Returned when an error has occurred while category deletion",
      *      404="Returned when unable to find category"
      *  }
      * )

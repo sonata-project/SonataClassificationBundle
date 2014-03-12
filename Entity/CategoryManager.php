@@ -41,13 +41,13 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
     {
         $page = (int) $page == 0 ? 1 : (int) $page;
 
-        $queryBuiler = $this->getRepository()->createQueryBuilder()
+        $queryBuilder = $this->getRepository()->createQueryBuilder()
             ->select('c')
             ->from($this->class, 'c')
             ->andWhere('c.parent IS NULL');
 
         $pager = new Pager($limit);
-        $pager->setQuery(new ProxyQuery($queryBuiler));
+        $pager->setQuery(new ProxyQuery($queryBuilder));
         $pager->setPage($page);
         $pager->init();
 
@@ -64,14 +64,14 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
      */
     public function getSubCategoriesPager($categoryId, $page = 1, $limit = 25, $criteria = array())
     {
-        $queryBuiler = $this->getRepository()->createQueryBuilder()
+        $queryBuilder = $this->getRepository()->createQueryBuilder()
             ->select('c')
             ->from($this->class, 'c')
             ->where('c.parent = :categoryId')
             ->setParameter('categoryId', $categoryId);
 
         $pager = new Pager($limit);
-        $pager->setQuery(new ProxyQuery($queryBuiler));
+        $pager->setQuery(new ProxyQuery($queryBuilder));
         $pager->setPage($page);
         $pager->init();
 

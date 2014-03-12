@@ -27,7 +27,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-
 /**
  * Class TagController
  *
@@ -119,7 +118,7 @@ class TagController
      *  output={"class"="Sonata\ClassificationBundle\Model\Tag", "groups"={"sonata_api_read"}},
      *  statusCodes={
      *      200="Returned when successful",
-     *      400="Returned when an error has occured while tag creation",
+     *      400="Returned when an error has occurred while tag creation",
      *      404="Returned when unable to find tag"
      *  }
      * )
@@ -146,7 +145,7 @@ class TagController
      *  output={"class"="Sonata\ClassificationBundle\Model\Tag", "groups"={"sonata_api_read"}},
      *  statusCodes={
      *      200="Returned when successful",
-     *      400="Returned when an error has occured while tag update",
+     *      400="Returned when an error has occurred while tag update",
      *      404="Returned when unable to find tag"
      *  }
      * )
@@ -172,7 +171,7 @@ class TagController
      *  },
      *  statusCodes={
      *      200="Returned when tag is successfully deleted",
-     *      400="Returned when an error has occured while tag deletion",
+     *      400="Returned when an error has occurred while tag deletion",
      *      404="Returned when unable to find tag"
      *  }
      * )

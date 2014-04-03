@@ -1,9 +1,12 @@
+.. index::
+    single: MediaBundle
+
 MediaBundle Integration
 =======================
 
-There is an (optional) integration with the ``SonataMediaBundle``, this integration allows to add image to Category and Collection objects.
+There is an (optional) integration with the ``SonataMediaBundle``. This integration allows you to add image to Category and Collection objects.
 
-If you have the ``SonataMediaBundle`` in your dependencies then a new input will be visible in the admin. In order to make them work properly, you need to configure the ``sonata_media`` section:
+If you have the ``SonataMediaBundle`` in your dependencies, then a new input will be visible in the admin. In order to make them work properly, you need to configure the ``sonata_media`` section like this:
 
 .. code-block:: yaml
 
@@ -28,7 +31,7 @@ If you have the ``SonataMediaBundle`` in your dependencies then a new input will
                     wide:    { width: 820, quality: 100}
 
 
-So you can display the image category like this:
+So, you can display the `image` category like this:
 
 .. code-block:: jinja
 

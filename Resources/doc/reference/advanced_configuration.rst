@@ -1,3 +1,6 @@
+.. index::
+    single: Configuration
+
 Advanced Configuration
 ======================
 

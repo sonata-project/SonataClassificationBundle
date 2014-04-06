@@ -21,7 +21,9 @@ class CollectionAdmin extends Admin
     protected $formOptions = array(
         'cascade_validation' => true
     );
-
+    
+    protected $useMedia = false;
+    
     /**
      * {@inheritdoc}
      */
@@ -33,7 +35,7 @@ class CollectionAdmin extends Admin
             ->add('description', 'textarea', array('required' => false))
         ;
 
-        if (interface_exists('Sonata\MediaBundle\Model\MediaInterface')) {
+        if ($this->getUseMedia()) {
             $formMapper->add('media', 'sonata_type_model_list',
                 array('required' => false),
                 array(
@@ -68,5 +70,14 @@ class CollectionAdmin extends Admin
             ->add('description')
             ->add('enabled', null, array('editable' => true))
         ;
+    }
+    
+    public function setUseMedia($use_media) {
+        $this->useMedia = $use_media;
+        return $this;
+    }
+    
+    public function getUseMedia() {
+        return $this->useMedia;
     }
 }

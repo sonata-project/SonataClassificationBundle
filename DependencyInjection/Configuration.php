@@ -28,7 +28,7 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('sonata_classification');
 
-        $rootNode
+        $rootNode     
             ->children()
                 ->arrayNode('class')
                     ->addDefaultsIfNotSet()
@@ -39,7 +39,7 @@ class Configuration implements ConfigurationInterface
                         ->scalarNode('media')->defaultValue('Application\\Sonata\\MediaBundle\\Entity\\Media')->end()
                     ->end()
                 ->end()
-
+                ->scalarNode("use_media")->defaultValue(false)->end()
                 ->arrayNode('admin')
                     ->addDefaultsIfNotSet()
                     ->children()

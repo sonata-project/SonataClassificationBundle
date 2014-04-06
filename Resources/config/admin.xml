@@ -9,7 +9,10 @@
             <argument />
             <argument>%sonata.classification.admin.category.entity%</argument>
             <argument>%sonata.classification.admin.category.controller%</argument>
-
+            <call method="setUseMedia">
+                <argument type="expression">parameter('sonata.classification.use_media')</argument>
+            </call>
+            
             <call method="setTranslationDomain">
                 <argument>%sonata.classification.admin.category.translation_domain%</argument>
             </call>
@@ -20,7 +23,7 @@
             <argument />
             <argument>%sonata.classification.admin.tag.entity%</argument>
             <argument>%sonata.classification.admin.tag.controller%</argument>
-
+            
             <call method="setTranslationDomain">
                 <argument>%sonata.classification.admin.tag.translation_domain%</argument>
             </call>

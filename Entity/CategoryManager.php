@@ -18,8 +18,8 @@ use Sonata\ClassificationBundle\Model\CategoryManagerInterface;
 
 use Sonata\CoreBundle\Model\BaseEntityManager;
 
-use Sonata\DoctrineORMAdminBundle\Datagrid\Pager;
-use Sonata\DoctrineORMAdminBundle\Datagrid\ProxyQuery;
+use Sonata\DatagridBundle\Pager\Doctrine\Pager;
+use Sonata\DatagridBundle\ProxyQuery\Doctrine\ProxyQuery;
 
 class CategoryManager extends BaseEntityManager implements CategoryManagerInterface
 {

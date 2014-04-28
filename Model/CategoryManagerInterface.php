@@ -25,7 +25,7 @@ interface CategoryManagerInterface extends ManagerInterface
      * @param integer $page
      * @param integer $maxPerPage
      *
-     * @return \Sonata\AdminBundle\Datagrid\Pager
+     * @return \Sonata\DatagridBundle\Pager\PagerInterface
      */
     public function getPager(array $criteria, $page, $maxPerPage = 10);
 }

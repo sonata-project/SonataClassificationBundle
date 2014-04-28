@@ -18,7 +18,7 @@ use FOS\RestBundle\Request\ParamFetcherInterface;
 use JMS\Serializer\SerializationContext;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 
-use Sonata\AdminBundle\Datagrid\Pager;
+use Sonata\DatagridBundle\Pager\PagerInterface;
 use Sonata\ClassificationBundle\Model\TagManagerInterface;
 
 use Symfony\Component\Form\FormFactoryInterface;
@@ -47,13 +47,13 @@ class TagController
     /**
      * Constructor
      *
-     * @param TagManagerInterface $tagManager
-     * @param FormFactoryInterface     $formFactory
+     * @param TagManagerInterface  $tagManager
+     * @param FormFactoryInterface $formFactory
      */
     public function __construct(TagManagerInterface $tagManager, FormFactoryInterface $formFactory)
     {
-        $this->tagManager = $tagManager;
-        $this->formFactory     = $formFactory;
+        $this->tagManager  = $tagManager;
+        $this->formFactory = $formFactory;
     }
 
     /**
@@ -61,7 +61,7 @@ class TagController
      *
      * @ApiDoc(
      *  resource=true,
-     *  output={"class"="Sonata\ClassificationBundle\Model\Tag", "groups"={"sonata_api_read"}}
+     *  output={"class"="Sonata\DatagridBundle\Pager\PagerInterface", "groups"={"sonata_api_read"}}
      * )
      *
      * @QueryParam(name="page", requirements="\d+", default="1", description="Page for tag list pagination")
@@ -72,17 +72,17 @@ class TagController
      *
      * @param ParamFetcherInterface $paramFetcher
      *
-     * @return Tag[]
+     * @return PagerInterface
      */
     public function getTagsAction(ParamFetcherInterface $paramFetcher)
     {
         $page  = $paramFetcher->get('page');
         $count = $paramFetcher->get('count');
 
-        /** @var Pager $tagsPager */
+        /** @var PagerInterface $tagsPager */
         $tagsPager = $this->tagManager->getPager($this->filterCriteria($paramFetcher), $page, $count);
 
-        return $tagsPager->getResults();
+        return $tagsPager;
     }
 
     /**

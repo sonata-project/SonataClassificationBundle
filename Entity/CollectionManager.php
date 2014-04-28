@@ -14,8 +14,8 @@ namespace Sonata\ClassificationBundle\Entity;
 use Sonata\ClassificationBundle\Model\CollectionManagerInterface;
 use Sonata\CoreBundle\Model\BaseEntityManager;
 
-use Sonata\DoctrineORMAdminBundle\Datagrid\Pager;
-use Sonata\DoctrineORMAdminBundle\Datagrid\ProxyQuery;
+use Sonata\DatagridBundle\Pager\Doctrine\Pager;
+use Sonata\DatagridBundle\ProxyQuery\Doctrine\ProxyQuery;
 
 class CollectionManager extends BaseEntityManager implements CollectionManagerInterface
 {

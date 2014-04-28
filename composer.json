@@ -20,7 +20,8 @@
         "symfony/symfony": "~2.2",
         "sonata-project/core-bundle": "~2.2@dev",
         "sonata-project/media-bundle": "~2.2",
-        "sonata-project/doctrine-orm-admin-bundle": "~2.2@dev"
+        "sonata-project/doctrine-orm-admin-bundle": "~2.2@dev",
+        "sonata-project/datagrid-bundle": "~2.2@dev"
     },
     "require-dev": {
         "friendsofsymfony/rest-bundle": "~1.1",

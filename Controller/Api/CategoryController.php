@@ -18,7 +18,7 @@ use FOS\RestBundle\Request\ParamFetcherInterface;
 use JMS\Serializer\SerializationContext;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 
-use Sonata\AdminBundle\Datagrid\Pager;
+use Sonata\DatagridBundle\Pager\PagerInterface;
 use Sonata\ClassificationBundle\Model\CategoryManagerInterface;
 
 use Symfony\Component\Form\FormFactoryInterface;
@@ -61,7 +61,7 @@ class CategoryController
      *
      * @ApiDoc(
      *  resource=true,
-     *  output={"class"="Sonata\ClassificationBundle\Model\Category", "groups"={"sonata_api_read"}}
+     *  output={"class"="Sonata\DatagridBundle\Pager\PagerInterface", "groups"={"sonata_api_read"}}
      * )
      *
      * @QueryParam(name="page", requirements="\d+", default="1", description="Page for category list pagination")
@@ -72,17 +72,17 @@ class CategoryController
      *
      * @param ParamFetcherInterface $paramFetcher
      *
-     * @return Category[]
+     * @return PagerInterface
      */
     public function getCategoriesAction(ParamFetcherInterface $paramFetcher)
     {
         $page  = $paramFetcher->get('page');
         $count = $paramFetcher->get('count');
 
-        /** @var Pager $categoriesPager */
+        /** @var PagerInterface $categoriesPager */
         $categoriesPager = $this->categoryManager->getPager($this->filterCriteria($paramFetcher), $page, $count);
 
-        return $categoriesPager->getResults();
+        return $categoriesPager;
     }
 
     /**

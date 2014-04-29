@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
-    <file source-language="fr" datatype="plaintext" original="" >
+    <file source-language="en" datatype="plaintext" original="" >
         <body>
             <trans-unit id="sonata_classification">
                 <source>sonata_classification</source>
@@ -32,7 +32,7 @@
             </trans-unit>
             <trans-unit id="list.label_slug">
                 <source>list.label_slug</source>
-                <target>Slud</target>
+                <target>Slug</target>
             </trans-unit>
             <trans-unit id="list.label_description">
                 <source>list.label_description</source>

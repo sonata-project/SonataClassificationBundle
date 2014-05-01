@@ -12,20 +12,8 @@
 namespace Sonata\ClassificationBundle\Model;
 
 use Sonata\CoreBundle\Model\ManagerInterface;
+use Sonata\CoreBundle\Model\PageableManagerInterface;
 
-interface TagManagerInterface extends ManagerInterface
+interface TagManagerInterface extends ManagerInterface, PageableManagerInterface
 {
-    /**
-     * Retrieve tags, based on the criteria, a page at a time.
-     *
-     * Valid criteria are:
-     *    enabled - boolean
-     *
-     * @param array   $criteria
-     * @param integer $page
-     * @param integer $maxPerPage
-     *
-     * @return \Sonata\DatagridBundle\Pager\PagerInterface
-     */
-    public function getPager(array $criteria, $page, $maxPerPage = 10);
 }

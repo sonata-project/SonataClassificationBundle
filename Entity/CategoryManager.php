@@ -140,7 +140,7 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
     /**
      * {@inheritdoc}
      */
-    public function getPager(array $criteria, $page, $maxPerPage = 10)
+    public function getPager(array $criteria, $page, $limit = 10, array $sort = array())
     {
         $parameters = array();
 
@@ -148,14 +148,15 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
             ->createQueryBuilder('c')
             ->select('c');
 
-        $criteria['enabled'] = isset($criteria['enabled']) ? $criteria['enabled'] : true;
-        $query->andWhere('c.enabled = :enabled');
-        $parameters['enabled'] = $criteria['enabled'];
+        if (isset($criteria['enabled'])) {
+            $query->andWhere('c.enabled = :enabled');
+            $parameters['enabled'] = (bool) $criteria['enabled'];
+        }
 
         $query->setParameters($parameters);
 
         $pager = new Pager();
-        $pager->setMaxPerPage($maxPerPage);
+        $pager->setMaxPerPage($limit);
         $pager->setQuery(new ProxyQuery($query));
         $pager->setPage($page);
         $pager->init();

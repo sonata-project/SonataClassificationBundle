@@ -27,12 +27,11 @@ class CollectionControllerTest extends \PHPUnit_Framework_TestCase
         $paramFetcher->expects($this->once())->method('all')->will($this->returnValue(array()));
 
         $pager = $this->getMockBuilder('Sonata\AdminBundle\Datagrid\Pager')->disableOriginalConstructor()->getMock();
-        $pager->expects($this->once())->method('getResults')->will($this->returnValue(array('returned')));
 
         $collectionManager = $this->getMock('Sonata\ClassificationBundle\Model\CollectionManagerInterface');
         $collectionManager->expects($this->once())->method('getPager')->will($this->returnValue($pager));
 
-        $this->assertEquals(array('returned'), $this->createCollectionController($collectionManager)->getCollectionsAction($paramFetcher));
+        $this->assertSame($pager, $this->createCollectionController($collectionManager)->getCollectionsAction($paramFetcher));
     }
 
     public function testGetCollectionAction()

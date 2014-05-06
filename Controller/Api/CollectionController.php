@@ -18,7 +18,7 @@ use FOS\RestBundle\Request\ParamFetcherInterface;
 use JMS\Serializer\SerializationContext;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 
-use Sonata\AdminBundle\Datagrid\Pager;
+use Sonata\DatagridBundle\Pager\PagerInterface;
 use Sonata\ClassificationBundle\Model\CollectionManagerInterface;
 
 use Symfony\Component\Form\FormFactoryInterface;
@@ -48,12 +48,12 @@ class CollectionController
      * Constructor
      *
      * @param CollectionManagerInterface $collectionManager
-     * @param FormFactoryInterface     $formFactory
+     * @param FormFactoryInterface       $formFactory
      */
     public function __construct(CollectionManagerInterface $collectionManager, FormFactoryInterface $formFactory)
     {
         $this->collectionManager = $collectionManager;
-        $this->formFactory     = $formFactory;
+        $this->formFactory       = $formFactory;
     }
 
     /**
@@ -61,7 +61,7 @@ class CollectionController
      *
      * @ApiDoc(
      *  resource=true,
-     *  output={"class"="Sonata\ClassificationBundle\Model\Collection", "groups"={"sonata_api_read"}}
+     *  output={"class"="Sonata\DatagridBundle\Pager\PagerInterface", "groups"={"sonata_api_read"}}
      * )
      *
      * @QueryParam(name="page", requirements="\d+", default="1", description="Page for collection list pagination")
@@ -72,17 +72,17 @@ class CollectionController
      *
      * @param ParamFetcherInterface $paramFetcher
      *
-     * @return Collection[]
+     * @return PagerInterface
      */
     public function getCollectionsAction(ParamFetcherInterface $paramFetcher)
     {
         $page  = $paramFetcher->get('page');
         $count = $paramFetcher->get('count');
 
-        /** @var Pager $collectionsPager */
+        /** @var PagerInterface $collectionsPager */
         $collectionsPager = $this->collectionManager->getPager($this->filterCriteria($paramFetcher), $page, $count);
 
-        return $collectionsPager->getResults();
+        return $collectionsPager;
     }
 
     /**

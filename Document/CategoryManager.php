@@ -14,8 +14,8 @@ namespace Sonata\ClassificationBundle\Document;
 use Sonata\CoreBundle\Model\BaseDocumentManager;
 use Sonata\ClassificationBundle\Model\CategoryManagerInterface;
 
-use Sonata\DoctrineORMAdminBundle\Datagrid\Pager;
-use Sonata\DoctrineORMAdminBundle\Datagrid\ProxyQuery;
+use Sonata\DatagridBundle\Pager\Doctrine\Pager;
+use Sonata\DatagridBundle\ProxyQuery\Doctrine\ProxyQuery;
 
 class CategoryManager extends BaseDocumentManager implements CategoryManagerInterface
 {

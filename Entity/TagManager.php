@@ -14,15 +14,15 @@ namespace Sonata\ClassificationBundle\Entity;
 use Sonata\ClassificationBundle\Model\TagManagerInterface;
 use Sonata\CoreBundle\Model\BaseEntityManager;
 
-use Sonata\DoctrineORMAdminBundle\Datagrid\Pager;
-use Sonata\DoctrineORMAdminBundle\Datagrid\ProxyQuery;
+use Sonata\DatagridBundle\Pager\Doctrine\pager;
+use Sonata\DatagridBundle\ProxyQuery\Doctrine\ProxyQuery;
 
 class TagManager extends BaseEntityManager implements TagManagerInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function getPager(array $criteria, $page, $maxPerPage = 10)
+    public function getPager(array $criteria, $page, $limit = 10, array $sort = array())
     {
         $parameters = array();
 
@@ -30,14 +30,15 @@ class TagManager extends BaseEntityManager implements TagManagerInterface
             ->createQueryBuilder('t')
             ->select('t');
 
-        $criteria['enabled'] = isset($criteria['enabled']) ? $criteria['enabled'] : true;
-        $query->andWhere('t.enabled = :enabled');
-        $parameters['enabled'] = $criteria['enabled'];
+        if (isset($criteria['enabled'])) {
+            $query->andWhere('t.enabled = :enabled');
+            $parameters['enabled'] = (bool) $criteria['enabled'];
+        }
 
         $query->setParameters($parameters);
 
         $pager = new Pager();
-        $pager->setMaxPerPage($maxPerPage);
+        $pager->setMaxPerPage($limit);
         $pager->setQuery(new ProxyQuery($query));
         $pager->setPage($page);
         $pager->init();

@@ -73,6 +73,14 @@ Installation
 
     php app/console sonata:easy-extends:generate --dest=src SonataClassificationBundle
 
+* If necessary add the new namespace to the autoload:
+
+.. code-block:: php
+
+    // app/autoload.php
+
+    $loader->add("Application", __DIR__.'/src/Application');
+
 * Enable the new bundle:
 
 .. code-block:: php
@@ -83,7 +91,7 @@ Installation
     {
         return array(
             // ...
-            new Application\Sonata\ClassificationBundle\SonataClassificationBundle(),
+            new Application\Sonata\ClassificationBundle\ApplicationSonataClassificationBundle(),
             // ...
         );
     }

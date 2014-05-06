@@ -27,12 +27,11 @@ class CategoryControllerTest extends \PHPUnit_Framework_TestCase
         $paramFetcher->expects($this->once())->method('all')->will($this->returnValue(array()));
 
         $pager = $this->getMockBuilder('Sonata\AdminBundle\Datagrid\Pager')->disableOriginalConstructor()->getMock();
-        $pager->expects($this->once())->method('getResults')->will($this->returnValue(array('returned')));
 
         $categoryManager = $this->getMock('Sonata\ClassificationBundle\Model\CategoryManagerInterface');
         $categoryManager->expects($this->once())->method('getPager')->will($this->returnValue($pager));
 
-        $this->assertEquals(array('returned'), $this->createCategoryController($categoryManager)->getCategoriesAction($paramFetcher));
+        $this->assertSame($pager, $this->createCategoryController($categoryManager)->getCategoriesAction($paramFetcher));
     }
 
     public function testGetCategoryAction()

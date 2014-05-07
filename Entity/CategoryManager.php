@@ -41,7 +41,7 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
     {
         $page = (int) $page == 0 ? 1 : (int) $page;
 
-        $queryBuilder = $this->getRepository()->createQueryBuilder()
+        $queryBuilder = $this->getObjectManager()->createQueryBuilder()
             ->select('c')
             ->from($this->class, 'c')
             ->andWhere('c.parent IS NULL');
@@ -64,7 +64,7 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
      */
     public function getSubCategoriesPager($categoryId, $page = 1, $limit = 25, $criteria = array())
     {
-        $queryBuilder = $this->getRepository()->createQueryBuilder()
+        $queryBuilder = $this->getObjectManager()->createQueryBuilder()
             ->select('c')
             ->from($this->class, 'c')
             ->where('c.parent = :categoryId')

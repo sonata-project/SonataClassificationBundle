@@ -74,6 +74,8 @@ class SonataClassificationExtension extends Extension
         $container->setParameter('sonata.classification.manager.tag.entity',        $config['class']['tag']);
         $container->setParameter('sonata.classification.manager.category.entity',   $config['class']['category']);
         $container->setParameter('sonata.classification.manager.collection.entity', $config['class']['collection']);
+        
+        $container->setParameter('sonata.classification.use_media', (bool) $config['use_media']);
     }
 
     /**
@@ -100,13 +102,19 @@ class SonataClassificationExtension extends Extension
      */
     public function registerDoctrineMapping(array $config)
     {
-
-        foreach ($config['class'] as $type => $class) {
-            if (!class_exists($class)) {
+        
+        foreach ($config['class'] as $type => $class) {            
+            if ( "media" == $type) {
+                if ($config['use_media'] && !class_exists($class)) {
+                    return;
+                } else {
+                    continue;
+                }
+            } elseif (!class_exists($class)) {                
                 return;
             }
         }
-
+        
         $collector = DoctrineCollector::getInstance();
 
         $collector->addAssociation($config['class']['category'], 'mapOneToMany', array(
@@ -145,7 +153,7 @@ class SonataClassificationExtension extends Extension
             'orphanRemoval' => false,
         ));
 
-        if (interface_exists('Sonata\MediaBundle\Model\MediaInterface')) {
+        if ($config['use_media']) {
             $collector->addAssociation($config['class']['collection'], 'mapManyToOne', array(
                 'fieldName'     => 'media',
                 'targetEntity'  => $config['class']['media'],

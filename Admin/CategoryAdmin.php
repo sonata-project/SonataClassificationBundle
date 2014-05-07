@@ -22,8 +22,6 @@ class CategoryAdmin extends Admin
         'cascade_validation' => true
     );
 
-    protected $useMedia = false;
-        
     /**
      * {@inheritdoc}
      */
@@ -42,7 +40,7 @@ class CategoryAdmin extends Admin
             ))
         ;
 
-        if ($this->useMedia) {
+        if (interface_exists('Sonata\MediaBundle\Model\MediaInterface')) {
             $formMapper->add('media', 'sonata_type_model_list',
                 array('required' => false),
                 array(
@@ -80,14 +78,5 @@ class CategoryAdmin extends Admin
             ->add('position')
             ->add('parent')
         ;
-    }
-
-    public function setUseMedia($use_media) {
-        $this->useMedia = $use_media;
-        return $this;
-    }
-    
-    public function getUseMedia() {
-        return $this->useMedia;
     }
 }

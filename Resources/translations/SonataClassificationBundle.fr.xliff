@@ -8,7 +8,7 @@
             </trans-unit>
             <trans-unit id="label_categories">
                 <source>label_categories</source>
-                <target>Categories</target>
+                <target>Catégories</target>
             </trans-unit>
             <trans-unit id="label_tags">
                 <source>label_tags</source>
@@ -18,89 +18,93 @@
                 <source>label_collections</source>
                 <target>Collections</target>
             </trans-unit>
+            <trans-unit id="breadcrumb.link_collection_list">
+                <source>breadcrumb.link_collection_list</source>
+                <target>Liste des collections</target>
+            </trans-unit>
             <trans-unit id="breadcrumb.link_category_list">
                 <source>breadcrumb.link_category_list</source>
-                <target>breadcrumb.link_category_list</target>
+                <target>Liste des catégories</target>
             </trans-unit>
             <trans-unit id="list.label_name">
                 <source>list.label_name</source>
-                <target>list.label_name</target>
+                <target>Libellé</target>
             </trans-unit>
             <trans-unit id="list.label_slug">
                 <source>list.label_slug</source>
-                <target>list.label_slug</target>
+                <target>Slug</target>
             </trans-unit>
             <trans-unit id="list.label_description">
                 <source>list.label_description</source>
-                <target>list.label_description</target>
+                <target>Description</target>
             </trans-unit>
             <trans-unit id="list.label_enabled">
                 <source>list.label_enabled</source>
-                <target>list.label_enabled</target>
+                <target>Activé</target>
             </trans-unit>
             <trans-unit id="filter.label_name">
                 <source>filter.label_name</source>
-                <target>filter.label_name</target>
+                <target>Filtre</target>
             </trans-unit>
             <trans-unit id="filter.label_enabled">
                 <source>filter.label_enabled</source>
-                <target>filter.label_enabled</target>
+                <target>Activé</target>
             </trans-unit>
             <trans-unit id="form.label_name">
                 <source>form.label_name</source>
-                <target>form.label_name</target>
+                <target>Libellé</target>
             </trans-unit>
             <trans-unit id="form.label_description">
                 <source>form.label_description</source>
-                <target>form.label_description</target>
+                <target>Description</target>
             </trans-unit>
             <trans-unit id="form.label_enabled">
                 <source>form.label_enabled</source>
-                <target>form.label_enabled</target>
+                <target>Activé</target>
             </trans-unit>
             <trans-unit id="breadcrumb.link_tag_list">
                 <source>breadcrumb.link_tag_list</source>
-                <target>breadcrumb.link_tag_list</target>
+                <target>Liste des tags</target>
             </trans-unit>
             <trans-unit id="form.label_slug">
                 <source>form.label_slug</source>
-                <target>form.label_slug</target>
+                <target>Slug</target>
             </trans-unit>
             <trans-unit id="form.label_created_at">
                 <source>form.label_created_at</source>
-                <target>form.label_created_at</target>
+                <target>Crée le</target>
             </trans-unit>
             <trans-unit id="form.label_updated_at">
                 <source>form.label_updated_at</source>
-                <target>form.label_updated_at</target>
+                <target>Mis à jour le</target>
             </trans-unit>
             <trans-unit id="list.label_created_at">
                 <source>list.label_created_at</source>
-                <target>list.label_created_at</target>
+                <target>Crée le</target>
             </trans-unit>
             <trans-unit id="list.label_updated_at">
                 <source>list.label_updated_at</source>
-                <target>list.label_updated_at</target>
+                <target>Mis à jour le</target>
             </trans-unit>
             <trans-unit id="form.label_position">
                 <source>form.label_position</source>
-                <target>form.label_position</target>
+                <target>Position</target>
             </trans-unit>
             <trans-unit id="form.label_parent">
                 <source>form.label_parent</source>
-                <target>form.label_parent</target>
+                <target>Parent</target>
             </trans-unit>
             <trans-unit id="list.label_position">
                 <source>list.label_position</source>
-                <target>list.label_position</target>
+                <target>Position</target>
             </trans-unit>
             <trans-unit id="list.label_parent">
                 <source>list.label_parent</source>
-                <target>list.label_parent</target>
+                <target>Parent</target>
             </trans-unit>
             <trans-unit id="filter.label_parent">
                 <source>filter.label_parent</source>
-                <target>filter.label_parent</target>
+                <target>Parent</target>
             </trans-unit>
             <trans-unit id="form.label_media">
                 <source>form.label_media</source>

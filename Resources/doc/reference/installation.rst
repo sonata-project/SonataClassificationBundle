@@ -63,9 +63,10 @@ Installation
 
     # ...
     doctrine:
-        # ...
-        types:
-            json:     Sonata\Doctrine\Types\JsonType
+        dbal:
+            # ...
+            types:
+                json:     Sonata\Doctrine\Types\JsonType
 
 * Run the easy-extends command:
 

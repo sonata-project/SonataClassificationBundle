@@ -32,7 +32,7 @@ abstract class Tag implements TagInterface
     {
         $this->name = $name;
 
-        $this->setSlug(self::slugify($name));
+        $this->setSlug($name);
     }
 
     /**
@@ -64,7 +64,7 @@ abstract class Tag implements TagInterface
      */
     public function setSlug($slug)
     {
-        $this->slug = $slug;
+        $this->slug = self::slugify($slug);
     }
 
     /**

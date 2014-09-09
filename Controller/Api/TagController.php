@@ -18,6 +18,7 @@ use FOS\RestBundle\Request\ParamFetcherInterface;
 use JMS\Serializer\SerializationContext;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 
+use Sonata\CoreBundle\Form\FormHelper;
 use Sonata\DatagridBundle\Pager\PagerInterface;
 use Sonata\ClassificationBundle\Model\TagManagerInterface;
 
@@ -248,6 +249,8 @@ class TagController
         $form = $this->formFactory->createNamed(null, 'sonata_classification_api_form_tag', $tag, array(
             'csrf_protection' => false
         ));
+
+        FormHelper::removeFields($request->request->all(), $form);
 
         $form->bind($request);
 

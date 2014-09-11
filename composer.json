@@ -17,9 +17,9 @@
         }
     ],
     "require": {
-        "symfony/symfony": "~2.2",
+        "symfony/symfony": "~2.3",
         "sonata-project/core-bundle": "~2.2",
-        "sonata-project/doctrine-orm-admin-bundle": "~2.2",
+        "sonata-project/doctrine-orm-admin-bundle": "~2.3",
         "sonata-project/datagrid-bundle": "~2.2@dev"
     },
     "require-dev": {
@@ -35,7 +35,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "2.2.x-dev"
+            "dev-master": "2.3.x-dev"
         }
     }
 }

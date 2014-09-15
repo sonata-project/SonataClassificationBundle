@@ -11,11 +11,11 @@
 
 namespace Sonata\ClassificationBundle\Model;
 
-abstract class Tag implements TagInterface
+abstract class Context implements ContextInterface
 {
     protected $name;
 
-    protected $slug;
+    protected $code;
 
     protected $createdAt;
 
@@ -23,16 +23,12 @@ abstract class Tag implements TagInterface
 
     protected $enabled;
 
-    protected $context;
-
     /**
      * {@inheritdoc}
      */
     public function setName($name)
     {
         $this->name = $name;
-
-        $this->setSlug($name);
     }
 
     /**
@@ -57,22 +53,6 @@ abstract class Tag implements TagInterface
     public function getEnabled()
     {
         return $this->enabled;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setSlug($slug)
-    {
-        $this->slug = self::slugify($slug);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getSlug()
-    {
-        return $this->slug;
     }
 
     /**
@@ -113,38 +93,19 @@ abstract class Tag implements TagInterface
     }
 
     /**
-     * source : http://snipplr.com/view/22741/slugify-a-string-in-php/
-     *
-     * @static
-     *
-     * @param string $text
-     *
-     * @return mixed|string
+     * @param mixed $code
      */
-    public static function slugify($text)
+    public function setCode($code)
     {
-        // replace non letter or digits by -
-        $text = preg_replace('~[^\\pL\d]+~u', '-', $text);
+        $this->code = $code;
+    }
 
-        // trim
-        $text = trim($text, '-');
-
-        // transliterate
-        if (function_exists('iconv')) {
-            $text = iconv('utf-8', 'us-ascii//TRANSLIT', $text);
-        }
-
-        // lowercase
-        $text = strtolower($text);
-
-        // remove unwanted characters
-        $text = preg_replace('~[^-\w]+~', '', $text);
-
-        if (empty($text)) {
-            return 'n-a';
-        }
-
-        return $text;
+    /**
+     * @return mixed
+     */
+    public function getCode()
+    {
+        return $this->code;
     }
 
     /**
@@ -153,21 +114,5 @@ abstract class Tag implements TagInterface
     public function __toString()
     {
         return $this->getName() ?: 'n/a';
-    }
-
-    /**
-     * @param ContextInterface $context
-     */
-    public function setContext(ContextInterface $context)
-    {
-        $this->context = $context;
-    }
-
-    /**
-     * @return ContextInterface
-     */
-    public function getContext()
-    {
-        return $this->context;
     }
 }

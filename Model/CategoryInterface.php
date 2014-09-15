@@ -134,4 +134,14 @@ interface CategoryInterface
      * @return MediaInterface
      */
     public function getMedia();
+
+    /**
+     * @param ContextInterface $context
+     */
+    public function setContext(ContextInterface $context);
+
+    /**
+     * @return ContextInterface
+     */
+    public function getContext();
 }

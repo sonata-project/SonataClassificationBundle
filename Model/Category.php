@@ -38,6 +38,8 @@ abstract class Category implements CategoryInterface
 
     protected $media;
 
+    protected $context;
+
     /**
      * {@inheritdoc}
      */
@@ -188,6 +190,8 @@ abstract class Category implements CategoryInterface
     {
         $this->children[] = $child;
 
+        $child->setContext($this->getContext());
+
         if (!$nested) {
             $child->setParent($this, true);
         }
@@ -275,5 +279,21 @@ abstract class Category implements CategoryInterface
     public function getMedia()
     {
         return $this->media;
+    }
+
+    /**
+     * @param ContextInterface $context
+     */
+    public function setContext(ContextInterface $context)
+    {
+        $this->context = $context;
+    }
+
+    /**
+     * @return ContextInterface
+     */
+    public function getContext()
+    {
+        return $this->context;
     }
 }

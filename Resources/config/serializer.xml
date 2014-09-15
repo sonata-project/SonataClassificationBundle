@@ -21,6 +21,11 @@
             <argument type="service" id="sonata.classification.manager.tag" />
         </service>
 
+        <service id="sonata.classification.serializer.handler.context" class="Sonata\ClassificationBundle\Serializer\ContextSerializerHandler">
+            <tag name="jms_serializer.subscribing_handler" />
+            <argument type="service" id="sonata.classification.manager.context" />
+        </service>
+
     </services>
 
 </container>

@@ -7,5 +7,5 @@
     <import type="rest" resource="sonata.classification.controller.api.category" name-prefix="sonata_api_classification_category_" />
     <import type="rest" resource="sonata.classification.controller.api.collection" name-prefix="sonata_api_classification_collection_" />
     <import type="rest" resource="sonata.classification.controller.api.tag" name-prefix="sonata_api_classification_tag_" />
-
+    <import type="rest" resource="sonata.classification.controller.api.context" name-prefix="sonata_api_classification_context_" />
 </routes>

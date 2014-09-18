@@ -15,12 +15,21 @@ use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Route\RouteCollection;
 
 class CategoryAdmin extends Admin
 {
     protected $formOptions = array(
         'cascade_validation' => true
     );
+
+    /**
+     * {@inheritdoc}
+     */
+    public function configureRoutes(RouteCollection $routes)
+    {
+        $routes->add('tree', 'tree');
+    }
 
     /**
      * {@inheritdoc}

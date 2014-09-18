@@ -13,6 +13,12 @@
             <call method="setTranslationDomain">
                 <argument>%sonata.classification.admin.category.translation_domain%</argument>
             </call>
+
+            <call method="setTemplates">
+                <argument type="collection">
+                    <argument key="list">SonataClassificationBundle:CategoryAdmin:list.html.twig</argument>
+                </argument>
+            </call>
         </service>
 
         <service id="sonata.classification.admin.tag" class="%sonata.classification.admin.tag.class%">

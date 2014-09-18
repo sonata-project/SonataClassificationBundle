@@ -113,7 +113,7 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
     /**
      * @return CategoryInterface[]
      */
-    public function getRootCategories()
+    public function getRootCategories($loadChildren = true)
     {
         $class = $this->getClass();
 
@@ -127,7 +127,7 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
                 throw new \RuntimeException('Context cannot be null');
             }
 
-            $categories[$category->getContext()->getId()] = $this->getRootCategory($category->getContext());
+            $categories[$category->getContext()->getId()] = $loadChildren ? $this->getRootCategory($category->getContext()) : $category;
         }
 
         return $categories;

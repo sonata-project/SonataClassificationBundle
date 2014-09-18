@@ -33,12 +33,16 @@ class CategoryAdmin extends Admin
                 ->add('description', 'textarea', array('required' => false))
             ->end()
             ->with('Options', array('class' => 'col-md-6'))
+                ->if_true($this->getSubject()->getParent() === null) // only main category can have a context
+                    ->add('context')
+                ->end_if()
                 ->add('position', 'integer', array('required' => false, 'data' => 0))
                 ->add('parent', 'sonata_category_selector', array(
                     'category'      => $this->getSubject() ?: null,
                     'model_manager' => $this->getModelManager(),
                     'class'         => $this->getClass(),
-                    'required'      => false
+                    'required'      => false,
+                    'context'       => $this->getSubject()->getContext()
                 ))
             ->end()
         ;
@@ -66,6 +70,7 @@ class CategoryAdmin extends Admin
     {
         $datagridMapper
             ->add('name')
+            ->add('context')
             ->add('enabled')
             ->add('parent')
         ;
@@ -78,6 +83,7 @@ class CategoryAdmin extends Admin
     {
         $listMapper
             ->addIdentifier('name')
+            ->add('context')
             ->add('slug')
             ->add('description')
             ->add('enabled', null, array('editable' => true))

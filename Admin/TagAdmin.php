@@ -23,7 +23,10 @@ class TagAdmin extends Admin
      */
     protected function configureFormFields(FormMapper $formMapper)
     {
-        $formMapper->add('name');
+        $formMapper
+            ->add('name')
+            ->add('context')
+        ;
 
         if ($this->hasSubject() && $this->getSubject()->getId()) {
             $formMapper->add('slug');
@@ -40,6 +43,7 @@ class TagAdmin extends Admin
         $datagridMapper
             ->add('name')
             ->add('enabled')
+            ->add('context')
         ;
     }
 
@@ -51,6 +55,7 @@ class TagAdmin extends Admin
         $listMapper
             ->addIdentifier('name')
             ->add('slug')
+            ->add('context')
             ->add('enabled', null, array('editable' => true))
             ->add('createdAt')
             ->add('updatedAt')

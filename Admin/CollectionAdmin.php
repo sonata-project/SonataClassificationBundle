@@ -31,6 +31,7 @@ class CollectionAdmin extends Admin
             ->add('enabled', null, array('required' => false))
             ->add('name')
             ->add('description', 'textarea', array('required' => false))
+            ->add('context')
         ;
 
         if (interface_exists('Sonata\MediaBundle\Model\MediaInterface')) {
@@ -54,6 +55,7 @@ class CollectionAdmin extends Admin
         $datagridMapper
             ->add('name')
             ->add('enabled')
+            ->add('context')
         ;
     }
 
@@ -65,7 +67,7 @@ class CollectionAdmin extends Admin
         $listMapper
             ->addIdentifier('name')
             ->add('slug')
-            ->add('description')
+            ->add('context')
             ->add('enabled', null, array('editable' => true))
         ;
     }

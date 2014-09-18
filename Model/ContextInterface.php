@@ -13,6 +13,9 @@ namespace Sonata\ClassificationBundle\Model;
 
 interface ContextInterface
 {
+
+    const DEFAULT_CONTEXT = 'default';
+
     /**
      * @param $name
      *
@@ -44,16 +47,16 @@ interface ContextInterface
     /**
      * Set slug
      *
-     * @param integer $code
+     * @param integer $id
      */
-    public function setCode($code);
+    public function setId($id);
 
     /**
      * Get slug
      *
      * @return integer $slug
      */
-    public function getCode();
+    public function getId();
 
     /**
      * Set created_at

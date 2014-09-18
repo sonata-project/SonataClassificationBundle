@@ -151,6 +151,61 @@ class SonataClassificationExtension extends Extension
             'orphanRemoval' => false,
         ));
 
+        $collector->addAssociation($config['class']['category'], 'mapManyToOne', array(
+            'fieldName'     => 'context',
+            'targetEntity'  => $config['class']['context'],
+            'cascade'       => array(
+                'persist',
+            ),
+            'mappedBy'      => null,
+            'inversedBy'    => null,
+            'joinColumns'   => array(
+                array(
+                    'name'  => 'context',
+                    'referencedColumnName' => 'id',
+                ),
+            ),
+            'orphanRemoval' => false,
+        ));
+
+        $collector->addAssociation($config['class']['tag'], 'mapManyToOne', array(
+            'fieldName'     => 'context',
+            'targetEntity'  => $config['class']['context'],
+            'cascade'       => array(
+                'persist',
+            ),
+            'mappedBy'      => null,
+            'inversedBy'    => null,
+            'joinColumns'   => array(
+                array(
+                    'name'  => 'context',
+                    'referencedColumnName' => 'id',
+                ),
+            ),
+            'orphanRemoval' => false,
+        ));
+
+        $collector->addUnique($config['class']['tag'], 'tag_context', array('slug', 'context'));
+
+        $collector->addAssociation($config['class']['collection'], 'mapManyToOne', array(
+            'fieldName'     => 'context',
+            'targetEntity'  => $config['class']['context'],
+            'cascade'       => array(
+                'persist',
+            ),
+            'mappedBy'      => null,
+            'inversedBy'    => null,
+            'joinColumns'   => array(
+                array(
+                    'name'  => 'context',
+                    'referencedColumnName' => 'id',
+                ),
+            ),
+            'orphanRemoval' => false,
+        ));
+
+        $collector->addUnique($config['class']['collection'], 'tag_collection', array('slug', 'context'));
+
         if (interface_exists('Sonata\MediaBundle\Model\MediaInterface')) {
             $collector->addAssociation($config['class']['collection'], 'mapManyToOne', array(
                 'fieldName'     => 'media',

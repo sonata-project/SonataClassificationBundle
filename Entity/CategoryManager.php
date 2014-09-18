@@ -16,6 +16,7 @@ use Sonata\AdminBundle\Datagrid\PagerInterface;
 use Sonata\ClassificationBundle\Model\CategoryInterface;
 use Sonata\ClassificationBundle\Model\CategoryManagerInterface;
 
+use Sonata\ClassificationBundle\Model\ContextInterface;
 use Sonata\CoreBundle\Model\BaseEntityManager;
 
 use Sonata\DatagridBundle\Pager\Doctrine\Pager;
@@ -79,34 +80,44 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
     }
 
     /**
+     * @param ContextInterface $context
+     *
      * @return CategoryInterface
      */
-    public function getRootCategory()
+    public function getRootCategory(ContextInterface $context = null)
     {
-        $this->loadCategories();
+        $code = $context ? $context->getName() : ContextInterface::DEFAULT_CONTEXT;
 
-        return $this->categories[0];
+        $this->loadCategories($code);
+
+        return $this->categories[$code][0];
     }
 
     /**
+     * @param ContextInterface $context
+     *
      * @return array
      */
-    public function getCategories()
+    public function getCategories(ContextInterface $context = null)
     {
-        $this->loadCategories();
+        $code = $context ? $context->getName() : ContextInterface::DEFAULT_CONTEXT;
 
-        return $this->categories;
+        $this->loadCategories($code);
+
+        return $this->categories[$code];
     }
 
     /**
      * Load all categories from the database, the current method is very efficient for < 256 categories
      *
      */
-    protected function loadCategories()
+    protected function loadCategories($code)
     {
-        if ($this->categories !== null) {
+        if (array_key_exists($code, $this->categories)) {
             return;
         }
+
+        $this->categories[$code] = array();
 
         $class = $this->getClass();
 
@@ -117,11 +128,12 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
             0 => $root
         );
 
-        $categories = $this->getObjectManager()->createQuery(sprintf('SELECT c FROM %s c INDEX BY c.id', $class))
+        $categories = $this->getObjectManager()->createQuery(sprintf('SELECT c FROM %s c INDEX BY c.id WHERE context = :context', $class))
+            ->setParameter('context', $code)
             ->execute();
 
         foreach ($categories as $category) {
-            $this->categories[$category->getId()] = $category;
+            $this->categories[$code][$category->getId()] = $category;
 
             $parent = $category->getParent();
 
@@ -147,6 +159,10 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
         $query = $this->getRepository()
             ->createQueryBuilder('c')
             ->select('c');
+
+        $query->andWhere('c.context = :context');
+
+        $parameters['context'] = isset($criteria['context']) ? $criteria['context'] : ContextInterface::DEFAULT_CONTEXT;
 
         if (isset($criteria['enabled'])) {
             $query->andWhere('c.enabled = :enabled');

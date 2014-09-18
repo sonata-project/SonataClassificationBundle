@@ -6,7 +6,6 @@
 
     <mapped-superclass name="Sonata\ClassificationBundle\Document\BaseContext">
 
-        <field name="code"          type="string"       fieldName="code"           />
         <field name="enabled"       type="boolean"      fieldName="enabled" />
         <field name="slug"          type="string"       fieldName="slug"    />
 

@@ -15,8 +15,6 @@ abstract class Context implements ContextInterface
 {
     protected $name;
 
-    protected $code;
-
     protected $createdAt;
 
     protected $updatedAt;
@@ -93,19 +91,11 @@ abstract class Context implements ContextInterface
     }
 
     /**
-     * @param mixed $code
+     * @param mixed $id
      */
-    public function setCode($code)
+    public function setId($id)
     {
-        $this->code = $code;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getCode()
-    {
-        return $this->code;
+        $this->id = $id;
     }
 
     /**

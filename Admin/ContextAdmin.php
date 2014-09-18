@@ -23,8 +23,8 @@ class ContextAdmin extends Admin
      */
     protected function configureFormFields(FormMapper $formMapper)
     {
+        $formMapper->add('id');
         $formMapper->add('name');
-        $formMapper->add('code');
         $formMapper->add('enabled', null, array('required' => false));
     }
 
@@ -34,6 +34,7 @@ class ContextAdmin extends Admin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
+            ->add('id')
             ->add('name')
             ->add('enabled')
         ;
@@ -46,7 +47,7 @@ class ContextAdmin extends Admin
     {
         $listMapper
             ->addIdentifier('name')
-            ->add('slug')
+            ->addIdentifier('id')
             ->add('enabled', null, array('editable' => true))
             ->add('createdAt')
             ->add('updatedAt')

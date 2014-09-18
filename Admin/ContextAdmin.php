@@ -23,9 +23,13 @@ class ContextAdmin extends Admin
      */
     protected function configureFormFields(FormMapper $formMapper)
     {
-        $formMapper->add('id');
-        $formMapper->add('name');
-        $formMapper->add('enabled', null, array('required' => false));
+        $formMapper
+            ->if_true($this->getSubject()->getId() === null)
+                ->add('id')
+            ->end_if()
+            ->add('name')
+            ->add('enabled', null, array('required' => false))
+        ;
     }
 
     /**

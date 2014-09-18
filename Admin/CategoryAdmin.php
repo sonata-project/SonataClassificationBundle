@@ -29,21 +29,22 @@ class CategoryAdmin extends Admin
     {
         $formMapper
             ->with('General', array('class' => 'col-md-6'))
+
                 ->add('name')
                 ->add('description', 'textarea', array('required' => false))
             ->end()
             ->with('Options', array('class' => 'col-md-6'))
-                ->if_true($this->getSubject()->getParent() === null) // only main category can have a context
-                    ->add('context')
-                ->end_if()
+                ->add('enabled')
                 ->add('position', 'integer', array('required' => false, 'data' => 0))
-                ->add('parent', 'sonata_category_selector', array(
-                    'category'      => $this->getSubject() ?: null,
-                    'model_manager' => $this->getModelManager(),
-                    'class'         => $this->getClass(),
-                    'required'      => false,
-                    'context'       => $this->getSubject()->getContext()
-                ))
+                ->if_true($this->getSubject()->getParent() !== null || $this->getSubject()->getId() === null) // root category cannot have a parent
+                    ->add('parent', 'sonata_category_selector', array(
+                        'category'      => $this->getSubject() ?: null,
+                        'model_manager' => $this->getModelManager(),
+                        'class'         => $this->getClass(),
+                        'required'      => false,
+                        'context'       => $this->getSubject()->getContext()
+                    ))
+                ->end_if()
             ->end()
         ;
 

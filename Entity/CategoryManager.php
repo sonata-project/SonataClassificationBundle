@@ -11,12 +11,14 @@
 
 namespace Sonata\ClassificationBundle\Entity;
 
+use Doctrine\Common\Persistence\ManagerRegistry;
 use Sonata\AdminBundle\Datagrid\PagerInterface;
 
 use Sonata\ClassificationBundle\Model\CategoryInterface;
 use Sonata\ClassificationBundle\Model\CategoryManagerInterface;
 
 use Sonata\ClassificationBundle\Model\ContextInterface;
+use Sonata\ClassificationBundle\Model\ContextManagerInterface;
 use Sonata\CoreBundle\Model\BaseEntityManager;
 
 use Sonata\DatagridBundle\Pager\Doctrine\Pager;
@@ -28,6 +30,21 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
      * @var array
      */
     protected $categories;
+
+    protected $contextManager;
+
+    /**
+     * @param string                  $class
+     * @param ManagerRegistry         $registry
+     * @param ContextManagerInterface $contextManager
+     */
+    public function __construct($class, ManagerRegistry $registry, ContextManagerInterface $contextManager)
+    {
+        parent::__construct($class, $registry);
+
+        $this->contextManager = $contextManager;
+        $this->categories = array();
+    }
 
     /**
      * Returns a pager to iterate over the root category
@@ -84,13 +101,36 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
      *
      * @return CategoryInterface
      */
-    public function getRootCategory(ContextInterface $context = null)
+    public function getRootCategory($context = null)
     {
-        $code = $context ? $context->getName() : ContextInterface::DEFAULT_CONTEXT;
+        $context = $this->getContext($context);
 
-        $this->loadCategories($code);
+        $this->loadCategories($context);
 
-        return $this->categories[$code][0];
+        return $this->categories[$context->getId()][0];
+    }
+
+    /**
+     * @return CategoryInterface[]
+     */
+    public function getRootCategories()
+    {
+        $class = $this->getClass();
+
+        $rootCategories = $this->getObjectManager()->createQuery(sprintf('SELECT c FROM %s c WHERE c.parent IS NULL', $class))
+            ->execute();
+
+        $categories = array();
+
+        foreach($rootCategories as $category) {
+            if ($category->getContext() === null) {
+                throw new \RuntimeException('Context cannot be null');
+            }
+
+            $categories[$category->getContext()->getId()] = $this->getRootCategory($category->getContext());
+        }
+
+        return $categories;
     }
 
     /**
@@ -98,55 +138,91 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
      *
      * @return array
      */
-    public function getCategories(ContextInterface $context = null)
+    public function getCategories($context = null)
     {
-        $code = $context ? $context->getName() : ContextInterface::DEFAULT_CONTEXT;
+        $context = $this->getContext($context);
 
-        $this->loadCategories($code);
+        $this->loadCategories($context);
 
-        return $this->categories[$code];
+        return $this->categories[$context->getId()];
+    }
+
+    /**
+     * @param $context
+     *
+     * @return ContextInterface
+     */
+    private function getContext($context)
+    {
+        if ($context === null) {
+            $context = ContextInterface::DEFAULT_CONTEXT;
+        }
+
+        if ($context instanceof ContextInterface) {
+            return $context;
+        }
+
+        $context = $this->contextManager->find($context);
+
+        if (!$context instanceof ContextInterface) {
+            throw new \RuntimeException(sprintf('Unable to find the context : %s', $context));
+        }
+
+        return $context;
     }
 
     /**
      * Load all categories from the database, the current method is very efficient for < 256 categories
      *
      */
-    protected function loadCategories($code)
+    protected function loadCategories(ContextInterface $context)
     {
-        if (array_key_exists($code, $this->categories)) {
+        if (array_key_exists($context->getId(), $this->categories)) {
             return;
         }
 
-        $this->categories[$code] = array();
-
         $class = $this->getClass();
 
-        $root = $this->create();
-        $root->setName('root');
-
-        $this->categories = array(
-            0 => $root
-        );
-
-        $categories = $this->getObjectManager()->createQuery(sprintf('SELECT c FROM %s c INDEX BY c.id WHERE context = :context', $class))
-            ->setParameter('context', $code)
+        $categories = $this->getObjectManager()->createQuery(sprintf('SELECT c FROM %s c WHERE c.context = :context ORDER BY c.parent ASC', $class))
+            ->setParameter('context', $context->getId())
             ->execute();
 
-        foreach ($categories as $category) {
-            $this->categories[$code][$category->getId()] = $category;
+        if (count($categories) == 0) {
+            // no category, create one for the provided context
+            $category = $this->create();
+            $category->setName($context->getName());
+            $category->setEnabled(true);
+            $category->setContext($context);
+            $category->setDescription($context->getName());
+
+            $this->save($category);
+
+            $categories = array($category);
+        }
+
+        foreach ($categories as $pos => $category) {
+            if ($pos === 0 && $category->getParent()) {
+                throw new \RuntimeException('The first category must be the root');
+            }
+
+            if ($pos == 0) {
+                $root = $category;
+            }
+
+            $this->categories[$context->getId()][$category->getId()] = $category;
 
             $parent = $category->getParent();
 
             $category->disableChildrenLazyLoading();
 
-            if (!$parent) {
-                $root->addChild($category, true);
-
-                continue;
+            if ($parent) {
+                $parent->addChild($category);
             }
-
-            $parent->addChild($category);
         }
+
+        $this->categories[$context->getId()] = array(
+            0 => $root
+        );
     }
 
     /**

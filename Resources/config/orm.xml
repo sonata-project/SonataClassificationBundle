@@ -14,6 +14,7 @@
         <service id="sonata.classification.manager.category" class="%sonata.classification.manager.category.class%">
             <argument>%sonata.classification.manager.category.entity%</argument>
             <argument type="service" id="doctrine" />
+            <argument type="service" id="sonata.classification.manager.context"  />
         </service>
 
         <service id="sonata.classification.manager.tag" class="%sonata.classification.manager.tag.class%">

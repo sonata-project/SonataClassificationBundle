@@ -12,8 +12,10 @@
 namespace Sonata\ClassificationBundle\Controller;
 
 use Sonata\AdminBundle\Controller\CRUDController as Controller;
+use Sonata\AdminBundle\Form\Type\Filter\ChoiceType;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
  * Page Admin Controller
@@ -33,7 +35,23 @@ class CategoryAdminController extends Controller
             return new RedirectResponse($this->admin->generateUrl('tree'));
         }
 
-        return parent::listAction();
+        $datagrid = $this->admin->getDatagrid();
+
+        if ($this->admin->getPersistentParameter('context')) {
+            $datagrid->setValue('context', null, $this->admin->getPersistentParameter('context'));
+        }
+
+        $formView = $datagrid->getForm()->createView();
+
+        // set the theme for the current Admin Form
+        $this->get('twig')->getExtension('form')->renderer->setTheme($formView, $this->admin->getFilterTheme());
+
+        return $this->render($this->admin->getTemplate('list'), array(
+            'action'     => 'list',
+            'form'       => $formView,
+            'datagrid'   => $datagrid,
+            'csrf_token' => $this->getCsrfToken('sonata.batch'),
+        ));
     }
 
     /**
@@ -68,6 +86,11 @@ class CategoryAdminController extends Controller
         }
 
         $datagrid = $this->admin->getDatagrid();
+
+        if ($this->admin->getPersistentParameter('context')) {
+            $datagrid->setValue('context', ChoiceType::TYPE_EQUAL, $this->admin->getPersistentParameter('context'));
+        }
+
         $formView = $datagrid->getForm()->createView();
 
         $this->get('twig')->getExtension('form')->renderer->setTheme($formView, $this->admin->getFilterTheme());

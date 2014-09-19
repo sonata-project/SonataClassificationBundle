@@ -211,11 +211,7 @@ class SonataClassificationExtension extends Extension
                 'fieldName'     => 'media',
                 'targetEntity'  => $config['class']['media'],
                 'cascade'       => array(
-                    'remove',
                     'persist',
-                    'refresh',
-                    'merge',
-                    'detach',
                 ),
                 'mappedBy'      => NULL,
                 'inversedBy'    => NULL,
@@ -233,11 +229,7 @@ class SonataClassificationExtension extends Extension
                 'fieldName'     => 'media',
                 'targetEntity'  => $config['class']['media'],
                 'cascade'       => array(
-                    'remove',
                     'persist',
-                    'refresh',
-                    'merge',
-                    'detach',
                 ),
                 'mappedBy'      => NULL,
                 'inversedBy'    => NULL,

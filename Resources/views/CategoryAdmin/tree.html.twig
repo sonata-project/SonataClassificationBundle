@@ -19,7 +19,7 @@ file that was distributed with this source code.
 {% macro navigate_child(collection, admin, root) %}
     <ul{% if root %} class="sonata-tree sonata-tree--toggleable js-treeview"{% endif %}>
         {% for element in collection %}
-            <li>
+            <li class="sonata-ba-list-field"  objectId="{{ element.id }}" >
                 <div class="sonata-tree__item">
                     {% if element.parent %}<i class="fa fa-caret-right" data-treeview-toggler></i>{% endif %}
                     <a class="sonata-tree__item__edit" href="{{ admin.generateObjectUrl('edit', element) }}">{{ element.name }}</a>

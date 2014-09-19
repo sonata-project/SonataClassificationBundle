@@ -130,7 +130,6 @@ class CategoryAdmin extends Admin
             ->add('name')
             ->add('context', null, array(), null, $options)
             ->add('enabled')
-            ->add('parent')
         ;
     }
 

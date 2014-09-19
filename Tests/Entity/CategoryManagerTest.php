@@ -38,7 +38,9 @@ class CategoryManagerTest extends \PHPUnit_Framework_TestCase
         $registry = $this->getMock('Doctrine\Common\Persistence\ManagerRegistry');
         $registry->expects($this->any())->method('getManagerForClass')->will($this->returnValue($em));
 
-        return new CategoryManager('Sonata\PageBundle\Entity\BaseCategory', $registry);
+        $contextManager = $this->getMock('Sonata\ClassificationBundle\Model\ContextManagerInterface');
+
+        return new CategoryManager('Sonata\PageBundle\Entity\BaseCategory', $registry, $contextManager);
     }
 
     public function testGetPager()

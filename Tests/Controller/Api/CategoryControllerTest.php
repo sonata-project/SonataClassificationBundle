@@ -64,6 +64,7 @@ class CategoryControllerTest extends \PHPUnit_Framework_TestCase
         $form->expects($this->once())->method('bind');
         $form->expects($this->once())->method('isValid')->will($this->returnValue(true));
         $form->expects($this->once())->method('getData')->will($this->returnValue($category));
+        $form->expects($this->once())->method('all')->will($this->returnValue(array()));
 
         $formFactory = $this->getMock('Symfony\Component\Form\FormFactoryInterface');
         $formFactory->expects($this->once())->method('createNamed')->will($this->returnValue($form));
@@ -81,6 +82,7 @@ class CategoryControllerTest extends \PHPUnit_Framework_TestCase
         $form = $this->getMockBuilder('Symfony\Component\Form\Form')->disableOriginalConstructor()->getMock();
         $form->expects($this->once())->method('bind');
         $form->expects($this->once())->method('isValid')->will($this->returnValue(false));
+        $form->expects($this->once())->method('all')->will($this->returnValue(array()));
 
         $formFactory = $this->getMock('Symfony\Component\Form\FormFactoryInterface');
         $formFactory->expects($this->once())->method('createNamed')->will($this->returnValue($form));
@@ -102,6 +104,7 @@ class CategoryControllerTest extends \PHPUnit_Framework_TestCase
         $form->expects($this->once())->method('bind');
         $form->expects($this->once())->method('isValid')->will($this->returnValue(true));
         $form->expects($this->once())->method('getData')->will($this->returnValue($category));
+        $form->expects($this->once())->method('all')->will($this->returnValue(array()));
 
         $formFactory = $this->getMock('Symfony\Component\Form\FormFactoryInterface');
         $formFactory->expects($this->once())->method('createNamed')->will($this->returnValue($form));
@@ -122,6 +125,7 @@ class CategoryControllerTest extends \PHPUnit_Framework_TestCase
         $form = $this->getMockBuilder('Symfony\Component\Form\Form')->disableOriginalConstructor()->getMock();
         $form->expects($this->once())->method('bind');
         $form->expects($this->once())->method('isValid')->will($this->returnValue(false));
+        $form->expects($this->once())->method('all')->will($this->returnValue(array()));
 
         $formFactory = $this->getMock('Symfony\Component\Form\FormFactoryInterface');
         $formFactory->expects($this->once())->method('createNamed')->will($this->returnValue($form));

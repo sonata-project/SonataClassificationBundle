@@ -11,8 +11,11 @@
 
 namespace Sonata\ClassificationBundle\Model;
 
-interface TagInterface
+interface ContextInterface
 {
+
+    const DEFAULT_CONTEXT = 'default';
+
     /**
      * @param $name
      *
@@ -44,16 +47,16 @@ interface TagInterface
     /**
      * Set slug
      *
-     * @param integer $slug
+     * @param integer $id
      */
-    public function setSlug($slug);
+    public function setId($id);
 
     /**
      * Get slug
      *
      * @return integer $slug
      */
-    public function getSlug();
+    public function getId();
 
     /**
      * Set created_at
@@ -82,14 +85,4 @@ interface TagInterface
      * @return \DateTime $updatedAt
      */
     public function getUpdatedAt();
-
-    /**
-     * @param ContextInterface $context
-     */
-    public function setContext(ContextInterface $context);
-
-    /**
-     * @return ContextInterface
-     */
-    public function getContext();
 }

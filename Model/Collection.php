@@ -30,6 +30,8 @@ abstract class Collection implements CollectionInterface
 
     protected $media;
 
+    protected $context;
+
     /**
      * Set name
      *
@@ -177,5 +179,21 @@ abstract class Collection implements CollectionInterface
     public function getMedia()
     {
         return $this->media;
+    }
+
+    /**
+     * @param ContextInterface $context
+     */
+    public function setContext(ContextInterface $context)
+    {
+        $this->context = $context;
+    }
+
+    /**
+     * @return ContextInterface
+     */
+    public function getContext()
+    {
+        return $this->context;
     }
 }

@@ -100,4 +100,14 @@ interface CollectionInterface
      * @return MediaInterface
      */
     public function getMedia();
+
+    /**
+     * @param ContextInterface $context
+     */
+    public function setContext(ContextInterface $context);
+
+    /**
+     * @return ContextInterface
+     */
+    public function getContext();
 }

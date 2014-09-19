@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of the Sonata project.
+ * This file is part of the Sonata package.
  *
- * (c) Sonata Project <https://github.com/sonata-project/SonataClassificationBundle/>
+ * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -16,35 +16,20 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 
-class CollectionAdmin extends Admin
+class ContextAdmin extends Admin
 {
-    protected $formOptions = array(
-        'cascade_validation' => true
-    );
-
     /**
      * {@inheritdoc}
      */
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('enabled', null, array('required' => false))
+            ->if_true($this->getSubject()->getId() === null)
+                ->add('id')
+            ->end_if()
             ->add('name')
-            ->add('description', 'textarea', array('required' => false))
-            ->add('context')
+            ->add('enabled', null, array('required' => false))
         ;
-
-        if (interface_exists('Sonata\MediaBundle\Model\MediaInterface')) {
-            $formMapper->add('media', 'sonata_type_model_list',
-                array('required' => false),
-                array(
-                    'link_parameters' => array(
-                        'provider' => 'sonata.media.provider.image',
-                        'context'  => 'sonata_collection'
-                    )
-                )
-            );
-        }
     }
 
     /**
@@ -53,9 +38,9 @@ class CollectionAdmin extends Admin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
+            ->add('id')
             ->add('name')
             ->add('enabled')
-            ->add('context')
         ;
     }
 
@@ -66,9 +51,10 @@ class CollectionAdmin extends Admin
     {
         $listMapper
             ->addIdentifier('name')
-            ->add('slug')
-            ->add('context')
+            ->addIdentifier('id')
             ->add('enabled', null, array('editable' => true))
+            ->add('createdAt')
+            ->add('updatedAt')
         ;
     }
 }

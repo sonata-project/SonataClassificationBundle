@@ -3,6 +3,7 @@
     double: Definition; Tag
     double: Definition; Collection
     double: Definition; Category
+    double: Definition; Context
 
 Classification Types
 ====================
@@ -32,3 +33,9 @@ A `category` is a class or division of things regarded as having particular shar
 
 For more practical examples, don't hesitate to test the public demo of `Sonata <http://demo.sonata-project.org>`_.
 If you want to know more, you can fork the `Sonata sandbox <https://github.com/sonata-project/sandbox>`_ from Github.com and analyse how it's built.
+
+
+Context
+=======
+
+A Context is a way to group Tag, Collection and Category into one set. So you can have duplicate tag accross contexts.

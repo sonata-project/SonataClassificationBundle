@@ -7,12 +7,14 @@
         <parameter key="sonata.classification.manager.category.class">Sonata\ClassificationBundle\Entity\CategoryManager</parameter>
         <parameter key="sonata.classification.manager.tag.class">Sonata\ClassificationBundle\Entity\TagManager</parameter>
         <parameter key="sonata.classification.manager.collection.class">Sonata\ClassificationBundle\Entity\CollectionManager</parameter>
+        <parameter key="sonata.classification.manager.context.class">Sonata\ClassificationBundle\Entity\ContextManager</parameter>
     </parameters>
 
     <services>
         <service id="sonata.classification.manager.category" class="%sonata.classification.manager.category.class%">
             <argument>%sonata.classification.manager.category.entity%</argument>
             <argument type="service" id="doctrine" />
+            <argument type="service" id="sonata.classification.manager.context"  />
         </service>
 
         <service id="sonata.classification.manager.tag" class="%sonata.classification.manager.tag.class%">
@@ -22,6 +24,11 @@
 
         <service id="sonata.classification.manager.collection" class="%sonata.classification.manager.collection.class%">
             <argument>%sonata.classification.manager.collection.entity%</argument>
+            <argument type="service" id="doctrine" />
+        </service>
+
+        <service id="sonata.classification.manager.context" class="%sonata.classification.manager.context.class%">
+            <argument>%sonata.classification.manager.context.entity%</argument>
             <argument type="service" id="doctrine" />
         </service>
     </services>

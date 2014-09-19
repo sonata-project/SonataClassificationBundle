@@ -46,8 +46,10 @@ class CategoryManagerTest extends \PHPUnit_Framework_TestCase
         $self = $this;
         $this
             ->getCategoryManager(function ($qb) use ($self) {
-                $qb->expects($self->never())->method('andWhere');
-                $qb->expects($self->once())->method('setParameters')->with(array());
+                $qb->expects($self->exactly(1))->method('andWhere')->withConsecutive(
+                    array($self->equalTo('c.context = :context'))
+                );
+                $qb->expects($self->once())->method('setParameters')->with(array('context' => 'default'));
             })
             ->getPager(array(), 1);
     }
@@ -57,11 +59,17 @@ class CategoryManagerTest extends \PHPUnit_Framework_TestCase
         $self = $this;
         $this
             ->getCategoryManager(function ($qb) use ($self) {
-                $qb->expects($self->once())->method('andWhere')->with($self->equalTo('c.enabled = :enabled'));
-                $qb->expects($self->once())->method('setParameters')->with(array('enabled' => true));
+                /** @var $self \PHPUnit_Framework_TestCase */
+                /** @var $qb \PHPUnit_Framework_MockObject_InvocationMocker */
+                $qb->expects($self->exactly(2))->method('andWhere')->withConsecutive(
+                    array($self->equalTo('c.context = :context')),
+                    array($self->equalTo('c.enabled = :enabled'))
+                );
+                $qb->expects($self->once())->method('setParameters')->with(array('enabled' => true, 'context' => 'default'));
             })
             ->getPager(array(
                 'enabled' => true,
+                'context' => 'default'
             ), 1);
     }
 
@@ -70,11 +78,17 @@ class CategoryManagerTest extends \PHPUnit_Framework_TestCase
         $self = $this;
         $this
             ->getCategoryManager(function ($qb) use ($self) {
-                $qb->expects($self->once())->method('andWhere')->with($self->equalTo('c.enabled = :enabled'));
-                $qb->expects($self->once())->method('setParameters')->with(array('enabled' => false));
+                /** @var $self \PHPUnit_Framework_TestCase */
+                /** @var $qb \PHPUnit_Framework_MockObject_InvocationMocker */
+                $qb->expects($self->exactly(2))->method('andWhere')->withConsecutive(
+                    array($self->equalTo('c.context = :context')),
+                    array($self->equalTo('c.enabled = :enabled'))
+                );
+                $qb->expects($self->once())->method('setParameters')->with(array('enabled' => false, 'context' => 'default'));
             })
             ->getPager(array(
                 'enabled' => false,
+                'context' => 'default'
             ), 1);
     }
 }

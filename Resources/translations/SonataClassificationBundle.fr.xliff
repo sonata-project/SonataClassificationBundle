@@ -110,6 +110,38 @@
                 <source>form.label_media</source>
                 <target>Media</target>
             </trans-unit>
+            <trans-unit id="breadcrumb.link_context_list">
+                <source>breadcrumb.link_context_list</source>
+                <target>Contexts</target>
+            </trans-unit>
+            <trans-unit id="list.label_id">
+                <source>list.label_id</source>
+                <target>Code</target>
+            </trans-unit>
+            <trans-unit id="filter.label_id">
+                <source>filter.label_id</source>
+                <target>Code</target>
+            </trans-unit>
+            <trans-unit id="label_contexts">
+                <source>label_contexts</source>
+                <target>Contexts</target>
+            </trans-unit>
+            <trans-unit id="form.label_id">
+                <source>form.label_id</source>
+                <target>Code</target>
+            </trans-unit>
+            <trans-unit id="filter.label_context">
+                <source>filter.label_context</source>
+                <target>Contextt</target>
+            </trans-unit>
+            <trans-unit id="list.label_context">
+                <source>list.label_context</source>
+                <target>Context</target>
+            </trans-unit>
+            <trans-unit id="form.label_context">
+                <source>form.label_context</source>
+                <target>Context</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

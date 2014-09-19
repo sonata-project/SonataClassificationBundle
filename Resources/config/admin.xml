@@ -9,9 +9,16 @@
             <argument />
             <argument>%sonata.classification.admin.category.entity%</argument>
             <argument>%sonata.classification.admin.category.controller%</argument>
+            <argument type="service" id="sonata.classification.manager.context" />
 
             <call method="setTranslationDomain">
                 <argument>%sonata.classification.admin.category.translation_domain%</argument>
+            </call>
+
+            <call method="setTemplates">
+                <argument type="collection">
+                    <argument key="list">SonataClassificationBundle:CategoryAdmin:list.html.twig</argument>
+                </argument>
             </call>
         </service>
 
@@ -34,6 +41,17 @@
 
             <call method="setTranslationDomain">
                 <argument>%sonata.classification.admin.collection.translation_domain%</argument>
+            </call>
+        </service>
+
+        <service id="sonata.classification.admin.context" class="%sonata.classification.admin.context.class%">
+            <tag name="sonata.admin" manager_type="orm" group="sonata_classification" label="label_contexts"  label_catalogue="%sonata.classification.admin.context.translation_domain%" label_translator_strategy="sonata.admin.label.strategy.underscore" />
+            <argument />
+            <argument>%sonata.classification.admin.context.entity%</argument>
+            <argument>%sonata.classification.admin.context.controller%</argument>
+
+            <call method="setTranslationDomain">
+                <argument>%sonata.classification.admin.context.translation_domain%</argument>
             </call>
         </service>
     </services>

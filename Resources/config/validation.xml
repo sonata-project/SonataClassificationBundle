@@ -38,4 +38,16 @@
         </property>
     </class>
 
+    <class name="Sonata\ClassificationBundle\Model\Context">
+        <property name="name">
+            <constraint name="NotBlank" />
+            <constraint name="NotNull" />
+            <constraint name="Length">
+               <option name="min">2</option>
+               <option name="max">32</option>
+           </constraint>
+        </property>
+    </class>
+
+
 </constraint-mapping>

@@ -43,6 +43,7 @@ class CategorySelectorType extends AbstractType
         $that = $this;
 
         $resolver->setDefaults(array(
+            'context'           => null,
             'category'          => null,
             'choice_list'       => function (Options $opts, $previousValue) use ($that) {
                 return new SimpleChoiceList($that->getChoices($opts));
@@ -61,11 +62,19 @@ class CategorySelectorType extends AbstractType
             return array();
         }
 
-        $root = $this->manager->getRootCategory();
+        if ($options['context'] === null) {
+            $categories = $this->manager->getRootCategories();
+        } else {
+            $categories = array($this->manager->getRootCategory($options['context']));
+        }
 
         $choices = array();
 
-        $this->childWalker($root, $options, $choices);
+        foreach ($categories as $category) {
+            $choices[$category->getId()] = sprintf("%s (%s)", $category->getName(), $category->getContext()->getId());
+
+            $this->childWalker($category, $options, $choices);
+        }
 
         return $choices;
     }
@@ -76,9 +85,8 @@ class CategorySelectorType extends AbstractType
      * @param array             $choices
      * @param int               $level
      */
-    private function childWalker(CategoryInterface $category, Options $options, array &$choices, $level = 1)
+    private function childWalker(CategoryInterface $category, Options $options, array &$choices, $level = 2)
     {
-
         if ($category->getChildren() === null) {
             return;
         }

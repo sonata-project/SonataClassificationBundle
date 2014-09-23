@@ -35,6 +35,10 @@ class CategoryAdminController extends Controller
             return new RedirectResponse($this->admin->generateUrl('tree'));
         }
 
+        if ($listMode = $this->getRequest()->get('_list_mode')) {
+            $this->admin->setListMode($listMode);
+        }
+
         $datagrid = $this->admin->getDatagrid();
 
         if ($this->admin->getPersistentParameter('context')) {

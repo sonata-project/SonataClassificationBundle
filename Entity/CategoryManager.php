@@ -152,20 +152,26 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
      *
      * @return ContextInterface
      */
-    private function getContext($context)
+    private function getContext($contextCode)
     {
-        if ($context === null) {
-            $context = ContextInterface::DEFAULT_CONTEXT;
+        if ($contextCode === null) {
+            $contextCode = ContextInterface::DEFAULT_CONTEXT;
         }
 
-        if ($context instanceof ContextInterface) {
-            return $context;
+        if ($contextCode instanceof ContextInterface) {
+            return $contextCode;
         }
 
-        $context = $this->contextManager->find($context);
+        $context = $this->contextManager->find($contextCode);
 
         if (!$context instanceof ContextInterface) {
-            throw new \RuntimeException(sprintf('Unable to find the context : %s', $context));
+            $context = $this->contextManager->create();
+
+            $context->setId($contextCode);
+            $context->setName($contextCode);
+            $context->setEnabled(true);
+
+            $this->contextManager->save($context);
         }
 
         return $context;

@@ -80,7 +80,6 @@ class CategoryAdmin extends Admin
     {
         $formMapper
             ->with('General', array('class' => 'col-md-6'))
-
                 ->add('name')
                 ->add('description', 'textarea', array('required' => false))
             ->end()

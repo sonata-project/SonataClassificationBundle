@@ -132,15 +132,27 @@
             </trans-unit>
             <trans-unit id="filter.label_context">
                 <source>filter.label_context</source>
-                <target>Contextt</target>
+                <target>Context</target>
             </trans-unit>
             <trans-unit id="list.label_context">
                 <source>list.label_context</source>
                 <target>Context</target>
             </trans-unit>
-            <trans-unit id="form.label_context">
-                <source>form.label_context</source>
-                <target>Context</target>
+            <trans-unit id="tree_catalog_title">
+                <source>tree_catalog_title</source>
+                <target>Catégories</target>
+            </trans-unit>
+            <trans-unit id="element.tree_site_label">
+                <source>element.tree_site_label</source>
+                <target>Catégories</target>
+            </trans-unit>
+            <trans-unit id="classification.list_mode">
+                <source>classification.list_mode</source>
+                <target>Liste</target>
+            </trans-unit>
+            <trans-unit id="classification.tree_mode">
+                <source>classification.tree_mode</source>
+                <target>Arbre</target>
             </trans-unit>
         </body>
     </file>

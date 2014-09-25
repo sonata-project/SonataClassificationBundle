@@ -50,7 +50,7 @@ file that was distributed with this source code.
         <div class="box box-primary">
             <div class="box-header">
                 <h1 class="box-title">
-                    {{ admin.trans('tree_catalog_title') }}
+                    {{ admin.trans('tree_catalog_title', {}, admin.translationdomain) }}
                     {% if not app.request.get('hide_context') %}
                         <div class="btn-group">
                             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">

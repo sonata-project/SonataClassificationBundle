@@ -142,6 +142,22 @@
                 <source>form.label_context</source>
                 <target>Context</target>
             </trans-unit>
+            <trans-unit id="tree_catalog_title">
+                <source>tree_catalog_title</source>
+                <target>Categories</target>
+            </trans-unit>
+            <trans-unit id="element.tree_site_label">
+                <source>element.tree_site_label</source>
+                <target>Categories</target>
+            </trans-unit>
+            <trans-unit id="classification.list_mode">
+                <source>classification.list_mode</source>
+                <target>List</target>
+            </trans-unit>
+            <trans-unit id="classification.tree_mode">
+                <source>classification.tree_mode</source>
+                <target>Tree</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

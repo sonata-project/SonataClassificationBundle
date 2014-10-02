@@ -91,7 +91,7 @@ class CategoryAdmin extends Admin
                         'category'      => $this->getSubject() ?: null,
                         'model_manager' => $this->getModelManager(),
                         'class'         => $this->getClass(),
-                        'required'      => false,
+                        'required'      => true,
                         'context'       => $this->getSubject()->getContext()
                     ))
                 ->end_if()
@@ -119,7 +119,6 @@ class CategoryAdmin extends Admin
      */
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
-
         $options = array();
         if ($this->getPersistentParameter('hide_context') === 1) {
             $options['disabled'] = true;

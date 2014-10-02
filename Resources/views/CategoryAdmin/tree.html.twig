@@ -16,20 +16,21 @@ file that was distributed with this source code.
 {% extends 'SonataAdminBundle:CRUD:base_list.html.twig' %}
 
 {% import _self as tree %}
-{% macro navigate_child(collection, admin, root) %}
+{% macro navigate_child(collection, admin, root, depth) %}
     <ul{% if root %} class="sonata-tree sonata-tree--toggleable js-treeview"{% endif %}>
         {% for element in collection %}
-            <li class="sonata-ba-list-field"  objectId="{{ element.id }}" >
-                <div class="sonata-tree__item">
-                    {% if element.parent %}<i class="fa fa-caret-right" data-treeview-toggler></i>{% endif %}
+            <li class="sonata-ba-list-field" objectId="{{ element.id }}" >
+                <div class="sonata-tree__item"{% if depth < 2 %} data-treeview-toggled{% endif %}>
+                    {% if element.parent or root %}<i class="fa fa-caret-right" data-treeview-toggler></i>{% endif %}
                     <a class="sonata-tree__item__edit" href="{{ admin.generateObjectUrl('edit', element) }}">{{ element.name }}</a>
                     <i class="text-muted">{{ element.description }}</i>
                     {#<a class="label label-default pull-right" href="{{ admin.generateObjectUrl('edit', element) }}">edit <i class="fa fa-magic"></i></a>#}
                     {% if element.enabled %}<span class="label label-success pull-right"><i class="fa fa-check"></i> active</span>{% endif %}
+                    {% if not element.enabled %}<span class="label label-danger pull-right"><i class="fa fa-times"> disabled</i></span>{% endif %}
                 </div>
 
                 {% if element.children|length %}
-                    {{ _self.navigate_child(element.children, admin, false) }}
+                    {{ _self.navigate_child(element.children, admin, false, depth + 1) }}
                 {% endif %}
             </li>
         {% endfor %}
@@ -49,7 +50,7 @@ file that was distributed with this source code.
         <div class="box box-primary">
             <div class="box-header">
                 <h1 class="box-title">
-                    {{ admin.trans('tree_catalog_title') }}
+                    {{ admin.trans('tree_catalog_title', {}, admin.translationdomain) }}
                     {% if not app.request.get('hide_context') %}
                         <div class="btn-group">
                             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
@@ -74,7 +75,7 @@ file that was distributed with this source code.
                 </h1>
             </div>
             <div class="box-content">
-                {{ tree.navigate_child(main_category.children, admin, true) }}
+                {{ tree.navigate_child([main_category], admin, true, 0) }}
             </div>
         </div>
     </div>

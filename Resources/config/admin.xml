@@ -34,7 +34,7 @@
         </service>
 
         <service id="sonata.classification.admin.collection" class="%sonata.classification.admin.collection.class%">
-            <tag name="sonata.admin" manager_type="orm" group="sonata_classification" label="label_collections"  label_catalogue="%sonata.classification.admin.tag.translation_domain%" label_translator_strategy="sonata.admin.label.strategy.underscore" />
+            <tag name="sonata.admin" manager_type="orm" group="sonata_classification" label="label_collections"  label_catalogue="%sonata.classification.admin.collection.translation_domain%" label_translator_strategy="sonata.admin.label.strategy.underscore" />
             <argument />
             <argument>%sonata.classification.admin.collection.entity%</argument>
             <argument>%sonata.classification.admin.collection.controller%</argument>

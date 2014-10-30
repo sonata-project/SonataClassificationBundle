@@ -91,7 +91,7 @@ class CategoryAdmin extends Admin
                         'category'      => $this->getSubject() ?: null,
                         'model_manager' => $this->getModelManager(),
                         'class'         => $this->getClass(),
-                        'required'      => true,
+                        'required'      => false,
                         'context'       => $this->getSubject()->getContext()
                     ))
                 ->end_if()

@@ -106,8 +106,9 @@ class SonataClassificationExtension extends Extension
      */
     public function registerDoctrineMapping(array $config)
     {
+
         foreach ($config['class'] as $type => $class) {
-            if ('media' !== $type && !class_exists($class)) {
+            if (!class_exists($class)) {
                 return;
             }
         }

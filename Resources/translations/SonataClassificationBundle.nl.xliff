@@ -112,35 +112,51 @@
             </trans-unit>
             <trans-unit id="breadcrumb.link_context_list">
                 <source>breadcrumb.link_context_list</source>
-                <target>breadcrumb.link_context_list</target>
+                <target>Contexten</target>
             </trans-unit>
             <trans-unit id="list.label_id">
                 <source>list.label_id</source>
-                <target>list.label_id</target>
+                <target>Code</target>
             </trans-unit>
             <trans-unit id="filter.label_id">
                 <source>filter.label_id</source>
-                <target>filter.label_id</target>
+                <target>Code</target>
             </trans-unit>
             <trans-unit id="label_contexts">
                 <source>label_contexts</source>
-                <target>label_contexts</target>
+                <target>Contexten</target>
             </trans-unit>
             <trans-unit id="form.label_id">
                 <source>form.label_id</source>
-                <target>form.label_id</target>
+                <target>Code</target>
             </trans-unit>
             <trans-unit id="filter.label_context">
                 <source>filter.label_context</source>
-                <target>filter.label_context</target>
+                <target>Context</target>
             </trans-unit>
             <trans-unit id="list.label_context">
                 <source>list.label_context</source>
-                <target>list.label_context</target>
+                <target>Context</target>
             </trans-unit>
             <trans-unit id="form.label_context">
                 <source>form.label_context</source>
-                <target>form.label_context</target>
+                <target>Context</target>
+            </trans-unit>
+            <trans-unit id="tree_catalog_title">
+                <source>tree_catalog_title</source>
+                <target>Categorieën voor context</target>
+            </trans-unit>
+            <trans-unit id="element.tree_site_label">
+                <source>element.tree_site_label</source>
+                <target>Categorieën</target>
+            </trans-unit>
+            <trans-unit id="classification.list_mode">
+                <source>classification.list_mode</source>
+                <target>Lijstweergave</target>
+            </trans-unit>
+            <trans-unit id="classification.tree_mode">
+                <source>classification.tree_mode</source>
+                <target>Structuurweergave</target>
             </trans-unit>
         </body>
     </file>

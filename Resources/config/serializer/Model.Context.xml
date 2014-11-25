@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <serializer>
-    <class name="Sonata\ClassificationBundle\Model\Tag" exclusion-policy="all" xml-root-name="tag">
+    <class name="Sonata\ClassificationBundle\Model\Context" exclusion-policy="all" xml-root-name="context">
 
         <property name="name" type="string" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
-        <property name="code" type="string" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write" />
 
         <property name="enabled" type="boolean" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write" />
 

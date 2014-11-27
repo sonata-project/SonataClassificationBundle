@@ -60,12 +60,12 @@ file that was distributed with this source code.
                                 {% for category in root_categories %}
                                     <li>
                                         <a href="{{ admin.generateUrl('tree', { 'context': category.context.id }) }}">
-                                            {{ category.name }}
                                             {% if current_context and category.context.id == current_context.id %}
                                                 <span class="pull-right">
                                                     <i class="fa fa-check"></i>
                                                 </span>
                                             {% endif %}
+                                            {{ category.name }}
                                         </a>
                                     </li>
                                 {% endfor %}

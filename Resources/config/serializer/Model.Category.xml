@@ -13,8 +13,9 @@
         <property name="createdAt" type="DateTime" expose="true" since-version="1.0" groups="sonata_api_read,sonata_search" />
         <property name="updatedAt" type="DateTime" expose="true" since-version="1.0" groups="sonata_api_read,sonata_search" />
 
-        <property name="parent" serialized-name="parent_id" type="sonata_classification_category_id" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
-        <property name="media"  serialized-name="media_id"  type="sonata_media_media_id"             expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
+        <property name="parent"  serialized-name="parent_id"  type="sonata_classification_category_id" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
+        <property name="media"   serialized-name="media_id"   type="sonata_media_media_id"             expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
+        <property name="context" serialized-name="context_id" type="sonata_classification_context_id"  expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
 
     </class>
 </serializer>

@@ -132,7 +132,7 @@ class SonataClassificationExtension extends Extension
             'fieldName'     => 'parent',
             'targetEntity'  => $config['class']['category'],
             'cascade'       => array(
-                'remove',
+                //'remove',
                 'persist',
                 'refresh',
                 'merge',

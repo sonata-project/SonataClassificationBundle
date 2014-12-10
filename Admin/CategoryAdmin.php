@@ -82,19 +82,19 @@ class CategoryAdmin extends Admin
             ->with('General', array('class' => 'col-md-6'))
                 ->add('name')
                 ->add('description', 'textarea', array('required' => false))
+                ->if_true($this->getSubject()->getParent() !== null || $this->getSubject()->getId() === null) // root category cannot have a parent
+                    ->add('parent', 'sonata_category_selector', array(
+                      'category'      => $this->getSubject() ?: null,
+                      'model_manager' => $this->getModelManager(),
+                      'class'         => $this->getClass(),
+                      'required'      => true,
+                      'context'       => $this->getSubject()->getContext()
+                    ))
+                ->end_if()
             ->end()
             ->with('Options', array('class' => 'col-md-6'))
                 ->add('enabled')
                 ->add('position', 'integer', array('required' => false, 'data' => 0))
-                ->if_true($this->getSubject()->getParent() !== null || $this->getSubject()->getId() === null) // root category cannot have a parent
-                    ->add('parent', 'sonata_category_selector', array(
-                        'category'      => $this->getSubject() ?: null,
-                        'model_manager' => $this->getModelManager(),
-                        'class'         => $this->getClass(),
-                        'required'      => false,
-                        'context'       => $this->getSubject()->getContext()
-                    ))
-                ->end_if()
             ->end()
         ;
 

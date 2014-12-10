@@ -154,7 +154,7 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
      */
     private function getContext($contextCode)
     {
-        if ($contextCode === null) {
+        if (empty($contextCode)) {
             $contextCode = ContextInterface::DEFAULT_CONTEXT;
         }
 

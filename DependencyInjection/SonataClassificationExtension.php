@@ -118,7 +118,6 @@ class SonataClassificationExtension extends Extension
             'fieldName'     => 'children',
             'targetEntity'  => $config['class']['category'],
             'cascade'       => array(
-                'remove',
                 'persist',
             ),
             'mappedBy'      => 'parent',

@@ -242,9 +242,10 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
             ->createQueryBuilder('c')
             ->select('c');
 
-        $query->andWhere('c.context = :context');
-
-        $parameters['context'] = isset($criteria['context']) ? $criteria['context'] : ContextInterface::DEFAULT_CONTEXT;
+        if (isset($criteria['context'])) {
+            $query->andWhere('c.context = :context');
+            $parameters['context'] = $criteria['context'];
+        }
 
         if (isset($criteria['enabled'])) {
             $query->andWhere('c.enabled = :enabled');

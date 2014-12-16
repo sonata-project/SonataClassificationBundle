@@ -69,6 +69,7 @@ class CategoryController
      * @QueryParam(name="page", requirements="\d+", default="1", description="Page for category list pagination")
      * @QueryParam(name="count", requirements="\d+", default="10", description="Number of categories by page")
      * @QueryParam(name="enabled", requirements="0|1", nullable=true, strict=true, description="Enabled/Disabled categories filter")
+     * @QueryParam(name="context", requirements="\S+", nullable=true, strict=true, description="Context of categories")
      *
      * @View(serializerGroups="sonata_api_read", serializerEnableMaxDepthChecks=true)
      *

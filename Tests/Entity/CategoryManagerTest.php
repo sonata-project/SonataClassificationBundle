@@ -53,7 +53,7 @@ class CategoryManagerTest extends \PHPUnit_Framework_TestCase
                 );
                 $qb->expects($self->once())->method('setParameters')->with(array('context' => 'default'));
             })
-            ->getPager(array(), 1);
+            ->getPager(array('context' => 'default'), 1);
     }
 
     public function testGetPagerWithEnabledCategories()

@@ -82,16 +82,22 @@ class CategoryAdmin extends Admin
             ->with('General', array('class' => 'col-md-6'))
                 ->add('name')
                 ->add('description', 'textarea', array('required' => false))
-                ->if_true($this->getSubject()->getParent() !== null || $this->getSubject()->getId() === null) // root category cannot have a parent
-                    ->add('parent', 'sonata_category_selector', array(
+        ;
+
+        if ($this->hasSubject()) {
+            if ($this->getSubject()->getParent() !== null || $this->getSubject()->getId() === null) { // root category cannot have a parent
+                $formMapper
+                  ->add('parent', 'sonata_category_selector', array(
                       'category'      => $this->getSubject() ?: null,
                       'model_manager' => $this->getModelManager(),
                       'class'         => $this->getClass(),
                       'required'      => true,
                       'context'       => $this->getSubject()->getContext()
-                    ))
-                ->end_if()
-            ->end()
+                    ));
+            }
+        }
+
+        $formMapper->end()
             ->with('Options', array('class' => 'col-md-6'))
                 ->add('enabled')
                 ->add('position', 'integer', array('required' => false, 'data' => 0))
@@ -154,7 +160,7 @@ class CategoryAdmin extends Admin
     {
         $parameters = array(
             'context'      => '',
-            'hide_context' => (int)$this->getRequest()->get('hide_context', 0)
+            'hide_context' => $this->hasRequest() ? (int)$this->getRequest()->get('hide_context', 0) : 0
         );
 
         if ($this->getSubject()) {

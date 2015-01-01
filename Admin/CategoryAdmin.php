@@ -57,8 +57,8 @@ class CategoryAdmin extends ContextAwareAdmin
     {
         $formMapper
             ->with('General', array('class' => 'col-md-6'))
-            ->add('name')
-            ->add('description', 'textarea', array('required' => false));
+                ->add('name')
+                ->add('description', 'textarea', array('required' => false));
 
         if ($this->hasSubject()) {
             if ($this->getSubject()->getParent() !== null || $this->getSubject()->getId() === null) { // root category cannot have a parent
@@ -75,22 +75,22 @@ class CategoryAdmin extends ContextAwareAdmin
 
         $formMapper->end()
             ->with('Options', array('class' => 'col-md-6'))
-            ->add('enabled')
-            ->add('position', 'integer', array('required' => false, 'data' => 0))
+                ->add('enabled')
+                ->add('position', 'integer', array('required' => false, 'data' => 0))
             ->end();
 
         if (interface_exists('Sonata\MediaBundle\Model\MediaInterface')) {
             $formMapper
                 ->with('General')
-                ->add('media', 'sonata_type_model_list',
-                    array('required' => false),
-                    array(
-                        'link_parameters' => array(
-                            'provider' => 'sonata.media.provider.image',
-                            'context'  => 'sonata_category',
+                    ->add('media', 'sonata_type_model_list',
+                        array('required' => false),
+                        array(
+                            'link_parameters' => array(
+                                'provider' => 'sonata.media.provider.image',
+                                'context'  => 'sonata_category',
+                            )
                         )
                     )
-                )
                 ->end();
         }
     }

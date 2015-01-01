@@ -13,6 +13,7 @@ namespace Sonata\ClassificationBundle\Admin;
 
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\ClassificationBundle\Entity\ContextManager;
+use Sonata\ClassificationBundle\Model\ContextInterface;
 
 /**
  * Class ContextAwareAdmin
@@ -52,7 +53,7 @@ abstract class ContextAwareAdmin extends Admin
         if ($contextId = $this->getPersistentParameter('context')) {
             $context = $this->getContextManager()->find($contextId);
 
-            if (!$context) {
+            if (!$context instanceof ContextInterface) {
                 $context = $this->getContextManager()->create();
                 $context->setEnabled(true);
                 $context->setId($context);

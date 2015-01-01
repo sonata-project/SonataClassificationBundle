@@ -24,6 +24,11 @@ use Sonata\CoreBundle\Model\BaseEntityManager;
 use Sonata\DatagridBundle\Pager\Doctrine\Pager;
 use Sonata\DatagridBundle\ProxyQuery\Doctrine\ProxyQuery;
 
+/**
+ * Class CategoryManager
+ *
+ * @package Sonata\ClassificationBundle\Entity
+ */
 class CategoryManager extends BaseEntityManager implements CategoryManagerInterface
 {
     /**
@@ -31,6 +36,9 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
      */
     protected $categories;
 
+    /**
+     * @var ContextManagerInterface
+     */
     protected $contextManager;
 
     /**
@@ -51,13 +59,12 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
      *
      * @param integer $page
      * @param integer $limit
-     * @param array   $criteria
      *
      * @return mixed
      */
-    public function getRootCategoriesPager($page = 1, $limit = 25, $criteria = array())
+    public function getRootCategoriesPager($page = 1, $limit = 25)
     {
-        $page = (int) $page == 0 ? 1 : (int) $page;
+        $page = (int)$page == 0 ? 1 : (int)$page;
 
         $queryBuilder = $this->getObjectManager()->createQueryBuilder()
             ->select('c')
@@ -76,11 +83,10 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
      * @param integer $categoryId
      * @param integer $page
      * @param integer $limit
-     * @param array   $criteria
      *
      * @return PagerInterface
      */
-    public function getSubCategoriesPager($categoryId, $page = 1, $limit = 25, $criteria = array())
+    public function getSubCategoriesPager($categoryId, $page = 1, $limit = 25)
     {
         $queryBuilder = $this->getObjectManager()->createQueryBuilder()
             ->select('c')
@@ -111,18 +117,22 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
     }
 
     /**
+     * @param bool $loadChildren
+     *
      * @return CategoryInterface[]
      */
     public function getRootCategories($loadChildren = true)
     {
         $class = $this->getClass();
 
-        $rootCategories = $this->getObjectManager()->createQuery(sprintf('SELECT c FROM %s c WHERE c.parent IS NULL', $class))
+        $rootCategories = $this->getObjectManager()
+            ->createQuery(sprintf('SELECT c FROM %s c WHERE c.parent IS NULL', $class))
             ->execute();
 
         $categories = array();
 
-        foreach($rootCategories as $category) {
+        /** @var CategoryInterface $category */
+        foreach ($rootCategories as $category) {
             if ($category->getContext() === null) {
                 throw new \RuntimeException('Context cannot be null');
             }
@@ -148,11 +158,11 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
     }
 
     /**
-     * @param $context
+     * @param $contextCode
      *
      * @return ContextInterface
      */
-    private function getContext($contextCode)
+    protected function getContext($contextCode)
     {
         if (empty($contextCode)) {
             $contextCode = ContextInterface::DEFAULT_CONTEXT;
@@ -180,6 +190,7 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
     /**
      * Load all categories from the database, the current method is very efficient for < 256 categories
      *
+     * @param ContextInterface $context
      */
     protected function loadCategories(ContextInterface $context)
     {
@@ -189,7 +200,8 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
 
         $class = $this->getClass();
 
-        $categories = $this->getObjectManager()->createQuery(sprintf('SELECT c FROM %s c WHERE c.context = :context ORDER BY c.parent ASC', $class))
+        $categories = $this->getObjectManager()->createQuery(sprintf('SELECT c FROM %s c WHERE c.context = :context ORDER BY c.parent ASC',
+            $class))
             ->setParameter('context', $context->getId())
             ->execute();
 
@@ -206,6 +218,7 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
             $categories = array($category);
         }
 
+        /** @var CategoryInterface $category */
         foreach ($categories as $pos => $category) {
             if ($pos === 0 && $category->getParent()) {
                 throw new \RuntimeException('The first category must be the root');
@@ -249,7 +262,7 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
 
         if (isset($criteria['enabled'])) {
             $query->andWhere('c.enabled = :enabled');
-            $parameters['enabled'] = (bool) $criteria['enabled'];
+            $parameters['enabled'] = (bool)$criteria['enabled'];
         }
 
         $query->setParameters($parameters);

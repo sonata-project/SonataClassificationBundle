@@ -26,7 +26,7 @@ class ContextAdmin extends Admin
         $formMapper
             ->ifTrue($this->getSubject()->getId() === null)
                 ->add('id')
-            ->endIf()
+            ->ifEnd()
             ->add('name')
             ->add('enabled', null, array('required' => false))
         ;

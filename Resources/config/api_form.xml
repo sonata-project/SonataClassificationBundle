@@ -43,6 +43,7 @@
             <argument>sonata_classification_api_form_context</argument>
             <argument>%sonata.classification.admin.context.entity%</argument>
             <argument>sonata_api_write</argument>
+            <argument>true</argument>
         </service>
     </services>
 </container>

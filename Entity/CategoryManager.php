@@ -24,11 +24,6 @@ use Sonata\CoreBundle\Model\BaseEntityManager;
 use Sonata\DatagridBundle\Pager\Doctrine\Pager;
 use Sonata\DatagridBundle\ProxyQuery\Doctrine\ProxyQuery;
 
-/**
- * Class CategoryManager
- *
- * @package Sonata\ClassificationBundle\Entity
- */
 class CategoryManager extends BaseEntityManager implements CategoryManagerInterface
 {
     /**

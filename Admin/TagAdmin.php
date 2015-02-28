@@ -15,11 +15,6 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 
-/**
- * Class TagAdmin
- *
- * @package Sonata\ClassificationBundle\Admin
- */
 class TagAdmin extends ContextAwareAdmin
 {
     /**

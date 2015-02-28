@@ -15,11 +15,6 @@ use Sonata\AdminBundle\Admin\Admin;
 use Sonata\ClassificationBundle\Entity\ContextManager;
 use Sonata\ClassificationBundle\Model\ContextInterface;
 
-/**
- * Class ContextAwareAdmin
- *
- * @package Sonata\ClassificationBundle\Admin
- */
 abstract class ContextAwareAdmin extends Admin
 {
     /**

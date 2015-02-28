@@ -31,6 +31,10 @@
             <call method="setTranslationDomain">
                 <argument>%sonata.classification.admin.tag.translation_domain%</argument>
             </call>
+
+            <call method="setContextManager">
+                <argument type="service" id="sonata.classification.manager.context"/>
+            </call>
         </service>
 
         <service id="sonata.classification.admin.collection" class="%sonata.classification.admin.collection.class%">
@@ -41,6 +45,10 @@
 
             <call method="setTranslationDomain">
                 <argument>%sonata.classification.admin.collection.translation_domain%</argument>
+            </call>
+
+            <call method="setContextManager">
+                <argument type="service" id="sonata.classification.manager.context"/>
             </call>
         </service>
 

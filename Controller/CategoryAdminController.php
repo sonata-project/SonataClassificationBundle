@@ -29,13 +29,13 @@ class CategoryAdminController extends Controller
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function listAction()
+    public function listAction(Request $request = null)
     {
-        if (!$this->getRequest()->get('filter') && !$this->getRequest()->get('filters')) {
+        if (!$request->get('filter') && !$request->get('filters')) {
             return new RedirectResponse($this->admin->generateUrl('tree'));
         }
 
-        if ($listMode = $this->getRequest()->get('_list_mode')) {
+        if ($listMode = $request->get('_list_mode')) {
             $this->admin->setListMode($listMode);
         }
 

@@ -24,7 +24,7 @@ class ContextAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->ifTrue($this->getSubject()->getId() === null)
+            ->ifTrue($this->hasSubject() ? $this->getSubject()->getId() : false === null)
                 ->add('id')
             ->ifEnd()
             ->add('name')

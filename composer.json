@@ -20,6 +20,7 @@
         "symfony/framework-bundle": "~2.3",
         "symfony/form": "~2.3",
         "sonata-project/doctrine-orm-admin-bundle": "~2.4@dev",
+        "sonata-project/admin-bundle": "~2.4@dev",
         "sonata-project/datagrid-bundle": "~2.2@dev"
     },
     "require-dev": {

@@ -189,10 +189,14 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
 
         $class = $this->getClass();
 
-        $categories = $this->getObjectManager()->createQuery(sprintf('SELECT c FROM %s c WHERE c.context = :context ORDER BY c.parent ASC', $class))
+        $categories1 = $this->getObjectManager()->createQuery(sprintf('SELECT c FROM %s c WHERE c.parent IS NULL and c.context = :context ORDER BY c.parent ASC', $class))
             ->setParameter('context', $context->getId())
             ->execute();
-
+        $categories2 = $this->getObjectManager()->createQuery(sprintf('SELECT c FROM %s c WHERE  c.parent IS NOT NULL and c.context = :context ORDER BY c.parent ASC', $class))
+            ->setParameter('context', $context->getId())
+            ->execute();
+        $categories = array_merge($categories1,$categories2);
+        
         if (count($categories) == 0) {
             // no category, create one for the provided context
             $category = $this->create();

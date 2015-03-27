@@ -11,6 +11,8 @@ Advanced Configuration
           tag:          Application\Sonata\ClassificationBundle\Entity\Tag
           category:     Application\Sonata\ClassificationBundle\Entity\Category
           collection:   Application\Sonata\ClassificationBundle\Entity\Collection
+          media:        Application\Sonata\MediaBundle\Entity\Collection
+          context:      Application\Sonata\ClassificationBundle\Entity\Collection
         
       admin:
           tag:
@@ -23,6 +25,10 @@ Advanced Configuration
               translation:  SonataClassificationBundle
           collection:
               class:        Sonata\ClassificationBundle\Admin\CollectionAdmin
+              controller:   SonataAdminBundle:CRUD
+              translation:  SonataClassificationBundle
+          context:
+              class:        Sonata\ClassificationBundle\Admin\ContextAdmin
               controller:   SonataAdminBundle:CRUD
               translation:  SonataClassificationBundle
 

@@ -12,6 +12,7 @@
 namespace Sonata\ClassificationBundle\Entity;
 
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\ORM\Query;
 use Sonata\AdminBundle\Datagrid\PagerInterface;
 
 use Sonata\ClassificationBundle\Model\CategoryInterface;
@@ -23,6 +24,8 @@ use Sonata\CoreBundle\Model\BaseEntityManager;
 
 use Sonata\DatagridBundle\Pager\Doctrine\Pager;
 use Sonata\DatagridBundle\ProxyQuery\Doctrine\ProxyQuery;
+
+use Sonata\Doctrine\Query\SortableNullsWalker;
 
 class CategoryManager extends BaseEntityManager implements CategoryManagerInterface
 {
@@ -190,6 +193,8 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
         $class = $this->getClass();
 
         $categories = $this->getObjectManager()->createQuery(sprintf('SELECT c FROM %s c WHERE c.context = :context ORDER BY c.parent ASC', $class))
+            ->setHint(Query::HINT_CUSTOM_OUTPUT_WALKER, 'Sonata\Doctrine\Query\SortableNullsWalker')
+            ->setHint("sortableNulls.fields", array("c.parent" => SortableNullsWalker::NULLS_FIRST))
             ->setParameter('context', $context->getId())
             ->execute();
 

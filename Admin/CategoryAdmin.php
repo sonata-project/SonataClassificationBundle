@@ -31,6 +31,7 @@ class CategoryAdmin extends Admin
             ->with('General', array('class' => 'col-md-6'))
                 ->add('name')
                 ->add('description', 'textarea', array('required' => false))
+                ->add('enabled',null, array('required' => false))
             ->end()
             ->with('Options', array('class' => 'col-md-6'))
                 ->add('position', 'integer', array('required' => false, 'data' => 0))

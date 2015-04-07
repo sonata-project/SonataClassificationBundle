@@ -82,6 +82,7 @@ class CategoryAdmin extends Admin
             ->with('General', array('class' => 'col-md-6'))
                 ->add('name')
                 ->add('description', 'textarea', array('required' => false))
+                ->add('enabled', 'checkbox')
         ;
 
         if ($this->hasSubject()) {

@@ -10,5 +10,7 @@
         <property name="createdAt" type="DateTime" expose="true" since-version="1.0" groups="sonata_api_read,sonata_search" />
         <property name="updatedAt" type="DateTime" expose="true" since-version="1.0" groups="sonata_api_read,sonata_search" />
 
+        <property name="context" serialized-name="context_id" type="sonata_classification_context_id"  expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
+
     </class>
 </serializer>

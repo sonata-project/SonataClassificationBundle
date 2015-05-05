@@ -53,20 +53,13 @@ Installation
                         #ApplicationSonataClassificationBundle: ~
                         SonataClassificationBundle: ~
 
-* Import the ``sonata_classification.yml`` file and enable `json` type for doctrine:
+* Import the ``sonata_classification.yml`` file in your main app/config/config.yml:
 
 .. code-block:: yaml
 
     imports:
         #...
         - { resource: sonata_classification.yml }
-
-    # ...
-    doctrine:
-        dbal:
-            # ...
-            types:
-                json:     Sonata\Doctrine\Types\JsonType
 
 * Run the easy-extends command:
 

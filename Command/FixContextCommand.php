@@ -38,7 +38,7 @@ class FixContextCommand extends ContainerAwareCommand
         $contextManager = $this->getContainer()->get('sonata.classification.manager.context');
         $tagManager = $this->getContainer()->get('sonata.classification.manager.tag');
         $collectionManager = $this->getContainer()->get('sonata.classification.manager.collection');
-        $cateoryManager = $this->getContainer()->get('sonata.classification.manager.category');
+        $categoryManager = $this->getContainer()->get('sonata.classification.manager.category');
 
         $output->writeln("1. Checking default context");
 
@@ -86,7 +86,7 @@ class FixContextCommand extends ContainerAwareCommand
 
         $output->writeln("3. Find category without default context");
 
-        foreach($cateoryManager->findBy(array()) as $category) {
+        foreach($categoryManager->findBy(array()) as $category) {
             if ($category->getContext()) {
                 continue;
             }
@@ -94,7 +94,7 @@ class FixContextCommand extends ContainerAwareCommand
             $output->writeln(sprintf(" > attach default context to collection: %s (%s)", $category->getSlug(), $category->getId()));
             $category->setContext($defaultContext);
 
-            $cateoryManager->save($category);
+            $categoryManager->save($category);
         }
 
         $output->writeln("Done!");

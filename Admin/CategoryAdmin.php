@@ -81,25 +81,28 @@ class CategoryAdmin extends Admin
         $formMapper
             ->with('General', array('class' => 'col-md-6'))
                 ->add('name')
+                ->add('context', 'sonata_type_model_list', array(), array(
+                    'admin_code' => 'sonata.classification.admin.context'
+                ))
                 ->add('description', 'textarea', array('required' => false))
         ;
 
         if ($this->hasSubject()) {
             if ($this->getSubject()->getParent() !== null || $this->getSubject()->getId() === null) { // root category cannot have a parent
                 $formMapper
-                  ->add('parent', 'sonata_category_selector', array(
-                      'category'      => $this->getSubject() ?: null,
-                      'model_manager' => $this->getModelManager(),
-                      'class'         => $this->getClass(),
-                      'required'      => true,
-                      'context'       => $this->getSubject()->getContext()
+                    ->add('parent', 'sonata_category_selector', array(
+                        'category'      => $this->getSubject() ?: null,
+                        'model_manager' => $this->getModelManager(),
+                        'class'         => $this->getClass(),
+                        'required'      => false,
+                        'context'       => $this->getSubject()->getContext()
                     ));
             }
         }
 
         $formMapper->end()
             ->with('Options', array('class' => 'col-md-6'))
-                ->add('enabled')
+                ->add('enabled', null, array('required' => false))
                 ->add('position', 'integer', array('required' => false, 'data' => 0))
             ->end()
         ;

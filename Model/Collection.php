@@ -168,8 +168,14 @@ abstract class Collection implements CollectionInterface
     /**
      * @param MediaInterface $media
      */
-    public function setMedia(MediaInterface $media = null)
+    public function setMedia($media = null)
     {
+        // No hinting is used to prevent Doctrine parsing exception
+        // when SonataMediaBundle is not installed
+        if ($media !== null && !($media instanceof MediaInterface)) {
+            throw new \InvalidArgumentException('Method setMedia expects null or instance of Sonata\MediaBundle\Model\MediaInterface');
+        }
+
         $this->media = $media;
     }
 

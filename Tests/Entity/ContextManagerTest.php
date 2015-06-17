@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -14,8 +15,7 @@ use Sonata\ClassificationBundle\Entity\ContextManager;
 use Sonata\CoreBundle\Test\EntityManagerMockFactory;
 
 /**
- * Class ContextManagerTest
- *
+ * Class ContextManagerTest.
  */
 class ContextManagerTest extends \PHPUnit_Framework_TestCase
 {

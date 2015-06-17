@@ -11,18 +11,15 @@
 
 namespace Sonata\ClassificationBundle\DependencyInjection;
 
-use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\HttpKernel\DependencyInjection\Extension;
-use Symfony\Component\Config\FileLocator;
-use Symfony\Component\Config\Definition\Processor;
-use Symfony\Component\DependencyInjection\Definition;
-use Symfony\Component\DependencyInjection\Reference;
-
 use Sonata\EasyExtendsBundle\Mapper\DoctrineCollector;
+use Symfony\Component\Config\Definition\Processor;
+use Symfony\Component\Config\FileLocator;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 /**
- * SonataClassificationBundleExtension
+ * SonataClassificationBundleExtension.
  *
  * @author Thomas Rabaix <thomas.rabaix@sonata-project.org>
  */
@@ -33,8 +30,6 @@ class SonataClassificationExtension extends Extension
      *
      * @param array            $configs
      * @param ContainerBuilder $container
-     *
-     * @return void
      */
     public function load(array $configs, ContainerBuilder $container)
     {
@@ -136,7 +131,7 @@ class SonataClassificationExtension extends Extension
                 'merge',
                 'detach',
             ),
-            'mappedBy'      => NULL,
+            'mappedBy'      => null,
             'inversedBy'    => 'children',
             'joinColumns'   => array(
                 array(
@@ -158,7 +153,7 @@ class SonataClassificationExtension extends Extension
             'inversedBy'    => null,
             'joinColumns'   => array(
                 array(
-                    'name'  => 'context',
+                    'name'                 => 'context',
                     'referencedColumnName' => 'id',
                 ),
             ),
@@ -175,7 +170,7 @@ class SonataClassificationExtension extends Extension
             'inversedBy'    => null,
             'joinColumns'   => array(
                 array(
-                    'name'  => 'context',
+                    'name'                 => 'context',
                     'referencedColumnName' => 'id',
                 ),
             ),
@@ -194,7 +189,7 @@ class SonataClassificationExtension extends Extension
             'inversedBy'    => null,
             'joinColumns'   => array(
                 array(
-                    'name'  => 'context',
+                    'name'                 => 'context',
                     'referencedColumnName' => 'id',
                 ),
             ),
@@ -210,8 +205,8 @@ class SonataClassificationExtension extends Extension
                 'cascade'       => array(
                     'persist',
                 ),
-                'mappedBy'      => NULL,
-                'inversedBy'    => NULL,
+                'mappedBy'      => null,
+                'inversedBy'    => null,
                 'joinColumns'   => array(
                     array(
                      'name'                 => 'media_id',
@@ -228,8 +223,8 @@ class SonataClassificationExtension extends Extension
                 'cascade'       => array(
                     'persist',
                 ),
-                'mappedBy'      => NULL,
-                'inversedBy'    => NULL,
+                'mappedBy'      => null,
+                'inversedBy'    => null,
                 'joinColumns'   => array(
                     array(
                      'name'                 => 'media_id',

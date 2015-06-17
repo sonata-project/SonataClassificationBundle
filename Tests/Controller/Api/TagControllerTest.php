@@ -15,7 +15,7 @@ use Sonata\ClassificationBundle\Controller\Api\TagController;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Class TagControllerTest
+ * Class TagControllerTest.
  *
  * @author Vincent Composieux <vincent.composieux@gmail.com>
  */
@@ -162,7 +162,7 @@ class TagControllerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Creates a new TagController
+     * Creates a new TagController.
      *
      * @param null $tagManager
      * @param null $formFactory

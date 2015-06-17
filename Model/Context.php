@@ -87,7 +87,7 @@ abstract class Context implements ContextInterface
 
     public function preUpdate()
     {
-        $this->setUpdatedAt(new \DateTime);
+        $this->setUpdatedAt(new \DateTime());
     }
 
     /**

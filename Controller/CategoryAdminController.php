@@ -15,10 +15,9 @@ use Sonata\AdminBundle\Controller\CRUDController as Controller;
 use Sonata\AdminBundle\Form\Type\Filter\ChoiceType;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
- * Page Admin Controller
+ * Page Admin Controller.
  *
  * @author Thomas Rabaix <thomas.rabaix@sonata-project.org>
  */
@@ -78,7 +77,7 @@ class CategoryAdminController extends Controller
             $mainCategory   = current($rootCategories);
             $currentContext = $mainCategory->getContext();
         } else {
-            foreach($rootCategories as $category) {
+            foreach ($rootCategories as $category) {
                 if ($currentContext->getId() != $category->getContext()->getId()) {
                     continue;
                 }

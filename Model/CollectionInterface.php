@@ -23,49 +23,49 @@ interface CollectionInterface
     public function setName($name);
 
     /**
-     * Get name
+     * Get name.
      *
      * @return string $name
      */
     public function getName();
 
     /**
-     * Set enabled
+     * Set enabled.
      *
-     * @param boolean $enabled
+     * @param bool $enabled
      */
     public function setEnabled($enabled);
 
     /**
-     * Get enabled
+     * Get enabled.
      *
-     * @return boolean $enabled
+     * @return bool $enabled
      */
     public function getEnabled();
 
     /**
-     * Set slug
+     * Set slug.
      *
-     * @param integer $slug
+     * @param int $slug
      */
     public function setSlug($slug);
 
     /**
-     * Get slug
+     * Get slug.
      *
-     * @return integer $slug
+     * @return int $slug
      */
     public function getSlug();
 
     /**
-     * Set description
+     * Set description.
      *
      * @param string $description
      */
     public function setDescription($description);
 
     /**
-     * Get description
+     * Get description.
      *
      * @return string $description
      */

@@ -15,5 +15,4 @@ use Sonata\ClassificationBundle\Model\Collection as ModelCollection;
 
 abstract class BaseCollection extends ModelCollection
 {
-
 }

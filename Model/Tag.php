@@ -109,11 +109,11 @@ abstract class Tag implements TagInterface
 
     public function preUpdate()
     {
-        $this->setUpdatedAt(new \DateTime);
+        $this->setUpdatedAt(new \DateTime());
     }
 
     /**
-     * source : http://snipplr.com/view/22741/slugify-a-string-in-php/
+     * source : http://snipplr.com/view/22741/slugify-a-string-in-php/.
      *
      * @static
      *

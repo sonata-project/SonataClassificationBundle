@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-    namespace Sonata\ClassificationBundle\Admin;
+namespace Sonata\ClassificationBundle\Admin;
 
 use Sonata\AdminBundle\Admin\Admin;
-use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
+use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 
 class TagAdmin extends Admin

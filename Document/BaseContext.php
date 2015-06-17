@@ -17,7 +17,7 @@ abstract class BaseContext extends ModelContext
 {
     public function prePersist()
     {
-        $this->setCreatedAt(new \DateTime);
-        $this->setUpdatedAt(new \DateTime);
+        $this->setCreatedAt(new \DateTime());
+        $this->setUpdatedAt(new \DateTime());
     }
 }

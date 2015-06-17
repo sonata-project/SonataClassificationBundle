@@ -13,13 +13,13 @@ namespace Sonata\ClassificationBundle\Form\Type;
 
 use Sonata\ClassificationBundle\Model\CategoryInterface;
 use Sonata\CoreBundle\Model\ManagerInterface;
-use Symfony\Component\OptionsResolver\Options;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\SimpleChoiceList;
+use Symfony\Component\OptionsResolver\Options;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
- * Select a category
+ * Select a category.
  *
  * @author Thomas Rabaix <thomas.rabaix@sonata-project.org>
  */
@@ -47,7 +47,7 @@ class CategorySelectorType extends AbstractType
             'category'          => null,
             'choice_list'       => function (Options $opts, $previousValue) use ($that) {
                 return new SimpleChoiceList($that->getChoices($opts));
-            }
+            },
         ));
     }
 
@@ -71,7 +71,7 @@ class CategorySelectorType extends AbstractType
         $choices = array();
 
         foreach ($categories as $category) {
-            $choices[$category->getId()] = sprintf("%s (%s)", $category->getName(), $category->getContext()->getId());
+            $choices[$category->getId()] = sprintf('%s (%s)', $category->getName(), $category->getContext()->getId());
 
             $this->childWalker($category, $options, $choices);
         }
@@ -96,7 +96,7 @@ class CategorySelectorType extends AbstractType
                 continue;
             }
 
-            $choices[$child->getId()] = sprintf("%s %s", str_repeat('-' , 1 * $level), $child);
+            $choices[$child->getId()] = sprintf('%s %s', str_repeat('-', 1 * $level), $child);
 
             $this->childWalker($child, $options, $choices, $level + 1);
         }

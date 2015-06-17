@@ -12,14 +12,14 @@
 namespace Sonata\ClassificationBundle\Admin;
 
 use Sonata\AdminBundle\Admin\Admin;
-use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
+use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 
 class CollectionAdmin extends Admin
 {
     protected $formOptions = array(
-        'cascade_validation' => true
+        'cascade_validation' => true,
     );
 
     /**
@@ -40,8 +40,8 @@ class CollectionAdmin extends Admin
                 array(
                     'link_parameters' => array(
                         'provider' => 'sonata.media.provider.image',
-                        'context'  => 'sonata_collection'
-                    )
+                        'context'  => 'sonata_collection',
+                    ),
                 )
             );
         }

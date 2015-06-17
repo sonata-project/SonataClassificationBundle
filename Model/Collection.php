@@ -11,7 +11,6 @@
 
 namespace Sonata\ClassificationBundle\Model;
 
-use Sonata\ClassificationBundle\Model\Tag;
 use Sonata\MediaBundle\Model\MediaInterface;
 
 abstract class Collection implements CollectionInterface
@@ -33,7 +32,7 @@ abstract class Collection implements CollectionInterface
     protected $context;
 
     /**
-     * Set name
+     * Set name.
      *
      * @param string $name
      */
@@ -45,7 +44,7 @@ abstract class Collection implements CollectionInterface
     }
 
     /**
-     * Get name
+     * Get name.
      *
      * @return string $name
      */
@@ -55,9 +54,9 @@ abstract class Collection implements CollectionInterface
     }
 
     /**
-     * Set enabled
+     * Set enabled.
      *
-     * @param boolean $enabled
+     * @param bool $enabled
      */
     public function setEnabled($enabled)
     {
@@ -65,9 +64,9 @@ abstract class Collection implements CollectionInterface
     }
 
     /**
-     * Get enabled
+     * Get enabled.
      *
-     * @return boolean $enabled
+     * @return bool $enabled
      */
     public function getEnabled()
     {
@@ -75,9 +74,9 @@ abstract class Collection implements CollectionInterface
     }
 
     /**
-     * Set slug
+     * Set slug.
      *
-     * @param integer $slug
+     * @param int $slug
      */
     public function setSlug($slug)
     {
@@ -85,9 +84,9 @@ abstract class Collection implements CollectionInterface
     }
 
     /**
-     * Get slug
+     * Get slug.
      *
-     * @return integer $slug
+     * @return int $slug
      */
     public function getSlug()
     {
@@ -95,7 +94,7 @@ abstract class Collection implements CollectionInterface
     }
 
     /**
-     * Set description
+     * Set description.
      *
      * @param string $description
      */
@@ -105,7 +104,7 @@ abstract class Collection implements CollectionInterface
     }
 
     /**
-     * Get description
+     * Get description.
      *
      * @return string $description
      */
@@ -124,13 +123,13 @@ abstract class Collection implements CollectionInterface
 
     public function prePersist()
     {
-        $this->setCreatedAt(new \DateTime);
-        $this->setUpdatedAt(new \DateTime);
+        $this->setCreatedAt(new \DateTime());
+        $this->setUpdatedAt(new \DateTime());
     }
 
     public function preUpdate()
     {
-        $this->setUpdatedAt(new \DateTime);
+        $this->setUpdatedAt(new \DateTime());
     }
 
     /**

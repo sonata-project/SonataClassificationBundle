@@ -13,14 +13,11 @@ namespace Sonata\ClassificationBundle\Entity;
 
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Sonata\AdminBundle\Datagrid\PagerInterface;
-
 use Sonata\ClassificationBundle\Model\CategoryInterface;
 use Sonata\ClassificationBundle\Model\CategoryManagerInterface;
-
 use Sonata\ClassificationBundle\Model\ContextInterface;
 use Sonata\ClassificationBundle\Model\ContextManagerInterface;
 use Sonata\CoreBundle\Model\BaseEntityManager;
-
 use Sonata\DatagridBundle\Pager\Doctrine\Pager;
 use Sonata\DatagridBundle\ProxyQuery\Doctrine\ProxyQuery;
 
@@ -47,11 +44,11 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
     }
 
     /**
-     * Returns a pager to iterate over the root category
+     * Returns a pager to iterate over the root category.
      *
-     * @param integer $page
-     * @param integer $limit
-     * @param array   $criteria
+     * @param int   $page
+     * @param int   $limit
+     * @param array $criteria
      *
      * @return mixed
      */
@@ -73,10 +70,10 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
     }
 
     /**
-     * @param integer $categoryId
-     * @param integer $page
-     * @param integer $limit
-     * @param array   $criteria
+     * @param int   $categoryId
+     * @param int   $page
+     * @param int   $limit
+     * @param array $criteria
      *
      * @return PagerInterface
      */
@@ -122,7 +119,7 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
 
         $categories = array();
 
-        foreach($rootCategories as $category) {
+        foreach ($rootCategories as $category) {
             if ($category->getContext() === null) {
                 throw new \RuntimeException('Context cannot be null');
             }
@@ -178,8 +175,7 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
     }
 
     /**
-     * Load all categories from the database, the current method is very efficient for < 256 categories
-     *
+     * Load all categories from the database, the current method is very efficient for < 256 categories.
      */
     protected function loadCategories(ContextInterface $context)
     {
@@ -227,7 +223,7 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
         }
 
         $this->categories[$context->getId()] = array(
-            0 => $root
+            0 => $root,
         );
     }
 

@@ -9,9 +9,8 @@
  * file that was distributed with this source code.
  */
 
-use Sonata\CoreBundle\Model\BaseDocumentManager;
 use Sonata\ClassificationBundle\Model\TagManagerInterface;
-
+use Sonata\CoreBundle\Model\BaseDocumentManager;
 use Sonata\DatagridBundle\Pager\Doctrine\Pager;
 use Sonata\DatagridBundle\ProxyQuery\Doctrine\ProxyQuery;
 

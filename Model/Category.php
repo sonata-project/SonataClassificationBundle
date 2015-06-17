@@ -12,8 +12,6 @@
 namespace Sonata\ClassificationBundle\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Sonata\ClassificationBundle\Model\CategoryInterface;
-use Sonata\ClassificationBundle\Model\Tag;
 use Sonata\MediaBundle\Model\MediaInterface;
 
 abstract class Category implements CategoryInterface
@@ -111,18 +109,18 @@ abstract class Category implements CategoryInterface
      */
     public function __toString()
     {
-        return $this->getName() ? : 'n/a';
+        return $this->getName() ?: 'n/a';
     }
 
     public function prePersist()
     {
-        $this->setCreatedAt(new \DateTime);
-        $this->setUpdatedAt(new \DateTime);
+        $this->setCreatedAt(new \DateTime());
+        $this->setUpdatedAt(new \DateTime());
     }
 
     public function preUpdate()
     {
-        $this->setUpdatedAt(new \DateTime);
+        $this->setUpdatedAt(new \DateTime());
     }
 
     /**

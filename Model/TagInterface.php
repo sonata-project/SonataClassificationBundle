@@ -21,63 +21,63 @@ interface TagInterface
     public function setName($name);
 
     /**
-     * Get name
+     * Get name.
      *
      * @return string $name
      */
     public function getName();
 
     /**
-     * Set enabled
+     * Set enabled.
      *
-     * @param boolean $enabled
+     * @param bool $enabled
      */
     public function setEnabled($enabled);
 
     /**
-     * Get enabled
+     * Get enabled.
      *
-     * @return boolean $enabled
+     * @return bool $enabled
      */
     public function getEnabled();
 
     /**
-     * Set slug
+     * Set slug.
      *
-     * @param integer $slug
+     * @param int $slug
      */
     public function setSlug($slug);
 
     /**
-     * Get slug
+     * Get slug.
      *
-     * @return integer $slug
+     * @return int $slug
      */
     public function getSlug();
 
     /**
-     * Set created_at
+     * Set created_at.
      *
      * @param \DateTime $createdAt
      */
     public function setCreatedAt(\DateTime $createdAt = null);
 
     /**
-     * Get created_at
+     * Get created_at.
      *
      * @return \DateTime $createdAt
      */
     public function getCreatedAt();
 
     /**
-     * Set updated_at
+     * Set updated_at.
      *
      * @param \DateTime $updatedAt
      */
     public function setUpdatedAt(\DateTime $updatedAt = null);
 
     /**
-     * Get updated_at
+     * Get updated_at.
      *
      * @return \DateTime $updatedAt
      */

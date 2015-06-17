@@ -12,17 +12,16 @@
 namespace Sonata\ClassificationBundle\Admin;
 
 use Sonata\AdminBundle\Admin\Admin;
-use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
+use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\ClassificationBundle\Entity\ContextManager;
-use Sonata\ClassificationBundle\Model\ContextInterface;
 
 class CategoryAdmin extends Admin
 {
     protected $formOptions = array(
-        'cascade_validation' => true
+        'cascade_validation' => true,
     );
 
     protected $contextManager;
@@ -92,7 +91,7 @@ class CategoryAdmin extends Admin
                       'model_manager' => $this->getModelManager(),
                       'class'         => $this->getClass(),
                       'required'      => true,
-                      'context'       => $this->getSubject()->getContext()
+                      'context'       => $this->getSubject()->getContext(),
                     ));
             }
         }
@@ -113,7 +112,7 @@ class CategoryAdmin extends Admin
                             'link_parameters' => array(
                                 'provider' => 'sonata.media.provider.image',
                                 'context'  => 'sonata_category',
-                            )
+                            ),
                         )
                     )
                 ->end();
@@ -160,7 +159,7 @@ class CategoryAdmin extends Admin
     {
         $parameters = array(
             'context'      => '',
-            'hide_context' => $this->hasRequest() ? (int)$this->getRequest()->get('hide_context', 0) : 0
+            'hide_context' => $this->hasRequest() ? (int) $this->getRequest()->get('hide_context', 0) : 0,
         );
 
         if ($this->getSubject()) {

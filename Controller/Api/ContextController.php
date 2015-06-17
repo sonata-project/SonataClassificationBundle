@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -8,28 +9,23 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Sonata\ClassificationBundle\Controller\Api;
 
 use FOS\RestBundle\Controller\Annotations\QueryParam;
 use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Request\ParamFetcherInterface;
-
 use JMS\Serializer\SerializationContext;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
-
+use Sonata\ClassificationBundle\Model\ContextManagerInterface;
 use Sonata\CoreBundle\Form\FormHelper;
 use Sonata\DacontextridBundle\Pager\PagerInterface;
-use Sonata\ClassificationBundle\Model\ContextManagerInterface;
-
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
- * Class ContextController
+ * Class ContextController.
  *
  * @author Thomas Rabaix <thomas.rabaix@gmail.com>
  */
@@ -46,10 +42,10 @@ class ContextController
     protected $formFactory;
 
     /**
-     * Constructor
+     * Constructor.
      *
-     * @param ContextManagerInterface  $contextManager
-     * @param FormFactoryInterface $formFactory
+     * @param ContextManagerInterface $contextManager
+     * @param FormFactoryInterface    $formFactory
      */
     public function __construct(ContextManagerInterface $contextManager, FormFactoryInterface $formFactory)
     {
@@ -58,7 +54,7 @@ class ContextController
     }
 
     /**
-     * Retrieves the list of contexts (paginated) based on criteria
+     * Retrieves the list of contexts (paginated) based on criteria.
      *
      * @ApiDoc(
      *  resource=true,
@@ -87,7 +83,7 @@ class ContextController
     }
 
     /**
-     * Retrieves a specific context
+     * Retrieves a specific context.
      *
      * @ApiDoc(
      *  requirements={
@@ -112,7 +108,7 @@ class ContextController
     }
 
     /**
-     * Adds a context
+     * Adds a context.
      *
      * @ApiDoc(
      *  input={"class"="sonata_classification_api_form_context", "name"="", "groups"={"sonata_api_write"}},
@@ -136,7 +132,7 @@ class ContextController
     }
 
     /**
-     * Updates a context
+     * Updates a context.
      *
      * @ApiDoc(
      *  requirements={
@@ -151,7 +147,7 @@ class ContextController
      *  }
      * )
      *
-     * @param integer $id      A Context identifier
+     * @param int     $id      A Context identifier
      * @param Request $request A Symfony request
      *
      * @return Context
@@ -164,7 +160,7 @@ class ContextController
     }
 
     /**
-     * Deletes a context
+     * Deletes a context.
      *
      * @ApiDoc(
      *  requirements={
@@ -177,7 +173,7 @@ class ContextController
      *  }
      * )
      *
-     * @param integer $id A Context identifier
+     * @param int $id A Context identifier
      *
      * @return \FOS\RestBundle\View\View
      *
@@ -193,7 +189,7 @@ class ContextController
     }
 
     /**
-     * Filters criteria from $paramFetcher to be compatible with the Pager criteria
+     * Filters criteria from $paramFetcher to be compatible with the Pager criteria.
      *
      * @param ParamFetcherInterface $paramFetcher
      *
@@ -215,9 +211,9 @@ class ContextController
     }
 
     /**
-     * Retrieves context with id $id or throws an exception if it doesn't exist
+     * Retrieves context with id $id or throws an exception if it doesn't exist.
      *
-     * @param integer $id A Context identifier
+     * @param int $id A Context identifier
      *
      * @return Context
      *
@@ -235,10 +231,10 @@ class ContextController
     }
 
     /**
-     * Write a context, this method is used by both POST and PUT action methods
+     * Write a context, this method is used by both POST and PUT action methods.
      *
-     * @param Request      $request Symfony request
-     * @param integer|null $id      A context identifier
+     * @param Request  $request Symfony request
+     * @param int|null $id      A context identifier
      *
      * @return \FOS\RestBundle\View\View|FormInterface
      */
@@ -247,7 +243,7 @@ class ContextController
         $context = $id ? $this->getContext($id) : null;
 
         $form = $this->formFactory->createNamed(null, 'sonata_classification_api_form_context', $context, array(
-            'csrf_protection' => false
+            'csrf_protection' => false,
         ));
 
         FormHelper::removeFields($request->request->all(), $form);

@@ -15,12 +15,9 @@ use Sonata\ClassificationBundle\Model\ContextInterface;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Output\Output;
-use Symfony\Component\ClassLoader\ClassCollectionLoader;
 
 class FixContextCommand extends ContainerAwareCommand
 {
-
     /**
      * {@inheritDoc}
      */
@@ -40,14 +37,14 @@ class FixContextCommand extends ContainerAwareCommand
         $collectionManager = $this->getContainer()->get('sonata.classification.manager.collection');
         $categoryManager = $this->getContainer()->get('sonata.classification.manager.category');
 
-        $output->writeln("1. Checking default context");
+        $output->writeln('1. Checking default context');
 
         $defaultContext = $contextManager->findOneBy(array(
-            'id' => ContextInterface::DEFAULT_CONTEXT
+            'id' => ContextInterface::DEFAULT_CONTEXT,
         ));
 
         if (!$defaultContext) {
-            $output->writeln(" > default context is missing, creating one");
+            $output->writeln(' > default context is missing, creating one');
             $defaultContext = $contextManager->create();
             $defaultContext->setId(ContextInterface::DEFAULT_CONTEXT);
             $defaultContext->setName('Default');
@@ -55,48 +52,48 @@ class FixContextCommand extends ContainerAwareCommand
 
             $contextManager->save($defaultContext);
         } else {
-            $output->writeln(" > default context exists");
+            $output->writeln(' > default context exists');
         }
 
-        $output->writeln("2. Find tag without default context");
+        $output->writeln('2. Find tag without default context');
 
-        foreach($tagManager->findBy(array()) as $tag) {
+        foreach ($tagManager->findBy(array()) as $tag) {
             if ($tag->getContext()) {
                 continue;
             }
 
-            $output->writeln(sprintf(" > attach default context to tag: %s (%s)", $tag->getSlug(), $tag->getId()));
+            $output->writeln(sprintf(' > attach default context to tag: %s (%s)', $tag->getSlug(), $tag->getId()));
             $tag->setContext($defaultContext);
 
             $tagManager->save($tag);
         }
 
-        $output->writeln("3. Find collection without default context");
+        $output->writeln('3. Find collection without default context');
 
-        foreach($collectionManager->findBy(array()) as $collection) {
+        foreach ($collectionManager->findBy(array()) as $collection) {
             if ($collection->getContext()) {
                 continue;
             }
 
-            $output->writeln(sprintf(" > attach default context to collection: %s (%s)", $tag->getSlug(), $tag->getId()));
+            $output->writeln(sprintf(' > attach default context to collection: %s (%s)', $tag->getSlug(), $tag->getId()));
             $collection->setContext($defaultContext);
 
             $collectionManager->save($collection);
         }
 
-        $output->writeln("3. Find category without default context");
+        $output->writeln('3. Find category without default context');
 
-        foreach($categoryManager->findBy(array()) as $category) {
+        foreach ($categoryManager->findBy(array()) as $category) {
             if ($category->getContext()) {
                 continue;
             }
 
-            $output->writeln(sprintf(" > attach default context to collection: %s (%s)", $category->getSlug(), $category->getId()));
+            $output->writeln(sprintf(' > attach default context to collection: %s (%s)', $category->getSlug(), $category->getId()));
             $category->setContext($defaultContext);
 
             $categoryManager->save($category);
         }
 
-        $output->writeln("Done!");
+        $output->writeln('Done!');
     }
 }

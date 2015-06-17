@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -14,8 +15,7 @@ use Sonata\ClassificationBundle\Entity\CategoryManager;
 use Sonata\CoreBundle\Test\EntityManagerMockFactory;
 
 /**
- * Class CategoryManagerTest
- *
+ * Class CategoryManagerTest.
  */
 class CategoryManagerTest extends \PHPUnit_Framework_TestCase
 {
@@ -49,8 +49,8 @@ class CategoryManagerTest extends \PHPUnit_Framework_TestCase
         $self = $this;
         $this
             ->getCategoryManager(function ($qb) use ($self) {
-                /** @var $self \PHPUnit_Framework_TestCase */
-                /** @var $qb \PHPUnit_Framework_MockObject_InvocationMocker */
+                /* @var $self \PHPUnit_Framework_TestCase */
+                /* @var $qb \PHPUnit_Framework_MockObject_InvocationMocker */
                 $qb->expects($self->exactly(2))->method('andWhere')->withConsecutive(
                     array($self->equalTo('c.context = :context')),
                     array($self->equalTo('c.enabled = :enabled'))
@@ -59,7 +59,7 @@ class CategoryManagerTest extends \PHPUnit_Framework_TestCase
             })
             ->getPager(array(
                 'enabled' => true,
-                'context' => 'default'
+                'context' => 'default',
             ), 1);
     }
 
@@ -68,8 +68,8 @@ class CategoryManagerTest extends \PHPUnit_Framework_TestCase
         $self = $this;
         $this
             ->getCategoryManager(function ($qb) use ($self) {
-                /** @var $self \PHPUnit_Framework_TestCase */
-                /** @var $qb \PHPUnit_Framework_MockObject_InvocationMocker */
+                /* @var $self \PHPUnit_Framework_TestCase */
+                /* @var $qb \PHPUnit_Framework_MockObject_InvocationMocker */
                 $qb->expects($self->exactly(2))->method('andWhere')->withConsecutive(
                     array($self->equalTo('c.context = :context')),
                     array($self->equalTo('c.enabled = :enabled'))
@@ -78,7 +78,7 @@ class CategoryManagerTest extends \PHPUnit_Framework_TestCase
             })
             ->getPager(array(
                 'enabled' => false,
-                'context' => 'default'
+                'context' => 'default',
             ), 1);
     }
 }

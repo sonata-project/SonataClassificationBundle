@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Sonata package.
  *
@@ -8,29 +9,23 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Sonata\ClassificationBundle\Controller\Api;
 
 use FOS\RestBundle\Controller\Annotations\QueryParam;
 use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Request\ParamFetcherInterface;
-
 use JMS\Serializer\SerializationContext;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
-
+use Sonata\ClassificationBundle\Model\CategoryManagerInterface;
 use Sonata\CoreBundle\Form\FormHelper;
 use Sonata\DatagridBundle\Pager\PagerInterface;
-use Sonata\ClassificationBundle\Model\CategoryManagerInterface;
-
-use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
- * Class CategoryController
+ * Class CategoryController.
  *
  * @author Vincent Composieux <vincent.composieux@gmail.com>
  */
@@ -47,7 +42,7 @@ class CategoryController
     protected $formFactory;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param CategoryManagerInterface $categoryManager
      * @param FormFactoryInterface     $formFactory
@@ -59,7 +54,7 @@ class CategoryController
     }
 
     /**
-     * Retrieves the list of categories (paginated) based on criteria
+     * Retrieves the list of categories (paginated) based on criteria.
      *
      * @ApiDoc(
      *  resource=true,
@@ -89,7 +84,7 @@ class CategoryController
     }
 
     /**
-     * Retrieves a specific category
+     * Retrieves a specific category.
      *
      * @ApiDoc(
      *  requirements={
@@ -114,7 +109,7 @@ class CategoryController
     }
 
     /**
-     * Adds a category
+     * Adds a category.
      *
      * @ApiDoc(
      *  input={"class"="sonata_classification_api_form_category", "name"="", "groups"={"sonata_api_write"}},
@@ -138,7 +133,7 @@ class CategoryController
     }
 
     /**
-     * Updates a category
+     * Updates a category.
      *
      * @ApiDoc(
      *  requirements={
@@ -153,7 +148,7 @@ class CategoryController
      *  }
      * )
      *
-     * @param integer $id      A Category identifier
+     * @param int     $id      A Category identifier
      * @param Request $request A Symfony request
      *
      * @return Category
@@ -166,7 +161,7 @@ class CategoryController
     }
 
     /**
-     * Deletes a category
+     * Deletes a category.
      *
      * @ApiDoc(
      *  requirements={
@@ -179,7 +174,7 @@ class CategoryController
      *  }
      * )
      *
-     * @param integer $id A Category identifier
+     * @param int $id A Category identifier
      *
      * @return \FOS\RestBundle\View\View
      *
@@ -195,7 +190,7 @@ class CategoryController
     }
 
     /**
-     * Filters criteria from $paramFetcher to be compatible with the Pager criteria
+     * Filters criteria from $paramFetcher to be compatible with the Pager criteria.
      *
      * @param ParamFetcherInterface $paramFetcher
      *
@@ -217,9 +212,9 @@ class CategoryController
     }
 
     /**
-     * Retrieves category with id $id or throws an exception if it doesn't exist
+     * Retrieves category with id $id or throws an exception if it doesn't exist.
      *
-     * @param integer $id A Category identifier
+     * @param int $id A Category identifier
      *
      * @return Category
      *
@@ -237,10 +232,10 @@ class CategoryController
     }
 
     /**
-     * Write a category, this method is used by both POST and PUT action methods
+     * Write a category, this method is used by both POST and PUT action methods.
      *
-     * @param Request      $request Symfony request
-     * @param integer|null $id      A category identifier
+     * @param Request  $request Symfony request
+     * @param int|null $id      A category identifier
      *
      * @return \FOS\RestBundle\View\View|FormInterface
      */
@@ -249,7 +244,7 @@ class CategoryController
         $category = $id ? $this->getCategory($id) : null;
 
         $form = $this->formFactory->createNamed(null, 'sonata_classification_api_form_category', $category, array(
-            'csrf_protection' => false
+            'csrf_protection' => false,
         ));
 
         FormHelper::removeFields($request->request->all(), $form);

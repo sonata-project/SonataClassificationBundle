@@ -4,7 +4,7 @@
         <body>
             <trans-unit id="sonata_classification">
                 <source>sonata_classification</source>
-                <target>Classification</target>
+                <target>Auszeichnung</target>
             </trans-unit>
             <trans-unit id="label_categories">
                 <source>label_categories</source>
@@ -141,6 +141,26 @@
             <trans-unit id="form.label_context">
                 <source>form.label_context</source>
                 <target>Kontext</target>
+            </trans-unit>
+            <trans-unit id="tree_catalog_title">
+                <source>tree_catalog_title</source>
+                <target>Kategorien</target>
+            </trans-unit>
+            <trans-unit id="element.tree_site_label">
+                <source>element.tree_site_label</source>
+                <target>Kategorien</target>
+            </trans-unit>
+            <trans-unit id="classification.list_mode">
+                <source>classification.list_mode</source>
+                <target>Liste</target>
+            </trans-unit>
+            <trans-unit id="classification.tree_mode">
+                <source>classification.tree_mode</source>
+                <target>Struktur</target>
+            </trans-unit>
+            <trans-unit id="breadcrumb.link_category_tree">
+                <source>breadcrumb.link_category_tree</source>
+                <target>Kategorie</target>
             </trans-unit>
         </body>
     </file>

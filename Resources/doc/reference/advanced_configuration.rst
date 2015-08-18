@@ -21,7 +21,7 @@ Advanced Configuration
               translation:  SonataClassificationBundle
           category:
               class:        Sonata\ClassificationBundle\Admin\CategoryAdmin
-              controller:   SonataAdminBundle:CRUD
+              controller:   SonataAdminBundle:CategoryAdmin
               translation:  SonataClassificationBundle
           collection:
               class:        Sonata\ClassificationBundle\Admin\CollectionAdmin

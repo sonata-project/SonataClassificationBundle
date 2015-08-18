@@ -4,7 +4,7 @@
         <body>
             <trans-unit id="sonata_classification">
                 <source>sonata_classification</source>
-                <target>Auszeichnung</target>
+                <target>Klassifizierung</target>
             </trans-unit>
             <trans-unit id="label_categories">
                 <source>label_categories</source>

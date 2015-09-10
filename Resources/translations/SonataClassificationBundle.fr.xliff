@@ -26,6 +26,10 @@
                 <source>breadcrumb.link_category_list</source>
                 <target>Liste des catégories</target>
             </trans-unit>
+            <trans-unit id="breadcrumb.link_category_tree">
+                <source>breadcrumb.link_category_tree</source>
+                <target>Arbre des catégories</target>
+            </trans-unit>
             <trans-unit id="list.label_name">
                 <source>list.label_name</source>
                 <target>Libellé</target>
@@ -44,7 +48,7 @@
             </trans-unit>
             <trans-unit id="filter.label_name">
                 <source>filter.label_name</source>
-                <target>Filtre</target>
+                <target>Libellé</target>
             </trans-unit>
             <trans-unit id="filter.label_enabled">
                 <source>filter.label_enabled</source>

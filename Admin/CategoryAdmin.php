@@ -96,10 +96,12 @@ class CategoryAdmin extends Admin
             }
         }
 
+        $position = $this->hasSubject() && !is_null($this->getSubject()->getPosition()) ? $this->getSubject()->getPosition() : 0;
+
         $formMapper->end()
             ->with('Options', array('class' => 'col-md-6'))
                 ->add('enabled')
-                ->add('position', 'integer', array('required' => false, 'data' => 0))
+                ->add('position', 'integer', array('required' => false, 'data' => $position))
             ->end()
         ;
 

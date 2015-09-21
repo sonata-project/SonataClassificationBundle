@@ -21,7 +21,7 @@ class CollectionManager extends BaseDocumentManager implements CollectionManager
     /**
      * {@inheritdoc}
      */
-    public function getPager(array $criteria, $page, $maxPerPage = 10)
+    public function getPager(array $criteria, $page, $maxPerPage = 10, array $sort = array())
     {
         $parameters = array();
 

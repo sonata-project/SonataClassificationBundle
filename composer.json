@@ -27,8 +27,7 @@
         "friendsofsymfony/rest-bundle": "~1.1",
         "jms/serializer-bundle": "~0.11",
         "sonata-project/media-bundle": "~2.2",
-        "symfony/phpunit-bridge": "~2.7|~3.0",
-        "fabpot/php-cs-fixer": "~0.5|~1.0"
+        "symfony/phpunit-bridge": "~2.7|~3.0"
     },
     "suggest": {
         "sonata-project/media-bundle": "~2.2"

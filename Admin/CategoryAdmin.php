@@ -164,6 +164,8 @@ class CategoryAdmin extends Admin
             'hide_context' => $this->hasRequest() ? (int) $this->getRequest()->get('hide_context', 0) : 0,
         );
 
+        $parameters = array_merge(parent::getPersistentParameters(), $parameters);
+
         if ($this->getSubject()) {
             $parameters['context'] = $this->getSubject()->getContext() ? $this->getSubject()->getContext()->getId() : '';
 

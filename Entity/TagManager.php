@@ -29,6 +29,11 @@ class TagManager extends BaseEntityManager implements TagManagerInterface
             ->createQueryBuilder('t')
             ->select('t');
 
+        if (isset($criteria['context'])) {
+            $query->andWhere('t.context = :context');
+            $parameters['context'] = $criteria['context'];
+        }
+
         if (isset($criteria['enabled'])) {
             $query->andWhere('t.enabled = :enabled');
             $parameters['enabled'] = (bool) $criteria['enabled'];

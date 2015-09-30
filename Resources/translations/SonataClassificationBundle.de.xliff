@@ -162,6 +162,10 @@
                 <source>breadcrumb.link_category_tree</source>
                 <target>Kategorie</target>
             </trans-unit>
+            <trans-unit id="no_tag_found">
+                <source>no_tag_found</source>
+                <target>Kein Tag gefunden.</target>
+            </trans-unit>
             <trans-unit id="active">
                 <source>active</source>
                 <target>aktiviert</target>

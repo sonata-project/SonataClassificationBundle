@@ -158,6 +158,10 @@
                 <source>classification.tree_mode</source>
                 <target>Albero</target>
             </trans-unit>
+            <trans-unit id="no_tag_found">
+                <source>no_tag_found</source>
+                <target>no_tag_found</target>
+            </trans-unit>
             <trans-unit id="breadcrumb.link_category_tree">
                 <source>breadcrumb.link_category_tree</source>
                 <target>breadcrumb.link_category_tree</target>

@@ -42,6 +42,7 @@ class SonataClassificationExtension extends Extension
         $loader->load('orm.xml');
         $loader->load('form.xml');
         $loader->load('serializer.xml');
+        $loader->load('block.xml');
 
         if (isset($bundles['FOSRestBundle']) && isset($bundles['NelmioApiDocBundle'])) {
             $loader->load('api_controllers.xml');

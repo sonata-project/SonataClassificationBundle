@@ -13,7 +13,7 @@ Advanced Configuration
           collection:   Application\Sonata\ClassificationBundle\Entity\Collection
           media:        Application\Sonata\MediaBundle\Entity\Collection
           context:      Application\Sonata\ClassificationBundle\Entity\Collection
-        
+
       admin:
           tag:
               class:        Sonata\ClassificationBundle\Admin\TagAdmin
@@ -31,4 +31,3 @@ Advanced Configuration
               class:        Sonata\ClassificationBundle\Admin\ContextAdmin
               controller:   SonataAdminBundle:CRUD
               translation:  SonataClassificationBundle
-

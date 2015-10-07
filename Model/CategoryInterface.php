@@ -16,6 +16,11 @@ use Sonata\MediaBundle\Model\MediaInterface;
 interface CategoryInterface
 {
     /**
+     * @return mixed
+     */
+    public function getId();
+
+    /**
      * Set name.
      *
      * @param string $name

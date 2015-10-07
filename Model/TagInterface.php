@@ -14,6 +14,11 @@ namespace Sonata\ClassificationBundle\Model;
 interface TagInterface
 {
     /**
+     * @return mixed
+     */
+    public function getId();
+
+    /**
      * Set name.
      *
      * @param string $name

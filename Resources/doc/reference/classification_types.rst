@@ -38,4 +38,4 @@ If you want to know more, you can fork the `Sonata sandbox <https://github.com/s
 Context
 =======
 
-A Context is a way to group Tag, Collection and Category into one set. So you can have duplicate tag accross contexts.
+A Context is a way to group `Tag`, `Collection` and `Category` into one set. So you can have duplicate tag accross contexts.

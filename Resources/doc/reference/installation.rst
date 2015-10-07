@@ -46,12 +46,9 @@ Installation
         orm:
             entity_managers:
                 default:
-                    #metadata_cache_driver: apc
-                    #query_cache_driver: apc
-                    #result_cache_driver: apc
                     mappings:
-                        #ApplicationSonataClassificationBundle: ~
                         SonataClassificationBundle: ~
+                        #ApplicationSonataClassificationBundle: ~
 
 * Import the ``sonata_classification.yml`` file in your main app/config/config.yml:
 

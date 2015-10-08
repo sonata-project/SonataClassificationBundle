@@ -113,30 +113,30 @@ class SonataClassificationExtension extends Extension
         $collector = DoctrineCollector::getInstance();
 
         $collector->addAssociation($config['class']['category'], 'mapOneToMany', array(
-            'fieldName'     => 'children',
-            'targetEntity'  => $config['class']['category'],
-            'cascade'       => array(
+            'fieldName'    => 'children',
+            'targetEntity' => $config['class']['category'],
+            'cascade'      => array(
                 'persist',
             ),
             'mappedBy'      => 'parent',
             'orphanRemoval' => true,
             'orderBy'       => array(
-                'position'  => 'ASC',
+                'position' => 'ASC',
             ),
         ));
 
         $collector->addAssociation($config['class']['category'], 'mapManyToOne', array(
-            'fieldName'     => 'parent',
-            'targetEntity'  => $config['class']['category'],
-            'cascade'       => array(
+            'fieldName'    => 'parent',
+            'targetEntity' => $config['class']['category'],
+            'cascade'      => array(
                 'persist',
                 'refresh',
                 'merge',
                 'detach',
             ),
-            'mappedBy'      => null,
-            'inversedBy'    => 'children',
-            'joinColumns'   => array(
+            'mappedBy'    => null,
+            'inversedBy'  => 'children',
+            'joinColumns' => array(
                 array(
                  'name'                 => 'parent_id',
                  'referencedColumnName' => 'id',
@@ -147,14 +147,14 @@ class SonataClassificationExtension extends Extension
         ));
 
         $collector->addAssociation($config['class']['category'], 'mapManyToOne', array(
-            'fieldName'     => 'context',
-            'targetEntity'  => $config['class']['context'],
-            'cascade'       => array(
+            'fieldName'    => 'context',
+            'targetEntity' => $config['class']['context'],
+            'cascade'      => array(
                 'persist',
             ),
-            'mappedBy'      => null,
-            'inversedBy'    => null,
-            'joinColumns'   => array(
+            'mappedBy'    => null,
+            'inversedBy'  => null,
+            'joinColumns' => array(
                 array(
                     'name'                 => 'context',
                     'referencedColumnName' => 'id',
@@ -164,14 +164,14 @@ class SonataClassificationExtension extends Extension
         ));
 
         $collector->addAssociation($config['class']['tag'], 'mapManyToOne', array(
-            'fieldName'     => 'context',
-            'targetEntity'  => $config['class']['context'],
-            'cascade'       => array(
+            'fieldName'    => 'context',
+            'targetEntity' => $config['class']['context'],
+            'cascade'      => array(
                 'persist',
             ),
-            'mappedBy'      => null,
-            'inversedBy'    => null,
-            'joinColumns'   => array(
+            'mappedBy'    => null,
+            'inversedBy'  => null,
+            'joinColumns' => array(
                 array(
                     'name'                 => 'context',
                     'referencedColumnName' => 'id',
@@ -183,14 +183,14 @@ class SonataClassificationExtension extends Extension
         $collector->addUnique($config['class']['tag'], 'tag_context', array('slug', 'context'));
 
         $collector->addAssociation($config['class']['collection'], 'mapManyToOne', array(
-            'fieldName'     => 'context',
-            'targetEntity'  => $config['class']['context'],
-            'cascade'       => array(
+            'fieldName'    => 'context',
+            'targetEntity' => $config['class']['context'],
+            'cascade'      => array(
                 'persist',
             ),
-            'mappedBy'      => null,
-            'inversedBy'    => null,
-            'joinColumns'   => array(
+            'mappedBy'    => null,
+            'inversedBy'  => null,
+            'joinColumns' => array(
                 array(
                     'name'                 => 'context',
                     'referencedColumnName' => 'id',
@@ -203,14 +203,14 @@ class SonataClassificationExtension extends Extension
 
         if (interface_exists('Sonata\MediaBundle\Model\MediaInterface')) {
             $collector->addAssociation($config['class']['collection'], 'mapManyToOne', array(
-                'fieldName'     => 'media',
-                'targetEntity'  => $config['class']['media'],
-                'cascade'       => array(
+                'fieldName'    => 'media',
+                'targetEntity' => $config['class']['media'],
+                'cascade'      => array(
                     'persist',
                 ),
-                'mappedBy'      => null,
-                'inversedBy'    => null,
-                'joinColumns'   => array(
+                'mappedBy'    => null,
+                'inversedBy'  => null,
+                'joinColumns' => array(
                     array(
                      'name'                 => 'media_id',
                      'referencedColumnName' => 'id',
@@ -221,14 +221,14 @@ class SonataClassificationExtension extends Extension
             ));
 
             $collector->addAssociation($config['class']['category'], 'mapManyToOne', array(
-                'fieldName'     => 'media',
-                'targetEntity'  => $config['class']['media'],
-                'cascade'       => array(
+                'fieldName'    => 'media',
+                'targetEntity' => $config['class']['media'],
+                'cascade'      => array(
                     'persist',
                 ),
-                'mappedBy'      => null,
-                'inversedBy'    => null,
-                'joinColumns'   => array(
+                'mappedBy'    => null,
+                'inversedBy'  => null,
+                'joinColumns' => array(
                     array(
                      'name'                 => 'media_id',
                      'referencedColumnName' => 'id',

@@ -80,7 +80,9 @@ class CategoryAdmin extends Admin
         $formMapper
             ->with('General', array('class' => 'col-md-6'))
                 ->add('name')
-                ->add('description', 'textarea', array('required' => false))
+                ->add('description', 'textarea', array(
+                    'required' => false,
+                ))
         ;
 
         if ($this->hasSubject()) {
@@ -98,10 +100,16 @@ class CategoryAdmin extends Admin
 
         $position = $this->hasSubject() && !is_null($this->getSubject()->getPosition()) ? $this->getSubject()->getPosition() : 0;
 
-        $formMapper->end()
+        $formMapper
+            ->end()
             ->with('Options', array('class' => 'col-md-6'))
-                ->add('enabled')
-                ->add('position', 'integer', array('required' => false, 'data' => $position))
+                ->add('enabled', null, array(
+                    'required' => false,
+                ))
+                ->add('position', 'integer', array(
+                    'required' => false,
+                    'data'     => $position,
+                ))
             ->end()
         ;
 
@@ -109,7 +117,9 @@ class CategoryAdmin extends Admin
             $formMapper
                 ->with('General')
                     ->add('media', 'sonata_type_model_list',
-                        array('required' => false),
+                        array(
+                            'required' => false,
+                        ),
                         array(
                             'link_parameters' => array(
                                 'provider' => 'sonata.media.provider.image',

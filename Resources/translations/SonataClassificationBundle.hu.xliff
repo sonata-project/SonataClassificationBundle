@@ -158,6 +158,18 @@
                 <source>classification.tree_mode</source>
                 <target>Fa</target>
             </trans-unit>
+            <trans-unit id="breadcrumb.link_category_tree">
+                <source>breadcrumb.link_category_tree</source>
+                <target>breadcrumb.link_category_tree</target>
+            </trans-unit>
+            <trans-unit id="active">
+                <source>active</source>
+                <target>active</target>
+            </trans-unit>
+            <trans-unit id="disabled">
+                <source>disabled</source>
+                <target>disabled</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

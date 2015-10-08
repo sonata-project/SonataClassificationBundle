@@ -154,6 +154,18 @@
                 <source>classification.tree_mode</source>
                 <target>Arbre</target>
             </trans-unit>
+            <trans-unit id="breadcrumb.link_category_tree">
+                <source>breadcrumb.link_category_tree</source>
+                <target>Catégorie</target>
+            </trans-unit>
+            <trans-unit id="active">
+                <source>active</source>
+                <target>Actif</target>
+            </trans-unit>
+            <trans-unit id="disabled">
+                <source>disabled</source>
+                <target>Désactivé</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

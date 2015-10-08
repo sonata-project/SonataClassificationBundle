@@ -28,7 +28,9 @@ class ContextAdmin extends Admin
                 ->add('id')
             ->ifEnd()
             ->add('name')
-            ->add('enabled', null, array('required' => false))
+            ->add('enabled', null, array(
+                'required' => false,
+            ))
         ;
     }
 
@@ -52,7 +54,9 @@ class ContextAdmin extends Admin
         $listMapper
             ->addIdentifier('name')
             ->addIdentifier('id')
-            ->add('enabled', null, array('editable' => true))
+            ->add('enabled', null, array(
+                'editable' => true,
+            ))
             ->add('createdAt')
             ->add('updatedAt')
         ;

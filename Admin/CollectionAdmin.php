@@ -28,10 +28,14 @@ class CollectionAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('enabled', null, array('required' => false))
             ->add('name')
-            ->add('description', 'textarea', array('required' => false))
+            ->add('description', 'textarea', array(
+                'required' => false,
+            ))
             ->add('context')
+            ->add('enabled', null, array(
+                'required' => false,
+            ))
         ;
 
         if (interface_exists('Sonata\MediaBundle\Model\MediaInterface')) {
@@ -68,7 +72,9 @@ class CollectionAdmin extends Admin
             ->addIdentifier('name')
             ->add('slug')
             ->add('context')
-            ->add('enabled', null, array('editable' => true))
+            ->add('enabled', null, array(
+                'editable' => true,
+            ))
         ;
     }
 }

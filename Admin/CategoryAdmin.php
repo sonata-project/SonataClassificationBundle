@@ -16,8 +16,6 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
-use Sonata\ClassificationBundle\Entity\ContextManager;
-use Sonata\ClassificationBundle\Model\ContextManagerInterface;
 
 class CategoryAdmin extends Admin
 {
@@ -26,54 +24,11 @@ class CategoryAdmin extends Admin
     );
 
     /**
-     * @var ContextManagerInterface
-     */
-    protected $contextManager;
-
-    /**
-     * @param string                  $code
-     * @param string                  $class
-     * @param string                  $baseControllerName
-     * @param ContextManagerInterface $contextManager
-     */
-    public function __construct($code, $class, $baseControllerName, ContextManagerInterface $contextManager)
-    {
-        parent::__construct($code, $class, $baseControllerName);
-
-        $this->contextManager = $contextManager;
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function configureRoutes(RouteCollection $routes)
     {
         $routes->add('tree', 'tree');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getNewInstance()
-    {
-        $instance = parent::getNewInstance();
-
-        if ($contextId = $this->getPersistentParameter('context')) {
-            $context = $this->contextManager->find($contextId);
-
-            if (!$context) {
-                $context = $this->contextManager->create();
-                $context->setEnabled(true);
-                $context->setId($context);
-                $context->setName($context);
-
-                $this->contextManager->save($context);
-            }
-
-            $instance->setContext($context);
-        }
-
-        return $instance;
     }
 
     /**
@@ -140,14 +95,10 @@ class CategoryAdmin extends Admin
      */
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
-        $options = array();
-        if ($this->getPersistentParameter('hide_context') === 1) {
-            $options['disabled'] = true;
-        }
+        parent::configureDatagridFilters($datagridMapper);
 
         $datagridMapper
             ->add('name')
-            ->add('context', null, array(), null, $options)
             ->add('enabled')
         ;
     }
@@ -166,30 +117,5 @@ class CategoryAdmin extends Admin
             ->add('position')
             ->add('parent')
         ;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getPersistentParameters()
-    {
-        $parameters = array(
-            'context'      => '',
-            'hide_context' => $this->hasRequest() ? (int) $this->getRequest()->get('hide_context', 0) : 0,
-        );
-
-        if ($this->getSubject()) {
-            $parameters['context'] = $this->getSubject()->getContext() ? $this->getSubject()->getContext()->getId() : '';
-
-            return $parameters;
-        }
-
-        if ($this->hasRequest()) {
-            $parameters['context'] = $this->getRequest()->get('context');
-
-            return $parameters;
-        }
-
-        return $parameters;
     }
 }

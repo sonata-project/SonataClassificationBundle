@@ -27,6 +27,7 @@
             <argument />
             <argument>%sonata.classification.admin.tag.entity%</argument>
             <argument>%sonata.classification.admin.tag.controller%</argument>
+            <argument type="service" id="sonata.classification.manager.context" />
 
             <call method="setTranslationDomain">
                 <argument>%sonata.classification.admin.tag.translation_domain%</argument>
@@ -38,6 +39,7 @@
             <argument />
             <argument>%sonata.classification.admin.collection.entity%</argument>
             <argument>%sonata.classification.admin.collection.controller%</argument>
+            <argument type="service" id="sonata.classification.manager.context" />
 
             <call method="setTranslationDomain">
                 <argument>%sonata.classification.admin.collection.translation_domain%</argument>

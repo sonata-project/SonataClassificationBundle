@@ -52,7 +52,7 @@ class SonataClassificationExtension extends Extension
             $loader->load('admin.xml');
         }
 
-        $this->registerDoctrineMapping($config, $container);
+        $this->registerDoctrineMapping($config);
         $this->configureClass($config, $container);
         $this->configureAdmin($config, $container);
     }

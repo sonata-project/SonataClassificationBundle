@@ -24,7 +24,7 @@ class FixContextCommand extends ContainerAwareCommand
     public function configure()
     {
         $this->setName('sonata:classification:fix-context');
-        $this->setDescription('Generate the default context if done defined and attach the context to all elements');
+        $this->setDescription('Generate the default context if none defined and attach the context to all elements');
     }
 
     /**

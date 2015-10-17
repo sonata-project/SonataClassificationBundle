@@ -203,11 +203,7 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
         }
 
         foreach ($categories as $pos => $category) {
-            if ($pos === 0 && $category->getParent()) {
-                throw new \RuntimeException('The first category must be the root');
-            }
-
-            if ($pos == 0) {
+            if ($category->getParent() == null) {
                 $root = $category;
             }
 

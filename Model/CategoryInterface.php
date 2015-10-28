@@ -16,9 +16,9 @@ use Sonata\MediaBundle\Model\MediaInterface;
 interface CategoryInterface
 {
     /**
-     * @param $name
+     * Set name.
      *
-     * @return mixed
+     * @param string $name
      */
     public function setName($name);
 
@@ -92,7 +92,7 @@ interface CategoryInterface
     /**
      * Get Children.
      *
-     * @return \Doctrine\Common\Collections\Collection $children
+     * @return Collection $children
      */
     public function getChildren();
 

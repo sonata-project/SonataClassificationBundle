@@ -16,6 +16,7 @@ use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Request\ParamFetcherInterface;
 use JMS\Serializer\SerializationContext;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
+use Sonata\ClassificationBundle\Model\CollectionInterface;
 use Sonata\ClassificationBundle\Model\CollectionManagerInterface;
 use Sonata\CoreBundle\Form\FormHelper;
 use Sonata\DatagridBundle\Pager\PagerInterface;
@@ -100,7 +101,7 @@ class CollectionController
      *
      * @param $id
      *
-     * @return Collection
+     * @return CollectionInterface
      */
     public function getCollectionAction($id)
     {
@@ -122,7 +123,7 @@ class CollectionController
      *
      * @param Request $request A Symfony request
      *
-     * @return Collection
+     * @return CollectionInterface
      *
      * @throws NotFoundHttpException
      */
@@ -150,7 +151,7 @@ class CollectionController
      * @param int     $id      A Collection identifier
      * @param Request $request A Symfony request
      *
-     * @return Collection
+     * @return CollectionInterface
      *
      * @throws NotFoundHttpException
      */
@@ -175,7 +176,7 @@ class CollectionController
      *
      * @param int $id A Collection identifier
      *
-     * @return \FOS\RestBundle\View\View
+     * @return View
      *
      * @throws NotFoundHttpException
      */
@@ -215,7 +216,7 @@ class CollectionController
      *
      * @param int $id A Collection identifier
      *
-     * @return Collection
+     * @return CollectionInterface
      *
      * @throws NotFoundHttpException
      */
@@ -236,7 +237,7 @@ class CollectionController
      * @param Request  $request Symfony request
      * @param int|null $id      A collection identifier
      *
-     * @return \FOS\RestBundle\View\View|FormInterface
+     * @return View|FormInterface
      */
     protected function handleWriteCollection($request, $id = null)
     {

@@ -13,12 +13,29 @@ namespace Sonata\ClassificationBundle\Model;
 
 abstract class Context implements ContextInterface
 {
+    /**
+     * @var int
+     */
+    protected $id;
+
+    /**
+     * @var string
+     */
     protected $name;
 
+    /**
+     * @var \DateTime
+     */
     protected $createdAt;
 
+    /**
+     * @var \DateTime
+     */
     protected $updatedAt;
 
+    /**
+     * @var bool
+     */
     protected $enabled;
 
     /**
@@ -91,7 +108,7 @@ abstract class Context implements ContextInterface
     }
 
     /**
-     * @param mixed $id
+     * {@inheritdoc}
      */
     public function setId($id)
     {

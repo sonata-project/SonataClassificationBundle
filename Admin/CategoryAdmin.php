@@ -17,6 +17,7 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\ClassificationBundle\Entity\ContextManager;
+use Sonata\ClassificationBundle\Model\ContextManagerInterface;
 
 class CategoryAdmin extends Admin
 {
@@ -24,15 +25,18 @@ class CategoryAdmin extends Admin
         'cascade_validation' => true,
     );
 
+    /**
+     * @var ContextManagerInterface
+     */
     protected $contextManager;
 
     /**
-     * @param string         $code
-     * @param string         $class
-     * @param string         $baseControllerName
-     * @param ContextManager $contextManager
+     * @param string                  $code
+     * @param string                  $class
+     * @param string                  $baseControllerName
+     * @param ContextManagerInterface $contextManager
      */
-    public function __construct($code, $class, $baseControllerName, ContextManager $contextManager)
+    public function __construct($code, $class, $baseControllerName, ContextManagerInterface $contextManager)
     {
         parent::__construct($code, $class, $baseControllerName);
 

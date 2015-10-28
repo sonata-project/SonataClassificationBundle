@@ -16,9 +16,10 @@ use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Request\ParamFetcherInterface;
 use JMS\Serializer\SerializationContext;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
+use Sonata\ClassificationBundle\Model\ContextInterface;
 use Sonata\ClassificationBundle\Model\ContextManagerInterface;
 use Sonata\CoreBundle\Form\FormHelper;
-use Sonata\DacontextridBundle\Pager\PagerInterface;
+use Sonata\DatagridBundle\Pager\PagerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -100,7 +101,7 @@ class ContextController
      *
      * @param $id
      *
-     * @return Context
+     * @return ContextInterface
      */
     public function getContextAction($id)
     {
@@ -122,7 +123,7 @@ class ContextController
      *
      * @param Request $request A Symfony request
      *
-     * @return Context
+     * @return ContextInterface
      *
      * @throws NotFoundHttpException
      */
@@ -150,7 +151,7 @@ class ContextController
      * @param int     $id      A Context identifier
      * @param Request $request A Symfony request
      *
-     * @return Context
+     * @return ContextInterface
      *
      * @throws NotFoundHttpException
      */
@@ -175,7 +176,7 @@ class ContextController
      *
      * @param int $id A Context identifier
      *
-     * @return \FOS\RestBundle\View\View
+     * @return View
      *
      * @throws NotFoundHttpException
      */
@@ -215,7 +216,7 @@ class ContextController
      *
      * @param int $id A Context identifier
      *
-     * @return Context
+     * @return ContextInterface
      *
      * @throws NotFoundHttpException
      */
@@ -236,7 +237,7 @@ class ContextController
      * @param Request  $request Symfony request
      * @param int|null $id      A context identifier
      *
-     * @return \FOS\RestBundle\View\View|FormInterface
+     * @return FormInterface
      */
     protected function handleWriteContext($request, $id = null)
     {

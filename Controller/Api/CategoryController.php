@@ -16,6 +16,7 @@ use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Request\ParamFetcherInterface;
 use JMS\Serializer\SerializationContext;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
+use Sonata\ClassificationBundle\Model\CategoryInterface;
 use Sonata\ClassificationBundle\Model\CategoryManagerInterface;
 use Sonata\CoreBundle\Form\FormHelper;
 use Sonata\DatagridBundle\Pager\PagerInterface;
@@ -101,7 +102,7 @@ class CategoryController
      *
      * @param $id
      *
-     * @return Category
+     * @return CategoryInterface
      */
     public function getCategoryAction($id)
     {
@@ -123,7 +124,7 @@ class CategoryController
      *
      * @param Request $request A Symfony request
      *
-     * @return Category
+     * @return CategoryInterface
      *
      * @throws NotFoundHttpException
      */
@@ -151,7 +152,7 @@ class CategoryController
      * @param int     $id      A Category identifier
      * @param Request $request A Symfony request
      *
-     * @return Category
+     * @return CategoryInterface
      *
      * @throws NotFoundHttpException
      */
@@ -176,7 +177,7 @@ class CategoryController
      *
      * @param int $id A Category identifier
      *
-     * @return \FOS\RestBundle\View\View
+     * @return View
      *
      * @throws NotFoundHttpException
      */
@@ -216,7 +217,7 @@ class CategoryController
      *
      * @param int $id A Category identifier
      *
-     * @return Category
+     * @return CategoryInterface
      *
      * @throws NotFoundHttpException
      */
@@ -237,7 +238,7 @@ class CategoryController
      * @param Request  $request Symfony request
      * @param int|null $id      A category identifier
      *
-     * @return \FOS\RestBundle\View\View|FormInterface
+     * @return View|FormInterface
      */
     protected function handleWriteCategory($request, $id = null)
     {

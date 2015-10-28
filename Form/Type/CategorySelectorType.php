@@ -12,6 +12,7 @@
 namespace Sonata\ClassificationBundle\Form\Type;
 
 use Sonata\ClassificationBundle\Model\CategoryInterface;
+use Sonata\ClassificationBundle\Model\CategoryManagerInterface;
 use Sonata\CoreBundle\Model\ManagerInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\SimpleChoiceList;
@@ -25,6 +26,9 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  */
 class CategorySelectorType extends AbstractType
 {
+    /**
+     * @var CategoryManagerInterface
+     */
     protected $manager;
 
     /**

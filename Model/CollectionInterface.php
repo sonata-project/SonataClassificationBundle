@@ -16,9 +16,9 @@ use Sonata\MediaBundle\Model\MediaInterface;
 interface CollectionInterface
 {
     /**
-     * @param $name
+     * Set name.
      *
-     * @return mixed
+     * @param string $name
      */
     public function setName($name);
 

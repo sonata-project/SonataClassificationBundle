@@ -16,6 +16,7 @@ use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Request\ParamFetcherInterface;
 use JMS\Serializer\SerializationContext;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
+use Sonata\ClassificationBundle\Model\TagInterface;
 use Sonata\ClassificationBundle\Model\TagManagerInterface;
 use Sonata\CoreBundle\Form\FormHelper;
 use Sonata\DatagridBundle\Pager\PagerInterface;
@@ -122,7 +123,7 @@ class TagController
      *
      * @param Request $request A Symfony request
      *
-     * @return Tag
+     * @return TagInterface
      *
      * @throws NotFoundHttpException
      */
@@ -150,7 +151,7 @@ class TagController
      * @param int     $id      A Tag identifier
      * @param Request $request A Symfony request
      *
-     * @return Tag
+     * @return TagInterface
      *
      * @throws NotFoundHttpException
      */
@@ -175,7 +176,7 @@ class TagController
      *
      * @param int $id A Tag identifier
      *
-     * @return \FOS\RestBundle\View\View
+     * @return View
      *
      * @throws NotFoundHttpException
      */
@@ -215,7 +216,7 @@ class TagController
      *
      * @param int $id A Tag identifier
      *
-     * @return Tag
+     * @return TagInterface
      *
      * @throws NotFoundHttpException
      */
@@ -236,7 +237,7 @@ class TagController
      * @param Request  $request Symfony request
      * @param int|null $id      A tag identifier
      *
-     * @return \FOS\RestBundle\View\View|FormInterface
+     * @return FormInterface
      */
     protected function handleWriteTag($request, $id = null)
     {

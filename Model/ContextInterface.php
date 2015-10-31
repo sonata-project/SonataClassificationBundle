@@ -16,9 +16,9 @@ interface ContextInterface
     const DEFAULT_CONTEXT = 'default';
 
     /**
-     * @param $name
+     * Set name.
      *
-     * @return mixed
+     * @param string $name
      */
     public function setName($name);
 

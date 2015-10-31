@@ -15,26 +15,48 @@ use Sonata\MediaBundle\Model\MediaInterface;
 
 abstract class Collection implements CollectionInterface
 {
+    /**
+     * @var string
+     */
     protected $name;
 
+    /**
+     * @var string
+     */
     protected $slug;
 
+    /**
+     * @var bool
+     */
     protected $enabled;
 
+    /**
+     * @var string
+     */
     protected $description;
 
+    /**
+     * @var \DateTime
+     */
     protected $createdAt;
 
+    /**
+     * @var \DateTime
+     */
     protected $updatedAt;
 
+    /**
+     * @var MediaInterface
+     */
     protected $media;
 
+    /**
+     * @var ContextInterface
+     */
     protected $context;
 
     /**
-     * Set name.
-     *
-     * @param string $name
+     * {@inheritdoc}
      */
     public function setName($name)
     {
@@ -44,9 +66,7 @@ abstract class Collection implements CollectionInterface
     }
 
     /**
-     * Get name.
-     *
-     * @return string $name
+     * {@inheritdoc}
      */
     public function getName()
     {
@@ -54,9 +74,7 @@ abstract class Collection implements CollectionInterface
     }
 
     /**
-     * Set enabled.
-     *
-     * @param bool $enabled
+     * {@inheritdoc}
      */
     public function setEnabled($enabled)
     {
@@ -64,9 +82,7 @@ abstract class Collection implements CollectionInterface
     }
 
     /**
-     * Get enabled.
-     *
-     * @return bool $enabled
+     * {@inheritdoc}
      */
     public function getEnabled()
     {
@@ -74,9 +90,7 @@ abstract class Collection implements CollectionInterface
     }
 
     /**
-     * Set slug.
-     *
-     * @param int $slug
+     * {@inheritdoc}
      */
     public function setSlug($slug)
     {
@@ -84,9 +98,7 @@ abstract class Collection implements CollectionInterface
     }
 
     /**
-     * Get slug.
-     *
-     * @return int $slug
+     * {@inheritdoc}
      */
     public function getSlug()
     {
@@ -94,9 +106,7 @@ abstract class Collection implements CollectionInterface
     }
 
     /**
-     * Set description.
-     *
-     * @param string $description
+     * {@inheritdoc}
      */
     public function setDescription($description)
     {
@@ -104,9 +114,7 @@ abstract class Collection implements CollectionInterface
     }
 
     /**
-     * Get description.
-     *
-     * @return string $description
+     * {@inheritdoc}
      */
     public function getDescription()
     {
@@ -165,7 +173,7 @@ abstract class Collection implements CollectionInterface
     }
 
     /**
-     * @param MediaInterface $media
+     * {@inheritdoc}
      */
     public function setMedia(MediaInterface $media = null)
     {
@@ -181,7 +189,7 @@ abstract class Collection implements CollectionInterface
     }
 
     /**
-     * @param ContextInterface $context
+     * {@inheritdoc}
      */
     public function setContext(ContextInterface $context)
     {

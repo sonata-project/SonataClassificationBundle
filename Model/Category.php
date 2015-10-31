@@ -16,26 +16,59 @@ use Sonata\MediaBundle\Model\MediaInterface;
 
 abstract class Category implements CategoryInterface
 {
+    /**
+     * @var string
+     */
     protected $name;
 
+    /**
+     * @var string
+     */
     protected $slug;
 
+    /**
+     * @var bool
+     */
     protected $enabled;
 
+    /**
+     * @var string
+     */
     protected $description;
 
+    /**
+     * @var \DateTime
+     */
     protected $createdAt;
 
+    /**
+     * @var \DateTime
+     */
     protected $updatedAt;
 
+    /**
+     * @var int
+     */
     protected $position;
 
+    /**
+     * @var CategoryInterface[]
+     */
     protected $children;
 
+    /**
+     * @var CategoryInterface
+     */
     protected $parent;
 
+    /**
+     * @var MediaInterface
+     */
     protected $media;
 
+    /**
+     * @var ContextInterface
+     */
     protected $context;
 
     /**
@@ -282,7 +315,7 @@ abstract class Category implements CategoryInterface
     }
 
     /**
-     * @param ContextInterface $context
+     * {@inheritdoc}
      */
     public function setContext(ContextInterface $context)
     {
@@ -290,7 +323,7 @@ abstract class Category implements CategoryInterface
     }
 
     /**
-     * @return ContextInterface
+     * {@inheritdoc}
      */
     public function getContext()
     {

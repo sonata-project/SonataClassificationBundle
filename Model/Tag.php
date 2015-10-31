@@ -13,16 +13,34 @@ namespace Sonata\ClassificationBundle\Model;
 
 abstract class Tag implements TagInterface
 {
+    /**
+     * @var string
+     */
     protected $name;
 
+    /**
+     * @var string
+     */
     protected $slug;
 
+    /**
+     * @var \DateTime
+     */
     protected $createdAt;
 
+    /**
+     * @var \DateTime
+     */
     protected $updatedAt;
 
+    /**
+     * @var bool
+     */
     protected $enabled;
 
+    /**
+     * @var ContextInterface
+     */
     protected $context;
 
     /**
@@ -156,7 +174,7 @@ abstract class Tag implements TagInterface
     }
 
     /**
-     * @param ContextInterface $context
+     * {@inheritdoc}
      */
     public function setContext(ContextInterface $context)
     {
@@ -164,7 +182,7 @@ abstract class Tag implements TagInterface
     }
 
     /**
-     * @return ContextInterface
+     * {@inheritdoc}
      */
     public function getContext()
     {

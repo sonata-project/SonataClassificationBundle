@@ -28,6 +28,9 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
      */
     protected $categories;
 
+    /**
+     * @var ContextManagerInterface
+     */
     protected $contextManager;
 
     /**
@@ -108,6 +111,8 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
     }
 
     /**
+     * @param bool|true $loadChildren
+     *
      * @return CategoryInterface[]
      */
     public function getRootCategories($loadChildren = true)
@@ -131,7 +136,7 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
     }
 
     /**
-     * @param ContextInterface $context
+     * @param ContextInterface|null $context
      *
      * @return array
      */
@@ -145,7 +150,7 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
     }
 
     /**
-     * @param $context
+     * @param $contextCode
      *
      * @return ContextInterface
      */

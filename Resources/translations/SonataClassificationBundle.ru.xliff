@@ -16,11 +16,11 @@
             </trans-unit>
             <trans-unit id="label_collections">
                 <source>label_collections</source>
-                <target>Колекции</target>
+                <target>Коллекции</target>
             </trans-unit>
             <trans-unit id="breadcrumb.link_collection_list">
                 <source>breadcrumb.link_collection_list</source>
-                <target>Колекции</target>
+                <target>Коллекции</target>
             </trans-unit>
             <trans-unit id="breadcrumb.link_category_list">
                 <source>breadcrumb.link_category_list</source>

@@ -52,6 +52,7 @@ class CategorySelectorType extends AbstractType
             'choice_list'       => function (Options $opts, $previousValue) use ($that) {
                 return new SimpleChoiceList($that->getChoices($opts));
             },
+            'choices_as_values' => true,
         ));
     }
 

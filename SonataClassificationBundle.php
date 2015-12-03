@@ -25,15 +25,15 @@ class SonataClassificationBundle extends Bundle
     }
 
     /**
-     * Register form mapping information
+     * Register form mapping information.
      */
     public function registerFormMapping()
     {
         FormHelper::registerFormTypeMapping(array(
-            'sonata_classification_api_form_category'   => 'Sonata\CoreBundle\Form\Type\DoctrineORMSerializationType',
-            'sonata_classification_api_form_collection' => 'Sonata\CoreBundle\Form\Type\DoctrineORMSerializationType',
-            'sonata_classification_api_form_tag'        => 'Sonata\CoreBundle\Form\Type\DoctrineORMSerializationType',
-            'sonata_classification_api_form_context'    => 'Sonata\CoreBundle\Form\Type\DoctrineORMSerializationType',
+            'sonata_classification_api_form_category'   => 'Sonata\ClassificationBundle\Form\Type\ApiCategoryType',
+            'sonata_classification_api_form_collection' => 'Sonata\ClassificationBundle\Form\Type\ApiCollectionType',
+            'sonata_classification_api_form_tag'        => 'Sonata\ClassificationBundle\Form\Type\ApiTagType',
+            'sonata_classification_api_form_context'    => 'Sonata\ClassificationBundle\Form\Type\ApiContextType',
             'sonata_category_selector'                  => 'Sonata\ClassificationBundle\Form\Type\CategorySelectorType',
         ));
     }

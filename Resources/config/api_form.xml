@@ -5,7 +5,7 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="sonata.classification.api.form.type.category" class="Sonata\CoreBundle\Form\Type\DoctrineORMSerializationType">
+        <service id="sonata.classification.api.form.type.category" class="Sonata\ClassificationBundle\Form\Type\ApiCategoryType">
             <tag name="form.type" alias="sonata_classification_api_form_category" />
 
             <argument type="service" id="jms_serializer.metadata_factory" />
@@ -15,7 +15,7 @@
             <argument>sonata_api_write</argument>
         </service>
 
-        <service id="sonata.classification.api.form.type.collection" class="Sonata\CoreBundle\Form\Type\DoctrineORMSerializationType">
+        <service id="sonata.classification.api.form.type.collection" class="Sonata\ClassificationBundle\Form\Type\ApiCollectionType">
             <tag name="form.type" alias="sonata_classification_api_form_collection" />
 
             <argument type="service" id="jms_serializer.metadata_factory" />
@@ -25,7 +25,7 @@
             <argument>sonata_api_write</argument>
         </service>
 
-        <service id="sonata.classification.api.form.type.tag" class="Sonata\CoreBundle\Form\Type\DoctrineORMSerializationType">
+        <service id="sonata.classification.api.form.type.tag" class="Sonata\ClassificationBundle\Form\Type\ApiTagType">
             <tag name="form.type" alias="sonata_classification_api_form_tag" />
 
             <argument type="service" id="jms_serializer.metadata_factory" />
@@ -35,7 +35,7 @@
             <argument>sonata_api_write</argument>
         </service>
 
-        <service id="sonata.classification.api.form.type.context" class="Sonata\CoreBundle\Form\Type\DoctrineORMSerializationType">
+        <service id="sonata.classification.api.form.type.context" class="Sonata\ClassificationBundle\Form\Type\ApiContextType">
             <tag name="form.type" alias="sonata_classification_api_form_context" />
 
             <argument type="service" id="jms_serializer.metadata_factory" />

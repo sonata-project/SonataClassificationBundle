@@ -61,7 +61,7 @@ class CollectionControllerTest extends \PHPUnit_Framework_TestCase
         $collectionManager->expects($this->once())->method('save')->will($this->returnValue($collection));
 
         $form = $this->getMockBuilder('Symfony\Component\Form\Form')->disableOriginalConstructor()->getMock();
-        $form->expects($this->once())->method('bind');
+        $form->expects($this->once())->method('handleRequest');
         $form->expects($this->once())->method('isValid')->will($this->returnValue(true));
         $form->expects($this->once())->method('getData')->will($this->returnValue($collection));
         $form->expects($this->once())->method('all')->will($this->returnValue(array()));
@@ -82,7 +82,7 @@ class CollectionControllerTest extends \PHPUnit_Framework_TestCase
         $collectionManager->expects($this->never())->method('save')->will($this->returnValue($collectionManager));
 
         $form = $this->getMockBuilder('Symfony\Component\Form\Form')->disableOriginalConstructor()->getMock();
-        $form->expects($this->once())->method('bind');
+        $form->expects($this->once())->method('handleRequest');
         $form->expects($this->once())->method('isValid')->will($this->returnValue(false));
         $form->expects($this->once())->method('all')->will($this->returnValue(array()));
 
@@ -103,7 +103,7 @@ class CollectionControllerTest extends \PHPUnit_Framework_TestCase
         $collectionManager->expects($this->once())->method('save')->will($this->returnValue($collection));
 
         $form = $this->getMockBuilder('Symfony\Component\Form\Form')->disableOriginalConstructor()->getMock();
-        $form->expects($this->once())->method('bind');
+        $form->expects($this->once())->method('handleRequest');
         $form->expects($this->once())->method('isValid')->will($this->returnValue(true));
         $form->expects($this->once())->method('getData')->will($this->returnValue($collection));
         $form->expects($this->once())->method('all')->will($this->returnValue(array()));
@@ -125,7 +125,7 @@ class CollectionControllerTest extends \PHPUnit_Framework_TestCase
         $collectionManager->expects($this->never())->method('save')->will($this->returnValue($collection));
 
         $form = $this->getMockBuilder('Symfony\Component\Form\Form')->disableOriginalConstructor()->getMock();
-        $form->expects($this->once())->method('bind');
+        $form->expects($this->once())->method('handleRequest');
         $form->expects($this->once())->method('isValid')->will($this->returnValue(false));
         $form->expects($this->once())->method('all')->will($this->returnValue(array()));
 

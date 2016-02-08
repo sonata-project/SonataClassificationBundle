@@ -249,7 +249,7 @@ class TagController
 
         FormHelper::removeFields($request->request->all(), $form);
 
-        $form->bind($request);
+        $form->handleRequest($request);
 
         if ($form->isValid()) {
             $tag = $form->getData();

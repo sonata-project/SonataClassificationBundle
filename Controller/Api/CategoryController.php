@@ -250,7 +250,7 @@ class CategoryController
 
         FormHelper::removeFields($request->request->all(), $form);
 
-        $form->bind($request);
+        $form->handleRequest($request);
 
         if ($form->isValid()) {
             $category = $form->getData();

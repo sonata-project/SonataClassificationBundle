@@ -61,7 +61,7 @@ class ContextControllerTest extends \PHPUnit_Framework_TestCase
         $contextManager->expects($this->once())->method('save')->will($this->returnValue($context));
 
         $form = $this->getMockBuilder('Symfony\Component\Form\Form')->disableOriginalConstructor()->getMock();
-        $form->expects($this->once())->method('bind');
+        $form->expects($this->once())->method('handleRequest');
         $form->expects($this->once())->method('isValid')->will($this->returnValue(true));
         $form->expects($this->once())->method('getData')->will($this->returnValue($context));
         $form->expects($this->once())->method('all')->will($this->returnValue(array()));
@@ -80,7 +80,7 @@ class ContextControllerTest extends \PHPUnit_Framework_TestCase
         $contextManager->expects($this->never())->method('save')->will($this->returnValue($contextManager));
 
         $form = $this->getMockBuilder('Symfony\Component\Form\Form')->disableOriginalConstructor()->getMock();
-        $form->expects($this->once())->method('bind');
+        $form->expects($this->once())->method('handleRequest');
         $form->expects($this->once())->method('isValid')->will($this->returnValue(false));
         $form->expects($this->once())->method('all')->will($this->returnValue(array()));
 
@@ -101,7 +101,7 @@ class ContextControllerTest extends \PHPUnit_Framework_TestCase
         $contextManager->expects($this->once())->method('save')->will($this->returnValue($context));
 
         $form = $this->getMockBuilder('Symfony\Component\Form\Form')->disableOriginalConstructor()->getMock();
-        $form->expects($this->once())->method('bind');
+        $form->expects($this->once())->method('handleRequest');
         $form->expects($this->once())->method('isValid')->will($this->returnValue(true));
         $form->expects($this->once())->method('getData')->will($this->returnValue($context));
         $form->expects($this->once())->method('all')->will($this->returnValue(array()));
@@ -123,7 +123,7 @@ class ContextControllerTest extends \PHPUnit_Framework_TestCase
         $contextManager->expects($this->never())->method('save')->will($this->returnValue($context));
 
         $form = $this->getMockBuilder('Symfony\Component\Form\Form')->disableOriginalConstructor()->getMock();
-        $form->expects($this->once())->method('bind');
+        $form->expects($this->once())->method('handleRequest');
         $form->expects($this->once())->method('isValid')->will($this->returnValue(false));
         $form->expects($this->once())->method('all')->will($this->returnValue(array()));
 

@@ -249,7 +249,7 @@ class ContextController
 
         FormHelper::removeFields($request->request->all(), $form);
 
-        $form->bind($request);
+        $form->handleRequest($request);
 
         if ($form->isValid()) {
             $context = $form->getData();

@@ -249,7 +249,7 @@ class CollectionController
 
         FormHelper::removeFields($request->request->all(), $form);
 
-        $form->bind($request);
+        $form->handleRequest($request);
 
         if ($form->isValid()) {
             $collection = $form->getData();

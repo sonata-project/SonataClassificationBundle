@@ -61,7 +61,7 @@ class CategoryControllerTest extends \PHPUnit_Framework_TestCase
         $categoryManager->expects($this->once())->method('save')->will($this->returnValue($category));
 
         $form = $this->getMockBuilder('Symfony\Component\Form\Form')->disableOriginalConstructor()->getMock();
-        $form->expects($this->once())->method('bind');
+        $form->expects($this->once())->method('handleRequest');
         $form->expects($this->once())->method('isValid')->will($this->returnValue(true));
         $form->expects($this->once())->method('getData')->will($this->returnValue($category));
         $form->expects($this->once())->method('all')->will($this->returnValue(array()));
@@ -80,7 +80,7 @@ class CategoryControllerTest extends \PHPUnit_Framework_TestCase
         $categoryManager->expects($this->never())->method('save')->will($this->returnValue($categoryManager));
 
         $form = $this->getMockBuilder('Symfony\Component\Form\Form')->disableOriginalConstructor()->getMock();
-        $form->expects($this->once())->method('bind');
+        $form->expects($this->once())->method('handleRequest');
         $form->expects($this->once())->method('isValid')->will($this->returnValue(false));
         $form->expects($this->once())->method('all')->will($this->returnValue(array()));
 
@@ -101,7 +101,7 @@ class CategoryControllerTest extends \PHPUnit_Framework_TestCase
         $categoryManager->expects($this->once())->method('save')->will($this->returnValue($category));
 
         $form = $this->getMockBuilder('Symfony\Component\Form\Form')->disableOriginalConstructor()->getMock();
-        $form->expects($this->once())->method('bind');
+        $form->expects($this->once())->method('handleRequest');
         $form->expects($this->once())->method('isValid')->will($this->returnValue(true));
         $form->expects($this->once())->method('getData')->will($this->returnValue($category));
         $form->expects($this->once())->method('all')->will($this->returnValue(array()));
@@ -123,7 +123,7 @@ class CategoryControllerTest extends \PHPUnit_Framework_TestCase
         $categoryManager->expects($this->never())->method('save')->will($this->returnValue($category));
 
         $form = $this->getMockBuilder('Symfony\Component\Form\Form')->disableOriginalConstructor()->getMock();
-        $form->expects($this->once())->method('bind');
+        $form->expects($this->once())->method('handleRequest');
         $form->expects($this->once())->method('isValid')->will($this->returnValue(false));
         $form->expects($this->once())->method('all')->will($this->returnValue(array()));
 

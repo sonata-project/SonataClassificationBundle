@@ -159,12 +159,16 @@ class CategoryAdmin extends Admin
     {
         $listMapper
             ->addIdentifier('name')
-            ->add('context')
+            ->add('context', null, array(
+                'sortable' => 'context.name',
+            ))
             ->add('slug')
             ->add('description')
             ->add('enabled', null, array('editable' => true))
             ->add('position')
-            ->add('parent')
+            ->add('parent', null, array(
+                'sortable' => 'parent.name',
+            ))
         ;
     }
 

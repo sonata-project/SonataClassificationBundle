@@ -203,7 +203,7 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
         }
 
         foreach ($categories as $pos => $category) {
-            if ($category->getParent() == null) {
+            if (null === $category->getParent()) {
                 $root = $category;
             }
 

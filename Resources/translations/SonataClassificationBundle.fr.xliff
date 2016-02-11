@@ -28,7 +28,7 @@
             </trans-unit>
             <trans-unit id="breadcrumb.link_category_tree">
                 <source>breadcrumb.link_category_tree</source>
-                <target>Arbre des catégories</target>
+                <target>Catégorie</target>
             </trans-unit>
             <trans-unit id="list.label_name">
                 <source>list.label_name</source>
@@ -157,10 +157,6 @@
             <trans-unit id="classification.tree_mode">
                 <source>classification.tree_mode</source>
                 <target>Arbre</target>
-            </trans-unit>
-            <trans-unit id="breadcrumb.link_category_tree">
-                <source>breadcrumb.link_category_tree</source>
-                <target>Catégorie</target>
             </trans-unit>
             <trans-unit id="active">
                 <source>active</source>

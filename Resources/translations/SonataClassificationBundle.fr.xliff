@@ -158,6 +158,10 @@
                 <source>classification.tree_mode</source>
                 <target>Arbre</target>
             </trans-unit>
+            <trans-unit id="no_tag_found">
+                <source>no_tag_found</source>
+                <target>Aucun tag trouvé</target>
+            </trans-unit>
             <trans-unit id="breadcrumb.link_category_tree">
                 <source>breadcrumb.link_category_tree</source>
                 <target>Catégorie</target>

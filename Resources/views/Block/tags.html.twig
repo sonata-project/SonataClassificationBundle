@@ -1,0 +1,35 @@
+{#
+
+This file is part of the Sonata package.
+
+(c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+
+#}
+{% extends sonata_block.templates.block_base %}
+
+{% block block %}
+    <div class="sonata-news-block-recent-post box box-primary">
+        <div class="box-header with-border">
+            <h3 class="box-title">
+                <i class="fa fa-tags"></i> {{ settings.title }}
+            </h3>
+        </div>
+
+        <div class="box-body">
+            {% sonata_template_box 'This is the tags block.' %}
+
+            <ul class="list-group">
+                {% for tag in pager.getResults() %}
+                    <li class="list-group-item">
+                        <a href="{{ url('sonata_news_tag', { 'tag': tag.name }) }}">{{ tag.name }}</a>
+                    </li>
+                {% else %}
+                    <li class="list-group-item">{{ 'no_tag_found'|trans({}, 'SonataClassificationBundle') }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endblock %}

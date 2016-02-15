@@ -1,0 +1,163 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="ja" datatype="plaintext" original="" >
+        <body>
+            <trans-unit id="sonata_classification">
+                <source>sonata_classification</source>
+                <target>分類</target>
+            </trans-unit>
+            <trans-unit id="label_categories">
+                <source>label_categories</source>
+                <target>カテゴリ</target>
+            </trans-unit>
+            <trans-unit id="label_tags">
+                <source>label_tags</source>
+                <target>タグ</target>
+            </trans-unit>
+            <trans-unit id="label_collections">
+                <source>label_collections</source>
+                <target>コレクション</target>
+            </trans-unit>
+            <trans-unit id="breadcrumb.link_collection_list">
+                <source>breadcrumb.link_collection_list</source>
+                <target>コレクション</target>
+            </trans-unit>
+            <trans-unit id="breadcrumb.link_category_list">
+                <source>breadcrumb.link_category_list</source>
+                <target>カテゴリ</target>
+            </trans-unit>
+            <trans-unit id="list.label_name">
+                <source>list.label_name</source>
+                <target>名前</target>
+            </trans-unit>
+            <trans-unit id="list.label_slug">
+                <source>list.label_slug</source>
+                <target>Slug</target>
+            </trans-unit>
+            <trans-unit id="list.label_description">
+                <source>list.label_description</source>
+                <target>説明</target>
+            </trans-unit>
+            <trans-unit id="list.label_enabled">
+                <source>list.label_enabled</source>
+                <target>Enabled</target>
+            </trans-unit>
+            <trans-unit id="filter.label_name">
+                <source>filter.label_name</source>
+                <target>名前</target>
+            </trans-unit>
+            <trans-unit id="filter.label_enabled">
+                <source>filter.label_enabled</source>
+                <target>Enabled</target>
+            </trans-unit>
+            <trans-unit id="form.label_name">
+                <source>form.label_name</source>
+                <target>名前</target>
+            </trans-unit>
+            <trans-unit id="form.label_description">
+                <source>form.label_description</source>
+                <target>説明</target>
+            </trans-unit>
+            <trans-unit id="form.label_enabled">
+                <source>form.label_enabled</source>
+                <target>Enabled</target>
+            </trans-unit>
+            <trans-unit id="form.label_slug">
+                <source>form.label_slug</source>
+                <target>Slug</target>
+            </trans-unit>
+            <trans-unit id="breadcrumb.link_tag_list">
+                <source>breadcrumb.link_tag_list</source>
+                <target>タグ</target>
+            </trans-unit>
+            <trans-unit id="form.label_created_at">
+                <source>form.label_created_at</source>
+                <target>作成日時</target>
+            </trans-unit>
+            <trans-unit id="form.label_updated_at">
+                <source>form.label_updated_at</source>
+                <target>更新日時</target>
+            </trans-unit>
+            <trans-unit id="list.label_created_at">
+                <source>list.label_created_at</source>
+                <target>作成日時</target>
+            </trans-unit>
+            <trans-unit id="list.label_updated_at">
+                <source>list.label_updated_at</source>
+                <target>更新日時</target>
+            </trans-unit>
+            <trans-unit id="form.label_position">
+                <source>form.label_position</source>
+                <target>ポジション</target>
+            </trans-unit>
+            <trans-unit id="form.label_parent">
+                <source>form.label_parent</source>
+                <target>親</target>
+            </trans-unit>
+            <trans-unit id="list.label_position">
+                <source>list.label_position</source>
+                <target>ポジション</target>
+            </trans-unit>
+            <trans-unit id="list.label_parent">
+                <source>list.label_parent</source>
+                <target>親</target>
+            </trans-unit>
+            <trans-unit id="filter.label_parent">
+                <source>filter.label_parent</source>
+                <target>親</target>
+            </trans-unit>
+            <trans-unit id="form.label_media">
+                <source>form.label_media</source>
+                <target>メディア</target>
+            </trans-unit>
+            <trans-unit id="breadcrumb.link_context_list">
+                <source>breadcrumb.link_context_list</source>
+                <target>コンテキスト</target>
+            </trans-unit>
+            <trans-unit id="list.label_id">
+                <source>list.label_id</source>
+                <target>コード</target>
+            </trans-unit>
+            <trans-unit id="filter.label_id">
+                <source>filter.label_id</source>
+                <target>コード</target>
+            </trans-unit>
+            <trans-unit id="label_contexts">
+                <source>label_contexts</source>
+                <target>コンテキスト</target>
+            </trans-unit>
+            <trans-unit id="form.label_id">
+                <source>form.label_id</source>
+                <target>コード</target>
+            </trans-unit>
+            <trans-unit id="filter.label_context">
+                <source>filter.label_context</source>
+                <target>コンテキスト</target>
+            </trans-unit>
+            <trans-unit id="list.label_context">
+                <source>list.label_context</source>
+                <target>コンテキスト</target>
+            </trans-unit>
+            <trans-unit id="form.label_context">
+                <source>form.label_context</source>
+                <target>コンテキスト</target>
+            </trans-unit>
+            <trans-unit id="tree_catalog_title">
+                <source>tree_catalog_title</source>
+                <target>カテゴリ</target>
+            </trans-unit>
+            <trans-unit id="element.tree_site_label">
+                <source>element.tree_site_label</source>
+                <target>カテゴリ</target>
+            </trans-unit>
+            <trans-unit id="classification.list_mode">
+                <source>classification.list_mode</source>
+                <target>リスト</target>
+            </trans-unit>
+            <trans-unit id="classification.tree_mode">
+                <source>classification.tree_mode</source>
+                <target>ツリー</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

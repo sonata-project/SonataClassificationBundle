@@ -11,8 +11,8 @@ Advanced Configuration
           tag:          Application\Sonata\ClassificationBundle\Entity\Tag
           category:     Application\Sonata\ClassificationBundle\Entity\Category
           collection:   Application\Sonata\ClassificationBundle\Entity\Collection
-          media:        Application\Sonata\MediaBundle\Entity\Collection
-          context:      Application\Sonata\ClassificationBundle\Entity\Collection
+          media:        Application\Sonata\MediaBundle\Entity\Media
+          context:      Application\Sonata\ClassificationBundle\Entity\Context
         
       admin:
           tag:

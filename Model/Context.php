@@ -39,6 +39,11 @@ abstract class Context implements ContextInterface
     protected $enabled;
 
     /**
+     * @var string
+     */
+    protected $slug;
+    
+    /**
      * {@inheritdoc}
      */
     public function setName($name)

@@ -72,6 +72,11 @@ abstract class Category implements CategoryInterface
     protected $context;
 
     /**
+     * @var int
+     */
+    protected $count;
+    
+    /**
      * {@inheritdoc}
      */
     public function setName($name)

@@ -37,11 +37,6 @@ abstract class Context implements ContextInterface
      * @var bool
      */
     protected $enabled;
-
-    /**
-     * @var string
-     */
-    protected $slug;
     
     /**
      * {@inheritdoc}

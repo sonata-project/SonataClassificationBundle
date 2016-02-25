@@ -70,7 +70,7 @@ abstract class Category implements CategoryInterface
      * @var ContextInterface
      */
     protected $context;
-
+    
     /**
      * {@inheritdoc}
      */

@@ -37,7 +37,7 @@ abstract class Context implements ContextInterface
      * @var bool
      */
     protected $enabled;
-    
+
     /**
      * {@inheritdoc}
      */

@@ -7,7 +7,6 @@
     <mapped-superclass name="Sonata\ClassificationBundle\Document\BaseContext">
 
         <field name="enabled"       type="boolean"      fieldName="enabled" />
-        <field name="slug"          type="string"       fieldName="slug"    />
 
         <field name="createdAt"     type="timestamp"    fieldName="createdAt" />
         <field name="updatedAt"     type="timestamp"    fieldName="updatedAt" />

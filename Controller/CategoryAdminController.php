@@ -32,7 +32,7 @@ class CategoryAdminController extends Controller
     public function listAction(Request $request = null)
     {
         if (!$request->get('filter') && !$request->get('filters')) {
-            return new RedirectResponse($this->admin->generateUrl('tree'));
+            return new RedirectResponse($this->admin->generateUrl('tree', $request->query->all()));
         }
 
         if ($listMode = $request->get('_list_mode')) {

@@ -26,7 +26,7 @@ file that was distributed with this source code.
                     <i class="text-muted">{{ element.description }}</i>
                     {#<a class="label label-default pull-right" href="{{ admin.generateObjectUrl('edit', element) }}">edit <i class="fa fa-magic"></i></a>#}
                     {% if element.enabled %}<span class="label label-success pull-right"><i class="fa fa-check"></i> {{ admin.trans('active', {}, admin.translationDomain) }}</span>{% endif %}
-                    {% if not element.enabled %}<span class="label label-danger pull-right"><i class="fa fa-times"> {{ admin.trans('disabled', {}, admin.translationDomain) }}</i></span>{% endif %}
+                    {% if not element.enabled %}<span class="label label-danger pull-right"><i class="fa fa-times"></i> {{ admin.trans('disabled', {}, admin.translationDomain) }}</span>{% endif %}
                 </div>
 
                 {% if element.children|length %}

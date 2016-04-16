@@ -170,6 +170,34 @@
                 <source>disabled</source>
                 <target>disabled</target>
             </trans-unit>
+            <trans-unit id="form.label_category">
+                <source>form.label_category</source>
+                <target>Kategória</target>
+            </trans-unit>
+            <trans-unit id="form.label_collection">
+                <source>form.label_collection</source>
+                <target>Gyűjtemény</target>
+            </trans-unit>
+            <trans-unit id="form.label_tag">
+                <source>form.label_tag</source>
+                <target>Címke</target>
+            </trans-unit>
+            <trans-unit id="form.label_title">
+                <source>form.label_title</source>
+                <target>Cím</target>
+            </trans-unit>
+            <trans-unit id="no_collections_found">
+                <source>no_collections_found</source>
+                <target>Gyűjtemény nem található</target>
+            </trans-unit>
+            <trans-unit id="no_categories_found">
+                <source>no_categories_found</source>
+                <target>Kategória nem található</target>
+            </trans-unit>
+            <trans-unit id="no_tags_found">
+                <source>no_tags_found</source>
+                <target>Címke nem található</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

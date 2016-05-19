@@ -101,3 +101,9 @@ Installation
                     mappings:
                         ApplicationSonataClassificationBundle: ~
                         # ...
+
+* Update the schema:
+
+.. code-block:: bash
+
+    php bin/console doctrine:schema:update --force

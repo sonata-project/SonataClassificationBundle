@@ -11,12 +11,11 @@
 
 namespace Sonata\ClassificationBundle\Admin;
 
-use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 
-class CollectionAdmin extends Admin
+class CollectionAdmin extends ContextAwareAdmin
 {
     protected $formOptions = array(
         'cascade_validation' => true,

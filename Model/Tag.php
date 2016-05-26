@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata project.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -42,6 +42,14 @@ abstract class Tag implements TagInterface
      * @var ContextInterface
      */
     protected $context;
+
+    /**
+     * {@inheritdoc}
+     */
+    public function __toString()
+    {
+        return $this->getName() ?: 'n/a';
+    }
 
     /**
      * {@inheritdoc}
@@ -163,14 +171,6 @@ abstract class Tag implements TagInterface
         }
 
         return $text;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function __toString()
-    {
-        return $this->getName() ?: 'n/a';
     }
 
     /**

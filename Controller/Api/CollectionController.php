@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -51,7 +51,7 @@ class CollectionController
     public function __construct(CollectionManagerInterface $collectionManager, FormFactoryInterface $formFactory)
     {
         $this->collectionManager = $collectionManager;
-        $this->formFactory       = $formFactory;
+        $this->formFactory = $formFactory;
     }
 
     /**
@@ -74,7 +74,7 @@ class CollectionController
      */
     public function getCollectionsAction(ParamFetcherInterface $paramFetcher)
     {
-        $page  = $paramFetcher->get('page');
+        $page = $paramFetcher->get('page');
         $count = $paramFetcher->get('count');
 
         /** @var PagerInterface $collectionsPager */

@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -51,7 +51,7 @@ class CategoryController
     public function __construct(CategoryManagerInterface $categoryManager, FormFactoryInterface $formFactory)
     {
         $this->categoryManager = $categoryManager;
-        $this->formFactory     = $formFactory;
+        $this->formFactory = $formFactory;
     }
 
     /**
@@ -75,7 +75,7 @@ class CategoryController
      */
     public function getCategoriesAction(ParamFetcherInterface $paramFetcher)
     {
-        $page  = $paramFetcher->get('page');
+        $page = $paramFetcher->get('page');
         $count = $paramFetcher->get('count');
 
         /** @var PagerInterface $categoriesPager */

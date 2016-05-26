@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of the Sonata project.
+ * This file is part of the Sonata Project package.
  *
- * (c) Sonata Project <https://github.com/sonata-project/SonataClassificationBundle/>
+ * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -74,6 +74,14 @@ abstract class Category implements CategoryInterface
     /**
      * {@inheritdoc}
      */
+    public function __toString()
+    {
+        return $this->getName() ?: 'n/a';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function setName($name)
     {
         $this->name = $name;
@@ -135,14 +143,6 @@ abstract class Category implements CategoryInterface
     public function getDescription()
     {
         return $this->description;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function __toString()
-    {
-        return $this->getName() ?: 'n/a';
     }
 
     public function prePersist()

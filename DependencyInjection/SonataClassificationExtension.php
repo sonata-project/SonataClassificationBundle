@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata project.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -64,16 +64,16 @@ class SonataClassificationExtension extends Extension
     public function configureClass($config, ContainerBuilder $container)
     {
         // admin configuration
-        $container->setParameter('sonata.classification.admin.tag.entity',        $config['class']['tag']);
-        $container->setParameter('sonata.classification.admin.category.entity',   $config['class']['category']);
+        $container->setParameter('sonata.classification.admin.tag.entity', $config['class']['tag']);
+        $container->setParameter('sonata.classification.admin.category.entity', $config['class']['category']);
         $container->setParameter('sonata.classification.admin.collection.entity', $config['class']['collection']);
-        $container->setParameter('sonata.classification.admin.context.entity',    $config['class']['context']);
+        $container->setParameter('sonata.classification.admin.context.entity', $config['class']['context']);
 
         // manager configuration
-        $container->setParameter('sonata.classification.manager.tag.entity',        $config['class']['tag']);
-        $container->setParameter('sonata.classification.manager.category.entity',   $config['class']['category']);
+        $container->setParameter('sonata.classification.manager.tag.entity', $config['class']['tag']);
+        $container->setParameter('sonata.classification.manager.category.entity', $config['class']['category']);
         $container->setParameter('sonata.classification.manager.collection.entity', $config['class']['collection']);
-        $container->setParameter('sonata.classification.manager.context.entity',    $config['class']['context']);
+        $container->setParameter('sonata.classification.manager.context.entity', $config['class']['context']);
     }
 
     /**
@@ -82,21 +82,21 @@ class SonataClassificationExtension extends Extension
      */
     public function configureAdmin($config, ContainerBuilder $container)
     {
-        $container->setParameter('sonata.classification.admin.category.class',                $config['admin']['category']['class']);
-        $container->setParameter('sonata.classification.admin.category.controller',           $config['admin']['category']['controller']);
-        $container->setParameter('sonata.classification.admin.category.translation_domain',   $config['admin']['category']['translation']);
+        $container->setParameter('sonata.classification.admin.category.class', $config['admin']['category']['class']);
+        $container->setParameter('sonata.classification.admin.category.controller', $config['admin']['category']['controller']);
+        $container->setParameter('sonata.classification.admin.category.translation_domain', $config['admin']['category']['translation']);
 
-        $container->setParameter('sonata.classification.admin.tag.class',                     $config['admin']['tag']['class']);
-        $container->setParameter('sonata.classification.admin.tag.controller',                $config['admin']['tag']['controller']);
-        $container->setParameter('sonata.classification.admin.tag.translation_domain',        $config['admin']['tag']['translation']);
+        $container->setParameter('sonata.classification.admin.tag.class', $config['admin']['tag']['class']);
+        $container->setParameter('sonata.classification.admin.tag.controller', $config['admin']['tag']['controller']);
+        $container->setParameter('sonata.classification.admin.tag.translation_domain', $config['admin']['tag']['translation']);
 
-        $container->setParameter('sonata.classification.admin.collection.class',              $config['admin']['collection']['class']);
-        $container->setParameter('sonata.classification.admin.collection.controller',         $config['admin']['collection']['controller']);
+        $container->setParameter('sonata.classification.admin.collection.class', $config['admin']['collection']['class']);
+        $container->setParameter('sonata.classification.admin.collection.controller', $config['admin']['collection']['controller']);
         $container->setParameter('sonata.classification.admin.collection.translation_domain', $config['admin']['collection']['translation']);
 
-        $container->setParameter('sonata.classification.admin.context.class',                 $config['admin']['context']['class']);
-        $container->setParameter('sonata.classification.admin.context.controller',            $config['admin']['context']['controller']);
-        $container->setParameter('sonata.classification.admin.context.translation_domain',    $config['admin']['context']['translation']);
+        $container->setParameter('sonata.classification.admin.context.class', $config['admin']['context']['class']);
+        $container->setParameter('sonata.classification.admin.context.controller', $config['admin']['context']['controller']);
+        $container->setParameter('sonata.classification.admin.context.translation_domain', $config['admin']['context']['translation']);
     }
 
     /**
@@ -113,50 +113,50 @@ class SonataClassificationExtension extends Extension
         $collector = DoctrineCollector::getInstance();
 
         $collector->addAssociation($config['class']['category'], 'mapOneToMany', array(
-            'fieldName'    => 'children',
+            'fieldName' => 'children',
             'targetEntity' => $config['class']['category'],
-            'cascade'      => array(
+            'cascade' => array(
                 'persist',
             ),
-            'mappedBy'      => 'parent',
+            'mappedBy' => 'parent',
             'orphanRemoval' => true,
-            'orderBy'       => array(
+            'orderBy' => array(
                 'position' => 'ASC',
             ),
         ));
 
         $collector->addAssociation($config['class']['category'], 'mapManyToOne', array(
-            'fieldName'    => 'parent',
+            'fieldName' => 'parent',
             'targetEntity' => $config['class']['category'],
-            'cascade'      => array(
+            'cascade' => array(
                 'persist',
                 'refresh',
                 'merge',
                 'detach',
             ),
-            'mappedBy'    => null,
-            'inversedBy'  => 'children',
+            'mappedBy' => null,
+            'inversedBy' => 'children',
             'joinColumns' => array(
                 array(
-                 'name'                 => 'parent_id',
+                 'name' => 'parent_id',
                  'referencedColumnName' => 'id',
-                 'onDelete'             => 'CASCADE',
+                 'onDelete' => 'CASCADE',
                 ),
             ),
             'orphanRemoval' => false,
         ));
 
         $collector->addAssociation($config['class']['category'], 'mapManyToOne', array(
-            'fieldName'    => 'context',
+            'fieldName' => 'context',
             'targetEntity' => $config['class']['context'],
-            'cascade'      => array(
+            'cascade' => array(
                 'persist',
             ),
-            'mappedBy'    => null,
-            'inversedBy'  => null,
+            'mappedBy' => null,
+            'inversedBy' => null,
             'joinColumns' => array(
                 array(
-                    'name'                 => 'context',
+                    'name' => 'context',
                     'referencedColumnName' => 'id',
                 ),
             ),
@@ -164,16 +164,16 @@ class SonataClassificationExtension extends Extension
         ));
 
         $collector->addAssociation($config['class']['tag'], 'mapManyToOne', array(
-            'fieldName'    => 'context',
+            'fieldName' => 'context',
             'targetEntity' => $config['class']['context'],
-            'cascade'      => array(
+            'cascade' => array(
                 'persist',
             ),
-            'mappedBy'    => null,
-            'inversedBy'  => null,
+            'mappedBy' => null,
+            'inversedBy' => null,
             'joinColumns' => array(
                 array(
-                    'name'                 => 'context',
+                    'name' => 'context',
                     'referencedColumnName' => 'id',
                 ),
             ),
@@ -183,16 +183,16 @@ class SonataClassificationExtension extends Extension
         $collector->addUnique($config['class']['tag'], 'tag_context', array('slug', 'context'));
 
         $collector->addAssociation($config['class']['collection'], 'mapManyToOne', array(
-            'fieldName'    => 'context',
+            'fieldName' => 'context',
             'targetEntity' => $config['class']['context'],
-            'cascade'      => array(
+            'cascade' => array(
                 'persist',
             ),
-            'mappedBy'    => null,
-            'inversedBy'  => null,
+            'mappedBy' => null,
+            'inversedBy' => null,
             'joinColumns' => array(
                 array(
-                    'name'                 => 'context',
+                    'name' => 'context',
                     'referencedColumnName' => 'id',
                 ),
             ),
@@ -203,36 +203,36 @@ class SonataClassificationExtension extends Extension
 
         if (interface_exists('Sonata\MediaBundle\Model\MediaInterface')) {
             $collector->addAssociation($config['class']['collection'], 'mapManyToOne', array(
-                'fieldName'    => 'media',
+                'fieldName' => 'media',
                 'targetEntity' => $config['class']['media'],
-                'cascade'      => array(
+                'cascade' => array(
                     'persist',
                 ),
-                'mappedBy'    => null,
-                'inversedBy'  => null,
+                'mappedBy' => null,
+                'inversedBy' => null,
                 'joinColumns' => array(
                     array(
-                     'name'                 => 'media_id',
+                     'name' => 'media_id',
                      'referencedColumnName' => 'id',
-                     'onDelete'             => 'SET NULL',
+                     'onDelete' => 'SET NULL',
                     ),
                 ),
                 'orphanRemoval' => false,
             ));
 
             $collector->addAssociation($config['class']['category'], 'mapManyToOne', array(
-                'fieldName'    => 'media',
+                'fieldName' => 'media',
                 'targetEntity' => $config['class']['media'],
-                'cascade'      => array(
+                'cascade' => array(
                     'persist',
                 ),
-                'mappedBy'    => null,
-                'inversedBy'  => null,
+                'mappedBy' => null,
+                'inversedBy' => null,
                 'joinColumns' => array(
                     array(
-                     'name'                 => 'media_id',
+                     'name' => 'media_id',
                      'referencedColumnName' => 'id',
-                     'onDelete'             => 'SET NULL',
+                     'onDelete' => 'SET NULL',
                     ),
                 ),
                 'orphanRemoval' => false,

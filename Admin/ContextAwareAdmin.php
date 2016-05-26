@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -66,26 +66,10 @@ abstract class ContextAwareAdmin extends Admin
     /**
      * {@inheritdoc}
      */
-    protected function configureDatagridFilters(DatagridMapper $datagridMapper)
-    {
-        $options = array();
-
-        if (1 === $this->getPersistentParameter('hide_context')) {
-            $options['disabled'] = true;
-        }
-
-        $datagridMapper
-            ->add('context', null, array(), null, $options)
-        ;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getPersistentParameters()
     {
         $parameters = array(
-            'context'      => '',
+            'context' => '',
             'hide_context' => $this->hasRequest() ? (int) $this->getRequest()->get('hide_context', 0) : 0,
         );
 
@@ -102,5 +86,21 @@ abstract class ContextAwareAdmin extends Admin
         }
 
         return $parameters;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function configureDatagridFilters(DatagridMapper $datagridMapper)
+    {
+        $options = array();
+
+        if (1 === $this->getPersistentParameter('hide_context')) {
+            $options['disabled'] = true;
+        }
+
+        $datagridMapper
+            ->add('context', null, array(), null, $options)
+        ;
     }
 }

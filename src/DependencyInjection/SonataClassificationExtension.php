@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Sonata\ClassificationBundle\DependencyInjection;
 
 use Sonata\EasyExtendsBundle\Mapper\DoctrineCollector;
-use Sonata\MediaBundle\Model\MediaInterface;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -109,7 +108,7 @@ class SonataClassificationExtension extends Extension
     public function registerDoctrineMapping(array $config): void
     {
         foreach ($config['class'] as $type => $class) {
-            if ('media' !== $type && !class_exists($class)) {
+            if (!class_exists($class)) {
                 return;
             }
         }
@@ -207,43 +206,5 @@ class SonataClassificationExtension extends Extension
         ]);
 
         $collector->addUnique($config['class']['collection'], 'tag_collection', ['slug', 'context']);
-
-        if (interface_exists(MediaInterface::class)) {
-            $collector->addAssociation($config['class']['collection'], 'mapManyToOne', [
-                'fieldName' => 'media',
-                'targetEntity' => $config['class']['media'],
-                'cascade' => [
-                    'persist',
-                ],
-                'mappedBy' => null,
-                'inversedBy' => null,
-                'joinColumns' => [
-                    [
-                     'name' => 'media_id',
-                     'referencedColumnName' => 'id',
-                     'onDelete' => 'SET NULL',
-                    ],
-                ],
-                'orphanRemoval' => false,
-            ]);
-
-            $collector->addAssociation($config['class']['category'], 'mapManyToOne', [
-                'fieldName' => 'media',
-                'targetEntity' => $config['class']['media'],
-                'cascade' => [
-                    'persist',
-                ],
-                'mappedBy' => null,
-                'inversedBy' => null,
-                'joinColumns' => [
-                    [
-                     'name' => 'media_id',
-                     'referencedColumnName' => 'id',
-                     'onDelete' => 'SET NULL',
-                    ],
-                ],
-                'orphanRemoval' => false,
-            ]);
-        }
     }
 }

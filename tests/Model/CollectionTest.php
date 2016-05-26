@@ -16,7 +16,6 @@ namespace Sonata\ClassificationBundle\Tests\Model;
 use PHPUnit\Framework\TestCase;
 use Sonata\ClassificationBundle\Model\Collection;
 use Sonata\ClassificationBundle\Model\ContextInterface;
-use Sonata\MediaBundle\Model\MediaInterface;
 
 /**
  * @author Dariusz Markowicz <dmarkowicz77@gmail.com>
@@ -30,9 +29,6 @@ class CollectionTest extends TestCase
         /** @var ContextInterface $context */
         $context = $this->createMock(ContextInterface::class);
 
-        /** @var MediaInterface $media */
-        $media = $this->createMock(MediaInterface::class);
-
         /** @var Collection $collection */
         $collection = $this->getMockForAbstractClass(Collection::class);
         $collection->setName('Hello World');
@@ -40,7 +36,6 @@ class CollectionTest extends TestCase
         $collection->setUpdatedAt($time);
         $collection->setEnabled(true);
         $collection->setDescription('My description');
-        $collection->setMedia($media);
         $collection->setContext($context);
 
         $this->assertSame('Hello World', $collection->getName());
@@ -50,7 +45,6 @@ class CollectionTest extends TestCase
         $this->assertSame($time, $collection->getUpdatedAt());
         $this->assertTrue($collection->getEnabled());
         $this->assertSame('My description', $collection->getDescription());
-        $this->assertSame($media, $collection->getMedia());
         $this->assertSame($context, $collection->getContext());
 
         $collection->setName('');

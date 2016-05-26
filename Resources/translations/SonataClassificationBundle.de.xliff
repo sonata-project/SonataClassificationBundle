@@ -170,6 +170,34 @@
                 <source>disabled</source>
                 <target>deaktiviert</target>
             </trans-unit>
+            <trans-unit id="form.label_category">
+                <source>form.label_category</source>
+                <target>Kategorie</target>
+            </trans-unit>
+            <trans-unit id="form.label_collection">
+                <source>form.label_collection</source>
+                <target>Sammlung</target>
+            </trans-unit>
+            <trans-unit id="form.label_tag">
+                <source>form.label_tag</source>
+                <target>Schlüsselwort</target>
+            </trans-unit>
+            <trans-unit id="form.label_title">
+                <source>form.label_title</source>
+                <target>Titel</target>
+            </trans-unit>
+            <trans-unit id="no_collections_found">
+                <source>no_collections_found</source>
+                <target>Es konnten keine Sammlungen gefunden werden.</target>
+            </trans-unit>
+            <trans-unit id="no_categories_found">
+                <source>no_categories_found</source>
+                <target>Es konnten keine Kategorien gefunden werden.</target>
+            </trans-unit>
+            <trans-unit id="no_tags_found">
+                <source>no_tags_found</source>
+                <target>Es konnten keine Schlüsselworte gefunden werden.</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -50,7 +50,7 @@ class TagController
      */
     public function __construct(TagManagerInterface $tagManager, FormFactoryInterface $formFactory)
     {
-        $this->tagManager  = $tagManager;
+        $this->tagManager = $tagManager;
         $this->formFactory = $formFactory;
     }
 
@@ -74,7 +74,7 @@ class TagController
      */
     public function getTagsAction(ParamFetcherInterface $paramFetcher)
     {
-        $page  = $paramFetcher->get('page');
+        $page = $paramFetcher->get('page');
         $count = $paramFetcher->get('count');
 
         /** @var PagerInterface $tagsPager */

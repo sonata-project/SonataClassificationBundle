@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -19,18 +19,6 @@ use Sonata\CoreBundle\Test\EntityManagerMockFactory;
  */
 class CategoryManagerTest extends \PHPUnit_Framework_TestCase
 {
-    protected function getCategoryManager($qbCallback)
-    {
-        $em = EntityManagerMockFactory::create($this, $qbCallback, array());
-
-        $registry = $this->getMock('Doctrine\Common\Persistence\ManagerRegistry');
-        $registry->expects($this->any())->method('getManagerForClass')->will($this->returnValue($em));
-
-        $contextManager = $this->getMock('Sonata\ClassificationBundle\Model\ContextManagerInterface');
-
-        return new CategoryManager('Sonata\PageBundle\Entity\BaseCategory', $registry, $contextManager);
-    }
-
     public function testGetPager()
     {
         $self = $this;
@@ -80,5 +68,17 @@ class CategoryManagerTest extends \PHPUnit_Framework_TestCase
                 'enabled' => false,
                 'context' => 'default',
             ), 1);
+    }
+
+    protected function getCategoryManager($qbCallback)
+    {
+        $em = EntityManagerMockFactory::create($this, $qbCallback, array());
+
+        $registry = $this->getMock('Doctrine\Common\Persistence\ManagerRegistry');
+        $registry->expects($this->any())->method('getManagerForClass')->will($this->returnValue($em));
+
+        $contextManager = $this->getMock('Sonata\ClassificationBundle\Model\ContextManagerInterface');
+
+        return new CategoryManager('Sonata\PageBundle\Entity\BaseCategory', $registry, $contextManager);
     }
 }

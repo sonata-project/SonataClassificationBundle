@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -50,7 +50,7 @@ class ContextController
      */
     public function __construct(ContextManagerInterface $contextManager, FormFactoryInterface $formFactory)
     {
-        $this->contextManager  = $contextManager;
+        $this->contextManager = $contextManager;
         $this->formFactory = $formFactory;
     }
 
@@ -74,7 +74,7 @@ class ContextController
      */
     public function getContextsAction(ParamFetcherInterface $paramFetcher)
     {
-        $page  = $paramFetcher->get('page');
+        $page = $paramFetcher->get('page');
         $count = $paramFetcher->get('count');
 
         /** @var PagerInterface $contextsPager */

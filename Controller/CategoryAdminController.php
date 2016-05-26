@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -51,9 +51,9 @@ class CategoryAdminController extends Controller
         $this->get('twig')->getExtension('form')->renderer->setTheme($formView, $this->admin->getFilterTheme());
 
         return $this->render($this->admin->getTemplate('list'), array(
-            'action'     => 'list',
-            'form'       => $formView,
-            'datagrid'   => $datagrid,
+            'action' => 'list',
+            'form' => $formView,
+            'datagrid' => $datagrid,
             'csrf_token' => $this->getCsrfToken('sonata.batch'),
         ));
     }
@@ -75,7 +75,7 @@ class CategoryAdminController extends Controller
         $rootCategories = $categoryManager->getRootCategories(false);
 
         if (!$currentContext) {
-            $mainCategory   = current($rootCategories);
+            $mainCategory = current($rootCategories);
             $currentContext = $mainCategory->getContext();
         } else {
             foreach ($rootCategories as $category) {
@@ -100,12 +100,12 @@ class CategoryAdminController extends Controller
         $this->get('twig')->getExtension('form')->renderer->setTheme($formView, $this->admin->getFilterTheme());
 
         return $this->render('SonataClassificationBundle:CategoryAdmin:tree.html.twig', array(
-            'action'           => 'tree',
-            'main_category'    => $mainCategory,
-            'root_categories'  => $rootCategories,
-            'current_context'  => $currentContext,
-            'form'             => $formView,
-            'csrf_token'       => $this->getCsrfToken('sonata.batch'),
+            'action' => 'tree',
+            'main_category' => $mainCategory,
+            'root_categories' => $rootCategories,
+            'current_context' => $currentContext,
+            'form' => $formView,
+            'csrf_token' => $this->getCsrfToken('sonata.batch'),
         ));
     }
 }

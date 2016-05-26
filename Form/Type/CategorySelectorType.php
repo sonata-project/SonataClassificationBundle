@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata project.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -47,9 +47,9 @@ class CategorySelectorType extends AbstractType
         $that = $this;
 
         $resolver->setDefaults(array(
-            'context'           => null,
-            'category'          => null,
-            'choice_list'       => function (Options $opts, $previousValue) use ($that) {
+            'context' => null,
+            'category' => null,
+            'choice_list' => function (Options $opts, $previousValue) use ($that) {
                 return new SimpleChoiceList($that->getChoices($opts));
             },
         ));
@@ -84,29 +84,6 @@ class CategorySelectorType extends AbstractType
     }
 
     /**
-     * @param CategoryInterface $category
-     * @param Options           $options
-     * @param array             $choices
-     * @param int               $level
-     */
-    private function childWalker(CategoryInterface $category, Options $options, array &$choices, $level = 2)
-    {
-        if ($category->getChildren() === null) {
-            return;
-        }
-
-        foreach ($category->getChildren() as $child) {
-            if ($options['category'] && $options['category']->getId() == $child->getId()) {
-                continue;
-            }
-
-            $choices[$child->getId()] = sprintf('%s %s', str_repeat('-', 1 * $level), $child);
-
-            $this->childWalker($child, $options, $choices, $level + 1);
-        }
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function getParent()
@@ -128,5 +105,28 @@ class CategorySelectorType extends AbstractType
     public function getName()
     {
         return $this->getBlockPrefix();
+    }
+
+    /**
+     * @param CategoryInterface $category
+     * @param Options           $options
+     * @param array             $choices
+     * @param int               $level
+     */
+    private function childWalker(CategoryInterface $category, Options $options, array &$choices, $level = 2)
+    {
+        if ($category->getChildren() === null) {
+            return;
+        }
+
+        foreach ($category->getChildren() as $child) {
+            if ($options['category'] && $options['category']->getId() == $child->getId()) {
+                continue;
+            }
+
+            $choices[$child->getId()] = sprintf('%s %s', str_repeat('-', 1 * $level), $child);
+
+            $this->childWalker($child, $options, $choices, $level + 1);
+        }
     }
 }

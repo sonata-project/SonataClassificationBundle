@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata project.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -37,6 +37,14 @@ abstract class Context implements ContextInterface
      * @var bool
      */
     protected $enabled;
+
+    /**
+     * {@inheritdoc}
+     */
+    public function __toString()
+    {
+        return $this->getName() ?: 'n/a';
+    }
 
     /**
      * {@inheritdoc}
@@ -113,13 +121,5 @@ abstract class Context implements ContextInterface
     public function setId($id)
     {
         $this->id = $id;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function __toString()
-    {
-        return $this->getName() ?: 'n/a';
     }
 }

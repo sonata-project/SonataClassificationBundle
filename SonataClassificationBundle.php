@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Sonata Project package.
+ *
+ * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Sonata\ClassificationBundle;
 
 use Sonata\CoreBundle\Form\FormHelper;
@@ -30,11 +39,11 @@ class SonataClassificationBundle extends Bundle
     public function registerFormMapping()
     {
         FormHelper::registerFormTypeMapping(array(
-            'sonata_classification_api_form_category'   => 'Sonata\ClassificationBundle\Form\Type\ApiCategoryType',
+            'sonata_classification_api_form_category' => 'Sonata\ClassificationBundle\Form\Type\ApiCategoryType',
             'sonata_classification_api_form_collection' => 'Sonata\ClassificationBundle\Form\Type\ApiCollectionType',
-            'sonata_classification_api_form_tag'        => 'Sonata\ClassificationBundle\Form\Type\ApiTagType',
-            'sonata_classification_api_form_context'    => 'Sonata\ClassificationBundle\Form\Type\ApiContextType',
-            'sonata_category_selector'                  => 'Sonata\ClassificationBundle\Form\Type\CategorySelectorType',
+            'sonata_classification_api_form_tag' => 'Sonata\ClassificationBundle\Form\Type\ApiTagType',
+            'sonata_classification_api_form_context' => 'Sonata\ClassificationBundle\Form\Type\ApiContextType',
+            'sonata_category_selector' => 'Sonata\ClassificationBundle\Form\Type\CategorySelectorType',
         ));
     }
 }

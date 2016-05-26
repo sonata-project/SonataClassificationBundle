@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata package.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -19,16 +19,6 @@ use Sonata\CoreBundle\Test\EntityManagerMockFactory;
  */
 class CollectionManagerTest extends \PHPUnit_Framework_TestCase
 {
-    protected function getCollectionManager($qbCallback)
-    {
-        $em = EntityManagerMockFactory::create($this, $qbCallback, array());
-
-        $registry = $this->getMock('Doctrine\Common\Persistence\ManagerRegistry');
-        $registry->expects($this->any())->method('getManagerForClass')->will($this->returnValue($em));
-
-        return new CollectionManager('Sonata\PageBundle\Entity\BaseCollection', $registry);
-    }
-
     public function testGetPager()
     {
         $self = $this;
@@ -64,5 +54,15 @@ class CollectionManagerTest extends \PHPUnit_Framework_TestCase
             ->getPager(array(
                 'enabled' => false,
             ), 1);
+    }
+
+    protected function getCollectionManager($qbCallback)
+    {
+        $em = EntityManagerMockFactory::create($this, $qbCallback, array());
+
+        $registry = $this->getMock('Doctrine\Common\Persistence\ManagerRegistry');
+        $registry->expects($this->any())->method('getManagerForClass')->will($this->returnValue($em));
+
+        return new CollectionManager('Sonata\PageBundle\Entity\BaseCollection', $registry);
     }
 }

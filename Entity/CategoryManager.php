@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sonata project.
+ * This file is part of the Sonata Project package.
  *
  * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
@@ -150,33 +150,35 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
     }
 
     /**
-     * @param $contextCode
-     *
-     * @return ContextInterface
+     * {@inheritdoc}
      */
-    private function getContext($contextCode)
+    public function getPager(array $criteria, $page, $limit = 10, array $sort = array())
     {
-        if (empty($contextCode)) {
-            $contextCode = ContextInterface::DEFAULT_CONTEXT;
+        $parameters = array();
+
+        $query = $this->getRepository()
+            ->createQueryBuilder('c')
+            ->select('c');
+
+        if (isset($criteria['context'])) {
+            $query->andWhere('c.context = :context');
+            $parameters['context'] = $criteria['context'];
         }
 
-        if ($contextCode instanceof ContextInterface) {
-            return $contextCode;
+        if (isset($criteria['enabled'])) {
+            $query->andWhere('c.enabled = :enabled');
+            $parameters['enabled'] = (bool) $criteria['enabled'];
         }
 
-        $context = $this->contextManager->find($contextCode);
+        $query->setParameters($parameters);
 
-        if (!$context instanceof ContextInterface) {
-            $context = $this->contextManager->create();
+        $pager = new Pager();
+        $pager->setMaxPerPage($limit);
+        $pager->setQuery(new ProxyQuery($query));
+        $pager->setPage($page);
+        $pager->init();
 
-            $context->setId($contextCode);
-            $context->setName($contextCode);
-            $context->setEnabled(true);
-
-            $this->contextManager->save($context);
-        }
-
-        return $context;
+        return $pager;
     }
 
     /**
@@ -229,34 +231,32 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
     }
 
     /**
-     * {@inheritdoc}
+     * @param $contextCode
+     *
+     * @return ContextInterface
      */
-    public function getPager(array $criteria, $page, $limit = 10, array $sort = array())
+    private function getContext($contextCode)
     {
-        $parameters = array();
-
-        $query = $this->getRepository()
-            ->createQueryBuilder('c')
-            ->select('c');
-
-        if (isset($criteria['context'])) {
-            $query->andWhere('c.context = :context');
-            $parameters['context'] = $criteria['context'];
+        if (empty($contextCode)) {
+            $contextCode = ContextInterface::DEFAULT_CONTEXT;
         }
 
-        if (isset($criteria['enabled'])) {
-            $query->andWhere('c.enabled = :enabled');
-            $parameters['enabled'] = (bool) $criteria['enabled'];
+        if ($contextCode instanceof ContextInterface) {
+            return $contextCode;
         }
 
-        $query->setParameters($parameters);
+        $context = $this->contextManager->find($contextCode);
 
-        $pager = new Pager();
-        $pager->setMaxPerPage($limit);
-        $pager->setQuery(new ProxyQuery($query));
-        $pager->setPage($page);
-        $pager->init();
+        if (!$context instanceof ContextInterface) {
+            $context = $this->contextManager->create();
 
-        return $pager;
+            $context->setId($contextCode);
+            $context->setName($contextCode);
+            $context->setEnabled(true);
+
+            $this->contextManager->save($context);
+        }
+
+        return $context;
     }
 }

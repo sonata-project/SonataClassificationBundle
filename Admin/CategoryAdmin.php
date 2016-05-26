@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of the Sonata project.
+ * This file is part of the Sonata Project package.
  *
- * (c) Sonata Project <https://github.com/sonata-project/SonataClassificationBundle/>
+ * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -48,11 +48,11 @@ class CategoryAdmin extends Admin
             if ($this->getSubject()->getParent() !== null || $this->getSubject()->getId() === null) { // root category cannot have a parent
                 $formMapper
                   ->add('parent', 'sonata_category_selector', array(
-                      'category'      => $this->getSubject() ?: null,
+                      'category' => $this->getSubject() ?: null,
                       'model_manager' => $this->getModelManager(),
-                      'class'         => $this->getClass(),
-                      'required'      => true,
-                      'context'       => $this->getSubject()->getContext(),
+                      'class' => $this->getClass(),
+                      'required' => true,
+                      'context' => $this->getSubject()->getContext(),
                     ));
             }
         }
@@ -67,7 +67,7 @@ class CategoryAdmin extends Admin
                 ))
                 ->add('position', 'integer', array(
                     'required' => false,
-                    'data'     => $position,
+                    'data' => $position,
                 ))
             ->end()
         ;
@@ -82,7 +82,7 @@ class CategoryAdmin extends Admin
                         array(
                             'link_parameters' => array(
                                 'provider' => 'sonata.media.provider.image',
-                                'context'  => 'sonata_category',
+                                'context' => 'sonata_category',
                             ),
                         )
                     )

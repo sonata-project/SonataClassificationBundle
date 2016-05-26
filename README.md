@@ -1,18 +1,28 @@
-Sonata Classification Bundle
-============================
+# Sonata Classification Bundle
 
-[![Build Status](https://secure.travis-ci.org/sonata-project/SonataClassificationBundle.png)](https://secure.travis-ci.org/#!/sonata-project/SonataClassificationBundle)
+Symfony SonataClassificationBundle
 
-A classification bundle to help organize your entities: tag, category and taxonomy
+[![Latest Stable Version](https://poser.pugx.org/sonata-project/classification-bundle/v/stable)](https://packagist.org/packages/sonata-project/classification-bundle)
+[![Latest Unstable Version](https://poser.pugx.org/sonata-project/classification-bundle/v/unstable)](https://packagist.org/packages/sonata-project/classification-bundle)
+[![License](https://poser.pugx.org/sonata-project/classification-bundle/license)](https://packagist.org/packages/sonata-project/classification-bundle)
 
-Check out the documentation on [https://sonata-project.org/bundles/classification/master/doc/index.html](https://sonata-project.org/bundles/classification/master/doc/index.html)
+[![Total Downloads](https://poser.pugx.org/sonata-project/classification-bundle/downloads)](https://packagist.org/packages/sonata-project/classification-bundle)
+[![Monthly Downloads](https://poser.pugx.org/sonata-project/classification-bundle/d/monthly)](https://packagist.org/packages/sonata-project/classification-bundle)
+[![Daily Downloads](https://poser.pugx.org/sonata-project/classification-bundle/d/daily)](https://packagist.org/packages/sonata-project/classification-bundle)
 
-**Google Groups**: For questions and proposals you can post on this google groups
+[![Build Status](https://travis-ci.org/sonata-project/SonataClassificationBundle.svg?branch=master)](https://travis-ci.org/sonata-project/SonataClassificationBundle)
 
-* [Sonata Users](https://groups.google.com/group/sonata-users): Only for user questions
-* [Sonata Devs](https://groups.google.com/group/sonata-devs): Only for devs
+## Documentation
 
-License
--------
+Check out the documentation on the [official website](https://sonata-project.org/bundles/classification).
 
-This bundle is available under the [MIT license](Resources/meta/LICENSE).
+## Support
+
+For general support and questions, please use [StackOverflow](http://stackoverflow.com/questions/tagged/sonata).
+
+If you think you find a bug or you have a feature idea to propose, feel free to open a issue
+**after looking** at the [contributing guide](CONTRIBUTING.md).
+
+## License
+
+This package is available under the [MIT license](LICENSE).

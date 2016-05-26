@@ -10,7 +10,9 @@ Symfony SonataClassificationBundle
 [![Monthly Downloads](https://poser.pugx.org/sonata-project/classification-bundle/d/monthly)](https://packagist.org/packages/sonata-project/classification-bundle)
 [![Daily Downloads](https://poser.pugx.org/sonata-project/classification-bundle/d/daily)](https://packagist.org/packages/sonata-project/classification-bundle)
 
-[![Build Status](https://travis-ci.org/sonata-project/SonataClassificationBundle.svg?branch=master)](https://travis-ci.org/sonata-project/SonataClassificationBundle)
+3.x status: [![Build Status](https://travis-ci.org/sonata-project/SonataClassificationBundle.svg?branch=3.x)](https://travis-ci.org/sonata-project/SonataClassificationBundle)
+
+master status: [![Build Status](https://travis-ci.org/sonata-project/SonataClassificationBundle.svg?branch=master)](https://travis-ci.org/sonata-project/SonataClassificationBundle)
 
 ## Documentation
 

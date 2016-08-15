@@ -68,9 +68,12 @@ abstract class ContextAwareAdmin extends Admin
      */
     public function getPersistentParameters()
     {
-        $parameters = array(
-            'context' => '',
-            'hide_context' => $this->hasRequest() ? (int) $this->getRequest()->get('hide_context', 0) : 0,
+        $parameters = array_merge(
+            parent::getPersistentParameters(),
+            array(
+                'context' => '',
+                'hide_context' => $this->hasRequest() ? (int) $this->getRequest()->get('hide_context', 0) : 0,
+            )
         );
 
         if ($this->getSubject()) {

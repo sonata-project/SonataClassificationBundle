@@ -25,6 +25,18 @@ class AdminTest extends \PHPUnit_Framework_TestCase
         $this->contextManager = $this->getMock('Sonata\ClassificationBundle\Model\ContextManagerInterface');
     }
 
+    public function testAbstractAdminChildren()
+    {
+        $contextAwareAdmin = $this->getMockBuilder('Sonata\ClassificationBundle\Admin\ContextAwareAdmin')
+            ->disableOriginalConstructor()
+            ->getMock();
+        $this->assertInstanceOf('Sonata\AdminBundle\Admin\AbstractAdmin', $contextAwareAdmin);
+        $contextAdmin = $this->getMockBuilder('Sonata\ClassificationBundle\Admin\ContextAdmin')
+            ->disableOriginalConstructor()
+            ->getMock();
+        $this->assertInstanceOf('Sonata\AdminBundle\Admin\AbstractAdmin', $contextAdmin);
+    }
+
     public function testGetPersistentParametersWithNoExtension()
     {
         $expected = array(

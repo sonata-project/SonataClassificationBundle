@@ -158,6 +158,7 @@ class SonataClassificationExtension extends Extension
                 array(
                     'name' => 'context',
                     'referencedColumnName' => 'id',
+                    'onDelete' => 'set null',
                 ),
             ),
             'orphanRemoval' => false,

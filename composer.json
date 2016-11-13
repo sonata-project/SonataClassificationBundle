@@ -31,7 +31,7 @@
         "symfony/options-resolver": "^2.3 || ^3.0"
     },
     "require-dev": {
-        "friendsofsymfony/rest-bundle": "<1.1",
+        "friendsofsymfony/rest-bundle": "^1.1 || ^2.0",
         "jms/serializer-bundle": "^0.13 || ^1.0",
         "sllh/php-cs-fixer-styleci-bridge": "^2.0",
         "sonata-project/block-bundle": "^3.0",

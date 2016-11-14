@@ -168,31 +168,51 @@
             </trans-unit>
             <trans-unit id="form.label_category">
                 <source>form.label_category</source>
-                <target>form.label_category</target>
+                <target>Catégorie</target>
             </trans-unit>
             <trans-unit id="form.label_collection">
                 <source>form.label_collection</source>
-                <target>form.label_collection</target>
+                <target>Collection</target>
             </trans-unit>
             <trans-unit id="form.label_tag">
                 <source>form.label_tag</source>
-                <target>form.label_tag</target>
+                <target>Tag</target>
             </trans-unit>
             <trans-unit id="form.label_title">
                 <source>form.label_title</source>
-                <target>form.label_title</target>
+                <target>Titre</target>
             </trans-unit>
             <trans-unit id="no_collections_found">
                 <source>no_collections_found</source>
-                <target>no_collections_found</target>
+                <target>Aucune collection trouvée</target>
             </trans-unit>
             <trans-unit id="no_categories_found">
                 <source>no_categories_found</source>
-                <target>no_categories_found</target>
+                <target>Aucune catégorie trouvée</target>
             </trans-unit>
             <trans-unit id="no_tags_found">
                 <source>no_tags_found</source>
-                <target>no_tags_found</target>
+                <target>Aucun tag trouvé</target>
+            </trans-unit>
+            <trans-unit id="form.label_context">
+                <source>form.label_context</source>
+                <target>Contexte</target>
+            </trans-unit>
+            <trans-unit id="breadcrumb.link_collection_create">
+                <source>breadcrumb.link_collection_create</source>
+                <target>Ajouter</target>
+            </trans-unit>
+            <trans-unit id="breadcrumb.link_tag_create">
+                <source>breadcrumb.link_tag_create</source>
+                <target>Ajouter</target>
+            </trans-unit>
+            <trans-unit id="breadcrumb.link_category_create">
+                <source>breadcrumb.link_category_create</source>
+                <target>Ajouter</target>
+            </trans-unit>
+            <trans-unit id="breadcrumb.link_context_create">
+                <source>breadcrumb.link_context_create</source>
+                <target>Ajouter</target>
             </trans-unit>
         </body>
     </file>

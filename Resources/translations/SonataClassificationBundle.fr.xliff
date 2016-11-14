@@ -20,11 +20,11 @@
             </trans-unit>
             <trans-unit id="breadcrumb.link_collection_list">
                 <source>breadcrumb.link_collection_list</source>
-                <target>Liste des collections</target>
+                <target>Collections</target>
             </trans-unit>
             <trans-unit id="breadcrumb.link_category_list">
                 <source>breadcrumb.link_category_list</source>
-                <target>Liste des catégories</target>
+                <target>Catégories</target>
             </trans-unit>
             <trans-unit id="breadcrumb.link_category_tree">
                 <source>breadcrumb.link_category_tree</source>

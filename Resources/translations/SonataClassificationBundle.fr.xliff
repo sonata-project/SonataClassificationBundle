@@ -28,7 +28,7 @@
             </trans-unit>
             <trans-unit id="breadcrumb.link_category_tree">
                 <source>breadcrumb.link_category_tree</source>
-                <target>Catégorie</target>
+                <target>Catégories</target>
             </trans-unit>
             <trans-unit id="list.label_name">
                 <source>list.label_name</source>
@@ -68,7 +68,7 @@
             </trans-unit>
             <trans-unit id="breadcrumb.link_tag_list">
                 <source>breadcrumb.link_tag_list</source>
-                <target>Liste des tags</target>
+                <target>Tags</target>
             </trans-unit>
             <trans-unit id="form.label_slug">
                 <source>form.label_slug</source>
@@ -112,11 +112,11 @@
             </trans-unit>
             <trans-unit id="form.label_media">
                 <source>form.label_media</source>
-                <target>Media</target>
+                <target>Média</target>
             </trans-unit>
             <trans-unit id="breadcrumb.link_context_list">
                 <source>breadcrumb.link_context_list</source>
-                <target>Contexts</target>
+                <target>Contextes</target>
             </trans-unit>
             <trans-unit id="list.label_id">
                 <source>list.label_id</source>
@@ -128,7 +128,7 @@
             </trans-unit>
             <trans-unit id="label_contexts">
                 <source>label_contexts</source>
-                <target>Contexts</target>
+                <target>Contextes</target>
             </trans-unit>
             <trans-unit id="form.label_id">
                 <source>form.label_id</source>
@@ -136,11 +136,11 @@
             </trans-unit>
             <trans-unit id="filter.label_context">
                 <source>filter.label_context</source>
-                <target>Context</target>
+                <target>Contexte</target>
             </trans-unit>
             <trans-unit id="list.label_context">
                 <source>list.label_context</source>
-                <target>Context</target>
+                <target>Contexte</target>
             </trans-unit>
             <trans-unit id="tree_catalog_title">
                 <source>tree_catalog_title</source>

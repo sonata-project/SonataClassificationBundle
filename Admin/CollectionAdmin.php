@@ -18,7 +18,6 @@ use Sonata\AdminBundle\Form\FormMapper;
 class CollectionAdmin extends ContextAwareAdmin
 {
     protected $formOptions = array(
-        'cascade_validation' => true,
     );
 
     /**

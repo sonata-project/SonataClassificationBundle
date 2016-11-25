@@ -19,7 +19,6 @@ use Sonata\AdminBundle\Route\RouteCollection;
 class CategoryAdmin extends ContextAwareAdmin
 {
     protected $formOptions = array(
-        'cascade_validation' => true,
     );
 
     /**
@@ -47,11 +46,9 @@ class CategoryAdmin extends ContextAwareAdmin
             if ($this->getSubject()->getParent() !== null || $this->getSubject()->getId() === null) { // root category cannot have a parent
                 $formMapper
                   ->add('parent', 'sonata_category_selector', array(
-                      'category' => $this->getSubject() ?: null,
                       'model_manager' => $this->getModelManager(),
                       'class' => $this->getClass(),
                       'required' => true,
-                      'context' => $this->getSubject()->getContext(),
                     ));
             }
         }

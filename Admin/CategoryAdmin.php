@@ -15,12 +15,26 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
+use Symfony\Component\Validator\Constraints\Valid;
 
 class CategoryAdmin extends ContextAwareAdmin
 {
     protected $formOptions = array(
         'cascade_validation' => true,
     );
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getFormBuilder()
+    {
+        if (isset($this->formOptions['cascade_validation'])) {
+            unset($this->formOptions['cascade_validation']);
+            $this->formOptions['constraints'][] = new Valid();
+        }
+
+        return parent::getFormBuilder();
+    }
 
     /**
      * {@inheritdoc}

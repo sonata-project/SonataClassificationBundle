@@ -17,6 +17,7 @@ use Sonata\CoreBundle\Model\ManagerInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\SimpleChoiceList;
 use Symfony\Component\OptionsResolver\Options;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
@@ -40,9 +41,16 @@ class CategorySelectorType extends AbstractType
     }
 
     /**
+     * NEXT_MAJOR: Remove method, when bumping requirements to SF 2.7+.
+     *
      * {@inheritdoc}
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
+        $this->configureOptions($resolver);
+    }
+
+    public function configureOptions(OptionsResolver $resolver)
     {
         $that = $this;
 

@@ -14,7 +14,7 @@ namespace Sonata\ClassificationBundle\Block\Service;
 use Doctrine\ORM\Mapping\ClassMetadataInfo;
 use Sonata\AdminBundle\Admin\AdminInterface;
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\BlockBundle\Block\BaseBlockService;
+use Sonata\BlockBundle\Block\Service\AbstractAdminBlockService;
 use Sonata\ClassificationBundle\Model\ContextInterface;
 use Sonata\ClassificationBundle\Model\ContextManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
@@ -23,7 +23,7 @@ use Symfony\Component\Form\FormBuilder;
 /**
  * @author Christian Gripp <mail@core23.de>
  */
-abstract class AbstractClassificationBlockService extends BaseBlockService
+abstract class AbstractClassificationBlockService extends AbstractAdminBlockService
 {
     /**
      * @var ContextManagerInterface

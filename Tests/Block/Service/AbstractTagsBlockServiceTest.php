@@ -12,15 +12,15 @@
 namespace Sonata\ClassificationBundle\Tests\Block\Service;
 
 use Sonata\AdminBundle\Tests\Fixtures\Admin\TagAdmin;
-use Sonata\BlockBundle\Tests\Block\AbstractBlockServiceTest;
-use Sonata\BlockBundle\Tests\Block\Service\FakeTemplating;
+use Sonata\BlockBundle\Test\AbstractBlockServiceTestCase;
+use Sonata\BlockBundle\Test\FakeTemplating;
 use Sonata\ClassificationBundle\Model\ContextManagerInterface;
 use Sonata\ClassificationBundle\Model\TagManagerInterface;
 
 /**
  * @author Christian Gripp <mail@core23.de>
  */
-final class AbstractTagsBlockServiceTest extends AbstractBlockServiceTest
+final class AbstractTagsBlockServiceTest extends AbstractBlockServiceTestCase
 {
     /**
      * @var ContextManagerInterface

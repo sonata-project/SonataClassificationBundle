@@ -18,7 +18,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * Page Admin Controller.
+ * Category Admin Controller.
  *
  * @author Thomas Rabaix <thomas.rabaix@sonata-project.org>
  */
@@ -67,6 +67,7 @@ class CategoryAdminController extends Controller
     {
         $categoryManager = $this->get('sonata.classification.manager.category');
 
+        $mainCategory = false;
         $currentContext = false;
         if ($context = $request->get('context')) {
             $currentContext = $this->get('sonata.classification.manager.context')->find($context);
@@ -74,7 +75,7 @@ class CategoryAdminController extends Controller
 
         $rootCategories = $categoryManager->getRootCategories(false);
 
-        if (!$currentContext) {
+        if (!$currentContext && !empty($rootCategories)) {
             $mainCategory = current($rootCategories);
             $currentContext = $mainCategory->getContext();
         } else {

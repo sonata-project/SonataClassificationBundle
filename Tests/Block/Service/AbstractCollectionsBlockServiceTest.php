@@ -65,10 +65,10 @@ final class AbstractCollectionsBlockServiceTest extends AbstractBlockServiceTest
 
     public function testLoad()
     {
-        $collection = $this->getMockBuilder('Sonata\ClassificationBundle\Model\CollectionInterfacer')
+        $collection = $this->getMockBuilder('Sonata\ClassificationBundle\Model\CollectionInterface')
             ->setMethods(array('getId'))
             ->disableOriginalConstructor()
-            ->getMock();
+            ->getMockForAbstractClass();
         $collection->expects($this->any())->method('getId')->will($this->returnValue(23));
 
         $this->collectionManager->expects($this->any())
@@ -93,10 +93,10 @@ final class AbstractCollectionsBlockServiceTest extends AbstractBlockServiceTest
 
     public function testPrePersist()
     {
-        $collection = $this->getMockBuilder('Sonata\ClassificationBundle\Model\CollectionInterfacer')
+        $collection = $this->getMockBuilder('Sonata\ClassificationBundle\Model\CollectionInterface')
             ->setMethods(array('getId'))
             ->disableOriginalConstructor()
-            ->getMock();
+            ->getMockForAbstractClass();
         $collection->expects($this->any())->method('getId')->will($this->returnValue(23));
 
         $block = $this->getMock('Sonata\BlockBundle\Model\BlockInterface');
@@ -116,10 +116,10 @@ final class AbstractCollectionsBlockServiceTest extends AbstractBlockServiceTest
 
     public function testPreUpdate()
     {
-        $collection = $this->getMockBuilder('Sonata\ClassificationBundle\Model\CollectionInterfacer')
+        $collection = $this->getMockBuilder('Sonata\ClassificationBundle\Model\CollectionInterface')
             ->setMethods(array('getId'))
             ->disableOriginalConstructor()
-            ->getMock();
+            ->getMockForAbstractClass();
         $collection->expects($this->any())->method('getId')->will($this->returnValue(23));
 
         $block = $this->getMock('Sonata\BlockBundle\Model\BlockInterface');

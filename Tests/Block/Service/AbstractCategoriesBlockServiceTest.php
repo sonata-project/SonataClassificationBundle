@@ -65,10 +65,10 @@ final class AbstractCategoriesBlockServiceTest extends AbstractBlockServiceTestC
 
     public function testLoad()
     {
-        $category = $this->getMockBuilder('Sonata\ClassificationBundle\Model\CategoryInterfacer')
+        $category = $this->getMockBuilder('Sonata\ClassificationBundle\Model\CategoryInterface')
             ->setMethods(array('getId'))
             ->disableOriginalConstructor()
-            ->getMock();
+            ->getMockForAbstractClass();
         $category->expects($this->any())->method('getId')->will($this->returnValue(23));
 
         $this->categoryManager->expects($this->any())
@@ -93,10 +93,10 @@ final class AbstractCategoriesBlockServiceTest extends AbstractBlockServiceTestC
 
     public function testPrePersist()
     {
-        $category = $this->getMockBuilder('Sonata\ClassificationBundle\Model\CategoryInterfacer')
+        $category = $this->getMockBuilder('Sonata\ClassificationBundle\Model\CategoryInterface')
             ->setMethods(array('getId'))
             ->disableOriginalConstructor()
-            ->getMock();
+            ->getMockForAbstractClass();
         $category->expects($this->any())->method('getId')->will($this->returnValue(23));
 
         $block = $this->getMock('Sonata\BlockBundle\Model\BlockInterface');
@@ -116,10 +116,10 @@ final class AbstractCategoriesBlockServiceTest extends AbstractBlockServiceTestC
 
     public function testPreUpdate()
     {
-        $category = $this->getMockBuilder('Sonata\ClassificationBundle\Model\CategoryInterfacer')
+        $category = $this->getMockBuilder('Sonata\ClassificationBundle\Model\CategoryInterface')
             ->setMethods(array('getId'))
             ->disableOriginalConstructor()
-            ->getMock();
+            ->getMockForAbstractClass();
         $category->expects($this->any())->method('getId')->will($this->returnValue(23));
 
         $block = $this->getMock('Sonata\BlockBundle\Model\BlockInterface');

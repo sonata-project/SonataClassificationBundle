@@ -198,6 +198,30 @@
                 <source>no_tags_found</source>
                 <target>No tags found.</target>
             </trans-unit>
+            <trans-unit id="breadcrumb.link_category_create">
+                <source>breadcrumb.link_category_create</source>
+                <target>Create</target>
+            </trans-unit>
+            <trans-unit id="breadcrumb.link_tag_create">
+                <source>breadcrumb.link_tag_create</source>
+                <target>Create</target>
+            </trans-unit>
+            <trans-unit id="breadcrumb.link_collection_create">
+                <source>breadcrumb.link_collection_create</source>
+                <target>Create</target>
+            </trans-unit>
+            <trans-unit id="breadcrumb.link_context_create">
+                <source>breadcrumb.link_context_create</source>
+                <target>Create</target>
+            </trans-unit>
+            <trans-unit id="form_general">
+                <source>General</source>
+                <target>General</target>
+            </trans-unit>
+            <trans-unit id="form_options">
+                <source>Options</source>
+                <target>Options</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

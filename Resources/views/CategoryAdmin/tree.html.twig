@@ -51,7 +51,7 @@ file that was distributed with this source code.
             <div class="box-header">
                 <h1 class="box-title">
                     {{ admin.trans('tree_catalog_title', {}, admin.translationdomain) }}
-                    {% if not app.request.get('hide_context') %}
+                    {% if not app.request.get('hide_context') and current_context is not empty %}
                         <div class="btn-group">
                             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                                 <strong class="text-info">{{ current_context.name }}</strong> <span class="caret"></span>
@@ -75,7 +75,11 @@ file that was distributed with this source code.
                 </h1>
             </div>
             <div class="box-content">
-                {{ tree.navigate_child([main_category], admin, true, 0) }}
+                {% if main_category is empty %}
+                    {{ tree.navigate_child([], admin, true, 0) }}
+                {% else %}
+                    {{ tree.navigate_child([main_category], admin, true, 0) }}
+                {% endif %}
             </div>
         </div>
     </div>

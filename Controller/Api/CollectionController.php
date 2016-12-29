@@ -11,9 +11,11 @@
 
 namespace Sonata\ClassificationBundle\Controller\Api;
 
+use FOS\RestBundle\Context\Context;
 use FOS\RestBundle\Controller\Annotations\QueryParam;
 use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Request\ParamFetcherInterface;
+use FOS\RestBundle\View\View as FOSRestView;
 use JMS\Serializer\SerializationContext;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Sonata\ClassificationBundle\Model\CollectionInterface;
@@ -255,11 +257,18 @@ class CollectionController
             $collection = $form->getData();
             $this->collectionManager->save($collection);
 
-            $view = \FOS\RestBundle\View\View::create($collection);
-            $serializationContext = SerializationContext::create();
-            $serializationContext->setGroups(array('sonata_api_read'));
-            $serializationContext->enableMaxDepthChecks();
-            $view->setSerializationContext($serializationContext);
+            $view = FOSRestView::create($collection);
+
+            if (class_exists('FOS\RestBundle\Context\Context')) {
+                $context = new Context();
+                $context->setGroups(array('sonata_api_read'));
+                $view->setContext($context);
+            } else {
+                $serializationContext = SerializationContext::create();
+                $serializationContext->setGroups(array('sonata_api_read'));
+                $serializationContext->enableMaxDepthChecks();
+                $view->setSerializationContext($serializationContext);
+            }
 
             return $view;
         }

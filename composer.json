@@ -18,33 +18,46 @@
     ],
     "require": {
         "php": "^5.3 || ^7.0",
+        "cocur/slugify": "^1.4 || ^2.0",
+        "sonata-project/admin-bundle": "^3.1",
+        "sonata-project/datagrid-bundle": "^2.2",
+        "sonata-project/doctrine-orm-admin-bundle": "^3.0",
         "symfony/config": "^2.3.9 || ^3.0",
         "symfony/console": "^2.3 || ^3.0",
         "symfony/dependency-injection": "^2.3.3 || ^3.0",
         "symfony/form": "^2.3.5 || ^3.0",
         "symfony/http-foundation": "^2.3 || ^3.0",
         "symfony/http-kernel": "^2.3 || ^3.0",
-        "symfony/options-resolver": "^2.3 || ^3.0",
-        "sonata-project/doctrine-orm-admin-bundle": "^3.0",
-        "sonata-project/admin-bundle": "^3.0",
-        "sonata-project/datagrid-bundle": "^2.2"
+        "symfony/options-resolver": "^2.3 || ^3.0"
     },
     "require-dev": {
-        "friendsofsymfony/rest-bundle": "^1.1",
+        "friendsofsymfony/rest-bundle": "^1.1 || ^2.0",
         "jms/serializer-bundle": "^0.13 || ^1.0",
         "sllh/php-cs-fixer-styleci-bridge": "^2.0",
+        "sonata-project/block-bundle": "^3.2",
         "sonata-project/media-bundle": "^3.0 || ^4.0@dev",
         "symfony/phpunit-bridge": "^2.7 || ^3.0"
     },
     "suggest": {
+        "sonata-project/block-bundle": "For rendering dynamic list blocks on a page.",
         "sonata-project/media-bundle": "For media management"
     },
     "conflict": {
         "jms/serializer": "<0.13",
+        "sonata-project/block-bundle": "<3.0 || >=4.0",
         "sonata-project/media-bundle": "<3.0 || >=5.0"
     },
     "autoload": {
-        "psr-4": { "Sonata\\ClassificationBundle\\": "" }
+        "psr-4": { "Sonata\\ClassificationBundle\\": "" },
+        "exclude-from-classmap": [
+            "Tests/"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": { "Sonata\\ClassificationBundle\\Tests\\": "Tests/" }
+    },
+    "config": {
+        "sort-packages": true
     },
     "extra": {
         "branch-alias": {

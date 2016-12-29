@@ -170,6 +170,58 @@
                 <source>disabled</source>
                 <target>disabled</target>
             </trans-unit>
+            <trans-unit id="form.label_category">
+                <source>form.label_category</source>
+                <target>Category</target>
+            </trans-unit>
+            <trans-unit id="form.label_collection">
+                <source>form.label_collection</source>
+                <target>Collection</target>
+            </trans-unit>
+            <trans-unit id="form.label_tag">
+                <source>form.label_tag</source>
+                <target>Tag</target>
+            </trans-unit>
+            <trans-unit id="form.label_title">
+                <source>form.label_title</source>
+                <target>Title</target>
+            </trans-unit>
+            <trans-unit id="no_collections_found">
+                <source>no_collections_found</source>
+                <target>No collections found.</target>
+            </trans-unit>
+            <trans-unit id="no_categories_found">
+                <source>no_categories_found</source>
+                <target>No categories found.</target>
+            </trans-unit>
+            <trans-unit id="no_tags_found">
+                <source>no_tags_found</source>
+                <target>No tags found.</target>
+            </trans-unit>
+            <trans-unit id="breadcrumb.link_category_create">
+                <source>breadcrumb.link_category_create</source>
+                <target>Create</target>
+            </trans-unit>
+            <trans-unit id="breadcrumb.link_tag_create">
+                <source>breadcrumb.link_tag_create</source>
+                <target>Create</target>
+            </trans-unit>
+            <trans-unit id="breadcrumb.link_collection_create">
+                <source>breadcrumb.link_collection_create</source>
+                <target>Create</target>
+            </trans-unit>
+            <trans-unit id="breadcrumb.link_context_create">
+                <source>breadcrumb.link_context_create</source>
+                <target>Create</target>
+            </trans-unit>
+            <trans-unit id="form_general">
+                <source>General</source>
+                <target>General</target>
+            </trans-unit>
+            <trans-unit id="form_options">
+                <source>Options</source>
+                <target>Options</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

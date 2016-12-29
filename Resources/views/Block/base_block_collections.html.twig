@@ -1,0 +1,38 @@
+{#
+
+This file is part of the Sonata package.
+
+(c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+
+#}
+
+{% extends sonata_block.templates.block_base %}
+
+{% block block %}
+    <div class="panel panel-default panel-collection-list">
+        {% if settings.title is not empty %}
+            <div class="panel-heading">
+                <h4 class="panel-title"><i class="fa fa-inpanel"></i> {{ settings.title }}</h4>
+            </div>
+        {% endif %}
+
+        <div class="panel-body">
+            {% if collections|length %}
+                <ul class="nav nav-pills nav-stacked">
+                    {% for col in collections %}
+                        <li{{ collection and collection.id == col.id ? ' class="active"' : '' }}>
+                            {% block collection_link %}
+                                {{ col.name }}
+                            {% endblock %}
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>{{ 'no_collections_found'|trans({}, 'SonataClassificationBundle') }}</p>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

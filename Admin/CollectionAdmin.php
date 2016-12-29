@@ -14,12 +14,34 @@ namespace Sonata\ClassificationBundle\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Symfony\Component\Validator\Constraints\Valid;
 
 class CollectionAdmin extends ContextAwareAdmin
 {
+    // NEXT_MAJOR: remove this override
     protected $formOptions = array(
         'cascade_validation' => true,
     );
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getFormBuilder()
+    {
+        // NEXT_MAJOR: set constraints unconditionally
+        if (isset($this->formOptions['cascade_validation'])) {
+            unset($this->formOptions['cascade_validation']);
+            $this->formOptions['constraints'][] = new Valid();
+        } else {
+            @trigger_error(<<<'EOT'
+Unsetting cascade_validation is deprecated since 3.x, and will give an error in 4.0.
+Override getFormBuilder() and remove the "Valid" constraint instead.
+EOT
+            , E_USER_DEPRECATED);
+        }
+
+        return parent::getFormBuilder();
+    }
 
     /**
      * {@inheritdoc}

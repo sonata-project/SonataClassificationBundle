@@ -1,6 +1,9 @@
 UPGRADE 3.x
 ===========
 
+UPGRADE FROM 3.1 to 3.2
+=======================
+
 ### Deep validation
 
 In `CategoryAdmin` and `CollectionAdmin`,

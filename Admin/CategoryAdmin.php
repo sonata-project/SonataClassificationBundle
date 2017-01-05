@@ -43,7 +43,7 @@ class CategoryAdmin extends ContextAwareAdmin
             $this->formOptions['constraints'][] = new Valid();
         } else {
             @trigger_error(<<<'EOT'
-Unsetting cascade_validation is deprecated since 3.x, and will give an error in 4.0.
+Unsetting cascade_validation is deprecated since 3.2, and will give an error in 4.0.
 Override getFormBuilder() and remove the "Valid" constraint instead.
 EOT
             , E_USER_DEPRECATED);

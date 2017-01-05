@@ -2,6 +2,24 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.2.0](https://github.com/sonata-project/SonataAdminBundle/compare/3.1.0...3.2.0) - 2017-01-05
+### Fixed
+- Symfony 3 compatibility was improved
+- Support for FosRestBundle 2.0
+- Incorrect `tag` reference on command output
+- Missing italian translations
+- Deprecated `Admin` class usage
+- Missing parameters from parent class in `ContextAwareAdmin::getPersistentParameters`
+- Incorrect names transliterating for slugs
+- Missing en translations for create forms
+- Typo in service unit tests
+- The category tree view in case the category list is empty
+- Vertical centering of buttons within a navbar in list/tree selector
+- Deprecated `AbstractBlockServiceTest`, `FakeTemplating`, `BaseBlockService` usage
+
+### Removed
+- Internal test classes are now excluded from the autoloader
+
 ## [3.1.0](https://github.com/sonata-project/SonataAdminBundle/compare/3.0.1...3.1.0) - 2016-07-05
 ### Added
 - Added `AbstractCategoriesBlockService` class

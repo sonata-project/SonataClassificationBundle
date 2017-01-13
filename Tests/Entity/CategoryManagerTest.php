@@ -14,9 +14,6 @@ namespace Sonata\ClassificationBundle\Tests\Entity;
 use Sonata\ClassificationBundle\Entity\CategoryManager;
 use Sonata\CoreBundle\Test\EntityManagerMockFactory;
 
-/**
- * Class CategoryManagerTest.
- */
 class CategoryManagerTest extends \PHPUnit_Framework_TestCase
 {
     public function testGetPager()

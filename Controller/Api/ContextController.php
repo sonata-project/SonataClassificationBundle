@@ -28,8 +28,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
- * Class ContextController.
- *
  * @author Thomas Rabaix <thomas.rabaix@gmail.com>
  */
 class ContextController

@@ -15,8 +15,6 @@ use Sonata\ClassificationBundle\Controller\Api\CategoryController;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Class CategoryControllerTest.
- *
  * @author Vincent Composieux <vincent.composieux@gmail.com>
  */
 class CategoryControllerTest extends \PHPUnit_Framework_TestCase

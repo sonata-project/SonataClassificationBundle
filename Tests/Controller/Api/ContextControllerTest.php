@@ -15,8 +15,6 @@ use Sonata\ClassificationBundle\Controller\Api\ContextController;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Class ContextControllerTest.
- *
  * @author Thomas Rabaix <thomas.rabaix@gmail.com>
  */
 class ContextControllerTest extends \PHPUnit_Framework_TestCase

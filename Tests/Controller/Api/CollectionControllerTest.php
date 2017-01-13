@@ -15,8 +15,6 @@ use Sonata\ClassificationBundle\Controller\Api\CollectionController;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Class CollectionControllerTest.
- *
  * @author Vincent Composieux <vincent.composieux@gmail.com>
  */
 class CollectionControllerTest extends \PHPUnit_Framework_TestCase

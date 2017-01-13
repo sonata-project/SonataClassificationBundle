@@ -14,9 +14,6 @@ namespace Sonata\ClassificationBundle\Tests\Entity;
 use Sonata\ClassificationBundle\Entity\TagManager;
 use Sonata\CoreBundle\Test\EntityManagerMockFactory;
 
-/**
- * Class TagManagerTest.
- */
 class TagManagerTest extends \PHPUnit_Framework_TestCase
 {
     public function testGetPager()

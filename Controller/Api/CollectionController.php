@@ -43,8 +43,6 @@ class CollectionController
     protected $formFactory;
 
     /**
-     * Constructor.
-     *
      * @param CollectionManagerInterface $collectionManager
      * @param FormFactoryInterface       $formFactory
      */

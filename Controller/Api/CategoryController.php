@@ -43,8 +43,6 @@ class CategoryController
     protected $formFactory;
 
     /**
-     * Constructor.
-     *
      * @param CategoryManagerInterface $categoryManager
      * @param FormFactoryInterface     $formFactory
      */

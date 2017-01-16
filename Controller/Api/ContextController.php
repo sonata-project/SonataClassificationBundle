@@ -43,8 +43,6 @@ class ContextController
     protected $formFactory;
 
     /**
-     * Constructor.
-     *
      * @param ContextManagerInterface $contextManager
      * @param FormFactoryInterface    $formFactory
      */

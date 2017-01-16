@@ -43,8 +43,6 @@ class TagController
     protected $formFactory;
 
     /**
-     * Constructor.
-     *
      * @param TagManagerInterface  $tagManager
      * @param FormFactoryInterface $formFactory
      */

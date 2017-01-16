@@ -28,8 +28,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
- * Class TagController.
- *
  * @author Vincent Composieux <vincent.composieux@gmail.com>
  */
 class TagController
@@ -45,8 +43,6 @@ class TagController
     protected $formFactory;
 
     /**
-     * Constructor.
-     *
      * @param TagManagerInterface  $tagManager
      * @param FormFactoryInterface $formFactory
      */

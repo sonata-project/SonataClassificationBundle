@@ -28,8 +28,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
- * Class CategoryController.
- *
  * @author Vincent Composieux <vincent.composieux@gmail.com>
  */
 class CategoryController
@@ -45,8 +43,6 @@ class CategoryController
     protected $formFactory;
 
     /**
-     * Constructor.
-     *
      * @param CategoryManagerInterface $categoryManager
      * @param FormFactoryInterface     $formFactory
      */

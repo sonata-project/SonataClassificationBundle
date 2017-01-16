@@ -28,8 +28,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
- * Class CollectionController.
- *
  * @author Vincent Composieux <vincent.composieux@gmail.com>
  */
 class CollectionController
@@ -45,8 +43,6 @@ class CollectionController
     protected $formFactory;
 
     /**
-     * Constructor.
-     *
      * @param CollectionManagerInterface $collectionManager
      * @param FormFactoryInterface       $formFactory
      */

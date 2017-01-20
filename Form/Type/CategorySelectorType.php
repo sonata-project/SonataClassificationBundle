@@ -15,6 +15,7 @@ use Sonata\ClassificationBundle\Model\CategoryInterface;
 use Sonata\ClassificationBundle\Model\CategoryManagerInterface;
 use Sonata\CoreBundle\Model\ManagerInterface;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\ChoiceList\ArrayChoiceList;
 use Symfony\Component\Form\Extension\Core\ChoiceList\SimpleChoiceList;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -50,6 +51,11 @@ class CategorySelectorType extends AbstractType
         $this->configureOptions($resolver);
     }
 
+    /**
+     * NEXT_MAJOR: replace usage of deprecated SimpleChoiceList
+     *
+     * {@inheritdoc}
+     */
     public function configureOptions(OptionsResolver $resolver)
     {
         $that = $this;
@@ -58,7 +64,11 @@ class CategorySelectorType extends AbstractType
             'context' => null,
             'category' => null,
             'choice_list' => function (Options $opts, $previousValue) use ($that) {
-                return new SimpleChoiceList($that->getChoices($opts));
+                if (class_exists('Symfony\Component\Form\Extension\Core\ChoiceList\SimpleChoiceList')) {    // BC with Symfony 2.*
+                    return new SimpleChoiceList($that->getChoices($opts));
+                }
+
+                return new ArrayChoiceList($that->getChoices($opts));
             },
         ));
     }

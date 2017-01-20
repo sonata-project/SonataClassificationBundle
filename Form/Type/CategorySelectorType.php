@@ -52,7 +52,7 @@ class CategorySelectorType extends AbstractType
     }
 
     /**
-     * NEXT_MAJOR: replace usage of deprecated SimpleChoiceList
+     * NEXT_MAJOR: replace usage of deprecated SimpleChoiceList.
      *
      * {@inheritdoc}
      */

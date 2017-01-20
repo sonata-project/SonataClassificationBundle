@@ -17,7 +17,7 @@ class CategorySelectorTypeTest extends \PHPUnit_Framework_TestCase
 {
     public function testConfigureOptions()
     {
-        $manager = $this->createMock('Sonata\CoreBundle\Model\ManagerInterface');
+        $manager = $this->getMock('Sonata\CoreBundle\Model\ManagerInterface');
         $categorySelectorType = new CategorySelectorType($manager);
         $categorySelectorType->configureOptions(new OptionsResolver());
     }

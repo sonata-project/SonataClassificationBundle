@@ -100,7 +100,7 @@ class CategoryAdminController extends Controller
 
         $this->get('twig')->getExtension('form')->renderer->setTheme($formView, $this->admin->getFilterTheme());
 
-        return $this->render('SonataClassificationBundle:CategoryAdmin:tree.html.twig', array(
+        return $this->render($this->admin->getTemplate('tree'), array(
             'action' => 'tree',
             'main_category' => $mainCategory,
             'root_categories' => $rootCategories,

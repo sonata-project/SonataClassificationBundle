@@ -2,6 +2,11 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.2.1](https://github.com/sonata-project/SonataClassificationBundle/compare/3.2.0...3.2.1) - 2017-02-02
+### Fixed
+- Category tree view was not easily customizable
+- Missing italian translation
+
 ## [3.2.0](https://github.com/sonata-project/SonataClassificationBundle/compare/3.1.0...3.2.0) - 2017-01-05
 ### Fixed
 - Symfony 3 compatibility was improved

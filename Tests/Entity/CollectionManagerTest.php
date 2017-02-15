@@ -21,6 +21,7 @@ class CollectionManagerTest extends \PHPUnit_Framework_TestCase
         $self = $this;
         $this
             ->getCollectionManager(function ($qb) use ($self) {
+                $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(array()));
                 $qb->expects($self->never())->method('andWhere');
                 $qb->expects($self->once())->method('setParameters')->with(array());
             })
@@ -32,6 +33,7 @@ class CollectionManagerTest extends \PHPUnit_Framework_TestCase
         $self = $this;
         $this
             ->getCollectionManager(function ($qb) use ($self) {
+                $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(array()));
                 $qb->expects($self->once())->method('andWhere')->with($self->equalTo('c.enabled = :enabled'));
                 $qb->expects($self->once())->method('setParameters')->with(array('enabled' => true));
             })
@@ -45,6 +47,7 @@ class CollectionManagerTest extends \PHPUnit_Framework_TestCase
         $self = $this;
         $this
             ->getCollectionManager(function ($qb) use ($self) {
+                $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(array()));
                 $qb->expects($self->once())->method('andWhere')->with($self->equalTo('c.enabled = :enabled'));
                 $qb->expects($self->once())->method('setParameters')->with(array('enabled' => false));
             })

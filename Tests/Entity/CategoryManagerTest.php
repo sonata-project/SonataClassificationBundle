@@ -21,6 +21,7 @@ class CategoryManagerTest extends \PHPUnit_Framework_TestCase
         $self = $this;
         $this
             ->getCategoryManager(function ($qb) use ($self) {
+                $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(array()));
                 $qb->expects($self->exactly(1))->method('andWhere')->withConsecutive(
                     array($self->equalTo('c.context = :context'))
                 );
@@ -34,8 +35,7 @@ class CategoryManagerTest extends \PHPUnit_Framework_TestCase
         $self = $this;
         $this
             ->getCategoryManager(function ($qb) use ($self) {
-                /* @var $self \PHPUnit_Framework_TestCase */
-                /* @var $qb \PHPUnit_Framework_MockObject_InvocationMocker */
+                $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(array()));
                 $qb->expects($self->exactly(2))->method('andWhere')->withConsecutive(
                     array($self->equalTo('c.context = :context')),
                     array($self->equalTo('c.enabled = :enabled'))
@@ -53,8 +53,7 @@ class CategoryManagerTest extends \PHPUnit_Framework_TestCase
         $self = $this;
         $this
             ->getCategoryManager(function ($qb) use ($self) {
-                /* @var $self \PHPUnit_Framework_TestCase */
-                /* @var $qb \PHPUnit_Framework_MockObject_InvocationMocker */
+                $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(array()));
                 $qb->expects($self->exactly(2))->method('andWhere')->withConsecutive(
                     array($self->equalTo('c.context = :context')),
                     array($self->equalTo('c.enabled = :enabled'))

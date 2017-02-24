@@ -158,12 +158,12 @@ abstract class AbstractCategoriesBlockService extends AbstractClassificationBloc
     }
 
     /**
-     * @param CategoryInterface|int  $id
-     * @param CategoryInterface|null $default
+     * @param CategoryInterface|int $id
+     * @param mixed                 $default
      *
      * @return CategoryInterface
      */
-    final protected function getCategory($id, CategoryInterface $default = null)
+    final protected function getCategory($id, $default = null)
     {
         if ($id instanceof CategoryInterface) {
             return $id;
@@ -173,7 +173,11 @@ abstract class AbstractCategoriesBlockService extends AbstractClassificationBloc
             return $this->categoryManager->find($id);
         }
 
-        return $default;
+        if ($default instanceof CategoryInterface) {
+            return $default;
+        }
+
+        return null;
     }
 
     /**

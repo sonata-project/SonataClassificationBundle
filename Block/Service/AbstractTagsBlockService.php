@@ -167,11 +167,11 @@ abstract class AbstractTagsBlockService extends AbstractClassificationBlockServi
 
     /**
      * @param TagInterface|int $id
-     * @param TagInterface     $default
+     * @param mixed            $default
      *
-     * @return TagInterface
+     * @return TagInterface|null
      */
-    final protected function getTag($id, TagInterface $default = null)
+    final protected function getTag($id, $default = null)
     {
         if ($id instanceof TagInterface) {
             return $id;
@@ -181,7 +181,11 @@ abstract class AbstractTagsBlockService extends AbstractClassificationBlockServi
             return $this->tagManager->find($id);
         }
 
-        return $default;
+        if ($default instanceof TagInterface) {
+            return $default;
+        }
+
+        return null;
     }
 
     /**

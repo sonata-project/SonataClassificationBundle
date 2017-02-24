@@ -16,7 +16,7 @@ use Sonata\ClassificationBundle\Model\CategoryInterface;
 use Sonata\ClassificationBundle\Model\CategoryManagerInterface;
 use Sonata\CoreBundle\Model\ManagerInterface;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\ChoiceList\SimpleChoiceList;
+use Symfony\Component\Form\ChoiceList\ArrayChoiceList;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -65,7 +65,7 @@ class CategorySelectorType extends AbstractType
                 'context' => null,
                 'category' => null,
                 'choice_list' => function (Options $opts, $previousValue) use ($that) {
-                    return new SimpleChoiceList($that->getChoices($opts));
+                    return new ArrayChoiceList($that->getChoices($opts));
                 },
             ));
 

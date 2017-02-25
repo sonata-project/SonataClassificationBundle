@@ -60,7 +60,7 @@ class CategorySelectorType extends AbstractType
     {
         $that = $this;
 
-        if (!class_exists('Symfony\Component\Form\ChoiceList\Loader\ChoiceLoaderInterface')) {
+        if (!interface_exists('Symfony\Component\Form\ChoiceList\Loader\ChoiceLoaderInterface')) {
             $resolver->setDefaults(array(
                 'context' => null,
                 'category' => null,

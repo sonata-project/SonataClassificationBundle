@@ -32,7 +32,7 @@ class CategorySelectorTypeTest extends \PHPUnit_Framework_TestCase
         $definedOptions = $optionsResolver->getDefinedOptions();
         $this->assertContains('category', $definedOptions);
         $this->assertContains('context', $definedOptions);
-        if (class_exists('Symfony\Component\Form\ChoiceList\Loader\ChoiceLoaderInterface')) {
+        if (interface_exists('Symfony\Component\Form\ChoiceList\Loader\ChoiceLoaderInterface')) {
             $this->assertContains('choice_loader', $definedOptions);
             $this->assertNotContains('choice_list', $definedOptions);
         } else {

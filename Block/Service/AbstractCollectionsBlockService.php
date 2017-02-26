@@ -159,12 +159,12 @@ abstract class AbstractCollectionsBlockService extends AbstractClassificationBlo
     }
 
     /**
-     * @param CollectionInterface|int  $id
-     * @param CollectionInterface|null $default
+     * @param CollectionInterface|int $id
+     * @param mixed                   $default
      *
-     * @return CollectionInterface
+     * @return CollectionInterface|null
      */
-    final protected function getCollection($id, CollectionInterface $default = null)
+    final protected function getCollection($id, $default = null)
     {
         if ($id instanceof CollectionInterface) {
             return $id;
@@ -174,7 +174,11 @@ abstract class AbstractCollectionsBlockService extends AbstractClassificationBlo
             return $this->collectionManager->find($id);
         }
 
-        return $default;
+        if ($default instanceof CollectionInterface) {
+            return $default;
+        }
+
+        return null;
     }
 
     /**

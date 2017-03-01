@@ -70,10 +70,10 @@ class CategoryManagerTest extends \PHPUnit_Framework_TestCase
     {
         $em = EntityManagerMockFactory::create($this, $qbCallback, array());
 
-        $registry = $this->getMock('Doctrine\Common\Persistence\ManagerRegistry');
+        $registry = $this->getMockForAbstractClass('Doctrine\Common\Persistence\ManagerRegistry');
         $registry->expects($this->any())->method('getManagerForClass')->will($this->returnValue($em));
 
-        $contextManager = $this->getMock('Sonata\ClassificationBundle\Model\ContextManagerInterface');
+        $contextManager = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Model\ContextManagerInterface');
 
         return new CategoryManager('Sonata\PageBundle\Entity\BaseCategory', $registry, $contextManager);
     }

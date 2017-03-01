@@ -60,7 +60,7 @@ class ContextManagerTest extends \PHPUnit_Framework_TestCase
     {
         $em = EntityManagerMockFactory::create($this, $qbCallback, array());
 
-        $registry = $this->getMock('Doctrine\Common\Persistence\ManagerRegistry');
+        $registry = $this->getMockForAbstractClass('Doctrine\Common\Persistence\ManagerRegistry');
         $registry->expects($this->any())->method('getManagerForClass')->will($this->returnValue($em));
 
         return new ContextManager('Sonata\PageBundle\Entity\BaseContext', $registry);

@@ -22,7 +22,7 @@ class AdminTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->contextManager = $this->getMock('Sonata\ClassificationBundle\Model\ContextManagerInterface');
+        $this->contextManager = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Model\ContextManagerInterface');
     }
 
     public function testAbstractAdminChildren()
@@ -60,7 +60,7 @@ class AdminTest extends \PHPUnit_Framework_TestCase
             'admin.my_code', 'My\Class', 'MyBundle:ClassAdmin', $this->contextManager,
         ));
 
-        $extension = $this->getMock('Sonata\AdminBundle\Admin\AdminExtensionInterface');
+        $extension = $this->getMockForAbstractClass('Sonata\AdminBundle\Admin\AdminExtensionInterface');
         $extension->expects($this->once())->method('getPersistentParameters')->will($this->returnValue(null));
 
         $admin->addExtension($extension);
@@ -86,7 +86,7 @@ class AdminTest extends \PHPUnit_Framework_TestCase
             'admin.my_code', 'My\Class', 'MyBundle:ClassAdmin', $this->contextManager,
         ));
 
-        $extension = $this->getMock('Sonata\AdminBundle\Admin\AdminExtensionInterface');
+        $extension = $this->getMockForAbstractClass('Sonata\AdminBundle\Admin\AdminExtensionInterface');
         $extension->expects($this->once())->method('getPersistentParameters')->will($this->returnValue($extensionParams));
 
         $admin->addExtension($extension);

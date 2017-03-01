@@ -19,6 +19,7 @@ use Sonata\ClassificationBundle\Model\ContextManagerInterface;
 use Symfony\Bridge\Twig\Extension\FormExtension;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Form\Extension\Csrf\CsrfProvider\CsrfProviderInterface;
+use Symfony\Component\Form\FormView;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Kernel;
@@ -84,7 +85,7 @@ class CategoryAdminControllerTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->container = $this->getMock('Symfony\Component\DependencyInjection\ContainerInterface');
+        $this->container = $this->getMockForAbstractClass('Symfony\Component\DependencyInjection\ContainerInterface');
 
         $this->request = new Request();
         $this->pool = new Pool($this->container, 'title', 'logo.png');
@@ -97,11 +98,10 @@ class CategoryAdminControllerTest extends \PHPUnit_Framework_TestCase
         $params = &$this->parameters;
         $template = &$this->template;
 
-        $templating = $this->getMock(
-            'Symfony\Bundle\FrameworkBundle\Templating\DelegatingEngine',
-            array(),
-            array($this->container, array())
-        );
+        $templating = $this->getMockBuilder('Symfony\Bundle\FrameworkBundle\Templating\DelegatingEngine')
+            ->setMethods(array())
+            ->setConstructorArgs(array($this->container, array()))
+            ->getMock();
 
         $templating->expects($this->any())
             ->method('renderResponse')
@@ -132,7 +132,7 @@ class CategoryAdminControllerTest extends \PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $twigRenderer = $this->getMock('Symfony\Bridge\Twig\Form\TwigRendererInterface');
+        $twigRenderer = $this->getMockForAbstractClass('Symfony\Bridge\Twig\Form\TwigRendererInterface');
 
         $formExtension = new FormExtension($twigRenderer);
 
@@ -318,7 +318,7 @@ class CategoryAdminControllerTest extends \PHPUnit_Framework_TestCase
         $this->request->query->set('_list_mode', 'list');
         $this->request->query->set('filter', 'filter[context][value]='.($context ? $context : ''));
 
-        $datagrid = $this->getMock('Sonata\AdminBundle\Datagrid\DatagridInterface');
+        $datagrid = $this->getMockForAbstractClass('Sonata\AdminBundle\Datagrid\DatagridInterface');
 
         $form = $this->getMockBuilder('Symfony\Component\Form\Form')
             ->disableOriginalConstructor()
@@ -326,7 +326,7 @@ class CategoryAdminControllerTest extends \PHPUnit_Framework_TestCase
 
         $form->expects($this->once())
              ->method('createView')
-             ->will($this->returnValue($this->getMock('Symfony\Component\Form\FormView')));
+             ->will($this->returnValue(new FormView()));
 
         $this->admin->expects($this->once())
             ->method('getDatagrid')
@@ -357,7 +357,7 @@ class CategoryAdminControllerTest extends \PHPUnit_Framework_TestCase
      */
     public function testTreeAction($context, $categories)
     {
-        $datagrid = $this->getMock('Sonata\AdminBundle\Datagrid\DatagridInterface');
+        $datagrid = $this->getMockForAbstractClass('Sonata\AdminBundle\Datagrid\DatagridInterface');
 
         $form = $this->getMockBuilder('Symfony\Component\Form\Form')
             ->disableOriginalConstructor()
@@ -365,7 +365,7 @@ class CategoryAdminControllerTest extends \PHPUnit_Framework_TestCase
 
         $form->expects($this->once())
             ->method('createView')
-            ->will($this->returnValue($this->getMock('Symfony\Component\Form\FormView')));
+            ->will($this->returnValue(new FormView()));
 
         $this->admin->expects($this->once())
             ->method('getDatagrid')

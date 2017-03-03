@@ -97,6 +97,36 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
     }
 
     /**
+     * NEXT_MAJOR: add this method to the interface.
+     *
+     * @param CategoryInterface $category
+     *
+     * @return CategoryInterface
+     */
+    public function getRootCategoryWithChildren(CategoryInterface $category)
+    {
+        if ($category->getContext() === null) {
+            throw new \RuntimeException('Context cannot be null');
+        }
+        if ($category->getParent() != null) {
+            throw new \RuntimeException('Method can be called only for root categories');
+        }
+        $context = $this->getContext($category->getContext());
+
+        $this->loadCategories($context);
+
+        foreach ($this->categories[$context->getId()] as $contextRootCategory) {
+            if ($category->getId() == $contextRootCategory->getId()) {
+                return $contextRootCategory;
+            }
+        }
+
+        throw new \RuntimeException('Category does not exist');
+    }
+
+    /**
+     * @todo NEXT_MAJOR: remove this method.
+     *
      * @param ContextInterface $context
      *
      * @return CategoryInterface
@@ -111,6 +141,24 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
     }
 
     /**
+     * NEXT_MAJOR: add this method to the interface.
+     *
+     * @param ContextInterface $context
+     *
+     * @return CategoryInterface[]
+     */
+    public function getRootCategoriesForContext(ContextInterface $context = null)
+    {
+        $context = $this->getContext($context);
+
+        $this->loadCategories($context);
+
+        return $this->categories[$context->getId()];
+    }
+
+    /**
+     * @todo NEXT_MAJOR: remove this method.
+     *
      * @param bool|true $loadChildren
      *
      * @return CategoryInterface[]
@@ -133,6 +181,53 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
         }
 
         return $categories;
+    }
+
+    /**
+     * NEXT_MAJOR: add this method to the interface.
+     *
+     * @param bool|true $loadChildren
+     *
+     * @return CategoryInterface[]
+     */
+    public function getAllRootCategories($loadChildren = true)
+    {
+        $class = $this->getClass();
+
+        $rootCategories = $this->getObjectManager()->createQuery(sprintf('SELECT c FROM %s c WHERE c.parent IS NULL', $class))
+            ->execute();
+
+        $categories = array();
+
+        foreach ($rootCategories as $category) {
+            if ($category->getContext() === null) {
+                throw new \RuntimeException('Context cannot be null');
+            }
+
+            $categories[] = $loadChildren ? $this->getRootCategoryWithChildren($category) : $category;
+        }
+
+        return $categories;
+    }
+
+    /**
+     * NEXT_MAJOR: add this method to the interface.
+     *
+     * @param bool|true $loadChildren
+     *
+     * @return array
+     */
+    public function getRootCategoriesSplitByContexts($loadChildren = true)
+    {
+        $rootCategories = $this->getAllRootCategories($loadChildren);
+
+        $splitCategories = array();
+
+        foreach ($rootCategories as $category) {
+            $splitCategories[$category->getContext()->getId()][] = $category;
+        }
+
+        return $splitCategories;
     }
 
     /**
@@ -183,6 +278,8 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
 
     /**
      * Load all categories from the database, the current method is very efficient for < 256 categories.
+     *
+     * @param ContextInterface $context
      */
     protected function loadCategories(ContextInterface $context)
     {
@@ -209,9 +306,10 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
             $categories = array($category);
         }
 
+        $rootCategories = array();
         foreach ($categories as $pos => $category) {
             if (null === $category->getParent()) {
-                $root = $category;
+                $rootCategories[] = $category;
             }
 
             $this->categories[$context->getId()][$category->getId()] = $category;
@@ -225,9 +323,7 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
             }
         }
 
-        $this->categories[$context->getId()] = array(
-            0 => $root,
-        );
+        $this->categories[$context->getId()] = $rootCategories;
     }
 
     /**

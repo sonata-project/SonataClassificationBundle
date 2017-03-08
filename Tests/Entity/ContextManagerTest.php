@@ -14,9 +14,6 @@ namespace Sonata\ClassificationBundle\Tests\Entity;
 use Sonata\ClassificationBundle\Entity\ContextManager;
 use Sonata\CoreBundle\Test\EntityManagerMockFactory;
 
-/**
- * Class ContextManagerTest.
- */
 class ContextManagerTest extends \PHPUnit_Framework_TestCase
 {
     public function testGetPager()
@@ -24,6 +21,7 @@ class ContextManagerTest extends \PHPUnit_Framework_TestCase
         $self = $this;
         $this
             ->getContextManager(function ($qb) use ($self) {
+                $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(array()));
                 $qb->expects($self->never())->method('andWhere');
                 $qb->expects($self->once())->method('setParameters')->with(array());
             })
@@ -35,6 +33,7 @@ class ContextManagerTest extends \PHPUnit_Framework_TestCase
         $self = $this;
         $this
             ->getContextManager(function ($qb) use ($self) {
+                $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(array()));
                 $qb->expects($self->once())->method('andWhere')->with($self->equalTo('c.enabled = :enabled'));
                 $qb->expects($self->once())->method('setParameters')->with(array('enabled' => true));
             })
@@ -48,6 +47,7 @@ class ContextManagerTest extends \PHPUnit_Framework_TestCase
         $self = $this;
         $this
             ->getContextManager(function ($qb) use ($self) {
+                $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(array()));
                 $qb->expects($self->once())->method('andWhere')->with($self->equalTo('c.enabled = :enabled'));
                 $qb->expects($self->once())->method('setParameters')->with(array('enabled' => false));
             })
@@ -60,7 +60,7 @@ class ContextManagerTest extends \PHPUnit_Framework_TestCase
     {
         $em = EntityManagerMockFactory::create($this, $qbCallback, array());
 
-        $registry = $this->getMock('Doctrine\Common\Persistence\ManagerRegistry');
+        $registry = $this->getMockForAbstractClass('Doctrine\Common\Persistence\ManagerRegistry');
         $registry->expects($this->any())->method('getManagerForClass')->will($this->returnValue($em));
 
         return new ContextManager('Sonata\PageBundle\Entity\BaseContext', $registry);

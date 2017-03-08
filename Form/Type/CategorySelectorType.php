@@ -11,12 +11,14 @@
 
 namespace Sonata\ClassificationBundle\Form\Type;
 
+use Sonata\ClassificationBundle\Form\ChoiceList\CategoryChoiceLoader;
 use Sonata\ClassificationBundle\Model\CategoryInterface;
 use Sonata\ClassificationBundle\Model\CategoryManagerInterface;
 use Sonata\CoreBundle\Model\ManagerInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\SimpleChoiceList;
 use Symfony\Component\OptionsResolver\Options;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
@@ -40,17 +42,40 @@ class CategorySelectorType extends AbstractType
     }
 
     /**
+     * NEXT_MAJOR: Remove method, when bumping requirements to SF 2.7+.
+     *
      * {@inheritdoc}
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
+        $this->configureOptions($resolver);
+    }
+
+    /**
+     * NEXT_MAJOR: replace usage of deprecated 'choice_list' option, when bumping requirements to SF 2.7+.
+     *
+     * {@inheritdoc}
+     */
+    public function configureOptions(OptionsResolver $resolver)
+    {
         $that = $this;
 
+        if (!interface_exists('Symfony\Component\Form\ChoiceList\Loader\ChoiceLoaderInterface')) {
+            $resolver->setDefaults(array(
+                'context' => null,
+                'category' => null,
+                'choice_list' => function (Options $opts, $previousValue) use ($that) {
+                    return new SimpleChoiceList($that->getChoices($opts));
+                },
+            ));
+
+            return;
+        }
         $resolver->setDefaults(array(
             'context' => null,
             'category' => null,
-            'choice_list' => function (Options $opts, $previousValue) use ($that) {
-                return new SimpleChoiceList($that->getChoices($opts));
+            'choice_loader' => function (Options $opts, $previousValue) use ($that) {
+                return new CategoryChoiceLoader(array_flip($that->getChoices($opts)));
             },
         ));
     }
@@ -67,9 +92,9 @@ class CategorySelectorType extends AbstractType
         }
 
         if ($options['context'] === null) {
-            $categories = $this->manager->getRootCategories();
+            $categories = $this->manager->getAllRootCategories();
         } else {
-            $categories = array($this->manager->getRootCategory($options['context']));
+            $categories = $this->manager->getRootCategoriesForContext($options['context']);
         }
 
         $choices = array();

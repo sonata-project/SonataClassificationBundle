@@ -160,15 +160,67 @@
             </trans-unit>
             <trans-unit id="breadcrumb.link_category_tree">
                 <source>breadcrumb.link_category_tree</source>
-                <target>breadcrumb.link_category_tree</target>
+                <target>Categoria</target>
             </trans-unit>
             <trans-unit id="active">
                 <source>active</source>
-                <target>active</target>
+                <target>Attivo</target>
             </trans-unit>
             <trans-unit id="disabled">
                 <source>disabled</source>
-                <target>disabled</target>
+                <target>Disabilitato</target>
+            </trans-unit>
+            <trans-unit id="form.label_category">
+                <source>form.label_category</source>
+                <target>Categoria</target>
+            </trans-unit>
+            <trans-unit id="form.label_collection">
+                <source>form.label_collection</source>
+                <target>Collezione</target>
+            </trans-unit>
+            <trans-unit id="form.label_tag">
+                <source>form.label_tag</source>
+                <target>Tag</target>
+            </trans-unit>
+            <trans-unit id="form.label_title">
+                <source>form.label_title</source>
+                <target>Titolo</target>
+            </trans-unit>
+            <trans-unit id="no_collections_found">
+                <source>no_collections_found</source>
+                <target>Nessuna collezione trovata</target>
+            </trans-unit>
+            <trans-unit id="no_categories_found">
+                <source>no_categories_found</source>
+                <target>Nessuna categoria trovata</target>
+            </trans-unit>
+            <trans-unit id="no_tags_found">
+                <source>no_tags_found</source>
+                <target>Nessun tag trovato</target>
+            </trans-unit>
+            <trans-unit id="breadcrumb.link_category_create">
+                <source>breadcrumb.link_category_create</source>
+                <target>Crea</target>
+            </trans-unit>
+            <trans-unit id="breadcrumb.link_tag_create">
+                <source>breadcrumb.link_tag_create</source>
+                <target>Crea</target>
+            </trans-unit>
+            <trans-unit id="breadcrumb.link_collection_create">
+                <source>breadcrumb.link_collection_create</source>
+                <target>Crea</target>
+            </trans-unit>
+            <trans-unit id="breadcrumb.link_context_create">
+                <source>breadcrumb.link_context_create</source>
+                <target>Crea</target>
+            </trans-unit>
+            <trans-unit id="form_general">
+                <source>General</source>
+                <target>Generale</target>
+            </trans-unit>
+            <trans-unit id="form_options">
+                <source>Options</source>
+                <target>Opzioni</target>
             </trans-unit>
         </body>
     </file>

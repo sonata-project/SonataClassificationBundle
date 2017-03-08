@@ -11,9 +11,11 @@
 
 namespace Sonata\ClassificationBundle\Controller\Api;
 
+use FOS\RestBundle\Context\Context;
 use FOS\RestBundle\Controller\Annotations\QueryParam;
 use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Request\ParamFetcherInterface;
+use FOS\RestBundle\View\View as FOSRestView;
 use JMS\Serializer\SerializationContext;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Sonata\ClassificationBundle\Model\CategoryInterface;
@@ -26,8 +28,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
- * Class CategoryController.
- *
  * @author Vincent Composieux <vincent.composieux@gmail.com>
  */
 class CategoryController
@@ -43,8 +43,6 @@ class CategoryController
     protected $formFactory;
 
     /**
-     * Constructor.
-     *
      * @param CategoryManagerInterface $categoryManager
      * @param FormFactoryInterface     $formFactory
      */
@@ -67,7 +65,7 @@ class CategoryController
      * @QueryParam(name="enabled", requirements="0|1", nullable=true, strict=true, description="Enabled/Disabled categories filter")
      * @QueryParam(name="context", requirements="\S+", nullable=true, strict=true, description="Context of categories")
      *
-     * @View(serializerGroups="sonata_api_read", serializerEnableMaxDepthChecks=true)
+     * @View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
      *
      * @param ParamFetcherInterface $paramFetcher
      *
@@ -98,7 +96,7 @@ class CategoryController
      *  }
      * )
      *
-     * @View(serializerGroups="sonata_api_read", serializerEnableMaxDepthChecks=true)
+     * @View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
      *
      * @param $id
      *
@@ -256,11 +254,18 @@ class CategoryController
             $category = $form->getData();
             $this->categoryManager->save($category);
 
-            $view = \FOS\RestBundle\View\View::create($category);
-            $serializationContext = SerializationContext::create();
-            $serializationContext->setGroups(array('sonata_api_read'));
-            $serializationContext->enableMaxDepthChecks();
-            $view->setSerializationContext($serializationContext);
+            $view = FOSRestView::create($category);
+
+            if (class_exists('FOS\RestBundle\Context\Context')) {
+                $context = new Context();
+                $context->setGroups(array('sonata_api_read'));
+                $view->setContext($context);
+            } else {
+                $serializationContext = SerializationContext::create();
+                $serializationContext->setGroups(array('sonata_api_read'));
+                $serializationContext->enableMaxDepthChecks();
+                $view->setSerializationContext($serializationContext);
+            }
 
             return $view;
         }

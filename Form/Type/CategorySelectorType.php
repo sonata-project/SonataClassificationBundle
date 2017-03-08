@@ -92,9 +92,9 @@ class CategorySelectorType extends AbstractType
         }
 
         if ($options['context'] === null) {
-            $categories = $this->manager->getRootCategories();
+            $categories = $this->manager->getAllRootCategories();
         } else {
-            $categories = array($this->manager->getRootCategory($options['context']));
+            $categories = $this->manager->getRootCategoriesForContext($options['context']);
         }
 
         $choices = array();

@@ -57,15 +57,15 @@ file that was distributed with this source code.
                                 <strong class="text-info">{{ current_context.name }}</strong> <span class="caret"></span>
                             </button>
                             <ul class="dropdown-menu" role="menu">
-                                {% for category in root_categories %}
+                                {% for context_id, categories in root_categories %}
                                     <li>
-                                        <a href="{{ admin.generateUrl('tree', { 'context': category.context.id }) }}">
-                                            {% if current_context and category.context.id == current_context.id %}
+                                        <a href="{{ admin.generateUrl('tree', { 'context': context_id }) }}">
+                                            {% if current_context and context_id == current_context.id %}
                                                 <span class="pull-right">
                                                     <i class="fa fa-check"></i>
                                                 </span>
                                             {% endif %}
-                                            {{ category.name }}
+                                            {{ categories|join(', ') }}
                                         </a>
                                     </li>
                                 {% endfor %}
@@ -75,10 +75,10 @@ file that was distributed with this source code.
                 </h1>
             </div>
             <div class="box-content">
-                {% if main_category is empty %}
+                {% if current_categories is empty %}
                     {{ tree.navigate_child([], admin, true, 0) }}
                 {% else %}
-                    {{ tree.navigate_child([main_category], admin, true, 0) }}
+                    {{ tree.navigate_child(current_categories, admin, true, 0) }}
                 {% endif %}
             </div>
         </div>

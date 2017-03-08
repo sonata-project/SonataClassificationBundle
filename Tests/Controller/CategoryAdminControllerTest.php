@@ -400,11 +400,11 @@ class CategoryAdminControllerTest extends \PHPUnit_Framework_TestCase
                 $categoryMock->setContext($this->getContextMock($category[1]));
             }
             $categoryMock->setEnabled(true);
-            array_push($categoriesMock, $categoryMock);
+            $categoriesMock[$categoryMock->getContext()->getId()][] = $categoryMock;
         }
 
         $this->categoryManager->expects($this->any())
-            ->method('getRootCategories')
+            ->method('getRootCategoriesSplitByContexts')
             ->will($this->returnValue($categoriesMock));
 
         $this->assertInstanceOf('Symfony\Component\HttpFoundation\Response',

@@ -42,8 +42,8 @@ final class AbstractCollectionsBlockServiceTest extends AbstractBlockServiceTest
         parent::setUp();
 
         $this->templating = new FakeTemplating();
-        $this->contextManager = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Model\ContextManagerInterface');
-        $this->collectionManager = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Model\CollectionManagerInterface');
+        $this->contextManager = $this->createMock('Sonata\ClassificationBundle\Model\ContextManagerInterface');
+        $this->collectionManager = $this->createMock('Sonata\ClassificationBundle\Model\CollectionManagerInterface');
         $this->collectionAdmin = $this->getMockBuilder('Sonata\ClassificationBundle\Admin\CollectionAdmin')->disableOriginalConstructor()->getMock();
     }
 
@@ -76,7 +76,7 @@ final class AbstractCollectionsBlockServiceTest extends AbstractBlockServiceTest
             ->with($this->equalTo('23'))
             ->will($this->returnValue($collection));
 
-        $block = $this->getMockForAbstractClass('Sonata\BlockBundle\Model\BlockInterface');
+        $block = $this->createMock('Sonata\BlockBundle\Model\BlockInterface');
         $block->expects($this->any())
             ->method('getSetting')
             ->with($this->equalTo('collectionId'))
@@ -99,7 +99,7 @@ final class AbstractCollectionsBlockServiceTest extends AbstractBlockServiceTest
             ->getMockForAbstractClass();
         $collection->expects($this->any())->method('getId')->will($this->returnValue(23));
 
-        $block = $this->getMockForAbstractClass('Sonata\BlockBundle\Model\BlockInterface');
+        $block = $this->createMock('Sonata\BlockBundle\Model\BlockInterface');
         $block->expects($this->any())
             ->method('getSetting')
             ->with($this->equalTo('collectionId'))
@@ -122,7 +122,7 @@ final class AbstractCollectionsBlockServiceTest extends AbstractBlockServiceTest
             ->getMockForAbstractClass();
         $collection->expects($this->any())->method('getId')->will($this->returnValue(23));
 
-        $block = $this->getMockForAbstractClass('Sonata\BlockBundle\Model\BlockInterface');
+        $block = $this->createMock('Sonata\BlockBundle\Model\BlockInterface');
         $block->expects($this->any())
             ->method('getSetting')
             ->with($this->equalTo('collectionId'))

@@ -42,8 +42,8 @@ final class AbstractCategoriesBlockServiceTest extends AbstractBlockServiceTestC
         parent::setUp();
 
         $this->templating = new FakeTemplating();
-        $this->contextManager = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Model\ContextManagerInterface');
-        $this->categoryManager = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Model\CategoryManagerInterface');
+        $this->contextManager = $this->createMock('Sonata\ClassificationBundle\Model\ContextManagerInterface');
+        $this->categoryManager = $this->createMock('Sonata\ClassificationBundle\Model\CategoryManagerInterface');
         $this->categoryAdmin = $this->getMockBuilder('Sonata\ClassificationBundle\Admin\CategoryAdmin')->disableOriginalConstructor()->getMock();
     }
 
@@ -76,7 +76,7 @@ final class AbstractCategoriesBlockServiceTest extends AbstractBlockServiceTestC
             ->with($this->equalTo('23'))
             ->will($this->returnValue($category));
 
-        $block = $this->getMockForAbstractClass('Sonata\BlockBundle\Model\BlockInterface');
+        $block = $this->createMock('Sonata\BlockBundle\Model\BlockInterface');
         $block->expects($this->any())
             ->method('getSetting')
             ->with($this->equalTo('categoryId'))
@@ -99,7 +99,7 @@ final class AbstractCategoriesBlockServiceTest extends AbstractBlockServiceTestC
             ->getMockForAbstractClass();
         $category->expects($this->any())->method('getId')->will($this->returnValue(23));
 
-        $block = $this->getMockForAbstractClass('Sonata\BlockBundle\Model\BlockInterface');
+        $block = $this->createMock('Sonata\BlockBundle\Model\BlockInterface');
         $block->expects($this->any())
             ->method('getSetting')
             ->with($this->equalTo('categoryId'))
@@ -122,7 +122,7 @@ final class AbstractCategoriesBlockServiceTest extends AbstractBlockServiceTestC
             ->getMockForAbstractClass();
         $category->expects($this->any())->method('getId')->will($this->returnValue(23));
 
-        $block = $this->getMockForAbstractClass('Sonata\BlockBundle\Model\BlockInterface');
+        $block = $this->createMock('Sonata\BlockBundle\Model\BlockInterface');
         $block->expects($this->any())
             ->method('getSetting')
             ->with($this->equalTo('categoryId'))

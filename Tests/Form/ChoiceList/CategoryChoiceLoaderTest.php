@@ -12,11 +12,12 @@
 namespace Sonata\AdminBundle\Tests\Form\ChoiceList;
 
 use Sonata\ClassificationBundle\Form\ChoiceList\CategoryChoiceLoader;
+use Sonata\ClassificationBundle\Tests\Helpers\PHPUnit_Framework_TestCase;
 
 /**
  * @author Anton Zlotnikov <exp.razor@gmail.com>
  */
-class CategoryChoiceLoaderTest extends \PHPUnit_Framework_TestCase
+class CategoryChoiceLoaderTest extends PHPUnit_Framework_TestCase
 {
     protected function setUp()
     {

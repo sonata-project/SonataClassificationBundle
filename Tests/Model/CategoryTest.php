@@ -13,22 +13,23 @@ namespace Sonata\ClassificationBundle\Tests\Model;
 
 use Sonata\ClassificationBundle\Model\Category;
 use Sonata\ClassificationBundle\Model\ContextInterface;
+use Sonata\ClassificationBundle\Tests\Helpers\PHPUnit_Framework_TestCase;
 use Sonata\MediaBundle\Model\MediaInterface;
 
 /**
  * @author Dariusz Markowicz <dmarkowicz77@gmail.com>
  */
-class CategoryTest extends \PHPUnit_Framework_TestCase
+class CategoryTest extends PHPUnit_Framework_TestCase
 {
     public function testSetterGetter()
     {
         $time = new \DateTime();
 
         /** @var ContextInterface $context */
-        $context = $this->getMockBuilder('Sonata\ClassificationBundle\Model\ContextInterface')->getMock();
+        $context = $this->createMock('Sonata\ClassificationBundle\Model\ContextInterface');
 
         /** @var MediaInterface $media */
-        $media = $this->getMockBuilder('Sonata\MediaBundle\Model\MediaInterface')->getMock();
+        $media = $this->createMock('Sonata\MediaBundle\Model\MediaInterface');
 
         /** @var Category $category */
         $category = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Model\Category');
@@ -86,7 +87,7 @@ class CategoryTest extends \PHPUnit_Framework_TestCase
         $cat3 = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Model\Category');
 
         /** @var ContextInterface $context */
-        $context = $this->getMockBuilder('Sonata\ClassificationBundle\Model\ContextInterface')->getMock();
+        $context = $this->createMock('Sonata\ClassificationBundle\Model\ContextInterface');
 
         /** @var Category $category */
         $category = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Model\Category');

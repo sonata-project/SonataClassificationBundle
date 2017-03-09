@@ -42,8 +42,8 @@ final class AbstractTagsBlockServiceTest extends AbstractBlockServiceTestCase
         parent::setUp();
 
         $this->templating = new FakeTemplating();
-        $this->contextManager = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Model\ContextManagerInterface');
-        $this->tagManager = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Model\TagManagerInterface');
+        $this->contextManager = $this->createMock('Sonata\ClassificationBundle\Model\ContextManagerInterface');
+        $this->tagManager = $this->createMock('Sonata\ClassificationBundle\Model\TagManagerInterface');
         $this->tagAdmin = $this->getMockBuilder('Sonata\ClassificationBundle\Admin\TagAdmin')->disableOriginalConstructor()->getMock();
     }
 
@@ -76,7 +76,7 @@ final class AbstractTagsBlockServiceTest extends AbstractBlockServiceTestCase
             ->with($this->equalTo('23'))
             ->will($this->returnValue($tag));
 
-        $block = $this->getMockForAbstractClass('Sonata\BlockBundle\Model\BlockInterface');
+        $block = $this->createMock('Sonata\BlockBundle\Model\BlockInterface');
         $block->expects($this->any())
             ->method('getSetting')
             ->with($this->equalTo('tagId'))
@@ -99,7 +99,7 @@ final class AbstractTagsBlockServiceTest extends AbstractBlockServiceTestCase
             ->getMockForAbstractClass();
         $tag->expects($this->any())->method('getId')->will($this->returnValue(23));
 
-        $block = $this->getMockForAbstractClass('Sonata\BlockBundle\Model\BlockInterface');
+        $block = $this->createMock('Sonata\BlockBundle\Model\BlockInterface');
         $block->expects($this->any())
             ->method('getSetting')
             ->with($this->equalTo('tagId'))
@@ -122,7 +122,7 @@ final class AbstractTagsBlockServiceTest extends AbstractBlockServiceTestCase
             ->getMockForAbstractClass();
         $tag->expects($this->any())->method('getId')->will($this->returnValue(23));
 
-        $block = $this->getMockForAbstractClass('Sonata\BlockBundle\Model\BlockInterface');
+        $block = $this->createMock('Sonata\BlockBundle\Model\BlockInterface');
         $block->expects($this->any())
             ->method('getSetting')
             ->with($this->equalTo('tagId'))

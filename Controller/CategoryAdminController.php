@@ -18,7 +18,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * Page Admin Controller.
+ * Category Admin Controller.
  *
  * @author Thomas Rabaix <thomas.rabaix@sonata-project.org>
  */
@@ -66,26 +66,33 @@ class CategoryAdminController extends Controller
     public function treeAction(Request $request)
     {
         $categoryManager = $this->get('sonata.classification.manager.category');
-
         $currentContext = false;
         if ($context = $request->get('context')) {
             $currentContext = $this->get('sonata.classification.manager.context')->find($context);
         }
 
-        $rootCategories = $categoryManager->getRootCategories(false);
+        // all root categories
+        $rootCategoriesSplitByContexts = $categoryManager->getRootCategoriesSplitByContexts(false);
 
-        if (!$currentContext) {
-            $mainCategory = current($rootCategories);
-            $currentContext = $mainCategory->getContext();
+        // root categories inside the current context
+        $currentCategories = array();
+
+        if (!$currentContext && !empty($rootCategoriesSplitByContexts)) {
+            $currentCategories = current($rootCategoriesSplitByContexts);
+            $currentContext = current($currentCategories)->getContext();
         } else {
-            foreach ($rootCategories as $category) {
-                if ($currentContext->getId() != $category->getContext()->getId()) {
+            foreach ($rootCategoriesSplitByContexts as $contextId => $contextCategories) {
+                if ($currentContext->getId() != $contextId) {
                     continue;
                 }
 
-                $mainCategory = $category;
+                foreach ($contextCategories as $category) {
+                    if ($currentContext->getId() != $category->getContext()->getId()) {
+                        continue;
+                    }
 
-                break;
+                    $currentCategories[] = $category;
+                }
             }
         }
 
@@ -99,10 +106,10 @@ class CategoryAdminController extends Controller
 
         $this->get('twig')->getExtension('form')->renderer->setTheme($formView, $this->admin->getFilterTheme());
 
-        return $this->render('SonataClassificationBundle:CategoryAdmin:tree.html.twig', array(
+        return $this->render($this->admin->getTemplate('tree'), array(
             'action' => 'tree',
-            'main_category' => $mainCategory,
-            'root_categories' => $rootCategories,
+            'current_categories' => $currentCategories,
+            'root_categories' => $rootCategoriesSplitByContexts,
             'current_context' => $currentContext,
             'form' => $formView,
             'csrf_token' => $this->getCsrfToken('sonata.batch'),

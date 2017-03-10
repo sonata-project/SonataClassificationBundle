@@ -11,13 +11,13 @@
 
 namespace Sonata\ClassificationBundle\Admin;
 
-use Sonata\AdminBundle\Admin\Admin;
+use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\ClassificationBundle\Entity\ContextManager;
 use Sonata\ClassificationBundle\Model\ContextInterface;
 use Sonata\ClassificationBundle\Model\ContextManagerInterface;
 
-abstract class ContextAwareAdmin extends Admin
+abstract class ContextAwareAdmin extends AbstractAdmin
 {
     /**
      * @var ContextManagerInterface
@@ -68,9 +68,12 @@ abstract class ContextAwareAdmin extends Admin
      */
     public function getPersistentParameters()
     {
-        $parameters = array(
-            'context' => '',
-            'hide_context' => $this->hasRequest() ? (int) $this->getRequest()->get('hide_context', 0) : 0,
+        $parameters = array_merge(
+            parent::getPersistentParameters(),
+            array(
+                'context' => '',
+                'hide_context' => $this->hasRequest() ? (int) $this->getRequest()->get('hide_context', 0) : 0,
+            )
         );
 
         if ($this->getSubject()) {

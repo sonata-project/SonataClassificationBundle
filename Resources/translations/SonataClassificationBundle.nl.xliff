@@ -170,6 +170,34 @@
                 <source>disabled</source>
                 <target>disabled</target>
             </trans-unit>
+            <trans-unit id="form.label_category">
+                <source>form.label_category</source>
+                <target>form.label_category</target>
+            </trans-unit>
+            <trans-unit id="form.label_collection">
+                <source>form.label_collection</source>
+                <target>form.label_collection</target>
+            </trans-unit>
+            <trans-unit id="form.label_tag">
+                <source>form.label_tag</source>
+                <target>form.label_tag</target>
+            </trans-unit>
+            <trans-unit id="form.label_title">
+                <source>form.label_title</source>
+                <target>form.label_title</target>
+            </trans-unit>
+            <trans-unit id="no_collections_found">
+                <source>no_collections_found</source>
+                <target>no_collections_found</target>
+            </trans-unit>
+            <trans-unit id="no_categories_found">
+                <source>no_categories_found</source>
+                <target>no_categories_found</target>
+            </trans-unit>
+            <trans-unit id="no_tags_found">
+                <source>no_tags_found</source>
+                <target>no_tags_found</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

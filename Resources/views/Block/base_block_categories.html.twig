@@ -1,0 +1,88 @@
+{#
+
+This file is part of the Sonata package.
+
+(c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+
+#}
+
+{% extends sonata_block.templates.block_base %}
+
+{% block block %}
+    <div class="panel panel-default panel-category-list">
+        {% if settings.title is not empty %}
+            <div class="panel-heading">
+                <h4 class="panel-title"><i class="fa fa-folder-open-o"></i> {{ settings.title }}</h4>
+            </div>
+        {% endif %}
+
+        <div class="panel-body">
+            {% if root.children|length %}
+                <ul class="nav nav-pills nav-stacked">
+                    {% set item = root %}
+                    {% set active = category %}
+                    {{ block('children') }}
+                </ul>
+            {% else %}
+                <p>{{ 'no_categories_found'|trans({}, 'SonataClassificationBundle') }}</p>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
+
+{% macro attributes(attributes) %}
+    {% for name, value in attributes %}
+        {%- if value is not none and value is not sameas(false) -%}
+            {{- ' %s="%s"'|format(name, value is sameas(true) ? name|e : value|e)|raw -}}
+        {%- endif -%}
+    {%- endfor -%}
+{% endmacro %}
+
+{% block list %}
+    {% if item.children|length %}
+        <ul>
+            {{ block('children') }}
+        </ul>
+    {% endif %}
+{% endblock %}
+
+{% block children %}
+    {# save current variables #}
+    {% set currentItem = item %}
+    {% for item in currentItem.children %}
+        {{ block('item') }}
+    {% endfor %}
+    {# restore current variables #}
+    {% set item = currentItem %}
+{% endblock %}
+
+{% block item %}
+    {# building the class of the item #}
+    {%- set classes = [] %}
+    {%- if active and active.id == item.id %}
+        {%- set classes = classes|merge(['active']) %}
+    {%- endif %}
+    {%- if loop.first %}
+        {%- set classes = classes|merge(['first']) %}
+    {%- endif %}
+    {%- if loop.last %}
+        {%- set classes = classes|merge(['last']) %}
+    {%- endif %}
+
+    {%- set attributes = [] %}
+    {%- if classes is not empty %}
+        {%- set attributes = attributes|merge({'class': classes|join(' ')}) %}
+    {%- endif %}
+    <li{{ _self.attributes(attributes) }}>
+        {{ block('link_category') }}
+        {# render the list of children#}
+        {{ block('list') }}
+    </li>
+{% endblock %}
+
+{% block link_category %}{{ block('label') }}{% endblock %}
+
+{% block label %}{{ category.name }}{% endblock %}

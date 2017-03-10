@@ -75,7 +75,7 @@ class FixContextCommand extends ContainerAwareCommand
                 continue;
             }
 
-            $output->writeln(sprintf(' > attach default context to collection: %s (%s)', $tag->getSlug(), $tag->getId()));
+            $output->writeln(sprintf(' > attach default context to collection: %s (%s)', $collection->getSlug(), $collection->getId()));
             $collection->setContext($defaultContext);
 
             $collectionManager->save($collection);

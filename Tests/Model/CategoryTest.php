@@ -1,0 +1,131 @@
+<?php
+
+/*
+ * This file is part of the Sonata Project package.
+ *
+ * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+namespace Sonata\ClassificationBundle\Tests\Model;
+
+use Sonata\ClassificationBundle\Model\Category;
+use Sonata\ClassificationBundle\Model\ContextInterface;
+use Sonata\MediaBundle\Model\MediaInterface;
+
+/**
+ * @author Dariusz Markowicz <dmarkowicz77@gmail.com>
+ */
+class CategoryTest extends \PHPUnit_Framework_TestCase
+{
+    public function testSetterGetter()
+    {
+        $time = new \DateTime();
+
+        /** @var ContextInterface $context */
+        $context = $this->getMockBuilder('Sonata\ClassificationBundle\Model\ContextInterface')->getMock();
+
+        /** @var MediaInterface $media */
+        $media = $this->getMockBuilder('Sonata\MediaBundle\Model\MediaInterface')->getMock();
+
+        /** @var Category $category */
+        $category = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Model\Category');
+        $category->setName('Hello World');
+        $category->setEnabled(true);
+        $category->setDescription('My description');
+        $category->setCreatedAt($time);
+        $category->setUpdatedAt($time);
+        $category->setPosition(2);
+        $category->setMedia($media);
+        $category->setContext($context);
+
+        $this->assertEquals('Hello World', $category->getName());
+        $this->assertEquals('Hello World', $category->__toString());
+        $this->assertEquals('hello-world', $category->getSlug());
+        $this->assertTrue($category->getEnabled());
+        $this->assertEquals('My description', $category->getDescription());
+        $this->assertEquals($time, $category->getCreatedAt());
+        $this->assertEquals($time, $category->getUpdatedAt());
+        $this->assertEquals(2, $category->getPosition());
+        $this->assertEquals($media, $category->getMedia());
+        $this->assertEquals($context, $category->getContext());
+
+        $category->setName('');
+        $this->assertEquals('n-a', $category->getSlug());
+        $this->assertEquals('n/a', $category->__toString());
+
+        $category->setName('Привет мир');
+        $this->assertEquals('privet-mir', $category->getSlug());
+        $this->assertEquals('Привет мир', $category->__toString());
+
+        $category->setSlug('Custom Slug');
+        $this->assertEquals('custom-slug', $category->getSlug());
+    }
+
+    public function testParent()
+    {
+        /** @var Category $parent */
+        $parent = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Model\Category');
+
+        /** @var Category $category */
+        $category = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Model\Category');
+        $category->setParent($parent);
+        $this->assertEquals($parent, $category->getParent());
+        $this->assertCount(1, $parent->getChildren());
+    }
+
+    public function testChildren()
+    {
+        /** @var Category $cat1 */
+        $cat1 = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Model\Category');
+        /** @var Category $cat2 */
+        $cat2 = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Model\Category');
+        /** @var Category $cat3 */
+        $cat3 = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Model\Category');
+
+        /** @var ContextInterface $context */
+        $context = $this->getMockBuilder('Sonata\ClassificationBundle\Model\ContextInterface')->getMock();
+
+        /** @var Category $category */
+        $category = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Model\Category');
+        $category->setContext($context);
+        $this->assertFalse($category->hasChildren());
+
+        $category->addChild($cat1);
+        $category->addChild($cat2);
+        $category->addChild($cat3);
+        $this->assertEquals($context, $cat1->getContext()); // child context set to parent
+        $this->assertEquals($category, $cat1->getParent());
+        $this->assertTrue($category->hasChildren());
+        $this->assertCount(3, $category->getChildren());
+
+        // Category::removeChild implementation use getId() which is not a part of interface nor model, skipping
+
+        // No type hint in interface so assume basic array.
+        $category->setChildren(array());
+        $this->assertCount(0, $category->getChildren());
+        $category->setChildren(array($cat1, $cat2, $cat3));
+        $this->assertCount(3, $category->getChildren());
+    }
+
+    public function testPrePersist()
+    {
+        /** @var Category $category */
+        $category = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Model\Category');
+        $category->prePersist();
+
+        $this->assertInstanceOf('\DateTime', $category->getCreatedAt());
+        $this->assertInstanceOf('\DateTime', $category->getUpdatedAt());
+    }
+
+    public function testPreUpdate()
+    {
+        /** @var Category $category */
+        $category = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Model\Category');
+        $category->preUpdate();
+
+        $this->assertInstanceOf('\DateTime', $category->getUpdatedAt());
+    }
+}

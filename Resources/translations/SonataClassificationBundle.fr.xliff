@@ -20,15 +20,15 @@
             </trans-unit>
             <trans-unit id="breadcrumb.link_collection_list">
                 <source>breadcrumb.link_collection_list</source>
-                <target>Liste des collections</target>
+                <target>Collections</target>
             </trans-unit>
             <trans-unit id="breadcrumb.link_category_list">
                 <source>breadcrumb.link_category_list</source>
-                <target>Liste des catégories</target>
+                <target>Catégories</target>
             </trans-unit>
             <trans-unit id="breadcrumb.link_category_tree">
                 <source>breadcrumb.link_category_tree</source>
-                <target>Catégorie</target>
+                <target>Catégories</target>
             </trans-unit>
             <trans-unit id="list.label_name">
                 <source>list.label_name</source>
@@ -68,7 +68,7 @@
             </trans-unit>
             <trans-unit id="breadcrumb.link_tag_list">
                 <source>breadcrumb.link_tag_list</source>
-                <target>Liste des tags</target>
+                <target>Tags</target>
             </trans-unit>
             <trans-unit id="form.label_slug">
                 <source>form.label_slug</source>
@@ -112,11 +112,11 @@
             </trans-unit>
             <trans-unit id="form.label_media">
                 <source>form.label_media</source>
-                <target>Media</target>
+                <target>Média</target>
             </trans-unit>
             <trans-unit id="breadcrumb.link_context_list">
                 <source>breadcrumb.link_context_list</source>
-                <target>Contexts</target>
+                <target>Contextes</target>
             </trans-unit>
             <trans-unit id="list.label_id">
                 <source>list.label_id</source>
@@ -128,7 +128,7 @@
             </trans-unit>
             <trans-unit id="label_contexts">
                 <source>label_contexts</source>
-                <target>Contexts</target>
+                <target>Contextes</target>
             </trans-unit>
             <trans-unit id="form.label_id">
                 <source>form.label_id</source>
@@ -136,11 +136,11 @@
             </trans-unit>
             <trans-unit id="filter.label_context">
                 <source>filter.label_context</source>
-                <target>Context</target>
+                <target>Contexte</target>
             </trans-unit>
             <trans-unit id="list.label_context">
                 <source>list.label_context</source>
-                <target>Context</target>
+                <target>Contexte</target>
             </trans-unit>
             <trans-unit id="tree_catalog_title">
                 <source>tree_catalog_title</source>
@@ -165,6 +165,54 @@
             <trans-unit id="disabled">
                 <source>disabled</source>
                 <target>Désactivé</target>
+            </trans-unit>
+            <trans-unit id="form.label_category">
+                <source>form.label_category</source>
+                <target>Catégorie</target>
+            </trans-unit>
+            <trans-unit id="form.label_collection">
+                <source>form.label_collection</source>
+                <target>Collection</target>
+            </trans-unit>
+            <trans-unit id="form.label_tag">
+                <source>form.label_tag</source>
+                <target>Tag</target>
+            </trans-unit>
+            <trans-unit id="form.label_title">
+                <source>form.label_title</source>
+                <target>Titre</target>
+            </trans-unit>
+            <trans-unit id="no_collections_found">
+                <source>no_collections_found</source>
+                <target>Aucune collection trouvée</target>
+            </trans-unit>
+            <trans-unit id="no_categories_found">
+                <source>no_categories_found</source>
+                <target>Aucune catégorie trouvée</target>
+            </trans-unit>
+            <trans-unit id="no_tags_found">
+                <source>no_tags_found</source>
+                <target>Aucun tag trouvé</target>
+            </trans-unit>
+            <trans-unit id="form.label_context">
+                <source>form.label_context</source>
+                <target>Contexte</target>
+            </trans-unit>
+            <trans-unit id="breadcrumb.link_collection_create">
+                <source>breadcrumb.link_collection_create</source>
+                <target>Ajouter</target>
+            </trans-unit>
+            <trans-unit id="breadcrumb.link_tag_create">
+                <source>breadcrumb.link_tag_create</source>
+                <target>Ajouter</target>
+            </trans-unit>
+            <trans-unit id="breadcrumb.link_category_create">
+                <source>breadcrumb.link_category_create</source>
+                <target>Ajouter</target>
+            </trans-unit>
+            <trans-unit id="breadcrumb.link_context_create">
+                <source>breadcrumb.link_context_create</source>
+                <target>Ajouter</target>
             </trans-unit>
         </body>
     </file>

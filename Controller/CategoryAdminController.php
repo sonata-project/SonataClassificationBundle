@@ -12,7 +12,6 @@
 namespace Sonata\ClassificationBundle\Controller;
 
 use Sonata\AdminBundle\Controller\CRUDController as Controller;
-use Sonata\AdminBundle\Form\Type\Filter\ChoiceType;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -99,7 +98,7 @@ class CategoryAdminController extends Controller
         $datagrid = $this->admin->getDatagrid();
 
         if ($this->admin->getPersistentParameter('context')) {
-            $datagrid->setValue('context', ChoiceType::TYPE_EQUAL, $this->admin->getPersistentParameter('context'));
+            $datagrid->setValue('context', null, $this->admin->getPersistentParameter('context'));
         }
 
         $formView = $datagrid->getForm()->createView();

@@ -12,6 +12,7 @@
 namespace Sonata\ClassificationBundle\Controller;
 
 use Sonata\AdminBundle\Controller\CRUDController as Controller;
+use Symfony\Component\Form\FormView;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -47,7 +48,7 @@ class CategoryAdminController extends Controller
         $formView = $datagrid->getForm()->createView();
 
         // set the theme for the current Admin Form
-        $this->get('twig')->getExtension('form')->renderer->setTheme($formView, $this->admin->getFilterTheme());
+        $this->setFormTheme($formView, $this->admin->getFilterTheme());
 
         return $this->render($this->admin->getTemplate('list'), array(
             'action' => 'list',
@@ -103,7 +104,7 @@ class CategoryAdminController extends Controller
 
         $formView = $datagrid->getForm()->createView();
 
-        $this->get('twig')->getExtension('form')->renderer->setTheme($formView, $this->admin->getFilterTheme());
+        $this->setFormTheme($formView, $this->admin->getFilterTheme());
 
         return $this->render($this->admin->getTemplate('tree'), array(
             'action' => 'tree',
@@ -113,5 +114,25 @@ class CategoryAdminController extends Controller
             'form' => $formView,
             'csrf_token' => $this->getCsrfToken('sonata.batch'),
         ));
+    }
+
+    /**
+     * Sets the admin form theme to form view. Used for compatibility between Symfony versions.
+     *
+     * @param FormView $formView
+     * @param string   $theme
+     */
+    private function setFormTheme(FormView $formView, $theme)
+    {
+        $twig = $this->get('twig');
+
+        // BC for Symfony < 3.2 where this runtime does not exists
+        if (!method_exists('Symfony\Bridge\Twig\AppVariable', 'getToken')) {
+            $twig->getExtension('Symfony\Bridge\Twig\Extension\FormExtension')
+                ->renderer->setTheme($formView, $theme);
+
+            return;
+        }
+        $twig->getRuntime('Symfony\Bridge\Twig\Form\TwigRenderer')->setTheme($formView, $theme);
     }
 }

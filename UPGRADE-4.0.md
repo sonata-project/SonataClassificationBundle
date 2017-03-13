@@ -8,3 +8,9 @@ All the deprecated code introduced on 3.x is removed on 4.0.
 Please read [3.x](https://github.com/sonata-project/SonataClassificationBundle/tree/3.x) upgrade guides for more information.
 
 See also the [diff code](https://github.com/sonata-project/SonataClassificationBundle/compare/3.x...4.0.0).
+
+### Models
+If you have implemented a custom model, you must adapt the signature of the following new methods:
+ * `CategoryInterface::getId`
+ * `CollectionInterface::getId`
+ * `TagInterface::getId`

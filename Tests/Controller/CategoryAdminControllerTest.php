@@ -337,6 +337,14 @@ class CategoryAdminControllerTest extends PHPUnit_Framework_TestCase
             ->method('getForm')
             ->will($this->returnValue($form));
 
+        $datagrid->expects($this->once())
+            ->method('getValues')
+            ->will($this->returnValue(array(
+                'context' => array(
+                    'value' => $context ?: '',
+                ),
+            )));
+
         $this->admin->expects($this->any())
             ->method('getPersistentParameter')
             ->will($this->returnValue($context));

@@ -17,6 +17,7 @@ file that was distributed with this source code.
 
 {% import _self as tree %}
 {% macro navigate_child(collection, admin, root, depth) %}
+    {% import _self as tree %}
     <ul{% if root %} class="sonata-tree sonata-tree--toggleable js-treeview"{% endif %}>
         {% for element in collection %}
             <li class="sonata-ba-list-field" objectId="{{ element.id }}" >
@@ -30,7 +31,7 @@ file that was distributed with this source code.
                 </div>
 
                 {% if element.children|length %}
-                    {{ _self.navigate_child(element.children, admin, false, depth + 1) }}
+                    {{ tree.navigate_child(element.children, admin, false, depth + 1) }}
                 {% endif %}
             </li>
         {% endfor %}

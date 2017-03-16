@@ -2,6 +2,25 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.3.0](https://github.com/sonata-project/SonataClassificationBundle/compare/3.2.1...3.3.0) - 2017-03-16
+### Added
+- Menu icon (fa-tags).
+- Fix bad / missing translations in french.
+- new methods for root categories in `CategoryManager`
+- `CategoryManager::loadCategories` method now loads all root categories in context
+- Categories tree now renders all root categories in context
+
+### Fixed
+- Fix usage of deprecated `choice_list` option for >=SF2.7
+- Allow false value for category in `AbstractCategoriesBlockService`
+- Allow false value for collection in `AbstractCollectionsBlockService`
+- Allow false value for tag in `AbstractTagsBlockService`
+- use `interface_exists` instead of `class_exists`
+- Fixed missing type field in filters form in categories tree mode
+- Twig runtime error on Symfony < 3.2 and Twig 2.x
+- Fixed conflict of datagrid `context` value and persistent `context` parameter
+- Fixed using `_self` in `navigate_child` macro in tree template (Twig 2.0 support)
+
 ## [3.2.1](https://github.com/sonata-project/SonataClassificationBundle/compare/3.2.0...3.2.1) - 2017-02-02
 ### Fixed
 - Category tree view was not easily customizable

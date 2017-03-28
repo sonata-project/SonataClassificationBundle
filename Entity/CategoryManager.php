@@ -127,7 +127,7 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
     /**
      * @todo NEXT_MAJOR: remove this method.
      *
-     * @param ContextInterface $context
+     * @param ContextInterface|string|null $context
      *
      * @return CategoryInterface
      */
@@ -143,11 +143,11 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
     /**
      * NEXT_MAJOR: add this method to the interface.
      *
-     * @param ContextInterface $context
+     * @param ContextInterface|string|null $context
      *
      * @return CategoryInterface[]
      */
-    public function getRootCategoriesForContext(ContextInterface $context = null)
+    public function getRootCategoriesForContext($context = null)
     {
         $context = $this->getContext($context);
 
@@ -231,7 +231,7 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
     }
 
     /**
-     * @param ContextInterface|null $context
+     * @param ContextInterface|string|null $context
      *
      * @return array
      */
@@ -327,7 +327,7 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
     }
 
     /**
-     * @param $contextCode
+     * @param ContextInterface|string|null $contextCode
      *
      * @return ContextInterface
      */

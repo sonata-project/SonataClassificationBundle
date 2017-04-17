@@ -77,6 +77,7 @@ class CategorySelectorType extends AbstractType
             'choice_loader' => function (Options $opts, $previousValue) use ($that) {
                 return new CategoryChoiceLoader(array_flip($that->getChoices($opts)));
             },
+            'choices_as_values' => true,
         ));
     }
 

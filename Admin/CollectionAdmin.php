@@ -20,7 +20,6 @@ class CollectionAdmin extends ContextAwareAdmin
 {
     // NEXT_MAJOR: remove this override
     protected $formOptions = array(
-        'cascade_validation' => true,
     );
 
     /**

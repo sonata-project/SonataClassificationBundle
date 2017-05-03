@@ -21,7 +21,6 @@ class CategoryAdmin extends ContextAwareAdmin
 {
     // NEXT_MAJOR: remove this override
     protected $formOptions = array(
-        'cascade_validation' => true,
     );
 
     /**
@@ -69,11 +68,9 @@ EOT
             if ($this->getSubject()->getParent() !== null || $this->getSubject()->getId() === null) { // root category cannot have a parent
                 $formMapper
                   ->add('parent', 'sonata_category_selector', array(
-                      'category' => $this->getSubject() ?: null,
                       'model_manager' => $this->getModelManager(),
                       'class' => $this->getClass(),
                       'required' => true,
-                      'context' => $this->getSubject()->getContext(),
                     ));
             }
         }

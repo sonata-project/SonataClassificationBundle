@@ -12,7 +12,6 @@
 namespace Sonata\ClassificationBundle\Entity;
 
 use Doctrine\Common\Persistence\ManagerRegistry;
-use Sonata\AdminBundle\Datagrid\PagerInterface;
 use Sonata\ClassificationBundle\Model\CategoryInterface;
 use Sonata\ClassificationBundle\Model\CategoryManagerInterface;
 use Sonata\ClassificationBundle\Model\ContextInterface;
@@ -47,13 +46,7 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
     }
 
     /**
-     * Returns a pager to iterate over the root category.
-     *
-     * @param int   $page
-     * @param int   $limit
-     * @param array $criteria
-     *
-     * @return mixed
+     * {@inheritdoc}
      */
     public function getRootCategoriesPager($page = 1, $limit = 25, $criteria = array())
     {
@@ -73,12 +66,7 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
     }
 
     /**
-     * @param int   $categoryId
-     * @param int   $page
-     * @param int   $limit
-     * @param array $criteria
-     *
-     * @return PagerInterface
+     * {@inheritdoc}
      */
     public function getSubCategoriesPager($categoryId, $page = 1, $limit = 25, $criteria = array())
     {
@@ -97,11 +85,7 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
     }
 
     /**
-     * NEXT_MAJOR: add this method to the interface.
-     *
-     * @param CategoryInterface $category
-     *
-     * @return CategoryInterface
+     * {@inheritdoc}
      */
     public function getRootCategoryWithChildren(CategoryInterface $category)
     {
@@ -125,11 +109,7 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
     }
 
     /**
-     * @todo NEXT_MAJOR: remove this method.
-     *
-     * @param ContextInterface $context
-     *
-     * @return CategoryInterface
+     * {@inheritdoc}
      */
     public function getRootCategory($context = null)
     {
@@ -141,11 +121,7 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
     }
 
     /**
-     * NEXT_MAJOR: add this method to the interface.
-     *
-     * @param ContextInterface $context
-     *
-     * @return CategoryInterface[]
+     * {@inheritdoc}
      */
     public function getRootCategoriesForContext(ContextInterface $context = null)
     {
@@ -157,11 +133,7 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
     }
 
     /**
-     * @todo NEXT_MAJOR: remove this method.
-     *
-     * @param bool|true $loadChildren
-     *
-     * @return CategoryInterface[]
+     * {@inheritdoc}
      */
     public function getRootCategories($loadChildren = true)
     {
@@ -184,11 +156,7 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
     }
 
     /**
-     * NEXT_MAJOR: add this method to the interface.
-     *
-     * @param bool|true $loadChildren
-     *
-     * @return CategoryInterface[]
+     * {@inheritdoc}
      */
     public function getAllRootCategories($loadChildren = true)
     {
@@ -211,11 +179,7 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
     }
 
     /**
-     * NEXT_MAJOR: add this method to the interface.
-     *
-     * @param bool|true $loadChildren
-     *
-     * @return array
+     * {@inheritdoc}
      */
     public function getRootCategoriesSplitByContexts($loadChildren = true)
     {
@@ -231,9 +195,7 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
     }
 
     /**
-     * @param ContextInterface|null $context
-     *
-     * @return array
+     * {@inheritdoc}
      */
     public function getCategories($context = null)
     {

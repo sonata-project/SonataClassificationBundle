@@ -14,3 +14,15 @@ If you have implemented a custom model, you must adapt the signature of the foll
  * `CategoryInterface::getId`
  * `CollectionInterface::getId`
  * `TagInterface::getId`
+
+### CategoryManager
++If you have implemented a custom category manager, you must adapt the signature of the following new methods:
+ * `getRootCategoriesPager`
+ * `getSubCategoriesPager`
+ * `getRootCategoryWithChildren`
+ * `getRootCategories`
+ * `getCategories`
+ * `getRootCategory`
+ * `getRootCategoriesForContext`
+ * `getAllRootCategories`
+ * `getRootCategoriesSplitByContexts`

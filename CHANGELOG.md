@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.3.1](https://github.com/sonata-project/SonataClassificationBundle/compare/3.3.0...3.3.1) - 2017-06-16
+### Fixed
+- use `same as` instead of deprecated `sameas` in twig template
+- Fixed hardcoded paths to classes in `.xml.skeleton` files of config
+- Added route check to tree view `Resources/views/CategoryAdmin/tree.html.twig`. If there aren't edit AND show routes, render element name only.
+
 ## [3.3.0](https://github.com/sonata-project/SonataClassificationBundle/compare/3.2.1...3.3.0) - 2017-03-16
 ### Added
 - Menu icon (fa-tags).

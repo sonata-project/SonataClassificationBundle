@@ -111,7 +111,7 @@ abstract class AbstractTagsBlockService extends AbstractClassificationBlockServi
                         array(
                             'label' => 'form.label_title',
                             'required' => false,
-                        )
+                        ),
                     ),
                     array('context',
                         // NEXT_MAJOR: remove when dropping Symfony <2.8 support
@@ -122,7 +122,7 @@ abstract class AbstractTagsBlockService extends AbstractClassificationBlockServi
                             'label' => 'form.label_context',
                             'required' => false,
                             'choices' => $this->getContextChoices(),
-                        )
+                        ),
                     ),
                     array($adminField, null, array()),
                 ),

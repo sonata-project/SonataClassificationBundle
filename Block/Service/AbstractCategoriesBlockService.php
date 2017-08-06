@@ -104,7 +104,7 @@ abstract class AbstractCategoriesBlockService extends AbstractClassificationBloc
                         array(
                             'label' => 'form.label_title',
                             'required' => false,
-                        )
+                        ),
                     ),
                     array('context',
                         // NEXT_MAJOR: remove when dropping Symfony <2.8 support
@@ -115,7 +115,7 @@ abstract class AbstractCategoriesBlockService extends AbstractClassificationBloc
                             'label' => 'form.label_context',
                             'required' => false,
                             'choices' => $this->getContextChoices(),
-                        )
+                        ),
                     ),
                     array($adminField, null, array()),
                 ),

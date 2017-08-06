@@ -18,11 +18,8 @@ use Sonata\BlockBundle\Model\BlockInterface;
 use Sonata\ClassificationBundle\Model\CategoryInterface;
 use Sonata\ClassificationBundle\Model\CategoryManagerInterface;
 use Sonata\ClassificationBundle\Model\ContextManagerInterface;
-use Sonata\CoreBundle\Form\Type\ImmutableArrayType;
 use Sonata\CoreBundle\Model\Metadata;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -91,21 +88,40 @@ abstract class AbstractCategoriesBlockService extends AbstractClassificationBloc
             ),
         ));
 
-        $formMapper->add('settings', ImmutableArrayType::class, array(
-            'keys' => array(
-                array('title', TextType::class, array(
-                    'label' => 'form.label_title',
-                    'required' => false,
-                )),
-                array('context', ChoiceType::class, array(
-                    'label' => 'form.label_context',
-                    'required' => false,
-                    'choices' => $this->getContextChoices(),
-                )),
-                array($adminField, null, array()),
-            ),
-            'translation_domain' => 'SonataClassificationBundle',
-        ));
+        $formMapper->add(
+            'settings',
+            // NEXT_MAJOR: remove when dropping Symfony <2.8 support
+            method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix')
+                ? 'Sonata\CoreBundle\Form\Type\ImmutableArrayType'
+                : 'sonata_type_immutable_array',
+            array(
+                'keys' => array(
+                    array('title',
+                        // NEXT_MAJOR: remove when dropping Symfony <2.8 support
+                        method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix')
+                            ? 'Symfony\Component\Form\Extension\Core\Type\TextType'
+                            : 'text',
+                        array(
+                            'label' => 'form.label_title',
+                            'required' => false,
+                        )
+                    ),
+                    array('context',
+                        // NEXT_MAJOR: remove when dropping Symfony <2.8 support
+                        method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix')
+                            ? 'Symfony\Component\Form\Extension\Core\Type\ChoiceType'
+                            : 'choice',
+                        array(
+                            'label' => 'form.label_context',
+                            'required' => false,
+                            'choices' => $this->getContextChoices(),
+                        )
+                    ),
+                    array($adminField, null, array()),
+                ),
+                'translation_domain' => 'SonataClassificationBundle',
+            )
+        );
     }
 
     /**

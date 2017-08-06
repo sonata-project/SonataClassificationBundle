@@ -11,6 +11,7 @@
 
 namespace Sonata\ClassificationBundle\Form\Type;
 
+use Sonata\AdminBundle\Form\Type\ModelType;
 use Sonata\ClassificationBundle\Form\ChoiceList\CategoryChoiceLoader;
 use Sonata\ClassificationBundle\Model\CategoryInterface;
 use Sonata\ClassificationBundle\Model\CategoryManagerInterface;
@@ -113,7 +114,7 @@ class CategorySelectorType extends AbstractType
      */
     public function getParent()
     {
-        return 'sonata_type_model';
+        return ModelType::class;
     }
 
     /**

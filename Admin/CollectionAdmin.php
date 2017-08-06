@@ -14,6 +14,8 @@ namespace Sonata\ClassificationBundle\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Form\Type\ModelListType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Validator\Constraints\Valid;
 
 class CollectionAdmin extends ContextAwareAdmin
@@ -50,7 +52,7 @@ EOT
     {
         $formMapper
             ->add('name')
-            ->add('description', 'textarea', array(
+            ->add('description', TextareaType::class, array(
                 'required' => false,
             ))
             ->add('context')
@@ -60,7 +62,7 @@ EOT
         ;
 
         if (interface_exists('Sonata\MediaBundle\Model\MediaInterface')) {
-            $formMapper->add('media', 'sonata_type_model_list',
+            $formMapper->add('media', ModelListType::class,
                 array('required' => false),
                 array(
                     'link_parameters' => array(

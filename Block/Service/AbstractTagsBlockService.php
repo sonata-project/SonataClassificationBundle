@@ -19,8 +19,11 @@ use Sonata\ClassificationBundle\Model\ContextInterface;
 use Sonata\ClassificationBundle\Model\ContextManagerInterface;
 use Sonata\ClassificationBundle\Model\TagInterface;
 use Sonata\ClassificationBundle\Model\TagManagerInterface;
+use Sonata\CoreBundle\Form\Type\ImmutableArrayType;
 use Sonata\CoreBundle\Model\Metadata;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -96,13 +99,13 @@ abstract class AbstractTagsBlockService extends AbstractClassificationBlockServi
             ),
         ));
 
-        $formMapper->add('settings', 'sonata_type_immutable_array', array(
+        $formMapper->add('settings', ImmutableArrayType::class, array(
             'keys' => array(
-                array('title', 'text', array(
+                array('title', TextType::class, array(
                     'label' => 'form.label_title',
                     'required' => false,
                 )),
-                array('context', 'choice', array(
+                array('context', ChoiceType::class, array(
                     'label' => 'form.label_context',
                     'required' => false,
                     'choices' => $contextChoices,

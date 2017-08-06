@@ -14,7 +14,11 @@ namespace Sonata\ClassificationBundle\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Form\Type\ModelListType;
 use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\ClassificationBundle\Form\Type\CategorySelectorType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Validator\Constraints\Valid;
 
 class CategoryAdmin extends ContextAwareAdmin
@@ -60,7 +64,7 @@ EOT
         $formMapper
             ->with('General', array('class' => 'col-md-6'))
                 ->add('name')
-                ->add('description', 'textarea', array(
+                ->add('description', TextareaType::class, array(
                     'required' => false,
                 ))
         ;
@@ -68,7 +72,7 @@ EOT
         if ($this->hasSubject()) {
             if ($this->getSubject()->getParent() !== null || $this->getSubject()->getId() === null) { // root category cannot have a parent
                 $formMapper
-                  ->add('parent', 'sonata_category_selector', array(
+                  ->add('parent', CategorySelectorType::class, array(
                       'category' => $this->getSubject() ?: null,
                       'model_manager' => $this->getModelManager(),
                       'class' => $this->getClass(),
@@ -86,7 +90,7 @@ EOT
                 ->add('enabled', null, array(
                     'required' => false,
                 ))
-                ->add('position', 'integer', array(
+                ->add('position', IntegerType::class, array(
                     'required' => false,
                     'data' => $position,
                 ))
@@ -96,7 +100,7 @@ EOT
         if (interface_exists('Sonata\MediaBundle\Model\MediaInterface')) {
             $formMapper
                 ->with('General')
-                    ->add('media', 'sonata_type_model_list',
+                    ->add('media', ModelListType::class,
                         array(
                             'required' => false,
                         ),

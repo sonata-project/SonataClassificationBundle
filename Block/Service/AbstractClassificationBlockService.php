@@ -78,7 +78,7 @@ abstract class AbstractClassificationBlockService extends AbstractAdminBlockServ
     }
 
     /**
-     * Returns an context choice array.
+     * Returns a context choice array.
      *
      * @return string[]
      */

@@ -50,9 +50,15 @@ EOT
     {
         $formMapper
             ->add('name')
-            ->add('description', 'textarea', array(
-                'required' => false,
-            ))
+            ->add('description',
+                // NEXT_MAJOR: remove when dropping Symfony <2.8 support
+                method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix')
+                    ? 'Symfony\Component\Form\Extension\Core\Type\TextareaType'
+                    : 'textarea',
+                array(
+                    'required' => false,
+                )
+            )
             ->add('context')
             ->add('enabled', null, array(
                 'required' => false,
@@ -60,7 +66,11 @@ EOT
         ;
 
         if (interface_exists('Sonata\MediaBundle\Model\MediaInterface')) {
-            $formMapper->add('media', 'sonata_type_model_list',
+            $formMapper->add('media',
+                // NEXT_MAJOR: remove when dropping Symfony <2.8 support
+                method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix')
+                    ? 'Sonata\AdminBundle\Form\Type\ModelListType'
+                    : 'sonata_type_model_list',
                 array('required' => false),
                 array(
                     'link_parameters' => array(

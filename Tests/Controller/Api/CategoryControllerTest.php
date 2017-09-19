@@ -12,21 +12,22 @@
 namespace Sonata\ClassificationBundle\Tests\Controller\Api;
 
 use Sonata\ClassificationBundle\Controller\Api\CategoryController;
+use Sonata\ClassificationBundle\Tests\Helpers\PHPUnit_Framework_TestCase;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @author Vincent Composieux <vincent.composieux@gmail.com>
  */
-class CategoryControllerTest extends \PHPUnit_Framework_TestCase
+class CategoryControllerTest extends PHPUnit_Framework_TestCase
 {
     public function testGetCategoriesAction()
     {
-        $paramFetcher = $this->getMockForAbstractClass('FOS\RestBundle\Request\ParamFetcherInterface');
+        $paramFetcher = $this->createMock('FOS\RestBundle\Request\ParamFetcherInterface');
         $paramFetcher->expects($this->once())->method('all')->will($this->returnValue(array()));
 
         $pager = $this->getMockBuilder('Sonata\AdminBundle\Datagrid\Pager')->disableOriginalConstructor()->getMock();
 
-        $categoryManager = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Model\CategoryManagerInterface');
+        $categoryManager = $this->createMock('Sonata\ClassificationBundle\Model\CategoryManagerInterface');
         $categoryManager->expects($this->once())->method('getPager')->will($this->returnValue($pager));
 
         $this->assertSame($pager, $this->createCategoryController($categoryManager)->getCategoriesAction($paramFetcher));
@@ -34,9 +35,9 @@ class CategoryControllerTest extends \PHPUnit_Framework_TestCase
 
     public function testGetCategoryAction()
     {
-        $category = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Model\CategoryInterface');
+        $category = $this->createMock('Sonata\ClassificationBundle\Model\CategoryInterface');
 
-        $categoryManager = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Model\CategoryManagerInterface');
+        $categoryManager = $this->createMock('Sonata\ClassificationBundle\Model\CategoryManagerInterface');
         $categoryManager->expects($this->once())->method('find')->will($this->returnValue($category));
 
         $this->assertEquals($category, $this->createCategoryController($categoryManager)->getCategoryAction(1));
@@ -53,9 +54,9 @@ class CategoryControllerTest extends \PHPUnit_Framework_TestCase
 
     public function testPostCategoryAction()
     {
-        $category = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Model\CategoryInterface');
+        $category = $this->createMock('Sonata\ClassificationBundle\Model\CategoryInterface');
 
-        $categoryManager = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Model\CategoryManagerInterface');
+        $categoryManager = $this->createMock('Sonata\ClassificationBundle\Model\CategoryManagerInterface');
         $categoryManager->expects($this->once())->method('save')->will($this->returnValue($category));
 
         $form = $this->getMockBuilder('Symfony\Component\Form\Form')->disableOriginalConstructor()->getMock();
@@ -64,7 +65,7 @@ class CategoryControllerTest extends \PHPUnit_Framework_TestCase
         $form->expects($this->once())->method('getData')->will($this->returnValue($category));
         $form->expects($this->once())->method('all')->will($this->returnValue(array()));
 
-        $formFactory = $this->getMockForAbstractClass('Symfony\Component\Form\FormFactoryInterface');
+        $formFactory = $this->createMock('Symfony\Component\Form\FormFactoryInterface');
         $formFactory->expects($this->once())->method('createNamed')->will($this->returnValue($form));
 
         $view = $this->createCategoryController($categoryManager, $formFactory)->postCategoryAction(new Request());
@@ -74,7 +75,7 @@ class CategoryControllerTest extends \PHPUnit_Framework_TestCase
 
     public function testPostCategoryInvalidAction()
     {
-        $categoryManager = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Model\CategoryManagerInterface');
+        $categoryManager = $this->createMock('Sonata\ClassificationBundle\Model\CategoryManagerInterface');
         $categoryManager->expects($this->never())->method('save')->will($this->returnValue($categoryManager));
 
         $form = $this->getMockBuilder('Symfony\Component\Form\Form')->disableOriginalConstructor()->getMock();
@@ -82,7 +83,7 @@ class CategoryControllerTest extends \PHPUnit_Framework_TestCase
         $form->expects($this->once())->method('isValid')->will($this->returnValue(false));
         $form->expects($this->once())->method('all')->will($this->returnValue(array()));
 
-        $formFactory = $this->getMockForAbstractClass('Symfony\Component\Form\FormFactoryInterface');
+        $formFactory = $this->createMock('Symfony\Component\Form\FormFactoryInterface');
         $formFactory->expects($this->once())->method('createNamed')->will($this->returnValue($form));
 
         $view = $this->createCategoryController($categoryManager, $formFactory)->postCategoryAction(new Request());
@@ -92,9 +93,9 @@ class CategoryControllerTest extends \PHPUnit_Framework_TestCase
 
     public function testPutCategoryAction()
     {
-        $category = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Model\CategoryInterface');
+        $category = $this->createMock('Sonata\ClassificationBundle\Model\CategoryInterface');
 
-        $categoryManager = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Model\CategoryManagerInterface');
+        $categoryManager = $this->createMock('Sonata\ClassificationBundle\Model\CategoryManagerInterface');
         $categoryManager->expects($this->once())->method('find')->will($this->returnValue($category));
         $categoryManager->expects($this->once())->method('save')->will($this->returnValue($category));
 
@@ -104,7 +105,7 @@ class CategoryControllerTest extends \PHPUnit_Framework_TestCase
         $form->expects($this->once())->method('getData')->will($this->returnValue($category));
         $form->expects($this->once())->method('all')->will($this->returnValue(array()));
 
-        $formFactory = $this->getMockForAbstractClass('Symfony\Component\Form\FormFactoryInterface');
+        $formFactory = $this->createMock('Symfony\Component\Form\FormFactoryInterface');
         $formFactory->expects($this->once())->method('createNamed')->will($this->returnValue($form));
 
         $view = $this->createCategoryController($categoryManager, $formFactory)->putCategoryAction(1, new Request());
@@ -114,9 +115,9 @@ class CategoryControllerTest extends \PHPUnit_Framework_TestCase
 
     public function testPutPostInvalidAction()
     {
-        $category = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Model\CategoryInterface');
+        $category = $this->createMock('Sonata\ClassificationBundle\Model\CategoryInterface');
 
-        $categoryManager = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Model\CategoryManagerInterface');
+        $categoryManager = $this->createMock('Sonata\ClassificationBundle\Model\CategoryManagerInterface');
         $categoryManager->expects($this->once())->method('find')->will($this->returnValue($category));
         $categoryManager->expects($this->never())->method('save')->will($this->returnValue($category));
 
@@ -125,7 +126,7 @@ class CategoryControllerTest extends \PHPUnit_Framework_TestCase
         $form->expects($this->once())->method('isValid')->will($this->returnValue(false));
         $form->expects($this->once())->method('all')->will($this->returnValue(array()));
 
-        $formFactory = $this->getMockForAbstractClass('Symfony\Component\Form\FormFactoryInterface');
+        $formFactory = $this->createMock('Symfony\Component\Form\FormFactoryInterface');
         $formFactory->expects($this->once())->method('createNamed')->will($this->returnValue($form));
 
         $view = $this->createCategoryController($categoryManager, $formFactory)->putCategoryAction(1, new Request());
@@ -135,9 +136,9 @@ class CategoryControllerTest extends \PHPUnit_Framework_TestCase
 
     public function testDeleteCategoryAction()
     {
-        $category = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Model\CategoryInterface');
+        $category = $this->createMock('Sonata\ClassificationBundle\Model\CategoryInterface');
 
-        $categoryManager = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Model\CategoryManagerInterface');
+        $categoryManager = $this->createMock('Sonata\ClassificationBundle\Model\CategoryManagerInterface');
         $categoryManager->expects($this->once())->method('find')->will($this->returnValue($category));
         $categoryManager->expects($this->once())->method('delete');
 
@@ -148,9 +149,9 @@ class CategoryControllerTest extends \PHPUnit_Framework_TestCase
 
     public function testDeleteCategoryInvalidAction()
     {
-        $this->setExpectedException('Symfony\Component\HttpKernel\Exception\NotFoundHttpException');
+        $this->expectException('Symfony\Component\HttpKernel\Exception\NotFoundHttpException');
 
-        $categoryManager = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Model\CategoryManagerInterface');
+        $categoryManager = $this->createMock('Sonata\ClassificationBundle\Model\CategoryManagerInterface');
         $categoryManager->expects($this->once())->method('find')->will($this->returnValue(null));
         $categoryManager->expects($this->never())->method('delete');
 
@@ -168,10 +169,10 @@ class CategoryControllerTest extends \PHPUnit_Framework_TestCase
     protected function createCategoryController($categoryManager = null, $formFactory = null)
     {
         if (null === $categoryManager) {
-            $categoryManager = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Model\CategoryManagerInterface');
+            $categoryManager = $this->createMock('Sonata\ClassificationBundle\Model\CategoryManagerInterface');
         }
         if (null === $formFactory) {
-            $formFactory = $this->getMockForAbstractClass('Symfony\Component\Form\FormFactoryInterface');
+            $formFactory = $this->createMock('Symfony\Component\Form\FormFactoryInterface');
         }
 
         return new CategoryController($categoryManager, $formFactory);

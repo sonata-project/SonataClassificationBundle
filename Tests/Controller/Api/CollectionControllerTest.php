@@ -12,21 +12,22 @@
 namespace Sonata\ClassificationBundle\Tests\Controller\Api;
 
 use Sonata\ClassificationBundle\Controller\Api\CollectionController;
+use Sonata\ClassificationBundle\Tests\Helpers\PHPUnit_Framework_TestCase;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @author Vincent Composieux <vincent.composieux@gmail.com>
  */
-class CollectionControllerTest extends \PHPUnit_Framework_TestCase
+class CollectionControllerTest extends PHPUnit_Framework_TestCase
 {
     public function testGetCollectionsAction()
     {
-        $paramFetcher = $this->getMockForAbstractClass('FOS\RestBundle\Request\ParamFetcherInterface');
+        $paramFetcher = $this->createMock('FOS\RestBundle\Request\ParamFetcherInterface');
         $paramFetcher->expects($this->once())->method('all')->will($this->returnValue(array()));
 
         $pager = $this->getMockBuilder('Sonata\AdminBundle\Datagrid\Pager')->disableOriginalConstructor()->getMock();
 
-        $collectionManager = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Model\CollectionManagerInterface');
+        $collectionManager = $this->createMock('Sonata\ClassificationBundle\Model\CollectionManagerInterface');
         $collectionManager->expects($this->once())->method('getPager')->will($this->returnValue($pager));
 
         $this->assertSame($pager, $this->createCollectionController($collectionManager)->getCollectionsAction($paramFetcher));
@@ -34,9 +35,9 @@ class CollectionControllerTest extends \PHPUnit_Framework_TestCase
 
     public function testGetCollectionAction()
     {
-        $collection = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Model\CollectionInterface');
+        $collection = $this->createMock('Sonata\ClassificationBundle\Model\CollectionInterface');
 
-        $collectionManager = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Model\CollectionManagerInterface');
+        $collectionManager = $this->createMock('Sonata\ClassificationBundle\Model\CollectionManagerInterface');
         $collectionManager->expects($this->once())->method('find')->will($this->returnValue($collection));
 
         $this->assertEquals($collection, $this->createCollectionController($collectionManager)->getCollectionAction(1));
@@ -53,9 +54,9 @@ class CollectionControllerTest extends \PHPUnit_Framework_TestCase
 
     public function testPostCollectionAction()
     {
-        $collection = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Model\CollectionInterface');
+        $collection = $this->createMock('Sonata\ClassificationBundle\Model\CollectionInterface');
 
-        $collectionManager = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Model\CollectionManagerInterface');
+        $collectionManager = $this->createMock('Sonata\ClassificationBundle\Model\CollectionManagerInterface');
         $collectionManager->expects($this->once())->method('save')->will($this->returnValue($collection));
 
         $form = $this->getMockBuilder('Symfony\Component\Form\Form')->disableOriginalConstructor()->getMock();
@@ -64,7 +65,7 @@ class CollectionControllerTest extends \PHPUnit_Framework_TestCase
         $form->expects($this->once())->method('getData')->will($this->returnValue($collection));
         $form->expects($this->once())->method('all')->will($this->returnValue(array()));
 
-        $formFactory = $this->getMockForAbstractClass('Symfony\Component\Form\FormFactoryInterface');
+        $formFactory = $this->createMock('Symfony\Component\Form\FormFactoryInterface');
         $formFactory->expects($this->once())->method('createNamed')->will($this->returnValue($form));
 
         $view = $this->createCollectionController($collectionManager, $formFactory)->postCollectionAction(new Request());
@@ -74,9 +75,9 @@ class CollectionControllerTest extends \PHPUnit_Framework_TestCase
 
     public function testPostCollectionInvalidAction()
     {
-        $collection = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Model\CollectionInterface');
+        $collection = $this->createMock('Sonata\ClassificationBundle\Model\CollectionInterface');
 
-        $collectionManager = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Model\CollectionManagerInterface');
+        $collectionManager = $this->createMock('Sonata\ClassificationBundle\Model\CollectionManagerInterface');
         $collectionManager->expects($this->never())->method('save')->will($this->returnValue($collectionManager));
 
         $form = $this->getMockBuilder('Symfony\Component\Form\Form')->disableOriginalConstructor()->getMock();
@@ -84,7 +85,7 @@ class CollectionControllerTest extends \PHPUnit_Framework_TestCase
         $form->expects($this->once())->method('isValid')->will($this->returnValue(false));
         $form->expects($this->once())->method('all')->will($this->returnValue(array()));
 
-        $formFactory = $this->getMockForAbstractClass('Symfony\Component\Form\FormFactoryInterface');
+        $formFactory = $this->createMock('Symfony\Component\Form\FormFactoryInterface');
         $formFactory->expects($this->once())->method('createNamed')->will($this->returnValue($form));
 
         $view = $this->createCollectionController($collectionManager, $formFactory)->postCollectionAction(new Request());
@@ -94,9 +95,9 @@ class CollectionControllerTest extends \PHPUnit_Framework_TestCase
 
     public function testPutCollectionAction()
     {
-        $collection = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Model\CollectionInterface');
+        $collection = $this->createMock('Sonata\ClassificationBundle\Model\CollectionInterface');
 
-        $collectionManager = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Model\CollectionManagerInterface');
+        $collectionManager = $this->createMock('Sonata\ClassificationBundle\Model\CollectionManagerInterface');
         $collectionManager->expects($this->once())->method('find')->will($this->returnValue($collection));
         $collectionManager->expects($this->once())->method('save')->will($this->returnValue($collection));
 
@@ -106,7 +107,7 @@ class CollectionControllerTest extends \PHPUnit_Framework_TestCase
         $form->expects($this->once())->method('getData')->will($this->returnValue($collection));
         $form->expects($this->once())->method('all')->will($this->returnValue(array()));
 
-        $formFactory = $this->getMockForAbstractClass('Symfony\Component\Form\FormFactoryInterface');
+        $formFactory = $this->createMock('Symfony\Component\Form\FormFactoryInterface');
         $formFactory->expects($this->once())->method('createNamed')->will($this->returnValue($form));
 
         $view = $this->createCollectionController($collectionManager, $formFactory)->putCollectionAction(1, new Request());
@@ -116,9 +117,9 @@ class CollectionControllerTest extends \PHPUnit_Framework_TestCase
 
     public function testPutPostInvalidAction()
     {
-        $collection = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Model\CollectionInterface');
+        $collection = $this->createMock('Sonata\ClassificationBundle\Model\CollectionInterface');
 
-        $collectionManager = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Model\CollectionManagerInterface');
+        $collectionManager = $this->createMock('Sonata\ClassificationBundle\Model\CollectionManagerInterface');
         $collectionManager->expects($this->once())->method('find')->will($this->returnValue($collection));
         $collectionManager->expects($this->never())->method('save')->will($this->returnValue($collection));
 
@@ -127,7 +128,7 @@ class CollectionControllerTest extends \PHPUnit_Framework_TestCase
         $form->expects($this->once())->method('isValid')->will($this->returnValue(false));
         $form->expects($this->once())->method('all')->will($this->returnValue(array()));
 
-        $formFactory = $this->getMockForAbstractClass('Symfony\Component\Form\FormFactoryInterface');
+        $formFactory = $this->createMock('Symfony\Component\Form\FormFactoryInterface');
         $formFactory->expects($this->once())->method('createNamed')->will($this->returnValue($form));
 
         $view = $this->createCollectionController($collectionManager, $formFactory)->putCollectionAction(1, new Request());
@@ -137,9 +138,9 @@ class CollectionControllerTest extends \PHPUnit_Framework_TestCase
 
     public function testDeleteCollectionAction()
     {
-        $collection = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Model\CollectionInterface');
+        $collection = $this->createMock('Sonata\ClassificationBundle\Model\CollectionInterface');
 
-        $collectionManager = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Model\CollectionManagerInterface');
+        $collectionManager = $this->createMock('Sonata\ClassificationBundle\Model\CollectionManagerInterface');
         $collectionManager->expects($this->once())->method('find')->will($this->returnValue($collection));
         $collectionManager->expects($this->once())->method('delete');
 
@@ -150,9 +151,9 @@ class CollectionControllerTest extends \PHPUnit_Framework_TestCase
 
     public function testDeleteCollectionInvalidAction()
     {
-        $this->setExpectedException('Symfony\Component\HttpKernel\Exception\NotFoundHttpException');
+        $this->expectException('Symfony\Component\HttpKernel\Exception\NotFoundHttpException');
 
-        $collectionManager = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Model\CollectionManagerInterface');
+        $collectionManager = $this->createMock('Sonata\ClassificationBundle\Model\CollectionManagerInterface');
         $collectionManager->expects($this->once())->method('find')->will($this->returnValue(null));
         $collectionManager->expects($this->never())->method('delete');
 
@@ -170,10 +171,10 @@ class CollectionControllerTest extends \PHPUnit_Framework_TestCase
     protected function createCollectionController($collectionManager = null, $formFactory = null)
     {
         if (null === $collectionManager) {
-            $collectionManager = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Model\CollectionManagerInterface');
+            $collectionManager = $this->createMock('Sonata\ClassificationBundle\Model\CollectionManagerInterface');
         }
         if (null === $formFactory) {
-            $formFactory = $this->getMockForAbstractClass('Symfony\Component\Form\FormFactoryInterface');
+            $formFactory = $this->createMock('Symfony\Component\Form\FormFactoryInterface');
         }
 
         return new CollectionController($collectionManager, $formFactory);

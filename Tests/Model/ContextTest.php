@@ -12,11 +12,12 @@
 namespace Sonata\ClassificationBundle\Tests\Model;
 
 use Sonata\ClassificationBundle\Model\Context;
+use Sonata\ClassificationBundle\Tests\Helpers\PHPUnit_Framework_TestCase;
 
 /**
  * @author Dariusz Markowicz <dmarkowicz77@gmail.com>
  */
-class ContextTest extends \PHPUnit_Framework_TestCase
+class ContextTest extends PHPUnit_Framework_TestCase
 {
     public function testSetterGetter()
     {

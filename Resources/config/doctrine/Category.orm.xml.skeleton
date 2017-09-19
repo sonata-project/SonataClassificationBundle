@@ -9,7 +9,7 @@
             association mapping  : http://www.doctrine-project.org/projects/orm/2.0/docs/reference/association-mapping/en
     -->
     <entity
-        name="Application\Sonata\ClassificationBundle\Entity\Category"
+        name="{{ namespace }}\Entity\Category"
         table="classification__category"
         repository-class="Doctrine\ORM\EntityRepository">
 

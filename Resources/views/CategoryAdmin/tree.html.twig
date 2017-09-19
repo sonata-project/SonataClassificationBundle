@@ -17,12 +17,19 @@ file that was distributed with this source code.
 
 {% import _self as tree %}
 {% macro navigate_child(collection, admin, root, depth) %}
+    {% import _self as tree %}
     <ul{% if root %} class="sonata-tree sonata-tree--toggleable js-treeview"{% endif %}>
         {% for element in collection %}
             <li class="sonata-ba-list-field" objectId="{{ element.id }}" >
                 <div class="sonata-tree__item"{% if depth < 2 %} data-treeview-toggled{% endif %}>
                     {% if element.parent or root %}<i class="fa fa-caret-right" data-treeview-toggler></i>{% endif %}
-                    <a class="sonata-tree__item__edit" href="{{ admin.generateObjectUrl('edit', element) }}">{{ element.name }}</a>
+                    {% if admin.hasRoute('edit') and admin.hasAccess('edit') %}
+                        <a class="sonata-tree__item__edit" href="{{ admin.generateObjectUrl('edit', element) }}">{{ element.name }}</a>
+                    {% elseif admin.hasRoute('show') and admin.hasAccess('show') %}
+                        <a class="sonata-tree__item__edit" href="{{ admin.generateObjectUrl('show', element) }}">{{ element.name }}</a>
+                    {% else %}
+                        {{ element.name }}
+                    {% endif %}
                     <i class="text-muted">{{ element.description }}</i>
                     {#<a class="label label-default pull-right" href="{{ admin.generateObjectUrl('edit', element) }}">edit <i class="fa fa-magic"></i></a>#}
                     {% if element.enabled %}<span class="label label-success pull-right"><i class="fa fa-check"></i> {{ admin.trans('active', {}, admin.translationDomain) }}</span>{% endif %}
@@ -30,7 +37,7 @@ file that was distributed with this source code.
                 </div>
 
                 {% if element.children|length %}
-                    {{ _self.navigate_child(element.children, admin, false, depth + 1) }}
+                    {{ tree.navigate_child(element.children, admin, false, depth + 1) }}
                 {% endif %}
             </li>
         {% endfor %}

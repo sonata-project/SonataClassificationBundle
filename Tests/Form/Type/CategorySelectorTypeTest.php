@@ -12,16 +12,17 @@
 namespace Sonata\ClassificationBundle\Tests\Form\Type;
 
 use Sonata\ClassificationBundle\Form\Type\CategorySelectorType;
+use Sonata\ClassificationBundle\Tests\Helpers\PHPUnit_Framework_TestCase;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Anton Zlotnikov <exp.razor@gmail.com>
  */
-class CategorySelectorTypeTest extends \PHPUnit_Framework_TestCase
+class CategorySelectorTypeTest extends PHPUnit_Framework_TestCase
 {
     public function testConfigureOptions()
     {
-        $manager = $this->getMockForAbstractClass('Sonata\CoreBundle\Model\ManagerInterface');
+        $manager = $this->createMock('Sonata\CoreBundle\Model\ManagerInterface');
         $categorySelectorType = new CategorySelectorType($manager);
         $optionsResolver = new OptionsResolver();
         $categorySelectorType->configureOptions($optionsResolver);

@@ -14,6 +14,7 @@ namespace Sonata\ClassificationBundle\Tests\Entity;
 use Sonata\ClassificationBundle\Entity\BaseCategory;
 use Sonata\ClassificationBundle\Entity\BaseContext;
 use Sonata\ClassificationBundle\Entity\CategoryManager;
+use Sonata\ClassificationBundle\Tests\Helpers\PHPUnit_Framework_TestCase;
 use Sonata\CoreBundle\Test\EntityManagerMockFactory;
 
 abstract class CategoryTest extends BaseCategory
@@ -39,7 +40,7 @@ abstract class ContextTest extends BaseContext
     }
 }
 
-class CategoryManagerTest extends \PHPUnit_Framework_TestCase
+class CategoryManagerTest extends PHPUnit_Framework_TestCase
 {
     public function testGetPager()
     {
@@ -303,7 +304,7 @@ class CategoryManagerTest extends \PHPUnit_Framework_TestCase
         $registry = $this->getMockForAbstractClass('Doctrine\Common\Persistence\ManagerRegistry');
         $registry->expects($this->any())->method('getManagerForClass')->will($this->returnValue($em));
 
-        $contextManager = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Model\ContextManagerInterface');
+        $contextManager = $this->createMock('Sonata\ClassificationBundle\Model\ContextManagerInterface');
 
         return new CategoryManager('Sonata\PageBundle\Entity\BaseCategory', $registry, $contextManager);
     }

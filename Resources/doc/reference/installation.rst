@@ -5,20 +5,19 @@
 Installation
 ============
 
-* Add ``SonataClassificationBundle`` to your vendor/bundles directory with the deps file:
+* Add ``SonataClassificationBundle`` via composer:
 
-.. code-block:: php
+.. code-block:: bash
 
-    // composer.json
+   $ composer require sonata-project/classification-bundle
 
-    "require": {
-    //...
-        "sonata-project/classification-bundle": "dev-master",
-    //...
-    }
+* Add ``SonataEasyExtendsBundle`` to the dev environment via composer:
 
+.. code-block:: bash
 
-* Add ``SonataClassificationBundle`` to your application kernel:
+   $ composer require --dev sonata-project/easy-extends-bundle
+
+* Add ``SonataClassificationBundle`` and  ``SonataEasyExtendsBundle`` to your application kernel:
 
 .. code-block:: php
 
@@ -26,11 +25,19 @@ Installation
 
     public function registerBundles()
     {
-        return array(
+        $bundles = [
             // ...
             new Sonata\ClassificationBundle\SonataClassificationBundle(),
             // ...
-        );
+        ];
+        
+        if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
+            // ...
+            $bundles[] = new Sonata\EasyExtendsBundle\SonataEasyExtendsBundle();
+            // ...
+        }
+        
+        return $bundles;
     }
 
 * Create a configuration file named ``sonata_classification.yml``:

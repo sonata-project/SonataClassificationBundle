@@ -35,8 +35,8 @@ file that was distributed with this source code.
 
 {% macro attributes(attributes) %}
     {% for name, value in attributes %}
-        {%- if value is not none and value is not sameas(false) -%}
-            {{- ' %s="%s"'|format(name, value is sameas(true) ? name|e : value|e)|raw -}}
+        {%- if value is not none and value is not same as(false) -%}
+            {{- ' %s="%s"'|format(name, value is same as(true) ? name|e : value|e)|raw -}}
         {%- endif -%}
     {%- endfor -%}
 {% endmacro %}

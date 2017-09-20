@@ -60,21 +60,34 @@ EOT
         $formMapper
             ->with('General', array('class' => 'col-md-6'))
                 ->add('name')
-                ->add('description', 'textarea', array(
-                    'required' => false,
-                ))
+                ->add('description',
+                    // NEXT_MAJOR: remove when dropping Symfony <2.8 support
+                    method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix')
+                        ? 'Symfony\Component\Form\Extension\Core\Type\TextareaType'
+                        : 'textarea',
+                    array(
+                        'required' => false,
+                    )
+                )
         ;
 
         if ($this->hasSubject()) {
             if ($this->getSubject()->getParent() !== null || $this->getSubject()->getId() === null) { // root category cannot have a parent
                 $formMapper
-                  ->add('parent', 'sonata_category_selector', array(
-                      'category' => $this->getSubject() ?: null,
-                      'model_manager' => $this->getModelManager(),
-                      'class' => $this->getClass(),
-                      'required' => true,
-                      'context' => $this->getSubject()->getContext(),
-                    ));
+                    ->add('parent',
+                        // NEXT_MAJOR: remove when dropping Symfony <2.8 support
+                        method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix')
+                            ? 'Sonata\ClassificationBundle\Form\Type\CategorySelectorType'
+                            : 'sonata_category_selector',
+                        array(
+                            'category' => $this->getSubject() ?: null,
+                            'model_manager' => $this->getModelManager(),
+                            'class' => $this->getClass(),
+                            'required' => true,
+                            'context' => $this->getSubject()->getContext(),
+                        )
+                    )
+                ;
             }
         }
 
@@ -86,17 +99,27 @@ EOT
                 ->add('enabled', null, array(
                     'required' => false,
                 ))
-                ->add('position', 'integer', array(
-                    'required' => false,
-                    'data' => $position,
-                ))
+                ->add('position',
+                    // NEXT_MAJOR: remove when dropping Symfony <2.8 support
+                    method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix')
+                        ? 'Symfony\Component\Form\Extension\Core\Type\IntegerType'
+                        : 'integer',
+                    array(
+                        'required' => false,
+                        'data' => $position,
+                    )
+                )
             ->end()
         ;
 
         if (interface_exists('Sonata\MediaBundle\Model\MediaInterface')) {
             $formMapper
                 ->with('General')
-                    ->add('media', 'sonata_type_model_list',
+                    ->add('media',
+                        // NEXT_MAJOR: remove when dropping Symfony <2.8 support
+                        method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix')
+                            ? 'Sonata\AdminBundle\Form\Type\ModelListType'
+                            : 'sonata_type_model_list',
                         array(
                             'required' => false,
                         ),

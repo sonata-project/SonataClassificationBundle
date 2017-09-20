@@ -19,6 +19,9 @@
                 <option name="max">32</option>
             </constraint>
         </property>
+        <property name="context">
+            <constraint name="NotBlank"/>
+        </property>
     </class>
     <class name="Sonata\ClassificationBundle\Model\Collection">
         <property name="name">
@@ -28,6 +31,9 @@
                 <option name="min">2</option>
                 <option name="max">32</option>
             </constraint>
+        </property>
+        <property name="context">
+            <constraint name="NotBlank"/>
         </property>
     </class>
     <class name="Sonata\ClassificationBundle\Model\Context">

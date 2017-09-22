@@ -15,6 +15,7 @@ use Sonata\EasyExtendsBundle\Mapper\DoctrineCollector;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
@@ -23,7 +24,7 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
  *
  * @author Thomas Rabaix <thomas.rabaix@sonata-project.org>
  */
-class SonataClassificationExtension extends Extension
+class SonataClassificationExtension extends Extension implements PrependExtensionInterface
 {
     /**
      * @throws \InvalidArgumentException
@@ -237,6 +238,31 @@ class SonataClassificationExtension extends Extension
                 ),
                 'orphanRemoval' => false,
             ));
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function prepend(ContainerBuilder $container)
+    {
+        $bundles = $container->getParameter('kernel.bundles');
+
+        // Blacklist all API controllers when using JMSDiExtraBundle without NelmioApiDocBundle or FOSRestBundle. API
+        // controllers use annotations and would be warmed, throwing an exception.
+        if (isset($bundles['JMSDiExtraBundle']) && !isset($bundles['NelmioApiDocBundle'], $bundles['FOSRestBundle'])) {
+            $blacklistedControllers = array();
+            foreach (glob(__DIR__.'/../Controller/Api/*.php', GLOB_NOSORT) as $filename) {
+                $blacklistedControllers[] = realpath($filename);
+            }
+
+            if (!empty($blacklistedControllers)) {
+                $container->prependExtensionConfig('jms_di_extra', array(
+                    'cache_warmer' => array(
+                        'controller_file_blacklist' => $blacklistedControllers,
+                    ),
+                ));
+            }
         }
     }
 }

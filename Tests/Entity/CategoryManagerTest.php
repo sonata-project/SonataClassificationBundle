@@ -47,13 +47,13 @@ class CategoryManagerTest extends PHPUnit_Framework_TestCase
         $self = $this;
         $this
             ->getCategoryManager(function ($qb) use ($self) {
-                $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(array()));
+                $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue([]));
                 $qb->expects($self->exactly(1))->method('andWhere')->withConsecutive(
-                    array($self->equalTo('c.context = :context'))
+                    [$self->equalTo('c.context = :context')]
                 );
-                $qb->expects($self->once())->method('setParameters')->with(array('context' => 'default'));
+                $qb->expects($self->once())->method('setParameters')->with(['context' => 'default']);
             })
-            ->getPager(array('context' => 'default'), 1);
+            ->getPager(['context' => 'default'], 1);
     }
 
     public function testGetPagerWithEnabledCategories()
@@ -61,17 +61,17 @@ class CategoryManagerTest extends PHPUnit_Framework_TestCase
         $self = $this;
         $this
             ->getCategoryManager(function ($qb) use ($self) {
-                $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(array()));
+                $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue([]));
                 $qb->expects($self->exactly(2))->method('andWhere')->withConsecutive(
-                    array($self->equalTo('c.context = :context')),
-                    array($self->equalTo('c.enabled = :enabled'))
+                    [$self->equalTo('c.context = :context')],
+                    [$self->equalTo('c.enabled = :enabled')]
                 );
-                $qb->expects($self->once())->method('setParameters')->with(array('enabled' => true, 'context' => 'default'));
+                $qb->expects($self->once())->method('setParameters')->with(['enabled' => true, 'context' => 'default']);
             })
-            ->getPager(array(
+            ->getPager([
                 'enabled' => true,
                 'context' => 'default',
-            ), 1);
+            ], 1);
     }
 
     public function testGetPagerWithDisabledCategories()
@@ -79,17 +79,17 @@ class CategoryManagerTest extends PHPUnit_Framework_TestCase
         $self = $this;
         $this
             ->getCategoryManager(function ($qb) use ($self) {
-                $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(array()));
+                $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue([]));
                 $qb->expects($self->exactly(2))->method('andWhere')->withConsecutive(
-                    array($self->equalTo('c.context = :context')),
-                    array($self->equalTo('c.enabled = :enabled'))
+                    [$self->equalTo('c.context = :context')],
+                    [$self->equalTo('c.enabled = :enabled')]
                 );
-                $qb->expects($self->once())->method('setParameters')->with(array('enabled' => false, 'context' => 'default'));
+                $qb->expects($self->once())->method('setParameters')->with(['enabled' => false, 'context' => 'default']);
             })
-            ->getPager(array(
+            ->getPager([
                 'enabled' => false,
                 'context' => 'default',
-            ), 1);
+            ], 1);
     }
 
     public function testGetCategoriesWithMultipleRootsInContext()
@@ -116,7 +116,7 @@ class CategoryManagerTest extends PHPUnit_Framework_TestCase
         $categoryBar->setParent(null);
         $categoryBar->setEnabled(true);
 
-        $categories = array($categoryFoo, $categoryBar);
+        $categories = [$categoryFoo, $categoryBar];
 
         $categoryManager = $this->getCategoryManager(function ($qb) {
         }, $categories);
@@ -149,7 +149,7 @@ class CategoryManagerTest extends PHPUnit_Framework_TestCase
         $categoryBar->setEnabled(true);
 
         $categoryManager = $this->getCategoryManager(function ($qb) {
-        }, array($categoryFoo, $categoryBar));
+        }, [$categoryFoo, $categoryBar]);
 
         $categoryFoo = $categoryManager->getRootCategoryWithChildren($categoryFoo);
         $this->assertContains($categoryBar, $categoryFoo->getChildren());
@@ -172,7 +172,7 @@ class CategoryManagerTest extends PHPUnit_Framework_TestCase
         $categoryFoo->setEnabled(true);
 
         $categoryManager = $this->getCategoryManager(function ($qb) {
-        }, array($categoryFoo));
+        }, [$categoryFoo]);
 
         $categoryBar = $categoryManager->getRootCategory($context);
         $this->assertEquals($categoryFoo, $categoryBar);
@@ -203,7 +203,7 @@ class CategoryManagerTest extends PHPUnit_Framework_TestCase
         $categoryBar->setEnabled(true);
 
         $categoryManager = $this->getCategoryManager(function ($qb) {
-        }, array($categoryFoo, $categoryBar));
+        }, [$categoryFoo, $categoryBar]);
 
         $categories = $categoryManager->getRootCategoriesForContext($context);
         $this->assertCount(1, $categories);
@@ -241,7 +241,7 @@ class CategoryManagerTest extends PHPUnit_Framework_TestCase
         $categoryBar->setEnabled(true);
 
         $categoryManager = $this->getCategoryManager(function ($qb) {
-        }, array($categoryFoo, $categoryBar));
+        }, [$categoryFoo, $categoryBar]);
 
         $categories = $categoryManager->getRootCategories(false);
         $this->assertArrayHasKey($contextFoo->getId(), $categories);
@@ -281,7 +281,7 @@ class CategoryManagerTest extends PHPUnit_Framework_TestCase
         $categoryBar->setEnabled(true);
 
         $categoryManager = $this->getCategoryManager(function ($qb) {
-        }, array($categoryFoo, $categoryBar));
+        }, [$categoryFoo, $categoryBar]);
 
         $categories = $categoryManager->getRootCategoriesSplitByContexts(false);
         $this->assertArrayHasKey($contextFoo->getId(), $categories);
@@ -292,7 +292,7 @@ class CategoryManagerTest extends PHPUnit_Framework_TestCase
 
     protected function getCategoryManager($qbCallback, $createQueryResult = null)
     {
-        $em = EntityManagerMockFactory::create($this, $qbCallback, array());
+        $em = EntityManagerMockFactory::create($this, $qbCallback, []);
 
         if (null != $createQueryResult) {
             $query = $this->getMockBuilder('Doctrine\ORM\AbstractQuery')->disableOriginalConstructor()->getMock();

@@ -105,9 +105,9 @@ class CategoryTest extends PHPUnit_Framework_TestCase
         // Category::removeChild implementation use getId() which is not a part of interface nor model, skipping
 
         // No type hint in interface so assume basic array.
-        $category->setChildren(array());
+        $category->setChildren([]);
         $this->assertCount(0, $category->getChildren());
-        $category->setChildren(array($cat1, $cat2, $cat3));
+        $category->setChildren([$cat1, $cat2, $cat3]);
         $this->assertCount(3, $category->getChildren());
     }
 

@@ -31,7 +31,7 @@ class TagAdmin extends ContextAwareAdmin
             $formMapper->add('slug');
         }
 
-        $formMapper->add('enabled', null, array('required' => false));
+        $formMapper->add('enabled', null, ['required' => false]);
     }
 
     /**
@@ -55,10 +55,10 @@ class TagAdmin extends ContextAwareAdmin
         $listMapper
             ->addIdentifier('name')
             ->add('slug')
-            ->add('context', null, array(
+            ->add('context', null, [
                 'sortable' => 'context.name',
-            ))
-            ->add('enabled', null, array('editable' => true))
+            ])
+            ->add('enabled', null, ['editable' => true])
             ->add('createdAt')
             ->add('updatedAt')
         ;

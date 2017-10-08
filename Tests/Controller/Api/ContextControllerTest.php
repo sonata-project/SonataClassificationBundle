@@ -23,7 +23,7 @@ class ContextControllerTest extends PHPUnit_Framework_TestCase
     public function testGetContextsAction()
     {
         $paramFetcher = $this->createMock('FOS\RestBundle\Request\ParamFetcherInterface');
-        $paramFetcher->expects($this->once())->method('all')->will($this->returnValue(array()));
+        $paramFetcher->expects($this->once())->method('all')->will($this->returnValue([]));
 
         $pager = $this->getMockBuilder('Sonata\AdminBundle\Datagrid\Pager')->disableOriginalConstructor()->getMock();
 
@@ -63,7 +63,7 @@ class ContextControllerTest extends PHPUnit_Framework_TestCase
         $form->expects($this->once())->method('handleRequest');
         $form->expects($this->once())->method('isValid')->will($this->returnValue(true));
         $form->expects($this->once())->method('getData')->will($this->returnValue($context));
-        $form->expects($this->once())->method('all')->will($this->returnValue(array()));
+        $form->expects($this->once())->method('all')->will($this->returnValue([]));
 
         $formFactory = $this->createMock('Symfony\Component\Form\FormFactoryInterface');
         $formFactory->expects($this->once())->method('createNamed')->will($this->returnValue($form));
@@ -81,7 +81,7 @@ class ContextControllerTest extends PHPUnit_Framework_TestCase
         $form = $this->getMockBuilder('Symfony\Component\Form\Form')->disableOriginalConstructor()->getMock();
         $form->expects($this->once())->method('handleRequest');
         $form->expects($this->once())->method('isValid')->will($this->returnValue(false));
-        $form->expects($this->once())->method('all')->will($this->returnValue(array()));
+        $form->expects($this->once())->method('all')->will($this->returnValue([]));
 
         $formFactory = $this->createMock('Symfony\Component\Form\FormFactoryInterface');
         $formFactory->expects($this->once())->method('createNamed')->will($this->returnValue($form));
@@ -103,7 +103,7 @@ class ContextControllerTest extends PHPUnit_Framework_TestCase
         $form->expects($this->once())->method('handleRequest');
         $form->expects($this->once())->method('isValid')->will($this->returnValue(true));
         $form->expects($this->once())->method('getData')->will($this->returnValue($context));
-        $form->expects($this->once())->method('all')->will($this->returnValue(array()));
+        $form->expects($this->once())->method('all')->will($this->returnValue([]));
 
         $formFactory = $this->createMock('Symfony\Component\Form\FormFactoryInterface');
         $formFactory->expects($this->once())->method('createNamed')->will($this->returnValue($form));
@@ -124,7 +124,7 @@ class ContextControllerTest extends PHPUnit_Framework_TestCase
         $form = $this->getMockBuilder('Symfony\Component\Form\Form')->disableOriginalConstructor()->getMock();
         $form->expects($this->once())->method('handleRequest');
         $form->expects($this->once())->method('isValid')->will($this->returnValue(false));
-        $form->expects($this->once())->method('all')->will($this->returnValue(array()));
+        $form->expects($this->once())->method('all')->will($this->returnValue([]));
 
         $formFactory = $this->createMock('Symfony\Component\Form\FormFactoryInterface');
         $formFactory->expects($this->once())->method('createNamed')->will($this->returnValue($form));
@@ -144,7 +144,7 @@ class ContextControllerTest extends PHPUnit_Framework_TestCase
 
         $view = $this->createContextController($contextManager)->deleteContextAction(1);
 
-        $this->assertEquals(array('deleted' => true), $view);
+        $this->assertEquals(['deleted' => true], $view);
     }
 
     public function testDeleteContextInvalidAction()

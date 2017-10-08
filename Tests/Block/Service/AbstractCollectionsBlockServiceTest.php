@@ -49,24 +49,24 @@ final class AbstractCollectionsBlockServiceTest extends AbstractBlockServiceTest
 
     public function testDefaultSettings()
     {
-        $blockService = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Block\Service\AbstractCollectionsBlockService', array(
+        $blockService = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Block\Service\AbstractCollectionsBlockService', [
             'block.service', $this->templating, $this->contextManager, $this->collectionManager, $this->collectionAdmin,
-        ));
+        ]);
         $blockContext = $this->getBlockContext($blockService);
 
-        $this->assertSettings(array(
+        $this->assertSettings([
             'title' => 'Collections',
             'collection' => false,
             'collectionId' => null,
             'context' => null,
             'template' => 'SonataClassificationBundle:Block:base_block_collections.html.twig',
-        ), $blockContext);
+        ], $blockContext);
     }
 
     public function testLoad()
     {
         $collection = $this->getMockBuilder('Sonata\ClassificationBundle\Model\CollectionInterface')
-            ->setMethods(array('getId'))
+            ->setMethods(['getId'])
             ->disableOriginalConstructor()
             ->getMockForAbstractClass();
         $collection->expects($this->any())->method('getId')->will($this->returnValue(23));
@@ -85,16 +85,16 @@ final class AbstractCollectionsBlockServiceTest extends AbstractBlockServiceTest
             ->method('setSetting')
             ->with($this->equalTo('collectionId'), $this->equalTo($collection));
 
-        $blockService = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Block\Service\AbstractCollectionsBlockService', array(
+        $blockService = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Block\Service\AbstractCollectionsBlockService', [
             'block.service', $this->templating, $this->contextManager, $this->collectionManager, $this->collectionAdmin,
-        ));
+        ]);
         $blockService->load($block);
     }
 
     public function testPrePersist()
     {
         $collection = $this->getMockBuilder('Sonata\ClassificationBundle\Model\CollectionInterface')
-            ->setMethods(array('getId'))
+            ->setMethods(['getId'])
             ->disableOriginalConstructor()
             ->getMockForAbstractClass();
         $collection->expects($this->any())->method('getId')->will($this->returnValue(23));
@@ -108,16 +108,16 @@ final class AbstractCollectionsBlockServiceTest extends AbstractBlockServiceTest
             ->method('setSetting')
             ->with($this->equalTo('collectionId'), $this->equalTo(23));
 
-        $blockService = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Block\Service\AbstractCollectionsBlockService', array(
+        $blockService = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Block\Service\AbstractCollectionsBlockService', [
             'block.service', $this->templating, $this->contextManager, $this->collectionManager, $this->collectionAdmin,
-        ));
+        ]);
         $blockService->prePersist($block);
     }
 
     public function testPreUpdate()
     {
         $collection = $this->getMockBuilder('Sonata\ClassificationBundle\Model\CollectionInterface')
-            ->setMethods(array('getId'))
+            ->setMethods(['getId'])
             ->disableOriginalConstructor()
             ->getMockForAbstractClass();
         $collection->expects($this->any())->method('getId')->will($this->returnValue(23));
@@ -131,9 +131,9 @@ final class AbstractCollectionsBlockServiceTest extends AbstractBlockServiceTest
             ->method('setSetting')
             ->with($this->equalTo('collectionId'), $this->equalTo(23));
 
-        $blockService = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Block\Service\AbstractCollectionsBlockService', array(
+        $blockService = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Block\Service\AbstractCollectionsBlockService', [
             'block.service', $this->templating, $this->contextManager, $this->collectionManager, $this->collectionAdmin,
-        ));
+        ]);
         $blockService->preUpdate($block);
     }
 }

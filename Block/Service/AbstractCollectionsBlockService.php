@@ -59,18 +59,18 @@ abstract class AbstractCollectionsBlockService extends AbstractClassificationBlo
     public function execute(BlockContextInterface $blockContext, Response $response = null)
     {
         $collection = $this->getCollection($blockContext->getSetting('collectionId'), $blockContext->getSetting('collection'));
-        $collections = $this->contextManager->findBy(array(
+        $collections = $this->contextManager->findBy([
             'enabled' => true,
             'context' => $blockContext->getSetting('context'),
-        ));
+        ]);
 
-        return $this->renderResponse($blockContext->getTemplate(), array(
+        return $this->renderResponse($blockContext->getTemplate(), [
             'context' => $blockContext,
             'settings' => $blockContext->getSettings(),
             'block' => $blockContext->getBlock(),
             'collection' => $collection,
             'collections' => $collections,
-        ), $response);
+        ], $response);
     }
 
     /**
@@ -78,16 +78,16 @@ abstract class AbstractCollectionsBlockService extends AbstractClassificationBlo
      */
     public function buildEditForm(FormMapper $formMapper, BlockInterface $block)
     {
-        $adminField = $this->getFormAdminType($formMapper, $this->collectionAdmin, 'collectionId', 'collection', array(
+        $adminField = $this->getFormAdminType($formMapper, $this->collectionAdmin, 'collectionId', 'collection', [
             'label' => 'form.label_collection',
-        ), array(
+        ], [
             'translation_domain' => 'SonataClassificationBundle',
-            'link_parameters' => array(
-                array(
+            'link_parameters' => [
+                [
                     'context' => $block->getSetting('context'),
-                ),
-            ),
-        ));
+                ],
+            ],
+        ]);
 
         $formMapper->add(
             'settings',
@@ -95,33 +95,33 @@ abstract class AbstractCollectionsBlockService extends AbstractClassificationBlo
             method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix')
                 ? 'Sonata\CoreBundle\Form\Type\ImmutableArrayType'
                 : 'sonata_type_immutable_array',
-            array(
-                'keys' => array(
-                    array('title',
+            [
+                'keys' => [
+                    ['title',
                         // NEXT_MAJOR: remove when dropping Symfony <2.8 support
                         method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix')
                             ? 'Symfony\Component\Form\Extension\Core\Type\TextType'
                             : 'text',
-                        array(
+                        [
                             'label' => 'form.label_title',
                             'required' => false,
-                        ),
-                    ),
-                    array('context',
+                        ],
+                    ],
+                    ['context',
                         // NEXT_MAJOR: remove when dropping Symfony <2.8 support
                         method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix')
                             ? 'Symfony\Component\Form\Extension\Core\Type\ChoiceType'
                             : 'choice',
-                        array(
+                        [
                             'label' => 'form.label_context',
                             'required' => false,
                             'choices' => $this->getContextChoices(),
-                        ),
-                    ),
-                    array($adminField, null, array()),
-                ),
+                        ],
+                    ],
+                    [$adminField, null, []],
+                ],
                 'translation_domain' => 'SonataClassificationBundle',
-            )
+            ]
         );
     }
 
@@ -130,13 +130,13 @@ abstract class AbstractCollectionsBlockService extends AbstractClassificationBlo
      */
     public function configureSettings(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'title' => 'Collections',
             'collection' => false,
             'collectionId' => null,
             'context' => null,
             'template' => 'SonataClassificationBundle:Block:base_block_collections.html.twig',
-        ));
+        ]);
     }
 
     /**
@@ -172,9 +172,9 @@ abstract class AbstractCollectionsBlockService extends AbstractClassificationBlo
     {
         $description = (!is_null($code) ? $code : $this->getName());
 
-        return new Metadata($this->getName(), $description, false, 'SonataClassificationBundle', array(
+        return new Metadata($this->getName(), $description, false, 'SonataClassificationBundle', [
             'class' => 'fa fa-folder-open-o',
-        ));
+        ]);
     }
 
     /**

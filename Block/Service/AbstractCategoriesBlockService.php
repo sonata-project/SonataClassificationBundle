@@ -61,13 +61,13 @@ abstract class AbstractCategoriesBlockService extends AbstractClassificationBloc
         $category = $this->getCategory($blockContext->getSetting('categoryId'), $blockContext->getSetting('category'));
         $root = $this->categoryManager->getRootCategory($blockContext->getSetting('context'));
 
-        return $this->renderResponse($blockContext->getTemplate(), array(
+        return $this->renderResponse($blockContext->getTemplate(), [
             'context' => $blockContext,
             'settings' => $blockContext->getSettings(),
             'block' => $blockContext->getBlock(),
             'category' => $category,
             'root' => $root,
-        ), $response);
+        ], $response);
     }
 
     /**
@@ -75,18 +75,18 @@ abstract class AbstractCategoriesBlockService extends AbstractClassificationBloc
      */
     public function buildEditForm(FormMapper $formMapper, BlockInterface $block)
     {
-        $adminField = $this->getFormAdminType($formMapper, $this->categoryAdmin, 'categoryId', 'category', array(
+        $adminField = $this->getFormAdminType($formMapper, $this->categoryAdmin, 'categoryId', 'category', [
             'label' => 'form.label_category',
-        ), array(
+        ], [
             'translation_domain' => 'SonataClassificationBundle',
-            'link_parameters' => array(
-                array(
-                    array(
+            'link_parameters' => [
+                [
+                    [
                         'context' => $block->getSetting('context'),
-                    ),
-                ),
-            ),
-        ));
+                    ],
+                ],
+            ],
+        ]);
 
         $formMapper->add(
             'settings',
@@ -94,33 +94,33 @@ abstract class AbstractCategoriesBlockService extends AbstractClassificationBloc
             method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix')
                 ? 'Sonata\CoreBundle\Form\Type\ImmutableArrayType'
                 : 'sonata_type_immutable_array',
-            array(
-                'keys' => array(
-                    array('title',
+            [
+                'keys' => [
+                    ['title',
                         // NEXT_MAJOR: remove when dropping Symfony <2.8 support
                         method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix')
                             ? 'Symfony\Component\Form\Extension\Core\Type\TextType'
                             : 'text',
-                        array(
+                        [
                             'label' => 'form.label_title',
                             'required' => false,
-                        ),
-                    ),
-                    array('context',
+                        ],
+                    ],
+                    ['context',
                         // NEXT_MAJOR: remove when dropping Symfony <2.8 support
                         method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix')
                             ? 'Symfony\Component\Form\Extension\Core\Type\ChoiceType'
                             : 'choice',
-                        array(
+                        [
                             'label' => 'form.label_context',
                             'required' => false,
                             'choices' => $this->getContextChoices(),
-                        ),
-                    ),
-                    array($adminField, null, array()),
-                ),
+                        ],
+                    ],
+                    [$adminField, null, []],
+                ],
                 'translation_domain' => 'SonataClassificationBundle',
-            )
+            ]
         );
     }
 
@@ -129,13 +129,13 @@ abstract class AbstractCategoriesBlockService extends AbstractClassificationBloc
      */
     public function configureSettings(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'title' => 'Categories',
             'category' => false,
             'categoryId' => null,
             'context' => 'default',
             'template' => 'SonataClassificationBundle:Block:base_block_categories.html.twig',
-        ));
+        ]);
     }
 
     /**
@@ -171,9 +171,9 @@ abstract class AbstractCategoriesBlockService extends AbstractClassificationBloc
     {
         $description = (!is_null($code) ? $code : $this->getName());
 
-        return new Metadata($this->getName(), $description, false, 'SonataClassificationBundle', array(
+        return new Metadata($this->getName(), $description, false, 'SonataClassificationBundle', [
             'class' => 'fa fa-folder-open-o',
-        ));
+        ]);
     }
 
     /**

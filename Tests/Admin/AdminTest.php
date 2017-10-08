@@ -40,14 +40,14 @@ class AdminTest extends PHPUnit_Framework_TestCase
 
     public function testGetPersistentParametersWithNoExtension()
     {
-        $expected = array(
+        $expected = [
             'context' => '',
             'hide_context' => 0,
-        );
+        ];
 
-        $admin = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Admin\ContextAwareAdmin', array(
+        $admin = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Admin\ContextAwareAdmin', [
             'admin.my_code', 'My\Class', 'MyBundle:ClassAdmin', $this->contextManager,
-        ));
+        ]);
 
         $this->assertSame($expected, $admin->getPersistentParameters());
     }
@@ -57,9 +57,9 @@ class AdminTest extends PHPUnit_Framework_TestCase
      */
     public function testGetPersistentParametersWithInvalidExtension()
     {
-        $admin = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Admin\ContextAwareAdmin', array(
+        $admin = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Admin\ContextAwareAdmin', [
             'admin.my_code', 'My\Class', 'MyBundle:ClassAdmin', $this->contextManager,
-        ));
+        ]);
 
         $extension = $this->createMock('Sonata\AdminBundle\Admin\AdminExtensionInterface');
         $extension->expects($this->once())->method('getPersistentParameters')->will($this->returnValue(null));
@@ -71,21 +71,21 @@ class AdminTest extends PHPUnit_Framework_TestCase
 
     public function testGetPersistentParametersWithValidExtension()
     {
-        $expected = array(
+        $expected = [
             'tl' => 'de',
             'abc' => 123,
             'context' => '',
             'hide_context' => 0,
-        );
+        ];
 
-        $extensionParams = array(
+        $extensionParams = [
             'tl' => 'de',
             'abc' => 123,
-        );
+        ];
 
-        $admin = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Admin\ContextAwareAdmin', array(
+        $admin = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Admin\ContextAwareAdmin', [
             'admin.my_code', 'My\Class', 'MyBundle:ClassAdmin', $this->contextManager,
-        ));
+        ]);
 
         $extension = $this->createMock('Sonata\AdminBundle\Admin\AdminExtensionInterface');
         $extension->expects($this->once())->method('getPersistentParameters')->will($this->returnValue($extensionParams));

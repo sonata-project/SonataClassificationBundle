@@ -52,27 +52,27 @@ abstract class AbstractClassificationBlockService extends AbstractAdminBlockServ
      *
      * @return FormBuilder
      */
-    final protected function getFormAdminType(FormMapper $formMapper, AdminInterface $admin, $formField, $field, $fieldOptions = array(), $adminOptions = array())
+    final protected function getFormAdminType(FormMapper $formMapper, AdminInterface $admin, $formField, $field, $fieldOptions = [], $adminOptions = [])
     {
-        $adminOptions = array_merge(array(
+        $adminOptions = array_merge([
             'edit' => 'list',
             'translation_domain' => 'SonataClassificationBundle',
-        ), $adminOptions);
+        ], $adminOptions);
 
         $fieldDescription = $admin->getModelManager()->getNewFieldDescriptionInstance($admin->getClass(), $field, $adminOptions);
         $fieldDescription->setAssociationAdmin($admin);
         $fieldDescription->setAdmin($formMapper->getAdmin());
-        $fieldDescription->setAssociationMapping(array(
+        $fieldDescription->setAssociationMapping([
             'fieldName' => $field,
             'type' => ClassMetadataInfo::MANY_TO_ONE,
-        ));
+        ]);
 
-        $fieldOptions = array_merge(array(
+        $fieldOptions = array_merge([
             'sonata_field_description' => $fieldDescription,
             'class' => $admin->getClass(),
             'model_manager' => $admin->getModelManager(),
             'required' => false,
-        ), $fieldOptions);
+        ], $fieldOptions);
 
         return $formMapper->create($formField, 'sonata_type_model_list', $fieldOptions);
     }
@@ -84,7 +84,7 @@ abstract class AbstractClassificationBlockService extends AbstractAdminBlockServ
      */
     final protected function getContextChoices()
     {
-        $contextChoices = array();
+        $contextChoices = [];
         /* @var ContextInterface $context */
         foreach ($this->contextManager->findAll() as $context) {
             $contextChoices[$context->getId()] = $context->getName();

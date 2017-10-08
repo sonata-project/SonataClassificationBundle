@@ -19,9 +19,9 @@ use Symfony\Component\Validator\Constraints\Valid;
 class CollectionAdmin extends ContextAwareAdmin
 {
     // NEXT_MAJOR: remove this override
-    protected $formOptions = array(
+    protected $formOptions = [
         'cascade_validation' => true,
-    );
+    ];
 
     /**
      * {@inheritdoc}
@@ -55,14 +55,14 @@ EOT
                 method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix')
                     ? 'Symfony\Component\Form\Extension\Core\Type\TextareaType'
                     : 'textarea',
-                array(
+                [
                     'required' => false,
-                )
+                ]
             )
             ->add('context')
-            ->add('enabled', null, array(
+            ->add('enabled', null, [
                 'required' => false,
-            ))
+            ])
         ;
 
         if (interface_exists('Sonata\MediaBundle\Model\MediaInterface')) {
@@ -71,13 +71,13 @@ EOT
                 method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix')
                     ? 'Sonata\AdminBundle\Form\Type\ModelListType'
                     : 'sonata_type_model_list',
-                array('required' => false),
-                array(
-                    'link_parameters' => array(
+                ['required' => false],
+                [
+                    'link_parameters' => [
                         'provider' => 'sonata.media.provider.image',
                         'context' => 'sonata_collection',
-                    ),
-                )
+                    ],
+                ]
             );
         }
     }
@@ -103,12 +103,12 @@ EOT
         $listMapper
             ->addIdentifier('name')
             ->add('slug')
-            ->add('context', null, array(
+            ->add('context', null, [
                 'sortable' => 'context.name',
-            ))
-            ->add('enabled', null, array(
+            ])
+            ->add('enabled', null, [
                 'editable' => true,
-            ))
+            ])
         ;
     }
 }

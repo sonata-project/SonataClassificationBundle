@@ -28,10 +28,10 @@ class CategoryChoiceLoaderTest extends PHPUnit_Framework_TestCase
 
     public function testLoadChoiceList()
     {
-        $choices = array(
+        $choices = [
             1 => 'foo',
             2 => 'bar',
-        );
+        ];
 
         $categoryLoader = new CategoryChoiceLoader(array_flip($choices));
 
@@ -40,30 +40,30 @@ class CategoryChoiceLoaderTest extends PHPUnit_Framework_TestCase
 
     public function testLoadChoicesForValues()
     {
-        $choices = array(
+        $choices = [
             1 => 'foo',
             2 => 'bar',
-        );
+        ];
 
         $categoryLoader = new CategoryChoiceLoader(array_flip($choices));
 
-        $this->assertSame(array_keys($choices), $categoryLoader->loadChoicesForValues(array(1, 2, 3)));
+        $this->assertSame(array_keys($choices), $categoryLoader->loadChoicesForValues([1, 2, 3]));
     }
 
     public function testLoadValuesForChoices()
     {
-        $choices = array(
+        $choices = [
             1 => 'foo',
             2 => 'bar',
-        );
+        ];
 
         $categoryLoader = new CategoryChoiceLoader(array_flip($choices));
 
         //due to string typecast of values inside of ArrayChoiceList
-        $expectedChoices = array(
+        $expectedChoices = [
             'foo' => '1',
             'bar' => '2',
-        );
+        ];
 
         $choices['3'] = 'extra';
 

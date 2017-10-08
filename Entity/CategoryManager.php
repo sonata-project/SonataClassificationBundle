@@ -43,7 +43,7 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
         parent::__construct($class, $registry);
 
         $this->contextManager = $contextManager;
-        $this->categories = array();
+        $this->categories = [];
     }
 
     /**
@@ -55,7 +55,7 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
      *
      * @return mixed
      */
-    public function getRootCategoriesPager($page = 1, $limit = 25, $criteria = array())
+    public function getRootCategoriesPager($page = 1, $limit = 25, $criteria = [])
     {
         $page = (int) $page == 0 ? 1 : (int) $page;
 
@@ -80,7 +80,7 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
      *
      * @return PagerInterface
      */
-    public function getSubCategoriesPager($categoryId, $page = 1, $limit = 25, $criteria = array())
+    public function getSubCategoriesPager($categoryId, $page = 1, $limit = 25, $criteria = [])
     {
         $queryBuilder = $this->getObjectManager()->createQueryBuilder()
             ->select('c')
@@ -170,7 +170,7 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
         $rootCategories = $this->getObjectManager()->createQuery(sprintf('SELECT c FROM %s c WHERE c.parent IS NULL', $class))
             ->execute();
 
-        $categories = array();
+        $categories = [];
 
         foreach ($rootCategories as $category) {
             if ($category->getContext() === null) {
@@ -197,7 +197,7 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
         $rootCategories = $this->getObjectManager()->createQuery(sprintf('SELECT c FROM %s c WHERE c.parent IS NULL', $class))
             ->execute();
 
-        $categories = array();
+        $categories = [];
 
         foreach ($rootCategories as $category) {
             if ($category->getContext() === null) {
@@ -221,7 +221,7 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
     {
         $rootCategories = $this->getAllRootCategories($loadChildren);
 
-        $splitCategories = array();
+        $splitCategories = [];
 
         foreach ($rootCategories as $category) {
             $splitCategories[$category->getContext()->getId()][] = $category;
@@ -247,9 +247,9 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
     /**
      * {@inheritdoc}
      */
-    public function getPager(array $criteria, $page, $limit = 10, array $sort = array())
+    public function getPager(array $criteria, $page, $limit = 10, array $sort = [])
     {
-        $parameters = array();
+        $parameters = [];
 
         $query = $this->getRepository()
             ->createQueryBuilder('c')
@@ -303,10 +303,10 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
 
             $this->save($category);
 
-            $categories = array($category);
+            $categories = [$category];
         }
 
-        $rootCategories = array();
+        $rootCategories = [];
         foreach ($categories as $pos => $category) {
             if (null === $category->getParent()) {
                 $rootCategories[] = $category;

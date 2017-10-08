@@ -185,7 +185,7 @@ class CategoryController
 
         $this->categoryManager->delete($category);
 
-        return array('deleted' => true);
+        return ['deleted' => true];
     }
 
     /**
@@ -242,9 +242,9 @@ class CategoryController
     {
         $category = $id ? $this->getCategory($id) : null;
 
-        $form = $this->formFactory->createNamed(null, 'sonata_classification_api_form_category', $category, array(
+        $form = $this->formFactory->createNamed(null, 'sonata_classification_api_form_category', $category, [
             'csrf_protection' => false,
-        ));
+        ]);
 
         FormHelper::removeFields($request->request->all(), $form);
 
@@ -258,11 +258,11 @@ class CategoryController
 
             if (class_exists('FOS\RestBundle\Context\Context')) {
                 $context = new Context();
-                $context->setGroups(array('sonata_api_read'));
+                $context->setGroups(['sonata_api_read']);
                 $view->setContext($context);
             } else {
                 $serializationContext = SerializationContext::create();
-                $serializationContext->setGroups(array('sonata_api_read'));
+                $serializationContext->setGroups(['sonata_api_read']);
                 $serializationContext->enableMaxDepthChecks();
                 $view->setSerializationContext($serializationContext);
             }

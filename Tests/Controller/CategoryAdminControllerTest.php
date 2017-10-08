@@ -90,9 +90,9 @@ class CategoryAdminControllerTest extends PHPUnit_Framework_TestCase
 
         $this->request = new Request();
         $this->pool = new Pool($this->container, 'title', 'logo.png');
-        $this->pool->setAdminServiceIds(array('foo.admin'));
+        $this->pool->setAdminServiceIds(['foo.admin']);
         $this->request->attributes->set('_sonata_admin', 'foo.admin');
-        $this->parameters = array();
+        $this->parameters = [];
         $this->template = '';
 
         // php 5.3 BC
@@ -100,15 +100,15 @@ class CategoryAdminControllerTest extends PHPUnit_Framework_TestCase
         $template = &$this->template;
 
         $templating = $this->getMockBuilder('Symfony\Bundle\FrameworkBundle\Templating\DelegatingEngine')
-            ->setMethods(array())
-            ->setConstructorArgs(array($this->container, array()))
+            ->setMethods([])
+            ->setConstructorArgs([$this->container, []])
             ->getMock();
 
         $templating->expects($this->any())
             ->method('renderResponse')
             ->will($this->returnCallback(function (
                 $view,
-                array $parameters = array(),
+                array $parameters = [],
                 Response $response = null
             ) use (
                 &$params,
@@ -281,7 +281,7 @@ class CategoryAdminControllerTest extends PHPUnit_Framework_TestCase
             ->method('generateUrl')
             ->will(
                 $this->returnCallback(
-                    function ($name, array $parameters = array(), $absolute = false) {
+                    function ($name, array $parameters = [], $absolute = false) {
                         $result = $name;
                         if (!empty($parameters)) {
                             $result .= '?'.http_build_query($parameters);
@@ -339,11 +339,11 @@ class CategoryAdminControllerTest extends PHPUnit_Framework_TestCase
 
         $datagrid->expects($this->once())
             ->method('getValues')
-            ->will($this->returnValue(array(
-                'context' => array(
+            ->will($this->returnValue([
+                'context' => [
                     'value' => $context ?: '',
-                ),
-            )));
+                ],
+            ]));
 
         $this->admin->expects($this->any())
             ->method('getPersistentParameter')
@@ -355,10 +355,10 @@ class CategoryAdminControllerTest extends PHPUnit_Framework_TestCase
 
     public function listActionData()
     {
-        return array(
-            'context' => array('default'),
-            'no context' => array(false),
-        );
+        return [
+            'context' => ['default'],
+            'no context' => [false],
+        ];
     }
 
     /**
@@ -401,7 +401,7 @@ class CategoryAdminControllerTest extends PHPUnit_Framework_TestCase
                 ->will($this->returnValue(false));
         }
 
-        $categoriesMock = array();
+        $categoriesMock = [];
         foreach ($categories as $category) {
             $categoryMock = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Model\Category');
             $categoryMock->setName($category[0]);
@@ -422,18 +422,18 @@ class CategoryAdminControllerTest extends PHPUnit_Framework_TestCase
 
     public function treeActionData()
     {
-        return array(
-            'context and no categories' => array('default', array()),
-            'no context and no categories' => array(false, array()),
-            'context and categories' => array('default', array(
-                array('First Category', 'other'),
-                array('Second Category', 'default'),
-            )),
-            'no context and categories' => array(false, array(
-                array('First Category', 'other'),
-                array('Second Category', 'default'),
-            )),
-        );
+        return [
+            'context and no categories' => ['default', []],
+            'no context and no categories' => [false, []],
+            'context and categories' => ['default', [
+                ['First Category', 'other'],
+                ['Second Category', 'default'],
+            ]],
+            'no context and categories' => [false, [
+                ['First Category', 'other'],
+                ['Second Category', 'default'],
+            ]],
+        ];
     }
 
     public function getCsrfProvider()

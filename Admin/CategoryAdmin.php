@@ -20,9 +20,9 @@ use Symfony\Component\Validator\Constraints\Valid;
 class CategoryAdmin extends ContextAwareAdmin
 {
     // NEXT_MAJOR: remove this override
-    protected $formOptions = array(
+    protected $formOptions = [
         'cascade_validation' => true,
-    );
+    ];
 
     /**
      * {@inheritdoc}
@@ -58,16 +58,16 @@ EOT
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->with('General', array('class' => 'col-md-6'))
+            ->with('General', ['class' => 'col-md-6'])
                 ->add('name')
                 ->add('description',
                     // NEXT_MAJOR: remove when dropping Symfony <2.8 support
                     method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix')
                         ? 'Symfony\Component\Form\Extension\Core\Type\TextareaType'
                         : 'textarea',
-                    array(
+                    [
                         'required' => false,
-                    )
+                    ]
                 )
         ;
 
@@ -79,13 +79,13 @@ EOT
                         method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix')
                             ? 'Sonata\ClassificationBundle\Form\Type\CategorySelectorType'
                             : 'sonata_category_selector',
-                        array(
+                        [
                             'category' => $this->getSubject() ?: null,
                             'model_manager' => $this->getModelManager(),
                             'class' => $this->getClass(),
                             'required' => true,
                             'context' => $this->getSubject()->getContext(),
-                        )
+                        ]
                     )
                 ;
             }
@@ -95,19 +95,19 @@ EOT
 
         $formMapper
             ->end()
-            ->with('Options', array('class' => 'col-md-6'))
-                ->add('enabled', null, array(
+            ->with('Options', ['class' => 'col-md-6'])
+                ->add('enabled', null, [
                     'required' => false,
-                ))
+                ])
                 ->add('position',
                     // NEXT_MAJOR: remove when dropping Symfony <2.8 support
                     method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix')
                         ? 'Symfony\Component\Form\Extension\Core\Type\IntegerType'
                         : 'integer',
-                    array(
+                    [
                         'required' => false,
                         'data' => $position,
-                    )
+                    ]
                 )
             ->end()
         ;
@@ -120,15 +120,15 @@ EOT
                         method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix')
                             ? 'Sonata\AdminBundle\Form\Type\ModelListType'
                             : 'sonata_type_model_list',
-                        array(
+                        [
                             'required' => false,
-                        ),
-                        array(
-                            'link_parameters' => array(
+                        ],
+                        [
+                            'link_parameters' => [
                                 'provider' => 'sonata.media.provider.image',
                                 'context' => 'sonata_category',
-                            ),
-                        )
+                            ],
+                        ]
                     )
                 ->end();
         }
@@ -154,16 +154,16 @@ EOT
     {
         $listMapper
             ->addIdentifier('name')
-            ->add('context', null, array(
+            ->add('context', null, [
                 'sortable' => 'context.name',
-            ))
+            ])
             ->add('slug')
             ->add('description')
-            ->add('enabled', null, array('editable' => true))
+            ->add('enabled', null, ['editable' => true])
             ->add('position')
-            ->add('parent', null, array(
+            ->add('parent', null, [
                 'sortable' => 'parent.name',
-            ))
+            ])
         ;
     }
 }

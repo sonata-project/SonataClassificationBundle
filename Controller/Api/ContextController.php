@@ -184,7 +184,7 @@ class ContextController
 
         $this->contextManager->delete($context);
 
-        return array('deleted' => true);
+        return ['deleted' => true];
     }
 
     /**
@@ -241,9 +241,9 @@ class ContextController
     {
         $context = $id ? $this->getContext($id) : null;
 
-        $form = $this->formFactory->createNamed(null, 'sonata_classification_api_form_context', $context, array(
+        $form = $this->formFactory->createNamed(null, 'sonata_classification_api_form_context', $context, [
             'csrf_protection' => false,
-        ));
+        ]);
 
         FormHelper::removeFields($request->request->all(), $form);
 
@@ -257,11 +257,11 @@ class ContextController
 
             if (class_exists('FOS\RestBundle\Context\Context')) {
                 $context = new Context();
-                $context->setGroups(array('sonata_api_read'));
+                $context->setGroups(['sonata_api_read']);
                 $view->setContext($context);
             } else {
                 $serializationContext = SerializationContext::create();
-                $serializationContext->setGroups(array('sonata_api_read'));
+                $serializationContext->setGroups(['sonata_api_read']);
                 $serializationContext->enableMaxDepthChecks();
                 $view->setSerializationContext($serializationContext);
             }

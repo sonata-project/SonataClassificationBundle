@@ -49,24 +49,24 @@ final class AbstractCategoriesBlockServiceTest extends AbstractBlockServiceTestC
 
     public function testDefaultSettings()
     {
-        $blockService = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Block\Service\AbstractCategoriesBlockService', array(
+        $blockService = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Block\Service\AbstractCategoriesBlockService', [
             'block.service', $this->templating, $this->contextManager, $this->categoryManager, $this->categoryAdmin,
-        ));
+        ]);
         $blockContext = $this->getBlockContext($blockService);
 
-        $this->assertSettings(array(
+        $this->assertSettings([
             'title' => 'Categories',
             'category' => false,
             'categoryId' => null,
             'context' => 'default',
             'template' => 'SonataClassificationBundle:Block:base_block_categories.html.twig',
-        ), $blockContext);
+        ], $blockContext);
     }
 
     public function testLoad()
     {
         $category = $this->getMockBuilder('Sonata\ClassificationBundle\Model\CategoryInterface')
-            ->setMethods(array('getId'))
+            ->setMethods(['getId'])
             ->disableOriginalConstructor()
             ->getMockForAbstractClass();
         $category->expects($this->any())->method('getId')->will($this->returnValue(23));
@@ -85,16 +85,16 @@ final class AbstractCategoriesBlockServiceTest extends AbstractBlockServiceTestC
             ->method('setSetting')
             ->with($this->equalTo('categoryId'), $this->equalTo($category));
 
-        $blockService = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Block\Service\AbstractCategoriesBlockService', array(
+        $blockService = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Block\Service\AbstractCategoriesBlockService', [
             'block.service', $this->templating, $this->contextManager, $this->categoryManager, $this->categoryAdmin,
-        ));
+        ]);
         $blockService->load($block);
     }
 
     public function testPrePersist()
     {
         $category = $this->getMockBuilder('Sonata\ClassificationBundle\Model\CategoryInterface')
-            ->setMethods(array('getId'))
+            ->setMethods(['getId'])
             ->disableOriginalConstructor()
             ->getMockForAbstractClass();
         $category->expects($this->any())->method('getId')->will($this->returnValue(23));
@@ -108,16 +108,16 @@ final class AbstractCategoriesBlockServiceTest extends AbstractBlockServiceTestC
             ->method('setSetting')
             ->with($this->equalTo('categoryId'), $this->equalTo(23));
 
-        $blockService = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Block\Service\AbstractCategoriesBlockService', array(
+        $blockService = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Block\Service\AbstractCategoriesBlockService', [
             'block.service', $this->templating, $this->contextManager, $this->categoryManager, $this->categoryAdmin,
-        ));
+        ]);
         $blockService->prePersist($block);
     }
 
     public function testPreUpdate()
     {
         $category = $this->getMockBuilder('Sonata\ClassificationBundle\Model\CategoryInterface')
-            ->setMethods(array('getId'))
+            ->setMethods(['getId'])
             ->disableOriginalConstructor()
             ->getMockForAbstractClass();
         $category->expects($this->any())->method('getId')->will($this->returnValue(23));
@@ -131,9 +131,9 @@ final class AbstractCategoriesBlockServiceTest extends AbstractBlockServiceTestC
             ->method('setSetting')
             ->with($this->equalTo('categoryId'), $this->equalTo(23));
 
-        $blockService = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Block\Service\AbstractCategoriesBlockService', array(
+        $blockService = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Block\Service\AbstractCategoriesBlockService', [
             'block.service', $this->templating, $this->contextManager, $this->categoryManager, $this->categoryAdmin,
-        ));
+        ]);
         $blockService->preUpdate($block);
     }
 }

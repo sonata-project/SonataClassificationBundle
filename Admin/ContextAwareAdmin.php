@@ -69,10 +69,10 @@ abstract class ContextAwareAdmin extends AbstractAdmin
     {
         $parameters = array_merge(
             parent::getPersistentParameters(),
-            array(
+            [
                 'context' => '',
                 'hide_context' => $this->hasRequest() ? (int) $this->getRequest()->get('hide_context', 0) : 0,
-            )
+            ]
         );
 
         if ($this->getSubject()) {
@@ -95,14 +95,14 @@ abstract class ContextAwareAdmin extends AbstractAdmin
      */
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
-        $options = array();
+        $options = [];
 
         if (1 === $this->getPersistentParameter('hide_context')) {
             $options['disabled'] = true;
         }
 
         $datagridMapper
-            ->add('context', null, array(), null, $options)
+            ->add('context', null, [], null, $options)
         ;
     }
 }

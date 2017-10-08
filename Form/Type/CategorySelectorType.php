@@ -61,23 +61,23 @@ class CategorySelectorType extends AbstractType
         $that = $this;
 
         if (!interface_exists('Symfony\Component\Form\ChoiceList\Loader\ChoiceLoaderInterface')) {
-            $resolver->setDefaults(array(
+            $resolver->setDefaults([
                 'context' => null,
                 'category' => null,
                 'choice_list' => function (Options $opts, $previousValue) use ($that) {
                     return new SimpleChoiceList($that->getChoices($opts));
                 },
-            ));
+            ]);
 
             return;
         }
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'context' => null,
             'category' => null,
             'choice_loader' => function (Options $opts, $previousValue) use ($that) {
                 return new CategoryChoiceLoader(array_flip($that->getChoices($opts)));
             },
-        ));
+        ]);
     }
 
     /**
@@ -88,7 +88,7 @@ class CategorySelectorType extends AbstractType
     public function getChoices(Options $options)
     {
         if (!$options['category'] instanceof CategoryInterface) {
-            return array();
+            return [];
         }
 
         if ($options['context'] === null) {
@@ -97,7 +97,7 @@ class CategorySelectorType extends AbstractType
             $categories = $this->manager->getRootCategoriesForContext($options['context']);
         }
 
-        $choices = array();
+        $choices = [];
 
         foreach ($categories as $category) {
             $choices[$category->getId()] = sprintf('%s (%s)', $category->getName(), $category->getContext()->getId());

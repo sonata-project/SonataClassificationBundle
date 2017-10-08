@@ -39,9 +39,9 @@ class FixContextCommand extends ContainerAwareCommand
 
         $output->writeln('1. Checking default context');
 
-        $defaultContext = $contextManager->findOneBy(array(
+        $defaultContext = $contextManager->findOneBy([
             'id' => ContextInterface::DEFAULT_CONTEXT,
-        ));
+        ]);
 
         if (!$defaultContext) {
             $output->writeln(' > default context is missing, creating one');
@@ -57,7 +57,7 @@ class FixContextCommand extends ContainerAwareCommand
 
         $output->writeln('2. Find tag without default context');
 
-        foreach ($tagManager->findBy(array()) as $tag) {
+        foreach ($tagManager->findBy([]) as $tag) {
             if ($tag->getContext()) {
                 continue;
             }
@@ -70,7 +70,7 @@ class FixContextCommand extends ContainerAwareCommand
 
         $output->writeln('3. Find collection without default context');
 
-        foreach ($collectionManager->findBy(array()) as $collection) {
+        foreach ($collectionManager->findBy([]) as $collection) {
             if ($collection->getContext()) {
                 continue;
             }
@@ -83,7 +83,7 @@ class FixContextCommand extends ContainerAwareCommand
 
         $output->writeln('3. Find category without default context');
 
-        foreach ($categoryManager->findBy(array()) as $category) {
+        foreach ($categoryManager->findBy([]) as $category) {
             if ($category->getContext()) {
                 continue;
             }

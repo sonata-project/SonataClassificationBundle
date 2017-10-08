@@ -54,12 +54,12 @@ class CategoryAdminController extends Controller
         // set the theme for the current Admin Form
         $this->setFormTheme($formView, $this->admin->getFilterTheme());
 
-        return $this->render($this->admin->getTemplate('list'), array(
+        return $this->render($this->admin->getTemplate('list'), [
             'action' => 'list',
             'form' => $formView,
             'datagrid' => $datagrid,
             'csrf_token' => $this->getCsrfToken('sonata.batch'),
-        ));
+        ]);
     }
 
     /**
@@ -79,7 +79,7 @@ class CategoryAdminController extends Controller
         $rootCategoriesSplitByContexts = $categoryManager->getRootCategoriesSplitByContexts(false);
 
         // root categories inside the current context
-        $currentCategories = array();
+        $currentCategories = [];
 
         if (!$currentContext && !empty($rootCategoriesSplitByContexts)) {
             $currentCategories = current($rootCategoriesSplitByContexts);
@@ -110,14 +110,14 @@ class CategoryAdminController extends Controller
 
         $this->setFormTheme($formView, $this->admin->getFilterTheme());
 
-        return $this->render($this->admin->getTemplate('tree'), array(
+        return $this->render($this->admin->getTemplate('tree'), [
             'action' => 'tree',
             'current_categories' => $currentCategories,
             'root_categories' => $rootCategoriesSplitByContexts,
             'current_context' => $currentContext,
             'form' => $formView,
             'csrf_token' => $this->getCsrfToken('sonata.batch'),
-        ));
+        ]);
     }
 
     /**

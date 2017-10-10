@@ -42,13 +42,13 @@ class CategoryManager extends BaseDocumentManager implements CategoryManagerInte
         parent::__construct($class, $registry);
 
         $this->contextManager = $contextManager;
-        $this->categories = array();
+        $this->categories = [];
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getRootCategoriesPager($page = 1, $limit = 25, $criteria = array())
+    public function getRootCategoriesPager($page = 1, $limit = 25, $criteria = [])
     {
         $queryBuilder = $this->getObjectManager()->createQueryBuilder()
             ->select('c')
@@ -66,7 +66,7 @@ class CategoryManager extends BaseDocumentManager implements CategoryManagerInte
     /**
      * {@inheritdoc}
      */
-    public function getSubCategoriesPager($categoryId, $page = 1, $limit = 25, $criteria = array())
+    public function getSubCategoriesPager($categoryId, $page = 1, $limit = 25, $criteria = [])
     {
         $queryBuilder = $this->getObjectManager()->createQueryBuilder()
             ->select('c')
@@ -102,7 +102,7 @@ class CategoryManager extends BaseDocumentManager implements CategoryManagerInte
         $rootCategories = $this->getObjectManager()->createQuery(sprintf('SELECT c FROM %s c WHERE c.parent IS NULL', $this->getClass()))
             ->execute();
 
-        $categories = array();
+        $categories = [];
 
         foreach ($rootCategories as $category) {
             if ($category->getContext() === null) {
@@ -216,7 +216,7 @@ class CategoryManager extends BaseDocumentManager implements CategoryManagerInte
 
             $this->save($category);
 
-            $categories = array($category);
+            $categories = [$category];
         }
 
         foreach ($categories as $pos => $category) {
@@ -239,9 +239,9 @@ class CategoryManager extends BaseDocumentManager implements CategoryManagerInte
             }
         }
 
-        $this->categories[$context->getId()] = array(
+        $this->categories[$context->getId()] = [
             0 => $root,
-        );
+        ];
     }
 
     /**

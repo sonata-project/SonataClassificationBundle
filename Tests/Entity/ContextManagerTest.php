@@ -22,11 +22,11 @@ class ContextManagerTest extends PHPUnit_Framework_TestCase
         $self = $this;
         $this
             ->getContextManager(function ($qb) use ($self) {
-                $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(array()));
+                $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue([]));
                 $qb->expects($self->never())->method('andWhere');
-                $qb->expects($self->once())->method('setParameters')->with(array());
+                $qb->expects($self->once())->method('setParameters')->with([]);
             })
-            ->getPager(array(), 1);
+            ->getPager([], 1);
     }
 
     public function testGetPagerWithEnabledContexts()
@@ -34,13 +34,13 @@ class ContextManagerTest extends PHPUnit_Framework_TestCase
         $self = $this;
         $this
             ->getContextManager(function ($qb) use ($self) {
-                $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(array()));
+                $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue([]));
                 $qb->expects($self->once())->method('andWhere')->with($self->equalTo('c.enabled = :enabled'));
-                $qb->expects($self->once())->method('setParameters')->with(array('enabled' => true));
+                $qb->expects($self->once())->method('setParameters')->with(['enabled' => true]);
             })
-            ->getPager(array(
+            ->getPager([
                 'enabled' => true,
-            ), 1);
+            ], 1);
     }
 
     public function testGetPagerWithDisabledContexts()
@@ -48,18 +48,18 @@ class ContextManagerTest extends PHPUnit_Framework_TestCase
         $self = $this;
         $this
             ->getContextManager(function ($qb) use ($self) {
-                $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue(array()));
+                $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue([]));
                 $qb->expects($self->once())->method('andWhere')->with($self->equalTo('c.enabled = :enabled'));
-                $qb->expects($self->once())->method('setParameters')->with(array('enabled' => false));
+                $qb->expects($self->once())->method('setParameters')->with(['enabled' => false]);
             })
-            ->getPager(array(
+            ->getPager([
                 'enabled' => false,
-            ), 1);
+            ], 1);
     }
 
     protected function getContextManager($qbCallback)
     {
-        $em = EntityManagerMockFactory::create($this, $qbCallback, array());
+        $em = EntityManagerMockFactory::create($this, $qbCallback, []);
 
         $registry = $this->getMockForAbstractClass('Doctrine\Common\Persistence\ManagerRegistry');
         $registry->expects($this->any())->method('getManagerForClass')->will($this->returnValue($em));

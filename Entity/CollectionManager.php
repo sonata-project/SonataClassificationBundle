@@ -21,9 +21,9 @@ class CollectionManager extends BaseEntityManager implements CollectionManagerIn
     /**
      * {@inheritdoc}
      */
-    public function getPager(array $criteria, $page, $limit = 10, array $sort = array())
+    public function getPager(array $criteria, $page, $limit = 10, array $sort = [])
     {
-        $parameters = array();
+        $parameters = [];
 
         $query = $this->getRepository()
             ->createQueryBuilder('c')

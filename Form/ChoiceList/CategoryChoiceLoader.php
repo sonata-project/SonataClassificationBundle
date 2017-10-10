@@ -54,7 +54,7 @@ final class CategoryChoiceLoader implements ChoiceLoaderInterface
     public function loadChoicesForValues(array $values, $value = null)
     {
         if (empty($values)) {
-            return array();
+            return [];
         }
 
         return $this->loadChoiceList($value)->getChoicesForValues($values);
@@ -66,7 +66,7 @@ final class CategoryChoiceLoader implements ChoiceLoaderInterface
     public function loadValuesForChoices(array $choices, $value = null)
     {
         if (empty($choices)) {
-            return array();
+            return [];
         }
 
         return $this->loadChoiceList($value)->getValuesForChoices($choices);

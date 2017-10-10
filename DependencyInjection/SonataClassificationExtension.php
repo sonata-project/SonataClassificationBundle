@@ -112,131 +112,131 @@ class SonataClassificationExtension extends Extension
 
         $collector = DoctrineCollector::getInstance();
 
-        $collector->addAssociation($config['class']['category'], 'mapOneToMany', array(
+        $collector->addAssociation($config['class']['category'], 'mapOneToMany', [
             'fieldName' => 'children',
             'targetEntity' => $config['class']['category'],
-            'cascade' => array(
+            'cascade' => [
                 'persist',
-            ),
+            ],
             'mappedBy' => 'parent',
             'orphanRemoval' => true,
-            'orderBy' => array(
+            'orderBy' => [
                 'position' => 'ASC',
-            ),
-        ));
+            ],
+        ]);
 
-        $collector->addAssociation($config['class']['category'], 'mapManyToOne', array(
+        $collector->addAssociation($config['class']['category'], 'mapManyToOne', [
             'fieldName' => 'parent',
             'targetEntity' => $config['class']['category'],
-            'cascade' => array(
+            'cascade' => [
                 'persist',
                 'refresh',
                 'merge',
                 'detach',
-            ),
+            ],
             'mappedBy' => null,
             'inversedBy' => 'children',
-            'joinColumns' => array(
-                array(
+            'joinColumns' => [
+                [
                  'name' => 'parent_id',
                  'referencedColumnName' => 'id',
                  'onDelete' => 'CASCADE',
-                ),
-            ),
+                ],
+            ],
             'orphanRemoval' => false,
-        ));
+        ]);
 
-        $collector->addAssociation($config['class']['category'], 'mapManyToOne', array(
+        $collector->addAssociation($config['class']['category'], 'mapManyToOne', [
             'fieldName' => 'context',
             'targetEntity' => $config['class']['context'],
-            'cascade' => array(
+            'cascade' => [
                 'persist',
-            ),
+            ],
             'mappedBy' => null,
             'inversedBy' => null,
-            'joinColumns' => array(
-                array(
+            'joinColumns' => [
+                [
                     'name' => 'context',
                     'referencedColumnName' => 'id',
-                ),
-            ),
+                ],
+            ],
             'orphanRemoval' => false,
-        ));
+        ]);
 
-        $collector->addAssociation($config['class']['tag'], 'mapManyToOne', array(
+        $collector->addAssociation($config['class']['tag'], 'mapManyToOne', [
             'fieldName' => 'context',
             'targetEntity' => $config['class']['context'],
-            'cascade' => array(
+            'cascade' => [
                 'persist',
-            ),
+            ],
             'mappedBy' => null,
             'inversedBy' => null,
-            'joinColumns' => array(
-                array(
+            'joinColumns' => [
+                [
                     'name' => 'context',
                     'referencedColumnName' => 'id',
-                ),
-            ),
+                ],
+            ],
             'orphanRemoval' => false,
-        ));
+        ]);
 
-        $collector->addUnique($config['class']['tag'], 'tag_context', array('slug', 'context'));
+        $collector->addUnique($config['class']['tag'], 'tag_context', ['slug', 'context']);
 
-        $collector->addAssociation($config['class']['collection'], 'mapManyToOne', array(
+        $collector->addAssociation($config['class']['collection'], 'mapManyToOne', [
             'fieldName' => 'context',
             'targetEntity' => $config['class']['context'],
-            'cascade' => array(
+            'cascade' => [
                 'persist',
-            ),
+            ],
             'mappedBy' => null,
             'inversedBy' => null,
-            'joinColumns' => array(
-                array(
+            'joinColumns' => [
+                [
                     'name' => 'context',
                     'referencedColumnName' => 'id',
-                ),
-            ),
+                ],
+            ],
             'orphanRemoval' => false,
-        ));
+        ]);
 
-        $collector->addUnique($config['class']['collection'], 'tag_collection', array('slug', 'context'));
+        $collector->addUnique($config['class']['collection'], 'tag_collection', ['slug', 'context']);
 
         if (interface_exists('Sonata\MediaBundle\Model\MediaInterface')) {
-            $collector->addAssociation($config['class']['collection'], 'mapManyToOne', array(
+            $collector->addAssociation($config['class']['collection'], 'mapManyToOne', [
                 'fieldName' => 'media',
                 'targetEntity' => $config['class']['media'],
-                'cascade' => array(
+                'cascade' => [
                     'persist',
-                ),
+                ],
                 'mappedBy' => null,
                 'inversedBy' => null,
-                'joinColumns' => array(
-                    array(
+                'joinColumns' => [
+                    [
                      'name' => 'media_id',
                      'referencedColumnName' => 'id',
                      'onDelete' => 'SET NULL',
-                    ),
-                ),
+                    ],
+                ],
                 'orphanRemoval' => false,
-            ));
+            ]);
 
-            $collector->addAssociation($config['class']['category'], 'mapManyToOne', array(
+            $collector->addAssociation($config['class']['category'], 'mapManyToOne', [
                 'fieldName' => 'media',
                 'targetEntity' => $config['class']['media'],
-                'cascade' => array(
+                'cascade' => [
                     'persist',
-                ),
+                ],
                 'mappedBy' => null,
                 'inversedBy' => null,
-                'joinColumns' => array(
-                    array(
+                'joinColumns' => [
+                    [
                      'name' => 'media_id',
                      'referencedColumnName' => 'id',
                      'onDelete' => 'SET NULL',
-                    ),
-                ),
+                    ],
+                ],
                 'orphanRemoval' => false,
-            ));
+            ]);
         }
     }
 }

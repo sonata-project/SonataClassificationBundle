@@ -28,9 +28,9 @@ class ContextAdmin extends AbstractAdmin
                 ->add('id')
             ->ifEnd()
             ->add('name')
-            ->add('enabled', null, array(
+            ->add('enabled', null, [
                 'required' => false,
-            ))
+            ])
         ;
     }
 
@@ -54,9 +54,9 @@ class ContextAdmin extends AbstractAdmin
         $listMapper
             ->addIdentifier('name')
             ->addIdentifier('id')
-            ->add('enabled', null, array(
+            ->add('enabled', null, [
                 'editable' => true,
-            ))
+            ])
             ->add('createdAt')
             ->add('updatedAt')
         ;

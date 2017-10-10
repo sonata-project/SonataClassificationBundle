@@ -18,8 +18,11 @@ use Sonata\BlockBundle\Model\BlockInterface;
 use Sonata\ClassificationBundle\Model\CategoryInterface;
 use Sonata\ClassificationBundle\Model\CategoryManagerInterface;
 use Sonata\ClassificationBundle\Model\ContextManagerInterface;
+use Sonata\CoreBundle\Form\Type\ImmutableArrayType;
 use Sonata\CoreBundle\Model\Metadata;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -88,35 +91,17 @@ abstract class AbstractCategoriesBlockService extends AbstractClassificationBloc
             ],
         ]);
 
-        $formMapper->add(
-            'settings',
-            // NEXT_MAJOR: remove when dropping Symfony <2.8 support
-            method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix')
-                ? 'Sonata\CoreBundle\Form\Type\ImmutableArrayType'
-                : 'sonata_type_immutable_array',
-            [
+        $formMapper->add(ImmutableArrayType::class, [
                 'keys' => [
-                    ['title',
-                        // NEXT_MAJOR: remove when dropping Symfony <2.8 support
-                        method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix')
-                            ? 'Symfony\Component\Form\Extension\Core\Type\TextType'
-                            : 'text',
-                        [
-                            'label' => 'form.label_title',
-                            'required' => false,
-                        ],
-                    ],
-                    ['context',
-                        // NEXT_MAJOR: remove when dropping Symfony <2.8 support
-                        method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix')
-                            ? 'Symfony\Component\Form\Extension\Core\Type\ChoiceType'
-                            : 'choice',
-                        [
-                            'label' => 'form.label_context',
-                            'required' => false,
-                            'choices' => $this->getContextChoices(),
-                        ],
-                    ],
+                    ['title', TextType::class, [
+                        'label' => 'form.label_title',
+                        'required' => false,
+                    ]],
+                    ['context', ChoiceType::class, [
+                        'label' => 'form.label_context',
+                        'required' => false,
+                        'choices' => $this->getContextChoices(),
+                    ]],
                     [$adminField, null, []],
                 ],
                 'translation_domain' => 'SonataClassificationBundle',

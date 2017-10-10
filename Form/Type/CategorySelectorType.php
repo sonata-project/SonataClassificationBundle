@@ -11,6 +11,7 @@
 
 namespace Sonata\ClassificationBundle\Form\Type;
 
+use Sonata\AdminBundle\Form\Type\ModelType;
 use Sonata\ClassificationBundle\Form\ChoiceList\CategoryChoiceLoader;
 use Sonata\ClassificationBundle\Model\CategoryInterface;
 use Sonata\ClassificationBundle\Model\CategoryManagerInterface;
@@ -113,10 +114,7 @@ class CategorySelectorType extends AbstractType
      */
     public function getParent()
     {
-        // NEXT_MAJOR: Remove ternary (when requirement of Symfony is >= 2.8)
-        return method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix')
-            ? 'Sonata\AdminBundle\Form\Type\ModelType'
-            : 'sonata_type_model';
+        return ModelType::class;
     }
 
     /**

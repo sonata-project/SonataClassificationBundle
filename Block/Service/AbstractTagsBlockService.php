@@ -15,12 +15,14 @@ use Sonata\AdminBundle\Admin\AdminInterface;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\BlockBundle\Block\BlockContextInterface;
 use Sonata\BlockBundle\Model\BlockInterface;
-use Sonata\ClassificationBundle\Model\ContextInterface;
 use Sonata\ClassificationBundle\Model\ContextManagerInterface;
 use Sonata\ClassificationBundle\Model\TagInterface;
 use Sonata\ClassificationBundle\Model\TagManagerInterface;
+use Sonata\CoreBundle\Form\Type\ImmutableArrayType;
 use Sonata\CoreBundle\Model\Metadata;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -79,12 +81,6 @@ abstract class AbstractTagsBlockService extends AbstractClassificationBlockServi
      */
     public function buildEditForm(FormMapper $formMapper, BlockInterface $block)
     {
-        $contextChoices = [];
-        /** @var ContextInterface $context */
-        foreach ($this->contextManager->findAll() as $context) {
-            $contextChoices[$context->getId()] = $context->getName();
-        }
-
         $adminField = $this->getFormAdminType($formMapper, $this->tagAdmin, 'tagId', 'tag', [
             'label' => 'form.label_tag',
         ], [
@@ -96,34 +92,17 @@ abstract class AbstractTagsBlockService extends AbstractClassificationBlockServi
             ],
         ]);
 
-        $formMapper->add('settings',
-            // NEXT_MAJOR: remove when dropping Symfony <2.8 support
-            method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix')
-                ? 'Sonata\CoreBundle\Form\Type\ImmutableArrayType'
-                : 'sonata_type_immutable_array',
-            [
+        $formMapper->add('settings', ImmutableArrayType::class, [
                 'keys' => [
-                    ['title',
-                        // NEXT_MAJOR: remove when dropping Symfony <2.8 support
-                        method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix')
-                            ? 'Symfony\Component\Form\Extension\Core\Type\TextType'
-                            : 'text',
-                        [
-                            'label' => 'form.label_title',
-                            'required' => false,
-                        ],
-                    ],
-                    ['context',
-                        // NEXT_MAJOR: remove when dropping Symfony <2.8 support
-                        method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix')
-                            ? 'Symfony\Component\Form\Extension\Core\Type\ChoiceType'
-                            : 'choice',
-                        [
-                            'label' => 'form.label_context',
-                            'required' => false,
-                            'choices' => $this->getContextChoices(),
-                        ],
-                    ],
+                    ['title', TextType::class, [
+                        'label' => 'form.label_title',
+                        'required' => false,
+                    ]],
+                    ['context', ChoiceType::class, [
+                        'label' => 'form.label_context',
+                        'required' => false,
+                        'choices' => $this->getContextChoices(),
+                    ]],
                     [$adminField, null, []],
                 ],
                 'translation_domain' => 'SonataClassificationBundle',

@@ -14,7 +14,12 @@ namespace Sonata\ClassificationBundle\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Form\Type\ModelListType;
 use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\ClassificationBundle\Form\Type\CategorySelectorType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Validator\Constraints\Valid;
 
 class CategoryAdmin extends ContextAwareAdmin
@@ -60,33 +65,21 @@ EOT
         $formMapper
             ->with('General', ['class' => 'col-md-6'])
                 ->add('name')
-                ->add('description',
-                    // NEXT_MAJOR: remove when dropping Symfony <2.8 support
-                    method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix')
-                        ? 'Symfony\Component\Form\Extension\Core\Type\TextareaType'
-                        : 'textarea',
-                    [
-                        'required' => false,
-                    ]
-                )
+                ->add('description', TextareaType::class, [
+                    'required' => false,
+                ])
         ;
 
         if ($this->hasSubject()) {
             if ($this->getSubject()->getParent() !== null || $this->getSubject()->getId() === null) { // root category cannot have a parent
                 $formMapper
-                    ->add('parent',
-                        // NEXT_MAJOR: remove when dropping Symfony <2.8 support
-                        method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix')
-                            ? 'Sonata\ClassificationBundle\Form\Type\CategorySelectorType'
-                            : 'sonata_category_selector',
-                        [
-                            'category' => $this->getSubject() ?: null,
-                            'model_manager' => $this->getModelManager(),
-                            'class' => $this->getClass(),
-                            'required' => true,
-                            'context' => $this->getSubject()->getContext(),
-                        ]
-                    )
+                    ->add('parent', CategorySelectorType::class, [
+                        'category' => $this->getSubject() ?: null,
+                        'model_manager' => $this->getModelManager(),
+                        'class' => $this->getClass(),
+                        'required' => true,
+                        'context' => $this->getSubject()->getContext(),
+                    ])
                 ;
             }
         }
@@ -96,40 +89,27 @@ EOT
         $formMapper
             ->end()
             ->with('Options', ['class' => 'col-md-6'])
-                ->add('enabled', null, [
+                ->add('enabled', CheckboxType::class, [
                     'required' => false,
                 ])
-                ->add('position',
-                    // NEXT_MAJOR: remove when dropping Symfony <2.8 support
-                    method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix')
-                        ? 'Symfony\Component\Form\Extension\Core\Type\IntegerType'
-                        : 'integer',
-                    [
-                        'required' => false,
-                        'data' => $position,
-                    ]
-                )
+                ->add('position', IntegerType::class, [
+                    'required' => false,
+                    'data' => $position,
+                ])
             ->end()
         ;
 
         if (interface_exists('Sonata\MediaBundle\Model\MediaInterface')) {
             $formMapper
                 ->with('General')
-                    ->add('media',
-                        // NEXT_MAJOR: remove when dropping Symfony <2.8 support
-                        method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix')
-                            ? 'Sonata\AdminBundle\Form\Type\ModelListType'
-                            : 'sonata_type_model_list',
-                        [
-                            'required' => false,
+                    ->add('media', ModelListType::class, [
+                        'required' => false,
+                    ], [
+                        'link_parameters' => [
+                            'provider' => 'sonata.media.provider.image',
+                            'context' => 'sonata_category',
                         ],
-                        [
-                            'link_parameters' => [
-                                'provider' => 'sonata.media.provider.image',
-                                'context' => 'sonata_category',
-                            ],
-                        ]
-                    )
+                    ])
                 ->end();
         }
     }

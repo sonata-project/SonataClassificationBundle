@@ -11,10 +11,10 @@
 
 namespace Sonata\ClassificationBundle\Tests\Admin;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\ClassificationBundle\Model\ContextManagerInterface;
-use Sonata\ClassificationBundle\Tests\Helpers\PHPUnit_Framework_TestCase;
 
-class AdminTest extends PHPUnit_Framework_TestCase
+class AdminTest extends TestCase
 {
     /**
      * @var ContextManagerInterface

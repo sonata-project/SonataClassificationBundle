@@ -11,11 +11,11 @@
 
 namespace Sonata\ClassificationBundle\Tests\Entity;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\ClassificationBundle\Entity\ContextManager;
-use Sonata\ClassificationBundle\Tests\Helpers\PHPUnit_Framework_TestCase;
 use Sonata\CoreBundle\Test\EntityManagerMockFactory;
 
-class ContextManagerTest extends PHPUnit_Framework_TestCase
+class ContextManagerTest extends TestCase
 {
     public function testGetPager()
     {

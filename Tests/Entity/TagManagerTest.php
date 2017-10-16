@@ -11,11 +11,11 @@
 
 namespace Sonata\ClassificationBundle\Tests\Entity;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\ClassificationBundle\Entity\TagManager;
-use Sonata\ClassificationBundle\Tests\Helpers\PHPUnit_Framework_TestCase;
 use Sonata\CoreBundle\Test\EntityManagerMockFactory;
 
-class TagManagerTest extends PHPUnit_Framework_TestCase
+class TagManagerTest extends TestCase
 {
     public function testGetPager()
     {

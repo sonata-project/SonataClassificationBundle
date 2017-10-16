@@ -11,10 +11,10 @@
 
 namespace Sonata\ClassificationBundle\Tests\Entity;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\ClassificationBundle\Entity\BaseCategory;
 use Sonata\ClassificationBundle\Entity\BaseContext;
 use Sonata\ClassificationBundle\Entity\CategoryManager;
-use Sonata\ClassificationBundle\Tests\Helpers\PHPUnit_Framework_TestCase;
 use Sonata\CoreBundle\Test\EntityManagerMockFactory;
 
 abstract class CategoryTest extends BaseCategory
@@ -40,7 +40,7 @@ abstract class ContextTest extends BaseContext
     }
 }
 
-class CategoryManagerTest extends PHPUnit_Framework_TestCase
+class CategoryManagerTest extends TestCase
 {
     public function testGetPager()
     {

@@ -11,12 +11,12 @@
 
 namespace Sonata\ClassificationBundle\Tests;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\AdminBundle\Admin\AdminInterface;
 use Sonata\AdminBundle\Admin\Pool;
 use Sonata\ClassificationBundle\Controller\CategoryAdminController;
 use Sonata\ClassificationBundle\Model\CategoryManagerInterface;
 use Sonata\ClassificationBundle\Model\ContextManagerInterface;
-use Sonata\ClassificationBundle\Tests\Helpers\PHPUnit_Framework_TestCase;
 use Symfony\Bridge\Twig\Extension\FormExtension;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Form\Extension\Csrf\CsrfProvider\CsrfProviderInterface;
@@ -29,7 +29,7 @@ use Symfony\Component\Security\Csrf\CsrfToken;
 /**
  * @author Dariusz Markowicz <dmarkowicz77@gmail.com>
  */
-class CategoryAdminControllerTest extends PHPUnit_Framework_TestCase
+class CategoryAdminControllerTest extends TestCase
 {
     /**
      * @var Request

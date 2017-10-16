@@ -11,14 +11,14 @@
 
 namespace Sonata\ClassificationBundle\Tests\Model;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\ClassificationBundle\Model\ContextInterface;
 use Sonata\ClassificationBundle\Model\Tag;
-use Sonata\ClassificationBundle\Tests\Helpers\PHPUnit_Framework_TestCase;
 
 /**
  * @author Dariusz Markowicz <dmarkowicz77@gmail.com>
  */
-class TagTest extends PHPUnit_Framework_TestCase
+class TagTest extends TestCase
 {
     public function testSetterGetter()
     {

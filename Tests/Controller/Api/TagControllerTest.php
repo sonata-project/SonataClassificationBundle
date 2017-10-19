@@ -11,14 +11,14 @@
 
 namespace Sonata\ClassificationBundle\Tests\Controller\Api;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\ClassificationBundle\Controller\Api\TagController;
-use Sonata\ClassificationBundle\Tests\Helpers\PHPUnit_Framework_TestCase;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @author Vincent Composieux <vincent.composieux@gmail.com>
  */
-class TagControllerTest extends PHPUnit_Framework_TestCase
+class TagControllerTest extends TestCase
 {
     public function testGetTagsAction()
     {

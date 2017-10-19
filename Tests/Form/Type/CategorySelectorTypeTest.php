@@ -11,14 +11,14 @@
 
 namespace Sonata\ClassificationBundle\Tests\Form\Type;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\ClassificationBundle\Form\Type\CategorySelectorType;
-use Sonata\ClassificationBundle\Tests\Helpers\PHPUnit_Framework_TestCase;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Anton Zlotnikov <exp.razor@gmail.com>
  */
-class CategorySelectorTypeTest extends PHPUnit_Framework_TestCase
+class CategorySelectorTypeTest extends TestCase
 {
     public function testConfigureOptions()
     {

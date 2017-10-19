@@ -14,6 +14,7 @@ namespace Sonata\ClassificationBundle\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
 class TagAdmin extends ContextAwareAdmin
 {
@@ -31,7 +32,9 @@ class TagAdmin extends ContextAwareAdmin
             $formMapper->add('slug');
         }
 
-        $formMapper->add('enabled', null, ['required' => false]);
+        $formMapper->add('enabled', CheckboxType::class, [
+            'required' => false,
+        ]);
     }
 
     /**

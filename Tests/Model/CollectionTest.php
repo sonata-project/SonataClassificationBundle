@@ -11,15 +11,15 @@
 
 namespace Sonata\ClassificationBundle\Tests\Model;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\ClassificationBundle\Model\Collection;
 use Sonata\ClassificationBundle\Model\ContextInterface;
-use Sonata\ClassificationBundle\Tests\Helpers\PHPUnit_Framework_TestCase;
 use Sonata\MediaBundle\Model\MediaInterface;
 
 /**
  * @author Dariusz Markowicz <dmarkowicz77@gmail.com>
  */
-class CollectionTest extends PHPUnit_Framework_TestCase
+class CollectionTest extends TestCase
 {
     public function testSetterGetter()
     {

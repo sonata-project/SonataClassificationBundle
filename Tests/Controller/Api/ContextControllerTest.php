@@ -11,14 +11,14 @@
 
 namespace Sonata\ClassificationBundle\Tests\Controller\Api;
 
+use PHPUnit\Framework\TestCase;
 use Sonata\ClassificationBundle\Controller\Api\ContextController;
-use Sonata\ClassificationBundle\Tests\Helpers\PHPUnit_Framework_TestCase;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @author Thomas Rabaix <thomas.rabaix@gmail.com>
  */
-class ContextControllerTest extends PHPUnit_Framework_TestCase
+class ContextControllerTest extends TestCase
 {
     public function testGetContextsAction()
     {

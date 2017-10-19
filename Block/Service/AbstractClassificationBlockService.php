@@ -14,6 +14,7 @@ namespace Sonata\ClassificationBundle\Block\Service;
 use Doctrine\ORM\Mapping\ClassMetadataInfo;
 use Sonata\AdminBundle\Admin\AdminInterface;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Form\Type\ModelTypeList;
 use Sonata\BlockBundle\Block\Service\AbstractAdminBlockService;
 use Sonata\ClassificationBundle\Model\ContextInterface;
 use Sonata\ClassificationBundle\Model\ContextManagerInterface;
@@ -74,7 +75,7 @@ abstract class AbstractClassificationBlockService extends AbstractAdminBlockServ
             'required' => false,
         ], $fieldOptions);
 
-        return $formMapper->create($formField, 'sonata_type_model_list', $fieldOptions);
+        return $formMapper->create($formField, ModelTypeList::class, $fieldOptions);
     }
 
     /**

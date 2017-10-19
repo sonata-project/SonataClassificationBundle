@@ -26,7 +26,7 @@ interface CategoryManagerInterface extends ManagerInterface, PageableManagerInte
      *
      * @return PagerInterface
      */
-    public function getRootCategoriesPager($page = 1, $limit = 25, $criteria = array());
+    public function getRootCategoriesPager($page = 1, $limit = 25, $criteria = []);
 
     /**
      * @param int   $categoryId
@@ -36,7 +36,7 @@ interface CategoryManagerInterface extends ManagerInterface, PageableManagerInte
      *
      * @return PagerInterface
      */
-    public function getSubCategoriesPager($categoryId, $page = 1, $limit = 25, $criteria = array());
+    public function getSubCategoriesPager($categoryId, $page = 1, $limit = 25, $criteria = []);
 
     /**
      * @param CategoryInterface $category

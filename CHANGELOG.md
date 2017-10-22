@@ -2,6 +2,21 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.4.0](https://github.com/sonata-project/SonataClassificationBundle/compare/3.3.2...3.4.0) - 2017-10-22
+### Removed
+- Removed usage of old form type aliases
+- Support for old versions of php and Symfony
+
+## [3.3.2](https://github.com/sonata-project/SonataClassificationBundle/compare/3.3.1...3.3.2) - 2017-10-22
+### Added
+- context fields validation in tag/collection create forms, which prevents creating objects with empty context from UI
+
+### Changed
+- Changed string type declaration of form fields to the fully-qualified type class name.
+
+### Fixed
+- Missing brazilian translations
+
 ## [3.3.1](https://github.com/sonata-project/SonataClassificationBundle/compare/3.3.0...3.3.1) - 2017-06-16
 ### Fixed
 - use `same as` instead of deprecated `sameas` in twig template

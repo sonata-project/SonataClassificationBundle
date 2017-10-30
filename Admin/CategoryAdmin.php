@@ -71,7 +71,7 @@ EOT
         ;
 
         if ($this->hasSubject()) {
-            if ($this->getSubject()->getParent() !== null || $this->getSubject()->getId() === null) { // root category cannot have a parent
+            if (null !== $this->getSubject()->getParent() || null === $this->getSubject()->getId()) { // root category cannot have a parent
                 $formMapper
                     ->add('parent', CategorySelectorType::class, [
                         'category' => $this->getSubject() ?: null,

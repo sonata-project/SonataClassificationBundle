@@ -57,7 +57,7 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
      */
     public function getRootCategoriesPager($page = 1, $limit = 25, $criteria = [])
     {
-        $page = (int) $page == 0 ? 1 : (int) $page;
+        $page = 0 == (int) $page ? 1 : (int) $page;
 
         $queryBuilder = $this->getObjectManager()->createQueryBuilder()
             ->select('c')
@@ -105,10 +105,10 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
      */
     public function getRootCategoryWithChildren(CategoryInterface $category)
     {
-        if ($category->getContext() === null) {
+        if (null === $category->getContext()) {
             throw new \RuntimeException('Context cannot be null');
         }
-        if ($category->getParent() != null) {
+        if (null != $category->getParent()) {
             throw new \RuntimeException('Method can be called only for root categories');
         }
         $context = $this->getContext($category->getContext());
@@ -173,7 +173,7 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
         $categories = [];
 
         foreach ($rootCategories as $category) {
-            if ($category->getContext() === null) {
+            if (null === $category->getContext()) {
                 throw new \RuntimeException('Context cannot be null');
             }
 
@@ -200,7 +200,7 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
         $categories = [];
 
         foreach ($rootCategories as $category) {
-            if ($category->getContext() === null) {
+            if (null === $category->getContext()) {
                 throw new \RuntimeException('Context cannot be null');
             }
 
@@ -293,7 +293,7 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
             ->setParameter('context', $context->getId())
             ->execute();
 
-        if (count($categories) == 0) {
+        if (0 == count($categories)) {
             // no category, create one for the provided context
             $category = $this->create();
             $category->setName($context->getName());

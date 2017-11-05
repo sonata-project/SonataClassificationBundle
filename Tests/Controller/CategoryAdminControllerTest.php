@@ -262,15 +262,15 @@ class CategoryAdminControllerTest extends TestCase
         $this->container->expects($this->any())
             ->method('has')
             ->will($this->returnCallback(function ($id) use ($tthis) {
-                if ($id == 'form.csrf_provider' && Kernel::MAJOR_VERSION == 2 && $tthis->getCsrfProvider() !== null) {
+                if ('form.csrf_provider' == $id && Kernel::MAJOR_VERSION == 2 && null !== $tthis->getCsrfProvider()) {
                     return true;
                 }
 
-                if ($id == 'security.csrf.token_manager' && Kernel::MAJOR_VERSION >= 3 && $tthis->getCsrfProvider() !== null) {
+                if ('security.csrf.token_manager' == $id && Kernel::MAJOR_VERSION >= 3 && null !== $tthis->getCsrfProvider()) {
                     return true;
                 }
 
-                if ($id == 'templating') {
+                if ('templating' == $id) {
                     return true;
                 }
 

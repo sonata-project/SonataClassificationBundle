@@ -92,7 +92,7 @@ class CategorySelectorType extends AbstractType
             return [];
         }
 
-        if ($options['context'] === null) {
+        if (null === $options['context']) {
             $categories = $this->manager->getAllRootCategories();
         } else {
             $categories = $this->manager->getRootCategoriesForContext($options['context']);
@@ -141,7 +141,7 @@ class CategorySelectorType extends AbstractType
      */
     private function childWalker(CategoryInterface $category, Options $options, array &$choices, $level = 2)
     {
-        if ($category->getChildren() === null) {
+        if (null === $category->getChildren()) {
             return;
         }
 

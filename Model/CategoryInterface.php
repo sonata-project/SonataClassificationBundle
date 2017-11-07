@@ -92,7 +92,7 @@ interface CategoryInterface
      * @param CategoryInterface $children
      * @param bool              $nested
      */
-    public function addChild(CategoryInterface $children, $nested = false);
+    public function addChild(self $children, $nested = false);
 
     /**
      * Get Children.
@@ -121,7 +121,7 @@ interface CategoryInterface
      * @param CategoryInterface $parent
      * @param bool              $nested
      */
-    public function setParent(CategoryInterface $parent = null, $nested = false);
+    public function setParent(self $parent = null, $nested = false);
 
     /**
      * Get Parent.

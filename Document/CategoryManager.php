@@ -105,7 +105,7 @@ class CategoryManager extends BaseDocumentManager implements CategoryManagerInte
         $categories = [];
 
         foreach ($rootCategories as $category) {
-            if ($category->getContext() === null) {
+            if (null === $category->getContext()) {
                 throw new \RuntimeException('Context cannot be null');
             }
 
@@ -206,7 +206,7 @@ class CategoryManager extends BaseDocumentManager implements CategoryManagerInte
             ->setParameter('context', $context->getId())
             ->execute();
 
-        if (count($categories) == 0) {
+        if (0 == count($categories)) {
             // no category, create one for the provided context
             $category = $this->create();
             $category->setName($context->getName());
@@ -220,11 +220,11 @@ class CategoryManager extends BaseDocumentManager implements CategoryManagerInte
         }
 
         foreach ($categories as $pos => $category) {
-            if ($pos === 0 && $category->getParent()) {
+            if (0 === $pos && $category->getParent()) {
                 throw new \RuntimeException('The first category must be the root');
             }
 
-            if ($pos === 0) {
+            if (0 === $pos) {
                 $root = $category;
             }
 

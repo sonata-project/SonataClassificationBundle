@@ -71,6 +71,11 @@ abstract class Category implements CategoryInterface
      */
     protected $context;
 
+    public function __construct()
+    {
+        $this->children = new ArrayCollection();
+    }
+
     /**
      * {@inheritdoc}
      */

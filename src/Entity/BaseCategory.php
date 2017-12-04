@@ -11,13 +11,14 @@
 
 namespace Sonata\ClassificationBundle\Entity;
 
+use Doctrine\ORM\PersistentCollection;
 use Sonata\ClassificationBundle\Model\Category as ModelCategory;
 
 abstract class BaseCategory extends ModelCategory
 {
     public function disableChildrenLazyLoading()
     {
-        if (is_object($this->children)) {
+        if ($this->children instanceof PersistentCollection) {
             $this->children->setInitialized(true);
         }
     }

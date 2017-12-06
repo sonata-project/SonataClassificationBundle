@@ -43,12 +43,11 @@ class CollectionControllerTest extends TestCase
         $this->assertEquals($collection, $this->createCollectionController($collectionManager)->getCollectionAction(1));
     }
 
-    /**
-     * @expectedException        \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
-     * @expectedExceptionMessage Collection (42) not found
-     */
     public function testGetCollectionNotFoundExceptionAction()
     {
+        $this->expectException(\Symfony\Component\HttpKernel\Exception\NotFoundHttpException::class);
+        $this->expectExceptionMessage('Collection (42) not found');
+
         $this->createCollectionController()->getCollectionAction(42);
     }
 

@@ -43,12 +43,11 @@ class ContextControllerTest extends TestCase
         $this->assertEquals($context, $this->createContextController($contextManager)->getContextAction(1));
     }
 
-    /**
-     * @expectedException        \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
-     * @expectedExceptionMessage Context (42) not found
-     */
     public function testGetContextNotFoundExceptionAction()
     {
+        $this->expectException(\Symfony\Component\HttpKernel\Exception\NotFoundHttpException::class);
+        $this->expectExceptionMessage('Context (42) not found');
+
         $this->createContextController()->getContextAction(42);
     }
 

@@ -43,12 +43,11 @@ class CategoryControllerTest extends TestCase
         $this->assertEquals($category, $this->createCategoryController($categoryManager)->getCategoryAction(1));
     }
 
-    /**
-     * @expectedException        \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
-     * @expectedExceptionMessage Category (42) not found
-     */
     public function testGetCategoryNotFoundExceptionAction()
     {
+        $this->expectException(\Symfony\Component\HttpKernel\Exception\NotFoundHttpException::class);
+        $this->expectExceptionMessage('Category (42) not found');
+
         $this->createCategoryController()->getCategoryAction(42);
     }
 

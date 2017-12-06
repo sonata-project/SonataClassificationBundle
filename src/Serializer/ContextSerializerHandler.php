@@ -37,8 +37,6 @@ class ContextSerializerHandler extends BaseSerializerHandler
         if ($data instanceof $className) {
             return $visitor->visitString($data->getId(), $type, $context);
         }
-
-        return;
     }
 
     /**

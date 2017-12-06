@@ -157,7 +157,7 @@ abstract class AbstractCollectionsBlockService extends AbstractClassificationBlo
      */
     public function getBlockMetadata($code = null)
     {
-        $description = (!is_null($code) ? $code : $this->getName());
+        $description = (null !== $code ? $code : $this->getName());
 
         return new Metadata($this->getName(), $description, false, 'SonataClassificationBundle', [
             'class' => 'fa fa-folder-open-o',

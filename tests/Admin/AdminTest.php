@@ -52,11 +52,10 @@ class AdminTest extends TestCase
         $this->assertSame($expected, $admin->getPersistentParameters());
     }
 
-    /**
-     * @expectedException \RuntimeException
-     */
     public function testGetPersistentParametersWithInvalidExtension()
     {
+        $this->expectException(\RuntimeException::class);
+
         $admin = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Admin\ContextAwareAdmin', [
             'admin.my_code', 'My\Class', 'MyBundle:ClassAdmin', $this->contextManager,
         ]);

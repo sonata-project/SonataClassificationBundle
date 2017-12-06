@@ -121,9 +121,9 @@ class TagController
      *
      * @param Request $request A Symfony request
      *
-     * @return TagInterface
-     *
      * @throws NotFoundHttpException
+     *
+     * @return TagInterface
      */
     public function postTagAction(Request $request)
     {
@@ -149,9 +149,9 @@ class TagController
      * @param int     $id      A Tag identifier
      * @param Request $request A Symfony request
      *
-     * @return TagInterface
-     *
      * @throws NotFoundHttpException
+     *
+     * @return TagInterface
      */
     public function putTagAction($id, Request $request)
     {
@@ -174,9 +174,9 @@ class TagController
      *
      * @param int $id A Tag identifier
      *
-     * @return View
-     *
      * @throws NotFoundHttpException
+     *
+     * @return View
      */
     public function deleteTagAction($id)
     {
@@ -214,9 +214,9 @@ class TagController
      *
      * @param int $id A Tag identifier
      *
-     * @return TagInterface
-     *
      * @throws NotFoundHttpException
+     *
+     * @return TagInterface
      */
     protected function getTag($id)
     {

@@ -26,10 +26,10 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 class SonataClassificationExtension extends Extension
 {
     /**
-     * @throws \InvalidArgumentException
-     *
      * @param array            $configs
      * @param ContainerBuilder $container
+     *
+     * @throws \InvalidArgumentException
      */
     public function load(array $configs, ContainerBuilder $container)
     {
@@ -43,7 +43,7 @@ class SonataClassificationExtension extends Extension
         $loader->load('form.xml');
         $loader->load('serializer.xml');
 
-        if (isset($bundles['FOSRestBundle']) && isset($bundles['NelmioApiDocBundle'])) {
+        if (isset($bundles['FOSRestBundle'], $bundles['NelmioApiDocBundle'])) {
             $loader->load('api_controllers.xml');
             $loader->load('api_form.xml');
         }

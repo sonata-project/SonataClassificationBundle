@@ -121,9 +121,9 @@ class ContextController
      *
      * @param Request $request A Symfony request
      *
-     * @return ContextInterface
-     *
      * @throws NotFoundHttpException
+     *
+     * @return ContextInterface
      */
     public function postContextAction(Request $request)
     {
@@ -149,9 +149,9 @@ class ContextController
      * @param int     $id      A Context identifier
      * @param Request $request A Symfony request
      *
-     * @return ContextInterface
-     *
      * @throws NotFoundHttpException
+     *
+     * @return ContextInterface
      */
     public function putContextAction($id, Request $request)
     {
@@ -174,9 +174,9 @@ class ContextController
      *
      * @param int $id A Context identifier
      *
-     * @return View
-     *
      * @throws NotFoundHttpException
+     *
+     * @return View
      */
     public function deleteContextAction($id)
     {
@@ -214,9 +214,9 @@ class ContextController
      *
      * @param int $id A Context identifier
      *
-     * @return ContextInterface
-     *
      * @throws NotFoundHttpException
+     *
+     * @return ContextInterface
      */
     protected function getContext($id)
     {

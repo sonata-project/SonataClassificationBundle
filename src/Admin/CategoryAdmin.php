@@ -84,7 +84,7 @@ EOT
             }
         }
 
-        $position = $this->hasSubject() && !is_null($this->getSubject()->getPosition()) ? $this->getSubject()->getPosition() : 0;
+        $position = $this->hasSubject() && null !== $this->getSubject()->getPosition() ? $this->getSubject()->getPosition() : 0;
 
         $formMapper
             ->end()

@@ -43,12 +43,11 @@ class TagControllerTest extends TestCase
         $this->assertEquals($tag, $this->createTagController($tagManager)->getTagAction(1));
     }
 
-    /**
-     * @expectedException        \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
-     * @expectedExceptionMessage Tag (42) not found
-     */
     public function testGetTagNotFoundExceptionAction()
     {
+        $this->expectException(\Symfony\Component\HttpKernel\Exception\NotFoundHttpException::class);
+        $this->expectExceptionMessage('Tag (42) not found');
+
         $this->createTagController()->getTagAction(42);
     }
 

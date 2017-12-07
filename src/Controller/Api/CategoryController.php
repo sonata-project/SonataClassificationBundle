@@ -122,9 +122,9 @@ class CategoryController
      *
      * @param Request $request A Symfony request
      *
-     * @return CategoryInterface
-     *
      * @throws NotFoundHttpException
+     *
+     * @return CategoryInterface
      */
     public function postCategoryAction(Request $request)
     {
@@ -150,9 +150,9 @@ class CategoryController
      * @param int     $id      A Category identifier
      * @param Request $request A Symfony request
      *
-     * @return CategoryInterface
-     *
      * @throws NotFoundHttpException
+     *
+     * @return CategoryInterface
      */
     public function putCategoryAction($id, Request $request)
     {
@@ -175,9 +175,9 @@ class CategoryController
      *
      * @param int $id A Category identifier
      *
-     * @return View
-     *
      * @throws NotFoundHttpException
+     *
+     * @return View
      */
     public function deleteCategoryAction($id)
     {
@@ -215,9 +215,9 @@ class CategoryController
      *
      * @param int $id A Category identifier
      *
-     * @return CategoryInterface
-     *
      * @throws NotFoundHttpException
+     *
+     * @return CategoryInterface
      */
     protected function getCategory($id)
     {

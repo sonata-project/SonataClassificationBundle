@@ -121,9 +121,9 @@ class CollectionController
      *
      * @param Request $request A Symfony request
      *
-     * @return CollectionInterface
-     *
      * @throws NotFoundHttpException
+     *
+     * @return CollectionInterface
      */
     public function postCollectionAction(Request $request)
     {
@@ -149,9 +149,9 @@ class CollectionController
      * @param int     $id      A Collection identifier
      * @param Request $request A Symfony request
      *
-     * @return CollectionInterface
-     *
      * @throws NotFoundHttpException
+     *
+     * @return CollectionInterface
      */
     public function putCollectionAction($id, Request $request)
     {
@@ -174,9 +174,9 @@ class CollectionController
      *
      * @param int $id A Collection identifier
      *
-     * @return View
-     *
      * @throws NotFoundHttpException
+     *
+     * @return View
      */
     public function deleteCollectionAction($id)
     {
@@ -214,9 +214,9 @@ class CollectionController
      *
      * @param int $id A Collection identifier
      *
-     * @return CollectionInterface
-     *
      * @throws NotFoundHttpException
+     *
+     * @return CollectionInterface
      */
     protected function getCollection($id)
     {

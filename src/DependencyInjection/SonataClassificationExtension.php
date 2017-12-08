@@ -175,6 +175,8 @@ class SonataClassificationExtension extends Extension
                 [
                     'name' => 'context',
                     'referencedColumnName' => 'id',
+                    'nullable' => false,
+                    'onDelete' => 'CASCADE',
                 ],
             ],
             'orphanRemoval' => false,

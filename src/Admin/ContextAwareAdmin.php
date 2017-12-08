@@ -43,21 +43,25 @@ abstract class ContextAwareAdmin extends AbstractAdmin
     {
         $instance = parent::getNewInstance();
 
-        if ($contextId = $this->getPersistentParameter('context')) {
-            $context = $this->contextManager->find($contextId);
-
-            if (!$context) {
-                /** @var ContextInterface $context */
-                $context = $this->contextManager->create();
-                $context->setEnabled(true);
-                $context->setId($contextId);
-                $context->setName($contextId);
-
-                $this->contextManager->save($context);
-            }
-
-            $instance->setContext($context);
+        // Get the context persistent parameter (can be a string, NULL or empty string) and fallback to "default"
+        $contextId = $this->getPersistentParameter('context');
+        if (!strlen($contextId)) {
+            $contextId = ContextInterface::DEFAULT_CONTEXT;
         }
+
+        // Get the existing context or create/persist a new one for this istance
+        $context = $this->contextManager->find($contextId);
+        if (!$context) {
+            /** @var ContextInterface $context */
+            $context = $this->contextManager->create();
+            $context->setId($contextId);
+            $context->setName(ucfirst($contextId));
+            $context->setEnabled(true);
+
+            $this->contextManager->save($context);
+        }
+
+        $instance->setContext($context);
 
         return $instance;
     }

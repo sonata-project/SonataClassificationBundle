@@ -5,7 +5,7 @@
         <parameter key="sonata.classification.admin.groupicon"><![CDATA[<i class='fa fa-tags'></i>]]></parameter>
     </parameters>
     <services>
-        <service id="sonata.classification.admin.category" class="%sonata.classification.admin.category.class%">
+        <service id="sonata.classification.admin.category" class="%sonata.classification.admin.category.class%" public="true">
             <tag name="sonata.admin" manager_type="orm" group="%sonata.classification.admin.groupname%" label="label_categories" label_catalogue="%sonata.classification.admin.category.translation_domain%" label_translator_strategy="sonata.admin.label.strategy.underscore" icon="%sonata.classification.admin.groupicon%"/>
             <argument/>
             <argument>%sonata.classification.admin.category.entity%</argument>
@@ -21,7 +21,7 @@
                 </argument>
             </call>
         </service>
-        <service id="sonata.classification.admin.tag" class="%sonata.classification.admin.tag.class%">
+        <service id="sonata.classification.admin.tag" class="%sonata.classification.admin.tag.class%" public="true">
             <tag name="sonata.admin" manager_type="orm" group="%sonata.classification.admin.groupname%" label="label_tags" label_catalogue="%sonata.classification.admin.tag.translation_domain%" label_translator_strategy="sonata.admin.label.strategy.underscore" icon="%sonata.classification.admin.groupicon%"/>
             <argument/>
             <argument>%sonata.classification.admin.tag.entity%</argument>
@@ -31,7 +31,7 @@
                 <argument>%sonata.classification.admin.tag.translation_domain%</argument>
             </call>
         </service>
-        <service id="sonata.classification.admin.collection" class="%sonata.classification.admin.collection.class%">
+        <service id="sonata.classification.admin.collection" class="%sonata.classification.admin.collection.class%" public="true">
             <tag name="sonata.admin" manager_type="orm" group="%sonata.classification.admin.groupname%" label="label_collections" label_catalogue="%sonata.classification.admin.collection.translation_domain%" label_translator_strategy="sonata.admin.label.strategy.underscore" icon="%sonata.classification.admin.groupicon%"/>
             <argument/>
             <argument>%sonata.classification.admin.collection.entity%</argument>
@@ -41,7 +41,7 @@
                 <argument>%sonata.classification.admin.collection.translation_domain%</argument>
             </call>
         </service>
-        <service id="sonata.classification.admin.context" class="%sonata.classification.admin.context.class%">
+        <service id="sonata.classification.admin.context" class="%sonata.classification.admin.context.class%" public="true">
             <tag name="sonata.admin" manager_type="orm" group="%sonata.classification.admin.groupname%" label="label_contexts" label_catalogue="%sonata.classification.admin.context.translation_domain%" label_translator_strategy="sonata.admin.label.strategy.underscore" icon="%sonata.classification.admin.groupicon%"/>
             <argument/>
             <argument>%sonata.classification.admin.context.entity%</argument>

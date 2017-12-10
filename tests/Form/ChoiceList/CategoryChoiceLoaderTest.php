@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -19,14 +21,14 @@ use Sonata\ClassificationBundle\Form\ChoiceList\CategoryChoiceLoader;
  */
 class CategoryChoiceLoaderTest extends TestCase
 {
-    protected function setUp()
+    protected function setUp(): void
     {
         if (!interface_exists('Symfony\Component\Form\ChoiceList\Loader\ChoiceLoaderInterface')) {
             $this->markTestSkipped('Test only available for >= SF3.0');
         }
     }
 
-    public function testLoadChoiceList()
+    public function testLoadChoiceList(): void
     {
         $choices = [
             1 => 'foo',
@@ -38,7 +40,7 @@ class CategoryChoiceLoaderTest extends TestCase
         $this->assertSame($choices, $categoryLoader->loadChoiceList()->getOriginalKeys());
     }
 
-    public function testLoadChoicesForValues()
+    public function testLoadChoicesForValues(): void
     {
         $choices = [
             1 => 'foo',
@@ -50,7 +52,7 @@ class CategoryChoiceLoaderTest extends TestCase
         $this->assertSame(array_keys($choices), $categoryLoader->loadChoicesForValues([1, 2, 3]));
     }
 
-    public function testLoadValuesForChoices()
+    public function testLoadValuesForChoices(): void
     {
         $choices = [
             1 => 'foo',

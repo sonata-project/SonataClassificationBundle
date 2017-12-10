@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -162,7 +164,7 @@ class CategoryManager extends BaseDocumentManager implements CategoryManagerInte
     /**
      * {@inheritdoc}
      */
-    public function getRootCategoryWithChildren(CategoryInterface $category)
+    public function getRootCategoryWithChildren(CategoryInterface $category): void
     {
         throw new \RuntimeException('Not Implemented yet');
     }
@@ -170,7 +172,7 @@ class CategoryManager extends BaseDocumentManager implements CategoryManagerInte
     /**
      * {@inheritdoc}
      */
-    public function getRootCategoriesForContext(ContextInterface $context = null)
+    public function getRootCategoriesForContext(ContextInterface $context = null): void
     {
         throw new \RuntimeException('Not Implemented yet');
     }
@@ -178,7 +180,7 @@ class CategoryManager extends BaseDocumentManager implements CategoryManagerInte
     /**
      * {@inheritdoc}
      */
-    public function getAllRootCategories($loadChildren = true)
+    public function getAllRootCategories($loadChildren = true): void
     {
         throw new \RuntimeException('Not Implemented yet');
     }
@@ -186,7 +188,7 @@ class CategoryManager extends BaseDocumentManager implements CategoryManagerInte
     /**
      * {@inheritdoc}
      */
-    public function getRootCategoriesSplitByContexts($loadChildren = true)
+    public function getRootCategoriesSplitByContexts($loadChildren = true): void
     {
         throw new \RuntimeException('Not Implemented yet');
     }
@@ -196,7 +198,7 @@ class CategoryManager extends BaseDocumentManager implements CategoryManagerInte
      *
      * @param ContextInterface $context
      */
-    protected function loadCategories(ContextInterface $context)
+    protected function loadCategories(ContextInterface $context): void
     {
         if (array_key_exists($context->getId(), $this->categories)) {
             return;

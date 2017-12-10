@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -20,7 +22,7 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class CollectionControllerTest extends TestCase
 {
-    public function testGetCollectionsAction()
+    public function testGetCollectionsAction(): void
     {
         $paramFetcher = $this->createMock('FOS\RestBundle\Request\ParamFetcherInterface');
         $paramFetcher->expects($this->once())->method('all')->will($this->returnValue([]));
@@ -33,7 +35,7 @@ class CollectionControllerTest extends TestCase
         $this->assertSame($pager, $this->createCollectionController($collectionManager)->getCollectionsAction($paramFetcher));
     }
 
-    public function testGetCollectionAction()
+    public function testGetCollectionAction(): void
     {
         $collection = $this->createMock('Sonata\ClassificationBundle\Model\CollectionInterface');
 
@@ -43,7 +45,7 @@ class CollectionControllerTest extends TestCase
         $this->assertEquals($collection, $this->createCollectionController($collectionManager)->getCollectionAction(1));
     }
 
-    public function testGetCollectionNotFoundExceptionAction()
+    public function testGetCollectionNotFoundExceptionAction(): void
     {
         $this->expectException(\Symfony\Component\HttpKernel\Exception\NotFoundHttpException::class);
         $this->expectExceptionMessage('Collection (42) not found');
@@ -51,7 +53,7 @@ class CollectionControllerTest extends TestCase
         $this->createCollectionController()->getCollectionAction(42);
     }
 
-    public function testPostCollectionAction()
+    public function testPostCollectionAction(): void
     {
         $collection = $this->createMock('Sonata\ClassificationBundle\Model\CollectionInterface');
 
@@ -72,7 +74,7 @@ class CollectionControllerTest extends TestCase
         $this->assertInstanceOf('FOS\RestBundle\View\View', $view);
     }
 
-    public function testPostCollectionInvalidAction()
+    public function testPostCollectionInvalidAction(): void
     {
         $collection = $this->createMock('Sonata\ClassificationBundle\Model\CollectionInterface');
 
@@ -92,7 +94,7 @@ class CollectionControllerTest extends TestCase
         $this->assertInstanceOf('Symfony\Component\Form\FormInterface', $view);
     }
 
-    public function testPutCollectionAction()
+    public function testPutCollectionAction(): void
     {
         $collection = $this->createMock('Sonata\ClassificationBundle\Model\CollectionInterface');
 
@@ -114,7 +116,7 @@ class CollectionControllerTest extends TestCase
         $this->assertInstanceOf('FOS\RestBundle\View\View', $view);
     }
 
-    public function testPutPostInvalidAction()
+    public function testPutPostInvalidAction(): void
     {
         $collection = $this->createMock('Sonata\ClassificationBundle\Model\CollectionInterface');
 
@@ -135,7 +137,7 @@ class CollectionControllerTest extends TestCase
         $this->assertInstanceOf('Symfony\Component\Form\FormInterface', $view);
     }
 
-    public function testDeleteCollectionAction()
+    public function testDeleteCollectionAction(): void
     {
         $collection = $this->createMock('Sonata\ClassificationBundle\Model\CollectionInterface');
 
@@ -148,7 +150,7 @@ class CollectionControllerTest extends TestCase
         $this->assertEquals(['deleted' => true], $view);
     }
 
-    public function testDeleteCollectionInvalidAction()
+    public function testDeleteCollectionInvalidAction(): void
     {
         $this->expectException('Symfony\Component\HttpKernel\Exception\NotFoundHttpException');
 

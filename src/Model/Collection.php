@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -66,7 +68,7 @@ abstract class Collection implements CollectionInterface
     /**
      * {@inheritdoc}
      */
-    public function setName($name)
+    public function setName($name): void
     {
         $this->name = $name;
 
@@ -84,7 +86,7 @@ abstract class Collection implements CollectionInterface
     /**
      * {@inheritdoc}
      */
-    public function setEnabled($enabled)
+    public function setEnabled($enabled): void
     {
         $this->enabled = $enabled;
     }
@@ -100,7 +102,7 @@ abstract class Collection implements CollectionInterface
     /**
      * {@inheritdoc}
      */
-    public function setSlug($slug)
+    public function setSlug($slug): void
     {
         $this->slug = Tag::slugify($slug);
     }
@@ -116,7 +118,7 @@ abstract class Collection implements CollectionInterface
     /**
      * {@inheritdoc}
      */
-    public function setDescription($description)
+    public function setDescription($description): void
     {
         $this->description = $description;
     }
@@ -129,13 +131,13 @@ abstract class Collection implements CollectionInterface
         return $this->description;
     }
 
-    public function prePersist()
+    public function prePersist(): void
     {
         $this->setCreatedAt(new \DateTime());
         $this->setUpdatedAt(new \DateTime());
     }
 
-    public function preUpdate()
+    public function preUpdate(): void
     {
         $this->setUpdatedAt(new \DateTime());
     }
@@ -143,7 +145,7 @@ abstract class Collection implements CollectionInterface
     /**
      * {@inheritdoc}
      */
-    public function setCreatedAt(\DateTime $createdAt)
+    public function setCreatedAt(\DateTime $createdAt): void
     {
         $this->createdAt = $createdAt;
     }
@@ -159,7 +161,7 @@ abstract class Collection implements CollectionInterface
     /**
      * {@inheritdoc}
      */
-    public function setUpdatedAt(\DateTime $updatedAt)
+    public function setUpdatedAt(\DateTime $updatedAt): void
     {
         $this->updatedAt = $updatedAt;
     }
@@ -175,7 +177,7 @@ abstract class Collection implements CollectionInterface
     /**
      * {@inheritdoc}
      */
-    public function setMedia(MediaInterface $media = null)
+    public function setMedia(MediaInterface $media = null): void
     {
         $this->media = $media;
     }
@@ -191,7 +193,7 @@ abstract class Collection implements CollectionInterface
     /**
      * {@inheritdoc}
      */
-    public function setContext(ContextInterface $context)
+    public function setContext(ContextInterface $context): void
     {
         $this->context = $context;
     }

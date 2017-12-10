@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -32,7 +34,7 @@ class CategoryAdmin extends ContextAwareAdmin
     /**
      * {@inheritdoc}
      */
-    public function configureRoutes(RouteCollection $routes)
+    public function configureRoutes(RouteCollection $routes): void
     {
         $routes->add('tree', 'tree');
     }
@@ -60,7 +62,7 @@ EOT
     /**
      * {@inheritdoc}
      */
-    protected function configureFormFields(FormMapper $formMapper)
+    protected function configureFormFields(FormMapper $formMapper): void
     {
         $formMapper
             ->with('General', ['class' => 'col-md-6'])
@@ -117,7 +119,7 @@ EOT
     /**
      * {@inheritdoc}
      */
-    protected function configureDatagridFilters(DatagridMapper $datagridMapper)
+    protected function configureDatagridFilters(DatagridMapper $datagridMapper): void
     {
         parent::configureDatagridFilters($datagridMapper);
 
@@ -130,7 +132,7 @@ EOT
     /**
      * {@inheritdoc}
      */
-    protected function configureListFields(ListMapper $listMapper)
+    protected function configureListFields(ListMapper $listMapper): void
     {
         $listMapper
             ->addIdentifier('name')

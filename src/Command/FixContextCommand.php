@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -21,7 +23,7 @@ class FixContextCommand extends ContainerAwareCommand
     /**
      * {@inheritdoc}
      */
-    public function configure()
+    public function configure(): void
     {
         $this->setName('sonata:classification:fix-context');
         $this->setDescription('Generate the default context if none defined and attach the context to all elements');
@@ -30,7 +32,7 @@ class FixContextCommand extends ContainerAwareCommand
     /**
      * {@inheritdoc}
      */
-    public function execute(InputInterface $input, OutputInterface $output)
+    public function execute(InputInterface $input, OutputInterface $output): void
     {
         $contextManager = $this->getContainer()->get('sonata.classification.manager.context');
         $tagManager = $this->getContainer()->get('sonata.classification.manager.tag');

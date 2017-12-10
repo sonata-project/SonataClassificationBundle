@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -29,7 +31,7 @@ class CollectionManager extends BaseDocumentManager implements CollectionManager
             ->createQueryBuilder('t')
             ->select('t');
 
-        $criteria['enabled'] = isset($criteria['enabled']) ? $criteria['enabled'] : true;
+        $criteria['enabled'] = $criteria['enabled'] ?? true;
         $query->andWhere('t.enabled = :enabled');
         $parameters['enabled'] = $criteria['enabled'];
 

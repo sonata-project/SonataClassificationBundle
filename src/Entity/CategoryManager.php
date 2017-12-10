@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -243,7 +245,7 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
      *
      * @param ContextInterface $context
      */
-    protected function loadCategories(ContextInterface $context)
+    protected function loadCategories(ContextInterface $context): void
     {
         if (array_key_exists($context->getId(), $this->categories)) {
             return;

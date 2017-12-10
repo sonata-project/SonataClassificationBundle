@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -20,7 +22,7 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class ContextControllerTest extends TestCase
 {
-    public function testGetContextsAction()
+    public function testGetContextsAction(): void
     {
         $paramFetcher = $this->createMock('FOS\RestBundle\Request\ParamFetcherInterface');
         $paramFetcher->expects($this->once())->method('all')->will($this->returnValue([]));
@@ -33,7 +35,7 @@ class ContextControllerTest extends TestCase
         $this->assertSame($pager, $this->createContextController($contextManager)->getContextsAction($paramFetcher));
     }
 
-    public function testGetContextAction()
+    public function testGetContextAction(): void
     {
         $context = $this->createMock('Sonata\ClassificationBundle\Model\ContextInterface');
 
@@ -43,7 +45,7 @@ class ContextControllerTest extends TestCase
         $this->assertEquals($context, $this->createContextController($contextManager)->getContextAction(1));
     }
 
-    public function testGetContextNotFoundExceptionAction()
+    public function testGetContextNotFoundExceptionAction(): void
     {
         $this->expectException(\Symfony\Component\HttpKernel\Exception\NotFoundHttpException::class);
         $this->expectExceptionMessage('Context (42) not found');
@@ -51,7 +53,7 @@ class ContextControllerTest extends TestCase
         $this->createContextController()->getContextAction(42);
     }
 
-    public function testPostContextAction()
+    public function testPostContextAction(): void
     {
         $context = $this->createMock('Sonata\ClassificationBundle\Model\ContextInterface');
 
@@ -72,7 +74,7 @@ class ContextControllerTest extends TestCase
         $this->assertInstanceOf('FOS\RestBundle\View\View', $view);
     }
 
-    public function testPostContextInvalidAction()
+    public function testPostContextInvalidAction(): void
     {
         $contextManager = $this->createMock('Sonata\ClassificationBundle\Model\ContextManagerInterface');
         $contextManager->expects($this->never())->method('save')->will($this->returnValue($contextManager));
@@ -90,7 +92,7 @@ class ContextControllerTest extends TestCase
         $this->assertInstanceOf('Symfony\Component\Form\FormInterface', $view);
     }
 
-    public function testPutContextAction()
+    public function testPutContextAction(): void
     {
         $context = $this->createMock('Sonata\ClassificationBundle\Model\ContextInterface');
 
@@ -112,7 +114,7 @@ class ContextControllerTest extends TestCase
         $this->assertInstanceOf('FOS\RestBundle\View\View', $view);
     }
 
-    public function testPutPostInvalidAction()
+    public function testPutPostInvalidAction(): void
     {
         $context = $this->createMock('Sonata\ClassificationBundle\Model\ContextInterface');
 
@@ -133,7 +135,7 @@ class ContextControllerTest extends TestCase
         $this->assertInstanceOf('Symfony\Component\Form\FormInterface', $view);
     }
 
-    public function testDeleteContextAction()
+    public function testDeleteContextAction(): void
     {
         $context = $this->createMock('Sonata\ClassificationBundle\Model\ContextInterface');
 
@@ -146,7 +148,7 @@ class ContextControllerTest extends TestCase
         $this->assertEquals(['deleted' => true], $view);
     }
 
-    public function testDeleteContextInvalidAction()
+    public function testDeleteContextInvalidAction(): void
     {
         $this->expectException('Symfony\Component\HttpKernel\Exception\NotFoundHttpException');
 

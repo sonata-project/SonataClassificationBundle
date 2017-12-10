@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -37,7 +39,7 @@ final class AbstractCategoriesBlockServiceTest extends AbstractBlockServiceTestC
      */
     private $categoryAdmin;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -47,7 +49,7 @@ final class AbstractCategoriesBlockServiceTest extends AbstractBlockServiceTestC
         $this->categoryAdmin = $this->getMockBuilder('Sonata\ClassificationBundle\Admin\CategoryAdmin')->disableOriginalConstructor()->getMock();
     }
 
-    public function testDefaultSettings()
+    public function testDefaultSettings(): void
     {
         $blockService = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Block\Service\AbstractCategoriesBlockService', [
             'block.service', $this->templating, $this->contextManager, $this->categoryManager, $this->categoryAdmin,
@@ -63,7 +65,7 @@ final class AbstractCategoriesBlockServiceTest extends AbstractBlockServiceTestC
         ], $blockContext);
     }
 
-    public function testLoad()
+    public function testLoad(): void
     {
         $category = $this->getMockBuilder('Sonata\ClassificationBundle\Model\CategoryInterface')
             ->setMethods(['getId'])
@@ -91,7 +93,7 @@ final class AbstractCategoriesBlockServiceTest extends AbstractBlockServiceTestC
         $blockService->load($block);
     }
 
-    public function testPrePersist()
+    public function testPrePersist(): void
     {
         $category = $this->getMockBuilder('Sonata\ClassificationBundle\Model\CategoryInterface')
             ->setMethods(['getId'])
@@ -114,7 +116,7 @@ final class AbstractCategoriesBlockServiceTest extends AbstractBlockServiceTestC
         $blockService->prePersist($block);
     }
 
-    public function testPreUpdate()
+    public function testPreUpdate(): void
     {
         $category = $this->getMockBuilder('Sonata\ClassificationBundle\Model\CategoryInterface')
             ->setMethods(['getId'])

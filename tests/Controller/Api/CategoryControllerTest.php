@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -20,7 +22,7 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class CategoryControllerTest extends TestCase
 {
-    public function testGetCategoriesAction()
+    public function testGetCategoriesAction(): void
     {
         $paramFetcher = $this->createMock('FOS\RestBundle\Request\ParamFetcherInterface');
         $paramFetcher->expects($this->once())->method('all')->will($this->returnValue([]));
@@ -33,7 +35,7 @@ class CategoryControllerTest extends TestCase
         $this->assertSame($pager, $this->createCategoryController($categoryManager)->getCategoriesAction($paramFetcher));
     }
 
-    public function testGetCategoryAction()
+    public function testGetCategoryAction(): void
     {
         $category = $this->createMock('Sonata\ClassificationBundle\Model\CategoryInterface');
 
@@ -43,7 +45,7 @@ class CategoryControllerTest extends TestCase
         $this->assertEquals($category, $this->createCategoryController($categoryManager)->getCategoryAction(1));
     }
 
-    public function testGetCategoryNotFoundExceptionAction()
+    public function testGetCategoryNotFoundExceptionAction(): void
     {
         $this->expectException(\Symfony\Component\HttpKernel\Exception\NotFoundHttpException::class);
         $this->expectExceptionMessage('Category (42) not found');
@@ -51,7 +53,7 @@ class CategoryControllerTest extends TestCase
         $this->createCategoryController()->getCategoryAction(42);
     }
 
-    public function testPostCategoryAction()
+    public function testPostCategoryAction(): void
     {
         $category = $this->createMock('Sonata\ClassificationBundle\Model\CategoryInterface');
 
@@ -72,7 +74,7 @@ class CategoryControllerTest extends TestCase
         $this->assertInstanceOf('FOS\RestBundle\View\View', $view);
     }
 
-    public function testPostCategoryInvalidAction()
+    public function testPostCategoryInvalidAction(): void
     {
         $categoryManager = $this->createMock('Sonata\ClassificationBundle\Model\CategoryManagerInterface');
         $categoryManager->expects($this->never())->method('save')->will($this->returnValue($categoryManager));
@@ -90,7 +92,7 @@ class CategoryControllerTest extends TestCase
         $this->assertInstanceOf('Symfony\Component\Form\FormInterface', $view);
     }
 
-    public function testPutCategoryAction()
+    public function testPutCategoryAction(): void
     {
         $category = $this->createMock('Sonata\ClassificationBundle\Model\CategoryInterface');
 
@@ -112,7 +114,7 @@ class CategoryControllerTest extends TestCase
         $this->assertInstanceOf('FOS\RestBundle\View\View', $view);
     }
 
-    public function testPutPostInvalidAction()
+    public function testPutPostInvalidAction(): void
     {
         $category = $this->createMock('Sonata\ClassificationBundle\Model\CategoryInterface');
 
@@ -133,7 +135,7 @@ class CategoryControllerTest extends TestCase
         $this->assertInstanceOf('Symfony\Component\Form\FormInterface', $view);
     }
 
-    public function testDeleteCategoryAction()
+    public function testDeleteCategoryAction(): void
     {
         $category = $this->createMock('Sonata\ClassificationBundle\Model\CategoryInterface');
 
@@ -146,7 +148,7 @@ class CategoryControllerTest extends TestCase
         $this->assertEquals(['deleted' => true], $view);
     }
 
-    public function testDeleteCategoryInvalidAction()
+    public function testDeleteCategoryInvalidAction(): void
     {
         $this->expectException('Symfony\Component\HttpKernel\Exception\NotFoundHttpException');
 

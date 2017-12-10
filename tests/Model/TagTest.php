@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -20,7 +22,7 @@ use Sonata\ClassificationBundle\Model\Tag;
  */
 class TagTest extends TestCase
 {
-    public function testSetterGetter()
+    public function testSetterGetter(): void
     {
         $time = new \DateTime();
 
@@ -55,7 +57,7 @@ class TagTest extends TestCase
         $this->assertEquals('custom-slug', $tag->getSlug());
     }
 
-    public function testPreUpdate()
+    public function testPreUpdate(): void
     {
         /** @var Tag $tag */
         $tag = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Model\Tag');

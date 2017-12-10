@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -21,12 +23,12 @@ class AdminTest extends TestCase
      */
     private $contextManager;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->contextManager = $this->createMock('Sonata\ClassificationBundle\Model\ContextManagerInterface');
     }
 
-    public function testAbstractAdminChildren()
+    public function testAbstractAdminChildren(): void
     {
         $contextAwareAdmin = $this->getMockBuilder('Sonata\ClassificationBundle\Admin\ContextAwareAdmin')
             ->disableOriginalConstructor()
@@ -38,7 +40,7 @@ class AdminTest extends TestCase
         $this->assertInstanceOf('Sonata\AdminBundle\Admin\AbstractAdmin', $contextAdmin);
     }
 
-    public function testGetPersistentParametersWithNoExtension()
+    public function testGetPersistentParametersWithNoExtension(): void
     {
         $expected = [
             'context' => '',
@@ -52,7 +54,7 @@ class AdminTest extends TestCase
         $this->assertSame($expected, $admin->getPersistentParameters());
     }
 
-    public function testGetPersistentParametersWithInvalidExtension()
+    public function testGetPersistentParametersWithInvalidExtension(): void
     {
         $this->expectException(\RuntimeException::class);
 
@@ -68,7 +70,7 @@ class AdminTest extends TestCase
         $admin->getPersistentParameters();
     }
 
-    public function testGetPersistentParametersWithValidExtension()
+    public function testGetPersistentParametersWithValidExtension(): void
     {
         $expected = [
             'tl' => 'de',

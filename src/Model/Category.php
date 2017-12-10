@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -87,7 +89,7 @@ abstract class Category implements CategoryInterface
     /**
      * {@inheritdoc}
      */
-    public function setName($name)
+    public function setName($name): void
     {
         $this->name = $name;
 
@@ -105,7 +107,7 @@ abstract class Category implements CategoryInterface
     /**
      * {@inheritdoc}
      */
-    public function setEnabled($enabled)
+    public function setEnabled($enabled): void
     {
         $this->enabled = $enabled;
     }
@@ -121,7 +123,7 @@ abstract class Category implements CategoryInterface
     /**
      * {@inheritdoc}
      */
-    public function setSlug($slug)
+    public function setSlug($slug): void
     {
         $this->slug = Tag::slugify($slug);
     }
@@ -137,7 +139,7 @@ abstract class Category implements CategoryInterface
     /**
      * {@inheritdoc}
      */
-    public function setDescription($description)
+    public function setDescription($description): void
     {
         $this->description = $description;
     }
@@ -150,13 +152,13 @@ abstract class Category implements CategoryInterface
         return $this->description;
     }
 
-    public function prePersist()
+    public function prePersist(): void
     {
         $this->setCreatedAt(new \DateTime());
         $this->setUpdatedAt(new \DateTime());
     }
 
-    public function preUpdate()
+    public function preUpdate(): void
     {
         $this->setUpdatedAt(new \DateTime());
     }
@@ -164,7 +166,7 @@ abstract class Category implements CategoryInterface
     /**
      * {@inheritdoc}
      */
-    public function setCreatedAt(\DateTime $createdAt)
+    public function setCreatedAt(\DateTime $createdAt): void
     {
         $this->createdAt = $createdAt;
     }
@@ -180,7 +182,7 @@ abstract class Category implements CategoryInterface
     /**
      * {@inheritdoc}
      */
-    public function setUpdatedAt(\DateTime $updatedAt)
+    public function setUpdatedAt(\DateTime $updatedAt): void
     {
         $this->updatedAt = $updatedAt;
     }
@@ -196,7 +198,7 @@ abstract class Category implements CategoryInterface
     /**
      * {@inheritdoc}
      */
-    public function setPosition($position)
+    public function setPosition($position): void
     {
         $this->position = $position;
     }
@@ -214,7 +216,7 @@ abstract class Category implements CategoryInterface
      *
      * @deprecated only used by the AdminHelper
      */
-    public function addChildren(CategoryInterface $child)
+    public function addChildren(CategoryInterface $child): void
     {
         $this->addChild($child, true);
     }
@@ -222,7 +224,7 @@ abstract class Category implements CategoryInterface
     /**
      * {@inheritdoc}
      */
-    public function addChild(CategoryInterface $child, $nested = false)
+    public function addChild(CategoryInterface $child, $nested = false): void
     {
         $this->children[] = $child;
 
@@ -238,7 +240,7 @@ abstract class Category implements CategoryInterface
     /**
      * {@inheritdoc}
      */
-    public function removeChild(CategoryInterface $childToDelete)
+    public function removeChild(CategoryInterface $childToDelete): void
     {
         foreach ($this->getChildren() as $pos => $child) {
             if ($childToDelete->getId() && $child->getId() === $childToDelete->getId()) {
@@ -266,7 +268,7 @@ abstract class Category implements CategoryInterface
     /**
      * {@inheritdoc}
      */
-    public function setChildren($children)
+    public function setChildren($children): void
     {
         $this->children = new ArrayCollection();
 
@@ -286,7 +288,7 @@ abstract class Category implements CategoryInterface
     /**
      * {@inheritdoc}
      */
-    public function setParent(CategoryInterface $parent = null, $nested = false)
+    public function setParent(CategoryInterface $parent = null, $nested = false): void
     {
         $this->parent = $parent;
 
@@ -306,7 +308,7 @@ abstract class Category implements CategoryInterface
     /**
      * {@inheritdoc}
      */
-    public function setMedia(MediaInterface $media = null)
+    public function setMedia(MediaInterface $media = null): void
     {
         $this->media = $media;
     }
@@ -322,7 +324,7 @@ abstract class Category implements CategoryInterface
     /**
      * {@inheritdoc}
      */
-    public function setContext(ContextInterface $context)
+    public function setContext(ContextInterface $context): void
     {
         $this->context = $context;
     }

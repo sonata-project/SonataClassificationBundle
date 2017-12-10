@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -19,7 +21,7 @@ use Sonata\ClassificationBundle\Model\Context;
  */
 class ContextTest extends TestCase
 {
-    public function testSetterGetter()
+    public function testSetterGetter(): void
     {
         $time = new \DateTime();
 
@@ -43,7 +45,7 @@ class ContextTest extends TestCase
         $this->assertEquals('n/a', $context->__toString());
     }
 
-    public function testPreUpdate()
+    public function testPreUpdate(): void
     {
         /** @var Context $context */
         $context = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Model\Context');

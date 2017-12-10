@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -15,7 +17,7 @@ use Sonata\ClassificationBundle\Model\Tag as ModelTag;
 
 abstract class BaseTag extends ModelTag
 {
-    public function prePersist()
+    public function prePersist(): void
     {
         $this->setCreatedAt(new \DateTime());
         $this->setUpdatedAt(new \DateTime());

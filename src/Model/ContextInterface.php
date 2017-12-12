@@ -46,16 +46,16 @@ interface ContextInterface
     public function getEnabled();
 
     /**
-     * Set slug.
+     * Set id.
      *
-     * @param int $id
+     * @param string $id
      */
     public function setId($id);
 
     /**
-     * Get slug.
+     * Get id.
      *
-     * @return int $slug
+     * @return string $id
      */
     public function getId();
 

@@ -34,6 +34,9 @@
         </property>
     </class>
     <class name="Sonata\ClassificationBundle\Model\Context">
+        <property name="id">
+            <constraint name="NotBlank"/>
+        </property>
         <property name="name">
             <constraint name="NotBlank"/>
             <constraint name="Length">

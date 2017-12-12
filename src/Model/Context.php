@@ -16,7 +16,7 @@ namespace Sonata\ClassificationBundle\Model;
 abstract class Context implements ContextInterface
 {
     /**
-     * @var int
+     * @var string
      */
     protected $id;
 

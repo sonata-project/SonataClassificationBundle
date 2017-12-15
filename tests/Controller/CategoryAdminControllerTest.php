@@ -17,7 +17,11 @@ use Sonata\AdminBundle\Admin\Pool;
 use Sonata\ClassificationBundle\Controller\CategoryAdminController;
 use Sonata\ClassificationBundle\Model\CategoryManagerInterface;
 use Sonata\ClassificationBundle\Model\ContextManagerInterface;
+use Symfony\Bridge\Twig\AppVariable;
+use Symfony\Bridge\Twig\Command\DebugCommand;
 use Symfony\Bridge\Twig\Extension\FormExtension;
+use Symfony\Bridge\Twig\Form\TwigRenderer;
+use Symfony\Component\Form\FormRenderer;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Form\Extension\Csrf\CsrfProvider\CsrfProviderInterface;
 use Symfony\Component\Form\FormView;
@@ -129,13 +133,22 @@ class CategoryAdminControllerTest extends TestCase
         $pool = $this->pool;
         $request = $this->request;
 
-        $twig = $this->getMockBuilder('Twig_Environment')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $twig = $this->createMock(\Twig_Environment::class);
 
-        $twigRenderer = $this->createMock('Symfony\Bridge\Twig\Form\TwigRendererInterface');
+        // Remove this trick when bumping Symfony requirement to 3.4+
+        if (method_exists(DebugCommand::class, 'getLoaderPaths')) {
+            $rendererClass = FormRenderer::class;
+        } else {
+            $rendererClass = TwigRenderer::class;
+        }
+
+        $twigRenderer = $this->createMock($rendererClass);
 
         $formExtension = new FormExtension($twigRenderer);
+
+        if (!method_exists(AppVariable::class, 'getToken')) {
+            $formExtension->renderer = $formExtension;
+        }
 
         $twig->expects($this->any())
             ->method('getExtension')

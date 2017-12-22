@@ -17,6 +17,7 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Form\Type\ModelListType;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\ClassificationBundle\Form\Type\CategorySelectorType;
+use Sonata\MediaBundle\Model\MediaInterface;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -99,7 +100,7 @@ EOT
             ->end()
         ;
 
-        if (interface_exists('Sonata\MediaBundle\Model\MediaInterface')) {
+        if (interface_exists(MediaInterface::class)) {
             $formMapper
                 ->with('General')
                     ->add('media', ModelListType::class, [

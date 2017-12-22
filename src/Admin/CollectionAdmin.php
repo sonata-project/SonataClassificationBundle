@@ -15,6 +15,7 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Form\Type\ModelListType;
+use Sonata\MediaBundle\Model\MediaInterface;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Validator\Constraints\Valid;
@@ -62,7 +63,7 @@ EOT
             ])
         ;
 
-        if (interface_exists('Sonata\MediaBundle\Model\MediaInterface')) {
+        if (interface_exists(MediaInterface::class)) {
             $formMapper->add('media', ModelListType::class, [
                 'required' => false,
             ], [

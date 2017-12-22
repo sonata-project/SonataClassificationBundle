@@ -11,9 +11,12 @@
 
 namespace Sonata\ClassificationBundle\Tests\Block\Service;
 
+use Sonata\BlockBundle\Model\BlockInterface;
 use Sonata\BlockBundle\Test\AbstractBlockServiceTestCase;
 use Sonata\BlockBundle\Test\FakeTemplating;
 use Sonata\ClassificationBundle\Admin\CategoryAdmin;
+use Sonata\ClassificationBundle\Block\Service\AbstractCategoriesBlockService;
+use Sonata\ClassificationBundle\Model\CategoryInterface;
 use Sonata\ClassificationBundle\Model\CategoryManagerInterface;
 use Sonata\ClassificationBundle\Model\ContextManagerInterface;
 
@@ -42,14 +45,14 @@ final class AbstractCategoriesBlockServiceTest extends AbstractBlockServiceTestC
         parent::setUp();
 
         $this->templating = new FakeTemplating();
-        $this->contextManager = $this->createMock('Sonata\ClassificationBundle\Model\ContextManagerInterface');
-        $this->categoryManager = $this->createMock('Sonata\ClassificationBundle\Model\CategoryManagerInterface');
-        $this->categoryAdmin = $this->getMockBuilder('Sonata\ClassificationBundle\Admin\CategoryAdmin')->disableOriginalConstructor()->getMock();
+        $this->contextManager = $this->createMock(ContextManagerInterface::class);
+        $this->categoryManager = $this->createMock(CategoryManagerInterface::class);
+        $this->categoryAdmin = $this->createMock(CategoryAdmin::class);
     }
 
     public function testDefaultSettings()
     {
-        $blockService = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Block\Service\AbstractCategoriesBlockService', [
+        $blockService = $this->getMockForAbstractClass(AbstractCategoriesBlockService::class, [
             'block.service', $this->templating, $this->contextManager, $this->categoryManager, $this->categoryAdmin,
         ]);
         $blockContext = $this->getBlockContext($blockService);
@@ -65,7 +68,7 @@ final class AbstractCategoriesBlockServiceTest extends AbstractBlockServiceTestC
 
     public function testLoad()
     {
-        $category = $this->getMockBuilder('Sonata\ClassificationBundle\Model\CategoryInterface')
+        $category = $this->getMockBuilder(CategoryInterface::class)
             ->setMethods(['getId'])
             ->disableOriginalConstructor()
             ->getMockForAbstractClass();
@@ -76,7 +79,7 @@ final class AbstractCategoriesBlockServiceTest extends AbstractBlockServiceTestC
             ->with($this->equalTo('23'))
             ->will($this->returnValue($category));
 
-        $block = $this->createMock('Sonata\BlockBundle\Model\BlockInterface');
+        $block = $this->createMock(BlockInterface::class);
         $block->expects($this->any())
             ->method('getSetting')
             ->with($this->equalTo('categoryId'))
@@ -85,7 +88,7 @@ final class AbstractCategoriesBlockServiceTest extends AbstractBlockServiceTestC
             ->method('setSetting')
             ->with($this->equalTo('categoryId'), $this->equalTo($category));
 
-        $blockService = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Block\Service\AbstractCategoriesBlockService', [
+        $blockService = $this->getMockForAbstractClass(AbstractCategoriesBlockService::class, [
             'block.service', $this->templating, $this->contextManager, $this->categoryManager, $this->categoryAdmin,
         ]);
         $blockService->load($block);
@@ -93,13 +96,13 @@ final class AbstractCategoriesBlockServiceTest extends AbstractBlockServiceTestC
 
     public function testPrePersist()
     {
-        $category = $this->getMockBuilder('Sonata\ClassificationBundle\Model\CategoryInterface')
+        $category = $this->getMockBuilder(CategoryInterface::class)
             ->setMethods(['getId'])
             ->disableOriginalConstructor()
             ->getMockForAbstractClass();
         $category->expects($this->any())->method('getId')->will($this->returnValue(23));
 
-        $block = $this->createMock('Sonata\BlockBundle\Model\BlockInterface');
+        $block = $this->createMock(BlockInterface::class);
         $block->expects($this->any())
             ->method('getSetting')
             ->with($this->equalTo('categoryId'))
@@ -108,7 +111,7 @@ final class AbstractCategoriesBlockServiceTest extends AbstractBlockServiceTestC
             ->method('setSetting')
             ->with($this->equalTo('categoryId'), $this->equalTo(23));
 
-        $blockService = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Block\Service\AbstractCategoriesBlockService', [
+        $blockService = $this->getMockForAbstractClass(AbstractCategoriesBlockService::class, [
             'block.service', $this->templating, $this->contextManager, $this->categoryManager, $this->categoryAdmin,
         ]);
         $blockService->prePersist($block);
@@ -116,13 +119,13 @@ final class AbstractCategoriesBlockServiceTest extends AbstractBlockServiceTestC
 
     public function testPreUpdate()
     {
-        $category = $this->getMockBuilder('Sonata\ClassificationBundle\Model\CategoryInterface')
+        $category = $this->getMockBuilder(CategoryInterface::class)
             ->setMethods(['getId'])
             ->disableOriginalConstructor()
             ->getMockForAbstractClass();
         $category->expects($this->any())->method('getId')->will($this->returnValue(23));
 
-        $block = $this->createMock('Sonata\BlockBundle\Model\BlockInterface');
+        $block = $this->createMock(BlockInterface::class);
         $block->expects($this->any())
             ->method('getSetting')
             ->with($this->equalTo('categoryId'))
@@ -131,7 +134,7 @@ final class AbstractCategoriesBlockServiceTest extends AbstractBlockServiceTestC
             ->method('setSetting')
             ->with($this->equalTo('categoryId'), $this->equalTo(23));
 
-        $blockService = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Block\Service\AbstractCategoriesBlockService', [
+        $blockService = $this->getMockForAbstractClass(AbstractCategoriesBlockService::class, [
             'block.service', $this->templating, $this->contextManager, $this->categoryManager, $this->categoryAdmin,
         ]);
         $blockService->preUpdate($block);

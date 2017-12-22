@@ -26,13 +26,13 @@ class CategoryTest extends TestCase
         $time = new \DateTime();
 
         /** @var ContextInterface $context */
-        $context = $this->createMock('Sonata\ClassificationBundle\Model\ContextInterface');
+        $context = $this->createMock(ContextInterface::class);
 
         /** @var MediaInterface $media */
-        $media = $this->createMock('Sonata\MediaBundle\Model\MediaInterface');
+        $media = $this->createMock(MediaInterface::class);
 
         /** @var Category $category */
-        $category = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Model\Category');
+        $category = $this->getMockForAbstractClass(Category::class);
         $category->setName('Hello World');
         $category->setEnabled(true);
         $category->setDescription('My description');
@@ -68,10 +68,10 @@ class CategoryTest extends TestCase
     public function testParent()
     {
         /** @var Category $parent */
-        $parent = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Model\Category');
+        $parent = $this->getMockForAbstractClass(Category::class);
 
         /** @var Category $category */
-        $category = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Model\Category');
+        $category = $this->getMockForAbstractClass(Category::class);
         $category->setParent($parent);
         $this->assertEquals($parent, $category->getParent());
         $this->assertCount(1, $parent->getChildren());
@@ -80,17 +80,17 @@ class CategoryTest extends TestCase
     public function testChildren()
     {
         /** @var Category $cat1 */
-        $cat1 = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Model\Category');
+        $cat1 = $this->getMockForAbstractClass(Category::class);
         /** @var Category $cat2 */
-        $cat2 = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Model\Category');
+        $cat2 = $this->getMockForAbstractClass(Category::class);
         /** @var Category $cat3 */
-        $cat3 = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Model\Category');
+        $cat3 = $this->getMockForAbstractClass(Category::class);
 
         /** @var ContextInterface $context */
-        $context = $this->createMock('Sonata\ClassificationBundle\Model\ContextInterface');
+        $context = $this->createMock(ContextInterface::class);
 
         /** @var Category $category */
-        $category = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Model\Category');
+        $category = $this->getMockForAbstractClass(Category::class);
         $category->setContext($context);
         $this->assertFalse($category->hasChildren());
 
@@ -114,19 +114,19 @@ class CategoryTest extends TestCase
     public function testPrePersist()
     {
         /** @var Category $category */
-        $category = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Model\Category');
+        $category = $this->getMockForAbstractClass(Category::class);
         $category->prePersist();
 
-        $this->assertInstanceOf('\DateTime', $category->getCreatedAt());
-        $this->assertInstanceOf('\DateTime', $category->getUpdatedAt());
+        $this->assertInstanceOf(\DateTime::class, $category->getCreatedAt());
+        $this->assertInstanceOf(\DateTime::class, $category->getUpdatedAt());
     }
 
     public function testPreUpdate()
     {
         /** @var Category $category */
-        $category = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Model\Category');
+        $category = $this->getMockForAbstractClass(Category::class);
         $category->preUpdate();
 
-        $this->assertInstanceOf('\DateTime', $category->getUpdatedAt());
+        $this->assertInstanceOf(\DateTime::class, $category->getUpdatedAt());
     }
 }

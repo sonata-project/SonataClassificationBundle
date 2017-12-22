@@ -11,6 +11,11 @@
 
 namespace Sonata\ClassificationBundle;
 
+use Sonata\ClassificationBundle\Form\Type\ApiCategoryType;
+use Sonata\ClassificationBundle\Form\Type\ApiCollectionType;
+use Sonata\ClassificationBundle\Form\Type\ApiContextType;
+use Sonata\ClassificationBundle\Form\Type\ApiTagType;
+use Sonata\ClassificationBundle\Form\Type\CategorySelectorType;
 use Sonata\CoreBundle\Form\FormHelper;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
@@ -39,11 +44,11 @@ class SonataClassificationBundle extends Bundle
     public function registerFormMapping()
     {
         FormHelper::registerFormTypeMapping([
-            'sonata_classification_api_form_category' => 'Sonata\ClassificationBundle\Form\Type\ApiCategoryType',
-            'sonata_classification_api_form_collection' => 'Sonata\ClassificationBundle\Form\Type\ApiCollectionType',
-            'sonata_classification_api_form_tag' => 'Sonata\ClassificationBundle\Form\Type\ApiTagType',
-            'sonata_classification_api_form_context' => 'Sonata\ClassificationBundle\Form\Type\ApiContextType',
-            'sonata_category_selector' => 'Sonata\ClassificationBundle\Form\Type\CategorySelectorType',
+            'sonata_classification_api_form_category' => ApiCategoryType::class,
+            'sonata_classification_api_form_collection' => ApiCollectionType::class,
+            'sonata_classification_api_form_tag' => ApiTagType::class,
+            'sonata_classification_api_form_context' => ApiContextType::class,
+            'sonata_category_selector' => CategorySelectorType::class,
         ]);
     }
 }

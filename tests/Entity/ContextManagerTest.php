@@ -11,7 +11,9 @@
 
 namespace Sonata\ClassificationBundle\Tests\Entity;
 
+use Doctrine\Common\Persistence\ManagerRegistry;
 use PHPUnit\Framework\TestCase;
+use Sonata\ClassificationBundle\Entity\BaseContext;
 use Sonata\ClassificationBundle\Entity\ContextManager;
 use Sonata\CoreBundle\Test\EntityManagerMockFactory;
 
@@ -61,9 +63,9 @@ class ContextManagerTest extends TestCase
     {
         $em = EntityManagerMockFactory::create($this, $qbCallback, []);
 
-        $registry = $this->getMockForAbstractClass('Doctrine\Common\Persistence\ManagerRegistry');
+        $registry = $this->getMockForAbstractClass(ManagerRegistry::class);
         $registry->expects($this->any())->method('getManagerForClass')->will($this->returnValue($em));
 
-        return new ContextManager('Sonata\PageBundle\Entity\BaseContext', $registry);
+        return new ContextManager(BaseContext::class, $registry);
     }
 }

@@ -11,10 +11,13 @@
 
 namespace Sonata\ClassificationBundle\Tests\Entity;
 
+use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\ORM\AbstractQuery;
 use PHPUnit\Framework\TestCase;
 use Sonata\ClassificationBundle\Entity\BaseCategory;
 use Sonata\ClassificationBundle\Entity\BaseContext;
 use Sonata\ClassificationBundle\Entity\CategoryManager;
+use Sonata\ClassificationBundle\Model\ContextManagerInterface;
 use Sonata\CoreBundle\Test\EntityManagerMockFactory;
 
 abstract class CategoryTest extends BaseCategory
@@ -95,13 +98,13 @@ class CategoryManagerTest extends TestCase
     public function testGetCategoriesWithMultipleRootsInContext()
     {
         /** @var ContextTest $context */
-        $context = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Tests\Entity\ContextTest');
+        $context = $this->getMockForAbstractClass(ContextTest::class);
         $context->setId(1);
         $context->setName('default');
         $context->setEnabled(true);
 
         /** @var CategoryTest $categoryFoo */
-        $categoryFoo = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Tests\Entity\CategoryTest');
+        $categoryFoo = $this->getMockForAbstractClass(CategoryTest::class);
         $categoryFoo->setId(1);
         $categoryFoo->setName('foo');
         $categoryFoo->setContext($context);
@@ -109,7 +112,7 @@ class CategoryManagerTest extends TestCase
         $categoryFoo->setEnabled(true);
 
         /** @var CategoryTest $categoryBar */
-        $categoryBar = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Tests\Entity\CategoryTest');
+        $categoryBar = $this->getMockForAbstractClass(CategoryTest::class);
         $categoryBar->setId(2);
         $categoryBar->setName('bar');
         $categoryBar->setContext($context);
@@ -127,13 +130,13 @@ class CategoryManagerTest extends TestCase
     public function testGetRootCategoryWithChildren()
     {
         /** @var ContextTest $context */
-        $context = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Tests\Entity\ContextTest');
+        $context = $this->getMockForAbstractClass(ContextTest::class);
         $context->setId(1);
         $context->setName('default');
         $context->setEnabled(true);
 
         /** @var CategoryTest $categoryFoo */
-        $categoryFoo = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Tests\Entity\CategoryTest');
+        $categoryFoo = $this->getMockForAbstractClass(CategoryTest::class);
         $categoryFoo->setId(1);
         $categoryFoo->setName('foo');
         $categoryFoo->setContext($context);
@@ -141,7 +144,7 @@ class CategoryManagerTest extends TestCase
         $categoryFoo->setEnabled(true);
 
         /** @var CategoryTest $categoryBar */
-        $categoryBar = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Tests\Entity\CategoryTest');
+        $categoryBar = $this->getMockForAbstractClass(CategoryTest::class);
         $categoryBar->setId(2);
         $categoryBar->setName('bar');
         $categoryBar->setContext($context);
@@ -158,13 +161,13 @@ class CategoryManagerTest extends TestCase
     public function testGetRootCategory()
     {
         /** @var ContextTest $context */
-        $context = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Tests\Entity\ContextTest');
+        $context = $this->getMockForAbstractClass(ContextTest::class);
         $context->setId(1);
         $context->setName('default');
         $context->setEnabled(true);
 
         /** @var CategoryTest $categoryFoo */
-        $categoryFoo = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Tests\Entity\CategoryTest');
+        $categoryFoo = $this->getMockForAbstractClass(CategoryTest::class);
         $categoryFoo->setId(1);
         $categoryFoo->setName('foo');
         $categoryFoo->setContext($context);
@@ -181,13 +184,13 @@ class CategoryManagerTest extends TestCase
     public function testGetRootCategoriesForContext()
     {
         /** @var ContextTest $context */
-        $context = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Tests\Entity\ContextTest');
+        $context = $this->getMockForAbstractClass(ContextTest::class);
         $context->setId(1);
         $context->setName('default');
         $context->setEnabled(true);
 
         /** @var CategoryTest $categoryFoo */
-        $categoryFoo = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Tests\Entity\CategoryTest');
+        $categoryFoo = $this->getMockForAbstractClass(CategoryTest::class);
         $categoryFoo->setId(1);
         $categoryFoo->setName('foo');
         $categoryFoo->setContext($context);
@@ -195,7 +198,7 @@ class CategoryManagerTest extends TestCase
         $categoryFoo->setEnabled(true);
 
         /** @var CategoryTest $categoryBar */
-        $categoryBar = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Tests\Entity\CategoryTest');
+        $categoryBar = $this->getMockForAbstractClass(CategoryTest::class);
         $categoryBar->setId(2);
         $categoryBar->setName('bar');
         $categoryBar->setContext($context);
@@ -213,19 +216,19 @@ class CategoryManagerTest extends TestCase
     public function testGetRootCategories()
     {
         /** @var ContextTest $contextFoo */
-        $contextFoo = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Tests\Entity\ContextTest');
+        $contextFoo = $this->getMockForAbstractClass(ContextTest::class);
         $contextFoo->setId(1);
         $contextFoo->setName('foo');
         $contextFoo->setEnabled(true);
 
         /** @var ContextTest $contextBar */
-        $contextBar = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Tests\Entity\ContextTest');
+        $contextBar = $this->getMockForAbstractClass(ContextTest::class);
         $contextBar->setId(2);
         $contextBar->setName('bar');
         $contextBar->setEnabled(true);
 
         /** @var CategoryTest $categoryFoo */
-        $categoryFoo = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Tests\Entity\CategoryTest');
+        $categoryFoo = $this->getMockForAbstractClass(CategoryTest::class);
         $categoryFoo->setId(1);
         $categoryFoo->setName('foo');
         $categoryFoo->setContext($contextFoo);
@@ -233,7 +236,7 @@ class CategoryManagerTest extends TestCase
         $categoryFoo->setEnabled(true);
 
         /** @var CategoryTest $categoryBar */
-        $categoryBar = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Tests\Entity\CategoryTest');
+        $categoryBar = $this->getMockForAbstractClass(CategoryTest::class);
         $categoryBar->setId(2);
         $categoryBar->setName('bar');
         $categoryBar->setContext($contextBar);
@@ -253,19 +256,19 @@ class CategoryManagerTest extends TestCase
     public function testGetRootCategoriesSplitByContexts()
     {
         /** @var ContextTest $contextFoo */
-        $contextFoo = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Tests\Entity\ContextTest');
+        $contextFoo = $this->getMockForAbstractClass(ContextTest::class);
         $contextFoo->setId(1);
         $contextFoo->setName('foo');
         $contextFoo->setEnabled(true);
 
         /** @var ContextTest $contextBar */
-        $contextBar = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Tests\Entity\ContextTest');
+        $contextBar = $this->getMockForAbstractClass(ContextTest::class);
         $contextBar->setId(2);
         $contextBar->setName('bar');
         $contextBar->setEnabled(true);
 
         /** @var CategoryTest $categoryFoo */
-        $categoryFoo = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Tests\Entity\CategoryTest');
+        $categoryFoo = $this->getMockForAbstractClass(CategoryTest::class);
         $categoryFoo->setId(1);
         $categoryFoo->setName('foo');
         $categoryFoo->setContext($contextFoo);
@@ -273,7 +276,7 @@ class CategoryManagerTest extends TestCase
         $categoryFoo->setEnabled(true);
 
         /** @var CategoryTest $categoryBar */
-        $categoryBar = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Tests\Entity\CategoryTest');
+        $categoryBar = $this->getMockForAbstractClass(CategoryTest::class);
         $categoryBar->setId(2);
         $categoryBar->setName('bar');
         $categoryBar->setContext($contextBar);
@@ -295,17 +298,17 @@ class CategoryManagerTest extends TestCase
         $em = EntityManagerMockFactory::create($this, $qbCallback, []);
 
         if (null != $createQueryResult) {
-            $query = $this->getMockBuilder('Doctrine\ORM\AbstractQuery')->disableOriginalConstructor()->getMock();
+            $query = $this->createMock(AbstractQuery::class);
             $query->expects($this->once())->method('execute')->will($this->returnValue($createQueryResult));
             $query->expects($this->any())->method('setParameter')->will($this->returnValue($query));
             $em->expects($this->once())->method('createQuery')->will($this->returnValue($query));
         }
 
-        $registry = $this->getMockForAbstractClass('Doctrine\Common\Persistence\ManagerRegistry');
+        $registry = $this->getMockForAbstractClass(ManagerRegistry::class);
         $registry->expects($this->any())->method('getManagerForClass')->will($this->returnValue($em));
 
-        $contextManager = $this->createMock('Sonata\ClassificationBundle\Model\ContextManagerInterface');
+        $contextManager = $this->createMock(ContextManagerInterface::class);
 
-        return new CategoryManager('Sonata\PageBundle\Entity\BaseCategory', $registry, $contextManager);
+        return new CategoryManager(BaseCategory::class, $registry, $contextManager);
     }
 }

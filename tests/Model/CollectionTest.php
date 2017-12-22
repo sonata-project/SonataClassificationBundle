@@ -26,13 +26,13 @@ class CollectionTest extends TestCase
         $time = new \DateTime();
 
         /** @var ContextInterface $context */
-        $context = $this->createMock('Sonata\ClassificationBundle\Model\ContextInterface');
+        $context = $this->createMock(ContextInterface::class);
 
         /** @var MediaInterface $media */
-        $media = $this->createMock('Sonata\MediaBundle\Model\MediaInterface');
+        $media = $this->createMock(MediaInterface::class);
 
         /** @var Collection $collection */
-        $collection = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Model\Collection');
+        $collection = $this->getMockForAbstractClass(Collection::class);
         $collection->setName('Hello World');
         $collection->setCreatedAt($time);
         $collection->setUpdatedAt($time);
@@ -66,19 +66,19 @@ class CollectionTest extends TestCase
     public function testPrePersist()
     {
         /** @var Collection $collection */
-        $collection = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Model\Collection');
+        $collection = $this->getMockForAbstractClass(Collection::class);
         $collection->prePersist();
 
-        $this->assertInstanceOf('\DateTime', $collection->getCreatedAt());
-        $this->assertInstanceOf('\DateTime', $collection->getUpdatedAt());
+        $this->assertInstanceOf(\DateTime::class, $collection->getCreatedAt());
+        $this->assertInstanceOf(\DateTime::class, $collection->getUpdatedAt());
     }
 
     public function testPreUpdate()
     {
         /** @var Collection $collection */
-        $collection = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Model\Collection');
+        $collection = $this->getMockForAbstractClass(Collection::class);
         $collection->preUpdate();
 
-        $this->assertInstanceOf('\DateTime', $collection->getUpdatedAt());
+        $this->assertInstanceOf(\DateTime::class, $collection->getUpdatedAt());
     }
 }

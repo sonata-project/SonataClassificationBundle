@@ -13,6 +13,8 @@ namespace Sonata\ClassificationBundle\Tests\Form\Type;
 
 use PHPUnit\Framework\TestCase;
 use Sonata\ClassificationBundle\Form\Type\CategorySelectorType;
+use Sonata\CoreBundle\Model\ManagerInterface;
+use Symfony\Component\Form\ChoiceList\Loader\ChoiceLoaderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
@@ -22,7 +24,7 @@ class CategorySelectorTypeTest extends TestCase
 {
     public function testConfigureOptions()
     {
-        $manager = $this->createMock('Sonata\CoreBundle\Model\ManagerInterface');
+        $manager = $this->createMock(ManagerInterface::class);
         $categorySelectorType = new CategorySelectorType($manager);
         $optionsResolver = new OptionsResolver();
         $categorySelectorType->configureOptions($optionsResolver);
@@ -33,7 +35,7 @@ class CategorySelectorTypeTest extends TestCase
         $definedOptions = $optionsResolver->getDefinedOptions();
         $this->assertContains('category', $definedOptions);
         $this->assertContains('context', $definedOptions);
-        if (interface_exists('Symfony\Component\Form\ChoiceList\Loader\ChoiceLoaderInterface')) {
+        if (interface_exists(ChoiceLoaderInterface::class)) {
             $this->assertContains('choice_loader', $definedOptions);
             $this->assertNotContains('choice_list', $definedOptions);
         } else {

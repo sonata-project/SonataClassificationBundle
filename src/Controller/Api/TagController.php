@@ -255,7 +255,7 @@ class TagController
 
             $view = FOSRestView::create($tag);
 
-            if (class_exists('FOS\RestBundle\Context\Context')) {
+            if (class_exists(Context::class)) {
                 $context = new Context();
                 $context->setGroups(['sonata_api_read']);
                 $view->setContext($context);

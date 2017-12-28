@@ -13,9 +13,18 @@ declare(strict_types=1);
 
 namespace Sonata\ClassificationBundle\Tests\Controller\Api;
 
+use FOS\RestBundle\Request\ParamFetcherInterface;
+use FOS\RestBundle\View\View;
 use PHPUnit\Framework\TestCase;
+use Sonata\AdminBundle\Datagrid\Pager;
 use Sonata\ClassificationBundle\Controller\Api\ContextController;
+use Sonata\ClassificationBundle\Model\ContextInterface;
+use Sonata\ClassificationBundle\Model\ContextManagerInterface;
+use Symfony\Component\Form\Form;
+use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * @author Thomas Rabaix <thomas.rabaix@gmail.com>
@@ -24,12 +33,12 @@ class ContextControllerTest extends TestCase
 {
     public function testGetContextsAction(): void
     {
-        $paramFetcher = $this->createMock('FOS\RestBundle\Request\ParamFetcherInterface');
+        $paramFetcher = $this->createMock(ParamFetcherInterface::class);
         $paramFetcher->expects($this->once())->method('all')->will($this->returnValue([]));
 
-        $pager = $this->getMockBuilder('Sonata\AdminBundle\Datagrid\Pager')->disableOriginalConstructor()->getMock();
+        $pager = $this->createMock(Pager::class);
 
-        $contextManager = $this->createMock('Sonata\ClassificationBundle\Model\ContextManagerInterface');
+        $contextManager = $this->createMock(ContextManagerInterface::class);
         $contextManager->expects($this->once())->method('getPager')->will($this->returnValue($pager));
 
         $this->assertSame($pager, $this->createContextController($contextManager)->getContextsAction($paramFetcher));
@@ -37,9 +46,9 @@ class ContextControllerTest extends TestCase
 
     public function testGetContextAction(): void
     {
-        $context = $this->createMock('Sonata\ClassificationBundle\Model\ContextInterface');
+        $context = $this->createMock(ContextInterface::class);
 
-        $contextManager = $this->createMock('Sonata\ClassificationBundle\Model\ContextManagerInterface');
+        $contextManager = $this->createMock(ContextManagerInterface::class);
         $contextManager->expects($this->once())->method('find')->will($this->returnValue($context));
 
         $this->assertEquals($context, $this->createContextController($contextManager)->getContextAction(1));
@@ -47,7 +56,7 @@ class ContextControllerTest extends TestCase
 
     public function testGetContextNotFoundExceptionAction(): void
     {
-        $this->expectException(\Symfony\Component\HttpKernel\Exception\NotFoundHttpException::class);
+        $this->expectException(NotFoundHttpException::class);
         $this->expectExceptionMessage('Context (42) not found');
 
         $this->createContextController()->getContextAction(42);
@@ -55,91 +64,91 @@ class ContextControllerTest extends TestCase
 
     public function testPostContextAction(): void
     {
-        $context = $this->createMock('Sonata\ClassificationBundle\Model\ContextInterface');
+        $context = $this->createMock(ContextInterface::class);
 
-        $contextManager = $this->createMock('Sonata\ClassificationBundle\Model\ContextManagerInterface');
+        $contextManager = $this->createMock(ContextManagerInterface::class);
         $contextManager->expects($this->once())->method('save')->will($this->returnValue($context));
 
-        $form = $this->getMockBuilder('Symfony\Component\Form\Form')->disableOriginalConstructor()->getMock();
+        $form = $this->createMock(Form::class);
         $form->expects($this->once())->method('handleRequest');
         $form->expects($this->once())->method('isValid')->will($this->returnValue(true));
         $form->expects($this->once())->method('getData')->will($this->returnValue($context));
         $form->expects($this->once())->method('all')->will($this->returnValue([]));
 
-        $formFactory = $this->createMock('Symfony\Component\Form\FormFactoryInterface');
+        $formFactory = $this->createMock(FormFactoryInterface::class);
         $formFactory->expects($this->once())->method('createNamed')->will($this->returnValue($form));
 
         $view = $this->createContextController($contextManager, $formFactory)->postContextAction(new Request());
 
-        $this->assertInstanceOf('FOS\RestBundle\View\View', $view);
+        $this->assertInstanceOf(View::class, $view);
     }
 
     public function testPostContextInvalidAction(): void
     {
-        $contextManager = $this->createMock('Sonata\ClassificationBundle\Model\ContextManagerInterface');
+        $contextManager = $this->createMock(ContextManagerInterface::class);
         $contextManager->expects($this->never())->method('save')->will($this->returnValue($contextManager));
 
-        $form = $this->getMockBuilder('Symfony\Component\Form\Form')->disableOriginalConstructor()->getMock();
+        $form = $this->createMock(Form::class);
         $form->expects($this->once())->method('handleRequest');
         $form->expects($this->once())->method('isValid')->will($this->returnValue(false));
         $form->expects($this->once())->method('all')->will($this->returnValue([]));
 
-        $formFactory = $this->createMock('Symfony\Component\Form\FormFactoryInterface');
+        $formFactory = $this->createMock(FormFactoryInterface::class);
         $formFactory->expects($this->once())->method('createNamed')->will($this->returnValue($form));
 
         $view = $this->createContextController($contextManager, $formFactory)->postContextAction(new Request());
 
-        $this->assertInstanceOf('Symfony\Component\Form\FormInterface', $view);
+        $this->assertInstanceOf(FormInterface::class, $view);
     }
 
     public function testPutContextAction(): void
     {
-        $context = $this->createMock('Sonata\ClassificationBundle\Model\ContextInterface');
+        $context = $this->createMock(ContextInterface::class);
 
-        $contextManager = $this->createMock('Sonata\ClassificationBundle\Model\ContextManagerInterface');
+        $contextManager = $this->createMock(ContextManagerInterface::class);
         $contextManager->expects($this->once())->method('find')->will($this->returnValue($context));
         $contextManager->expects($this->once())->method('save')->will($this->returnValue($context));
 
-        $form = $this->getMockBuilder('Symfony\Component\Form\Form')->disableOriginalConstructor()->getMock();
+        $form = $this->createMock(Form::class);
         $form->expects($this->once())->method('handleRequest');
         $form->expects($this->once())->method('isValid')->will($this->returnValue(true));
         $form->expects($this->once())->method('getData')->will($this->returnValue($context));
         $form->expects($this->once())->method('all')->will($this->returnValue([]));
 
-        $formFactory = $this->createMock('Symfony\Component\Form\FormFactoryInterface');
+        $formFactory = $this->createMock(FormFactoryInterface::class);
         $formFactory->expects($this->once())->method('createNamed')->will($this->returnValue($form));
 
         $view = $this->createContextController($contextManager, $formFactory)->putContextAction(1, new Request());
 
-        $this->assertInstanceOf('FOS\RestBundle\View\View', $view);
+        $this->assertInstanceOf(View::class, $view);
     }
 
     public function testPutPostInvalidAction(): void
     {
-        $context = $this->createMock('Sonata\ClassificationBundle\Model\ContextInterface');
+        $context = $this->createMock(ContextInterface::class);
 
-        $contextManager = $this->createMock('Sonata\ClassificationBundle\Model\ContextManagerInterface');
+        $contextManager = $this->createMock(ContextManagerInterface::class);
         $contextManager->expects($this->once())->method('find')->will($this->returnValue($context));
         $contextManager->expects($this->never())->method('save')->will($this->returnValue($context));
 
-        $form = $this->getMockBuilder('Symfony\Component\Form\Form')->disableOriginalConstructor()->getMock();
+        $form = $this->createMock(Form::class);
         $form->expects($this->once())->method('handleRequest');
         $form->expects($this->once())->method('isValid')->will($this->returnValue(false));
         $form->expects($this->once())->method('all')->will($this->returnValue([]));
 
-        $formFactory = $this->createMock('Symfony\Component\Form\FormFactoryInterface');
+        $formFactory = $this->createMock(FormFactoryInterface::class);
         $formFactory->expects($this->once())->method('createNamed')->will($this->returnValue($form));
 
         $view = $this->createContextController($contextManager, $formFactory)->putContextAction(1, new Request());
 
-        $this->assertInstanceOf('Symfony\Component\Form\FormInterface', $view);
+        $this->assertInstanceOf(FormInterface::class, $view);
     }
 
     public function testDeleteContextAction(): void
     {
-        $context = $this->createMock('Sonata\ClassificationBundle\Model\ContextInterface');
+        $context = $this->createMock(ContextInterface::class);
 
-        $contextManager = $this->createMock('Sonata\ClassificationBundle\Model\ContextManagerInterface');
+        $contextManager = $this->createMock(ContextManagerInterface::class);
         $contextManager->expects($this->once())->method('find')->will($this->returnValue($context));
         $contextManager->expects($this->once())->method('delete');
 
@@ -150,9 +159,9 @@ class ContextControllerTest extends TestCase
 
     public function testDeleteContextInvalidAction(): void
     {
-        $this->expectException('Symfony\Component\HttpKernel\Exception\NotFoundHttpException');
+        $this->expectException(NotFoundHttpException::class);
 
-        $contextManager = $this->createMock('Sonata\ClassificationBundle\Model\ContextManagerInterface');
+        $contextManager = $this->createMock(ContextManagerInterface::class);
         $contextManager->expects($this->once())->method('find')->will($this->returnValue(null));
         $contextManager->expects($this->never())->method('delete');
 
@@ -170,10 +179,10 @@ class ContextControllerTest extends TestCase
     protected function createContextController($contextManager = null, $formFactory = null)
     {
         if (null === $contextManager) {
-            $contextManager = $this->createMock('Sonata\ClassificationBundle\Model\ContextManagerInterface');
+            $contextManager = $this->createMock(ContextManagerInterface::class);
         }
         if (null === $formFactory) {
-            $formFactory = $this->createMock('Symfony\Component\Form\FormFactoryInterface');
+            $formFactory = $this->createMock(FormFactoryInterface::class);
         }
 
         return new ContextController($contextManager, $formFactory);

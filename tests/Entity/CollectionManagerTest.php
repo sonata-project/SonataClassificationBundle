@@ -13,7 +13,9 @@ declare(strict_types=1);
 
 namespace Sonata\ClassificationBundle\Tests\Entity;
 
+use Doctrine\Common\Persistence\ManagerRegistry;
 use PHPUnit\Framework\TestCase;
+use Sonata\ClassificationBundle\Entity\BaseCollection;
 use Sonata\ClassificationBundle\Entity\CollectionManager;
 use Sonata\CoreBundle\Test\EntityManagerMockFactory;
 
@@ -63,9 +65,9 @@ class CollectionManagerTest extends TestCase
     {
         $em = EntityManagerMockFactory::create($this, $qbCallback, []);
 
-        $registry = $this->getMockForAbstractClass('Doctrine\Common\Persistence\ManagerRegistry');
+        $registry = $this->getMockForAbstractClass(ManagerRegistry::class);
         $registry->expects($this->any())->method('getManagerForClass')->will($this->returnValue($em));
 
-        return new CollectionManager('Sonata\PageBundle\Entity\BaseCollection', $registry);
+        return new CollectionManager(BaseCollection::class, $registry);
     }
 }

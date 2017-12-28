@@ -16,17 +16,32 @@ namespace Sonata\ClassificationBundle\Tests;
 use PHPUnit\Framework\TestCase;
 use Sonata\AdminBundle\Admin\AdminInterface;
 use Sonata\AdminBundle\Admin\Pool;
+use Sonata\AdminBundle\Datagrid\DatagridInterface;
+use Sonata\ClassificationBundle\Admin\CategoryAdmin;
 use Sonata\ClassificationBundle\Controller\CategoryAdminController;
+use Sonata\ClassificationBundle\Entity\CategoryManager;
+use Sonata\ClassificationBundle\Entity\ContextManager;
+use Sonata\ClassificationBundle\Model\Category;
 use Sonata\ClassificationBundle\Model\CategoryManagerInterface;
+use Sonata\ClassificationBundle\Model\Context;
 use Sonata\ClassificationBundle\Model\ContextManagerInterface;
+use Symfony\Bridge\Twig\AppVariable;
+use Symfony\Bridge\Twig\Command\DebugCommand;
 use Symfony\Bridge\Twig\Extension\FormExtension;
+use Symfony\Bridge\Twig\Form\TwigRenderer;
+use Symfony\Bundle\FrameworkBundle\Templating\DelegatingEngine;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Form\Extension\Csrf\CsrfProvider\CsrfProviderInterface;
+use Symfony\Component\Form\Form;
+use Symfony\Component\Form\FormRenderer;
 use Symfony\Component\Form\FormView;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Security\Csrf\CsrfToken;
+use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 
 /**
  * @author Dariusz Markowicz <dmarkowicz77@gmail.com>
@@ -37,6 +52,11 @@ class CategoryAdminControllerTest extends TestCase
      * @var Request
      */
     private $request;
+
+    /**
+     * @var RequestStack
+     */
+    private $requestStack;
 
     /**
      * @var AdminInterface
@@ -88,9 +108,11 @@ class CategoryAdminControllerTest extends TestCase
      */
     protected function setUp(): void
     {
-        $this->container = $this->createMock('Symfony\Component\DependencyInjection\ContainerInterface');
+        $this->container = $this->createMock(ContainerInterface::class);
 
         $this->request = new Request();
+        $this->requestStack = new RequestStack();
+        $this->requestStack->push($this->request);
         $this->pool = new Pool($this->container, 'title', 'logo.png');
         $this->pool->setAdminServiceIds(['foo.admin']);
         $this->request->attributes->set('_sonata_admin', 'foo.admin');
@@ -101,7 +123,7 @@ class CategoryAdminControllerTest extends TestCase
         $params = &$this->parameters;
         $template = &$this->template;
 
-        $templating = $this->getMockBuilder('Symfony\Bundle\FrameworkBundle\Templating\DelegatingEngine')
+        $templating = $this->getMockBuilder(DelegatingEngine::class)
             ->setMethods([])
             ->setConstructorArgs([$this->container, []])
             ->getMock();
@@ -130,42 +152,47 @@ class CategoryAdminControllerTest extends TestCase
         // php 5.3 BC
         $pool = $this->pool;
         $request = $this->request;
+        $requestStack = $this->requestStack;
 
-        $twig = $this->getMockBuilder('Twig_Environment')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $twig = $this->createMock(\Twig_Environment::class);
 
-        $twigRenderer = $this->createMock('Symfony\Bridge\Twig\Form\TwigRendererInterface');
-
-        $formExtension = new FormExtension($twigRenderer);
+        // BC for Symfony < 3.4 where runtime should be TwigRenderer
+        if (!method_exists(DebugCommand::class, 'getLoaderPaths')) {
+            $formRenderer = $this->createMock(TwigRenderer::class);
+            $formExtension = new FormExtension($formRenderer);
+        } else {
+            $formRenderer = $this->createMock(FormRenderer::class);
+            $formExtension = new FormExtension();
+        }
 
         $twig->expects($this->any())
             ->method('getExtension')
             ->will($this->returnCallback(function ($name) use ($formExtension) {
                 switch ($name) {
                     case 'form':
-                    case 'Symfony\Bridge\Twig\Extension\FormExtension':
+                    case FormExtension::class:
                         return $formExtension;
                 }
             }));
 
         $twig->expects($this->any())
             ->method('getRuntime')
-            ->will($this->returnCallback(function ($name) use ($twigRenderer) {
+            ->will($this->returnCallback(function ($name) use ($formRenderer) {
                 switch ($name) {
-                    case 'Symfony\Bridge\Twig\Form\TwigRenderer':
-                        if (method_exists('Symfony\Bridge\Twig\AppVariable', 'getToken')) {
-                            return $twigRenderer;
+                    case TwigRenderer::class:
+                    case FormRenderer::class:
+                        if (method_exists(AppVariable::class, 'getToken')) {
+                            return $formRenderer;
                         }
 
-                        throw new \Twig_Error_Runtime('This runtime exists when Symony >= 3.2.');
+                        throw new \Twig_Error_Runtime('This runtime exists when Symfony >= 3.2.');
                 }
             }));
 
         // Prefer Symfony 2.x interfaces
-        if (interface_exists('Symfony\Component\Form\Extension\Csrf\CsrfProvider\CsrfProviderInterface')) {
+        if (interface_exists(CsrfProviderInterface::class)) {
             $this->csrfProvider = $this->getMockBuilder(
-                'Symfony\Component\Form\Extension\Csrf\CsrfProvider\CsrfProviderInterface'
+                CsrfProviderInterface::class
             )
                 ->getMock();
 
@@ -186,7 +213,7 @@ class CategoryAdminControllerTest extends TestCase
                 }));
         } else {
             $this->csrfProvider = $this->getMockBuilder(
-                'Symfony\Component\Security\Csrf\CsrfTokenManagerInterface'
+                CsrfTokenManagerInterface::class
             )
                 ->getMock();
 
@@ -210,19 +237,13 @@ class CategoryAdminControllerTest extends TestCase
         // php 5.3 BC
         $csrfProvider = $this->csrfProvider;
 
-        $this->admin = $this->getMockBuilder('Sonata\ClassificationBundle\Admin\CategoryAdmin')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $this->admin = $this->createMock(CategoryAdmin::class);
         $admin = $this->admin;
 
-        $this->categoryManager = $this->getMockBuilder('Sonata\ClassificationBundle\Entity\CategoryManager')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $this->categoryManager = $this->createMock(CategoryManager::class);
         $categoryManager = $this->categoryManager;
 
-        $this->contextManager = $this->getMockBuilder('Sonata\ClassificationBundle\Entity\ContextManager')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $this->contextManager = $this->createMock(ContextManager::class);
         $contextManager = $this->contextManager;
 
         $this->container->expects($this->any())
@@ -231,6 +252,7 @@ class CategoryAdminControllerTest extends TestCase
                 $pool,
                 $admin,
                 $request,
+                $requestStack,
                 $templating,
                 $twig,
                 $csrfProvider,
@@ -242,6 +264,8 @@ class CategoryAdminControllerTest extends TestCase
                         return $pool;
                     case 'request':
                         return $request;
+                    case 'request_stack':
+                        return $requestStack;
                     case 'foo.admin':
                         return $admin;
                     case 'templating':
@@ -294,6 +318,10 @@ class CategoryAdminControllerTest extends TestCase
                 )
             );
 
+        $this->admin->expects($this->any())
+            ->method('getTemplate')
+            ->will($this->returnValue('SonataClassificationBundle:CategoryAdmin:list.html.twig'));
+
         $this->controller = new CategoryAdminController();
         $this->controller->setContainer($this->container);
     }
@@ -309,7 +337,7 @@ class CategoryAdminControllerTest extends TestCase
 
         $result = $this->controller->listAction($this->request);
         $this->assertInstanceOf(
-            'Symfony\Component\HttpFoundation\RedirectResponse', $result);
+            RedirectResponse::class, $result);
         $this->assertSame('tree?hide_context=0', $result->getTargetUrl());
     }
 
@@ -321,9 +349,9 @@ class CategoryAdminControllerTest extends TestCase
         $this->request->query->set('_list_mode', 'list');
         $this->request->query->set('filter', 'filter[context][value]='.($context ? $context : ''));
 
-        $datagrid = $this->createMock('Sonata\AdminBundle\Datagrid\DatagridInterface');
+        $datagrid = $this->createMock(DatagridInterface::class);
 
-        $form = $this->getMockBuilder('Symfony\Component\Form\Form')
+        $form = $this->getMockBuilder(Form::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -351,7 +379,7 @@ class CategoryAdminControllerTest extends TestCase
             ->method('getPersistentParameter')
             ->will($this->returnValue($context));
 
-        $this->assertInstanceOf('Symfony\Component\HttpFoundation\Response',
+        $this->assertInstanceOf(Response::class,
             $this->controller->listAction($this->request));
     }
 
@@ -368,11 +396,9 @@ class CategoryAdminControllerTest extends TestCase
      */
     public function testTreeAction($context, $categories): void
     {
-        $datagrid = $this->createMock('Sonata\AdminBundle\Datagrid\DatagridInterface');
+        $datagrid = $this->createMock(DatagridInterface::class);
 
-        $form = $this->getMockBuilder('Symfony\Component\Form\Form')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $form = $this->createMock(Form::class);
 
         $form->expects($this->once())
             ->method('createView')
@@ -405,7 +431,7 @@ class CategoryAdminControllerTest extends TestCase
 
         $categoriesMock = [];
         foreach ($categories as $category) {
-            $categoryMock = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Model\Category');
+            $categoryMock = $this->getMockForAbstractClass(Category::class);
             $categoryMock->setName($category[0]);
             if ($category[1]) {
                 $categoryMock->setContext($this->getContextMock($category[1]));
@@ -418,7 +444,7 @@ class CategoryAdminControllerTest extends TestCase
             ->method('getRootCategoriesSplitByContexts')
             ->will($this->returnValue($categoriesMock));
 
-        $this->assertInstanceOf('Symfony\Component\HttpFoundation\Response',
+        $this->assertInstanceOf(Response::class,
             $this->controller->treeAction($this->request));
     }
 
@@ -445,7 +471,7 @@ class CategoryAdminControllerTest extends TestCase
 
     private function getContextMock($id)
     {
-        $contextMock = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Model\Context');
+        $contextMock = $this->getMockForAbstractClass(Context::class);
         $contextMock->expects($this->any())->method('getId')->will($this->returnValue($id));
         $contextMock->setName($id);
         $contextMock->setEnabled(true);

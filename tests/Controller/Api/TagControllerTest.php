@@ -13,9 +13,18 @@ declare(strict_types=1);
 
 namespace Sonata\ClassificationBundle\Tests\Controller\Api;
 
+use FOS\RestBundle\Request\ParamFetcherInterface;
+use FOS\RestBundle\View\View;
 use PHPUnit\Framework\TestCase;
+use Sonata\AdminBundle\Datagrid\Pager;
 use Sonata\ClassificationBundle\Controller\Api\TagController;
+use Sonata\ClassificationBundle\Model\TagInterface;
+use Sonata\ClassificationBundle\Model\TagManagerInterface;
+use Symfony\Component\Form\Form;
+use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * @author Vincent Composieux <vincent.composieux@gmail.com>
@@ -24,12 +33,12 @@ class TagControllerTest extends TestCase
 {
     public function testGetTagsAction(): void
     {
-        $paramFetcher = $this->createMock('FOS\RestBundle\Request\ParamFetcherInterface');
+        $paramFetcher = $this->createMock(ParamFetcherInterface::class);
         $paramFetcher->expects($this->once())->method('all')->will($this->returnValue([]));
 
-        $pager = $this->getMockBuilder('Sonata\AdminBundle\Datagrid\Pager')->disableOriginalConstructor()->getMock();
+        $pager = $this->createMock(Pager::class);
 
-        $tagManager = $this->createMock('Sonata\ClassificationBundle\Model\TagManagerInterface');
+        $tagManager = $this->createMock(TagManagerInterface::class);
         $tagManager->expects($this->once())->method('getPager')->will($this->returnValue($pager));
 
         $this->assertSame($pager, $this->createTagController($tagManager)->getTagsAction($paramFetcher));
@@ -37,9 +46,9 @@ class TagControllerTest extends TestCase
 
     public function testGetTagAction(): void
     {
-        $tag = $this->createMock('Sonata\ClassificationBundle\Model\TagInterface');
+        $tag = $this->createMock(TagInterface::class);
 
-        $tagManager = $this->createMock('Sonata\ClassificationBundle\Model\TagManagerInterface');
+        $tagManager = $this->createMock(TagManagerInterface::class);
         $tagManager->expects($this->once())->method('find')->will($this->returnValue($tag));
 
         $this->assertEquals($tag, $this->createTagController($tagManager)->getTagAction(1));
@@ -47,7 +56,7 @@ class TagControllerTest extends TestCase
 
     public function testGetTagNotFoundExceptionAction(): void
     {
-        $this->expectException(\Symfony\Component\HttpKernel\Exception\NotFoundHttpException::class);
+        $this->expectException(NotFoundHttpException::class);
         $this->expectExceptionMessage('Tag (42) not found');
 
         $this->createTagController()->getTagAction(42);
@@ -55,93 +64,93 @@ class TagControllerTest extends TestCase
 
     public function testPostTagAction(): void
     {
-        $tag = $this->createMock('Sonata\ClassificationBundle\Model\TagInterface');
+        $tag = $this->createMock(TagInterface::class);
 
-        $tagManager = $this->createMock('Sonata\ClassificationBundle\Model\TagManagerInterface');
+        $tagManager = $this->createMock(TagManagerInterface::class);
         $tagManager->expects($this->once())->method('save')->will($this->returnValue($tag));
 
-        $form = $this->getMockBuilder('Symfony\Component\Form\Form')->disableOriginalConstructor()->getMock();
+        $form = $this->createMock(Form::class);
         $form->expects($this->once())->method('handleRequest');
         $form->expects($this->once())->method('isValid')->will($this->returnValue(true));
         $form->expects($this->once())->method('getData')->will($this->returnValue($tag));
         $form->expects($this->once())->method('all')->will($this->returnValue([]));
 
-        $formFactory = $this->createMock('Symfony\Component\Form\FormFactoryInterface');
+        $formFactory = $this->createMock(FormFactoryInterface::class);
         $formFactory->expects($this->once())->method('createNamed')->will($this->returnValue($form));
 
         $view = $this->createTagController($tagManager, $formFactory)->postTagAction(new Request());
 
-        $this->assertInstanceOf('FOS\RestBundle\View\View', $view);
+        $this->assertInstanceOf(View::class, $view);
     }
 
     public function testPostTagInvalidAction(): void
     {
-        $tag = $this->createMock('Sonata\ClassificationBundle\Model\TagInterface');
+        $tag = $this->createMock(TagInterface::class);
 
-        $tagManager = $this->createMock('Sonata\ClassificationBundle\Model\TagManagerInterface');
+        $tagManager = $this->createMock(TagManagerInterface::class);
         $tagManager->expects($this->never())->method('save')->will($this->returnValue($tagManager));
 
-        $form = $this->getMockBuilder('Symfony\Component\Form\Form')->disableOriginalConstructor()->getMock();
+        $form = $this->createMock(Form::class);
         $form->expects($this->once())->method('handleRequest');
         $form->expects($this->once())->method('isValid')->will($this->returnValue(false));
         $form->expects($this->once())->method('all')->will($this->returnValue([]));
 
-        $formFactory = $this->createMock('Symfony\Component\Form\FormFactoryInterface');
+        $formFactory = $this->createMock(FormFactoryInterface::class);
         $formFactory->expects($this->once())->method('createNamed')->will($this->returnValue($form));
 
         $view = $this->createTagController($tagManager, $formFactory)->postTagAction(new Request());
 
-        $this->assertInstanceOf('Symfony\Component\Form\FormInterface', $view);
+        $this->assertInstanceOf(FormInterface::class, $view);
     }
 
     public function testPutTagAction(): void
     {
-        $tag = $this->createMock('Sonata\ClassificationBundle\Model\TagInterface');
+        $tag = $this->createMock(TagInterface::class);
 
-        $tagManager = $this->createMock('Sonata\ClassificationBundle\Model\TagManagerInterface');
+        $tagManager = $this->createMock(TagManagerInterface::class);
         $tagManager->expects($this->once())->method('find')->will($this->returnValue($tag));
         $tagManager->expects($this->once())->method('save')->will($this->returnValue($tag));
 
-        $form = $this->getMockBuilder('Symfony\Component\Form\Form')->disableOriginalConstructor()->getMock();
+        $form = $this->createMock(Form::class);
         $form->expects($this->once())->method('handleRequest');
         $form->expects($this->once())->method('isValid')->will($this->returnValue(true));
         $form->expects($this->once())->method('getData')->will($this->returnValue($tag));
         $form->expects($this->once())->method('all')->will($this->returnValue([]));
 
-        $formFactory = $this->createMock('Symfony\Component\Form\FormFactoryInterface');
+        $formFactory = $this->createMock(FormFactoryInterface::class);
         $formFactory->expects($this->once())->method('createNamed')->will($this->returnValue($form));
 
         $view = $this->createTagController($tagManager, $formFactory)->putTagAction(1, new Request());
 
-        $this->assertInstanceOf('FOS\RestBundle\View\View', $view);
+        $this->assertInstanceOf(View::class, $view);
     }
 
     public function testPutPostInvalidAction(): void
     {
-        $tag = $this->createMock('Sonata\ClassificationBundle\Model\TagInterface');
+        $tag = $this->createMock(TagInterface::class);
 
-        $tagManager = $this->createMock('Sonata\ClassificationBundle\Model\TagManagerInterface');
+        $tagManager = $this->createMock(TagManagerInterface::class);
         $tagManager->expects($this->once())->method('find')->will($this->returnValue($tag));
         $tagManager->expects($this->never())->method('save')->will($this->returnValue($tag));
 
-        $form = $this->getMockBuilder('Symfony\Component\Form\Form')->disableOriginalConstructor()->getMock();
+        $form = $this->createMock(Form::class);
         $form->expects($this->once())->method('handleRequest');
         $form->expects($this->once())->method('isValid')->will($this->returnValue(false));
         $form->expects($this->once())->method('all')->will($this->returnValue([]));
 
-        $formFactory = $this->createMock('Symfony\Component\Form\FormFactoryInterface');
+        $formFactory = $this->createMock(FormFactoryInterface::class);
         $formFactory->expects($this->once())->method('createNamed')->will($this->returnValue($form));
 
         $view = $this->createTagController($tagManager, $formFactory)->putTagAction(1, new Request());
 
-        $this->assertInstanceOf('Symfony\Component\Form\FormInterface', $view);
+        $this->assertInstanceOf(FormInterface::class, $view);
     }
 
     public function testDeleteTagAction(): void
     {
-        $tag = $this->createMock('Sonata\ClassificationBundle\Model\TagInterface');
+        $tag = $this->createMock(TagInterface::class);
 
-        $tagManager = $this->createMock('Sonata\ClassificationBundle\Model\TagManagerInterface');
+        $tagManager = $this->createMock(TagManagerInterface::class);
         $tagManager->expects($this->once())->method('find')->will($this->returnValue($tag));
         $tagManager->expects($this->once())->method('delete');
 
@@ -152,9 +161,9 @@ class TagControllerTest extends TestCase
 
     public function testDeleteTagInvalidAction(): void
     {
-        $this->expectException('Symfony\Component\HttpKernel\Exception\NotFoundHttpException');
+        $this->expectException(NotFoundHttpException::class);
 
-        $tagManager = $this->createMock('Sonata\ClassificationBundle\Model\TagManagerInterface');
+        $tagManager = $this->createMock(TagManagerInterface::class);
         $tagManager->expects($this->once())->method('find')->will($this->returnValue(null));
         $tagManager->expects($this->never())->method('delete');
 
@@ -172,10 +181,10 @@ class TagControllerTest extends TestCase
     protected function createTagController($tagManager = null, $formFactory = null)
     {
         if (null === $tagManager) {
-            $tagManager = $this->createMock('Sonata\ClassificationBundle\Model\TagManagerInterface');
+            $tagManager = $this->createMock(TagManagerInterface::class);
         }
         if (null === $formFactory) {
-            $formFactory = $this->createMock('Symfony\Component\Form\FormFactoryInterface');
+            $formFactory = $this->createMock(FormFactoryInterface::class);
         }
 
         return new TagController($tagManager, $formFactory);

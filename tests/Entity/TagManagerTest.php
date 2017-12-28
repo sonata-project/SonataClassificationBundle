@@ -13,7 +13,9 @@ declare(strict_types=1);
 
 namespace Sonata\ClassificationBundle\Tests\Entity;
 
+use Doctrine\Common\Persistence\ManagerRegistry;
 use PHPUnit\Framework\TestCase;
+use Sonata\ClassificationBundle\Entity\BaseTag;
 use Sonata\ClassificationBundle\Entity\TagManager;
 use Sonata\CoreBundle\Test\EntityManagerMockFactory;
 
@@ -63,9 +65,9 @@ class TagManagerTest extends TestCase
     {
         $em = EntityManagerMockFactory::create($this, $qbCallback, []);
 
-        $registry = $this->getMockForAbstractClass('Doctrine\Common\Persistence\ManagerRegistry');
+        $registry = $this->getMockForAbstractClass(ManagerRegistry::class);
         $registry->expects($this->any())->method('getManagerForClass')->will($this->returnValue($em));
 
-        return new TagManager('Sonata\PageBundle\Entity\BaseTag', $registry);
+        return new TagManager(BaseTag::class, $registry);
     }
 }

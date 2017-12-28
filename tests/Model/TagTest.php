@@ -27,10 +27,10 @@ class TagTest extends TestCase
         $time = new \DateTime();
 
         /** @var ContextInterface $context */
-        $context = $this->createMock('Sonata\ClassificationBundle\Model\ContextInterface');
+        $context = $this->createMock(ContextInterface::class);
 
         /** @var Tag $tag */
-        $tag = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Model\Tag');
+        $tag = $this->getMockForAbstractClass(Tag::class);
         $tag->setName('Hello World');
         $tag->setCreatedAt($time);
         $tag->setUpdatedAt($time);
@@ -60,9 +60,9 @@ class TagTest extends TestCase
     public function testPreUpdate(): void
     {
         /** @var Tag $tag */
-        $tag = $this->getMockForAbstractClass('Sonata\ClassificationBundle\Model\Tag');
+        $tag = $this->getMockForAbstractClass(Tag::class);
         $tag->preUpdate();
 
-        $this->assertInstanceOf('\DateTime', $tag->getUpdatedAt());
+        $this->assertInstanceOf(\DateTime::class, $tag->getUpdatedAt());
     }
 }

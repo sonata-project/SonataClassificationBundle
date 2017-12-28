@@ -15,6 +15,7 @@ namespace Sonata\AdminBundle\Tests\Form\ChoiceList;
 
 use PHPUnit\Framework\TestCase;
 use Sonata\ClassificationBundle\Form\ChoiceList\CategoryChoiceLoader;
+use Symfony\Component\Form\ChoiceList\Loader\ChoiceLoaderInterface;
 
 /**
  * @author Anton Zlotnikov <exp.razor@gmail.com>
@@ -23,7 +24,7 @@ class CategoryChoiceLoaderTest extends TestCase
 {
     protected function setUp(): void
     {
-        if (!interface_exists('Symfony\Component\Form\ChoiceList\Loader\ChoiceLoaderInterface')) {
+        if (!interface_exists(ChoiceLoaderInterface::class)) {
             $this->markTestSkipped('Test only available for >= SF3.0');
         }
     }

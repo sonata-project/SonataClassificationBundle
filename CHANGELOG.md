@@ -2,6 +2,22 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.6.0](https://github.com/sonata-project/SonataClassificationBundle/compare/3.5.0...3.6.0) - 2018-01-07
+### Added
+- Added `NotBlank` constraint to `Context::$id`
+
+### Changed
+- make admin services explicit public
+
+### Fixed
+- Compatibility with SF 3.4, SF 4
+
+### Removed
+- `NotNull` constraint from `Tag::$name`
+- `NotNull` constraint from `Context::$name`
+- `NotNull` constraint from `Category::$name`
+- `NotNull` constraint from `Collection::$name`
+
 ## [3.5.0](https://github.com/sonata-project/SonataClassificationBundle/compare/3.4.0...3.5.0) - 2017-12-08
 ### Changed
 - Rollback to PHP 5.6 as minimum support.

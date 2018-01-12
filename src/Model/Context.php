@@ -124,4 +124,12 @@ abstract class Context implements ContextInterface
     {
         $this->id = $id;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
 }

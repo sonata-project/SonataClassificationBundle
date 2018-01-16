@@ -7,7 +7,7 @@
         <parameter key="sonata.classification.manager.context.class">Sonata\ClassificationBundle\Entity\ContextManager</parameter>
     </parameters>
     <services>
-        <service id="sonata.classification.manager.category" class="%sonata.classification.manager.category.class%">
+        <service id="sonata.classification.manager.category" class="%sonata.classification.manager.category.class%" public="true">
             <argument>%sonata.classification.manager.category.entity%</argument>
             <argument type="service" id="doctrine"/>
             <argument type="service" id="sonata.classification.manager.context"/>

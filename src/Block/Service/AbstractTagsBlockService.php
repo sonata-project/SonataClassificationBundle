@@ -120,7 +120,7 @@ abstract class AbstractTagsBlockService extends AbstractClassificationBlockServi
             'tag' => false,
             'tagId' => null,
             'context' => null,
-            'template' => 'SonataClassificationBundle:Block:base_block_tags.html.twig',
+            'template' => '@SonataClassification/Block/base_block_tags.html.twig',
         ]);
     }
 

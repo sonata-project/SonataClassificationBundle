@@ -17,5 +17,5 @@ You can easily customize it with the ``SonataAdminBundle`` configuration :
                 sonata.classification.admin.category:
                     templates:
                         view:
-                            tree: 'AppBundle:CategoryAdmin:tree.html.twig'
+                            tree: '@App/CategoryAdmin/tree.html.twig'
 

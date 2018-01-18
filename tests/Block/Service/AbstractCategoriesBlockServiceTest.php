@@ -62,7 +62,7 @@ final class AbstractCategoriesBlockServiceTest extends AbstractBlockServiceTestC
             'category' => false,
             'categoryId' => null,
             'context' => 'default',
-            'template' => 'SonataClassificationBundle:Block:base_block_categories.html.twig',
+            'template' => '@SonataClassification/Block/base_block_categories.html.twig',
         ], $blockContext);
     }
 

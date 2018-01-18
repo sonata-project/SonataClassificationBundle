@@ -22,7 +22,7 @@ Here is a sample implementation for a custom category list block:
 
             $resolver->setDefaults(array(
                 'context'    => 'custom',
-                'template'   => 'AcmeCustomBundle:Block:block_categories.html.twig',
+                'template'   => '@AcmeCustom/Block/block_categories.html.twig',
             ));
         }
 
@@ -40,7 +40,7 @@ Here is a sample implementation for a custom category list block:
 
 .. code-block:: twig
 
-    {% extends 'SonataClassificationBundle:Block:base_block_categories.html.twig' %}
+    {% extends '@SonataClassification/Block/base_block_categories.html.twig' %}
 
     {% block link_category %}<a href="{{ path('acme_custom_category', { 'category': item.slug }) }}">{{ item.name }}</a>{% endblock %}
 

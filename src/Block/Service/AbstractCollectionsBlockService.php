@@ -122,7 +122,7 @@ abstract class AbstractCollectionsBlockService extends AbstractClassificationBlo
             'collection' => false,
             'collectionId' => null,
             'context' => null,
-            'template' => 'SonataClassificationBundle:Block:base_block_collections.html.twig',
+            'template' => '@SonataClassification/Block/base_block_collections.html.twig',
         ]);
     }
 

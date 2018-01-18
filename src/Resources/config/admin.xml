@@ -16,8 +16,8 @@
             </call>
             <call method="setTemplates">
                 <argument type="collection">
-                    <argument key="list">SonataClassificationBundle:CategoryAdmin:list.html.twig</argument>
-                    <argument key="tree">SonataClassificationBundle:CategoryAdmin:tree.html.twig</argument>
+                    <argument key="list">@SonataClassification/CategoryAdmin/list.html.twig</argument>
+                    <argument key="tree">@SonataClassification/CategoryAdmin/tree.html.twig</argument>
                 </argument>
             </call>
         </service>

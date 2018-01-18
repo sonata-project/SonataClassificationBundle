@@ -318,7 +318,7 @@ class CategoryAdminControllerTest extends TestCase
 
         $this->admin->expects($this->any())
             ->method('getTemplate')
-            ->will($this->returnValue('SonataClassificationBundle:CategoryAdmin:list.html.twig'));
+            ->will($this->returnValue('@SonataClassification/CategoryAdmin/list.html.twig'));
 
         $this->controller = new CategoryAdminController();
         $this->controller->setContainer($this->container);

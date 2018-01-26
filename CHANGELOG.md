@@ -2,6 +2,11 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.6.1](https://github.com/sonata-project/SonataClassificationBundle/compare/3.6.0...3.6.1) - 2018-01-26
+### Fixed
+- Slugify ^3.0 support
+- Make `sonata.classification.manager.category` public
+
 ## [3.6.0](https://github.com/sonata-project/SonataClassificationBundle/compare/3.5.0...3.6.0) - 2018-01-07
 ### Added
 - Added `NotBlank` constraint to `Context::$id`

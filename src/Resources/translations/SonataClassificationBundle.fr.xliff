@@ -214,6 +214,18 @@
                 <source>breadcrumb.link_context_create</source>
                 <target>Ajouter</target>
             </trans-unit>
+            <trans-unit id="form.label_translation_domain">
+                <source>form.label_translation_domain</source>
+                <target>Domaine de traduction</target>
+            </trans-unit>
+            <trans-unit id="form.label_icon">
+                <source>form.label_icon</source>
+                <target>Icône</target>
+            </trans-unit>
+            <trans-unit id="form.label_class">
+                <source>form.label_class</source>
+                <target>Classe CSS</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

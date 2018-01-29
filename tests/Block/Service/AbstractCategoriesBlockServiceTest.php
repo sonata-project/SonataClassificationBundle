@@ -58,7 +58,10 @@ final class AbstractCategoriesBlockServiceTest extends AbstractBlockServiceTestC
         $blockContext = $this->getBlockContext($blockService);
 
         $this->assertSettings([
-            'title' => 'Categories',
+            'title' => null,
+            'translation_domain' => null,
+            'icon' => 'fa fa-folder-open-o',
+            'class' => null,
             'category' => false,
             'categoryId' => null,
             'context' => 'default',

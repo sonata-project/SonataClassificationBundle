@@ -95,7 +95,19 @@ abstract class AbstractTagsBlockService extends AbstractClassificationBlockServi
         $formMapper->add('settings', ImmutableArrayType::class, [
                 'keys' => [
                     ['title', TextType::class, [
+                        'required' => false,
                         'label' => 'form.label_title',
+                    ]],
+                    ['translation_domain', TextType::class, [
+                        'label' => 'form.label_translation_domain',
+                        'required' => false,
+                    ]],
+                    ['icon', TextType::class, [
+                        'label' => 'form.label_icon',
+                        'required' => false,
+                    ]],
+                    ['class', TextType::class, [
+                        'label' => 'form.label_class',
                         'required' => false,
                     ]],
                     ['context', ChoiceType::class, [
@@ -116,7 +128,10 @@ abstract class AbstractTagsBlockService extends AbstractClassificationBlockServi
     public function configureSettings(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'title' => 'Tags',
+            'title' => null,
+            'translation_domain' => null,
+            'icon' => 'fa fa-tags',
+            'class' => null,
             'tag' => false,
             'tagId' => null,
             'context' => null,

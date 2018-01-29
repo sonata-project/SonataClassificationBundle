@@ -94,7 +94,19 @@ abstract class AbstractCategoriesBlockService extends AbstractClassificationBloc
         $formMapper->add(ImmutableArrayType::class, [
                 'keys' => [
                     ['title', TextType::class, [
+                        'required' => false,
                         'label' => 'form.label_title',
+                    ]],
+                    ['translation_domain', TextType::class, [
+                        'label' => 'form.label_translation_domain',
+                        'required' => false,
+                    ]],
+                    ['icon', TextType::class, [
+                        'label' => 'form.label_icon',
+                        'required' => false,
+                    ]],
+                    ['class', TextType::class, [
+                        'label' => 'form.label_class',
                         'required' => false,
                     ]],
                     ['context', ChoiceType::class, [
@@ -115,7 +127,10 @@ abstract class AbstractCategoriesBlockService extends AbstractClassificationBloc
     public function configureSettings(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'title' => 'Categories',
+            'title' => null,
+            'translation_domain' => null,
+            'icon' => 'fa fa-folder-open-o',
+            'class' => null,
             'category' => false,
             'categoryId' => null,
             'context' => 'default',

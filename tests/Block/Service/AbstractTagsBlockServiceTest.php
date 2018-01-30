@@ -60,11 +60,14 @@ final class AbstractTagsBlockServiceTest extends AbstractBlockServiceTestCase
         $blockContext = $this->getBlockContext($blockService);
 
         $this->assertSettings([
-            'title' => 'Tags',
+            'title' => null,
+            'translation_domain' => null,
+            'icon' => 'fa fa-tags',
+            'class' => null,
             'tag' => false,
             'tagId' => null,
             'context' => null,
-            'template' => 'SonataClassificationBundle:Block:base_block_tags.html.twig',
+            'template' => '@SonataClassification/Block/base_block_tags.html.twig',
         ], $blockContext);
     }
 

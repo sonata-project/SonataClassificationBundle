@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sonata\ClassificationBundle\Model;
 
+use Doctrine\Common\Collections\Collection as DoctrineCollection;
 use Sonata\MediaBundle\Model\MediaInterface;
 
 interface CategoryInterface
@@ -99,7 +100,7 @@ interface CategoryInterface
     /**
      * Get Children.
      *
-     * @return Collection $children
+     * @return DoctrineCollection|CategoryInterface[] $children
      */
     public function getChildren();
 

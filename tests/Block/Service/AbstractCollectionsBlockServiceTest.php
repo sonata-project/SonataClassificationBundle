@@ -60,11 +60,14 @@ final class AbstractCollectionsBlockServiceTest extends AbstractBlockServiceTest
         $blockContext = $this->getBlockContext($blockService);
 
         $this->assertSettings([
-            'title' => 'Collections',
+            'title' => null,
+            'translation_domain' => null,
+            'icon' => 'fa fa-inpanel',
+            'class' => null,
             'collection' => false,
             'collectionId' => null,
             'context' => null,
-            'template' => 'SonataClassificationBundle:Block:base_block_collections.html.twig',
+            'template' => '@SonataClassification/Block/base_block_collections.html.twig',
         ], $blockContext);
     }
 

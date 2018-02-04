@@ -17,6 +17,8 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Form\Type\ModelListType;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\ClassificationBundle\Form\Type\CategorySelectorType;
+use Sonata\ClassificationBundle\Model\CategoryManagerInterface;
+use Sonata\ClassificationBundle\Model\ContextManagerInterface;
 use Sonata\MediaBundle\Model\MediaInterface;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
@@ -29,6 +31,20 @@ class CategoryAdmin extends ContextAwareAdmin
     protected $formOptions = [
         'cascade_validation' => true,
     ];
+
+    protected $categoryManager;
+
+    public function __construct(
+        $code,
+        $class,
+        $baseControllerName,
+        ContextManagerInterface $contextManager,
+        CategoryManagerInterface $categoryManager = null
+    ) {
+        parent::__construct($code, $class, $baseControllerName, $contextManager);
+
+        $this->categoryManager = $categoryManager;
+    }
 
     /**
      * {@inheritdoc}
@@ -63,6 +79,13 @@ EOT
      */
     protected function configureFormFields(FormMapper $formMapper)
     {
+        // NEXT_MAJOR: remove this and make the category manager constructor argument mandatory
+        if (null === $this->categoryManager) {
+            $this->categoryManager = $this->getConfigurationPool()
+                ->getContainer()
+                ->get('sonata.classification.manager.category');
+        }
+
         $formMapper
             ->with('General', ['class' => 'col-md-6'])
                 ->add('name')
@@ -72,7 +95,9 @@ EOT
         ;
 
         if ($this->hasSubject()) {
-            if (null !== $this->getSubject()->getParent() || null === $this->getSubject()->getId()) { // root category cannot have a parent
+            // Show the selector if category has a parent or it's new (but not the first root category for the context)
+            if (null !== $this->getSubject()->getParent() || (null === $this->getSubject()->getId())
+                && count($this->categoryManager->getRootCategoriesSplitByContexts($this->getSubject()->getContext()))) {
                 $formMapper
                     ->add('parent', CategorySelectorType::class, [
                         'category' => $this->getSubject() ?: null,

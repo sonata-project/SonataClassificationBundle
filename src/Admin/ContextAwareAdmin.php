@@ -76,7 +76,7 @@ abstract class ContextAwareAdmin extends AbstractAdmin
         );
 
         if ($this->getSubject()) {
-            $parameters['context'] = $this->getSubject()->getContext() ? $this->getSubject()->getContext()->getId() : '';
+            $parameters['context'] = $this->getSubject()->getContext()->getId();
 
             return $parameters;
         }

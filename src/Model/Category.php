@@ -227,10 +227,7 @@ abstract class Category implements CategoryInterface
     {
         $this->children[] = $child;
 
-        if ($this->getContext()) {
-            $child->setContext($this->getContext());
-        }
-
+        $child->setContext($this->getContext());
         if (!$nested) {
             $child->setParent($this, true);
         }

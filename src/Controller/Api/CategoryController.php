@@ -16,7 +16,6 @@ use FOS\RestBundle\Controller\Annotations\QueryParam;
 use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Request\ParamFetcherInterface;
 use FOS\RestBundle\View\View as FOSRestView;
-use JMS\Serializer\SerializationContext;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Sonata\ClassificationBundle\Model\CategoryInterface;
 use Sonata\ClassificationBundle\Model\CategoryManagerInterface;
@@ -254,18 +253,11 @@ class CategoryController
             $category = $form->getData();
             $this->categoryManager->save($category);
 
-            $view = FOSRestView::create($category);
+            $context = new Context();
+            $context->setGroups(['sonata_api_read']);
 
-            if (class_exists(Context::class)) {
-                $context = new Context();
-                $context->setGroups(['sonata_api_read']);
-                $view->setContext($context);
-            } else {
-                $serializationContext = SerializationContext::create();
-                $serializationContext->setGroups(['sonata_api_read']);
-                $serializationContext->enableMaxDepthChecks();
-                $view->setSerializationContext($serializationContext);
-            }
+            $view = FOSRestView::create($category);
+            $view->setContext($context);
 
             return $view;
         }

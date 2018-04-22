@@ -17,6 +17,7 @@ use PHPUnit\Framework\TestCase;
 use Sonata\AdminBundle\Admin\AdminInterface;
 use Sonata\AdminBundle\Admin\Pool;
 use Sonata\AdminBundle\Datagrid\DatagridInterface;
+use Sonata\AdminBundle\Templating\TemplateRegistry;
 use Sonata\ClassificationBundle\Admin\CategoryAdmin;
 use Sonata\ClassificationBundle\Controller\CategoryAdminController;
 use Sonata\ClassificationBundle\Entity\CategoryManager;
@@ -118,7 +119,6 @@ class CategoryAdminControllerTest extends TestCase
         $this->request->attributes->set('_sonata_admin', 'foo.admin');
         $this->parameters = [];
         $this->template = '';
-
         // php 5.3 BC
         $params = &$this->parameters;
         $template = &$this->template;
@@ -238,6 +238,11 @@ class CategoryAdminControllerTest extends TestCase
         $csrfProvider = $this->csrfProvider;
 
         $this->admin = $this->createMock(CategoryAdmin::class);
+
+        $this->admin->expects($this->any())
+            ->method('getCode')
+            ->will($this->returnValue('admin_code'));
+
         $admin = $this->admin;
 
         $this->categoryManager = $this->createMock(CategoryManager::class);
@@ -279,6 +284,8 @@ class CategoryAdminControllerTest extends TestCase
                         return $categoryManager;
                     case 'sonata.classification.manager.context':
                         return $contextManager;
+                    case 'admin_code.template_registry':
+                        return new TemplateRegistry();
                 }
             }));
 

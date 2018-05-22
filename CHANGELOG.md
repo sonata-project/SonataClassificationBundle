@@ -2,6 +2,19 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.7.0](https://github.com/sonata-project/SonataClassificationBundle/compare/3.6.1...3.7.0) - 2018-05-22
+### Added
+- make block icon configurable
+- added block title translation domain
+
+### Fixed
+- Commands not working on symfony4
+
+### Removed
+- Default title from blocks
+- Compatibility with older versions of FOSRestBundle (<2.1)
+- Compatibility with Cocur slugify `^1.0`
+
 ## [3.6.1](https://github.com/sonata-project/SonataClassificationBundle/compare/3.6.0...3.6.1) - 2018-01-26
 ### Fixed
 - Slugify ^3.0 support

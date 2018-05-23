@@ -59,7 +59,7 @@ class CategoryAdminController extends Controller
         // set the theme for the current Admin Form
         $this->setFormTheme($formView, $this->admin->getFilterTheme());
 
-        return $this->render($this->admin->getTemplate('list'), [
+        return $this->renderWithExtraParams($this->admin->getTemplate('list'), [
             'action' => 'list',
             'form' => $formView,
             'datagrid' => $datagrid,
@@ -115,7 +115,7 @@ class CategoryAdminController extends Controller
 
         $this->setFormTheme($formView, $this->admin->getFilterTheme());
 
-        return $this->render($this->admin->getTemplate('tree'), [
+        return $this->renderWithExtraParams($this->admin->getTemplate('tree'), [
             'action' => 'tree',
             'current_categories' => $currentCategories,
             'root_categories' => $rootCategoriesSplitByContexts,

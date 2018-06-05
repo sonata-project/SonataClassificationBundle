@@ -18,6 +18,8 @@ use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
 class TagAdmin extends ContextAwareAdmin
 {
+    protected $classnameLabel = 'Tag';
+
     /**
      * {@inheritdoc}
      */

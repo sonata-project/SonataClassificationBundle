@@ -22,6 +22,8 @@ use Symfony\Component\Validator\Constraints\Valid;
 
 class CollectionAdmin extends ContextAwareAdmin
 {
+    protected $classnameLabel = 'Collection';
+
     // NEXT_MAJOR: remove this override
     protected $formOptions = [
         'cascade_validation' => true,

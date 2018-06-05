@@ -25,6 +25,8 @@ use Symfony\Component\Validator\Constraints\Valid;
 
 class CategoryAdmin extends ContextAwareAdmin
 {
+    protected $classnameLabel = 'Category';
+
     // NEXT_MAJOR: remove this override
     protected $formOptions = [
         'cascade_validation' => true,

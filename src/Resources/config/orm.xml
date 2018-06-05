@@ -12,15 +12,15 @@
             <argument type="service" id="doctrine"/>
             <argument type="service" id="sonata.classification.manager.context"/>
         </service>
-        <service id="sonata.classification.manager.tag" class="%sonata.classification.manager.tag.class%">
+        <service id="sonata.classification.manager.tag" class="%sonata.classification.manager.tag.class%" public="true">
             <argument>%sonata.classification.manager.tag.entity%</argument>
             <argument type="service" id="doctrine"/>
         </service>
-        <service id="sonata.classification.manager.collection" class="%sonata.classification.manager.collection.class%">
+        <service id="sonata.classification.manager.collection" class="%sonata.classification.manager.collection.class%" public="true">
             <argument>%sonata.classification.manager.collection.entity%</argument>
             <argument type="service" id="doctrine"/>
         </service>
-        <service id="sonata.classification.manager.context" class="%sonata.classification.manager.context.class%">
+        <service id="sonata.classification.manager.context" class="%sonata.classification.manager.context.class%" public="true">
             <argument>%sonata.classification.manager.context.entity%</argument>
             <argument type="service" id="doctrine"/>
         </service>

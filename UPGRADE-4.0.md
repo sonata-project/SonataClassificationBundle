@@ -26,3 +26,7 @@ If you have implemented a custom model, you must adapt the signature of the foll
  * `getRootCategoriesForContext`
  * `getAllRootCategories`
  * `getRootCategoriesSplitByContexts`
+
+## Doctrine schema update
+Disallowed null value on foreign keys for associations with Context for
+Category, Tag and Collection entities.

@@ -21,6 +21,8 @@ use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
 class ContextAdmin extends AbstractAdmin
 {
+    protected $classnameLabel = 'Context';
+
     /**
      * {@inheritdoc}
      */

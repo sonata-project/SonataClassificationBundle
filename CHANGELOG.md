@@ -2,6 +2,14 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.7.1](https://github.com/sonata-project/SonataClassificationBundle/compare/3.7.0...3.7.1) - 2018-06-18
+### Changed
+- Stop using the deprecated method `Sonata\AdminBundle\Controller\CRUDController::render` and use the new `renderWithExtraParams`
+- Force use translation strings for classification entities
+
+### Fixed
+- Make entity managers services public
+
 ## [3.7.0](https://github.com/sonata-project/SonataClassificationBundle/compare/3.6.1...3.7.0) - 2018-05-22
 ### Added
 - make block icon configurable

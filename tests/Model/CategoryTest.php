@@ -67,8 +67,12 @@ class CategoryTest extends TestCase
 
     public function testParent()
     {
+        /** @var ContextInterface $context */
+        $context = $this->createMock(ContextInterface::class);
+
         /** @var Category $parent */
         $parent = $this->getMockForAbstractClass(Category::class);
+        $parent->setContext($context);
 
         /** @var Category $category */
         $category = $this->getMockForAbstractClass(Category::class);

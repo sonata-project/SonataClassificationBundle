@@ -60,7 +60,7 @@ interface CollectionInterface
     /**
      * Get slug.
      *
-     * @return int $slug
+     * @return string $slug
      */
     public function getSlug();
 

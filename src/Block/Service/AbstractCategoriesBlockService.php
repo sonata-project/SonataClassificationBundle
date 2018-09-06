@@ -206,7 +206,7 @@ abstract class AbstractCategoriesBlockService extends AbstractClassificationBloc
     {
         $block->setSetting(
             'categoryId',
-            is_object($block->getSetting('categoryId')) ? $block->getSetting('categoryId')->getId() : null
+            \is_object($block->getSetting('categoryId')) ? $block->getSetting('categoryId')->getId() : null
         );
     }
 }

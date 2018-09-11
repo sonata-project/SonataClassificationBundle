@@ -211,7 +211,7 @@ abstract class AbstractCollectionsBlockService extends AbstractClassificationBlo
     {
         $block->setSetting(
             'collectionId',
-            is_object($block->getSetting('collectionId')) ? $block->getSetting('collectionId')->getId() : null
+            \is_object($block->getSetting('collectionId')) ? $block->getSetting('collectionId')->getId() : null
         );
     }
 }

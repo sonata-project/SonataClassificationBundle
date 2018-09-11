@@ -283,7 +283,7 @@ abstract class Category implements CategoryInterface
      */
     public function hasChildren()
     {
-        return count($this->children) > 0;
+        return \count($this->children) > 0;
     }
 
     /**

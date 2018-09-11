@@ -209,7 +209,7 @@ abstract class AbstractTagsBlockService extends AbstractClassificationBlockServi
     {
         $block->setSetting(
             'tagId',
-            is_object($block->getSetting('tagId')) ? $block->getSetting('tagId')->getId() : null
+            \is_object($block->getSetting('tagId')) ? $block->getSetting('tagId')->getId() : null
         );
     }
 }

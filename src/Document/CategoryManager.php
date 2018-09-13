@@ -208,7 +208,7 @@ class CategoryManager extends BaseDocumentManager implements CategoryManagerInte
             ->setParameter('context', $context->getId())
             ->execute();
 
-        if (0 == count($categories)) {
+        if (0 == \count($categories)) {
             // no category, create one for the provided context
             $category = $this->create();
             $category->setName($context->getName());

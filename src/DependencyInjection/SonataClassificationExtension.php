@@ -162,6 +162,7 @@ class SonataClassificationExtension extends Extension
                 [
                     'name' => 'context',
                     'referencedColumnName' => 'id',
+                    'nullable' => false,
                 ],
             ],
             'orphanRemoval' => false,
@@ -179,6 +180,7 @@ class SonataClassificationExtension extends Extension
                 [
                     'name' => 'context',
                     'referencedColumnName' => 'id',
+                    'nullable' => false,
                 ],
             ],
             'orphanRemoval' => false,
@@ -198,6 +200,7 @@ class SonataClassificationExtension extends Extension
                 [
                     'name' => 'context',
                     'referencedColumnName' => 'id',
+                    'nullable' => false,
                 ],
             ],
             'orphanRemoval' => false,

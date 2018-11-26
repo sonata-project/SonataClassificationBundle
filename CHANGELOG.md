@@ -2,6 +2,76 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.7.1](https://github.com/sonata-project/SonataClassificationBundle/compare/3.7.0...3.7.1) - 2018-06-18
+### Changed
+- Stop using the deprecated method `Sonata\AdminBundle\Controller\CRUDController::render` and use the new `renderWithExtraParams`
+- Force use translation strings for classification entities
+
+### Fixed
+- Make entity managers services public
+
+## [3.7.0](https://github.com/sonata-project/SonataClassificationBundle/compare/3.6.1...3.7.0) - 2018-05-22
+### Added
+- make block icon configurable
+- added block title translation domain
+
+### Fixed
+- Commands not working on symfony4
+
+### Removed
+- Default title from blocks
+- Compatibility with older versions of FOSRestBundle (<2.1)
+- Compatibility with Cocur slugify `^1.0`
+
+## [3.6.1](https://github.com/sonata-project/SonataClassificationBundle/compare/3.6.0...3.6.1) - 2018-01-26
+### Fixed
+- Slugify ^3.0 support
+- Make `sonata.classification.manager.category` public
+
+## [3.6.0](https://github.com/sonata-project/SonataClassificationBundle/compare/3.5.0...3.6.0) - 2018-01-07
+### Added
+- Added `NotBlank` constraint to `Context::$id`
+
+### Changed
+- make admin services explicit public
+
+### Fixed
+- Compatibility with SF 3.4, SF 4
+
+### Removed
+- `NotNull` constraint from `Tag::$name`
+- `NotNull` constraint from `Context::$name`
+- `NotNull` constraint from `Category::$name`
+- `NotNull` constraint from `Collection::$name`
+
+## [3.5.0](https://github.com/sonata-project/SonataClassificationBundle/compare/3.4.0...3.5.0) - 2017-12-08
+### Changed
+- Rollback to PHP 5.6 as minimum support.
+
+### Fixed
+- It is now allowed to install Symfony 4
+
+## [3.4.0](https://github.com/sonata-project/SonataClassificationBundle/compare/3.3.2...3.4.0) - 2017-10-22
+### Removed
+- Removed usage of old form type aliases
+- Support for old versions of php and Symfony
+
+## [3.3.2](https://github.com/sonata-project/SonataClassificationBundle/compare/3.3.1...3.3.2) - 2017-10-22
+### Added
+- context fields validation in tag/collection create forms, which prevents creating objects with empty context from UI
+
+### Changed
+- Changed string type declaration of form fields to the fully-qualified type class name.
+
+### Fixed
+- Missing brazilian translations
+
+## [3.3.1](https://github.com/sonata-project/SonataClassificationBundle/compare/3.3.0...3.3.1) - 2017-06-16
+### Fixed
+- use `same as` instead of deprecated `sameas` in twig template
+- Fixed hardcoded paths to classes in `.xml.skeleton` files of config
+- Added route check to tree view `Resources/views/CategoryAdmin/tree.html.twig`. If there aren't edit AND show routes, render element name only.
+
 ## [3.3.0](https://github.com/sonata-project/SonataClassificationBundle/compare/3.2.1...3.3.0) - 2017-03-16
 ### Added
 - Menu icon (fa-tags).

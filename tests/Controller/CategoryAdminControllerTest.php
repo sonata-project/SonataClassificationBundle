@@ -24,7 +24,7 @@ use Sonata\ClassificationBundle\Entity\CategoryManager;
 use Sonata\ClassificationBundle\Entity\ContextManager;
 use Sonata\ClassificationBundle\Model\Category;
 use Sonata\ClassificationBundle\Model\CategoryManagerInterface;
-use Sonata\ClassificationBundle\Model\Context;
+use Sonata\ClassificationBundle\Model\ContextInterface;
 use Sonata\ClassificationBundle\Model\ContextManagerInterface;
 use Symfony\Bridge\Twig\AppVariable;
 use Symfony\Bridge\Twig\Command\DebugCommand;
@@ -478,7 +478,7 @@ class CategoryAdminControllerTest extends TestCase
 
     private function getContextMock($id)
     {
-        $contextMock = $this->getMockForAbstractClass(Context::class);
+        $contextMock = $this->createMock(ContextInterface::class);
         $contextMock->expects($this->any())->method('getId')->will($this->returnValue($id));
         $contextMock->setName($id);
         $contextMock->setEnabled(true);

@@ -11,8 +11,8 @@
 
 namespace Sonata\ClassificationBundle\Model;
 
-use Sonata\CoreBundle\Model\ManagerInterface;
-use Sonata\CoreBundle\Model\PageableManagerInterface;
+use Sonata\Doctrine\Model\ManagerInterface;
+use Sonata\Doctrine\Model\PageableManagerInterface;
 
 interface ContextManagerInterface extends ManagerInterface, PageableManagerInterface
 {

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -79,7 +81,7 @@ abstract class AbstractTagsBlockService extends AbstractClassificationBlockServi
     /**
      * {@inheritdoc}
      */
-    public function buildEditForm(FormMapper $formMapper, BlockInterface $block)
+    public function buildEditForm(FormMapper $formMapper, BlockInterface $block): void
     {
         $adminField = $this->getFormAdminType($formMapper, $this->tagAdmin, 'tagId', 'tag', [
             'label' => 'form.label_tag',
@@ -125,7 +127,7 @@ abstract class AbstractTagsBlockService extends AbstractClassificationBlockServi
     /**
      * {@inheritdoc}
      */
-    public function configureSettings(OptionsResolver $resolver)
+    public function configureSettings(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'title' => null,
@@ -142,7 +144,7 @@ abstract class AbstractTagsBlockService extends AbstractClassificationBlockServi
     /**
      * {@inheritdoc}
      */
-    public function load(BlockInterface $block)
+    public function load(BlockInterface $block): void
     {
         if (is_numeric($block->getSetting('tagId'))) {
             $block->setSetting('tagId', $this->getTag($block->getSetting('tagId')));
@@ -152,7 +154,7 @@ abstract class AbstractTagsBlockService extends AbstractClassificationBlockServi
     /**
      * {@inheritdoc}
      */
-    public function prePersist(BlockInterface $block)
+    public function prePersist(BlockInterface $block): void
     {
         $this->resolveIds($block);
     }
@@ -160,7 +162,7 @@ abstract class AbstractTagsBlockService extends AbstractClassificationBlockServi
     /**
      * {@inheritdoc}
      */
-    public function preUpdate(BlockInterface $block)
+    public function preUpdate(BlockInterface $block): void
     {
         $this->resolveIds($block);
     }
@@ -203,7 +205,7 @@ abstract class AbstractTagsBlockService extends AbstractClassificationBlockServi
     /**
      * @param BlockInterface $block
      */
-    private function resolveIds(BlockInterface $block)
+    private function resolveIds(BlockInterface $block): void
     {
         $block->setSetting(
             'tagId',

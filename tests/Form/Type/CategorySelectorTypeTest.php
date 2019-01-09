@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -22,7 +24,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class CategorySelectorTypeTest extends TestCase
 {
-    public function testConfigureOptions()
+    public function testConfigureOptions(): void
     {
         $manager = $this->createMock(ManagerInterface::class);
         $categorySelectorType = new CategorySelectorType($manager);

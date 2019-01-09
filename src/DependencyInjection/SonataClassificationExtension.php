@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -32,7 +34,7 @@ class SonataClassificationExtension extends Extension
      *
      * @throws \InvalidArgumentException
      */
-    public function load(array $configs, ContainerBuilder $container)
+    public function load(array $configs, ContainerBuilder $container): void
     {
         $processor = new Processor();
         $configuration = new Configuration();
@@ -63,7 +65,7 @@ class SonataClassificationExtension extends Extension
      * @param array            $config
      * @param ContainerBuilder $container
      */
-    public function configureClass($config, ContainerBuilder $container)
+    public function configureClass($config, ContainerBuilder $container): void
     {
         // admin configuration
         $container->setParameter('sonata.classification.admin.tag.entity', $config['class']['tag']);
@@ -82,7 +84,7 @@ class SonataClassificationExtension extends Extension
      * @param array            $config
      * @param ContainerBuilder $container
      */
-    public function configureAdmin($config, ContainerBuilder $container)
+    public function configureAdmin($config, ContainerBuilder $container): void
     {
         $container->setParameter('sonata.classification.admin.category.class', $config['admin']['category']['class']);
         $container->setParameter('sonata.classification.admin.category.controller', $config['admin']['category']['controller']);
@@ -104,7 +106,7 @@ class SonataClassificationExtension extends Extension
     /**
      * @param array $config
      */
-    public function registerDoctrineMapping(array $config)
+    public function registerDoctrineMapping(array $config): void
     {
         foreach ($config['class'] as $type => $class) {
             if ('media' !== $type && !class_exists($class)) {

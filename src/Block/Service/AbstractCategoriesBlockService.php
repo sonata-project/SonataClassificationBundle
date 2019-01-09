@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -76,7 +78,7 @@ abstract class AbstractCategoriesBlockService extends AbstractClassificationBloc
     /**
      * {@inheritdoc}
      */
-    public function buildEditForm(FormMapper $formMapper, BlockInterface $block)
+    public function buildEditForm(FormMapper $formMapper, BlockInterface $block): void
     {
         $adminField = $this->getFormAdminType($formMapper, $this->categoryAdmin, 'categoryId', 'category', [
             'label' => 'form.label_category',
@@ -124,7 +126,7 @@ abstract class AbstractCategoriesBlockService extends AbstractClassificationBloc
     /**
      * {@inheritdoc}
      */
-    public function configureSettings(OptionsResolver $resolver)
+    public function configureSettings(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'title' => null,
@@ -141,7 +143,7 @@ abstract class AbstractCategoriesBlockService extends AbstractClassificationBloc
     /**
      * {@inheritdoc}
      */
-    public function load(BlockInterface $block)
+    public function load(BlockInterface $block): void
     {
         if (is_numeric($block->getSetting('categoryId'))) {
             $block->setSetting('categoryId', $this->getCategory($block->getSetting('categoryId')));
@@ -151,7 +153,7 @@ abstract class AbstractCategoriesBlockService extends AbstractClassificationBloc
     /**
      * {@inheritdoc}
      */
-    public function prePersist(BlockInterface $block)
+    public function prePersist(BlockInterface $block): void
     {
         $this->resolveIds($block);
     }
@@ -159,7 +161,7 @@ abstract class AbstractCategoriesBlockService extends AbstractClassificationBloc
     /**
      * {@inheritdoc}
      */
-    public function preUpdate(BlockInterface $block)
+    public function preUpdate(BlockInterface $block): void
     {
         $this->resolveIds($block);
     }
@@ -202,7 +204,7 @@ abstract class AbstractCategoriesBlockService extends AbstractClassificationBloc
     /**
      * @param BlockInterface $block
      */
-    private function resolveIds(BlockInterface $block)
+    private function resolveIds(BlockInterface $block): void
     {
         $block->setSetting(
             'categoryId',

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -21,7 +23,7 @@ use Sonata\MediaBundle\Model\MediaInterface;
  */
 class CollectionTest extends TestCase
 {
-    public function testSetterGetter()
+    public function testSetterGetter(): void
     {
         $time = new \DateTime();
 
@@ -63,7 +65,7 @@ class CollectionTest extends TestCase
         $this->assertEquals('custom-slug', $collection->getSlug());
     }
 
-    public function testPrePersist()
+    public function testPrePersist(): void
     {
         /** @var Collection $collection */
         $collection = $this->getMockForAbstractClass(Collection::class);
@@ -73,7 +75,7 @@ class CollectionTest extends TestCase
         $this->assertInstanceOf(\DateTime::class, $collection->getUpdatedAt());
     }
 
-    public function testPreUpdate()
+    public function testPreUpdate(): void
     {
         /** @var Collection $collection */
         $collection = $this->getMockForAbstractClass(Collection::class);

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -17,7 +19,7 @@ abstract class CategoryTest extends BaseCategory
 {
     private $id;
 
-    public function setId($id)
+    public function setId($id): void
     {
         $this->id = $id;
     }

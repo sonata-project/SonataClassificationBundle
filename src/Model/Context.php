@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -49,7 +51,7 @@ abstract class Context implements ContextInterface
     /**
      * {@inheritdoc}
      */
-    public function setName($name)
+    public function setName($name): void
     {
         $this->name = $name;
     }
@@ -65,7 +67,7 @@ abstract class Context implements ContextInterface
     /**
      * {@inheritdoc}
      */
-    public function setEnabled($enabled)
+    public function setEnabled($enabled): void
     {
         $this->enabled = $enabled;
     }
@@ -81,7 +83,7 @@ abstract class Context implements ContextInterface
     /**
      * {@inheritdoc}
      */
-    public function setCreatedAt(\DateTime $createdAt = null)
+    public function setCreatedAt(\DateTime $createdAt = null): void
     {
         $this->createdAt = $createdAt;
     }
@@ -97,7 +99,7 @@ abstract class Context implements ContextInterface
     /**
      * {@inheritdoc}
      */
-    public function setUpdatedAt(\DateTime $updatedAt = null)
+    public function setUpdatedAt(\DateTime $updatedAt = null): void
     {
         $this->updatedAt = $updatedAt;
     }
@@ -110,7 +112,7 @@ abstract class Context implements ContextInterface
         return $this->updatedAt;
     }
 
-    public function preUpdate()
+    public function preUpdate(): void
     {
         $this->setUpdatedAt(new \DateTime());
     }
@@ -118,7 +120,7 @@ abstract class Context implements ContextInterface
     /**
      * {@inheritdoc}
      */
-    public function setId($id)
+    public function setId($id): void
     {
         $this->id = $id;
     }

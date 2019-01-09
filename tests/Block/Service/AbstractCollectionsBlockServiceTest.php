@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -40,7 +42,7 @@ final class AbstractCollectionsBlockServiceTest extends AbstractBlockServiceTest
      */
     private $collectionAdmin;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -50,7 +52,7 @@ final class AbstractCollectionsBlockServiceTest extends AbstractBlockServiceTest
         $this->collectionAdmin = $this->createMock(CollectionAdmin::class);
     }
 
-    public function testDefaultSettings()
+    public function testDefaultSettings(): void
     {
         $blockService = $this->getMockForAbstractClass(AbstractCollectionsBlockService::class, [
             'block.service', $this->templating, $this->contextManager, $this->collectionManager, $this->collectionAdmin,
@@ -69,7 +71,7 @@ final class AbstractCollectionsBlockServiceTest extends AbstractBlockServiceTest
         ], $blockContext);
     }
 
-    public function testLoad()
+    public function testLoad(): void
     {
         $collection = $this->getMockBuilder(CollectionInterface::class)
             ->setMethods(['getId'])
@@ -97,7 +99,7 @@ final class AbstractCollectionsBlockServiceTest extends AbstractBlockServiceTest
         $blockService->load($block);
     }
 
-    public function testPrePersist()
+    public function testPrePersist(): void
     {
         $collection = $this->getMockBuilder(CollectionInterface::class)
             ->setMethods(['getId'])
@@ -120,7 +122,7 @@ final class AbstractCollectionsBlockServiceTest extends AbstractBlockServiceTest
         $blockService->prePersist($block);
     }
 
-    public function testPreUpdate()
+    public function testPreUpdate(): void
     {
         $collection = $this->getMockBuilder(CollectionInterface::class)
             ->setMethods(['getId'])

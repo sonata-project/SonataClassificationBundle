@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -21,11 +23,11 @@ use Sonata\CoreBundle\Test\EntityManagerMockFactory;
 
 class CategoryManagerTest extends TestCase
 {
-    public function testGetPager()
+    public function testGetPager(): void
     {
         $self = $this;
         $this
-            ->getCategoryManager(function ($qb) use ($self) {
+            ->getCategoryManager(function ($qb) use ($self): void {
                 $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue([]));
                 $qb->expects($self->exactly(1))->method('andWhere')->withConsecutive(
                     [$self->equalTo('c.context = :context')]
@@ -35,11 +37,11 @@ class CategoryManagerTest extends TestCase
             ->getPager(['context' => 'default'], 1);
     }
 
-    public function testGetPagerWithEnabledCategories()
+    public function testGetPagerWithEnabledCategories(): void
     {
         $self = $this;
         $this
-            ->getCategoryManager(function ($qb) use ($self) {
+            ->getCategoryManager(function ($qb) use ($self): void {
                 $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue([]));
                 $qb->expects($self->exactly(2))->method('andWhere')->withConsecutive(
                     [$self->equalTo('c.context = :context')],
@@ -53,11 +55,11 @@ class CategoryManagerTest extends TestCase
             ], 1);
     }
 
-    public function testGetPagerWithDisabledCategories()
+    public function testGetPagerWithDisabledCategories(): void
     {
         $self = $this;
         $this
-            ->getCategoryManager(function ($qb) use ($self) {
+            ->getCategoryManager(function ($qb) use ($self): void {
                 $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue([]));
                 $qb->expects($self->exactly(2))->method('andWhere')->withConsecutive(
                     [$self->equalTo('c.context = :context')],
@@ -71,7 +73,7 @@ class CategoryManagerTest extends TestCase
             ], 1);
     }
 
-    public function testGetCategoriesWithMultipleRootsInContext()
+    public function testGetCategoriesWithMultipleRootsInContext(): void
     {
         /** @var ContextTest $context */
         $context = $this->getMockForAbstractClass(ContextTest::class);
@@ -97,13 +99,13 @@ class CategoryManagerTest extends TestCase
 
         $categories = [$categoryFoo, $categoryBar];
 
-        $categoryManager = $this->getCategoryManager(function ($qb) {
+        $categoryManager = $this->getCategoryManager(function ($qb): void {
         }, $categories);
 
         $this->assertSame($categoryManager->getCategories($context), $categories);
     }
 
-    public function testGetRootCategoryWithChildren()
+    public function testGetRootCategoryWithChildren(): void
     {
         /** @var ContextTest $context */
         $context = $this->getMockForAbstractClass(ContextTest::class);
@@ -127,14 +129,14 @@ class CategoryManagerTest extends TestCase
         $categoryBar->setParent($categoryFoo);
         $categoryBar->setEnabled(true);
 
-        $categoryManager = $this->getCategoryManager(function ($qb) {
+        $categoryManager = $this->getCategoryManager(function ($qb): void {
         }, [$categoryFoo, $categoryBar]);
 
         $categoryFoo = $categoryManager->getRootCategoryWithChildren($categoryFoo);
         $this->assertContains($categoryBar, $categoryFoo->getChildren());
     }
 
-    public function testGetRootCategory()
+    public function testGetRootCategory(): void
     {
         /** @var ContextTest $context */
         $context = $this->getMockForAbstractClass(ContextTest::class);
@@ -150,14 +152,14 @@ class CategoryManagerTest extends TestCase
         $categoryFoo->setParent(null);
         $categoryFoo->setEnabled(true);
 
-        $categoryManager = $this->getCategoryManager(function ($qb) {
+        $categoryManager = $this->getCategoryManager(function ($qb): void {
         }, [$categoryFoo]);
 
         $categoryBar = $categoryManager->getRootCategory($context);
         $this->assertEquals($categoryFoo, $categoryBar);
     }
 
-    public function testGetRootCategoriesForContext()
+    public function testGetRootCategoriesForContext(): void
     {
         /** @var ContextTest $context */
         $context = $this->getMockForAbstractClass(ContextTest::class);
@@ -181,7 +183,7 @@ class CategoryManagerTest extends TestCase
         $categoryBar->setParent($categoryFoo);
         $categoryBar->setEnabled(true);
 
-        $categoryManager = $this->getCategoryManager(function ($qb) {
+        $categoryManager = $this->getCategoryManager(function ($qb): void {
         }, [$categoryFoo, $categoryBar]);
 
         $categories = $categoryManager->getRootCategoriesForContext($context);
@@ -189,7 +191,7 @@ class CategoryManagerTest extends TestCase
         $this->assertContains($categoryFoo, $categories);
     }
 
-    public function testGetRootCategories()
+    public function testGetRootCategories(): void
     {
         /** @var ContextTest $contextFoo */
         $contextFoo = $this->getMockForAbstractClass(ContextTest::class);
@@ -219,7 +221,7 @@ class CategoryManagerTest extends TestCase
         $categoryBar->setParent(null);
         $categoryBar->setEnabled(true);
 
-        $categoryManager = $this->getCategoryManager(function ($qb) {
+        $categoryManager = $this->getCategoryManager(function ($qb): void {
         }, [$categoryFoo, $categoryBar]);
 
         $categories = $categoryManager->getRootCategories(false);
@@ -229,7 +231,7 @@ class CategoryManagerTest extends TestCase
         $this->assertEquals($categoryBar, $categories[$contextBar->getId()]);
     }
 
-    public function testGetRootCategoriesSplitByContexts()
+    public function testGetRootCategoriesSplitByContexts(): void
     {
         /** @var ContextTest $contextFoo */
         $contextFoo = $this->getMockForAbstractClass(ContextTest::class);
@@ -259,7 +261,7 @@ class CategoryManagerTest extends TestCase
         $categoryBar->setParent(null);
         $categoryBar->setEnabled(true);
 
-        $categoryManager = $this->getCategoryManager(function ($qb) {
+        $categoryManager = $this->getCategoryManager(function ($qb): void {
         }, [$categoryFoo, $categoryBar]);
 
         $categories = $categoryManager->getRootCategoriesSplitByContexts(false);

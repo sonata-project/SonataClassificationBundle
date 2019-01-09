@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -48,7 +50,7 @@ class CategorySelectorType extends AbstractType
      *
      * {@inheritdoc}
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function setDefaultOptions(OptionsResolverInterface $resolver): void
     {
         $this->configureOptions($resolver);
     }
@@ -58,7 +60,7 @@ class CategorySelectorType extends AbstractType
      *
      * {@inheritdoc}
      */
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $that = $this;
 
@@ -140,7 +142,7 @@ class CategorySelectorType extends AbstractType
      * @param array             $choices
      * @param int               $level
      */
-    private function childWalker(CategoryInterface $category, Options $options, array &$choices, $level = 2)
+    private function childWalker(CategoryInterface $category, Options $options, array &$choices, $level = 2): void
     {
         if (null === $category->getChildren()) {
             return;

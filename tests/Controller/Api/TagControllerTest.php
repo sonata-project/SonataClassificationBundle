@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -29,7 +31,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  */
 class TagControllerTest extends TestCase
 {
-    public function testGetTagsAction()
+    public function testGetTagsAction(): void
     {
         $paramFetcher = $this->createMock(ParamFetcherInterface::class);
         $paramFetcher->expects($this->once())->method('all')->will($this->returnValue([]));
@@ -42,7 +44,7 @@ class TagControllerTest extends TestCase
         $this->assertSame($pager, $this->createTagController($tagManager)->getTagsAction($paramFetcher));
     }
 
-    public function testGetTagAction()
+    public function testGetTagAction(): void
     {
         $tag = $this->createMock(TagInterface::class);
 
@@ -52,7 +54,7 @@ class TagControllerTest extends TestCase
         $this->assertEquals($tag, $this->createTagController($tagManager)->getTagAction(1));
     }
 
-    public function testGetTagNotFoundExceptionAction()
+    public function testGetTagNotFoundExceptionAction(): void
     {
         $this->expectException(NotFoundHttpException::class);
         $this->expectExceptionMessage('Tag (42) not found');
@@ -60,7 +62,7 @@ class TagControllerTest extends TestCase
         $this->createTagController()->getTagAction(42);
     }
 
-    public function testPostTagAction()
+    public function testPostTagAction(): void
     {
         $tag = $this->createMock(TagInterface::class);
 
@@ -81,7 +83,7 @@ class TagControllerTest extends TestCase
         $this->assertInstanceOf(View::class, $view);
     }
 
-    public function testPostTagInvalidAction()
+    public function testPostTagInvalidAction(): void
     {
         $tag = $this->createMock(TagInterface::class);
 
@@ -101,7 +103,7 @@ class TagControllerTest extends TestCase
         $this->assertInstanceOf(FormInterface::class, $view);
     }
 
-    public function testPutTagAction()
+    public function testPutTagAction(): void
     {
         $tag = $this->createMock(TagInterface::class);
 
@@ -123,7 +125,7 @@ class TagControllerTest extends TestCase
         $this->assertInstanceOf(View::class, $view);
     }
 
-    public function testPutPostInvalidAction()
+    public function testPutPostInvalidAction(): void
     {
         $tag = $this->createMock(TagInterface::class);
 
@@ -144,7 +146,7 @@ class TagControllerTest extends TestCase
         $this->assertInstanceOf(FormInterface::class, $view);
     }
 
-    public function testDeleteTagAction()
+    public function testDeleteTagAction(): void
     {
         $tag = $this->createMock(TagInterface::class);
 
@@ -157,7 +159,7 @@ class TagControllerTest extends TestCase
         $this->assertEquals(['deleted' => true], $view);
     }
 
-    public function testDeleteTagInvalidAction()
+    public function testDeleteTagInvalidAction(): void
     {
         $this->expectException(NotFoundHttpException::class);
 

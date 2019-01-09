@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -79,7 +81,7 @@ abstract class AbstractCollectionsBlockService extends AbstractClassificationBlo
     /**
      * {@inheritdoc}
      */
-    public function buildEditForm(FormMapper $formMapper, BlockInterface $block)
+    public function buildEditForm(FormMapper $formMapper, BlockInterface $block): void
     {
         $adminField = $this->getFormAdminType($formMapper, $this->collectionAdmin, 'collectionId', 'collection', [
             'label' => 'form.label_collection',
@@ -127,7 +129,7 @@ abstract class AbstractCollectionsBlockService extends AbstractClassificationBlo
     /**
      * {@inheritdoc}
      */
-    public function configureSettings(OptionsResolver $resolver)
+    public function configureSettings(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'title' => null,
@@ -144,7 +146,7 @@ abstract class AbstractCollectionsBlockService extends AbstractClassificationBlo
     /**
      * {@inheritdoc}
      */
-    public function load(BlockInterface $block)
+    public function load(BlockInterface $block): void
     {
         if (is_numeric($block->getSetting('collectionId'))) {
             $block->setSetting('collectionId', $this->getCollection($block->getSetting('collectionId')));
@@ -154,7 +156,7 @@ abstract class AbstractCollectionsBlockService extends AbstractClassificationBlo
     /**
      * {@inheritdoc}
      */
-    public function prePersist(BlockInterface $block)
+    public function prePersist(BlockInterface $block): void
     {
         $this->resolveIds($block);
     }
@@ -162,7 +164,7 @@ abstract class AbstractCollectionsBlockService extends AbstractClassificationBlo
     /**
      * {@inheritdoc}
      */
-    public function preUpdate(BlockInterface $block)
+    public function preUpdate(BlockInterface $block): void
     {
         $this->resolveIds($block);
     }
@@ -205,7 +207,7 @@ abstract class AbstractCollectionsBlockService extends AbstractClassificationBlo
     /**
      * @param BlockInterface $block
      */
-    private function resolveIds(BlockInterface $block)
+    private function resolveIds(BlockInterface $block): void
     {
         $block->setSetting(
             'collectionId',

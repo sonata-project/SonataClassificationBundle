@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Sonata Project package.
  *
@@ -13,7 +15,7 @@ namespace Sonata\ClassificationBundle\Model;
 
 interface ContextInterface
 {
-    const DEFAULT_CONTEXT = 'default';
+    public const DEFAULT_CONTEXT = 'default';
 
     /**
      * Set name.

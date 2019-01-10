@@ -21,7 +21,7 @@
         }
     ],
     "require": {
-        "php": "^5.6 || ^7.0",
+        "php": "^7.1",
         "cocur/slugify": "^2.0 || ^3.0",
         "sonata-project/admin-bundle": "^3.31",
         "sonata-project/core-bundle": "^3.9",

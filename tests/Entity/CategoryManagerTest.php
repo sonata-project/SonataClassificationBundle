@@ -19,7 +19,7 @@ use PHPUnit\Framework\TestCase;
 use Sonata\ClassificationBundle\Entity\BaseCategory;
 use Sonata\ClassificationBundle\Entity\CategoryManager;
 use Sonata\ClassificationBundle\Model\ContextManagerInterface;
-use Sonata\CoreBundle\Test\EntityManagerMockFactory;
+use Sonata\Doctrine\Test\EntityManagerMockFactory;
 
 class CategoryManagerTest extends TestCase
 {

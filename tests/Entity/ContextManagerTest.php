@@ -17,7 +17,7 @@ use Doctrine\Common\Persistence\ManagerRegistry;
 use PHPUnit\Framework\TestCase;
 use Sonata\ClassificationBundle\Entity\BaseContext;
 use Sonata\ClassificationBundle\Entity\ContextManager;
-use Sonata\CoreBundle\Test\EntityManagerMockFactory;
+use Sonata\Doctrine\Test\EntityManagerMockFactory;
 
 class ContextManagerTest extends TestCase
 {

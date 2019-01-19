@@ -14,9 +14,9 @@ declare(strict_types=1);
 namespace Sonata\ClassificationBundle\Document;
 
 use Sonata\ClassificationBundle\Model\CollectionManagerInterface;
-use Sonata\CoreBundle\Model\BaseDocumentManager;
 use Sonata\DatagridBundle\Pager\Doctrine\Pager;
 use Sonata\DatagridBundle\ProxyQuery\Doctrine\ProxyQuery;
+use Sonata\Doctrine\Document\BaseDocumentManager;
 
 class CollectionManager extends BaseDocumentManager implements CollectionManagerInterface
 {

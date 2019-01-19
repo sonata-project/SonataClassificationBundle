@@ -17,7 +17,7 @@ use Doctrine\Common\Persistence\ManagerRegistry;
 use PHPUnit\Framework\TestCase;
 use Sonata\ClassificationBundle\Entity\BaseCollection;
 use Sonata\ClassificationBundle\Entity\CollectionManager;
-use Sonata\CoreBundle\Test\EntityManagerMockFactory;
+use Sonata\Doctrine\Test\EntityManagerMockFactory;
 
 class CollectionManagerTest extends TestCase
 {

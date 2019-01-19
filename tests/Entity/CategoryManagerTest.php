@@ -17,33 +17,9 @@ use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\AbstractQuery;
 use PHPUnit\Framework\TestCase;
 use Sonata\ClassificationBundle\Entity\BaseCategory;
-use Sonata\ClassificationBundle\Entity\BaseContext;
 use Sonata\ClassificationBundle\Entity\CategoryManager;
 use Sonata\ClassificationBundle\Model\ContextManagerInterface;
-use Sonata\CoreBundle\Test\EntityManagerMockFactory;
-
-abstract class CategoryTest extends BaseCategory
-{
-    private $id;
-
-    public function setId($id): void
-    {
-        $this->id = $id;
-    }
-
-    public function getId()
-    {
-        return $this->id;
-    }
-}
-
-abstract class ContextTest extends BaseContext
-{
-    public function getId()
-    {
-        return $this->id;
-    }
-}
+use Sonata\Doctrine\Test\EntityManagerMockFactory;
 
 class CategoryManagerTest extends TestCase
 {

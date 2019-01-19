@@ -11,10 +11,14 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Sonata\ClassificationBundle\Form\Type;
+namespace Sonata\ClassificationBundle\Tests\Entity;
 
-use Sonata\Form\Type\BaseDoctrineORMSerializationType;
+use Sonata\ClassificationBundle\Entity\BaseContext;
 
-class ApiCollectionType extends BaseDoctrineORMSerializationType
+abstract class ContextTest extends BaseContext
 {
+    public function getId()
+    {
+        return $this->id;
+    }
 }

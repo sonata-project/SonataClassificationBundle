@@ -17,7 +17,7 @@ use Doctrine\Common\Persistence\ManagerRegistry;
 use PHPUnit\Framework\TestCase;
 use Sonata\ClassificationBundle\Entity\BaseTag;
 use Sonata\ClassificationBundle\Entity\TagManager;
-use Sonata\CoreBundle\Test\EntityManagerMockFactory;
+use Sonata\Doctrine\Test\EntityManagerMockFactory;
 
 class TagManagerTest extends TestCase
 {

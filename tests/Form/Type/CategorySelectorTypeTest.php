@@ -15,7 +15,7 @@ namespace Sonata\ClassificationBundle\Tests\Form\Type;
 
 use PHPUnit\Framework\TestCase;
 use Sonata\ClassificationBundle\Form\Type\CategorySelectorType;
-use Sonata\CoreBundle\Model\ManagerInterface;
+use Sonata\Doctrine\Model\ManagerInterface;
 use Symfony\Component\Form\ChoiceList\Loader\ChoiceLoaderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 

@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sonata\ClassificationBundle\Form\Type;
 
-use Sonata\CoreBundle\Form\Type\BaseDoctrineORMSerializationType;
+use Sonata\Form\Type\BaseDoctrineORMSerializationType;
 
 class ApiTagType extends BaseDoctrineORMSerializationType
 {

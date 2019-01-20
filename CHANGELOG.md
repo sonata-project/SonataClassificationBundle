@@ -2,6 +2,16 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.8.0](https://github.com/sonata-project/SonataClassificationBundle/compare/3.7.1...3.8.0) - 2019-01-18
+
+### Fixed
+- Fix deprecation for symfony/config 4.2+
+- Deprecations about `Sonata\CoreBundle\Model\BaseEntityManager`
+
+### Removed
+- Removed CoreBundle deprecations
+- support for php 5 and php 7.0
+
 ## [3.7.1](https://github.com/sonata-project/SonataClassificationBundle/compare/3.7.0...3.7.1) - 2018-06-18
 ### Changed
 - Stop using the deprecated method `Sonata\AdminBundle\Controller\CRUDController::render` and use the new `renderWithExtraParams`

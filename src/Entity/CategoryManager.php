@@ -59,7 +59,7 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
      */
     public function getRootCategoriesPager($page = 1, $limit = 25, $criteria = [])
     {
-        $page = 0 == (int) $page ? 1 : (int) $page;
+        $page = 0 === (int) $page ? 1 : (int) $page;
 
         $queryBuilder = $this->getObjectManager()->createQueryBuilder()
             ->select('c')
@@ -110,7 +110,7 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
         if (null === $category->getContext()) {
             throw new \RuntimeException('Context cannot be null');
         }
-        if (null != $category->getParent()) {
+        if (null !== $category->getParent()) {
             throw new \RuntimeException('Method can be called only for root categories');
         }
         $context = $this->getContext($category->getContext());
@@ -118,7 +118,7 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
         $this->loadCategories($context);
 
         foreach ($this->categories[$context->getId()] as $contextRootCategory) {
-            if ($category->getId() == $contextRootCategory->getId()) {
+            if ($category->getId() === $contextRootCategory->getId()) {
                 return $contextRootCategory;
             }
         }
@@ -295,7 +295,7 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
             ->setParameter('context', $context->getId())
             ->execute();
 
-        if (0 == \count($categories)) {
+        if (0 === \count($categories)) {
             // no category, create one for the provided context
             $category = $this->create();
             $category->setName($context->getName());

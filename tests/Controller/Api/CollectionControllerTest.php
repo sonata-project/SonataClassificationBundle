@@ -51,7 +51,7 @@ class CollectionControllerTest extends TestCase
         $collectionManager = $this->createMock(CollectionManagerInterface::class);
         $collectionManager->expects($this->once())->method('find')->will($this->returnValue($collection));
 
-        $this->assertEquals($collection, $this->createCollectionController($collectionManager)->getCollectionAction(1));
+        $this->assertSame($collection, $this->createCollectionController($collectionManager)->getCollectionAction(1));
     }
 
     public function testGetCollectionNotFoundExceptionAction()
@@ -156,7 +156,7 @@ class CollectionControllerTest extends TestCase
 
         $view = $this->createCollectionController($collectionManager)->deleteCollectionAction(1);
 
-        $this->assertEquals(['deleted' => true], $view);
+        $this->assertSame(['deleted' => true], $view);
     }
 
     public function testDeleteCollectionInvalidAction()

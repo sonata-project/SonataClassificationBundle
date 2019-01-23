@@ -149,7 +149,7 @@ class CategorySelectorType extends AbstractType
         }
 
         foreach ($category->getChildren() as $child) {
-            if ($options['category'] && $options['category']->getId() == $child->getId()) {
+            if ($options['category'] && $options['category']->getId() === $child->getId()) {
                 continue;
             }
 

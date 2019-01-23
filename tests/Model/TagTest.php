@@ -37,24 +37,24 @@ class TagTest extends TestCase
         $tag->setEnabled(true);
         $tag->setContext($context);
 
-        $this->assertEquals('Hello World', $tag->getName());
-        $this->assertEquals('Hello World', $tag->__toString());
-        $this->assertEquals('hello-world', $tag->getSlug());
-        $this->assertEquals($time, $tag->getCreatedAt());
-        $this->assertEquals($time, $tag->getUpdatedAt());
+        $this->assertSame('Hello World', $tag->getName());
+        $this->assertSame('Hello World', $tag->__toString());
+        $this->assertSame('hello-world', $tag->getSlug());
+        $this->assertSame($time, $tag->getCreatedAt());
+        $this->assertSame($time, $tag->getUpdatedAt());
         $this->assertTrue($tag->getEnabled());
-        $this->assertEquals($context, $tag->getContext());
+        $this->assertSame($context, $tag->getContext());
 
         $tag->setName('');
-        $this->assertEquals('n-a', $tag->getSlug());
-        $this->assertEquals('n/a', $tag->__toString());
+        $this->assertSame('n-a', $tag->getSlug());
+        $this->assertSame('n/a', $tag->__toString());
 
         $tag->setName('Привет мир');
-        $this->assertEquals('privet-mir', $tag->getSlug());
-        $this->assertEquals('Привет мир', $tag->__toString());
+        $this->assertSame('privet-mir', $tag->getSlug());
+        $this->assertSame('Привет мир', $tag->__toString());
 
         $tag->setSlug('Custom Slug');
-        $this->assertEquals('custom-slug', $tag->getSlug());
+        $this->assertSame('custom-slug', $tag->getSlug());
     }
 
     public function testPreUpdate()

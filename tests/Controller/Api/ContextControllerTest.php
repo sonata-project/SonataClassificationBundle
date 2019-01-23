@@ -51,7 +51,7 @@ class ContextControllerTest extends TestCase
         $contextManager = $this->createMock(ContextManagerInterface::class);
         $contextManager->expects($this->once())->method('find')->will($this->returnValue($context));
 
-        $this->assertEquals($context, $this->createContextController($contextManager)->getContextAction(1));
+        $this->assertSame($context, $this->createContextController($contextManager)->getContextAction(1));
     }
 
     public function testGetContextNotFoundExceptionAction()
@@ -154,7 +154,7 @@ class ContextControllerTest extends TestCase
 
         $view = $this->createContextController($contextManager)->deleteContextAction(1);
 
-        $this->assertEquals(['deleted' => true], $view);
+        $this->assertSame(['deleted' => true], $view);
     }
 
     public function testDeleteContextInvalidAction()

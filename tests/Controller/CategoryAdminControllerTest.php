@@ -205,7 +205,7 @@ class CategoryAdminControllerTest extends TestCase
             $this->csrfProvider->expects($this->any())
                 ->method('isCsrfTokenValid')
                 ->will($this->returnCallback(function ($intention, $token) {
-                    if ($token == 'csrf-token-123_'.$intention) {
+                    if ($token === 'csrf-token-123_'.$intention) {
                         return true;
                     }
 
@@ -226,7 +226,7 @@ class CategoryAdminControllerTest extends TestCase
             $this->csrfProvider->expects($this->any())
                 ->method('isTokenValid')
                 ->will($this->returnCallback(function (CsrfToken $token) {
-                    if ($token->getValue() == 'csrf-token-123_'.$token->getId()) {
+                    if ($token->getValue() === 'csrf-token-123_'.$token->getId()) {
                         return true;
                     }
 
@@ -295,15 +295,15 @@ class CategoryAdminControllerTest extends TestCase
         $this->container->expects($this->any())
             ->method('has')
             ->will($this->returnCallback(function ($id) use ($tthis) {
-                if ('form.csrf_provider' == $id && Kernel::MAJOR_VERSION == 2 && null !== $tthis->getCsrfProvider()) {
+                if ('form.csrf_provider' === $id && Kernel::MAJOR_VERSION === 2 && null !== $tthis->getCsrfProvider()) {
                     return true;
                 }
 
-                if ('security.csrf.token_manager' == $id && Kernel::MAJOR_VERSION >= 3 && null !== $tthis->getCsrfProvider()) {
+                if ('security.csrf.token_manager' === $id && Kernel::MAJOR_VERSION >= 3 && null !== $tthis->getCsrfProvider()) {
                     return true;
                 }
 
-                if ('templating' == $id) {
+                if ('templating' === $id) {
                     return true;
                 }
 

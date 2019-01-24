@@ -44,27 +44,27 @@ class CategoryTest extends TestCase
         $category->setMedia($media);
         $category->setContext($context);
 
-        $this->assertEquals('Hello World', $category->getName());
-        $this->assertEquals('Hello World', $category->__toString());
-        $this->assertEquals('hello-world', $category->getSlug());
+        $this->assertSame('Hello World', $category->getName());
+        $this->assertSame('Hello World', $category->__toString());
+        $this->assertSame('hello-world', $category->getSlug());
         $this->assertTrue($category->getEnabled());
-        $this->assertEquals('My description', $category->getDescription());
-        $this->assertEquals($time, $category->getCreatedAt());
-        $this->assertEquals($time, $category->getUpdatedAt());
-        $this->assertEquals(2, $category->getPosition());
-        $this->assertEquals($media, $category->getMedia());
-        $this->assertEquals($context, $category->getContext());
+        $this->assertSame('My description', $category->getDescription());
+        $this->assertSame($time, $category->getCreatedAt());
+        $this->assertSame($time, $category->getUpdatedAt());
+        $this->assertSame(2, $category->getPosition());
+        $this->assertSame($media, $category->getMedia());
+        $this->assertSame($context, $category->getContext());
 
         $category->setName('');
-        $this->assertEquals('n-a', $category->getSlug());
-        $this->assertEquals('n/a', $category->__toString());
+        $this->assertSame('n-a', $category->getSlug());
+        $this->assertSame('n/a', $category->__toString());
 
         $category->setName('Привет мир');
-        $this->assertEquals('privet-mir', $category->getSlug());
-        $this->assertEquals('Привет мир', $category->__toString());
+        $this->assertSame('privet-mir', $category->getSlug());
+        $this->assertSame('Привет мир', $category->__toString());
 
         $category->setSlug('Custom Slug');
-        $this->assertEquals('custom-slug', $category->getSlug());
+        $this->assertSame('custom-slug', $category->getSlug());
     }
 
     public function testParent(): void
@@ -75,7 +75,7 @@ class CategoryTest extends TestCase
         /** @var Category $category */
         $category = $this->getMockForAbstractClass(Category::class);
         $category->setParent($parent);
-        $this->assertEquals($parent, $category->getParent());
+        $this->assertSame($parent, $category->getParent());
         $this->assertCount(1, $parent->getChildren());
     }
 
@@ -99,8 +99,8 @@ class CategoryTest extends TestCase
         $category->addChild($cat1);
         $category->addChild($cat2);
         $category->addChild($cat3);
-        $this->assertEquals($context, $cat1->getContext()); // child context set to parent
-        $this->assertEquals($category, $cat1->getParent());
+        $this->assertSame($context, $cat1->getContext()); // child context set to parent
+        $this->assertSame($category, $cat1->getParent());
         $this->assertTrue($category->hasChildren());
         $this->assertCount(3, $category->getChildren());
 

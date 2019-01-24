@@ -43,26 +43,26 @@ class CollectionTest extends TestCase
         $collection->setMedia($media);
         $collection->setContext($context);
 
-        $this->assertEquals('Hello World', $collection->getName());
-        $this->assertEquals('Hello World', $collection->__toString());
-        $this->assertEquals('hello-world', $collection->getSlug());
-        $this->assertEquals($time, $collection->getCreatedAt());
-        $this->assertEquals($time, $collection->getUpdatedAt());
+        $this->assertSame('Hello World', $collection->getName());
+        $this->assertSame('Hello World', $collection->__toString());
+        $this->assertSame('hello-world', $collection->getSlug());
+        $this->assertSame($time, $collection->getCreatedAt());
+        $this->assertSame($time, $collection->getUpdatedAt());
         $this->assertTrue($collection->getEnabled());
-        $this->assertEquals('My description', $collection->getDescription());
-        $this->assertEquals($media, $collection->getMedia());
-        $this->assertEquals($context, $collection->getContext());
+        $this->assertSame('My description', $collection->getDescription());
+        $this->assertSame($media, $collection->getMedia());
+        $this->assertSame($context, $collection->getContext());
 
         $collection->setName('');
-        $this->assertEquals('n-a', $collection->getSlug());
-        $this->assertEquals('n/a', $collection->__toString());
+        $this->assertSame('n-a', $collection->getSlug());
+        $this->assertSame('n/a', $collection->__toString());
 
         $collection->setName('Привет мир');
-        $this->assertEquals('privet-mir', $collection->getSlug());
-        $this->assertEquals('Привет мир', $collection->__toString());
+        $this->assertSame('privet-mir', $collection->getSlug());
+        $this->assertSame('Привет мир', $collection->__toString());
 
         $collection->setSlug('Custom Slug');
-        $this->assertEquals('custom-slug', $collection->getSlug());
+        $this->assertSame('custom-slug', $collection->getSlug());
     }
 
     public function testPrePersist(): void

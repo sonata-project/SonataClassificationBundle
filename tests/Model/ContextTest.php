@@ -35,14 +35,14 @@ class ContextTest extends TestCase
         $context->setUpdatedAt($time);
         $context->setEnabled(true);
 
-        $this->assertEquals('Hello World', $context->getName());
-        $this->assertEquals('Hello World', $context->__toString());
-        $this->assertEquals($time, $context->getCreatedAt());
-        $this->assertEquals($time, $context->getUpdatedAt());
+        $this->assertSame('Hello World', $context->getName());
+        $this->assertSame('Hello World', $context->__toString());
+        $this->assertSame($time, $context->getCreatedAt());
+        $this->assertSame($time, $context->getUpdatedAt());
         $this->assertTrue($context->getEnabled());
 
         $context->setName('');
-        $this->assertEquals('n/a', $context->__toString());
+        $this->assertSame('n/a', $context->__toString());
     }
 
     public function testPreUpdate(): void

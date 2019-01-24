@@ -51,7 +51,7 @@ class CategoryControllerTest extends TestCase
         $categoryManager = $this->createMock(CategoryManagerInterface::class);
         $categoryManager->expects($this->once())->method('find')->will($this->returnValue($category));
 
-        $this->assertEquals($category, $this->createCategoryController($categoryManager)->getCategoryAction(1));
+        $this->assertSame($category, $this->createCategoryController($categoryManager)->getCategoryAction(1));
     }
 
     public function testGetCategoryNotFoundExceptionAction(): void
@@ -154,7 +154,7 @@ class CategoryControllerTest extends TestCase
 
         $view = $this->createCategoryController($categoryManager)->deleteCategoryAction(1);
 
-        $this->assertEquals(['deleted' => true], $view);
+        $this->assertSame(['deleted' => true], $view);
     }
 
     public function testDeleteCategoryInvalidAction(): void

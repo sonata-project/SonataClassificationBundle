@@ -51,7 +51,7 @@ class TagControllerTest extends TestCase
         $tagManager = $this->createMock(TagManagerInterface::class);
         $tagManager->expects($this->once())->method('find')->will($this->returnValue($tag));
 
-        $this->assertEquals($tag, $this->createTagController($tagManager)->getTagAction(1));
+        $this->assertSame($tag, $this->createTagController($tagManager)->getTagAction(1));
     }
 
     public function testGetTagNotFoundExceptionAction(): void
@@ -156,7 +156,7 @@ class TagControllerTest extends TestCase
 
         $view = $this->createTagController($tagManager)->deleteTagAction(1);
 
-        $this->assertEquals(['deleted' => true], $view);
+        $this->assertSame(['deleted' => true], $view);
     }
 
     public function testDeleteTagInvalidAction(): void

@@ -93,12 +93,12 @@ class CategoryAdminController extends Controller
             $currentContext = current($currentCategories)->getContext();
         } else {
             foreach ($rootCategoriesSplitByContexts as $contextId => $contextCategories) {
-                if ($currentContext->getId() != $contextId) {
+                if ($currentContext->getId() !== $contextId) {
                     continue;
                 }
 
                 foreach ($contextCategories as $category) {
-                    if ($currentContext->getId() != $category->getContext()->getId()) {
+                    if ($currentContext->getId() !== $category->getContext()->getId()) {
                         continue;
                     }
 

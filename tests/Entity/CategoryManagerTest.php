@@ -156,7 +156,7 @@ class CategoryManagerTest extends TestCase
         }, [$categoryFoo]);
 
         $categoryBar = $categoryManager->getRootCategory($context);
-        $this->assertEquals($categoryFoo, $categoryBar);
+        $this->assertSame($categoryFoo, $categoryBar);
     }
 
     public function testGetRootCategoriesForContext(): void
@@ -227,8 +227,8 @@ class CategoryManagerTest extends TestCase
         $categories = $categoryManager->getRootCategories(false);
         $this->assertArrayHasKey($contextFoo->getId(), $categories);
         $this->assertArrayHasKey($contextBar->getId(), $categories);
-        $this->assertEquals($categoryFoo, $categories[$contextFoo->getId()]);
-        $this->assertEquals($categoryBar, $categories[$contextBar->getId()]);
+        $this->assertSame($categoryFoo, $categories[$contextFoo->getId()]);
+        $this->assertSame($categoryBar, $categories[$contextBar->getId()]);
     }
 
     public function testGetRootCategoriesSplitByContexts(): void
@@ -275,7 +275,7 @@ class CategoryManagerTest extends TestCase
     {
         $em = EntityManagerMockFactory::create($this, $qbCallback, []);
 
-        if (null != $createQueryResult) {
+        if (null !== $createQueryResult) {
             $query = $this->createMock(AbstractQuery::class);
             $query->expects($this->once())->method('execute')->will($this->returnValue($createQueryResult));
             $query->expects($this->any())->method('setParameter')->will($this->returnValue($query));

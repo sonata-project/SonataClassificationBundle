@@ -30,3 +30,9 @@ If you have implemented a custom model, you must adapt the signature of the foll
 ## Doctrine schema update
 Disallowed null value on foreign keys for associations with Context for
 Category, Tag and Collection entities.
+
+## Removed media previews
+
+The media features were removed, to resolve internal circular dependency issues. 
+If you still need these, please have a look at the [ClassificationMediaBundle](https://github.com/sonata-project/SonataClassificationMediaBundle).
+

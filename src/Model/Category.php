@@ -15,7 +15,6 @@ namespace Sonata\ClassificationBundle\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection as DoctrineCollection;
-use Sonata\MediaBundle\Model\MediaInterface;
 
 abstract class Category implements CategoryInterface
 {
@@ -63,11 +62,6 @@ abstract class Category implements CategoryInterface
      * @var CategoryInterface
      */
     protected $parent;
-
-    /**
-     * @var MediaInterface
-     */
-    protected $media;
 
     /**
      * @var ContextInterface
@@ -304,22 +298,6 @@ abstract class Category implements CategoryInterface
     public function getParent()
     {
         return $this->parent;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setMedia(MediaInterface $media = null): void
-    {
-        $this->media = $media;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getMedia()
-    {
-        return $this->media;
     }
 
     /**

@@ -13,8 +13,6 @@ declare(strict_types=1);
 
 namespace Sonata\ClassificationBundle\Model;
 
-use Sonata\MediaBundle\Model\MediaInterface;
-
 abstract class Collection implements CollectionInterface
 {
     /**
@@ -46,11 +44,6 @@ abstract class Collection implements CollectionInterface
      * @var \DateTime
      */
     protected $updatedAt;
-
-    /**
-     * @var MediaInterface
-     */
-    protected $media;
 
     /**
      * @var ContextInterface
@@ -172,22 +165,6 @@ abstract class Collection implements CollectionInterface
     public function getUpdatedAt()
     {
         return $this->updatedAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setMedia(MediaInterface $media = null): void
-    {
-        $this->media = $media;
-    }
-
-    /**
-     * @return MediaInterface
-     */
-    public function getMedia()
-    {
-        return $this->media;
     }
 
     /**

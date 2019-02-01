@@ -16,7 +16,6 @@ namespace Sonata\ClassificationBundle\Tests\Model;
 use PHPUnit\Framework\TestCase;
 use Sonata\ClassificationBundle\Model\Category;
 use Sonata\ClassificationBundle\Model\ContextInterface;
-use Sonata\MediaBundle\Model\MediaInterface;
 
 /**
  * @author Dariusz Markowicz <dmarkowicz77@gmail.com>
@@ -30,9 +29,6 @@ class CategoryTest extends TestCase
         /** @var ContextInterface $context */
         $context = $this->createMock(ContextInterface::class);
 
-        /** @var MediaInterface $media */
-        $media = $this->createMock(MediaInterface::class);
-
         /** @var Category $category */
         $category = $this->getMockForAbstractClass(Category::class);
         $category->setName('Hello World');
@@ -41,7 +37,6 @@ class CategoryTest extends TestCase
         $category->setCreatedAt($time);
         $category->setUpdatedAt($time);
         $category->setPosition(2);
-        $category->setMedia($media);
         $category->setContext($context);
 
         $this->assertSame('Hello World', $category->getName());
@@ -52,7 +47,6 @@ class CategoryTest extends TestCase
         $this->assertSame($time, $category->getCreatedAt());
         $this->assertSame($time, $category->getUpdatedAt());
         $this->assertSame(2, $category->getPosition());
-        $this->assertSame($media, $category->getMedia());
         $this->assertSame($context, $category->getContext());
 
         $category->setName('');

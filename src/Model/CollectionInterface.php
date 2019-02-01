@@ -13,8 +13,6 @@ declare(strict_types=1);
 
 namespace Sonata\ClassificationBundle\Model;
 
-use Sonata\MediaBundle\Model\MediaInterface;
-
 interface CollectionInterface
 {
     /**
@@ -97,16 +95,6 @@ interface CollectionInterface
      * @return \DateTime
      */
     public function getUpdatedAt();
-
-    /**
-     * @param MediaInterface $media
-     */
-    public function setMedia(MediaInterface $media = null);
-
-    /**
-     * @return MediaInterface
-     */
-    public function getMedia();
 
     /**
      * @param ContextInterface $context

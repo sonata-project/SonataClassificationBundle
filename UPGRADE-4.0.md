@@ -33,6 +33,6 @@ Category, Tag and Collection entities.
 
 ## Removed media previews
 
-The media features were removed, to resolve internal ciruclar dependency issues. 
+The media features were removed, to resolve internal circular dependency issues. 
 If you still need these, please have a look at the [ClassificationMediaBundle](https://github.com/sonata-project/SonataClassificationMediaBundle).
 

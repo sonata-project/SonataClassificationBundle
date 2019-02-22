@@ -247,7 +247,7 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
      */
     protected function loadCategories(ContextInterface $context): void
     {
-        if (array_key_exists($context->getId(), $this->categories)) {
+        if (\array_key_exists($context->getId(), $this->categories)) {
             return;
         }
 

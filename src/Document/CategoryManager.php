@@ -200,7 +200,7 @@ class CategoryManager extends BaseDocumentManager implements CategoryManagerInte
      */
     protected function loadCategories(ContextInterface $context): void
     {
-        if (array_key_exists($context->getId(), $this->categories)) {
+        if (\array_key_exists($context->getId(), $this->categories)) {
             return;
         }
 

@@ -198,6 +198,14 @@
                 <source>no_tags_found</source>
                 <target>Címke nem található</target>
             </trans-unit>
+            <trans-unit id="group_general">
+                <source>group_general</source>
+                <target>Általános</target>
+            </trans-unit>
+            <trans-unit id="group_options">
+                <source>group_options</source>
+                <target>Opciók</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

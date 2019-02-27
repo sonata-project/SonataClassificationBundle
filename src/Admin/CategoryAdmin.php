@@ -68,7 +68,7 @@ EOT
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->with('General', ['class' => 'col-md-6'])
+            ->with('group_general', ['class' => 'col-md-6'])
                 ->add('name')
                 ->add('description', TextareaType::class, [
                     'required' => false,
@@ -93,7 +93,7 @@ EOT
 
         $formMapper
             ->end()
-            ->with('Options', ['class' => 'col-md-6'])
+            ->with('group_options', ['class' => 'col-md-6'])
                 ->add('enabled', CheckboxType::class, [
                     'required' => false,
                 ])
@@ -106,7 +106,7 @@ EOT
 
         if (interface_exists(MediaInterface::class)) {
             $formMapper
-                ->with('General')
+                ->with('group_general')
                     ->add('media', ModelListType::class, [
                         'required' => false,
                     ], [

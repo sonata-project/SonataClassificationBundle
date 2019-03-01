@@ -222,6 +222,14 @@
                 <source>form.label_class</source>
                 <target>Classe CSS</target>
             </trans-unit>
+            <trans-unit id="group_general">
+                <source>group_general</source>
+                <target>Général</target>
+            </trans-unit>
+            <trans-unit id="group_options">
+                <source>group_options</source>
+                <target>Options</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

@@ -25,7 +25,7 @@ class CollectionManagerTest extends TestCase
     {
         $self = $this;
         $this
-            ->getCollectionManager(function ($qb) use ($self) {
+            ->getCollectionManager(static function ($qb) use ($self) {
                 $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue([]));
                 $qb->expects($self->never())->method('andWhere');
                 $qb->expects($self->once())->method('setParameters')->with([]);
@@ -37,7 +37,7 @@ class CollectionManagerTest extends TestCase
     {
         $self = $this;
         $this
-            ->getCollectionManager(function ($qb) use ($self) {
+            ->getCollectionManager(static function ($qb) use ($self) {
                 $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue([]));
                 $qb->expects($self->once())->method('andWhere')->with($self->equalTo('c.enabled = :enabled'));
                 $qb->expects($self->once())->method('setParameters')->with(['enabled' => true]);
@@ -51,7 +51,7 @@ class CollectionManagerTest extends TestCase
     {
         $self = $this;
         $this
-            ->getCollectionManager(function ($qb) use ($self) {
+            ->getCollectionManager(static function ($qb) use ($self) {
                 $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue([]));
                 $qb->expects($self->once())->method('andWhere')->with($self->equalTo('c.enabled = :enabled'));
                 $qb->expects($self->once())->method('setParameters')->with(['enabled' => false]);

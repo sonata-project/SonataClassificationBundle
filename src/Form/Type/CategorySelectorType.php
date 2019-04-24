@@ -68,7 +68,7 @@ class CategorySelectorType extends AbstractType
             $resolver->setDefaults([
                 'context' => null,
                 'category' => null,
-                'choice_list' => function (Options $opts, $previousValue) use ($that) {
+                'choice_list' => static function (Options $opts, $previousValue) use ($that) {
                     return new SimpleChoiceList($that->getChoices($opts));
                 },
             ]);
@@ -78,7 +78,7 @@ class CategorySelectorType extends AbstractType
         $resolver->setDefaults([
             'context' => null,
             'category' => null,
-            'choice_loader' => function (Options $opts, $previousValue) use ($that) {
+            'choice_loader' => static function (Options $opts, $previousValue) use ($that) {
                 return new CategoryChoiceLoader(array_flip($that->getChoices($opts)));
             },
         ]);

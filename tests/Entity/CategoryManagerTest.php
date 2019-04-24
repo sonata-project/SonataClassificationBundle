@@ -27,7 +27,7 @@ class CategoryManagerTest extends TestCase
     {
         $self = $this;
         $this
-            ->getCategoryManager(function ($qb) use ($self) {
+            ->getCategoryManager(static function ($qb) use ($self) {
                 $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue([]));
                 $qb->expects($self->exactly(1))->method('andWhere')->withConsecutive(
                     [$self->equalTo('c.context = :context')]
@@ -41,7 +41,7 @@ class CategoryManagerTest extends TestCase
     {
         $self = $this;
         $this
-            ->getCategoryManager(function ($qb) use ($self) {
+            ->getCategoryManager(static function ($qb) use ($self) {
                 $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue([]));
                 $qb->expects($self->exactly(2))->method('andWhere')->withConsecutive(
                     [$self->equalTo('c.context = :context')],
@@ -59,7 +59,7 @@ class CategoryManagerTest extends TestCase
     {
         $self = $this;
         $this
-            ->getCategoryManager(function ($qb) use ($self) {
+            ->getCategoryManager(static function ($qb) use ($self) {
                 $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue([]));
                 $qb->expects($self->exactly(2))->method('andWhere')->withConsecutive(
                     [$self->equalTo('c.context = :context')],
@@ -99,7 +99,7 @@ class CategoryManagerTest extends TestCase
 
         $categories = [$categoryFoo, $categoryBar];
 
-        $categoryManager = $this->getCategoryManager(function ($qb) {
+        $categoryManager = $this->getCategoryManager(static function ($qb) {
         }, $categories);
 
         $this->assertSame($categoryManager->getCategories($context), $categories);
@@ -129,7 +129,7 @@ class CategoryManagerTest extends TestCase
         $categoryBar->setParent($categoryFoo);
         $categoryBar->setEnabled(true);
 
-        $categoryManager = $this->getCategoryManager(function ($qb) {
+        $categoryManager = $this->getCategoryManager(static function ($qb) {
         }, [$categoryFoo, $categoryBar]);
 
         $categoryFoo = $categoryManager->getRootCategoryWithChildren($categoryFoo);
@@ -152,7 +152,7 @@ class CategoryManagerTest extends TestCase
         $categoryFoo->setParent(null);
         $categoryFoo->setEnabled(true);
 
-        $categoryManager = $this->getCategoryManager(function ($qb) {
+        $categoryManager = $this->getCategoryManager(static function ($qb) {
         }, [$categoryFoo]);
 
         $categoryBar = $categoryManager->getRootCategory($context);
@@ -183,7 +183,7 @@ class CategoryManagerTest extends TestCase
         $categoryBar->setParent($categoryFoo);
         $categoryBar->setEnabled(true);
 
-        $categoryManager = $this->getCategoryManager(function ($qb) {
+        $categoryManager = $this->getCategoryManager(static function ($qb) {
         }, [$categoryFoo, $categoryBar]);
 
         $categories = $categoryManager->getRootCategoriesForContext($context);
@@ -221,7 +221,7 @@ class CategoryManagerTest extends TestCase
         $categoryBar->setParent(null);
         $categoryBar->setEnabled(true);
 
-        $categoryManager = $this->getCategoryManager(function ($qb) {
+        $categoryManager = $this->getCategoryManager(static function ($qb) {
         }, [$categoryFoo, $categoryBar]);
 
         $categories = $categoryManager->getRootCategories(false);
@@ -261,7 +261,7 @@ class CategoryManagerTest extends TestCase
         $categoryBar->setParent(null);
         $categoryBar->setEnabled(true);
 
-        $categoryManager = $this->getCategoryManager(function ($qb) {
+        $categoryManager = $this->getCategoryManager(static function ($qb) {
         }, [$categoryFoo, $categoryBar]);
 
         $categories = $categoryManager->getRootCategoriesSplitByContexts(false);

@@ -130,7 +130,7 @@ class CategoryAdminControllerTest extends TestCase
 
         $templating->expects($this->any())
             ->method('renderResponse')
-            ->will($this->returnCallback(function (
+            ->will($this->returnCallback(static function (
                 $view,
                 array $parameters = [],
                 Response $response = null
@@ -167,7 +167,7 @@ class CategoryAdminControllerTest extends TestCase
 
         $twig->expects($this->any())
             ->method('getExtension')
-            ->will($this->returnCallback(function ($name) use ($formExtension) {
+            ->will($this->returnCallback(static function ($name) use ($formExtension) {
                 switch ($name) {
                     case 'form':
                     case FormExtension::class:
@@ -177,7 +177,7 @@ class CategoryAdminControllerTest extends TestCase
 
         $twig->expects($this->any())
             ->method('getRuntime')
-            ->will($this->returnCallback(function ($name) use ($formRenderer) {
+            ->will($this->returnCallback(static function ($name) use ($formRenderer) {
                 switch ($name) {
                     case TwigRenderer::class:
                     case FormRenderer::class:
@@ -198,13 +198,13 @@ class CategoryAdminControllerTest extends TestCase
 
             $this->csrfProvider->expects($this->any())
                 ->method('generateCsrfToken')
-                ->will($this->returnCallback(function ($intention) {
+                ->will($this->returnCallback(static function ($intention) {
                     return 'csrf-token-123_'.$intention;
                 }));
 
             $this->csrfProvider->expects($this->any())
                 ->method('isCsrfTokenValid')
-                ->will($this->returnCallback(function ($intention, $token) {
+                ->will($this->returnCallback(static function ($intention, $token) {
                     if ($token === 'csrf-token-123_'.$intention) {
                         return true;
                     }
@@ -219,13 +219,13 @@ class CategoryAdminControllerTest extends TestCase
 
             $this->csrfProvider->expects($this->any())
                 ->method('getToken')
-                ->will($this->returnCallback(function ($intention) {
+                ->will($this->returnCallback(static function ($intention) {
                     return new CsrfToken($intention, 'csrf-token-123_'.$intention);
                 }));
 
             $this->csrfProvider->expects($this->any())
                 ->method('isTokenValid')
-                ->will($this->returnCallback(function (CsrfToken $token) {
+                ->will($this->returnCallback(static function (CsrfToken $token) {
                     if ($token->getValue() === 'csrf-token-123_'.$token->getId()) {
                         return true;
                     }
@@ -253,7 +253,7 @@ class CategoryAdminControllerTest extends TestCase
 
         $this->container->expects($this->any())
             ->method('get')
-            ->will($this->returnCallback(function ($id) use (
+            ->will($this->returnCallback(static function ($id) use (
                 $pool,
                 $admin,
                 $request,
@@ -294,7 +294,7 @@ class CategoryAdminControllerTest extends TestCase
 
         $this->container->expects($this->any())
             ->method('has')
-            ->will($this->returnCallback(function ($id) use ($tthis) {
+            ->will($this->returnCallback(static function ($id) use ($tthis) {
                 if ('form.csrf_provider' === $id && Kernel::MAJOR_VERSION === 2 && null !== $tthis->getCsrfProvider()) {
                     return true;
                 }
@@ -314,7 +314,7 @@ class CategoryAdminControllerTest extends TestCase
             ->method('generateUrl')
             ->will(
                 $this->returnCallback(
-                    function ($name, array $parameters = [], $absolute = false) {
+                    static function ($name, array $parameters = [], $absolute = false) {
                         $result = $name;
                         if (!empty($parameters)) {
                             $result .= '?'.http_build_query($parameters);

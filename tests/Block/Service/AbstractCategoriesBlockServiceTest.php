@@ -77,18 +77,18 @@ final class AbstractCategoriesBlockServiceTest extends AbstractBlockServiceTestC
             ->setMethods(['getId'])
             ->disableOriginalConstructor()
             ->getMockForAbstractClass();
-        $category->expects($this->any())->method('getId')->will($this->returnValue(23));
+        $category->expects($this->any())->method('getId')->willReturn(23);
 
         $this->categoryManager->expects($this->any())
             ->method('find')
             ->with($this->equalTo('23'))
-            ->will($this->returnValue($category));
+            ->willReturn($category);
 
         $block = $this->createMock(BlockInterface::class);
         $block->expects($this->any())
             ->method('getSetting')
             ->with($this->equalTo('categoryId'))
-            ->will($this->returnValue(23));
+            ->willReturn(23);
         $block->expects($this->once())
             ->method('setSetting')
             ->with($this->equalTo('categoryId'), $this->equalTo($category));
@@ -105,13 +105,13 @@ final class AbstractCategoriesBlockServiceTest extends AbstractBlockServiceTestC
             ->setMethods(['getId'])
             ->disableOriginalConstructor()
             ->getMockForAbstractClass();
-        $category->expects($this->any())->method('getId')->will($this->returnValue(23));
+        $category->expects($this->any())->method('getId')->willReturn(23);
 
         $block = $this->createMock(BlockInterface::class);
         $block->expects($this->any())
             ->method('getSetting')
             ->with($this->equalTo('categoryId'))
-            ->will($this->returnValue($category));
+            ->willReturn($category);
         $block->expects($this->once())
             ->method('setSetting')
             ->with($this->equalTo('categoryId'), $this->equalTo(23));
@@ -128,13 +128,13 @@ final class AbstractCategoriesBlockServiceTest extends AbstractBlockServiceTestC
             ->setMethods(['getId'])
             ->disableOriginalConstructor()
             ->getMockForAbstractClass();
-        $category->expects($this->any())->method('getId')->will($this->returnValue(23));
+        $category->expects($this->any())->method('getId')->willReturn(23);
 
         $block = $this->createMock(BlockInterface::class);
         $block->expects($this->any())
             ->method('getSetting')
             ->with($this->equalTo('categoryId'))
-            ->will($this->returnValue($category));
+            ->willReturn($category);
         $block->expects($this->once())
             ->method('setSetting')
             ->with($this->equalTo('categoryId'), $this->equalTo(23));

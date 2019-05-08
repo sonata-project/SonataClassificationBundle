@@ -77,18 +77,18 @@ final class AbstractTagsBlockServiceTest extends AbstractBlockServiceTestCase
             ->setMethods(['getId'])
             ->disableOriginalConstructor()
             ->getMockForAbstractClass();
-        $tag->expects($this->any())->method('getId')->will($this->returnValue(23));
+        $tag->expects($this->any())->method('getId')->willReturn(23);
 
         $this->tagManager->expects($this->any())
             ->method('find')
             ->with($this->equalTo('23'))
-            ->will($this->returnValue($tag));
+            ->willReturn($tag);
 
         $block = $this->createMock(BlockInterface::class);
         $block->expects($this->any())
             ->method('getSetting')
             ->with($this->equalTo('tagId'))
-            ->will($this->returnValue(23));
+            ->willReturn(23);
         $block->expects($this->once())
             ->method('setSetting')
             ->with($this->equalTo('tagId'), $this->equalTo($tag));
@@ -105,13 +105,13 @@ final class AbstractTagsBlockServiceTest extends AbstractBlockServiceTestCase
             ->setMethods(['getId'])
             ->disableOriginalConstructor()
             ->getMockForAbstractClass();
-        $tag->expects($this->any())->method('getId')->will($this->returnValue(23));
+        $tag->expects($this->any())->method('getId')->willReturn(23);
 
         $block = $this->createMock(BlockInterface::class);
         $block->expects($this->any())
             ->method('getSetting')
             ->with($this->equalTo('tagId'))
-            ->will($this->returnValue($tag));
+            ->willReturn($tag);
         $block->expects($this->once())
             ->method('setSetting')
             ->with($this->equalTo('tagId'), $this->equalTo(23));
@@ -128,13 +128,13 @@ final class AbstractTagsBlockServiceTest extends AbstractBlockServiceTestCase
             ->setMethods(['getId'])
             ->disableOriginalConstructor()
             ->getMockForAbstractClass();
-        $tag->expects($this->any())->method('getId')->will($this->returnValue(23));
+        $tag->expects($this->any())->method('getId')->willReturn(23);
 
         $block = $this->createMock(BlockInterface::class);
         $block->expects($this->any())
             ->method('getSetting')
             ->with($this->equalTo('tagId'))
-            ->will($this->returnValue($tag));
+            ->willReturn($tag);
         $block->expects($this->once())
             ->method('setSetting')
             ->with($this->equalTo('tagId'), $this->equalTo(23));

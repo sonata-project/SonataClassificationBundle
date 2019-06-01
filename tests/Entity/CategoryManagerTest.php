@@ -277,13 +277,13 @@ class CategoryManagerTest extends TestCase
 
         if (null !== $createQueryResult) {
             $query = $this->createMock(AbstractQuery::class);
-            $query->expects($this->once())->method('execute')->will($this->returnValue($createQueryResult));
-            $query->expects($this->any())->method('setParameter')->will($this->returnValue($query));
-            $em->expects($this->once())->method('createQuery')->will($this->returnValue($query));
+            $query->expects($this->once())->method('execute')->willReturn($createQueryResult);
+            $query->expects($this->any())->method('setParameter')->willReturn($query);
+            $em->expects($this->once())->method('createQuery')->willReturn($query);
         }
 
         $registry = $this->getMockForAbstractClass(ManagerRegistry::class);
-        $registry->expects($this->any())->method('getManagerForClass')->will($this->returnValue($em));
+        $registry->expects($this->any())->method('getManagerForClass')->willReturn($em);
 
         $contextManager = $this->createMock(ContextManagerInterface::class);
 

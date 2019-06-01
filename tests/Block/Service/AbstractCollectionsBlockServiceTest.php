@@ -77,18 +77,18 @@ final class AbstractCollectionsBlockServiceTest extends AbstractBlockServiceTest
             ->setMethods(['getId'])
             ->disableOriginalConstructor()
             ->getMockForAbstractClass();
-        $collection->expects($this->any())->method('getId')->will($this->returnValue(23));
+        $collection->expects($this->any())->method('getId')->willReturn(23);
 
         $this->collectionManager->expects($this->any())
             ->method('find')
             ->with($this->equalTo('23'))
-            ->will($this->returnValue($collection));
+            ->willReturn($collection);
 
         $block = $this->createMock(BlockInterface::class);
         $block->expects($this->any())
             ->method('getSetting')
             ->with($this->equalTo('collectionId'))
-            ->will($this->returnValue(23));
+            ->willReturn(23);
         $block->expects($this->once())
             ->method('setSetting')
             ->with($this->equalTo('collectionId'), $this->equalTo($collection));
@@ -105,13 +105,13 @@ final class AbstractCollectionsBlockServiceTest extends AbstractBlockServiceTest
             ->setMethods(['getId'])
             ->disableOriginalConstructor()
             ->getMockForAbstractClass();
-        $collection->expects($this->any())->method('getId')->will($this->returnValue(23));
+        $collection->expects($this->any())->method('getId')->willReturn(23);
 
         $block = $this->createMock(BlockInterface::class);
         $block->expects($this->any())
             ->method('getSetting')
             ->with($this->equalTo('collectionId'))
-            ->will($this->returnValue($collection));
+            ->willReturn($collection);
         $block->expects($this->once())
             ->method('setSetting')
             ->with($this->equalTo('collectionId'), $this->equalTo(23));
@@ -128,13 +128,13 @@ final class AbstractCollectionsBlockServiceTest extends AbstractBlockServiceTest
             ->setMethods(['getId'])
             ->disableOriginalConstructor()
             ->getMockForAbstractClass();
-        $collection->expects($this->any())->method('getId')->will($this->returnValue(23));
+        $collection->expects($this->any())->method('getId')->willReturn(23);
 
         $block = $this->createMock(BlockInterface::class);
         $block->expects($this->any())
             ->method('getSetting')
             ->with($this->equalTo('collectionId'))
-            ->will($this->returnValue($collection));
+            ->willReturn($collection);
         $block->expects($this->once())
             ->method('setSetting')
             ->with($this->equalTo('collectionId'), $this->equalTo(23));

@@ -66,7 +66,7 @@ class TagManagerTest extends TestCase
         $em = EntityManagerMockFactory::create($this, $qbCallback, []);
 
         $registry = $this->getMockForAbstractClass(ManagerRegistry::class);
-        $registry->expects($this->any())->method('getManagerForClass')->will($this->returnValue($em));
+        $registry->expects($this->any())->method('getManagerForClass')->willReturn($em);
 
         return new TagManager(BaseTag::class, $registry);
     }

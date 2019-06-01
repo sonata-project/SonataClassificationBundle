@@ -34,12 +34,12 @@ class CollectionControllerTest extends TestCase
     public function testGetCollectionsAction()
     {
         $paramFetcher = $this->createMock(ParamFetcherInterface::class);
-        $paramFetcher->expects($this->once())->method('all')->will($this->returnValue([]));
+        $paramFetcher->expects($this->once())->method('all')->willReturn([]);
 
         $pager = $this->createMock(Pager::class);
 
         $collectionManager = $this->createMock(CollectionManagerInterface::class);
-        $collectionManager->expects($this->once())->method('getPager')->will($this->returnValue($pager));
+        $collectionManager->expects($this->once())->method('getPager')->willReturn($pager);
 
         $this->assertSame($pager, $this->createCollectionController($collectionManager)->getCollectionsAction($paramFetcher));
     }
@@ -49,7 +49,7 @@ class CollectionControllerTest extends TestCase
         $collection = $this->createMock(CollectionInterface::class);
 
         $collectionManager = $this->createMock(CollectionManagerInterface::class);
-        $collectionManager->expects($this->once())->method('find')->will($this->returnValue($collection));
+        $collectionManager->expects($this->once())->method('find')->willReturn($collection);
 
         $this->assertSame($collection, $this->createCollectionController($collectionManager)->getCollectionAction(1));
     }
@@ -67,16 +67,16 @@ class CollectionControllerTest extends TestCase
         $collection = $this->createMock(CollectionInterface::class);
 
         $collectionManager = $this->createMock(CollectionManagerInterface::class);
-        $collectionManager->expects($this->once())->method('save')->will($this->returnValue($collection));
+        $collectionManager->expects($this->once())->method('save')->willReturn($collection);
 
         $form = $this->createMock(Form::class);
         $form->expects($this->once())->method('handleRequest');
-        $form->expects($this->once())->method('isValid')->will($this->returnValue(true));
-        $form->expects($this->once())->method('getData')->will($this->returnValue($collection));
-        $form->expects($this->once())->method('all')->will($this->returnValue([]));
+        $form->expects($this->once())->method('isValid')->willReturn(true);
+        $form->expects($this->once())->method('getData')->willReturn($collection);
+        $form->expects($this->once())->method('all')->willReturn([]);
 
         $formFactory = $this->createMock(FormFactoryInterface::class);
-        $formFactory->expects($this->once())->method('createNamed')->will($this->returnValue($form));
+        $formFactory->expects($this->once())->method('createNamed')->willReturn($form);
 
         $view = $this->createCollectionController($collectionManager, $formFactory)->postCollectionAction(new Request());
 
@@ -88,15 +88,15 @@ class CollectionControllerTest extends TestCase
         $collection = $this->createMock(CollectionInterface::class);
 
         $collectionManager = $this->createMock(CollectionManagerInterface::class);
-        $collectionManager->expects($this->never())->method('save')->will($this->returnValue($collectionManager));
+        $collectionManager->expects($this->never())->method('save')->willReturn($collectionManager);
 
         $form = $this->createMock(Form::class);
         $form->expects($this->once())->method('handleRequest');
-        $form->expects($this->once())->method('isValid')->will($this->returnValue(false));
-        $form->expects($this->once())->method('all')->will($this->returnValue([]));
+        $form->expects($this->once())->method('isValid')->willReturn(false);
+        $form->expects($this->once())->method('all')->willReturn([]);
 
         $formFactory = $this->createMock(FormFactoryInterface::class);
-        $formFactory->expects($this->once())->method('createNamed')->will($this->returnValue($form));
+        $formFactory->expects($this->once())->method('createNamed')->willReturn($form);
 
         $view = $this->createCollectionController($collectionManager, $formFactory)->postCollectionAction(new Request());
 
@@ -108,17 +108,17 @@ class CollectionControllerTest extends TestCase
         $collection = $this->createMock(CollectionInterface::class);
 
         $collectionManager = $this->createMock(CollectionManagerInterface::class);
-        $collectionManager->expects($this->once())->method('find')->will($this->returnValue($collection));
-        $collectionManager->expects($this->once())->method('save')->will($this->returnValue($collection));
+        $collectionManager->expects($this->once())->method('find')->willReturn($collection);
+        $collectionManager->expects($this->once())->method('save')->willReturn($collection);
 
         $form = $this->createMock(Form::class);
         $form->expects($this->once())->method('handleRequest');
-        $form->expects($this->once())->method('isValid')->will($this->returnValue(true));
-        $form->expects($this->once())->method('getData')->will($this->returnValue($collection));
-        $form->expects($this->once())->method('all')->will($this->returnValue([]));
+        $form->expects($this->once())->method('isValid')->willReturn(true);
+        $form->expects($this->once())->method('getData')->willReturn($collection);
+        $form->expects($this->once())->method('all')->willReturn([]);
 
         $formFactory = $this->createMock(FormFactoryInterface::class);
-        $formFactory->expects($this->once())->method('createNamed')->will($this->returnValue($form));
+        $formFactory->expects($this->once())->method('createNamed')->willReturn($form);
 
         $view = $this->createCollectionController($collectionManager, $formFactory)->putCollectionAction(1, new Request());
 
@@ -130,16 +130,16 @@ class CollectionControllerTest extends TestCase
         $collection = $this->createMock(CollectionInterface::class);
 
         $collectionManager = $this->createMock(CollectionManagerInterface::class);
-        $collectionManager->expects($this->once())->method('find')->will($this->returnValue($collection));
-        $collectionManager->expects($this->never())->method('save')->will($this->returnValue($collection));
+        $collectionManager->expects($this->once())->method('find')->willReturn($collection);
+        $collectionManager->expects($this->never())->method('save')->willReturn($collection);
 
         $form = $this->createMock(Form::class);
         $form->expects($this->once())->method('handleRequest');
-        $form->expects($this->once())->method('isValid')->will($this->returnValue(false));
-        $form->expects($this->once())->method('all')->will($this->returnValue([]));
+        $form->expects($this->once())->method('isValid')->willReturn(false);
+        $form->expects($this->once())->method('all')->willReturn([]);
 
         $formFactory = $this->createMock(FormFactoryInterface::class);
-        $formFactory->expects($this->once())->method('createNamed')->will($this->returnValue($form));
+        $formFactory->expects($this->once())->method('createNamed')->willReturn($form);
 
         $view = $this->createCollectionController($collectionManager, $formFactory)->putCollectionAction(1, new Request());
 
@@ -151,7 +151,7 @@ class CollectionControllerTest extends TestCase
         $collection = $this->createMock(CollectionInterface::class);
 
         $collectionManager = $this->createMock(CollectionManagerInterface::class);
-        $collectionManager->expects($this->once())->method('find')->will($this->returnValue($collection));
+        $collectionManager->expects($this->once())->method('find')->willReturn($collection);
         $collectionManager->expects($this->once())->method('delete');
 
         $view = $this->createCollectionController($collectionManager)->deleteCollectionAction(1);
@@ -164,7 +164,7 @@ class CollectionControllerTest extends TestCase
         $this->expectException(NotFoundHttpException::class);
 
         $collectionManager = $this->createMock(CollectionManagerInterface::class);
-        $collectionManager->expects($this->once())->method('find')->will($this->returnValue(null));
+        $collectionManager->expects($this->once())->method('find')->willReturn(null);
         $collectionManager->expects($this->never())->method('delete');
 
         $this->createCollectionController($collectionManager)->deleteCollectionAction(1);

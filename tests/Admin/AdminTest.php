@@ -63,7 +63,7 @@ class AdminTest extends TestCase
         ]);
 
         $extension = $this->createMock(AdminExtensionInterface::class);
-        $extension->expects($this->once())->method('getPersistentParameters')->will($this->returnValue(null));
+        $extension->expects($this->once())->method('getPersistentParameters')->willReturn(null);
 
         $admin->addExtension($extension);
 
@@ -89,7 +89,7 @@ class AdminTest extends TestCase
         ]);
 
         $extension = $this->createMock(AdminExtensionInterface::class);
-        $extension->expects($this->once())->method('getPersistentParameters')->will($this->returnValue($extensionParams));
+        $extension->expects($this->once())->method('getPersistentParameters')->willReturn($extensionParams);
 
         $admin->addExtension($extension);
 

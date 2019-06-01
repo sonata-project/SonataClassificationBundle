@@ -130,7 +130,7 @@ class CategoryAdminControllerTest extends TestCase
 
         $templating->expects($this->any())
             ->method('renderResponse')
-            ->will($this->returnCallback(static function (
+            ->willReturnCallback(static function (
                 $view,
                 array $parameters = [],
                 Response $response = null
@@ -147,7 +147,7 @@ class CategoryAdminControllerTest extends TestCase
                 $params = $parameters;
 
                 return $response;
-            }));
+            });
 
         // php 5.3 BC
         $pool = $this->pool;
@@ -167,17 +167,17 @@ class CategoryAdminControllerTest extends TestCase
 
         $twig->expects($this->any())
             ->method('getExtension')
-            ->will($this->returnCallback(static function ($name) use ($formExtension) {
+            ->willReturnCallback(static function ($name) use ($formExtension) {
                 switch ($name) {
                     case 'form':
                     case FormExtension::class:
                         return $formExtension;
                 }
-            }));
+            });
 
         $twig->expects($this->any())
             ->method('getRuntime')
-            ->will($this->returnCallback(static function ($name) use ($formRenderer) {
+            ->willReturnCallback(static function ($name) use ($formRenderer) {
                 switch ($name) {
                     case TwigRenderer::class:
                     case FormRenderer::class:
@@ -187,7 +187,7 @@ class CategoryAdminControllerTest extends TestCase
 
                         throw new \Twig_Error_Runtime('This runtime exists when Symfony >= 3.2.');
                 }
-            }));
+            });
 
         // Prefer Symfony 2.x interfaces
         if (interface_exists(CsrfProviderInterface::class)) {
@@ -198,19 +198,19 @@ class CategoryAdminControllerTest extends TestCase
 
             $this->csrfProvider->expects($this->any())
                 ->method('generateCsrfToken')
-                ->will($this->returnCallback(static function ($intention) {
+                ->willReturnCallback(static function ($intention) {
                     return 'csrf-token-123_'.$intention;
-                }));
+                });
 
             $this->csrfProvider->expects($this->any())
                 ->method('isCsrfTokenValid')
-                ->will($this->returnCallback(static function ($intention, $token) {
+                ->willReturnCallback(static function ($intention, $token) {
                     if ($token === 'csrf-token-123_'.$intention) {
                         return true;
                     }
 
                     return false;
-                }));
+                });
         } else {
             $this->csrfProvider = $this->getMockBuilder(
                 CsrfTokenManagerInterface::class
@@ -219,19 +219,19 @@ class CategoryAdminControllerTest extends TestCase
 
             $this->csrfProvider->expects($this->any())
                 ->method('getToken')
-                ->will($this->returnCallback(static function ($intention) {
+                ->willReturnCallback(static function ($intention) {
                     return new CsrfToken($intention, 'csrf-token-123_'.$intention);
-                }));
+                });
 
             $this->csrfProvider->expects($this->any())
                 ->method('isTokenValid')
-                ->will($this->returnCallback(static function (CsrfToken $token) {
+                ->willReturnCallback(static function (CsrfToken $token) {
                     if ($token->getValue() === 'csrf-token-123_'.$token->getId()) {
                         return true;
                     }
 
                     return false;
-                }));
+                });
         }
 
         // php 5.3 BC
@@ -241,7 +241,7 @@ class CategoryAdminControllerTest extends TestCase
 
         $this->admin->expects($this->any())
             ->method('getCode')
-            ->will($this->returnValue('admin_code'));
+            ->willReturn('admin_code');
 
         $admin = $this->admin;
 
@@ -253,7 +253,7 @@ class CategoryAdminControllerTest extends TestCase
 
         $this->container->expects($this->any())
             ->method('get')
-            ->will($this->returnCallback(static function ($id) use (
+            ->willReturnCallback(static function ($id) use (
                 $pool,
                 $admin,
                 $request,
@@ -287,14 +287,14 @@ class CategoryAdminControllerTest extends TestCase
                     case 'admin_code.template_registry':
                         return new TemplateRegistry();
                 }
-            }));
+            });
 
         // php 5.3
         $tthis = $this;
 
         $this->container->expects($this->any())
             ->method('has')
-            ->will($this->returnCallback(static function ($id) use ($tthis) {
+            ->willReturnCallback(static function ($id) use ($tthis) {
                 if ('form.csrf_provider' === $id && Kernel::MAJOR_VERSION === 2 && null !== $tthis->getCsrfProvider()) {
                     return true;
                 }
@@ -308,12 +308,12 @@ class CategoryAdminControllerTest extends TestCase
                 }
 
                 return false;
-            }));
+            });
 
         $this->admin->expects($this->any())
             ->method('generateUrl')
-            ->will(
-                $this->returnCallback(
+            ->willReturnCallback(
+
                     static function ($name, array $parameters = [], $absolute = false) {
                         $result = $name;
                         if (!empty($parameters)) {
@@ -322,12 +322,12 @@ class CategoryAdminControllerTest extends TestCase
 
                         return $result;
                     }
-                )
+
             );
 
         $this->admin->expects($this->any())
             ->method('getTemplate')
-            ->will($this->returnValue('@SonataClassification/CategoryAdmin/list.html.twig'));
+            ->willReturn('@SonataClassification/CategoryAdmin/list.html.twig');
 
         $this->controller = new CategoryAdminController();
         $this->controller->setContainer($this->container);
@@ -364,27 +364,27 @@ class CategoryAdminControllerTest extends TestCase
 
         $form->expects($this->once())
              ->method('createView')
-             ->will($this->returnValue(new FormView()));
+             ->willReturn(new FormView());
 
         $this->admin->expects($this->once())
             ->method('getDatagrid')
-            ->will($this->returnValue($datagrid));
+            ->willReturn($datagrid);
 
         $datagrid->expects($this->once())
             ->method('getForm')
-            ->will($this->returnValue($form));
+            ->willReturn($form);
 
         $datagrid->expects($this->once())
             ->method('getValues')
-            ->will($this->returnValue([
+            ->willReturn([
                 'context' => [
                     'value' => $context ?: '',
                 ],
-            ]));
+            ]);
 
         $this->admin->expects($this->any())
             ->method('getPersistentParameter')
-            ->will($this->returnValue($context));
+            ->willReturn($context);
 
         $this->assertInstanceOf(Response::class,
             $this->controller->listAction($this->request));
@@ -409,31 +409,31 @@ class CategoryAdminControllerTest extends TestCase
 
         $form->expects($this->once())
             ->method('createView')
-            ->will($this->returnValue(new FormView()));
+            ->willReturn(new FormView());
 
         $this->admin->expects($this->once())
             ->method('getDatagrid')
-            ->will($this->returnValue($datagrid));
+            ->willReturn($datagrid);
 
         $datagrid->expects($this->once())
             ->method('getForm')
-            ->will($this->returnValue($form));
+            ->willReturn($form);
 
         $this->admin->expects($this->any())
             ->method('getPersistentParameter')
-            ->will($this->returnValue('default'));
+            ->willReturn('default');
 
         if ($context) {
             $contextMock = $this->getContextMock($context);
             $this->request->query->set('context', $contextMock->getId());
             $this->contextManager->expects($this->any())
                 ->method('find')
-                ->will($this->returnValue($contextMock));
+                ->willReturn($contextMock);
         } else {
             $this->request->query->remove('context');
             $this->contextManager->expects($this->any())
                 ->method('find')
-                ->will($this->returnValue(false));
+                ->willReturn(false);
         }
 
         $categoriesMock = [];
@@ -449,7 +449,7 @@ class CategoryAdminControllerTest extends TestCase
 
         $this->categoryManager->expects($this->any())
             ->method('getRootCategoriesSplitByContexts')
-            ->will($this->returnValue($categoriesMock));
+            ->willReturn($categoriesMock);
 
         $this->assertInstanceOf(Response::class,
             $this->controller->treeAction($this->request));
@@ -479,7 +479,7 @@ class CategoryAdminControllerTest extends TestCase
     private function getContextMock($id)
     {
         $contextMock = $this->createMock(ContextInterface::class);
-        $contextMock->expects($this->any())->method('getId')->will($this->returnValue($id));
+        $contextMock->expects($this->any())->method('getId')->willReturn($id);
         $contextMock->setName($id);
         $contextMock->setEnabled(true);
 

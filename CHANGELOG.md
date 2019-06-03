@@ -2,6 +2,11 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.8.1](https://github.com/sonata-project/SonataClassificationBundle/compare/3.8.0...3.8.1) - 2019-06-03
+
+### Added
+- Added translation keys for `CategoryAdmin` "General" and "Options" labels
+
 ## [3.8.0](https://github.com/sonata-project/SonataClassificationBundle/compare/3.7.1...3.8.0) - 2019-01-18
 
 ### Fixed

@@ -36,9 +36,7 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
     protected $contextManager;
 
     /**
-     * @param string                  $class
-     * @param ManagerRegistry         $registry
-     * @param ContextManagerInterface $contextManager
+     * @param string $class
      */
     public function __construct($class, ManagerRegistry $registry, ContextManagerInterface $contextManager)
     {
@@ -101,7 +99,6 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
     /**
      * NEXT_MAJOR: add this method to the interface.
      *
-     * @param CategoryInterface $category
      *
      * @return CategoryInterface
      */
@@ -280,8 +277,6 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
 
     /**
      * Load all categories from the database, the current method is very efficient for < 256 categories.
-     *
-     * @param ContextInterface $context
      */
     protected function loadCategories(ContextInterface $context)
     {

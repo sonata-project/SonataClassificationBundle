@@ -44,11 +44,7 @@ abstract class AbstractCategoriesBlockService extends AbstractClassificationBloc
     private $categoryAdmin;
 
     /**
-     * @param string                   $name
-     * @param EngineInterface          $templating
-     * @param ContextManagerInterface  $contextManager
-     * @param CategoryManagerInterface $categoryManager
-     * @param AdminInterface           $categoryAdmin
+     * @param string $name
      */
     public function __construct($name, EngineInterface $templating, ContextManagerInterface $contextManager, CategoryManagerInterface $categoryManager, AdminInterface $categoryAdmin)
     {
@@ -201,9 +197,6 @@ abstract class AbstractCategoriesBlockService extends AbstractClassificationBloc
         return null;
     }
 
-    /**
-     * @param BlockInterface $block
-     */
     private function resolveIds(BlockInterface $block)
     {
         $block->setSetting(

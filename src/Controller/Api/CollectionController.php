@@ -43,10 +43,6 @@ class CollectionController
      */
     protected $formFactory;
 
-    /**
-     * @param CollectionManagerInterface $collectionManager
-     * @param FormFactoryInterface       $formFactory
-     */
     public function __construct(CollectionManagerInterface $collectionManager, FormFactoryInterface $formFactory)
     {
         $this->collectionManager = $collectionManager;
@@ -66,8 +62,6 @@ class CollectionController
      * @QueryParam(name="enabled", requirements="0|1", nullable=true, strict=true, description="Enabled/Disabled collections filter")
      *
      * @View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
-     *
-     * @param ParamFetcherInterface $paramFetcher
      *
      * @return PagerInterface
      */
@@ -191,7 +185,6 @@ class CollectionController
     /**
      * Filters criteria from $paramFetcher to be compatible with the Pager criteria.
      *
-     * @param ParamFetcherInterface $paramFetcher
      *
      * @return array The filtered criteria
      */

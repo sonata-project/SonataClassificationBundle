@@ -85,9 +85,6 @@ interface TagInterface
      */
     public function getUpdatedAt();
 
-    /**
-     * @param ContextInterface $context
-     */
     public function setContext(ContextInterface $context);
 
     /**

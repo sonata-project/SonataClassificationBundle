@@ -43,10 +43,6 @@ class ContextController
      */
     protected $formFactory;
 
-    /**
-     * @param ContextManagerInterface $contextManager
-     * @param FormFactoryInterface    $formFactory
-     */
     public function __construct(ContextManagerInterface $contextManager, FormFactoryInterface $formFactory)
     {
         $this->contextManager = $contextManager;
@@ -66,8 +62,6 @@ class ContextController
      * @QueryParam(name="enabled", requirements="0|1", nullable=true, strict=true, description="Enabled/Disabled contexts filter")
      *
      * @View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
-     *
-     * @param ParamFetcherInterface $paramFetcher
      *
      * @return PagerInterface
      */
@@ -191,7 +185,6 @@ class ContextController
     /**
      * Filters criteria from $paramFetcher to be compatible with the Pager criteria.
      *
-     * @param ParamFetcherInterface $paramFetcher
      *
      * @return array The filtered criteria
      */

@@ -43,10 +43,6 @@ class TagController
      */
     protected $formFactory;
 
-    /**
-     * @param TagManagerInterface  $tagManager
-     * @param FormFactoryInterface $formFactory
-     */
     public function __construct(TagManagerInterface $tagManager, FormFactoryInterface $formFactory)
     {
         $this->tagManager = $tagManager;
@@ -66,8 +62,6 @@ class TagController
      * @QueryParam(name="enabled", requirements="0|1", nullable=true, strict=true, description="Enabled/Disabled tags filter")
      *
      * @View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
-     *
-     * @param ParamFetcherInterface $paramFetcher
      *
      * @return PagerInterface
      */
@@ -191,7 +185,6 @@ class TagController
     /**
      * Filters criteria from $paramFetcher to be compatible with the Pager criteria.
      *
-     * @param ParamFetcherInterface $paramFetcher
      *
      * @return array The filtered criteria
      */

@@ -73,9 +73,6 @@ interface CollectionInterface
      */
     public function getDescription();
 
-    /**
-     * @param \DateTime $createdAt
-     */
     public function setCreatedAt(\DateTime $createdAt);
 
     /**
@@ -83,9 +80,6 @@ interface CollectionInterface
      */
     public function getCreatedAt();
 
-    /**
-     * @param \DateTime $updatedAt
-     */
     public function setUpdatedAt(\DateTime $updatedAt);
 
     /**
@@ -103,9 +97,6 @@ interface CollectionInterface
      */
     public function getMedia();
 
-    /**
-     * @param ContextInterface $context
-     */
     public function setContext(ContextInterface $context);
 
     /**

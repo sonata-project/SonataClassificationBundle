@@ -26,10 +26,9 @@ abstract class ContextAwareAdmin extends AbstractAdmin
     protected $contextManager;
 
     /**
-     * @param string                  $code
-     * @param string                  $class
-     * @param string                  $baseControllerName
-     * @param ContextManagerInterface $contextManager
+     * @param string $code
+     * @param string $class
+     * @param string $baseControllerName
      */
     public function __construct($code, $class, $baseControllerName, ContextManagerInterface $contextManager)
     {

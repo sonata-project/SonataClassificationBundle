@@ -34,9 +34,7 @@ abstract class AbstractClassificationBlockService extends AbstractAdminBlockServ
     protected $contextManager;
 
     /**
-     * @param string                  $name
-     * @param EngineInterface         $templating
-     * @param ContextManagerInterface $contextManager
+     * @param string $name
      */
     public function __construct($name, EngineInterface $templating, ContextManagerInterface $contextManager)
     {
@@ -46,12 +44,10 @@ abstract class AbstractClassificationBlockService extends AbstractAdminBlockServ
     }
 
     /**
-     * @param FormMapper     $formMapper
-     * @param AdminInterface $admin
-     * @param string         $formField
-     * @param string         $field
-     * @param array          $fieldOptions
-     * @param array          $adminOptions
+     * @param string $formField
+     * @param string $field
+     * @param array  $fieldOptions
+     * @param array  $adminOptions
      *
      * @return FormBuilder
      */

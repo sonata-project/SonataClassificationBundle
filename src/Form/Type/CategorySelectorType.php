@@ -37,9 +37,6 @@ class CategorySelectorType extends AbstractType
      */
     protected $manager;
 
-    /**
-     * @param ManagerInterface $manager
-     */
     public function __construct(ManagerInterface $manager)
     {
         $this->manager = $manager;
@@ -85,8 +82,6 @@ class CategorySelectorType extends AbstractType
     }
 
     /**
-     * @param Options $options
-     *
      * @return array
      */
     public function getChoices(Options $options)
@@ -137,10 +132,7 @@ class CategorySelectorType extends AbstractType
     }
 
     /**
-     * @param CategoryInterface $category
-     * @param Options           $options
-     * @param array             $choices
-     * @param int               $level
+     * @param int $level
      */
     private function childWalker(CategoryInterface $category, Options $options, array &$choices, $level = 2)
     {

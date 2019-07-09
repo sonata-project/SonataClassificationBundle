@@ -44,11 +44,7 @@ abstract class AbstractTagsBlockService extends AbstractClassificationBlockServi
     private $tagAdmin;
 
     /**
-     * @param string                  $name
-     * @param EngineInterface         $templating
-     * @param ContextManagerInterface $contextManager
-     * @param TagManagerInterface     $tagManager
-     * @param AdminInterface          $tagAdmin
+     * @param string $name
      */
     public function __construct($name, EngineInterface $templating, ContextManagerInterface $contextManager, TagManagerInterface $tagManager, AdminInterface $tagAdmin)
     {
@@ -202,9 +198,6 @@ abstract class AbstractTagsBlockService extends AbstractClassificationBlockServi
         return null;
     }
 
-    /**
-     * @param BlockInterface $block
-     */
     private function resolveIds(BlockInterface $block)
     {
         $block->setSetting(

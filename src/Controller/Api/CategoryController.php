@@ -43,10 +43,6 @@ class CategoryController
      */
     protected $formFactory;
 
-    /**
-     * @param CategoryManagerInterface $categoryManager
-     * @param FormFactoryInterface     $formFactory
-     */
     public function __construct(CategoryManagerInterface $categoryManager, FormFactoryInterface $formFactory)
     {
         $this->categoryManager = $categoryManager;
@@ -67,8 +63,6 @@ class CategoryController
      * @QueryParam(name="context", requirements="\S+", nullable=true, strict=true, description="Context of categories")
      *
      * @View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
-     *
-     * @param ParamFetcherInterface $paramFetcher
      *
      * @return PagerInterface
      */
@@ -192,7 +186,6 @@ class CategoryController
     /**
      * Filters criteria from $paramFetcher to be compatible with the Pager criteria.
      *
-     * @param ParamFetcherInterface $paramFetcher
      *
      * @return array The filtered criteria
      */

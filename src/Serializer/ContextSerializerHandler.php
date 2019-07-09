@@ -25,10 +25,7 @@ class ContextSerializerHandler extends BaseSerializerHandler
     /**
      * Serialize data object to id.
      *
-     * @param VisitorInterface $visitor
-     * @param object           $data
-     * @param array            $type
-     * @param Context          $context
+     * @param object $data
      *
      * @return int|null
      */

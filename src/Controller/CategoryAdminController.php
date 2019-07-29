@@ -70,8 +70,6 @@ class CategoryAdminController extends Controller
     }
 
     /**
-     * @param Request $request
-     *
      * @return Response
      */
     public function treeAction(Request $request)
@@ -130,8 +128,7 @@ class CategoryAdminController extends Controller
     /**
      * Sets the admin form theme to form view. Used for compatibility between Symfony versions.
      *
-     * @param FormView $formView
-     * @param string   $theme
+     * @param string $theme
      */
     private function setFormTheme(FormView $formView, $theme): void
     {

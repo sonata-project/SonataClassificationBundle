@@ -41,8 +41,6 @@ interface CategoryManagerInterface extends ManagerInterface, PageableManagerInte
     public function getSubCategoriesPager($categoryId, $page = 1, $limit = 25, $criteria = []);
 
     /**
-     * @param CategoryInterface $category
-     *
      * @return CategoryInterface
      */
     public function getRootCategoryWithChildren(CategoryInterface $category);

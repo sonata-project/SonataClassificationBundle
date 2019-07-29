@@ -28,9 +28,6 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 class SonataClassificationExtension extends Extension
 {
     /**
-     * @param array            $configs
-     * @param ContainerBuilder $container
-     *
      * @throws \InvalidArgumentException
      */
     public function load(array $configs, ContainerBuilder $container): void
@@ -61,8 +58,7 @@ class SonataClassificationExtension extends Extension
     }
 
     /**
-     * @param array            $config
-     * @param ContainerBuilder $container
+     * @param array $config
      */
     public function configureClass($config, ContainerBuilder $container): void
     {
@@ -80,8 +76,7 @@ class SonataClassificationExtension extends Extension
     }
 
     /**
-     * @param array            $config
-     * @param ContainerBuilder $container
+     * @param array $config
      */
     public function configureAdmin($config, ContainerBuilder $container): void
     {
@@ -102,9 +97,6 @@ class SonataClassificationExtension extends Extension
         $container->setParameter('sonata.classification.admin.context.translation_domain', $config['admin']['context']['translation']);
     }
 
-    /**
-     * @param array $config
-     */
     public function registerDoctrineMapping(array $config): void
     {
         foreach ($config['class'] as $type => $class) {

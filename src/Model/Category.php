@@ -207,8 +207,6 @@ abstract class Category implements CategoryInterface
     }
 
     /**
-     * @param CategoryInterface $child
-     *
      * @deprecated only used by the AdminHelper
      */
     public function addChildren(CategoryInterface $child): void

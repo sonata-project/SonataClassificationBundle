@@ -44,11 +44,7 @@ abstract class AbstractCollectionsBlockService extends AbstractClassificationBlo
     private $collectionAdmin;
 
     /**
-     * @param string                     $name
-     * @param EngineInterface            $templating
-     * @param ContextManagerInterface    $contextManager
-     * @param CollectionManagerInterface $collectionManager
-     * @param AdminInterface             $collectionAdmin
+     * @param string $name
      */
     public function __construct($name, EngineInterface $templating, ContextManagerInterface $contextManager, CollectionManagerInterface $collectionManager, AdminInterface $collectionAdmin)
     {
@@ -204,9 +200,6 @@ abstract class AbstractCollectionsBlockService extends AbstractClassificationBlo
         return null;
     }
 
-    /**
-     * @param BlockInterface $block
-     */
     private function resolveIds(BlockInterface $block): void
     {
         $block->setSetting(

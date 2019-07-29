@@ -35,9 +35,7 @@ class CategoryManager extends BaseDocumentManager implements CategoryManagerInte
     protected $contextManager;
 
     /**
-     * @param string                  $class
-     * @param ManagerRegistry         $registry
-     * @param ContextManagerInterface $contextManager
+     * @param string $class
      */
     public function __construct($class, ManagerRegistry $registry, ContextManagerInterface $contextManager)
     {
@@ -195,8 +193,6 @@ class CategoryManager extends BaseDocumentManager implements CategoryManagerInte
 
     /**
      * Load all categories from the database, the current method is very efficient for < 256 categories.
-     *
-     * @param ContextInterface $context
      */
     protected function loadCategories(ContextInterface $context): void
     {

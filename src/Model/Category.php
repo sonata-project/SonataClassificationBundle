@@ -35,7 +35,7 @@ abstract class Category implements CategoryInterface
     protected $enabled;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $description;
 
@@ -50,7 +50,7 @@ abstract class Category implements CategoryInterface
     protected $updatedAt;
 
     /**
-     * @var int
+     * @var int|null
      */
     protected $position;
 
@@ -60,7 +60,7 @@ abstract class Category implements CategoryInterface
     protected $children;
 
     /**
-     * @var CategoryInterface
+     * @var CategoryInterface|null
      */
     protected $parent;
 

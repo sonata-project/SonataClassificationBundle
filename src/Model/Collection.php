@@ -33,7 +33,7 @@ abstract class Collection implements CollectionInterface
     protected $enabled;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $description;
 

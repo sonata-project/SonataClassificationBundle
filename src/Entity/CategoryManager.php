@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Sonata\ClassificationBundle\Entity;
 
 use Doctrine\Common\Persistence\ManagerRegistry;
-use Sonata\AdminBundle\Datagrid\PagerInterface;
 use Sonata\ClassificationBundle\Model\CategoryInterface;
 use Sonata\ClassificationBundle\Model\CategoryManagerInterface;
 use Sonata\ClassificationBundle\Model\ContextInterface;
@@ -48,12 +47,6 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
 
     /**
      * Returns a pager to iterate over the root category.
-     *
-     * @param int   $page
-     * @param int   $limit
-     * @param array $criteria
-     *
-     * @return mixed
      */
     public function getRootCategoriesPager($page = 1, $limit = 25, $criteria = [])
     {
@@ -72,14 +65,6 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
         return $pager;
     }
 
-    /**
-     * @param int   $categoryId
-     * @param int   $page
-     * @param int   $limit
-     * @param array $criteria
-     *
-     * @return PagerInterface
-     */
     public function getSubCategoriesPager($categoryId, $page = 1, $limit = 25, $criteria = [])
     {
         $queryBuilder = $this->getObjectManager()->createQueryBuilder()
@@ -96,12 +81,6 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
         return $pager;
     }
 
-    /**
-     * NEXT_MAJOR: add this method to the interface.
-     *
-     *
-     * @return CategoryInterface
-     */
     public function getRootCategoryWithChildren(CategoryInterface $category)
     {
         if (null === $category->getContext()) {
@@ -123,13 +102,6 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
         throw new \RuntimeException('Category does not exist');
     }
 
-    /**
-     * @todo NEXT_MAJOR: remove this method.
-     *
-     * @param ContextInterface $context
-     *
-     * @return CategoryInterface
-     */
     public function getRootCategory($context = null)
     {
         $context = $this->getContext($context);
@@ -139,13 +111,6 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
         return $this->categories[$context->getId()][0];
     }
 
-    /**
-     * NEXT_MAJOR: add this method to the interface.
-     *
-     * @param ContextInterface $context
-     *
-     * @return CategoryInterface[]
-     */
     public function getRootCategoriesForContext(ContextInterface $context = null)
     {
         $context = $this->getContext($context);
@@ -155,13 +120,6 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
         return $this->categories[$context->getId()];
     }
 
-    /**
-     * @todo NEXT_MAJOR: remove this method.
-     *
-     * @param bool|true $loadChildren
-     *
-     * @return CategoryInterface[]
-     */
     public function getRootCategories($loadChildren = true)
     {
         $class = $this->getClass();
@@ -182,13 +140,6 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
         return $categories;
     }
 
-    /**
-     * NEXT_MAJOR: add this method to the interface.
-     *
-     * @param bool|true $loadChildren
-     *
-     * @return CategoryInterface[]
-     */
     public function getAllRootCategories($loadChildren = true)
     {
         $class = $this->getClass();
@@ -209,13 +160,6 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
         return $categories;
     }
 
-    /**
-     * NEXT_MAJOR: add this method to the interface.
-     *
-     * @param bool|true $loadChildren
-     *
-     * @return array
-     */
     public function getRootCategoriesSplitByContexts($loadChildren = true)
     {
         $rootCategories = $this->getAllRootCategories($loadChildren);
@@ -229,11 +173,6 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
         return $splitCategories;
     }
 
-    /**
-     * @param ContextInterface|null $context
-     *
-     * @return array
-     */
     public function getCategories($context = null)
     {
         $context = $this->getContext($context);

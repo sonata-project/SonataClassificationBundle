@@ -79,17 +79,11 @@ abstract class Category implements CategoryInterface
         $this->children = new ArrayCollection();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function __toString()
     {
         return $this->getName() ?: 'n/a';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setName($name)
     {
         $this->name = $name;
@@ -97,57 +91,36 @@ abstract class Category implements CategoryInterface
         $this->setSlug($name);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName()
     {
         return $this->name;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setEnabled($enabled)
     {
         $this->enabled = $enabled;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getEnabled()
     {
         return $this->enabled;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setSlug($slug)
     {
         $this->slug = Tag::slugify($slug);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getSlug()
     {
         return $this->slug;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setDescription($description)
     {
         $this->description = $description;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getDescription()
     {
         return $this->description;
@@ -164,41 +137,26 @@ abstract class Category implements CategoryInterface
         $this->setUpdatedAt(new \DateTime());
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setCreatedAt(\DateTime $createdAt)
     {
         $this->createdAt = $createdAt;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getCreatedAt()
     {
         return $this->createdAt;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setUpdatedAt(\DateTime $updatedAt)
     {
         $this->updatedAt = $updatedAt;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getUpdatedAt()
     {
         return $this->updatedAt;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setPosition($position)
     {
         $this->position = $position;
@@ -220,9 +178,6 @@ abstract class Category implements CategoryInterface
         $this->addChild($child, true);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function addChild(CategoryInterface $child, $nested = false)
     {
         $this->children[] = $child;
@@ -236,9 +191,6 @@ abstract class Category implements CategoryInterface
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function removeChild(CategoryInterface $childToDelete)
     {
         foreach ($this->getChildren() as $pos => $child) {
@@ -256,17 +208,11 @@ abstract class Category implements CategoryInterface
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getChildren()
     {
         return $this->children;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setChildren($children)
     {
         $this->children = new ArrayCollection();
@@ -276,17 +222,11 @@ abstract class Category implements CategoryInterface
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function hasChildren()
     {
         return \count($this->children) > 0;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setParent(CategoryInterface $parent = null, $nested = false)
     {
         $this->parent = $parent;
@@ -296,41 +236,26 @@ abstract class Category implements CategoryInterface
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getParent()
     {
         return $this->parent;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setMedia(MediaInterface $media = null)
     {
         $this->media = $media;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getMedia()
     {
         return $this->media;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setContext(ContextInterface $context)
     {
         $this->context = $context;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getContext()
     {
         return $this->context;

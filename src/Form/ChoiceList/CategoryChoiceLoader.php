@@ -38,9 +38,6 @@ final class CategoryChoiceLoader implements ChoiceLoaderInterface
         $this->choices = $choices;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function loadChoiceList($value = null)
     {
         if (null !== $this->choiceList) {
@@ -50,9 +47,6 @@ final class CategoryChoiceLoader implements ChoiceLoaderInterface
         return $this->choiceList = new ArrayChoiceList($this->choices, $value);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function loadChoicesForValues(array $values, $value = null)
     {
         if (empty($values)) {
@@ -62,9 +56,6 @@ final class CategoryChoiceLoader implements ChoiceLoaderInterface
         return $this->loadChoiceList($value)->getChoicesForValues($values);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function loadValuesForChoices(array $choices, $value = null)
     {
         if (empty($choices)) {

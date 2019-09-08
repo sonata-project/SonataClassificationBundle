@@ -20,9 +20,6 @@ use Sonata\Doctrine\Entity\BaseEntityManager;
 
 class TagManager extends BaseEntityManager implements TagManagerInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function getPager(array $criteria, $page, $limit = 10, array $sort = [])
     {
         $parameters = [];

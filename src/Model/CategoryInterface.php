@@ -102,7 +102,7 @@ interface CategoryInterface
     /**
      * Set children.
      *
-     * @param $children
+     * @param array $children
      */
     public function setChildren($children);
 

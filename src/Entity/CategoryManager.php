@@ -324,7 +324,7 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
     }
 
     /**
-     * @param $contextCode
+     * @param string|ContextInterface $contextCode
      *
      * @return ContextInterface
      */

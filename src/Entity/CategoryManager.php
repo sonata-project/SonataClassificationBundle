@@ -102,6 +102,13 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
         throw new \RuntimeException('Category does not exist');
     }
 
+    /**
+     * @deprecated since sonata-project/classification-bundle 3.x, to be removed in 4.0.
+     *
+     * @param ContextInterface $context
+     *
+     * @return CategoryInterface
+     */
     public function getRootCategory($context = null)
     {
         $context = $this->getContext($context);
@@ -120,6 +127,13 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
         return $this->categories[$context->getId()];
     }
 
+    /**
+     * @deprecated since sonata-project/classification-bundle 3.x, to be removed in 4.0.
+     *
+     * @param bool|true $loadChildren
+     *
+     * @return CategoryInterface[]
+     */
     public function getRootCategories($loadChildren = true)
     {
         $class = $this->getClass();

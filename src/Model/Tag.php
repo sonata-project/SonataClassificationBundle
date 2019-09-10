@@ -47,17 +47,11 @@ abstract class Tag implements TagInterface
      */
     protected $context;
 
-    /**
-     * {@inheritdoc}
-     */
     public function __toString()
     {
         return $this->getName() ?: 'n/a';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setName($name)
     {
         $this->name = $name;
@@ -65,73 +59,46 @@ abstract class Tag implements TagInterface
         $this->setSlug($name);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName()
     {
         return $this->name;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setEnabled($enabled)
     {
         $this->enabled = $enabled;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getEnabled()
     {
         return $this->enabled;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setSlug($slug)
     {
         $this->slug = self::slugify($slug);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getSlug()
     {
         return $this->slug;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setCreatedAt(\DateTime $createdAt = null)
     {
         $this->createdAt = $createdAt;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getCreatedAt()
     {
         return $this->createdAt;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setUpdatedAt(\DateTime $updatedAt = null)
     {
         $this->updatedAt = $updatedAt;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getUpdatedAt()
     {
         return $this->updatedAt;
@@ -162,17 +129,11 @@ abstract class Tag implements TagInterface
         return $text;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setContext(ContextInterface $context)
     {
         $this->context = $context;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getContext()
     {
         return $this->context;

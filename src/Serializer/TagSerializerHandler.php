@@ -20,9 +20,6 @@ use Sonata\Serializer\BaseSerializerHandler;
  */
 class TagSerializerHandler extends BaseSerializerHandler
 {
-    /**
-     * {@inheritdoc}
-     */
     public static function getType()
     {
         return 'sonata_classification_tag_id';

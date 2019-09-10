@@ -13,9 +13,6 @@ Here is a sample implementation for a custom category list block:
     <?php
     class CustomCategoriesBlockService extends AbstractCategoriesBlockService
     {
-        /**
-         * {@inheritdoc}
-         */
         public function configureSettings(OptionsResolver $resolver)
         {
             parent::configureSettings($resolver);
@@ -26,9 +23,6 @@ Here is a sample implementation for a custom category list block:
             ));
         }
 
-        /**
-         * {@inheritdoc}
-         */
         public function getBlockMetadata($code = null)
         {
             return new Metadata($this->getName(), (!is_null($code) ? $code : $this->getName()), false, 'AcmeCustomBundle', array(

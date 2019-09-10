@@ -20,9 +20,6 @@ use Sonata\Serializer\BaseSerializerHandler;
  */
 class CollectionSerializerHandler extends BaseSerializerHandler
 {
-    /**
-     * {@inheritdoc}
-     */
     public static function getType()
     {
         return 'sonata_classification_collection_id';

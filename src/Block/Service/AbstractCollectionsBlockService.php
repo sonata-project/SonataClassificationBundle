@@ -54,9 +54,6 @@ abstract class AbstractCollectionsBlockService extends AbstractClassificationBlo
         $this->collectionAdmin = $collectionAdmin;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function execute(BlockContextInterface $blockContext, Response $response = null)
     {
         $collection = $this->getCollection($blockContext->getSetting('collectionId'), $blockContext->getSetting('collection'));
@@ -74,9 +71,6 @@ abstract class AbstractCollectionsBlockService extends AbstractClassificationBlo
         ], $response);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function buildEditForm(FormMapper $formMapper, BlockInterface $block)
     {
         $adminField = $this->getFormAdminType($formMapper, $this->collectionAdmin, 'collectionId', 'collection', [
@@ -122,9 +116,6 @@ abstract class AbstractCollectionsBlockService extends AbstractClassificationBlo
         );
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function configureSettings(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
@@ -139,9 +130,6 @@ abstract class AbstractCollectionsBlockService extends AbstractClassificationBlo
         ]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function load(BlockInterface $block)
     {
         if (is_numeric($block->getSetting('collectionId'))) {
@@ -149,25 +137,16 @@ abstract class AbstractCollectionsBlockService extends AbstractClassificationBlo
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function prePersist(BlockInterface $block)
     {
         $this->resolveIds($block);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function preUpdate(BlockInterface $block)
     {
         $this->resolveIds($block);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockMetadata($code = null)
     {
         $description = (null !== $code ? $code : $this->getName());

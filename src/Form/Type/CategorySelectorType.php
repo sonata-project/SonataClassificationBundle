@@ -44,8 +44,6 @@ class CategorySelectorType extends AbstractType
 
     /**
      * NEXT_MAJOR: Remove method, when bumping requirements to SF 2.7+.
-     *
-     * {@inheritdoc}
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
@@ -54,8 +52,6 @@ class CategorySelectorType extends AbstractType
 
     /**
      * NEXT_MAJOR: replace usage of deprecated 'choice_list' option, when bumping requirements to SF 2.7+.
-     *
-     * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)
     {
@@ -107,25 +103,16 @@ class CategorySelectorType extends AbstractType
         return $choices;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getParent()
     {
         return ModelType::class;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix()
     {
         return 'sonata_category_selector';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName()
     {
         return $this->getBlockPrefix();

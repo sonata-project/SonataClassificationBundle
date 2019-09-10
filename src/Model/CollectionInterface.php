@@ -62,14 +62,14 @@ interface CollectionInterface
     /**
      * Set description.
      *
-     * @param string $description
+     * @param string|null $description
      */
     public function setDescription($description);
 
     /**
      * Get description.
      *
-     * @return string $description
+     * @return string|null $description
      */
     public function getDescription();
 

@@ -20,9 +20,6 @@ use Sonata\Doctrine\Document\BaseDocumentManager;
 
 class CategoryManager extends BaseDocumentManager implements CategoryManagerInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function getPager(array $criteria, $page, $limit = 10, array $sort = [])
     {
         $parameters = [];

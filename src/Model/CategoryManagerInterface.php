@@ -13,9 +13,18 @@ declare(strict_types=1);
 
 namespace Sonata\ClassificationBundle\Model;
 
+use Sonata\DatagridBundle\Pager\PagerInterface;
 use Sonata\Doctrine\Model\ManagerInterface;
 use Sonata\Doctrine\Model\PageableManagerInterface;
 
+/**
+ * @method PagerInterface      getRootCategoriesPager(int $page = 1, int $limit = 25, array $criteria = [])
+ * @method PagerInterface      getSubCategoriesPager(int $categoryId, int $page = 1, int $limit = 25, array $criteria = [])
+ * @method CategoryInterface[] getRootCategoriesForContext(?ContextInterface $context)
+ * @method CategoryInterface[] getAllRootCategories(bool $loadChildren = true)
+ * @method CategoryInterface[] getRootCategoriesSplitByContexts(bool $loadChildren = true)
+ * @method CategoryInterface[] getCategories(?ContextInterface $context)
+ */
 interface CategoryManagerInterface extends ManagerInterface, PageableManagerInterface
 {
 }

@@ -274,12 +274,19 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
     }
 
     /**
-     * @param string|ContextInterface $contextCode
+     * @param ContextInterface|null $contextCode
      *
      * @return ContextInterface
      */
     private function getContext($contextCode)
     {
+        if (\is_string($contextCode)) {
+            @trigger_error(
+                'Passing a string as context is deprecated since sonata-project/classification-bundle 3.x, to be forbidden in 4.0.',
+                E_USER_DEPRECATED
+            );
+        }
+
         if (empty($contextCode)) {
             $contextCode = ContextInterface::DEFAULT_CONTEXT;
         }

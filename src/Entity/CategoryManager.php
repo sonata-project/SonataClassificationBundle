@@ -89,7 +89,8 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
         if (null !== $category->getParent()) {
             throw new \RuntimeException('Method can be called only for root categories');
         }
-        $context = $this->getContext($category->getContext());
+
+        $context = $category->getContext();
 
         $this->loadCategories($context);
 
@@ -105,7 +106,7 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
     /**
      * @deprecated since sonata-project/classification-bundle 3.x, to be removed in 4.0.
      *
-     * @param ContextInterface $context
+     * @param ContextInterface|string|null $context
      *
      * @return CategoryInterface
      */
@@ -120,7 +121,9 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
 
     public function getRootCategoriesForContext(ContextInterface $context = null)
     {
-        $context = $this->getContext($context);
+        if (null === $context) {
+            $context = $this->getContext();
+        }
 
         $this->loadCategories($context);
 
@@ -273,28 +276,30 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
         $this->categories[$context->getId()] = $rootCategories;
     }
 
-    /**
-     * @param string|ContextInterface $contextCode
-     *
-     * @return ContextInterface
-     */
-    private function getContext($contextCode)
+    private function getContext($context = null): ContextInterface
     {
-        if (empty($contextCode)) {
-            $contextCode = ContextInterface::DEFAULT_CONTEXT;
+        if ($context instanceof ContextInterface) {
+            return $context;
         }
 
-        if ($contextCode instanceof ContextInterface) {
-            return $contextCode;
+        if (null === $context) {
+            $context = ContextInterface::DEFAULT_CONTEXT;
         }
 
-        $context = $this->contextManager->find($contextCode);
+        if (!\is_string($context)) {
+            throw new \InvalidArgumentException(sprintf(
+                'Invalid parameter given: %s',
+                (string) $context
+            ));
+        }
+
+        $context = $this->contextManager->find($context);
 
         if (!$context instanceof ContextInterface) {
             $context = $this->contextManager->create();
 
-            $context->setId($contextCode);
-            $context->setName($contextCode);
+            $context->setId($context);
+            $context->setName($context);
             $context->setEnabled(true);
 
             $this->contextManager->save($context);

@@ -2,6 +2,21 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.9.0](https://github.com/sonata-project/SonataClassificationBundle/compare/3.8.1...3.9.0) - 2019-09-20
+### Added
+- Add more `@method` annotation to propagate new methods of `CategoryManagerInterface`
+- Add strict types to CategoryManager
+
+### Removed
+- Remove superfluous PHPDoc
+
+### Fixed
+- Match PHPDoc with doctrine model
+
+### Changed
+- `CategoryManager::getRootCategory` will throw an exception if you pass
+  invalid arguments
+
 ## [3.8.1](https://github.com/sonata-project/SonataClassificationBundle/compare/3.8.0...3.8.1) - 2019-06-03
 
 ### Added

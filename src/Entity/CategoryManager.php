@@ -104,7 +104,7 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
     }
 
     /**
-     * @deprecated since sonata-project/classification-bundle 3.x, to be removed in 4.0.
+     * @deprecated since sonata-project/classification-bundle 3.9, to be removed in 4.0.
      *
      * @param ContextInterface|string|null $context
      *
@@ -131,7 +131,7 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
     }
 
     /**
-     * @deprecated since sonata-project/classification-bundle 3.x, to be removed in 4.0.
+     * @deprecated since sonata-project/classification-bundle 3.9, to be removed in 4.0.
      *
      * @param bool|true $loadChildren
      *

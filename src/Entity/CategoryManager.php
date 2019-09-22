@@ -46,7 +46,7 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
     }
 
     /**
-     * {@inheritdoc}
+     * Returns a pager to iterate over the root category.
      */
     public function getRootCategoriesPager($page = 1, $limit = 25, $criteria = [])
     {
@@ -65,9 +65,6 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
         return $pager;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getSubCategoriesPager($categoryId, $page = 1, $limit = 25, $criteria = [])
     {
         $queryBuilder = $this->getObjectManager()->createQueryBuilder()
@@ -84,11 +81,6 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
         return $pager;
     }
 
-    /**
-     * NEXT_MAJOR: add this method to the interface.
-     *
-     * @return CategoryInterface
-     */
     public function getRootCategoryWithChildren(CategoryInterface $category)
     {
         if (null === $category->getContext()) {
@@ -97,7 +89,8 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
         if (null !== $category->getParent()) {
             throw new \RuntimeException('Method can be called only for root categories');
         }
-        $context = $this->getContext($category->getContext());
+
+        $context = $category->getContext();
 
         $this->loadCategories($context);
 
@@ -111,7 +104,11 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
     }
 
     /**
-     * {@inheritdoc}
+     * @deprecated since sonata-project/classification-bundle 3.9, to be removed in 4.0.
+     *
+     * @param ContextInterface|string|null $context
+     *
+     * @return CategoryInterface
      */
     public function getRootCategory($context = null)
     {
@@ -122,12 +119,11 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
         return $this->categories[$context->getId()][0];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getRootCategoriesForContext(ContextInterface $context = null)
     {
-        $context = $this->getContext($context);
+        if (null === $context) {
+            $context = $this->getContext();
+        }
 
         $this->loadCategories($context);
 
@@ -135,7 +131,11 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
     }
 
     /**
-     * {@inheritdoc}
+     * @deprecated since sonata-project/classification-bundle 3.9, to be removed in 4.0.
+     *
+     * @param bool|true $loadChildren
+     *
+     * @return CategoryInterface[]
      */
     public function getRootCategories($loadChildren = true)
     {
@@ -157,9 +157,6 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
         return $categories;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getAllRootCategories($loadChildren = true)
     {
         $class = $this->getClass();
@@ -180,9 +177,6 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
         return $categories;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getRootCategoriesSplitByContexts($loadChildren = true)
     {
         $rootCategories = $this->getAllRootCategories($loadChildren);
@@ -196,9 +190,6 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
         return $splitCategories;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getCategories($context = null)
     {
         $context = $this->getContext($context);
@@ -208,9 +199,6 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
         return $this->categories[$context->getId()];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getPager(array $criteria, $page, $limit = 10, array $sort = [])
     {
         $parameters = [];
@@ -288,28 +276,30 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
         $this->categories[$context->getId()] = $rootCategories;
     }
 
-    /**
-     * @param $contextCode
-     *
-     * @return ContextInterface
-     */
-    private function getContext($contextCode)
+    private function getContext($context = null): ContextInterface
     {
-        if (empty($contextCode)) {
-            $contextCode = ContextInterface::DEFAULT_CONTEXT;
+        if ($context instanceof ContextInterface) {
+            return $context;
         }
 
-        if ($contextCode instanceof ContextInterface) {
-            return $contextCode;
+        if (null === $context) {
+            $context = ContextInterface::DEFAULT_CONTEXT;
         }
 
-        $context = $this->contextManager->find($contextCode);
+        if (!\is_string($context)) {
+            throw new \InvalidArgumentException(sprintf(
+                'Invalid parameter given: %s',
+                (string) $context
+            ));
+        }
+
+        $context = $this->contextManager->find($context);
 
         if (!$context instanceof ContextInterface) {
             $context = $this->contextManager->create();
 
-            $context->setId($contextCode);
-            $context->setName($contextCode);
+            $context->setId($context);
+            $context->setName($context);
             $context->setEnabled(true);
 
             $this->contextManager->save($context);

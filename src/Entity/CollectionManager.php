@@ -20,9 +20,6 @@ use Sonata\Doctrine\Entity\BaseEntityManager;
 
 class CollectionManager extends BaseEntityManager implements CollectionManagerInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function getPager(array $criteria, $page, $limit = 10, array $sort = [])
     {
         $parameters = [];

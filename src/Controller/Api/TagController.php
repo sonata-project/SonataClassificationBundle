@@ -92,7 +92,7 @@ class TagController
      *
      * @View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
      *
-     * @param $id
+     * @param mixed $id
      *
      * @return Tag
      */

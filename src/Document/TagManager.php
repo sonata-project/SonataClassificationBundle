@@ -18,9 +18,6 @@ use Sonata\Doctrine\Document\BaseDocumentManager;
 
 class TagManager extends BaseDocumentManager implements TagManagerInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function getPager(array $criteria, $page, $limit = 10, array $sort = [])
     {
         $parameters = [];

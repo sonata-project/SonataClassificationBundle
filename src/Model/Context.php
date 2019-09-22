@@ -40,73 +40,46 @@ abstract class Context implements ContextInterface
      */
     protected $enabled;
 
-    /**
-     * {@inheritdoc}
-     */
     public function __toString()
     {
         return $this->getName() ?: 'n/a';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setName($name): void
     {
         $this->name = $name;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName()
     {
         return $this->name;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setEnabled($enabled): void
     {
         $this->enabled = $enabled;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getEnabled()
     {
         return $this->enabled;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setCreatedAt(\DateTime $createdAt = null): void
     {
         $this->createdAt = $createdAt;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getCreatedAt()
     {
         return $this->createdAt;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setUpdatedAt(\DateTime $updatedAt = null): void
     {
         $this->updatedAt = $updatedAt;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getUpdatedAt()
     {
         return $this->updatedAt;
@@ -117,17 +90,11 @@ abstract class Context implements ContextInterface
         $this->setUpdatedAt(new \DateTime());
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setId($id): void
     {
         $this->id = $id;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getId()
     {
         return $this->id;

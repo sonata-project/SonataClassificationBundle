@@ -54,9 +54,6 @@ abstract class AbstractTagsBlockService extends AbstractClassificationBlockServi
         $this->tagAdmin = $tagAdmin;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function execute(BlockContextInterface $blockContext, Response $response = null)
     {
         $tag = $this->getTag($blockContext->getSetting('tagId'), $blockContext->getSetting('tag'));
@@ -74,9 +71,6 @@ abstract class AbstractTagsBlockService extends AbstractClassificationBlockServi
         ], $response);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function buildEditForm(FormMapper $formMapper, BlockInterface $block): void
     {
         $adminField = $this->getFormAdminType($formMapper, $this->tagAdmin, 'tagId', 'tag', [
@@ -120,9 +114,6 @@ abstract class AbstractTagsBlockService extends AbstractClassificationBlockServi
         );
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function configureSettings(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
@@ -137,9 +128,6 @@ abstract class AbstractTagsBlockService extends AbstractClassificationBlockServi
         ]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function load(BlockInterface $block): void
     {
         if (is_numeric($block->getSetting('tagId'))) {
@@ -147,25 +135,16 @@ abstract class AbstractTagsBlockService extends AbstractClassificationBlockServi
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function prePersist(BlockInterface $block): void
     {
         $this->resolveIds($block);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function preUpdate(BlockInterface $block): void
     {
         $this->resolveIds($block);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockMetadata($code = null)
     {
         $description = (null !== $code ? $code : $this->getName());

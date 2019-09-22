@@ -127,9 +127,6 @@ class CategoryManager extends BaseDocumentManager implements CategoryManagerInte
         return $this->categories[$context->getId()];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getPager(array $criteria, $page, $limit = 10, array $sort = [])
     {
         $parameters = [];

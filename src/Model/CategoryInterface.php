@@ -67,24 +67,24 @@ interface CategoryInterface
     /**
      * Set description.
      *
-     * @param string $description
+     * @param string|null $description
      */
     public function setDescription($description);
 
     /**
      * Get description.
      *
-     * @return string $description
+     * @return string|null $description
      */
     public function getDescription();
 
     /**
-     * @param int $position
+     * @param int|null $position
      */
     public function setPosition($position);
 
     /**
-     * @return int
+     * @return int|null
      */
     public function getPosition();
 
@@ -106,7 +106,7 @@ interface CategoryInterface
     /**
      * Set children.
      *
-     * @param $children
+     * @param array $children
      */
     public function setChildren($children);
 
@@ -120,15 +120,15 @@ interface CategoryInterface
     /**
      * Set Parent.
      *
-     * @param CategoryInterface $parent
-     * @param bool              $nested
+     * @param CategoryInterface|null $parent
+     * @param bool                   $nested
      */
     public function setParent(self $parent = null, $nested = false);
 
     /**
      * Get Parent.
      *
-     * @return CategoryInterface $parent
+     * @return CategoryInterface|null $parent
      */
     public function getParent();
 

@@ -54,9 +54,6 @@ abstract class AbstractCategoriesBlockService extends AbstractClassificationBloc
         $this->categoryAdmin = $categoryAdmin;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function execute(BlockContextInterface $blockContext, Response $response = null)
     {
         $category = $this->getCategory($blockContext->getSetting('categoryId'), $blockContext->getSetting('category'));
@@ -71,9 +68,6 @@ abstract class AbstractCategoriesBlockService extends AbstractClassificationBloc
         ], $response);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function buildEditForm(FormMapper $formMapper, BlockInterface $block): void
     {
         $adminField = $this->getFormAdminType($formMapper, $this->categoryAdmin, 'categoryId', 'category', [
@@ -119,9 +113,6 @@ abstract class AbstractCategoriesBlockService extends AbstractClassificationBloc
         );
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function configureSettings(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
@@ -136,9 +127,6 @@ abstract class AbstractCategoriesBlockService extends AbstractClassificationBloc
         ]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function load(BlockInterface $block): void
     {
         if (is_numeric($block->getSetting('categoryId'))) {
@@ -146,25 +134,16 @@ abstract class AbstractCategoriesBlockService extends AbstractClassificationBloc
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function prePersist(BlockInterface $block): void
     {
         $this->resolveIds($block);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function preUpdate(BlockInterface $block): void
     {
         $this->resolveIds($block);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockMetadata($code = null)
     {
         $description = (null !== $code ? $code : $this->getName());

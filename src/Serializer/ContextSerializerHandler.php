@@ -38,9 +38,6 @@ class ContextSerializerHandler extends BaseSerializerHandler
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public static function getType()
     {
         return 'sonata_classification_context_id';

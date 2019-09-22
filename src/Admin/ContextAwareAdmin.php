@@ -37,9 +37,6 @@ abstract class ContextAwareAdmin extends AbstractAdmin
         $this->contextManager = $contextManager;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getNewInstance()
     {
         $instance = parent::getNewInstance();
@@ -63,9 +60,6 @@ abstract class ContextAwareAdmin extends AbstractAdmin
         return $instance;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getPersistentParameters()
     {
         $parameters = array_merge(
@@ -91,9 +85,6 @@ abstract class ContextAwareAdmin extends AbstractAdmin
         return $parameters;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function configureDatagridFilters(DatagridMapper $datagridMapper): void
     {
         $options = [];

@@ -29,9 +29,6 @@ class CollectionAdmin extends ContextAwareAdmin
         'cascade_validation' => true,
     ];
 
-    /**
-     * {@inheritdoc}
-     */
     public function getFormBuilder()
     {
         // NEXT_MAJOR: set constraints unconditionally
@@ -49,9 +46,6 @@ EOT
         return parent::getFormBuilder();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function configureFormFields(FormMapper $formMapper): void
     {
         $formMapper
@@ -66,9 +60,6 @@ EOT
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function configureDatagridFilters(DatagridMapper $datagridMapper): void
     {
         parent::configureDatagridFilters($datagridMapper);
@@ -79,9 +70,6 @@ EOT
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function configureListFields(ListMapper $listMapper): void
     {
         $listMapper

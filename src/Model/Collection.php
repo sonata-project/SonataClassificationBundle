@@ -31,7 +31,7 @@ abstract class Collection implements CollectionInterface
     protected $enabled;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $description;
 
@@ -50,17 +50,11 @@ abstract class Collection implements CollectionInterface
      */
     protected $context;
 
-    /**
-     * {@inheritdoc}
-     */
     public function __toString()
     {
         return $this->getName() ?: 'n/a';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setName($name): void
     {
         $this->name = $name;
@@ -68,57 +62,36 @@ abstract class Collection implements CollectionInterface
         $this->setSlug($name);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName()
     {
         return $this->name;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setEnabled($enabled): void
     {
         $this->enabled = $enabled;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getEnabled()
     {
         return $this->enabled;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setSlug($slug): void
     {
         $this->slug = Tag::slugify($slug);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getSlug()
     {
         return $this->slug;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setDescription($description): void
     {
         $this->description = $description;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getDescription()
     {
         return $this->description;
@@ -135,41 +108,26 @@ abstract class Collection implements CollectionInterface
         $this->setUpdatedAt(new \DateTime());
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setCreatedAt(\DateTime $createdAt): void
     {
         $this->createdAt = $createdAt;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getCreatedAt()
     {
         return $this->createdAt;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setUpdatedAt(\DateTime $updatedAt): void
     {
         $this->updatedAt = $updatedAt;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getUpdatedAt()
     {
         return $this->updatedAt;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setContext(ContextInterface $context): void
     {
         $this->context = $context;

@@ -23,9 +23,6 @@ class ContextAdmin extends AbstractAdmin
 {
     protected $classnameLabel = 'Context';
 
-    /**
-     * {@inheritdoc}
-     */
     protected function configureFormFields(FormMapper $formMapper): void
     {
         $formMapper
@@ -39,9 +36,6 @@ class ContextAdmin extends AbstractAdmin
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function configureDatagridFilters(DatagridMapper $datagridMapper): void
     {
         $datagridMapper
@@ -51,9 +45,6 @@ class ContextAdmin extends AbstractAdmin
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function configureListFields(ListMapper $listMapper): void
     {
         $listMapper

@@ -22,9 +22,6 @@ class TagAdmin extends ContextAwareAdmin
 {
     protected $classnameLabel = 'Tag';
 
-    /**
-     * {@inheritdoc}
-     */
     protected function configureFormFields(FormMapper $formMapper): void
     {
         $formMapper
@@ -41,9 +38,6 @@ class TagAdmin extends ContextAwareAdmin
         ]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function configureDatagridFilters(DatagridMapper $datagridMapper): void
     {
         parent::configureDatagridFilters($datagridMapper);
@@ -54,9 +48,6 @@ class TagAdmin extends ContextAwareAdmin
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function configureListFields(ListMapper $listMapper): void
     {
         $listMapper

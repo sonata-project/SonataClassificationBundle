@@ -293,18 +293,18 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
             ));
         }
 
-        $context = $this->contextManager->find($context);
+        $contextObj = $this->contextManager->find($context);
 
-        if (!$context instanceof ContextInterface) {
-            $context = $this->contextManager->create();
+        if (!$contextObj instanceof ContextInterface) {
+            $contextObj = $this->contextManager->create();
 
-            $context->setId($context);
-            $context->setName($context);
-            $context->setEnabled(true);
+            $contextObj->setId($context);
+            $contextObj->setName($context);
+            $contextObj->setEnabled(true);
 
-            $this->contextManager->save($context);
+            $this->contextManager->save($contextObj);
         }
 
-        return $context;
+        return $contextObj;
     }
 }

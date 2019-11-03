@@ -57,7 +57,7 @@ abstract class AbstractCollectionsBlockService extends AbstractClassificationBlo
     public function execute(BlockContextInterface $blockContext, Response $response = null)
     {
         $collection = $this->getCollection($blockContext->getSetting('collectionId'), $blockContext->getSetting('collection'));
-        $collections = $this->contextManager->findBy([
+        $collections = $this->collectionManager->findBy([
             'enabled' => true,
             'context' => $blockContext->getSetting('context'),
         ]);

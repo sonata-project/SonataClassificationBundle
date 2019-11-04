@@ -185,7 +185,6 @@ class CollectionController
     /**
      * Filters criteria from $paramFetcher to be compatible with the Pager criteria.
      *
-     *
      * @return array The filtered criteria
      */
     protected function filterCriteria(ParamFetcherInterface $paramFetcher)

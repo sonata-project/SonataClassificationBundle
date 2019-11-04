@@ -287,10 +287,7 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
         }
 
         if (!\is_string($context)) {
-            throw new \InvalidArgumentException(sprintf(
-                'Invalid parameter given: %s',
-                (string) $context
-            ));
+            throw new \InvalidArgumentException(sprintf('Invalid parameter given: %s', (string) $context));
         }
 
         $contextObj = $this->contextManager->find($context);

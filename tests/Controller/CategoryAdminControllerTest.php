@@ -26,13 +26,8 @@ use Sonata\ClassificationBundle\Model\Category;
 use Sonata\ClassificationBundle\Model\CategoryManagerInterface;
 use Sonata\ClassificationBundle\Model\ContextInterface;
 use Sonata\ClassificationBundle\Model\ContextManagerInterface;
-use Symfony\Bridge\Twig\AppVariable;
-use Symfony\Bridge\Twig\Command\DebugCommand;
-use Symfony\Bridge\Twig\Extension\FormExtension;
-use Symfony\Bridge\Twig\Form\TwigRenderer;
 use Symfony\Bundle\FrameworkBundle\Templating\DelegatingEngine;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\Form\Extension\Csrf\CsrfProvider\CsrfProviderInterface;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormRenderer;
 use Symfony\Component\Form\FormView;
@@ -40,7 +35,6 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Security\Csrf\CsrfToken;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 
@@ -85,7 +79,7 @@ class CategoryAdminControllerTest extends TestCase
     private $template;
 
     /**
-     * @var CsrfProviderInterface
+     * @var CsrfTokenManagerInterface
      */
     private $csrfProvider;
 
@@ -156,83 +150,29 @@ class CategoryAdminControllerTest extends TestCase
 
         $twig = $this->createMock(\Twig_Environment::class);
 
-        // BC for Symfony < 3.4 where runtime should be TwigRenderer
-        if (!method_exists(DebugCommand::class, 'getLoaderPaths')) {
-            $formRenderer = $this->createMock(TwigRenderer::class);
-            $formExtension = new FormExtension($formRenderer);
-        } else {
-            $formRenderer = $this->createMock(FormRenderer::class);
-            $formExtension = new FormExtension();
-        }
-
-        $twig->expects($this->any())
-            ->method('getExtension')
-            ->willReturnCallback(static function ($name) use ($formExtension) {
-                switch ($name) {
-                    case 'form':
-                    case FormExtension::class:
-                        return $formExtension;
-                }
-            });
+        $formRenderer = $this->createMock(FormRenderer::class);
 
         $twig->expects($this->any())
             ->method('getRuntime')
-            ->willReturnCallback(static function ($name) use ($formRenderer) {
-                switch ($name) {
-                    case TwigRenderer::class:
-                    case FormRenderer::class:
-                        if (method_exists(AppVariable::class, 'getToken')) {
-                            return $formRenderer;
-                        }
+            ->willReturn($formRenderer);
 
-                        throw new \Twig_Error_Runtime('This runtime exists when Symfony >= 3.2.');
-                }
+        $this->csrfProvider = $this->createMock(CsrfTokenManagerInterface::class);
+
+        $this->csrfProvider->expects($this->any())
+            ->method('getToken')
+            ->willReturnCallback(static function ($intention) {
+                return new CsrfToken($intention, 'csrf-token-123_'.$intention);
             });
 
-        // Prefer Symfony 2.x interfaces
-        if (interface_exists(CsrfProviderInterface::class)) {
-            $this->csrfProvider = $this->getMockBuilder(
-                CsrfProviderInterface::class
-            )
-                ->getMock();
+        $this->csrfProvider->expects($this->any())
+            ->method('isTokenValid')
+            ->willReturnCallback(static function (CsrfToken $token) {
+                if ($token->getValue() === 'csrf-token-123_'.$token->getId()) {
+                    return true;
+                }
 
-            $this->csrfProvider->expects($this->any())
-                ->method('generateCsrfToken')
-                ->willReturnCallback(static function ($intention) {
-                    return 'csrf-token-123_'.$intention;
-                });
-
-            $this->csrfProvider->expects($this->any())
-                ->method('isCsrfTokenValid')
-                ->willReturnCallback(static function ($intention, $token) {
-                    if ($token === 'csrf-token-123_'.$intention) {
-                        return true;
-                    }
-
-                    return false;
-                });
-        } else {
-            $this->csrfProvider = $this->getMockBuilder(
-                CsrfTokenManagerInterface::class
-            )
-                ->getMock();
-
-            $this->csrfProvider->expects($this->any())
-                ->method('getToken')
-                ->willReturnCallback(static function ($intention) {
-                    return new CsrfToken($intention, 'csrf-token-123_'.$intention);
-                });
-
-            $this->csrfProvider->expects($this->any())
-                ->method('isTokenValid')
-                ->willReturnCallback(static function (CsrfToken $token) {
-                    if ($token->getValue() === 'csrf-token-123_'.$token->getId()) {
-                        return true;
-                    }
-
-                    return false;
-                });
-        }
+                return false;
+            });
 
         // php 5.3 BC
         $csrfProvider = $this->csrfProvider;
@@ -295,11 +235,7 @@ class CategoryAdminControllerTest extends TestCase
         $this->container->expects($this->any())
             ->method('has')
             ->willReturnCallback(static function ($id) use ($tthis) {
-                if ('form.csrf_provider' === $id && Kernel::MAJOR_VERSION === 2 && null !== $tthis->getCsrfProvider()) {
-                    return true;
-                }
-
-                if ('security.csrf.token_manager' === $id && Kernel::MAJOR_VERSION >= 3 && null !== $tthis->getCsrfProvider()) {
+                if ('security.csrf.token_manager' === $id && null !== $tthis->getCsrfProvider()) {
                     return true;
                 }
 

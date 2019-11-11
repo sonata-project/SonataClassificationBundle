@@ -19,8 +19,6 @@ use Sonata\ClassificationBundle\Model\CategoryInterface;
 use Sonata\ClassificationBundle\Model\CategoryManagerInterface;
 use Sonata\Doctrine\Model\ManagerInterface;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\ChoiceList\Loader\ChoiceLoaderInterface;
-use Symfony\Component\Form\Extension\Core\ChoiceList\SimpleChoiceList;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -43,31 +41,19 @@ class CategorySelectorType extends AbstractType
     }
 
     /**
-     * NEXT_MAJOR: Remove method, when bumping requirements to SF 2.7+.
+     * NEXT_MAJOR: Remove this method.
+     *
+     * @deprecated since sonata-project/classification-bundle 3.x, to be removed in version 4.0.
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $this->configureOptions($resolver);
     }
 
-    /**
-     * NEXT_MAJOR: replace usage of deprecated 'choice_list' option, when bumping requirements to SF 2.7+.
-     */
     public function configureOptions(OptionsResolver $resolver)
     {
         $that = $this;
 
-        if (!interface_exists(ChoiceLoaderInterface::class)) {
-            $resolver->setDefaults([
-                'context' => null,
-                'category' => null,
-                'choice_list' => static function (Options $opts, $previousValue) use ($that) {
-                    return new SimpleChoiceList($that->getChoices($opts));
-                },
-            ]);
-
-            return;
-        }
         $resolver->setDefaults([
             'context' => null,
             'category' => null,
@@ -113,6 +99,11 @@ class CategorySelectorType extends AbstractType
         return 'sonata_category_selector';
     }
 
+    /**
+     * NEXT_MAJOR: Remove this method.
+     *
+     * @deprecated since sonata-project/classification-bundle 3.x, to be removed in version 4.0.
+     */
     public function getName()
     {
         return $this->getBlockPrefix();

@@ -30,10 +30,7 @@ class CategorySelectorTypeTest extends TestCase
         $categorySelectorType = new CategorySelectorType($manager);
         $optionsResolver = new OptionsResolver();
         $categorySelectorType->configureOptions($optionsResolver);
-        //unable to get defined options on SF2.3
-        if (!method_exists($optionsResolver, 'getDefinedOptions')) {
-            return;
-        }
+
         $definedOptions = $optionsResolver->getDefinedOptions();
         $this->assertContains('category', $definedOptions);
         $this->assertContains('context', $definedOptions);

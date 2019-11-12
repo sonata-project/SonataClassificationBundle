@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.9.2](https://github.com/sonata-project/SonataClassificationBundle/compare/3.9.1...3.9.2) - 2019-11-11
+### Fixed
+- Fix calling wrong manager in `AbstractCollectionsBlockService`
+
 ## [3.9.1](https://github.com/sonata-project/SonataClassificationBundle/compare/3.9.0...3.9.1) - 2019-10-14
 ### Fixed
 - `getContext` method with non-existing context causing infinite loop among

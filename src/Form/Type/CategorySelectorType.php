@@ -19,6 +19,7 @@ use Sonata\ClassificationBundle\Model\CategoryInterface;
 use Sonata\ClassificationBundle\Model\CategoryManagerInterface;
 use Sonata\Doctrine\Model\ManagerInterface;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\ChoiceList\Loader\ChoiceLoaderInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -52,13 +53,11 @@ class CategorySelectorType extends AbstractType
 
     public function configureOptions(OptionsResolver $resolver)
     {
-        $that = $this;
-
         $resolver->setDefaults([
             'context' => null,
             'category' => null,
-            'choice_loader' => static function (Options $opts, $previousValue) use ($that) {
-                return new CategoryChoiceLoader(array_flip($that->getChoices($opts)));
+            'choice_loader' => function (Options $opts): ChoiceLoaderInterface {
+                return new CategoryChoiceLoader(array_flip($this->getChoices($opts)));
             },
         ]);
     }

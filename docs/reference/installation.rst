@@ -8,7 +8,7 @@ Installation
 Prerequisites
 -------------
 
-PHP 5.6 or 7.0 and Symfony 2.8, >=3.3 or 4 are needed to make this bundle work, there are
+PHP 7.1 and Symfony >=3.4 or >= 4.2 are needed to make this bundle work, there are
 also some Sonata dependencies that need to be installed and configured beforehand:
 
 * `SonataEasyExtendsBundle <https://sonata-project.org/bundles/easy-extends>`_

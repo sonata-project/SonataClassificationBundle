@@ -22,6 +22,7 @@ use Sonata\ClassificationBundle\Model\ContextInterface;
 use Sonata\ClassificationBundle\Model\ContextManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\Form\FormBuilder;
+use Twig\Environment;
 
 /**
  * @author Christian Gripp <mail@core23.de>
@@ -34,13 +35,25 @@ abstract class AbstractClassificationBlockService extends AbstractAdminBlockServ
     protected $contextManager;
 
     /**
-     * @param string $name
+     * @param string|Environment                      $twigOrDeprecatedName
+     * @param EngineInterface|ContextManagerInterface $contextManagerOrDeprecatedTemplating
+     * @param ContextManagerInterface|null            $deprecatedContextManager
      */
-    public function __construct($name, EngineInterface $templating, ContextManagerInterface $contextManager)
-    {
-        parent::__construct($name, $templating);
+    public function __construct(
+        $twigOrDeprecatedName,
+        $contextManagerOrDeprecatedTemplating,
+        $deprecatedContextManager = null
+    ) {
+        // NEXT_MAJOR: remove the if block
+        if (\is_string($twigOrDeprecatedName)) {
+            parent::__construct($twigOrDeprecatedName, $contextManagerOrDeprecatedTemplating);
 
-        $this->contextManager = $contextManager;
+            $this->contextManager = $deprecatedContextManager;
+        } else {
+            parent::__construct($twigOrDeprecatedName);
+
+            $this->contextManager = $contextManagerOrDeprecatedTemplating;
+        }
     }
 
     /**

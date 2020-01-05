@@ -17,10 +17,12 @@ use Doctrine\Common\Persistence\ManagerRegistry;
 use PHPUnit\Framework\TestCase;
 use Sonata\ClassificationBundle\Entity\BaseTag;
 use Sonata\ClassificationBundle\Entity\TagManager;
-use Sonata\Doctrine\Test\EntityManagerMockFactory;
+use Sonata\Doctrine\Test\EntityManagerMockFactoryTrait;
 
 class TagManagerTest extends TestCase
 {
+    use EntityManagerMockFactoryTrait;
+
     public function testGetPager()
     {
         $self = $this;
@@ -63,7 +65,7 @@ class TagManagerTest extends TestCase
 
     protected function getTagManager($qbCallback)
     {
-        $em = EntityManagerMockFactory::create($this, $qbCallback, []);
+        $em = $this->createEntityManagerMock($qbCallback, []);
 
         $registry = $this->getMockForAbstractClass(ManagerRegistry::class);
         $registry->expects($this->any())->method('getManagerForClass')->willReturn($em);

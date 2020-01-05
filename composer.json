@@ -49,7 +49,7 @@
         "jms/serializer-bundle": "^1.0 || ^2.0",
         "sonata-project/block-bundle": "^3.14",
         "sonata-project/media-bundle": "^3.17",
-        "symfony/phpunit-bridge": "^4.2"
+        "symfony/phpunit-bridge": "^5.0"
     },
     "suggest": {
         "sonata-project/block-bundle": "For rendering dynamic list blocks on a page.",

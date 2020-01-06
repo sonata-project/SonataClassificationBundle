@@ -17,10 +17,12 @@ use Doctrine\Common\Persistence\ManagerRegistry;
 use PHPUnit\Framework\TestCase;
 use Sonata\ClassificationBundle\Entity\BaseContext;
 use Sonata\ClassificationBundle\Entity\ContextManager;
-use Sonata\Doctrine\Test\EntityManagerMockFactory;
+use Sonata\Doctrine\Test\EntityManagerMockFactoryTrait;
 
 class ContextManagerTest extends TestCase
 {
+    use EntityManagerMockFactoryTrait;
+
     public function testGetPager(): void
     {
         $self = $this;
@@ -63,7 +65,7 @@ class ContextManagerTest extends TestCase
 
     protected function getContextManager($qbCallback)
     {
-        $em = EntityManagerMockFactory::create($this, $qbCallback, []);
+        $em = $this->createEntityManagerMock($qbCallback, []);
 
         $registry = $this->getMockForAbstractClass(ManagerRegistry::class);
         $registry->expects($this->any())->method('getManagerForClass')->willReturn($em);

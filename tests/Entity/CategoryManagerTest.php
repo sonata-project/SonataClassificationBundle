@@ -19,10 +19,12 @@ use PHPUnit\Framework\TestCase;
 use Sonata\ClassificationBundle\Entity\BaseCategory;
 use Sonata\ClassificationBundle\Entity\CategoryManager;
 use Sonata\ClassificationBundle\Model\ContextManagerInterface;
-use Sonata\Doctrine\Test\EntityManagerMockFactory;
+use Sonata\Doctrine\Test\EntityManagerMockFactoryTrait;
 
 class CategoryManagerTest extends TestCase
 {
+    use EntityManagerMockFactoryTrait;
+
     public function testGetPager(): void
     {
         $self = $this;
@@ -273,7 +275,7 @@ class CategoryManagerTest extends TestCase
 
     protected function getCategoryManager($qbCallback, $createQueryResult = null)
     {
-        $em = EntityManagerMockFactory::create($this, $qbCallback, []);
+        $em = $this->createEntityManagerMock($qbCallback, []);
 
         if (null !== $createQueryResult) {
             $query = $this->createMock(AbstractQuery::class);

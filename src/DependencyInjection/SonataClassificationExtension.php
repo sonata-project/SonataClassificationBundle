@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Sonata\ClassificationBundle\DependencyInjection;
 
 use Sonata\EasyExtendsBundle\Mapper\DoctrineCollector;
-use Sonata\MediaBundle\Model\MediaInterface;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -197,7 +196,7 @@ class SonataClassificationExtension extends Extension
 
         $collector->addUnique($config['class']['collection'], 'tag_collection', ['slug', 'context']);
 
-        if (interface_exists(MediaInterface::class)) {
+        if (null === $config['class']['media']) {
             $collector->addAssociation($config['class']['collection'], 'mapManyToOne', [
                 'fieldName' => 'media',
                 'targetEntity' => $config['class']['media'],

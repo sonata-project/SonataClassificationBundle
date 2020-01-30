@@ -31,7 +31,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  */
 class ContextControllerTest extends TestCase
 {
-    public function testGetContextsAction()
+    public function testGetContextsAction(): void
     {
         $paramFetcher = $this->createMock(ParamFetcherInterface::class);
         $paramFetcher->expects($this->once())->method('all')->willReturn([]);
@@ -44,7 +44,7 @@ class ContextControllerTest extends TestCase
         $this->assertSame($pager, $this->createContextController($contextManager)->getContextsAction($paramFetcher));
     }
 
-    public function testGetContextAction()
+    public function testGetContextAction(): void
     {
         $context = $this->createMock(ContextInterface::class);
 
@@ -54,7 +54,7 @@ class ContextControllerTest extends TestCase
         $this->assertSame($context, $this->createContextController($contextManager)->getContextAction(1));
     }
 
-    public function testGetContextNotFoundExceptionAction()
+    public function testGetContextNotFoundExceptionAction(): void
     {
         $this->expectException(NotFoundHttpException::class);
         $this->expectExceptionMessage('Context (42) not found');
@@ -62,7 +62,7 @@ class ContextControllerTest extends TestCase
         $this->createContextController()->getContextAction(42);
     }
 
-    public function testPostContextAction()
+    public function testPostContextAction(): void
     {
         $context = $this->createMock(ContextInterface::class);
 
@@ -83,7 +83,7 @@ class ContextControllerTest extends TestCase
         $this->assertInstanceOf(View::class, $view);
     }
 
-    public function testPostContextInvalidAction()
+    public function testPostContextInvalidAction(): void
     {
         $contextManager = $this->createMock(ContextManagerInterface::class);
         $contextManager->expects($this->never())->method('save')->willReturn($contextManager);
@@ -101,7 +101,7 @@ class ContextControllerTest extends TestCase
         $this->assertInstanceOf(FormInterface::class, $view);
     }
 
-    public function testPutContextAction()
+    public function testPutContextAction(): void
     {
         $context = $this->createMock(ContextInterface::class);
 
@@ -123,7 +123,7 @@ class ContextControllerTest extends TestCase
         $this->assertInstanceOf(View::class, $view);
     }
 
-    public function testPutPostInvalidAction()
+    public function testPutPostInvalidAction(): void
     {
         $context = $this->createMock(ContextInterface::class);
 
@@ -144,7 +144,7 @@ class ContextControllerTest extends TestCase
         $this->assertInstanceOf(FormInterface::class, $view);
     }
 
-    public function testDeleteContextAction()
+    public function testDeleteContextAction(): void
     {
         $context = $this->createMock(ContextInterface::class);
 
@@ -157,7 +157,7 @@ class ContextControllerTest extends TestCase
         $this->assertSame(['deleted' => true], $view);
     }
 
-    public function testDeleteContextInvalidAction()
+    public function testDeleteContextInvalidAction(): void
     {
         $this->expectException(NotFoundHttpException::class);
 

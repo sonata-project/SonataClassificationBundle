@@ -23,11 +23,11 @@ class TagManagerTest extends TestCase
 {
     use EntityManagerMockFactoryTrait;
 
-    public function testGetPager()
+    public function testGetPager(): void
     {
         $self = $this;
         $this
-            ->getTagManager(static function ($qb) use ($self) {
+            ->getTagManager(static function ($qb) use ($self): void {
                 $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue([]));
                 $qb->expects($self->never())->method('andWhere');
                 $qb->expects($self->once())->method('setParameters')->with([]);
@@ -35,11 +35,11 @@ class TagManagerTest extends TestCase
             ->getPager([], 1);
     }
 
-    public function testGetPagerWithEnabledTags()
+    public function testGetPagerWithEnabledTags(): void
     {
         $self = $this;
         $this
-            ->getTagManager(static function ($qb) use ($self) {
+            ->getTagManager(static function ($qb) use ($self): void {
                 $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue([]));
                 $qb->expects($self->once())->method('andWhere')->with($self->equalTo('t.enabled = :enabled'));
                 $qb->expects($self->once())->method('setParameters')->with(['enabled' => true]);
@@ -49,11 +49,11 @@ class TagManagerTest extends TestCase
             ], 1);
     }
 
-    public function testGetPagerWithDisabledTags()
+    public function testGetPagerWithDisabledTags(): void
     {
         $self = $this;
         $this
-            ->getTagManager(static function ($qb) use ($self) {
+            ->getTagManager(static function ($qb) use ($self): void {
                 $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue([]));
                 $qb->expects($self->once())->method('andWhere')->with($self->equalTo('t.enabled = :enabled'));
                 $qb->expects($self->once())->method('setParameters')->with(['enabled' => false]);

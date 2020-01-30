@@ -21,7 +21,7 @@ use Sonata\ClassificationBundle\Model\Context;
  */
 class ContextTest extends TestCase
 {
-    public function testSetterGetter()
+    public function testSetterGetter(): void
     {
         $time = new \DateTime();
 
@@ -45,7 +45,7 @@ class ContextTest extends TestCase
         $this->assertSame('n/a', $context->__toString());
     }
 
-    public function testPreUpdate()
+    public function testPreUpdate(): void
     {
         /** @var Context $context */
         $context = $this->getMockForAbstractClass(Context::class);

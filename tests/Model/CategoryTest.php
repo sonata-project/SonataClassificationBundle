@@ -23,7 +23,7 @@ use Sonata\MediaBundle\Model\MediaInterface;
  */
 class CategoryTest extends TestCase
 {
-    public function testSetterGetter()
+    public function testSetterGetter(): void
     {
         $time = new \DateTime();
 
@@ -67,7 +67,7 @@ class CategoryTest extends TestCase
         $this->assertSame('custom-slug', $category->getSlug());
     }
 
-    public function testParent()
+    public function testParent(): void
     {
         /** @var Category $parent */
         $parent = $this->getMockForAbstractClass(Category::class);
@@ -79,7 +79,7 @@ class CategoryTest extends TestCase
         $this->assertCount(1, $parent->getChildren());
     }
 
-    public function testChildren()
+    public function testChildren(): void
     {
         /** @var Category $cat1 */
         $cat1 = $this->getMockForAbstractClass(Category::class);
@@ -113,7 +113,7 @@ class CategoryTest extends TestCase
         $this->assertCount(3, $category->getChildren());
     }
 
-    public function testPrePersist()
+    public function testPrePersist(): void
     {
         /** @var Category $category */
         $category = $this->getMockForAbstractClass(Category::class);
@@ -123,7 +123,7 @@ class CategoryTest extends TestCase
         $this->assertInstanceOf(\DateTime::class, $category->getUpdatedAt());
     }
 
-    public function testPreUpdate()
+    public function testPreUpdate(): void
     {
         /** @var Category $category */
         $category = $this->getMockForAbstractClass(Category::class);

@@ -21,7 +21,7 @@ use Sonata\ClassificationBundle\Form\ChoiceList\CategoryChoiceLoader;
  */
 class CategoryChoiceLoaderTest extends TestCase
 {
-    public function testLoadChoiceList()
+    public function testLoadChoiceList(): void
     {
         $choices = [
             1 => 'foo',
@@ -33,7 +33,7 @@ class CategoryChoiceLoaderTest extends TestCase
         $this->assertSame($choices, $categoryLoader->loadChoiceList()->getOriginalKeys());
     }
 
-    public function testLoadChoicesForValues()
+    public function testLoadChoicesForValues(): void
     {
         $choices = [
             1 => 'foo',
@@ -45,7 +45,7 @@ class CategoryChoiceLoaderTest extends TestCase
         $this->assertSame(array_keys($choices), $categoryLoader->loadChoicesForValues([1, 2, 3]));
     }
 
-    public function testLoadValuesForChoices()
+    public function testLoadValuesForChoices(): void
     {
         $choices = [
             1 => 'foo',

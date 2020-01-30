@@ -42,7 +42,7 @@ final class AbstractCategoriesBlockServiceTest extends AbstractBlockServiceTestC
      */
     private $categoryAdmin;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -52,7 +52,7 @@ final class AbstractCategoriesBlockServiceTest extends AbstractBlockServiceTestC
         $this->categoryAdmin = $this->createMock(CategoryAdmin::class);
     }
 
-    public function testDefaultSettings()
+    public function testDefaultSettings(): void
     {
         $blockService = $this->getMockForAbstractClass(AbstractCategoriesBlockService::class, [
             'block.service', $this->templating, $this->contextManager, $this->categoryManager, $this->categoryAdmin,
@@ -71,7 +71,7 @@ final class AbstractCategoriesBlockServiceTest extends AbstractBlockServiceTestC
         ], $blockContext);
     }
 
-    public function testLoad()
+    public function testLoad(): void
     {
         $category = $this->getMockBuilder(CategoryInterface::class)
             ->setMethods(['getId'])
@@ -99,7 +99,7 @@ final class AbstractCategoriesBlockServiceTest extends AbstractBlockServiceTestC
         $blockService->load($block);
     }
 
-    public function testPrePersist()
+    public function testPrePersist(): void
     {
         $category = $this->getMockBuilder(CategoryInterface::class)
             ->setMethods(['getId'])
@@ -122,7 +122,7 @@ final class AbstractCategoriesBlockServiceTest extends AbstractBlockServiceTestC
         $blockService->prePersist($block);
     }
 
-    public function testPreUpdate()
+    public function testPreUpdate(): void
     {
         $category = $this->getMockBuilder(CategoryInterface::class)
             ->setMethods(['getId'])

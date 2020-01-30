@@ -42,7 +42,7 @@ final class AbstractTagsBlockServiceTest extends AbstractBlockServiceTestCase
      */
     private $tagAdmin;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -52,7 +52,7 @@ final class AbstractTagsBlockServiceTest extends AbstractBlockServiceTestCase
         $this->tagAdmin = $this->createMock(TagAdmin::class);
     }
 
-    public function testDefaultSettings()
+    public function testDefaultSettings(): void
     {
         $blockService = $this->getMockForAbstractClass(AbstractTagsBlockService::class, [
             'block.service', $this->templating, $this->contextManager, $this->tagManager, $this->tagAdmin,
@@ -71,7 +71,7 @@ final class AbstractTagsBlockServiceTest extends AbstractBlockServiceTestCase
         ], $blockContext);
     }
 
-    public function testLoad()
+    public function testLoad(): void
     {
         $tag = $this->getMockBuilder(TagInterface::class)
             ->setMethods(['getId'])
@@ -99,7 +99,7 @@ final class AbstractTagsBlockServiceTest extends AbstractBlockServiceTestCase
         $blockService->load($block);
     }
 
-    public function testPrePersist()
+    public function testPrePersist(): void
     {
         $tag = $this->getMockBuilder(TagInterface::class)
             ->setMethods(['getId'])
@@ -122,7 +122,7 @@ final class AbstractTagsBlockServiceTest extends AbstractBlockServiceTestCase
         $blockService->prePersist($block);
     }
 
-    public function testPreUpdate()
+    public function testPreUpdate(): void
     {
         $tag = $this->getMockBuilder(TagInterface::class)
             ->setMethods(['getId'])

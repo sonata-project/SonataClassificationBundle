@@ -31,7 +31,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  */
 class CollectionControllerTest extends TestCase
 {
-    public function testGetCollectionsAction()
+    public function testGetCollectionsAction(): void
     {
         $paramFetcher = $this->createMock(ParamFetcherInterface::class);
         $paramFetcher->expects($this->once())->method('all')->willReturn([]);
@@ -44,7 +44,7 @@ class CollectionControllerTest extends TestCase
         $this->assertSame($pager, $this->createCollectionController($collectionManager)->getCollectionsAction($paramFetcher));
     }
 
-    public function testGetCollectionAction()
+    public function testGetCollectionAction(): void
     {
         $collection = $this->createMock(CollectionInterface::class);
 
@@ -54,7 +54,7 @@ class CollectionControllerTest extends TestCase
         $this->assertSame($collection, $this->createCollectionController($collectionManager)->getCollectionAction(1));
     }
 
-    public function testGetCollectionNotFoundExceptionAction()
+    public function testGetCollectionNotFoundExceptionAction(): void
     {
         $this->expectException(NotFoundHttpException::class);
         $this->expectExceptionMessage('Collection (42) not found');
@@ -62,7 +62,7 @@ class CollectionControllerTest extends TestCase
         $this->createCollectionController()->getCollectionAction(42);
     }
 
-    public function testPostCollectionAction()
+    public function testPostCollectionAction(): void
     {
         $collection = $this->createMock(CollectionInterface::class);
 
@@ -83,7 +83,7 @@ class CollectionControllerTest extends TestCase
         $this->assertInstanceOf(View::class, $view);
     }
 
-    public function testPostCollectionInvalidAction()
+    public function testPostCollectionInvalidAction(): void
     {
         $collection = $this->createMock(CollectionInterface::class);
 
@@ -103,7 +103,7 @@ class CollectionControllerTest extends TestCase
         $this->assertInstanceOf(FormInterface::class, $view);
     }
 
-    public function testPutCollectionAction()
+    public function testPutCollectionAction(): void
     {
         $collection = $this->createMock(CollectionInterface::class);
 
@@ -125,7 +125,7 @@ class CollectionControllerTest extends TestCase
         $this->assertInstanceOf(View::class, $view);
     }
 
-    public function testPutPostInvalidAction()
+    public function testPutPostInvalidAction(): void
     {
         $collection = $this->createMock(CollectionInterface::class);
 
@@ -146,7 +146,7 @@ class CollectionControllerTest extends TestCase
         $this->assertInstanceOf(FormInterface::class, $view);
     }
 
-    public function testDeleteCollectionAction()
+    public function testDeleteCollectionAction(): void
     {
         $collection = $this->createMock(CollectionInterface::class);
 
@@ -159,7 +159,7 @@ class CollectionControllerTest extends TestCase
         $this->assertSame(['deleted' => true], $view);
     }
 
-    public function testDeleteCollectionInvalidAction()
+    public function testDeleteCollectionInvalidAction(): void
     {
         $this->expectException(NotFoundHttpException::class);
 

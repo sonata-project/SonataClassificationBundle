@@ -23,11 +23,11 @@ class ContextManagerTest extends TestCase
 {
     use EntityManagerMockFactoryTrait;
 
-    public function testGetPager()
+    public function testGetPager(): void
     {
         $self = $this;
         $this
-            ->getContextManager(static function ($qb) use ($self) {
+            ->getContextManager(static function ($qb) use ($self): void {
                 $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue([]));
                 $qb->expects($self->never())->method('andWhere');
                 $qb->expects($self->once())->method('setParameters')->with([]);
@@ -35,11 +35,11 @@ class ContextManagerTest extends TestCase
             ->getPager([], 1);
     }
 
-    public function testGetPagerWithEnabledContexts()
+    public function testGetPagerWithEnabledContexts(): void
     {
         $self = $this;
         $this
-            ->getContextManager(static function ($qb) use ($self) {
+            ->getContextManager(static function ($qb) use ($self): void {
                 $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue([]));
                 $qb->expects($self->once())->method('andWhere')->with($self->equalTo('c.enabled = :enabled'));
                 $qb->expects($self->once())->method('setParameters')->with(['enabled' => true]);
@@ -49,11 +49,11 @@ class ContextManagerTest extends TestCase
             ], 1);
     }
 
-    public function testGetPagerWithDisabledContexts()
+    public function testGetPagerWithDisabledContexts(): void
     {
         $self = $this;
         $this
-            ->getContextManager(static function ($qb) use ($self) {
+            ->getContextManager(static function ($qb) use ($self): void {
                 $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue([]));
                 $qb->expects($self->once())->method('andWhere')->with($self->equalTo('c.enabled = :enabled'));
                 $qb->expects($self->once())->method('setParameters')->with(['enabled' => false]);

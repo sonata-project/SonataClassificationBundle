@@ -19,7 +19,7 @@ abstract class CategoryTest extends BaseCategory
 {
     private $id;
 
-    public function setId($id)
+    public function setId($id): void
     {
         $this->id = $id;
     }

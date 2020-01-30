@@ -27,12 +27,12 @@ class AdminTest extends TestCase
      */
     private $contextManager;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->contextManager = $this->createMock(ContextManagerInterface::class);
     }
 
-    public function testAbstractAdminChildren()
+    public function testAbstractAdminChildren(): void
     {
         $contextAwareAdmin = $this->createMock(ContextAwareAdmin::class);
         $this->assertInstanceOf(AbstractAdmin::class, $contextAwareAdmin);
@@ -40,7 +40,7 @@ class AdminTest extends TestCase
         $this->assertInstanceOf(AbstractAdmin::class, $contextAdmin);
     }
 
-    public function testGetPersistentParametersWithNoExtension()
+    public function testGetPersistentParametersWithNoExtension(): void
     {
         $expected = [
             'context' => '',
@@ -54,7 +54,7 @@ class AdminTest extends TestCase
         $this->assertSame($expected, $admin->getPersistentParameters());
     }
 
-    public function testGetPersistentParametersWithInvalidExtension()
+    public function testGetPersistentParametersWithInvalidExtension(): void
     {
         $this->expectException(\RuntimeException::class);
 
@@ -70,7 +70,7 @@ class AdminTest extends TestCase
         $admin->getPersistentParameters();
     }
 
-    public function testGetPersistentParametersWithValidExtension()
+    public function testGetPersistentParametersWithValidExtension(): void
     {
         $expected = [
             'tl' => 'de',

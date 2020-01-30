@@ -101,7 +101,7 @@ class CategoryAdminControllerTest extends TestCase
     /**
      * Based on Sonata\AdminBundle\Tests\Controller\CRUDControllerTest.
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->container = $this->createMock(ContainerInterface::class);
 
@@ -269,12 +269,12 @@ class CategoryAdminControllerTest extends TestCase
         $this->controller->setContainer($this->container);
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->controller = null;
     }
 
-    public function testListActionWithoutFilter()
+    public function testListActionWithoutFilter(): void
     {
         $this->request->query->set('hide_context', '0');
 
@@ -287,7 +287,7 @@ class CategoryAdminControllerTest extends TestCase
     /**
      * @dataProvider listActionData
      */
-    public function testListAction($context)
+    public function testListAction($context): void
     {
         $this->request->query->set('_list_mode', 'list');
         $this->request->query->set('filter', 'filter[context][value]='.($context ? $context : ''));
@@ -337,7 +337,7 @@ class CategoryAdminControllerTest extends TestCase
     /**
      * @dataProvider treeActionData
      */
-    public function testTreeAction($context, $categories)
+    public function testTreeAction($context, $categories): void
     {
         $datagrid = $this->createMock(DatagridInterface::class);
 

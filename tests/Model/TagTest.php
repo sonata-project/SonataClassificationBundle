@@ -22,7 +22,7 @@ use Sonata\ClassificationBundle\Model\Tag;
  */
 class TagTest extends TestCase
 {
-    public function testSetterGetter()
+    public function testSetterGetter(): void
     {
         $time = new \DateTime();
 
@@ -57,7 +57,7 @@ class TagTest extends TestCase
         $this->assertSame('custom-slug', $tag->getSlug());
     }
 
-    public function testPreUpdate()
+    public function testPreUpdate(): void
     {
         /** @var Tag $tag */
         $tag = $this->getMockForAbstractClass(Tag::class);

@@ -23,11 +23,11 @@ class CollectionManagerTest extends TestCase
 {
     use EntityManagerMockFactoryTrait;
 
-    public function testGetPager()
+    public function testGetPager(): void
     {
         $self = $this;
         $this
-            ->getCollectionManager(static function ($qb) use ($self) {
+            ->getCollectionManager(static function ($qb) use ($self): void {
                 $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue([]));
                 $qb->expects($self->never())->method('andWhere');
                 $qb->expects($self->once())->method('setParameters')->with([]);
@@ -35,11 +35,11 @@ class CollectionManagerTest extends TestCase
             ->getPager([], 1);
     }
 
-    public function testGetPagerWithEnabledCollections()
+    public function testGetPagerWithEnabledCollections(): void
     {
         $self = $this;
         $this
-            ->getCollectionManager(static function ($qb) use ($self) {
+            ->getCollectionManager(static function ($qb) use ($self): void {
                 $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue([]));
                 $qb->expects($self->once())->method('andWhere')->with($self->equalTo('c.enabled = :enabled'));
                 $qb->expects($self->once())->method('setParameters')->with(['enabled' => true]);
@@ -49,11 +49,11 @@ class CollectionManagerTest extends TestCase
             ], 1);
     }
 
-    public function testGetPagerWithDisabledCollections()
+    public function testGetPagerWithDisabledCollections(): void
     {
         $self = $this;
         $this
-            ->getCollectionManager(static function ($qb) use ($self) {
+            ->getCollectionManager(static function ($qb) use ($self): void {
                 $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue([]));
                 $qb->expects($self->once())->method('andWhere')->with($self->equalTo('c.enabled = :enabled'));
                 $qb->expects($self->once())->method('setParameters')->with(['enabled' => false]);

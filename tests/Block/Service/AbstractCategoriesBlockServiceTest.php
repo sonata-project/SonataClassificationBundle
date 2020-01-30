@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sonata\ClassificationBundle\Tests\Block\Service;
 
 use Sonata\BlockBundle\Model\BlockInterface;
-use Sonata\BlockBundle\Test\AbstractBlockServiceTestCase;
+use Sonata\BlockBundle\Test\BlockServiceTestCase;
 use Sonata\BlockBundle\Test\FakeTemplating;
 use Sonata\ClassificationBundle\Admin\CategoryAdmin;
 use Sonata\ClassificationBundle\Block\Service\AbstractCategoriesBlockService;
@@ -25,7 +25,7 @@ use Sonata\ClassificationBundle\Model\ContextManagerInterface;
 /**
  * @author Christian Gripp <mail@core23.de>
  */
-final class AbstractCategoriesBlockServiceTest extends AbstractBlockServiceTestCase
+final class AbstractCategoriesBlockServiceTest extends BlockServiceTestCase
 {
     /**
      * @var ContextManagerInterface

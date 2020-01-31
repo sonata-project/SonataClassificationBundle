@@ -2,6 +2,17 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.10.0](https://github.com/sonata-project/SonataClassificationBundle/compare/3.9.2...3.10.0) - 2020-01-31
+### Fixed
+- Fix media bundle decoupling
+
+### Changed
+- Loading media association based on defined class
+
+### Removed
+- Support for Symfony < 3.4
+- Support for Symfony >= 4, < 4.2
+
 ## [3.9.2](https://github.com/sonata-project/SonataClassificationBundle/compare/3.9.1...3.9.2) - 2019-11-11
 ### Fixed
 - Fix calling wrong manager in `AbstractCollectionsBlockService`

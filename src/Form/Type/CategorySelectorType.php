@@ -44,7 +44,7 @@ class CategorySelectorType extends AbstractType
     /**
      * NEXT_MAJOR: Remove this method.
      *
-     * @deprecated since sonata-project/classification-bundle 3.x, to be removed in version 4.0.
+     * @deprecated since sonata-project/classification-bundle 3.10, to be removed in version 4.0.
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver): void
     {
@@ -101,7 +101,7 @@ class CategorySelectorType extends AbstractType
     /**
      * NEXT_MAJOR: Remove this method.
      *
-     * @deprecated since sonata-project/classification-bundle 3.x, to be removed in version 4.0.
+     * @deprecated since sonata-project/classification-bundle 3.10, to be removed in version 4.0.
      */
     public function getName()
     {

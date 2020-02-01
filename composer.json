@@ -48,7 +48,7 @@
         "doctrine/mongodb-odm": "^2.0",
         "friendsofsymfony/rest-bundle": "^2.1",
         "jms/serializer-bundle": "^1.0 || ^2.0",
-        "sonata-project/block-bundle": "^3.14",
+        "sonata-project/block-bundle": "^3.16.1",
         "symfony/phpunit-bridge": "^5.0"
     },
     "suggest": {

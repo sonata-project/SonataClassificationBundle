@@ -196,7 +196,7 @@ class SonataClassificationExtension extends Extension
 
         $collector->addUnique($config['class']['collection'], 'tag_collection', ['slug', 'context']);
 
-        if (null === $config['class']['media']) {
+        if (null !== $config['class']['media']) {
             $collector->addAssociation($config['class']['collection'], 'mapManyToOne', [
                 'fieldName' => 'media',
                 'targetEntity' => $config['class']['media'],

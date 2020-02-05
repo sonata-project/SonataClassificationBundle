@@ -35,7 +35,7 @@ If you have the ``SonataMediaBundle`` in your dependencies, then a new input wil
 
 So, you can display the `image` category like this:
 
-.. code-block:: jinja
+.. code-block:: twig
 
     <h1>{{ category.name}}</h1>
 

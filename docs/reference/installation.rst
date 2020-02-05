@@ -17,28 +17,24 @@ Add ``SonataClassificationBundle`` via composer:
 
 .. code-block:: bash
 
-   $ composer require sonata-project/classification-bundle
+   composer require sonata-project/classification-bundle
 
-Now, add the new ``SonataClassificationBundle`` to ``bundles.php`` file:
+Now, add the new ``SonataClassificationBundle`` to ``bundles.php`` file::
 
-.. code-block:: php
-
-    <?php
 
     // config/bundles.php
 
     return [
-        //...
+        // ...
         Sonata\ClassificationBundle\SonataClassificationBundle::class => ['all' => true],
     ];
 
 .. note::
+
     If you are not using Symfony Flex, you should enable bundles in your
     ``AppKernel.php``.
 
 .. code-block:: php
-
-    <?php
 
     // app/AppKernel.php
 
@@ -70,6 +66,7 @@ Add these bundles in the config mapping definition (or enable `auto_mapping`_):
                         SonataClassificationBundle: ~
 
 .. note::
+
     If you are not using Symfony Flex, this configuration should be added
     to ``app/config/config.yml``.
 
@@ -83,6 +80,7 @@ generate the correct entities for the media:
     bin/console sonata:easy-extends:generate SonataClassificationBundle --dest=src --namespace_prefix=App
 
 .. note::
+
     If you are not using Symfony Flex, use command without ``--namespace_prefix=App``.
 
 With provided parameters, the files are generated in ``src/Application/Sonata/ClassificationBundle``.
@@ -96,28 +94,24 @@ With provided parameters, the files are generated in ``src/Application/Sonata/Cl
     ``App\Application\Sonata\ClassificationBundle\Entity\Tag``.
 
 .. note::
+
     If you are not using Symfony Flex, the namespace will be ``Application\Sonata\ClassificationBundle\Entity``.
 
-Now, add the new ``Application`` Bundle into the ``bundles.php``:
-
-.. code-block:: php
-
-    <?php
+Now, add the new ``Application`` Bundle into the ``bundles.php``::
 
     // config/bundles.php
 
     return [
-        //...
+        // ...
         App\Application\Sonata\ClassificationBundle\ApplicationSonataClassificationBundle::class => ['all' => true],
     ];
 
 .. note::
+
     If you are not using Symfony Flex, add the new ``Application`` Bundle into your
     ``AppKernel.php``.
 
 .. code-block:: php
-
-    <?php
 
     // app/AppKernel.php
 
@@ -136,7 +130,7 @@ Now, add the new ``Application`` Bundle into the ``bundles.php``:
 
 And configure ``ClassificationBundle`` to use the newly generated classes:
 
-.. code-block:: php
+.. code-block:: yaml
 
     # config/packages/sonata.yaml
 
@@ -149,6 +143,7 @@ And configure ``ClassificationBundle`` to use the newly generated classes:
 
 
 .. note::
+
     If you are not using Symfony Flex, add classes without the ``App\``
     part and this configuration should be added to ``app/config/config.yml``
 

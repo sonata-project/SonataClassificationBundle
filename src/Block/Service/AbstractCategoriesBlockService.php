@@ -83,7 +83,9 @@ abstract class AbstractCategoriesBlockService extends AbstractClassificationBloc
             ],
         ]);
 
-        $formMapper->add(ImmutableArrayType::class, [
+        $formMapper->add(
+            ImmutableArrayType::class,
+            [
                 'keys' => [
                     ['title', TextType::class, [
                         'required' => false,

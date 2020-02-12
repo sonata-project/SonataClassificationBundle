@@ -249,16 +249,14 @@ class CategoryAdminControllerTest extends TestCase
         $this->admin->expects($this->any())
             ->method('generateUrl')
             ->willReturnCallback(
-
-                    static function ($name, array $parameters = [], $absolute = false) {
-                        $result = $name;
-                        if (!empty($parameters)) {
-                            $result .= '?'.http_build_query($parameters);
-                        }
-
-                        return $result;
+                static function ($name, array $parameters = [], $absolute = false) {
+                    $result = $name;
+                    if (!empty($parameters)) {
+                        $result .= '?'.http_build_query($parameters);
                     }
 
+                    return $result;
+                }
             );
 
         $this->admin->expects($this->any())
@@ -280,7 +278,9 @@ class CategoryAdminControllerTest extends TestCase
 
         $result = $this->controller->listAction($this->request);
         $this->assertInstanceOf(
-            RedirectResponse::class, $result);
+            RedirectResponse::class,
+            $result
+        );
         $this->assertSame('tree?hide_context=0', $result->getTargetUrl());
     }
 
@@ -322,8 +322,10 @@ class CategoryAdminControllerTest extends TestCase
             ->method('getPersistentParameter')
             ->willReturn($context);
 
-        $this->assertInstanceOf(Response::class,
-            $this->controller->listAction($this->request));
+        $this->assertInstanceOf(
+            Response::class,
+            $this->controller->listAction($this->request)
+        );
     }
 
     public function listActionData()
@@ -387,8 +389,10 @@ class CategoryAdminControllerTest extends TestCase
             ->method('getRootCategoriesSplitByContexts')
             ->willReturn($categoriesMock);
 
-        $this->assertInstanceOf(Response::class,
-            $this->controller->treeAction($this->request));
+        $this->assertInstanceOf(
+            Response::class,
+            $this->controller->treeAction($this->request)
+        );
     }
 
     public function treeActionData()

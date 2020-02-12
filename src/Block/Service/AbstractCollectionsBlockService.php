@@ -86,7 +86,8 @@ abstract class AbstractCollectionsBlockService extends AbstractClassificationBlo
 
         $formMapper->add(
             'settings',
-            ImmutableArrayType::class, [
+            ImmutableArrayType::class,
+            [
                 'keys' => [
                     ['title', TextType::class, [
                         'required' => false,

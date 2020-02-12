@@ -84,7 +84,10 @@ abstract class AbstractTagsBlockService extends AbstractClassificationBlockServi
             ],
         ]);
 
-        $formMapper->add('settings', ImmutableArrayType::class, [
+        $formMapper->add(
+            'settings',
+            ImmutableArrayType::class,
+            [
                 'keys' => [
                     ['title', TextType::class, [
                         'required' => false,

@@ -10,11 +10,11 @@ Advanced Configuration
 
         sonata_classification:
             class:
-                tag:          Application\Sonata\ClassificationBundle\Entity\Tag
-                category:     Application\Sonata\ClassificationBundle\Entity\Category
-                collection:   Application\Sonata\ClassificationBundle\Entity\Collection
-                media:        Application\Sonata\MediaBundle\Entity\Media
-                context:      Application\Sonata\ClassificationBundle\Entity\Context
+                tag:          App\Entity\Tag
+                category:     App\Entity\Category
+                collection:   App\Entity\Collection
+                media:        App\Entity\Media
+                context:      App\Entity\Context
 
             admin:
                 tag:

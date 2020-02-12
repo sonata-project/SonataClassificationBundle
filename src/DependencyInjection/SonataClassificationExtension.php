@@ -13,7 +13,8 @@ declare(strict_types=1);
 
 namespace Sonata\ClassificationBundle\DependencyInjection;
 
-use Sonata\EasyExtendsBundle\Mapper\DoctrineCollector;
+use Sonata\Doctrine\Mapper\Builder\OptionsBuilder;
+use Sonata\Doctrine\Mapper\DoctrineCollector;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -52,7 +53,10 @@ class SonataClassificationExtension extends Extension
             $loader->load('admin.xml');
         }
 
-        $this->registerDoctrineMapping($config);
+        if (isset($bundles['SonataDoctrineBundle'])) {
+            $this->registerDoctrineMapping($config);
+        }
+
         $this->configureClass($config, $container);
         $this->configureAdmin($config, $container);
     }
@@ -107,131 +111,145 @@ class SonataClassificationExtension extends Extension
 
         $collector = DoctrineCollector::getInstance();
 
-        $collector->addAssociation($config['class']['category'], 'mapOneToMany', [
-            'fieldName' => 'children',
-            'targetEntity' => $config['class']['category'],
-            'cascade' => [
+        $categoryOnyToManyOptions = OptionsBuilder::create()
+            ->add('fieldName', 'children')
+            ->add('targetEntity', $config['class']['category'])
+            ->add('cascade', [
                 'persist',
-            ],
-            'mappedBy' => 'parent',
-            'orphanRemoval' => true,
-            'orderBy' => [
+            ])
+            ->add('mappedBy', 'parent')
+            ->add('orphanRemoval', true)
+            ->add('orderBy', [
                 'position' => 'ASC',
-            ],
-        ]);
+            ])
+        ;
 
-        $collector->addAssociation($config['class']['category'], 'mapManyToOne', [
-            'fieldName' => 'parent',
-            'targetEntity' => $config['class']['category'],
-            'cascade' => [
+        $collector->addAssociation($config['class']['category'], 'mapOneToMany', $categoryOnyToManyOptions);
+
+        $parentCategoryManyToOneOptions = OptionsBuilder::create()
+            ->add('fieldName', 'parent')
+            ->add('targetEntity', $config['class']['category'])
+            ->add('cascade', [
                 'persist',
                 'refresh',
                 'merge',
                 'detach',
-            ],
-            'mappedBy' => null,
-            'inversedBy' => 'children',
-            'joinColumns' => [
+            ])
+            ->add('mappedBy', null)
+            ->add('inversedBy', 'children')
+            ->add('joinColumns', [
                 [
-                 'name' => 'parent_id',
-                 'referencedColumnName' => 'id',
-                 'onDelete' => 'CASCADE',
+                    'name' => 'parent_id',
+                    'referencedColumnName' => 'id',
+                    'onDelete' => 'CASCADE',
                 ],
-            ],
-            'orphanRemoval' => false,
-        ]);
+            ])
+            ->add('orphanRemoval', false)
+        ;
 
-        $collector->addAssociation($config['class']['category'], 'mapManyToOne', [
-            'fieldName' => 'context',
-            'targetEntity' => $config['class']['context'],
-            'cascade' => [
+        $collector->addAssociation($config['class']['category'], 'mapManyToOne', $parentCategoryManyToOneOptions);
+
+        $contextManyToOneOptions = OptionsBuilder::create()
+            ->add('fieldName', 'context')
+            ->add('targetEntity', $config['class']['context'])
+            ->add('cascade', [
                 'persist',
-            ],
-            'mappedBy' => null,
-            'inversedBy' => null,
-            'joinColumns' => [
+            ])
+            ->add('mappedBy', null)
+            ->add('inversedBy', null)
+            ->add('joinColumns', [
                 [
                     'name' => 'context',
                     'referencedColumnName' => 'id',
                 ],
-            ],
-            'orphanRemoval' => false,
-        ]);
+            ])
+            ->add('orphanRemoval', false)
+        ;
 
-        $collector->addAssociation($config['class']['tag'], 'mapManyToOne', [
-            'fieldName' => 'context',
-            'targetEntity' => $config['class']['context'],
-            'cascade' => [
+        $collector->addAssociation($config['class']['category'], 'mapManyToOne', $contextManyToOneOptions);
+
+        $tagManyToOneOptions = OptionsBuilder::create()
+            ->add('fieldName', 'context')
+            ->add('targetEntity', $config['class']['context'])
+            ->add('cascade', [
                 'persist',
-            ],
-            'mappedBy' => null,
-            'inversedBy' => null,
-            'joinColumns' => [
+            ])
+            ->add('mappedBy', null)
+            ->add('inversedBy', null)
+            ->add('joinColumns', [
                 [
                     'name' => 'context',
                     'referencedColumnName' => 'id',
                 ],
-            ],
-            'orphanRemoval' => false,
-        ]);
+            ])
+            ->add('orphanRemoval', false)
+        ;
+
+        $collector->addAssociation($config['class']['tag'], 'mapManyToOne', $tagManyToOneOptions);
 
         $collector->addUnique($config['class']['tag'], 'tag_context', ['slug', 'context']);
 
-        $collector->addAssociation($config['class']['collection'], 'mapManyToOne', [
-            'fieldName' => 'context',
-            'targetEntity' => $config['class']['context'],
-            'cascade' => [
+        $collectionManyToOneOptions = OptionsBuilder::create()
+            ->add('fieldName', 'context')
+            ->add('targetEntity', $config['class']['context'])
+            ->add('cascade', [
                 'persist',
-            ],
-            'mappedBy' => null,
-            'inversedBy' => null,
-            'joinColumns' => [
+            ])
+            ->add('mappedBy', null)
+            ->add('inversedBy', null)
+            ->add('joinColumns', [
                 [
                     'name' => 'context',
                     'referencedColumnName' => 'id',
                 ],
-            ],
-            'orphanRemoval' => false,
-        ]);
+            ])
+            ->add('orphanRemoval', false)
+        ;
+
+        $collector->addAssociation($config['class']['collection'], 'mapManyToOne', $collectionManyToOneOptions);
 
         $collector->addUnique($config['class']['collection'], 'tag_collection', ['slug', 'context']);
 
         if (null !== $config['class']['media']) {
-            $collector->addAssociation($config['class']['collection'], 'mapManyToOne', [
-                'fieldName' => 'media',
-                'targetEntity' => $config['class']['media'],
-                'cascade' => [
+            $mediaManyToOneOptions = OptionsBuilder::create()
+                ->add('fieldName', 'media')
+                ->add('targetEntity', $config['class']['media'])
+                ->add('cascade', [
                     'persist',
-                ],
-                'mappedBy' => null,
-                'inversedBy' => null,
-                'joinColumns' => [
+                ])
+                ->add('mappedBy', null)
+                ->add('inversedBy', null)
+                ->add('joinColumns', [
                     [
-                     'name' => 'media_id',
-                     'referencedColumnName' => 'id',
-                     'onDelete' => 'SET NULL',
+                        'name' => 'media_id',
+                        'referencedColumnName' => 'id',
+                        'onDelete' => 'SET NULL',
                     ],
-                ],
-                'orphanRemoval' => false,
-            ]);
+                ])
+                ->add('orphanRemoval', false)
+            ;
 
-            $collector->addAssociation($config['class']['category'], 'mapManyToOne', [
-                'fieldName' => 'media',
-                'targetEntity' => $config['class']['media'],
-                'cascade' => [
+            $collector->addAssociation($config['class']['collection'], 'mapManyToOne', $mediaManyToOneOptions);
+
+            $categoryManyToOneOptions = OptionsBuilder::create()
+                ->add('fieldName', 'media')
+                ->add('targetEntity', $config['class']['media'])
+                ->add('cascade', [
                     'persist',
-                ],
-                'mappedBy' => null,
-                'inversedBy' => null,
-                'joinColumns' => [
+                ])
+                ->add('mappedBy', null)
+                ->add('inversedBy', null)
+                ->add('joinColumns', [
                     [
-                     'name' => 'media_id',
-                     'referencedColumnName' => 'id',
-                     'onDelete' => 'SET NULL',
+                        'name' => 'media_id',
+                        'referencedColumnName' => 'id',
+                        'onDelete' => 'SET NULL',
                     ],
-                ],
-                'orphanRemoval' => false,
-            ]);
+                ])
+                ->add('orphanRemoval', false)
+            ;
+
+            $collector->addAssociation($config['class']['category'], 'mapManyToOne', $categoryManyToOneOptions);
         }
     }
 }

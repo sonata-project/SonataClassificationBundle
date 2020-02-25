@@ -44,14 +44,38 @@ abstract class AbstractTagsBlockService extends AbstractClassificationBlockServi
     private $tagAdmin;
 
     /**
-     * @param string $name
+     * @param string|Environment                           $twigOrDeprecatedName
+     * @param EngineInterface|ContextManagerInterface      $contextManagerOrDeprecatedTemplating
+     * @param ContextManagerInterface|TagManagerInterface| $tagManagerOrDeprecatedContextManager
+     * @param TagManagerInterface|AdminInterface           $tagAdminOrDeprecatedTagManager
+     * @param AdminInterface|null                          $deprecatedTagAdmin
      */
-    public function __construct($name, EngineInterface $templating, ContextManagerInterface $contextManager, TagManagerInterface $tagManager, AdminInterface $tagAdmin)
-    {
-        parent::__construct($name, $templating, $contextManager);
+    public function __construct(
+        $twigOrDeprecatedName,
+        $contextManagerOrDeprecatedTemplating,
+        $tagManagerOrDeprecatedContextManager,
+        $tagAdminOrDeprecatedTagManager,
+        $deprecatedTagAdmin = null
+    ) {
+        // NEXT_MAJOR: remove the if block
+        if (\is_string($twigOrDeprecatedName)) {
+            parent::__construct(
+                $twigOrDeprecatedName,
+                $contextManagerOrDeprecatedTemplating,
+                $tagManagerOrDeprecatedContextManager
+            );
 
-        $this->tagManager = $tagManager;
-        $this->tagAdmin = $tagAdmin;
+            $this->tagManager = $tagAdminOrDeprecatedTagManager;
+            $this->tagAdmin = $deprecatedTagAdmin;
+        } else {
+            parent::__construct(
+                $twigOrDeprecatedName,
+                $contextManagerOrDeprecatedTemplating
+            );
+
+            $this->tagManager = $tagManagerOrDeprecatedContextManager;
+            $this->tagAdmin = $tagAdminOrDeprecatedTagManager;
+        }
     }
 
     public function execute(BlockContextInterface $blockContext, Response $response = null)
@@ -84,7 +108,10 @@ abstract class AbstractTagsBlockService extends AbstractClassificationBlockServi
             ],
         ]);
 
-        $formMapper->add('settings', ImmutableArrayType::class, [
+        $formMapper->add(
+            'settings',
+            ImmutableArrayType::class,
+            [
                 'keys' => [
                     ['title', TextType::class, [
                         'required' => false,

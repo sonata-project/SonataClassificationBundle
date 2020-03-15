@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sonata\ClassificationBundle\Entity;
 
+use Sonata\ClassificationBundle\Model\CollectionInterface;
 use Sonata\ClassificationBundle\Model\CollectionManagerInterface;
 use Sonata\DatagridBundle\Pager\Doctrine\Pager;
 use Sonata\DatagridBundle\ProxyQuery\Doctrine\ProxyQuery;
@@ -42,5 +43,34 @@ class CollectionManager extends BaseEntityManager implements CollectionManagerIn
         $pager->init();
 
         return $pager;
+    }
+
+    public function getBySlug(string $slug, $context = null, ?bool $enabled = true): ?CollectionInterface
+    {
+        $queryBuilder = $this->getObjectManager()->createQueryBuilder()
+            ->select('c')
+            ->andWhere('c.slug = :slug')->setParameter('slug', $slug);
+
+        if (null !== $context) {
+            $queryBuilder->andWhere('c.context = :context')->setParameter('context', $context);
+        }
+        if (null !== $enabled) {
+            $queryBuilder->andWhere('c.enabled = :enabled')->setParameter('enabled', $enabled);
+        }
+
+        return $queryBuilder->getQuery()->getOneOrNullResult();
+    }
+
+    public function getByContext($context, ?bool $enabled = true): array
+    {
+        $queryBuilder = $this->getObjectManager()->createQueryBuilder()
+            ->select('c')
+            ->andWhere('c.context = :context')->setParameter('context', $context);
+
+        if (null !== $enabled) {
+            $queryBuilder->andWhere('c.enabled = :enabled')->setParameter('enabled', $enabled);
+        }
+
+        return $queryBuilder->getQuery()->getResult();
     }
 }

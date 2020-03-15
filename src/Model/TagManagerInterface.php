@@ -16,6 +16,10 @@ namespace Sonata\ClassificationBundle\Model;
 use Sonata\Doctrine\Model\ManagerInterface;
 use Sonata\Doctrine\Model\PageableManagerInterface;
 
+/**
+ * @method TagInterface|null getBySlug(string $slug, ContextInterface|string|null $context, bool $enabled = true)
+ * @method TagInterface[]    getByContext(ContextInterface|string $context, bool $enabled = true)
+ */
 interface TagManagerInterface extends ManagerInterface, PageableManagerInterface
 {
 }

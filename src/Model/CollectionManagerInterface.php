@@ -16,6 +16,10 @@ namespace Sonata\ClassificationBundle\Model;
 use Sonata\Doctrine\Model\ManagerInterface;
 use Sonata\Doctrine\Model\PageableManagerInterface;
 
+/**
+ * @method CollectionInterface|null getBySlug(string $slug, ContextInterface|string|null $context, bool $enabled = true)
+ * @method CollectionInterface[]    getByContext(ContextInterface|string $context, bool $enabled = true)
+ */
 interface CollectionManagerInterface extends ManagerInterface, PageableManagerInterface
 {
 }

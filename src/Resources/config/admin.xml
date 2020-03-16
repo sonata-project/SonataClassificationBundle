@@ -50,5 +50,13 @@
                 <argument>%sonata.classification.admin.context.translation_domain%</argument>
             </call>
         </service>
+        <service id="Sonata\ClassificationBundle\Admin\Filter\CategoryFilter">
+            <tag name="sonata.admin.filter.type"/>
+            <argument type="service" id="sonata.classification.manager.category"/>
+        </service>
+        <service id="Sonata\ClassificationBundle\Admin\Filter\CollectionFilter">
+            <tag name="sonata.admin.filter.type"/>
+            <argument type="service" id="sonata.classification.manager.collection"/>
+        </service>
     </services>
 </container>

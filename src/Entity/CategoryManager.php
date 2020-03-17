@@ -228,6 +228,22 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
         return $pager;
     }
 
+    public function getBySlug(string $slug, $context = null, ?bool $enabled = true): ?CategoryInterface
+    {
+        $queryBuilder = $this->getObjectManager()->createQueryBuilder()
+            ->select('c')
+            ->andWhere('c.slug = :slug')->setParameter('slug', $slug);
+
+        if (null !== $context) {
+            $queryBuilder->andWhere('c.context = :context')->setParameter('context', $context);
+        }
+        if (null !== $enabled) {
+            $queryBuilder->andWhere('c.enabled = :enabled')->setParameter('enabled', $enabled);
+        }
+
+        return $queryBuilder->getQuery()->getOneOrNullResult();
+    }
+
     /**
      * Load all categories from the database, the current method is very efficient for < 256 categories.
      */

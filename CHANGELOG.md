@@ -2,6 +2,21 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.11.0](https://github.com/sonata-project/SonataClassificationBundle/compare/3.10.1...3.11.0) - 2020-03-18
+### Added
+- Add public aliases to all manager interface
+- Added `CollectionManager::getBySlug` method
+- Added `CategoryManager::getBySlug` method
+- Added `CategoryManager::getByContext` method
+- Added `TagManager::getBySlug` method
+- Added `TagManager::getByContext` method
+
+### Fixed
+- Allow `cocur/slugify` ^4.0
+
+### Removed
+- Remove block deprecations
+
 ## [3.10.1](https://github.com/sonata-project/SonataClassificationBundle/compare/3.10.0...3.10.1) - 2020-02-03
 ### Fixed
 - Fix media bundle decoupling

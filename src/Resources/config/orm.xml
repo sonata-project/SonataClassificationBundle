@@ -24,5 +24,9 @@
             <argument>%sonata.classification.manager.context.entity%</argument>
             <argument type="service" id="doctrine"/>
         </service>
+        <service id="Sonata\ClassificationBundle\Model\CategoryManagerInterface" alias="sonata.classification.manager.category" public="true"/>
+        <service id="Sonata\ClassificationBundle\Model\TagManagerInterface" alias="sonata.classification.manager.tag" public="true"/>
+        <service id="Sonata\ClassificationBundle\Model\CollectionManagerInterface" alias="sonata.classification.manager.collection" public="true"/>
+        <service id="Sonata\ClassificationBundle\Model\ContextManagerInterface" alias="sonata.classification.manager.context" public="true"/>
     </services>
 </container>

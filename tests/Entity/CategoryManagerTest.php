@@ -273,6 +273,25 @@ class CategoryManagerTest extends TestCase
         $this->assertContains($categoryBar, $categories[$contextBar->getId()]);
     }
 
+    public function testGetBySlug(): void
+    {
+        $self = $this;
+        $this
+            ->getCategoryManager(static function ($qb) use ($self): void {
+                $qb->expects($self->exactly(3))->method('andWhere')->withConsecutive(
+                    [$self->equalTo('c.slug = :slug')],
+                    [$self->equalTo('c.context = :context')],
+                    [$self->equalTo('c.enabled = :enabled')]
+                )->willReturn($qb);
+                $qb->expects($self->exactly(3))->method('setParameter')->withConsecutive(
+                    [$self->equalTo('slug'), $self->equalTo('theslug')],
+                    [$self->equalTo('context'), $self->equalTo('contextA')],
+                    [$self->equalTo('enabled'), $self->equalTo(false)]
+                )->willReturn($qb);
+            })
+            ->getBySlug('theslug', 'contextA', false);
+    }
+
     protected function getCategoryManager($qbCallback, $createQueryResult = null)
     {
         $em = $this->createEntityManagerMock($qbCallback, []);

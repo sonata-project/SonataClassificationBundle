@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sonata\ClassificationBundle\Tests\Entity;
 
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\ORM\AbstractQuery;
 use PHPUnit\Framework\TestCase;
 use Sonata\ClassificationBundle\Entity\BaseTag;
 use Sonata\ClassificationBundle\Entity\TagManager;
@@ -63,9 +64,52 @@ class TagManagerTest extends TestCase
             ], 1);
     }
 
-    protected function getTagManager($qbCallback)
+    public function testGetBySlug(): void
+    {
+        $self = $this;
+        $this
+            ->getTagManager(static function ($qb) use ($self): void {
+                $qb->expects($self->exactly(3))->method('andWhere')->withConsecutive(
+                    [$self->equalTo('t.slug = :slug')],
+                    [$self->equalTo('t.context = :context')],
+                    [$self->equalTo('t.enabled = :enabled')]
+                )->willReturn($qb);
+                $qb->expects($self->exactly(3))->method('setParameter')->withConsecutive(
+                    [$self->equalTo('slug'), $self->equalTo('theslug')],
+                    [$self->equalTo('context'), $self->equalTo('contextA')],
+                    [$self->equalTo('enabled'), $self->equalTo(false)]
+                )->willReturn($qb);
+            })
+            ->getBySlug('theslug', 'contextA', false);
+    }
+
+    public function testGetByContext(): void
+    {
+        $self = $this;
+        $this
+            ->getTagManager(static function ($qb) use ($self): void {
+                $qb->expects($self->exactly(2))->method('andWhere')->withConsecutive(
+                    [$self->equalTo('t.context = :context')],
+                    [$self->equalTo('t.enabled = :enabled')]
+                )->willReturn($qb);
+                $qb->expects($self->exactly(2))->method('setParameter')->withConsecutive(
+                    [$self->equalTo('context'), $self->equalTo('contextA')],
+                    [$self->equalTo('enabled'), $self->equalTo(false)]
+                )->willReturn($qb);
+            }, [])
+            ->getByContext('contextA', false);
+    }
+
+    protected function getTagManager($qbCallback, $createQueryResult = null)
     {
         $em = $this->createEntityManagerMock($qbCallback, []);
+
+        if (null !== $createQueryResult) {
+            $query = $this->createMock(AbstractQuery::class);
+            $query->expects($this->once())->method('execute')->willReturn($createQueryResult);
+            $query->expects($this->any())->method('setParameter')->willReturn($query);
+            $em->expects($this->once())->method('createQuery')->willReturn($query);
+        }
 
         $registry = $this->getMockForAbstractClass(ManagerRegistry::class);
         $registry->expects($this->any())->method('getManagerForClass')->willReturn($em);

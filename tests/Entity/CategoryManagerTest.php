@@ -15,6 +15,7 @@ namespace Sonata\ClassificationBundle\Tests\Entity;
 
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\AbstractQuery;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sonata\ClassificationBundle\Entity\BaseCategory;
 use Sonata\ClassificationBundle\Entity\CategoryManager;
@@ -29,7 +30,7 @@ class CategoryManagerTest extends TestCase
     {
         $self = $this;
         $this
-            ->getCategoryManager(static function ($qb) use ($self): void {
+            ->getCategoryManager(static function (MockObject $qb) use ($self): void {
                 $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue([]));
                 $qb->expects($self->exactly(1))->method('andWhere')->withConsecutive(
                     [$self->equalTo('c.context = :context')]
@@ -43,7 +44,7 @@ class CategoryManagerTest extends TestCase
     {
         $self = $this;
         $this
-            ->getCategoryManager(static function ($qb) use ($self): void {
+            ->getCategoryManager(static function (MockObject $qb) use ($self): void {
                 $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue([]));
                 $qb->expects($self->exactly(2))->method('andWhere')->withConsecutive(
                     [$self->equalTo('c.context = :context')],
@@ -61,7 +62,7 @@ class CategoryManagerTest extends TestCase
     {
         $self = $this;
         $this
-            ->getCategoryManager(static function ($qb) use ($self): void {
+            ->getCategoryManager(static function (MockObject $qb) use ($self): void {
                 $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue([]));
                 $qb->expects($self->exactly(2))->method('andWhere')->withConsecutive(
                     [$self->equalTo('c.context = :context')],
@@ -101,7 +102,7 @@ class CategoryManagerTest extends TestCase
 
         $categories = [$categoryFoo, $categoryBar];
 
-        $categoryManager = $this->getCategoryManager(static function ($qb): void {
+        $categoryManager = $this->getCategoryManager(static function (MockObject $qb): void {
         }, $categories);
 
         $this->assertSame($categoryManager->getCategories($context), $categories);
@@ -131,7 +132,7 @@ class CategoryManagerTest extends TestCase
         $categoryBar->setParent($categoryFoo);
         $categoryBar->setEnabled(true);
 
-        $categoryManager = $this->getCategoryManager(static function ($qb): void {
+        $categoryManager = $this->getCategoryManager(static function (MockObject $qb): void {
         }, [$categoryFoo, $categoryBar]);
 
         $categoryFoo = $categoryManager->getRootCategoryWithChildren($categoryFoo);
@@ -154,7 +155,7 @@ class CategoryManagerTest extends TestCase
         $categoryFoo->setParent(null);
         $categoryFoo->setEnabled(true);
 
-        $categoryManager = $this->getCategoryManager(static function ($qb): void {
+        $categoryManager = $this->getCategoryManager(static function (MockObject $qb): void {
         }, [$categoryFoo]);
 
         $categoryBar = $categoryManager->getRootCategory($context);
@@ -185,7 +186,7 @@ class CategoryManagerTest extends TestCase
         $categoryBar->setParent($categoryFoo);
         $categoryBar->setEnabled(true);
 
-        $categoryManager = $this->getCategoryManager(static function ($qb): void {
+        $categoryManager = $this->getCategoryManager(static function (MockObject $qb): void {
         }, [$categoryFoo, $categoryBar]);
 
         $categories = $categoryManager->getRootCategoriesForContext($context);
@@ -223,7 +224,7 @@ class CategoryManagerTest extends TestCase
         $categoryBar->setParent(null);
         $categoryBar->setEnabled(true);
 
-        $categoryManager = $this->getCategoryManager(static function ($qb): void {
+        $categoryManager = $this->getCategoryManager(static function (MockObject $qb): void {
         }, [$categoryFoo, $categoryBar]);
 
         $categories = $categoryManager->getRootCategories(false);
@@ -263,7 +264,7 @@ class CategoryManagerTest extends TestCase
         $categoryBar->setParent(null);
         $categoryBar->setEnabled(true);
 
-        $categoryManager = $this->getCategoryManager(static function ($qb): void {
+        $categoryManager = $this->getCategoryManager(static function (MockObject $qb): void {
         }, [$categoryFoo, $categoryBar]);
 
         $categories = $categoryManager->getRootCategoriesSplitByContexts(false);
@@ -277,7 +278,7 @@ class CategoryManagerTest extends TestCase
     {
         $self = $this;
         $this
-            ->getCategoryManager(static function ($qb) use ($self): void {
+            ->getCategoryManager(static function (MockObject $qb) use ($self): void {
                 $qb->expects($self->exactly(3))->method('andWhere')->withConsecutive(
                     [$self->equalTo('c.slug = :slug')],
                     [$self->equalTo('c.context = :context')],
@@ -292,19 +293,19 @@ class CategoryManagerTest extends TestCase
             ->getBySlug('theslug', 'contextA', false);
     }
 
-    protected function getCategoryManager($qbCallback, $createQueryResult = null)
+    private function getCategoryManager($qbCallback, $createQueryResult = null): CategoryManager
     {
         $em = $this->createEntityManagerMock($qbCallback, []);
 
         if (null !== $createQueryResult) {
             $query = $this->createMock(AbstractQuery::class);
             $query->expects($this->once())->method('execute')->willReturn($createQueryResult);
-            $query->expects($this->any())->method('setParameter')->willReturn($query);
+            $query->method('setParameter')->willReturn($query);
             $em->expects($this->once())->method('createQuery')->willReturn($query);
         }
 
         $registry = $this->getMockForAbstractClass(ManagerRegistry::class);
-        $registry->expects($this->any())->method('getManagerForClass')->willReturn($em);
+        $registry->method('getManagerForClass')->willReturn($em);
 
         $contextManager = $this->createMock(ContextManagerInterface::class);
 

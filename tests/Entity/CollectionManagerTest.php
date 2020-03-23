@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sonata\ClassificationBundle\Tests\Entity;
 
 use Doctrine\Common\Persistence\ManagerRegistry;
-use Doctrine\ORM\AbstractQuery;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sonata\ClassificationBundle\Entity\BaseCollection;
 use Sonata\ClassificationBundle\Entity\CollectionManager;
@@ -28,7 +28,7 @@ class CollectionManagerTest extends TestCase
     {
         $self = $this;
         $this
-            ->getCollectionManager(static function ($qb) use ($self): void {
+            ->getCollectionManager(static function (MockObject $qb) use ($self): void {
                 $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue([]));
                 $qb->expects($self->never())->method('andWhere');
                 $qb->expects($self->once())->method('setParameters')->with([]);
@@ -40,7 +40,7 @@ class CollectionManagerTest extends TestCase
     {
         $self = $this;
         $this
-            ->getCollectionManager(static function ($qb) use ($self): void {
+            ->getCollectionManager(static function (MockObject $qb) use ($self): void {
                 $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue([]));
                 $qb->expects($self->once())->method('andWhere')->with($self->equalTo('c.enabled = :enabled'));
                 $qb->expects($self->once())->method('setParameters')->with(['enabled' => true]);
@@ -54,7 +54,7 @@ class CollectionManagerTest extends TestCase
     {
         $self = $this;
         $this
-            ->getCollectionManager(static function ($qb) use ($self): void {
+            ->getCollectionManager(static function (MockObject $qb) use ($self): void {
                 $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue([]));
                 $qb->expects($self->once())->method('andWhere')->with($self->equalTo('c.enabled = :enabled'));
                 $qb->expects($self->once())->method('setParameters')->with(['enabled' => false]);
@@ -68,7 +68,7 @@ class CollectionManagerTest extends TestCase
     {
         $self = $this;
         $this
-            ->getCollectionManager(static function ($qb) use ($self): void {
+            ->getCollectionManager(static function (MockObject $qb) use ($self): void {
                 $qb->expects($self->exactly(3))->method('andWhere')->withConsecutive(
                     [$self->equalTo('c.slug = :slug')],
                     [$self->equalTo('c.context = :context')],
@@ -87,7 +87,7 @@ class CollectionManagerTest extends TestCase
     {
         $self = $this;
         $this
-            ->getCollectionManager(static function ($qb) use ($self): void {
+            ->getCollectionManager(static function (MockObject $qb) use ($self): void {
                 $qb->expects($self->exactly(2))->method('andWhere')->withConsecutive(
                     [$self->equalTo('c.context = :context')],
                     [$self->equalTo('c.enabled = :enabled')]
@@ -96,23 +96,16 @@ class CollectionManagerTest extends TestCase
                     [$self->equalTo('context'), $self->equalTo('contextA')],
                     [$self->equalTo('enabled'), $self->equalTo(false)]
                 )->willReturn($qb);
-            }, [])
+            })
             ->getByContext('contextA', false);
     }
 
-    protected function getCollectionManager($qbCallback, $createQueryResult = null)
+    private function getCollectionManager($qbCallback): CollectionManager
     {
         $em = $this->createEntityManagerMock($qbCallback, []);
 
-        if (null !== $createQueryResult) {
-            $query = $this->createMock(AbstractQuery::class);
-            $query->expects($this->once())->method('execute')->willReturn($createQueryResult);
-            $query->expects($this->any())->method('setParameter')->willReturn($query);
-            $em->expects($this->once())->method('createQuery')->willReturn($query);
-        }
-
         $registry = $this->getMockForAbstractClass(ManagerRegistry::class);
-        $registry->expects($this->any())->method('getManagerForClass')->willReturn($em);
+        $registry->method('getManagerForClass')->willReturn($em);
 
         return new CollectionManager(BaseCollection::class, $registry);
     }

@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sonata\ClassificationBundle\Tests\Entity;
 
 use Doctrine\Common\Persistence\ManagerRegistry;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sonata\ClassificationBundle\Entity\BaseContext;
 use Sonata\ClassificationBundle\Entity\ContextManager;
@@ -27,7 +28,7 @@ class ContextManagerTest extends TestCase
     {
         $self = $this;
         $this
-            ->getContextManager(static function ($qb) use ($self): void {
+            ->getContextManager(static function (MockObject $qb) use ($self): void {
                 $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue([]));
                 $qb->expects($self->never())->method('andWhere');
                 $qb->expects($self->once())->method('setParameters')->with([]);
@@ -39,7 +40,7 @@ class ContextManagerTest extends TestCase
     {
         $self = $this;
         $this
-            ->getContextManager(static function ($qb) use ($self): void {
+            ->getContextManager(static function (MockObject $qb) use ($self): void {
                 $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue([]));
                 $qb->expects($self->once())->method('andWhere')->with($self->equalTo('c.enabled = :enabled'));
                 $qb->expects($self->once())->method('setParameters')->with(['enabled' => true]);
@@ -53,7 +54,7 @@ class ContextManagerTest extends TestCase
     {
         $self = $this;
         $this
-            ->getContextManager(static function ($qb) use ($self): void {
+            ->getContextManager(static function (MockObject $qb) use ($self): void {
                 $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue([]));
                 $qb->expects($self->once())->method('andWhere')->with($self->equalTo('c.enabled = :enabled'));
                 $qb->expects($self->once())->method('setParameters')->with(['enabled' => false]);
@@ -63,12 +64,12 @@ class ContextManagerTest extends TestCase
             ], 1);
     }
 
-    protected function getContextManager($qbCallback)
+    private function getContextManager($qbCallback): ContextManager
     {
         $em = $this->createEntityManagerMock($qbCallback, []);
 
         $registry = $this->getMockForAbstractClass(ManagerRegistry::class);
-        $registry->expects($this->any())->method('getManagerForClass')->willReturn($em);
+        $registry->method('getManagerForClass')->willReturn($em);
 
         return new ContextManager(BaseContext::class, $registry);
     }

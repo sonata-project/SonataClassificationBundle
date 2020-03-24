@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.11.1](https://github.com/sonata-project/SonataClassificationBundle/compare/3.11.0...3.11.1) - 2020-03-24
+### Fixed
+- Fix Lexer query error in managers
+
 ## [3.11.0](https://github.com/sonata-project/SonataClassificationBundle/compare/3.10.1...3.11.0) - 2020-03-18
 ### Added
 - Add public aliases to all manager interface

@@ -47,7 +47,8 @@ class TagManager extends BaseEntityManager implements TagManagerInterface
 
     public function getBySlug(string $slug, $context = null, ?bool $enabled = true): ?TagInterface
     {
-        $queryBuilder = $this->getObjectManager()->createQueryBuilder()
+        $queryBuilder = $this->getRepository()
+            ->createQueryBuilder('t')
             ->select('t')
             ->andWhere('t.slug = :slug')->setParameter('slug', $slug);
 
@@ -63,7 +64,8 @@ class TagManager extends BaseEntityManager implements TagManagerInterface
 
     public function getByContext($context, ?bool $enabled = true): array
     {
-        $queryBuilder = $this->getObjectManager()->createQueryBuilder()
+        $queryBuilder = $this->getRepository()
+            ->createQueryBuilder('t')
             ->select('t')
             ->andWhere('t.context = :context')->setParameter('context', $context);
 

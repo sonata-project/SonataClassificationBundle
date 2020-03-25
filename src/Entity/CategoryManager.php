@@ -230,7 +230,8 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
 
     public function getBySlug(string $slug, $context = null, ?bool $enabled = true): ?CategoryInterface
     {
-        $queryBuilder = $this->getObjectManager()->createQueryBuilder()
+        $queryBuilder = $this->getRepository()
+            ->createQueryBuilder('c')
             ->select('c')
             ->andWhere('c.slug = :slug')->setParameter('slug', $slug);
 

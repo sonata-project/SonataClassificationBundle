@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sonata\ClassificationBundle\Tests\Entity;
 
 use Doctrine\Common\Persistence\ManagerRegistry;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sonata\ClassificationBundle\Entity\BaseTag;
 use Sonata\ClassificationBundle\Entity\TagManager;
@@ -27,7 +28,7 @@ class TagManagerTest extends TestCase
     {
         $self = $this;
         $this
-            ->getTagManager(static function ($qb) use ($self): void {
+            ->getTagManager(static function (MockObject $qb) use ($self): void {
                 $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue([]));
                 $qb->expects($self->never())->method('andWhere');
                 $qb->expects($self->once())->method('setParameters')->with([]);
@@ -39,7 +40,7 @@ class TagManagerTest extends TestCase
     {
         $self = $this;
         $this
-            ->getTagManager(static function ($qb) use ($self): void {
+            ->getTagManager(static function (MockObject $qb) use ($self): void {
                 $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue([]));
                 $qb->expects($self->once())->method('andWhere')->with($self->equalTo('t.enabled = :enabled'));
                 $qb->expects($self->once())->method('setParameters')->with(['enabled' => true]);
@@ -53,7 +54,7 @@ class TagManagerTest extends TestCase
     {
         $self = $this;
         $this
-            ->getTagManager(static function ($qb) use ($self): void {
+            ->getTagManager(static function (MockObject $qb) use ($self): void {
                 $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue([]));
                 $qb->expects($self->once())->method('andWhere')->with($self->equalTo('t.enabled = :enabled'));
                 $qb->expects($self->once())->method('setParameters')->with(['enabled' => false]);
@@ -63,12 +64,48 @@ class TagManagerTest extends TestCase
             ], 1);
     }
 
-    protected function getTagManager($qbCallback)
+    public function testGetBySlug(): void
+    {
+        $self = $this;
+        $this
+            ->getTagManager(static function (MockObject $qb) use ($self): void {
+                $qb->expects($self->exactly(3))->method('andWhere')->withConsecutive(
+                    [$self->equalTo('t.slug = :slug')],
+                    [$self->equalTo('t.context = :context')],
+                    [$self->equalTo('t.enabled = :enabled')]
+                )->willReturn($qb);
+                $qb->expects($self->exactly(3))->method('setParameter')->withConsecutive(
+                    [$self->equalTo('slug'), $self->equalTo('theslug')],
+                    [$self->equalTo('context'), $self->equalTo('contextA')],
+                    [$self->equalTo('enabled'), $self->equalTo(false)]
+                )->willReturn($qb);
+            })
+            ->getBySlug('theslug', 'contextA', false);
+    }
+
+    public function testGetByContext(): void
+    {
+        $self = $this;
+        $this
+            ->getTagManager(static function (MockObject $qb) use ($self): void {
+                $qb->expects($self->exactly(2))->method('andWhere')->withConsecutive(
+                    [$self->equalTo('t.context = :context')],
+                    [$self->equalTo('t.enabled = :enabled')]
+                )->willReturn($qb);
+                $qb->expects($self->exactly(2))->method('setParameter')->withConsecutive(
+                    [$self->equalTo('context'), $self->equalTo('contextA')],
+                    [$self->equalTo('enabled'), $self->equalTo(false)]
+                )->willReturn($qb);
+            })
+            ->getByContext('contextA', false);
+    }
+
+    private function getTagManager($qbCallback): TagManager
     {
         $em = $this->createEntityManagerMock($qbCallback, []);
 
         $registry = $this->getMockForAbstractClass(ManagerRegistry::class);
-        $registry->expects($this->any())->method('getManagerForClass')->willReturn($em);
+        $registry->method('getManagerForClass')->willReturn($em);
 
         return new TagManager(BaseTag::class, $registry);
     }

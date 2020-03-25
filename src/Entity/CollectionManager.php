@@ -47,7 +47,8 @@ class CollectionManager extends BaseEntityManager implements CollectionManagerIn
 
     public function getBySlug(string $slug, $context = null, ?bool $enabled = true): ?CollectionInterface
     {
-        $queryBuilder = $this->getObjectManager()->createQueryBuilder()
+        $queryBuilder = $this->getRepository()
+            ->createQueryBuilder('c')
             ->select('c')
             ->andWhere('c.slug = :slug')->setParameter('slug', $slug);
 
@@ -63,7 +64,8 @@ class CollectionManager extends BaseEntityManager implements CollectionManagerIn
 
     public function getByContext($context, ?bool $enabled = true): array
     {
-        $queryBuilder = $this->getObjectManager()->createQueryBuilder()
+        $queryBuilder = $this->getRepository()
+            ->createQueryBuilder('c')
             ->select('c')
             ->andWhere('c.context = :context')->setParameter('context', $context);
 

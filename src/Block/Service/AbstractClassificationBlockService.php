@@ -38,9 +38,9 @@ abstract class AbstractClassificationBlockService extends AbstractBlockService
     protected $contextManager;
 
     /**
-     * @param string|Environment $twigOrDeprecatedName
+     * @param string|Environment                      $twigOrDeprecatedName
      * @param EngineInterface|ContextManagerInterface $contextManagerOrDeprecatedTemplating
-     * @param ContextManagerInterface|null $deprecatedContextManager
+     * @param ContextManagerInterface|null            $deprecatedContextManager
      */
     public function __construct(
         $twigOrDeprecatedName,
@@ -51,8 +51,8 @@ abstract class AbstractClassificationBlockService extends AbstractBlockService
         // NEXT_MAJOR: remove the if block
         if (!interface_exists(AdminBlockServiceInterface::class)) {
             @trigger_error(
-                'The ' . __NAMESPACE__ . '\EditableBlockService interface is required since sonata-project/block-bundle 4.0 ' .
-                'You must add it to you ' . __CLASS__ . '.',
+                'The '.__NAMESPACE__.'\EditableBlockService interface is required since sonata-project/block-bundle 4.0 '.
+                'You must add it to you '.__CLASS__.'.',
                 E_USER_DEPRECATED
             );
         }
@@ -164,8 +164,8 @@ abstract class AbstractClassificationBlockService extends AbstractBlockService
     /**
      * @param string $formField
      * @param string $field
-     * @param array $fieldOptions
-     * @param array $adminOptions
+     * @param array  $fieldOptions
+     * @param array  $adminOptions
      *
      * @return FormBuilder
      */

@@ -18,7 +18,6 @@ use Sonata\AdminBundle\Admin\AdminInterface;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Form\Type\ModelTypeList;
 use Sonata\BlockBundle\Block\Service\AdminBlockServiceInterface;
-use Sonata\BlockBundle\Block\Service\AbstractAdminBlockService;
 use Sonata\BlockBundle\Meta\Metadata;
 use Sonata\BlockBundle\Model\BlockInterface;
 use Sonata\ClassificationBundle\Model\ContextInterface;
@@ -39,20 +38,21 @@ abstract class AbstractClassificationBlockService extends AbstractBlockService
     protected $contextManager;
 
     /**
-     * @param string|Environment                      $twigOrDeprecatedName
+     * @param string|Environment $twigOrDeprecatedName
      * @param EngineInterface|ContextManagerInterface $contextManagerOrDeprecatedTemplating
-     * @param ContextManagerInterface|null            $deprecatedContextManager
+     * @param ContextManagerInterface|null $deprecatedContextManager
      */
     public function __construct(
         $twigOrDeprecatedName,
         $contextManagerOrDeprecatedTemplating,
         $deprecatedContextManager = null
-    ) {
+    )
+    {
         // NEXT_MAJOR: remove the if block
         if (!interface_exists(AdminBlockServiceInterface::class)) {
             @trigger_error(
-                'The '.__NAMESPACE__.'\EditableBlockService interface is required since sonata-project/block-bundle 4.0 '.
-                'You must add it to you '.__CLASS__.'.',
+                'The ' . __NAMESPACE__ . '\EditableBlockService interface is required since sonata-project/block-bundle 4.0 ' .
+                'You must add it to you ' . __CLASS__ . '.',
                 E_USER_DEPRECATED
             );
         }
@@ -160,52 +160,54 @@ abstract class AbstractClassificationBlockService extends AbstractBlockService
     {
         return new Metadata($this->getName(), (null !== $code ? $code : $this->getName()), false, 'SonataBlockBundle', ['class' => 'fa fa-file']);
     }
+
     /**
-    * @param string $formField
-    * @param string $field
-    * @param array  $fieldOptions
-    * @param array  $adminOptions
-    *
-    * @return FormBuilder
-    */
-        final protected function getFormAdminType(FormMapper $formMapper, AdminInterface $admin, $formField, $field, $fieldOptions = [], $adminOptions = [])
-        {
-            $adminOptions = array_merge([
-                'edit' => 'list',
-                'translation_domain' => 'SonataClassificationBundle',
-            ], $adminOptions);
+     * @param string $formField
+     * @param string $field
+     * @param array $fieldOptions
+     * @param array $adminOptions
+     *
+     * @return FormBuilder
+     */
+    final protected function getFormAdminType(FormMapper $formMapper, AdminInterface $admin, $formField, $field, $fieldOptions = [], $adminOptions = [])
+    {
+        $adminOptions = array_merge([
+            'edit' => 'list',
+            'translation_domain' => 'SonataClassificationBundle',
+        ], $adminOptions);
 
-            $fieldDescription = $admin->getModelManager()->getNewFieldDescriptionInstance($admin->getClass(), $field, $adminOptions);
-            $fieldDescription->setAssociationAdmin($admin);
-            $fieldDescription->setAdmin($formMapper->getAdmin());
-            $fieldDescription->setAssociationMapping([
-                'fieldName' => $field,
-                'type' => ClassMetadataInfo::MANY_TO_ONE,
-            ]);
+        $fieldDescription = $admin->getModelManager()->getNewFieldDescriptionInstance($admin->getClass(), $field, $adminOptions);
+        $fieldDescription->setAssociationAdmin($admin);
+        $fieldDescription->setAdmin($formMapper->getAdmin());
+        $fieldDescription->setAssociationMapping([
+            'fieldName' => $field,
+            'type' => ClassMetadataInfo::MANY_TO_ONE,
+        ]);
 
-            $fieldOptions = array_merge([
-                'sonata_field_description' => $fieldDescription,
-                'class' => $admin->getClass(),
-                'model_manager' => $admin->getModelManager(),
-                'required' => false,
-            ], $fieldOptions);
+        $fieldOptions = array_merge([
+            'sonata_field_description' => $fieldDescription,
+            'class' => $admin->getClass(),
+            'model_manager' => $admin->getModelManager(),
+            'required' => false,
+        ], $fieldOptions);
 
-            return $formMapper->create($formField, ModelTypeList::class, $fieldOptions);
+        return $formMapper->create($formField, ModelTypeList::class, $fieldOptions);
+    }
+
+    /**
+     * Returns a context choice array.
+     *
+     * @return string[]
+     */
+
+    final protected function getContextChoices()
+    {
+        $contextChoices = [];
+        /* @var ContextInterface $context */
+        foreach ($this->contextManager->findAll() as $context) {
+            $contextChoices[$context->getId()] = $context->getName();
         }
 
-        /**
-         * Returns a context choice array.
-         *
-         * @return string[]
-         */
-        final protected function getContextChoices()
-        {
-            $contextChoices = [];
-            /* @var ContextInterface $context */
-            foreach ($this->contextManager->findAll() as $context) {
-                $contextChoices[$context->getId()] = $context->getName();
-            }
-
-            return $contextChoices;
-        }
+        return $contextChoices;
+    }
 }

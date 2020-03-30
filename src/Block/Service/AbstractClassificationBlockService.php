@@ -16,10 +16,15 @@ namespace Sonata\ClassificationBundle\Block\Service;
 use Doctrine\ORM\Mapping\ClassMetadataInfo;
 use Sonata\AdminBundle\Admin\AdminInterface;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\BlockBundle\Meta\Metadata;
 use Sonata\AdminBundle\Form\Type\ModelTypeList;
+use Sonata\BlockBundle\Model\BlockInterface;
 use Sonata\BlockBundle\Block\Service\AbstractAdminBlockService;
+use Sonata\BlockBundle\Block\Service\AdminBlockServiceInterface;
+use Sonata\BlockBundle\Block\Service\EditableBlockService;
 use Sonata\ClassificationBundle\Model\ContextInterface;
 use Sonata\ClassificationBundle\Model\ContextManagerInterface;
+use Sonata\CoreBundle\Validator\ErrorElement;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\Form\FormBuilder;
 use Twig\Environment;
@@ -27,7 +32,7 @@ use Twig\Environment;
 /**
  * @author Christian Gripp <mail@core23.de>
  */
-abstract class AbstractClassificationBlockService extends AbstractAdminBlockService
+abstract class AbstractClassificationBlockService extends AbstractBlockService
 {
     /**
      * @var ContextManagerInterface
@@ -44,6 +49,16 @@ abstract class AbstractClassificationBlockService extends AbstractAdminBlockServ
         $contextManagerOrDeprecatedTemplating,
         $deprecatedContextManager = null
     ) {
+        // NEXT_MAJOR: remove the if block
+        if (!interface_exists(AdminBlockServiceInterface::class))
+        {
+            @trigger_error(
+                'The ' . __NAMESPACE__ . '\EditableBlockService interface is required since sonata-project/block-bundle 4.0 ' .
+                'You must add it to you ' . __CLASS__ . '.',
+                E_USER_DEPRECATED
+            );
+        }
+
         // NEXT_MAJOR: remove the if block
         if (\is_string($twigOrDeprecatedName)) {
             parent::__construct($twigOrDeprecatedName, $contextManagerOrDeprecatedTemplating);
@@ -103,5 +118,97 @@ abstract class AbstractClassificationBlockService extends AbstractAdminBlockServ
         }
 
         return $contextChoices;
+    }
+
+    /**
+     * NEXT_MAJOR: Remove this method.
+     *
+     * @deprecated since sonata-project/block-bundle 3.16, to be removed in version 4.0.
+     */
+    public function prePersist(BlockInterface $block)
+    {
+    }
+
+    /**
+     * NEXT_MAJOR: Remove this method.
+     *
+     * @deprecated since sonata-project/block-bundle 3.16, to be removed in version 4.0.
+     */
+    public function postPersist(BlockInterface $block)
+    {
+    }
+
+    /**
+     * NEXT_MAJOR: Remove this method.
+     *
+     * @deprecated since sonata-project/block-bundle 3.16, to be removed in version 4.0.
+     */
+    public function preUpdate(BlockInterface $block)
+    {
+    }
+
+    /**
+     * NEXT_MAJOR: Remove this method.
+     *
+     * @deprecated since sonata-project/block-bundle 3.16, to be removed in version 4.0.
+     */
+    public function postUpdate(BlockInterface $block)
+    {
+    }
+
+    /**
+     * NEXT_MAJOR: Remove this method.
+     *
+     * @deprecated since sonata-project/block-bundle 3.16, to be removed in version 4.0.
+     */
+    public function preRemove(BlockInterface $block)
+    {
+    }
+
+    /**
+     * NEXT_MAJOR: Remove this method.
+     *
+     * @deprecated since sonata-project/block-bundle 3.16, to be removed in version 4.0.
+     */
+    public function postRemove(BlockInterface $block)
+    {
+    }
+
+    /**
+     * NEXT_MAJOR: Remove this method.
+     *
+     * @deprecated since sonata-project/block-bundle 3.16, to be removed in version 4.0.
+     */
+    public function buildCreateForm(FormMapper $formMapper, BlockInterface $block)
+    {
+        $this->buildEditForm($formMapper, $block);
+    }
+
+    /**
+     * NEXT_MAJOR: Remove this method.
+     *
+     * @deprecated since sonata-project/block-bundle 3.16, to be removed in version 4.0.
+     */
+    public function buildEditForm(FormMapper $form, BlockInterface $block)
+    {
+    }
+
+    /**
+     * NEXT_MAJOR: Remove this method.
+     *
+     * @deprecated since sonata-project/block-bundle 3.16, to be removed in version 4.0.
+     */
+    public function validateBlock(ErrorElement $errorElement, BlockInterface $block)
+    {
+    }
+
+    /**
+     * NEXT_MAJOR: Remove this method.
+     *
+     * @deprecated since sonata-project/block-bundle 3.16, to be removed in version 4.0.
+     */
+    public function getBlockMetadata($code = null)
+    {
+        return new Metadata($this->getName(), (null !== $code ? $code : $this->getName()), false, 'SonataBlockBundle', ['class' => 'fa fa-file']);
     }
 }

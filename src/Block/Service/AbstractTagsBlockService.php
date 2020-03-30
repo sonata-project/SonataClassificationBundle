@@ -44,11 +44,11 @@ abstract class AbstractTagsBlockService extends AbstractClassificationBlockServi
     private $tagAdmin;
 
     /**
-     * @param string|Environment                           $twigOrDeprecatedName
-     * @param EngineInterface|ContextManagerInterface      $contextManagerOrDeprecatedTemplating
-     * @param ContextManagerInterface|TagManagerInterface| $tagManagerOrDeprecatedContextManager
-     * @param TagManagerInterface|AdminInterface           $tagAdminOrDeprecatedTagManager
-     * @param AdminInterface|null                          $deprecatedTagAdmin
+     * @param string|Environment                          $twigOrDeprecatedName
+     * @param EngineInterface|ContextManagerInterface     $contextManagerOrDeprecatedTemplating
+     * @param ContextManagerInterface|TagManagerInterface $tagManagerOrDeprecatedContextManager
+     * @param TagManagerInterface|AdminInterface          $tagAdminOrDeprecatedTagManager
+     * @param AdminInterface|null                         $deprecatedTagAdmin
      */
     public function __construct(
         $twigOrDeprecatedName,

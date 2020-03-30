@@ -46,8 +46,7 @@ abstract class AbstractClassificationBlockService extends AbstractBlockService
         $twigOrDeprecatedName,
         $contextManagerOrDeprecatedTemplating,
         $deprecatedContextManager = null
-    )
-    {
+    ) {
         // NEXT_MAJOR: remove the if block
         if (!interface_exists(AdminBlockServiceInterface::class)) {
             @trigger_error(

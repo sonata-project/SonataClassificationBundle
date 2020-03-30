@@ -198,7 +198,6 @@ abstract class AbstractClassificationBlockService extends AbstractBlockService
      *
      * @return string[]
      */
-
     final protected function getContextChoices()
     {
         $contextChoices = [];

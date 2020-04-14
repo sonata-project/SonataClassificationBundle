@@ -80,7 +80,7 @@ abstract class AbstractCollectionsBlockService extends AbstractClassificationBlo
         }
     }
 
-    public function execute(BlockContextInterface $blockContext, Response $response = null)
+    public function execute(BlockContextInterface $blockContext, ?Response $response = null)
     {
         $collection = $this->getCollection($blockContext->getSetting('collectionId'), $blockContext->getSetting('collection'));
         $collections = $this->collectionManager->findBy([

@@ -135,7 +135,7 @@ abstract class Collection implements CollectionInterface
         return $this->updatedAt;
     }
 
-    public function setMedia(MediaInterface $media = null)
+    public function setMedia(?MediaInterface $media = null)
     {
         $this->media = $media;
     }

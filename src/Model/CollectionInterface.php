@@ -90,7 +90,7 @@ interface CollectionInterface
     /**
      * @param MediaInterface $media
      */
-    public function setMedia(MediaInterface $media = null);
+    public function setMedia(?MediaInterface $media = null);
 
     /**
      * @return MediaInterface

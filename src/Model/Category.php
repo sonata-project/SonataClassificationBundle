@@ -227,7 +227,7 @@ abstract class Category implements CategoryInterface
         return \count($this->children) > 0;
     }
 
-    public function setParent(CategoryInterface $parent = null, $nested = false)
+    public function setParent(?CategoryInterface $parent = null, $nested = false)
     {
         $this->parent = $parent;
 
@@ -241,7 +241,7 @@ abstract class Category implements CategoryInterface
         return $this->parent;
     }
 
-    public function setMedia(MediaInterface $media = null)
+    public function setMedia(?MediaInterface $media = null)
     {
         $this->media = $media;
     }

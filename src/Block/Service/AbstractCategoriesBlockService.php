@@ -78,7 +78,7 @@ abstract class AbstractCategoriesBlockService extends AbstractClassificationBloc
         }
     }
 
-    public function execute(BlockContextInterface $blockContext, Response $response = null)
+    public function execute(BlockContextInterface $blockContext, ?Response $response = null)
     {
         $category = $this->getCategory($blockContext->getSetting('categoryId'), $blockContext->getSetting('category'));
         $root = $this->categoryManager->getRootCategory($blockContext->getSetting('context'));

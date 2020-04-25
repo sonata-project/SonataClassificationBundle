@@ -167,7 +167,7 @@ class CategoryManager extends BaseDocumentManager implements CategoryManagerInte
     /**
      * {@inheritdoc}
      */
-    public function getRootCategoriesForContext(ContextInterface $context = null): void
+    public function getRootCategoriesForContext(?ContextInterface $context = null): void
     {
         throw new \RuntimeException('Not Implemented yet');
     }

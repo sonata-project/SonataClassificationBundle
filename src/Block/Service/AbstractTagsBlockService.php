@@ -78,7 +78,7 @@ abstract class AbstractTagsBlockService extends AbstractClassificationBlockServi
         }
     }
 
-    public function execute(BlockContextInterface $blockContext, Response $response = null)
+    public function execute(BlockContextInterface $blockContext, ?Response $response = null)
     {
         $tag = $this->getTag($blockContext->getSetting('tagId'), $blockContext->getSetting('tag'));
         $tags = $this->tagManager->findBy([

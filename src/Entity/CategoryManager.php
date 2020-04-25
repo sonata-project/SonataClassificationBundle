@@ -119,7 +119,7 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
         return $this->categories[$context->getId()][0];
     }
 
-    public function getRootCategoriesForContext(ContextInterface $context = null)
+    public function getRootCategoriesForContext(?ContextInterface $context = null)
     {
         if (null === $context) {
             $context = $this->getContext();

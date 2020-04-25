@@ -80,7 +80,7 @@ interface CategoryManagerInterface extends ManagerInterface, PageableManagerInte
      *
      * @return CategoryInterface[]
      */
-    public function getRootCategoriesForContext(ContextInterface $context = null);
+    public function getRootCategoriesForContext(?ContextInterface $context = null);
 
     /**
      * @param bool|true $loadChildren

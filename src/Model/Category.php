@@ -221,7 +221,7 @@ abstract class Category implements CategoryInterface
         return \count($this->children) > 0;
     }
 
-    public function setParent(CategoryInterface $parent = null, $nested = false): void
+    public function setParent(?CategoryInterface $parent = null, $nested = false): void
     {
         $this->parent = $parent;
 

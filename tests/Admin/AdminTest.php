@@ -27,7 +27,7 @@ class AdminTest extends TestCase
      */
     private $contextManager;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->contextManager = $this->createMock(ContextManagerInterface::class);
     }

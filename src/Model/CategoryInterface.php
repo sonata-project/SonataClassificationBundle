@@ -123,7 +123,7 @@ interface CategoryInterface
      * @param CategoryInterface|null $parent
      * @param bool                   $nested
      */
-    public function setParent(self $parent = null, $nested = false);
+    public function setParent(?self $parent = null, $nested = false);
 
     /**
      * Get Parent.
@@ -132,7 +132,7 @@ interface CategoryInterface
      */
     public function getParent();
 
-    public function setMedia(MediaInterface $media = null);
+    public function setMedia(?MediaInterface $media = null);
 
     /**
      * @return MediaInterface

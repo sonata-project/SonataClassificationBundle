@@ -127,7 +127,7 @@ class CategoryAdminControllerTest extends TestCase
             ->willReturnCallback(static function (
                 $view,
                 array $parameters = [],
-                Response $response = null
+                ?Response $response = null
             ) use (
                 &$params,
                 &$template

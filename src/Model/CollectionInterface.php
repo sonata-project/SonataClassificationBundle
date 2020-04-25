@@ -90,8 +90,7 @@ interface CollectionInterface
      */
     public function getUpdatedAt();
 
-    /**
-    public function setMedia(MediaInterface $media = null);
+    public function setMedia(?MediaInterface $media = null);
 
     /**
      * @return MediaInterface

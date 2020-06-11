@@ -15,7 +15,7 @@ namespace Sonata\ClassificationBundle\Serializer;
 
 use JMS\Serializer\Context;
 use JMS\Serializer\VisitorInterface;
-use Sonata\Serializer\BaseSerializerHandler;
+use Sonata\Form\Serializer\BaseSerializerHandler;
 
 /**
  * @author Thomas Rabaix <thomas.rabaix@gmail.com>

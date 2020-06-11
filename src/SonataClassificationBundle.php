@@ -36,15 +36,19 @@ class SonataClassificationBundle extends Bundle
 
     /**
      * Register form mapping information.
+     *
+     * NEXT_MAJOR: remove this method
      */
     public function registerFormMapping()
     {
-        FormHelper::registerFormTypeMapping([
-            'sonata_classification_api_form_category' => ApiCategoryType::class,
-            'sonata_classification_api_form_collection' => ApiCollectionType::class,
-            'sonata_classification_api_form_tag' => ApiTagType::class,
-            'sonata_classification_api_form_context' => ApiContextType::class,
-            'sonata_category_selector' => CategorySelectorType::class,
-        ]);
+        if (class_exists(FormHelper::class)) {
+            FormHelper::registerFormTypeMapping([
+                'sonata_classification_api_form_category' => ApiCategoryType::class,
+                'sonata_classification_api_form_collection' => ApiCollectionType::class,
+                'sonata_classification_api_form_tag' => ApiTagType::class,
+                'sonata_classification_api_form_context' => ApiContextType::class,
+                'sonata_category_selector' => CategorySelectorType::class,
+            ]);
+        }
     }
 }

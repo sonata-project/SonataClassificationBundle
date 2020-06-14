@@ -15,19 +15,19 @@ namespace Sonata\ClassificationBundle\Tests\Admin\Filter;
 
 use PHPUnit\Framework\TestCase;
 use Sonata\ClassificationBundle\Admin\Filter\CategoryFilter;
-use Sonata\ClassificationBundle\Model\CategoryManagerInterface;
+use Sonata\ClassificationBundle\Entity\CategoryManager;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class CategoryFilterTest extends TestCase
 {
     /**
-     * @var MockObject&CategoryManagerInterface
+     * @var MockObject&CategoryManager
      */
     private $categoryManager;
 
     protected function setUp(): void
     {
-        $this->categoryManager = $this->createStub(CategoryManagerInterface::class);
+        $this->categoryManager = $this->createStub(CategoryManager::class);
     }
 
     public function testRenderSettings(): void

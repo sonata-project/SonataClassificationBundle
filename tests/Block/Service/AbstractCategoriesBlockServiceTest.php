@@ -15,12 +15,12 @@ namespace Sonata\ClassificationBundle\Tests\Block\Service;
 
 use Sonata\BlockBundle\Model\BlockInterface;
 use Sonata\BlockBundle\Test\BlockServiceTestCase;
-use Sonata\BlockBundle\Test\FakeTemplating;
 use Sonata\ClassificationBundle\Admin\CategoryAdmin;
 use Sonata\ClassificationBundle\Block\Service\AbstractCategoriesBlockService;
 use Sonata\ClassificationBundle\Model\CategoryInterface;
 use Sonata\ClassificationBundle\Model\CategoryManagerInterface;
 use Sonata\ClassificationBundle\Model\ContextManagerInterface;
+use Twig\Environment;
 
 /**
  * @author Christian Gripp <mail@core23.de>
@@ -46,7 +46,7 @@ final class AbstractCategoriesBlockServiceTest extends BlockServiceTestCase
     {
         parent::setUp();
 
-        $this->templating = new FakeTemplating();
+        $this->twig = $this->createMock(Environment::class);
         $this->contextManager = $this->createMock(ContextManagerInterface::class);
         $this->categoryManager = $this->createMock(CategoryManagerInterface::class);
         $this->categoryAdmin = $this->createMock(CategoryAdmin::class);
@@ -55,7 +55,7 @@ final class AbstractCategoriesBlockServiceTest extends BlockServiceTestCase
     public function testDefaultSettings(): void
     {
         $blockService = $this->getMockForAbstractClass(AbstractCategoriesBlockService::class, [
-            'block.service', $this->templating, $this->contextManager, $this->categoryManager, $this->categoryAdmin,
+            $this->twig, $this->contextManager, $this->categoryManager, $this->categoryAdmin,
         ]);
         $blockContext = $this->getBlockContext($blockService);
 
@@ -94,7 +94,7 @@ final class AbstractCategoriesBlockServiceTest extends BlockServiceTestCase
             ->with($this->equalTo('categoryId'), $this->equalTo($category));
 
         $blockService = $this->getMockForAbstractClass(AbstractCategoriesBlockService::class, [
-            'block.service', $this->templating, $this->contextManager, $this->categoryManager, $this->categoryAdmin,
+            $this->twig, $this->contextManager, $this->categoryManager, $this->categoryAdmin,
         ]);
         $blockService->load($block);
     }
@@ -117,7 +117,7 @@ final class AbstractCategoriesBlockServiceTest extends BlockServiceTestCase
             ->with($this->equalTo('categoryId'), $this->equalTo(23));
 
         $blockService = $this->getMockForAbstractClass(AbstractCategoriesBlockService::class, [
-            'block.service', $this->templating, $this->contextManager, $this->categoryManager, $this->categoryAdmin,
+            $this->twig, $this->contextManager, $this->categoryManager, $this->categoryAdmin,
         ]);
         $blockService->prePersist($block);
     }
@@ -140,7 +140,7 @@ final class AbstractCategoriesBlockServiceTest extends BlockServiceTestCase
             ->with($this->equalTo('categoryId'), $this->equalTo(23));
 
         $blockService = $this->getMockForAbstractClass(AbstractCategoriesBlockService::class, [
-            'block.service', $this->templating, $this->contextManager, $this->categoryManager, $this->categoryAdmin,
+            $this->twig, $this->contextManager, $this->categoryManager, $this->categoryAdmin,
         ]);
         $blockService->preUpdate($block);
     }

@@ -13,7 +13,9 @@ declare(strict_types=1);
 
 namespace Sonata\ClassificationBundle\DependencyInjection;
 
-use Sonata\EasyExtendsBundle\Mapper\DoctrineCollector;
+use Sonata\Doctrine\Mapper\Builder\OptionsBuilder;
+use Sonata\Doctrine\Mapper\DoctrineCollector;
+use Sonata\EasyExtendsBundle\Mapper\DoctrineCollector as DeprecatedDoctrineCollector;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -52,7 +54,13 @@ class SonataClassificationExtension extends Extension
             $loader->load('admin.xml');
         }
 
-        $this->registerDoctrineMapping($config);
+        if (isset($bundles['SonataDoctrineBundle'])) {
+            $this->registerSonataDoctrineMapping($config);
+        } else {
+            // NEXT MAJOR: Remove next line and throw error when not registering SonataDoctrineBundle
+            $this->registerDoctrineMapping($config);
+        }
+
         $this->configureClass($config, $container);
         $this->configureAdmin($config, $container);
     }
@@ -97,15 +105,23 @@ class SonataClassificationExtension extends Extension
         $container->setParameter('sonata.classification.admin.context.translation_domain', $config['admin']['context']['translation']);
     }
 
+    /**
+     * NEXT_MAJOR: Remove this method.
+     */
     public function registerDoctrineMapping(array $config)
     {
+        @trigger_error(
+            'Using SonataEasyExtendsBundle is deprecated since sonata-project/classification-bundle 3.x. Please register SonataDoctrineBundle as a bundle instead.',
+            E_USER_DEPRECATED
+        );
+
         foreach ($config['class'] as $type => $class) {
             if ('media' !== $type && !class_exists($class)) {
                 return;
             }
         }
 
-        $collector = DoctrineCollector::getInstance();
+        $collector = DeprecatedDoctrineCollector::getInstance();
 
         $collector->addAssociation($config['class']['category'], 'mapOneToMany', [
             'fieldName' => 'children',
@@ -232,6 +248,67 @@ class SonataClassificationExtension extends Extension
                 ],
                 'orphanRemoval' => false,
             ]);
+        }
+    }
+
+    private function registerSonataDoctrineMapping(array $config): void
+    {
+        foreach ($config['class'] as $type => $class) {
+            if ('media' !== $type && !class_exists($class)) {
+                return;
+            }
+        }
+
+        $collector = DoctrineCollector::getInstance();
+
+        $collector->addAssociation(
+            $config['class']['category'],
+            'mapOneToMany',
+            OptionsBuilder::createOneToMany('children', $config['class']['category'])
+                ->cascade(['persist'])
+                ->mappedBy('parent')
+                ->orphanRemoval()
+                ->addOrder('position', 'ASC')
+        );
+
+        $collector->addAssociation(
+            $config['class']['category'],
+            'mapManyToOne',
+            OptionsBuilder::createManyToOne('parent', $config['class']['category'])
+                ->cascade(['persist', 'refresh', 'merge', 'detach'])
+                ->inversedBy('children')
+                ->addJoin([
+                    'name' => 'parent_id',
+                    'referencedColumnName' => 'id',
+                    'onDelete' => 'CASCADE',
+                ])
+        );
+
+        $contextOptions = OptionsBuilder::createManyToOne('context', $config['class']['context'])
+            ->cascade(['persist'])
+            ->addJoin([
+                'name' => 'context',
+                'referencedColumnName' => 'id',
+            ]);
+
+        $collector->addAssociation($config['class']['category'], 'mapManyToOne', $contextOptions);
+        $collector->addAssociation($config['class']['tag'], 'mapManyToOne', $contextOptions);
+        $collector->addAssociation($config['class']['collection'], 'mapManyToOne', $contextOptions);
+
+        $collector->addUnique($config['class']['tag'], 'tag_context', ['slug', 'context']);
+        $collector->addUnique($config['class']['collection'], 'tag_collection', ['slug', 'context']);
+
+        if (null !== $config['class']['media']) {
+            $mediaOptions = OptionsBuilder::createManyToOne('media', $config['class']['media'])
+                ->cascade(['persist'])
+                ->addJoin([
+                    'name' => 'media_id',
+                    'referencedColumnName' => 'id',
+                    'onDelete' => 'SET NULL',
+                ]);
+
+            $collector->addAssociation($config['class']['collection'], 'mapManyToOne', $mediaOptions);
+            $collector->addAssociation($config['class']['category'], 'mapManyToOne', $mediaOptions);
         }
     }
 }

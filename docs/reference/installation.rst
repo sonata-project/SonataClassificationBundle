@@ -1,6 +1,6 @@
 .. index::
-    single: Introduction
-    single: AppKernel
+    single: Installation
+    single: Configuration
 
 Installation
 ============
@@ -8,19 +8,41 @@ Installation
 Prerequisites
 -------------
 
-PHP 7.1 and Symfony >=3.4 or >= 4.2 are needed to make this bundle work, there are
-also some Sonata dependencies that need to be installed and configured beforehand:
+PHP ^7.2 and Symfony ^4.4 are needed to make this bundle work, there are
+also some Sonata dependencies that need to be installed and configured beforehand.
 
-* `SonataEasyExtendsBundle <https://sonata-project.org/bundles/easy-extends>`_
+Optional dependencies:
 
-Add ``SonataClassificationBundle`` via composer:
+* `SonataAdminBundle <https://sonata-project.org/bundles/admin>`_
+* `SonataBlockBundle <https://sonata-project.org/bundles/block>`_
+* `SonataMediaBundle <https://sonata-project.org/bundles/media>`_
 
-.. code-block:: bash
+And the persistence bundle (choose one):
 
-   composer require sonata-project/classification-bundle
+* `SonataDoctrineOrmAdminBundle <https://sonata-project.org/bundles/doctrine-orm-admin>`_
+* `SonataDoctrineMongoDBAdminBundle <https://sonata-project.org/bundles/mongo-admin>`_
 
-Now, add the new ``SonataClassificationBundle`` to ``bundles.php`` file::
+Follow also their configuration step; you will find everything you need in
+their own installation chapter.
 
+.. note::
+
+    If a dependency is already installed somewhere in your project or in
+    another dependency, you won't need to install it again.
+
+Enable the Bundle
+-----------------
+
+Add ``SonataClassificationBundle`` via composer::
+
+    composer require sonata-project/classification-bundle
+
+If you want to use the REST API, you also need ``friendsofsymfony/rest-bundle`` and ``nelmio/api-doc-bundle``::
+
+    composer require friendsofsymfony/rest-bundle nelmio/api-doc-bundle
+
+Next, be sure to enable the bundles in your ``config/bundles.php`` file if they
+are not already enabled::
 
     // config/bundles.php
 
@@ -29,31 +51,27 @@ Now, add the new ``SonataClassificationBundle`` to ``bundles.php`` file::
         Sonata\ClassificationBundle\SonataClassificationBundle::class => ['all' => true],
     ];
 
-.. note::
-
-    If you are not using Symfony Flex, you should enable bundles in your
-    ``AppKernel.php``.
-
-.. code-block:: php
-
-    // app/AppKernel.php
-
-    public function registerBundles()
-    {
-        return [
-            new Sonata\ClassificationBundle\SonataClassificationBundle(),
-            // ...
-        ];
-    }
-
 Configuration
--------------
+=============
 
-Doctrine Configuration
-~~~~~~~~~~~~~~~~~~~~~~
-Add these bundles in the config mapping definition (or enable `auto_mapping`_):
+SonataClassificationBundle Configuration
+----------------------------------------
 
 .. code-block:: yaml
+
+    # config/packages/sonata_classification.yaml
+
+    sonata_classification:
+        class:
+            tag: App\Entity\SonataClassificationTag
+            category: App\Entity\SonataClassificationCategory
+            collection: App\Entity\SonataClassificationCollection
+            context: App\Entity\SonataClassificationContext
+
+Doctrine ORM Configuration
+--------------------------
+
+Add these bundles in the config mapping definition (or enable `auto_mapping`_)::
 
     # config/packages/doctrine.yaml
 
@@ -62,95 +80,193 @@ Add these bundles in the config mapping definition (or enable `auto_mapping`_):
             entity_managers:
                 default:
                     mappings:
-                        ApplicationSonataClassificationBundle: ~
                         SonataClassificationBundle: ~
 
-.. note::
+And then create the corresponding entities, ``src/Entity/SonataClassificationTag``::
 
-    If you are not using Symfony Flex, this configuration should be added
-    to ``app/config/config.yml``.
+    // src/Entity/SonataClassificationTag.php
 
-Extending the Bundle
---------------------
-At this point, the bundle is functional, but not quite ready yet. You need to
-generate the correct entities for the media:
+    use Doctrine\ORM\Mapping as ORM;
+    use Sonata\ClassificationBundle\Entity\BaseTag;
 
-.. code-block:: bash
-
-    bin/console sonata:easy-extends:generate SonataClassificationBundle --dest=src --namespace_prefix=App
-
-.. note::
-
-    If you are not using Symfony Flex, use command without ``--namespace_prefix=App``.
-
-With provided parameters, the files are generated in ``src/Application/Sonata/ClassificationBundle``.
-
-.. note::
-
-    The command will generate domain objects in ``App\Application`` namespace.
-    So you can point entities' associations to a global and common namespace.
-    This will make Entities sharing easier as your models will allow to
-    point to a global namespace. For instance the tag will be
-    ``App\Application\Sonata\ClassificationBundle\Entity\Tag``.
-
-.. note::
-
-    If you are not using Symfony Flex, the namespace will be ``Application\Sonata\ClassificationBundle\Entity``.
-
-Now, add the new ``Application`` Bundle into the ``bundles.php``::
-
-    // config/bundles.php
-
-    return [
-        // ...
-        App\Application\Sonata\ClassificationBundle\ApplicationSonataClassificationBundle::class => ['all' => true],
-    ];
-
-.. note::
-
-    If you are not using Symfony Flex, add the new ``Application`` Bundle into your
-    ``AppKernel.php``.
-
-.. code-block:: php
-
-    // app/AppKernel.php
-
-    class AppKernel {
-
-        public function registerBundles()
-        {
-            return [
-                // Application Bundles
-                // ...
-                new Application\Sonata\ClassificationBundle\ApplicationSonataClassificationBundle(),
-                // ...
-            ];
-        }
+    /**
+     * @ORM\Entity
+     * @ORM\Table(name="classification__tag")
+     */
+    class SonataClassificationTag extends BaseTag
+    {
+        /**
+         * @ORM\Id
+         * @ORM\GeneratedValue
+         * @ORM\Column(type="integer")
+         */
+        protected $id;
     }
 
-And configure ``ClassificationBundle`` to use the newly generated classes:
+``src/Entity/SonataClassificationCategory``::
 
-.. code-block:: yaml
+    // src/Entity/SonataClassificationCategory.php
 
-    # config/packages/sonata.yaml
+    use Doctrine\ORM\Mapping as ORM;
+    use Sonata\ClassificationBundle\Entity\BaseCategory;
 
-    sonata_classification:
-        class:
-            tag: App\Application\Sonata\ClassificationBundle\Entity\Tag
-            category: App\Application\Sonata\ClassificationBundle\Entity\Category
-            collection: App\Application\Sonata\ClassificationBundle\Entity\Collection
-            context: App\Application\Sonata\ClassificationBundle\Entity\Context
+    /**
+     * @ORM\Entity
+     * @ORM\Table(name="classification__category")
+     */
+    class SonataClassificationCategory extends BaseCategory
+    {
+        /**
+         * @ORM\Id
+         * @ORM\GeneratedValue
+         * @ORM\Column(type="integer")
+         */
+        protected $id;
+    }
 
+``src/Entity/SonataClassificationCollection``::
 
-.. note::
+    // src/Entity/SonataClassificationCollection.php
 
-    If you are not using Symfony Flex, add classes without the ``App\``
-    part and this configuration should be added to ``app/config/config.yml``
+    use Doctrine\ORM\Mapping as ORM;
+    use Sonata\ClassificationBundle\Entity\BaseCollection;
 
-The only thing left is to update your schema:
+    /**
+     * @ORM\Entity
+     * @ORM\Table(name="classification__collection")
+     */
+    class SonataClassificationCollection extends BaseCollection
+    {
+        /**
+         * @ORM\Id
+         * @ORM\GeneratedValue
+         * @ORM\Column(type="integer")
+         */
+        protected $id;
+    }
 
-.. code-block:: bash
+and ``src/Entity/SonataClassificationContext``::
+
+    // src/Entity/SonataClassificationContext.php
+
+    use Doctrine\ORM\Mapping as ORM;
+    use Sonata\ClassificationBundle\Entity\BaseContext;
+
+    /**
+     * @ORM\Entity
+     * @ORM\Table(name="classification__context")
+     */
+    class SonataClassificationContext extends BaseContext
+    {
+        /**
+         * @ORM\Id
+         * @ORM\GeneratedValue
+         * @ORM\Column(type="integer")
+         */
+        protected $id;
+    }
+
+The only thing left is to update your schema::
 
     bin/console doctrine:schema:update --force
 
-.. _`auto_mapping`: http://symfony.com/doc/2.0/reference/configuration/doctrine.html#configuration-overview
+Doctrine MongoDB Configuration
+------------------------------
+
+You have to create the corresponding documents, ``src/Document/SonataClassificationTag``::
+
+    // src/Document/SonataClassificationTag.php
+
+    use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
+    use Sonata\ClassificationBundle\Document\BaseTag;
+
+    /**
+     * @MongoDB\Document
+     */
+    class SonataClassificationTag extends BaseTag
+    {
+        /**
+         * @MongoDB\Id
+         */
+        protected $id;
+    }
+
+``src/Document/SonataClassificationCategory``::
+
+    // src/Document/SonataClassificationCategory.php
+
+    use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
+    use Sonata\ClassificationBundle\Document\BaseCategory;
+
+    /**
+     * @MongoDB\Document
+     */
+    class SonataClassificationCategory extends BaseCategory
+    {
+        /**
+         * @MongoDB\Id
+         */
+        protected $id;
+    }
+
+``src/Document/SonataClassificationCollection``::
+
+    // src/Document/SonataClassificationCollection.php
+
+    use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
+    use Sonata\ClassificationBundle\Document\BaseCollection;
+
+    /**
+     * @MongoDB\Document
+     */
+    class SonataClassificationCollection extends BaseCollection
+    {
+        /**
+         * @MongoDB\Id
+         */
+        protected $id;
+    }
+
+and ``src/Document/SonataClassificationContext``::
+
+    // src/Document/SonataClassificationContext.php
+
+    use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
+    use Sonata\ClassificationBundle\Document\BaseContext;
+
+    /**
+     * @MongoDB\Document
+     */
+    class SonataClassificationContext extends BaseContext
+    {
+        /**
+         * @MongoDB\Id
+         */
+        protected $id;
+    }
+
+And then configure ``ClassificationBundle`` to use the newly generated classes::
+
+    # config/packages/sonata_classification.yaml
+
+    sonata_classification:
+        class:
+            tag: App\Document\SonataClassificationTag
+            category: App\Document\SonataClassificationCategory
+            collection: App\Document\SonataClassificationCollection
+            context: App\Document\SonataClassificationContext
+
+Next Steps
+----------
+
+At this point, your Symfony installation should be fully functional, without errors
+showing up from SonataClassificationBundle. If, at this point or during the installation,
+you come across any errors, don't panic:
+
+    - Read the error message carefully. Try to find out exactly which bundle is causing the error.
+      Is it SonataClassificationBundle or one of the dependencies?
+    - Make sure you followed all the instructions correctly, for both SonataClassificationBundle and its dependencies.
+    - Still no luck? Try checking the project's `open issues on GitHub`_.
+
+.. _`open issues on GitHub`: https://github.com/sonata-project/SonataClassificationBundle/issues
+.. _`auto_mapping`: http://symfony.com/doc/4.4/reference/configuration/doctrine.html#configuration-overviews

@@ -2,6 +2,30 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.12.1](https://github.com/sonata-project/SonataClassificationBundle/compare/3.12.0...3.12.1) - 2020-06-21
+### Fixed
+- [[#539](https://github.com/sonata-project/SonataClassificationBundle/pull/539)]
+  Fix mysql database schema ([@wbloszyk](https://github.com/wbloszyk))
+
+### Removed
+- [[#539](https://github.com/sonata-project/SonataClassificationBundle/pull/539)]
+  Remove support for mssql database ([@wbloszyk](https://github.com/wbloszyk))
+
+## [3.12.0](https://github.com/sonata-project/SonataClassificationBundle/compare/3.11.1...3.12.0) - 2020-06-19
+### Added
+- Added `CategoryFilter` for admin lists
+- Added `CollectionFilter` for admin lists
+
+### Fixed
+- fixed database schema to work with mssql
+
+### Changed
+- Make admin bundle optional
+
+### Removed
+- SonataCoreBundle dependencies
+- Support for Symfony < 4.3
+
 ## [3.11.1](https://github.com/sonata-project/SonataClassificationBundle/compare/3.11.0...3.11.1) - 2020-03-24
 ### Fixed
 - Fix Lexer query error in managers

@@ -128,7 +128,6 @@ class SonataClassificationExtension extends Extension
                 'refresh',
                 'merge',
                 'detach',
-                'remove',
             ],
             'mappedBy' => null,
             'inversedBy' => 'children',
@@ -136,6 +135,7 @@ class SonataClassificationExtension extends Extension
                 [
                  'name' => 'parent_id',
                  'referencedColumnName' => 'id',
+                 'onDelete' => 'CASCADE',
                 ],
             ],
             'orphanRemoval' => false,

@@ -5,17 +5,21 @@
             <argument type="service" id="sonata.classification.manager.category"/>
             <argument type="service" id="form.factory"/>
         </service>
+        <service id="Sonata\ClassificationBundle\Controller\Api\CategoryController" alias="sonata.classification.controller.api.category" public="true"/>
         <service id="sonata.classification.controller.api.collection" class="Sonata\ClassificationBundle\Controller\Api\CollectionController">
             <argument type="service" id="sonata.classification.manager.collection"/>
             <argument type="service" id="form.factory"/>
         </service>
+        <service id="Sonata\ClassificationBundle\Controller\Api\CollectionController" alias="sonata.classification.controller.api.collection" public="true"/>
         <service id="sonata.classification.controller.api.tag" class="Sonata\ClassificationBundle\Controller\Api\TagController">
             <argument type="service" id="sonata.classification.manager.tag"/>
             <argument type="service" id="form.factory"/>
         </service>
+        <service id="Sonata\ClassificationBundle\Controller\Api\TagController" alias="sonata.classification.controller.api.tag" public="true"/>
         <service id="sonata.classification.controller.api.context" class="Sonata\ClassificationBundle\Controller\Api\ContextController">
             <argument type="service" id="sonata.classification.manager.context"/>
             <argument type="service" id="form.factory"/>
         </service>
+        <service id="Sonata\ClassificationBundle\Controller\Api\ContextController" alias="sonata.classification.controller.api.context" public="true"/>
     </services>
 </container>

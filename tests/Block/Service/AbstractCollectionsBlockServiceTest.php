@@ -15,12 +15,12 @@ namespace Sonata\ClassificationBundle\Tests\Block\Service;
 
 use Sonata\BlockBundle\Model\BlockInterface;
 use Sonata\BlockBundle\Test\BlockServiceTestCase;
-use Sonata\BlockBundle\Test\FakeTemplating;
 use Sonata\ClassificationBundle\Admin\CollectionAdmin;
 use Sonata\ClassificationBundle\Block\Service\AbstractCollectionsBlockService;
 use Sonata\ClassificationBundle\Model\CollectionInterface;
 use Sonata\ClassificationBundle\Model\CollectionManagerInterface;
 use Sonata\ClassificationBundle\Model\ContextManagerInterface;
+use Twig\Environment;
 
 /**
  * @author Christian Gripp <mail@core23.de>
@@ -46,7 +46,7 @@ final class AbstractCollectionsBlockServiceTest extends BlockServiceTestCase
     {
         parent::setUp();
 
-        $this->templating = new FakeTemplating();
+        $this->twig = $this->createMock(Environment::class);
         $this->contextManager = $this->createMock(ContextManagerInterface::class);
         $this->collectionManager = $this->createMock(CollectionManagerInterface::class);
         $this->collectionAdmin = $this->createMock(CollectionAdmin::class);
@@ -55,7 +55,7 @@ final class AbstractCollectionsBlockServiceTest extends BlockServiceTestCase
     public function testDefaultSettings(): void
     {
         $blockService = $this->getMockForAbstractClass(AbstractCollectionsBlockService::class, [
-            'block.service', $this->templating, $this->contextManager, $this->collectionManager, $this->collectionAdmin,
+            $this->twig, $this->contextManager, $this->collectionManager, $this->collectionAdmin,
         ]);
         $blockContext = $this->getBlockContext($blockService);
 
@@ -94,7 +94,7 @@ final class AbstractCollectionsBlockServiceTest extends BlockServiceTestCase
             ->with($this->equalTo('collectionId'), $this->equalTo($collection));
 
         $blockService = $this->getMockForAbstractClass(AbstractCollectionsBlockService::class, [
-            'block.service', $this->templating, $this->contextManager, $this->collectionManager, $this->collectionAdmin,
+            $this->twig, $this->contextManager, $this->collectionManager, $this->collectionAdmin,
         ]);
         $blockService->load($block);
     }
@@ -117,7 +117,7 @@ final class AbstractCollectionsBlockServiceTest extends BlockServiceTestCase
             ->with($this->equalTo('collectionId'), $this->equalTo(23));
 
         $blockService = $this->getMockForAbstractClass(AbstractCollectionsBlockService::class, [
-            'block.service', $this->templating, $this->contextManager, $this->collectionManager, $this->collectionAdmin,
+            $this->twig, $this->contextManager, $this->collectionManager, $this->collectionAdmin,
         ]);
         $blockService->prePersist($block);
     }
@@ -140,7 +140,7 @@ final class AbstractCollectionsBlockServiceTest extends BlockServiceTestCase
             ->with($this->equalTo('collectionId'), $this->equalTo(23));
 
         $blockService = $this->getMockForAbstractClass(AbstractCollectionsBlockService::class, [
-            'block.service', $this->templating, $this->contextManager, $this->collectionManager, $this->collectionAdmin,
+            $this->twig, $this->contextManager, $this->collectionManager, $this->collectionAdmin,
         ]);
         $blockService->preUpdate($block);
     }

@@ -15,12 +15,12 @@ namespace Sonata\ClassificationBundle\Tests\Block\Service;
 
 use Sonata\BlockBundle\Model\BlockInterface;
 use Sonata\BlockBundle\Test\BlockServiceTestCase;
-use Sonata\BlockBundle\Test\FakeTemplating;
 use Sonata\ClassificationBundle\Admin\TagAdmin;
 use Sonata\ClassificationBundle\Block\Service\AbstractTagsBlockService;
 use Sonata\ClassificationBundle\Model\ContextManagerInterface;
 use Sonata\ClassificationBundle\Model\TagInterface;
 use Sonata\ClassificationBundle\Model\TagManagerInterface;
+use Twig\Environment;
 
 /**
  * @author Christian Gripp <mail@core23.de>
@@ -46,7 +46,7 @@ final class AbstractTagsBlockServiceTest extends BlockServiceTestCase
     {
         parent::setUp();
 
-        $this->templating = new FakeTemplating();
+        $this->twig = $this->createMock(Environment::class);
         $this->contextManager = $this->createMock(ContextManagerInterface::class);
         $this->tagManager = $this->createMock(TagManagerInterface::class);
         $this->tagAdmin = $this->createMock(TagAdmin::class);
@@ -55,7 +55,7 @@ final class AbstractTagsBlockServiceTest extends BlockServiceTestCase
     public function testDefaultSettings(): void
     {
         $blockService = $this->getMockForAbstractClass(AbstractTagsBlockService::class, [
-            'block.service', $this->templating, $this->contextManager, $this->tagManager, $this->tagAdmin,
+            $this->twig, $this->contextManager, $this->tagManager, $this->tagAdmin,
         ]);
         $blockContext = $this->getBlockContext($blockService);
 
@@ -94,7 +94,7 @@ final class AbstractTagsBlockServiceTest extends BlockServiceTestCase
             ->with($this->equalTo('tagId'), $this->equalTo($tag));
 
         $blockService = $this->getMockForAbstractClass(AbstractTagsBlockService::class, [
-            'block.service', $this->templating, $this->contextManager, $this->tagManager, $this->tagAdmin,
+            $this->twig, $this->contextManager, $this->tagManager, $this->tagAdmin,
         ]);
         $blockService->load($block);
     }
@@ -117,7 +117,7 @@ final class AbstractTagsBlockServiceTest extends BlockServiceTestCase
             ->with($this->equalTo('tagId'), $this->equalTo(23));
 
         $blockService = $this->getMockForAbstractClass(AbstractTagsBlockService::class, [
-            'block.service', $this->templating, $this->contextManager, $this->tagManager, $this->tagAdmin,
+            $this->twig, $this->contextManager, $this->tagManager, $this->tagAdmin,
         ]);
         $blockService->prePersist($block);
     }
@@ -140,7 +140,7 @@ final class AbstractTagsBlockServiceTest extends BlockServiceTestCase
             ->with($this->equalTo('tagId'), $this->equalTo(23));
 
         $blockService = $this->getMockForAbstractClass(AbstractTagsBlockService::class, [
-            'block.service', $this->templating, $this->contextManager, $this->tagManager, $this->tagAdmin,
+            $this->twig, $this->contextManager, $this->tagManager, $this->tagAdmin,
         ]);
         $blockService->preUpdate($block);
     }

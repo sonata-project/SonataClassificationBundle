@@ -1,0 +1,46 @@
+framework:
+    test: true
+    secret: '50n474.U53r'
+    form:
+        enabled: true
+    translator:
+        enabled: true
+
+twig:
+    exception_controller: null
+    paths:
+        - '%kernel.project_dir%/templates'
+    strict_variables: '%kernel.debug%'
+
+sonata_classification:
+    class:
+        tag: Sonata\ClassificationBundle\Tests\App\Entity\Tag
+        category: Sonata\ClassificationBundle\Tests\App\Entity\Category
+        context: Sonata\ClassificationBundle\Tests\App\Entity\Context
+        collection: Sonata\ClassificationBundle\Tests\App\Entity\Collection
+        media: Sonata\ClassificationBundle\Tests\App\Entity\Media
+
+fos_rest:
+    param_fetcher_listener: true
+    body_listener: true
+    format_listener: true
+    view:
+        view_response_listener: force
+    body_converter:
+        enabled: false
+        validate: true
+
+doctrine:
+    dbal:
+        driver: pdo_sqlite
+        path: '%app.base_dir%sonata_classification_test.db3'
+    orm:
+        entity_managers:
+            default:
+                mappings:
+                    SonataClassificationBundle: ~
+                    SonataClassificationTest:
+                        type: annotation
+                        dir: '%kernel.project_dir%/Entity'
+                        is_bundle: false
+                        prefix: Sonata\ClassificationBundle\Tests\App\Entity

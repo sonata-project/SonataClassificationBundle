@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<routes xmlns="http://friendsofsymfony.github.com/schema/rest" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://friendsofsymfony.github.com/schema/rest https://raw.github.com/FriendsOfSymfony/FOSRestBundle/master/Resources/config/schema/routing/rest_routing-1.0.xsd">
-    <import type="rest" resource="Sonata\ClassificationBundle\Controller\Api\CategoryController" name-prefix="sonata_api_classification_category_"/>
-    <import type="rest" resource="Sonata\ClassificationBundle\Controller\Api\CollectionController" name-prefix="sonata_api_classification_collection_"/>
-    <import type="rest" resource="Sonata\ClassificationBundle\Controller\Api\TagController" name-prefix="sonata_api_classification_tag_"/>
-    <import type="rest" resource="Sonata\ClassificationBundle\Controller\Api\ContextController" name-prefix="sonata_api_classification_context_"/>
+<routes xmlns="http://symfony.com/schema/routing" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/routing https://symfony.com/schema/routing/routing-1.0.xsd">
+    <import type="xml" resource="./api/category.xml" name-prefix="sonata_api_classification_category_"/>
+    <import type="xml" resource="./api/collection.xml" name-prefix="sonata_api_classification_collection_"/>
+    <import type="xml" resource="./api/context.xml" name-prefix="sonata_api_classification_context_"/>
+    <import type="xml" resource="./api/tag.xml" name-prefix="sonata_api_classification_tag_"/>
 </routes>

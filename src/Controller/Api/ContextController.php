@@ -14,10 +14,9 @@ declare(strict_types=1);
 namespace Sonata\ClassificationBundle\Controller\Api;
 
 use FOS\RestBundle\Context\Context;
-use FOS\RestBundle\Controller\Annotations\QueryParam;
-use FOS\RestBundle\Controller\Annotations\View;
+use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Request\ParamFetcherInterface;
-use FOS\RestBundle\View\View as FOSRestView;
+use FOS\RestBundle\View\View;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Sonata\ClassificationBundle\Form\FormHelper;
 use Sonata\ClassificationBundle\Model\ContextInterface;
@@ -57,11 +56,11 @@ class ContextController
      *  output={"class"="Sonata\DatagridBundle\Pager\PagerInterface", "groups"={"sonata_api_read"}}
      * )
      *
-     * @QueryParam(name="page", requirements="\d+", default="1", description="Page for context list pagination")
-     * @QueryParam(name="count", requirements="\d+", default="10", description="Number of contexts by page")
-     * @QueryParam(name="enabled", requirements="0|1", nullable=true, strict=true, description="Enabled/Disabled contexts filter")
+     * @Rest\QueryParam(name="page", requirements="\d+", default="1", description="Page for context list pagination")
+     * @Rest\QueryParam(name="count", requirements="\d+", default="10", description="Number of contexts by page")
+     * @Rest\QueryParam(name="enabled", requirements="0|1", nullable=true, strict=true, description="Enabled/Disabled contexts filter")
      *
-     * @View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
+     * @Rest\View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
      *
      * @return PagerInterface
      */
@@ -81,7 +80,7 @@ class ContextController
      *
      * @ApiDoc(
      *  requirements={
-     *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="context id"}
+     *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="Context identifier"}
      *  },
      *  output={"class"="Sonata\ClassificationBundle\Model\Context", "groups"={"sonata_api_read"}},
      *  statusCodes={
@@ -90,9 +89,9 @@ class ContextController
      *  }
      * )
      *
-     * @View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
+     * @Rest\View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
      *
-     * @param mixed $id
+     * @param mixed $id Context identifier
      *
      * @return ContextInterface
      */
@@ -114,7 +113,7 @@ class ContextController
      *  }
      * )
      *
-     * @param Request $request A Symfony request
+     * @param Request $request Symfony request
      *
      * @throws NotFoundHttpException
      *
@@ -130,7 +129,7 @@ class ContextController
      *
      * @ApiDoc(
      *  requirements={
-     *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="context identifier"}
+     *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="Context identifier"}
      *  },
      *  input={"class"="sonata_classification_api_form_context", "name"="", "groups"={"sonata_api_write"}},
      *  output={"class"="Sonata\ClassificationBundle\Model\Context", "groups"={"sonata_api_read"}},
@@ -141,8 +140,8 @@ class ContextController
      *  }
      * )
      *
-     * @param int     $id      A Context identifier
-     * @param Request $request A Symfony request
+     * @param int     $id      Context identifier
+     * @param Request $request Symfony request
      *
      * @throws NotFoundHttpException
      *
@@ -158,7 +157,7 @@ class ContextController
      *
      * @ApiDoc(
      *  requirements={
-     *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="context identifier"}
+     *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="Context identifier"}
      *  },
      *  statusCodes={
      *      200="Returned when context is successfully deleted",
@@ -167,11 +166,11 @@ class ContextController
      *  }
      * )
      *
-     * @param int $id A Context identifier
+     * @param int $id Context identifier
      *
      * @throws NotFoundHttpException
      *
-     * @return View
+     * @return Rest\View
      */
     public function deleteContextAction($id)
     {
@@ -205,7 +204,7 @@ class ContextController
     /**
      * Retrieves context with id $id or throws an exception if it doesn't exist.
      *
-     * @param int $id A Context identifier
+     * @param int $id Context identifier
      *
      * @throws NotFoundHttpException
      *
@@ -226,7 +225,7 @@ class ContextController
      * Write a context, this method is used by both POST and PUT action methods.
      *
      * @param Request  $request Symfony request
-     * @param int|null $id      A context identifier
+     * @param int|null $id      context identifier
      *
      * @return FormInterface
      */
@@ -249,7 +248,7 @@ class ContextController
             $context = new Context();
             $context->setGroups(['sonata_api_read']);
 
-            $view = FOSRestView::create($context);
+            $view = View::create($context);
             $view->setContext($context);
 
             return $view;

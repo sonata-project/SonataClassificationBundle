@@ -14,10 +14,9 @@ declare(strict_types=1);
 namespace Sonata\ClassificationBundle\Controller\Api;
 
 use FOS\RestBundle\Context\Context;
-use FOS\RestBundle\Controller\Annotations\QueryParam;
-use FOS\RestBundle\Controller\Annotations\View;
+use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Request\ParamFetcherInterface;
-use FOS\RestBundle\View\View as FOSRestView;
+use FOS\RestBundle\View\View;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Sonata\ClassificationBundle\Form\FormHelper;
 use Sonata\ClassificationBundle\Model\CollectionInterface;
@@ -57,11 +56,11 @@ class CollectionController
      *  output={"class"="Sonata\DatagridBundle\Pager\PagerInterface", "groups"={"sonata_api_read"}}
      * )
      *
-     * @QueryParam(name="page", requirements="\d+", default="1", description="Page for collection list pagination")
-     * @QueryParam(name="count", requirements="\d+", default="10", description="Number of collections by page")
-     * @QueryParam(name="enabled", requirements="0|1", nullable=true, strict=true, description="Enabled/Disabled collections filter")
+     * @Rest\QueryParam(name="page", requirements="\d+", default="1", description="Page for collection list pagination")
+     * @Rest\QueryParam(name="count", requirements="\d+", default="10", description="Number of collections by page")
+     * @Rest\QueryParam(name="enabled", requirements="0|1", nullable=true, strict=true, description="Enabled/Disabled collections filter")
      *
-     * @View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
+     * @Rest\View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
      *
      * @return PagerInterface
      */
@@ -81,7 +80,7 @@ class CollectionController
      *
      * @ApiDoc(
      *  requirements={
-     *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="collection id"}
+     *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="Collection identifier"}
      *  },
      *  output={"class"="Sonata\ClassificationBundle\Model\Collection", "groups"={"sonata_api_read"}},
      *  statusCodes={
@@ -90,9 +89,9 @@ class CollectionController
      *  }
      * )
      *
-     * @View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
+     * @Rest\View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
      *
-     * @param mixed $id
+     * @param mixed $id Collection identifier
      *
      * @return CollectionInterface
      */
@@ -114,7 +113,7 @@ class CollectionController
      *  }
      * )
      *
-     * @param Request $request A Symfony request
+     * @param Request $request Symfony request
      *
      * @throws NotFoundHttpException
      *
@@ -130,7 +129,7 @@ class CollectionController
      *
      * @ApiDoc(
      *  requirements={
-     *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="collection identifier"}
+     *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="Collection identifier"}
      *  },
      *  input={"class"="sonata_classification_api_form_collection", "name"="", "groups"={"sonata_api_write"}},
      *  output={"class"="Sonata\ClassificationBundle\Model\Collection", "groups"={"sonata_api_read"}},
@@ -141,8 +140,8 @@ class CollectionController
      *  }
      * )
      *
-     * @param int     $id      A Collection identifier
-     * @param Request $request A Symfony request
+     * @param int     $id      Collection identifier
+     * @param Request $request Symfony request
      *
      * @throws NotFoundHttpException
      *
@@ -158,7 +157,7 @@ class CollectionController
      *
      * @ApiDoc(
      *  requirements={
-     *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="collection identifier"}
+     *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="Collection identifier"}
      *  },
      *  statusCodes={
      *      200="Returned when collection is successfully deleted",
@@ -167,11 +166,11 @@ class CollectionController
      *  }
      * )
      *
-     * @param int $id A Collection identifier
+     * @param int $id Collection identifier
      *
      * @throws NotFoundHttpException
      *
-     * @return View
+     * @return Rest\View
      */
     public function deleteCollectionAction($id)
     {
@@ -205,7 +204,7 @@ class CollectionController
     /**
      * Retrieves collection with id $id or throws an exception if it doesn't exist.
      *
-     * @param int $id A Collection identifier
+     * @param int $id Collection identifier
      *
      * @throws NotFoundHttpException
      *
@@ -226,9 +225,9 @@ class CollectionController
      * Write a collection, this method is used by both POST and PUT action methods.
      *
      * @param Request  $request Symfony request
-     * @param int|null $id      A collection identifier
+     * @param int|null $id      Collection identifier
      *
-     * @return View|FormInterface
+     * @return Rest\View|FormInterface
      */
     protected function handleWriteCollection($request, $id = null)
     {
@@ -249,7 +248,7 @@ class CollectionController
             $context = new Context();
             $context->setGroups(['sonata_api_read']);
 
-            $view = FOSRestView::create($collection);
+            $view = View::create($collection);
             $view->setContext($context);
 
             return $view;

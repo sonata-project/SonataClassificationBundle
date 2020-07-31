@@ -14,10 +14,9 @@ declare(strict_types=1);
 namespace Sonata\ClassificationBundle\Controller\Api;
 
 use FOS\RestBundle\Context\Context;
-use FOS\RestBundle\Controller\Annotations\QueryParam;
-use FOS\RestBundle\Controller\Annotations\View;
+use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Request\ParamFetcherInterface;
-use FOS\RestBundle\View\View as FOSRestView;
+use FOS\RestBundle\View\View;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Sonata\ClassificationBundle\Form\FormHelper;
 use Sonata\ClassificationBundle\Model\CategoryInterface;
@@ -57,12 +56,12 @@ class CategoryController
      *  output={"class"="Sonata\DatagridBundle\Pager\PagerInterface", "groups"={"sonata_api_read"}}
      * )
      *
-     * @QueryParam(name="page", requirements="\d+", default="1", description="Page for category list pagination")
-     * @QueryParam(name="count", requirements="\d+", default="10", description="Number of categories by page")
-     * @QueryParam(name="enabled", requirements="0|1", nullable=true, strict=true, description="Enabled/Disabled categories filter")
-     * @QueryParam(name="context", requirements="\S+", nullable=true, strict=true, description="Context of categories")
+     * @Rest\QueryParam(name="page", requirements="\d+", default="1", description="Page for category list pagination")
+     * @Rest\QueryParam(name="count", requirements="\d+", default="10", description="Number of categories by page")
+     * @Rest\QueryParam(name="enabled", requirements="0|1", nullable=true, strict=true, description="Enabled/Disabled categories filter")
+     * @Rest\QueryParam(name="context", requirements="\S+", nullable=true, strict=true, description="Context of categories")
      *
-     * @View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
+     * @Rest\View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
      *
      * @return PagerInterface
      */
@@ -82,7 +81,7 @@ class CategoryController
      *
      * @ApiDoc(
      *  requirements={
-     *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="category id"}
+     *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="Category identifier"}
      *  },
      *  output={"class"="Sonata\ClassificationBundle\Model\Category", "groups"={"sonata_api_read"}},
      *  statusCodes={
@@ -91,9 +90,9 @@ class CategoryController
      *  }
      * )
      *
-     * @View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
+     * @Rest\View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
      *
-     * @param mixed $id
+     * @param mixed $id Category identifier
      *
      * @return CategoryInterface
      */
@@ -115,7 +114,7 @@ class CategoryController
      *  }
      * )
      *
-     * @param Request $request A Symfony request
+     * @param Request $request Symfony request
      *
      * @throws NotFoundHttpException
      *
@@ -131,7 +130,7 @@ class CategoryController
      *
      * @ApiDoc(
      *  requirements={
-     *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="category identifier"}
+     *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="Category identifier"}
      *  },
      *  input={"class"="sonata_classification_api_form_category", "name"="", "groups"={"sonata_api_write"}},
      *  output={"class"="Sonata\ClassificationBundle\Model\Category", "groups"={"sonata_api_read"}},
@@ -142,8 +141,8 @@ class CategoryController
      *  }
      * )
      *
-     * @param int     $id      A Category identifier
-     * @param Request $request A Symfony request
+     * @param int     $id      Category identifier
+     * @param Request $request Symfony request
      *
      * @throws NotFoundHttpException
      *
@@ -159,7 +158,7 @@ class CategoryController
      *
      * @ApiDoc(
      *  requirements={
-     *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="category identifier"}
+     *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="Category identifier"}
      *  },
      *  statusCodes={
      *      200="Returned when category is successfully deleted",
@@ -168,11 +167,11 @@ class CategoryController
      *  }
      * )
      *
-     * @param int $id A Category identifier
+     * @param int $id Category identifier
      *
      * @throws NotFoundHttpException
      *
-     * @return View
+     * @return Rest\View
      */
     public function deleteCategoryAction($id)
     {
@@ -206,7 +205,7 @@ class CategoryController
     /**
      * Retrieves category with id $id or throws an exception if it doesn't exist.
      *
-     * @param int $id A Category identifier
+     * @param int $id Category identifier
      *
      * @throws NotFoundHttpException
      *
@@ -227,9 +226,9 @@ class CategoryController
      * Write a category, this method is used by both POST and PUT action methods.
      *
      * @param Request  $request Symfony request
-     * @param int|null $id      A category identifier
+     * @param int|null $id      category identifier
      *
-     * @return View|FormInterface
+     * @return Rest\View|FormInterface
      */
     protected function handleWriteCategory($request, $id = null)
     {
@@ -250,7 +249,7 @@ class CategoryController
             $context = new Context();
             $context->setGroups(['sonata_api_read']);
 
-            $view = FOSRestView::create($category);
+            $view = View::create($category);
             $view->setContext($context);
 
             return $view;

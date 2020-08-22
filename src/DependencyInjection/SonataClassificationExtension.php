@@ -219,7 +219,7 @@ class SonataClassificationExtension extends Extension
     private function registerSonataDoctrineMapping(array $config): void
     {
         foreach ($config['class'] as $type => $class) {
-            if ('media' !== $type && !class_exists($class)) {
+            if (!class_exists($class)) {
                 return;
             }
         }
@@ -262,18 +262,5 @@ class SonataClassificationExtension extends Extension
 
         $collector->addUnique($config['class']['tag'], 'tag_context', ['slug', 'context']);
         $collector->addUnique($config['class']['collection'], 'tag_collection', ['slug', 'context']);
-
-        if (null !== $config['class']['media']) {
-            $mediaOptions = OptionsBuilder::createManyToOne('media', $config['class']['media'])
-                ->cascade(['persist'])
-                ->addJoin([
-                    'name' => 'media_id',
-                    'referencedColumnName' => 'id',
-                    'onDelete' => 'SET NULL',
-                ]);
-
-            $collector->addAssociation($config['class']['collection'], 'mapManyToOne', $mediaOptions);
-            $collector->addAssociation($config['class']['category'], 'mapManyToOne', $mediaOptions);
-        }
     }
 }

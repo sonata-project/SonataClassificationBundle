@@ -42,8 +42,7 @@
         "sonata-project/admin-bundle": "<3.68",
         "sonata-project/block-bundle": "<3.19 || >=4.0",
         "sonata-project/core-bundle": "<3.20",
-        "sonata-project/doctrine-orm-admin-bundle": "<3.16",
-        "sonata-project/media-bundle": "<3.20 || >=4.0"
+        "sonata-project/doctrine-orm-admin-bundle": "<3.16"
     },
     "require-dev": {
         "doctrine/mongodb-odm": "^2.0",
@@ -54,7 +53,6 @@
         "sonata-project/admin-bundle": "^3.68",
         "sonata-project/block-bundle": "^3.19",
         "sonata-project/doctrine-orm-admin-bundle": "^3.16",
-        "sonata-project/media-bundle": "^3.20",
         "symfony/phpunit-bridge": "^5.1"
     },
     "suggest": {

@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.13.1](https://github.com/sonata-project/SonataClassificationBundle/compare/3.13.0...3.13.1) - 2020-08-23
+### Fixed
+- [[#554](https://github.com/sonata-project/SonataClassificationBundle/pull/554)]
+  Make admin dependency optional for block rendering
+([@core23](https://github.com/core23))
+
 ## [3.13.0](https://github.com/sonata-project/SonataClassificationBundle/compare/3.12.1...3.13.0) - 2020-08-05
 ### Added
 - [[#545](https://github.com/sonata-project/SonataClassificationBundle/pull/545)]

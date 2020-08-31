@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sonata\ClassificationBundle\Block\Service;
 
+use BadMethodCallException;
 use Sonata\AdminBundle\Admin\AdminInterface;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\BlockBundle\Block\BlockContextInterface;
@@ -27,6 +28,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Twig\Environment;
 
 /**
  * @author Christian Gripp <mail@core23.de>
@@ -39,7 +41,7 @@ abstract class AbstractCollectionsBlockService extends AbstractClassificationBlo
     private $collectionManager;
 
     /**
-     * @var AdminInterface
+     * @var AdminInterface|null
      */
     private $collectionAdmin;
 
@@ -49,7 +51,7 @@ abstract class AbstractCollectionsBlockService extends AbstractClassificationBlo
      * @param string|Environment                                 $twigOrDeprecatedName
      * @param EngineInterface|ContextManagerInterface            $contextManagerOrDeprecatedTemplating
      * @param ContextManagerInterface|CollectionManagerInterface $collectionManagerOrDeprecatedContextManager
-     * @param CollectionManagerInterface|AdminInterface          $collectionAdminOrDeprecatedCollectionManager
+     * @param CollectionManagerInterface|AdminInterface|null     $collectionAdminOrDeprecatedCollectionManager
      * @param AdminInterface|null                                $deprecatedCollectionAdmin
      */
     public function __construct(
@@ -99,6 +101,10 @@ abstract class AbstractCollectionsBlockService extends AbstractClassificationBlo
 
     public function buildEditForm(FormMapper $formMapper, BlockInterface $block): void
     {
+        if (null === $this->collectionAdmin) {
+            throw new BadMethodCallException('You need the sonata-project/admin-bundle library to edit this block.');
+        }
+
         $adminField = $this->getFormAdminType($formMapper, $this->collectionAdmin, 'collectionId', 'collection', [
             'label' => 'form.label_collection',
         ], [

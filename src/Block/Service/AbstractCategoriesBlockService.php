@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sonata\ClassificationBundle\Block\Service;
 
+use BadMethodCallException;
 use Sonata\AdminBundle\Admin\AdminInterface;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\BlockBundle\Block\BlockContextInterface;
@@ -27,6 +28,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Twig\Environment;
 
 /**
  * @author Christian Gripp <mail@core23.de>
@@ -39,7 +41,7 @@ abstract class AbstractCategoriesBlockService extends AbstractClassificationBloc
     private $categoryManager;
 
     /**
-     * @var AdminInterface
+     * @var AdminInterface|null
      */
     private $categoryAdmin;
 
@@ -47,7 +49,7 @@ abstract class AbstractCategoriesBlockService extends AbstractClassificationBloc
      * @param string|Environment                               $twigOrDeprecatedName
      * @param EngineInterface|ContextManagerInterface          $contextManagerOrDeprecatedTemplating
      * @param ContextManagerInterface|CategoryManagerInterface $categoryManagerOrDeprecatedContextManager
-     * @param CategoryManagerInterface|AdminInterface          $categoryAdminOrDeprecatedCategoryManager
+     * @param CategoryManagerInterface|AdminInterface|null     $categoryAdminOrDeprecatedCategoryManager
      * @param AdminInterface|null                              $deprecatedCategoryAdmin
      */
     public function __construct(
@@ -94,6 +96,10 @@ abstract class AbstractCategoriesBlockService extends AbstractClassificationBloc
 
     public function buildEditForm(FormMapper $formMapper, BlockInterface $block): void
     {
+        if (null === $this->categoryAdmin) {
+            throw new BadMethodCallException('You need the sonata-project/admin-bundle library to edit this block.');
+        }
+
         $adminField = $this->getFormAdminType($formMapper, $this->categoryAdmin, 'categoryId', 'category', [
             'label' => 'form.label_category',
         ], [

@@ -14,10 +14,9 @@ declare(strict_types=1);
 namespace Sonata\ClassificationBundle\Controller\Api;
 
 use FOS\RestBundle\Context\Context;
-use FOS\RestBundle\Controller\Annotations\QueryParam;
-use FOS\RestBundle\Controller\Annotations\View;
+use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Request\ParamFetcherInterface;
-use FOS\RestBundle\View\View as FOSRestView;
+use FOS\RestBundle\View\View;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Sonata\ClassificationBundle\Form\FormHelper;
 use Sonata\ClassificationBundle\Model\TagInterface;
@@ -57,11 +56,11 @@ class TagController
      *  output={"class"="Sonata\DatagridBundle\Pager\PagerInterface", "groups"={"sonata_api_read"}}
      * )
      *
-     * @QueryParam(name="page", requirements="\d+", default="1", description="Page for tag list pagination")
-     * @QueryParam(name="count", requirements="\d+", default="10", description="Number of tags by page")
-     * @QueryParam(name="enabled", requirements="0|1", nullable=true, strict=true, description="Enabled/Disabled tags filter")
+     * @Rest\QueryParam(name="page", requirements="\d+", default="1", description="Page for tag list pagination")
+     * @Rest\QueryParam(name="count", requirements="\d+", default="10", description="Number of tags by page")
+     * @Rest\QueryParam(name="enabled", requirements="0|1", nullable=true, strict=true, description="Enabled/Disabled tags filter")
      *
-     * @View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
+     * @Rest\View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
      *
      * @return PagerInterface
      */
@@ -81,7 +80,7 @@ class TagController
      *
      * @ApiDoc(
      *  requirements={
-     *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="tag id"}
+     *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="Tag identifier"}
      *  },
      *  output={"class"="Sonata\ClassificationBundle\Model\Tag", "groups"={"sonata_api_read"}},
      *  statusCodes={
@@ -90,9 +89,9 @@ class TagController
      *  }
      * )
      *
-     * @View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
+     * @Rest\View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
      *
-     * @param mixed $id
+     * @param mixed $id Tag identifier
      *
      * @return Tag
      */
@@ -114,7 +113,7 @@ class TagController
      *  }
      * )
      *
-     * @param Request $request A Symfony request
+     * @param Request $request Symfony request
      *
      * @throws NotFoundHttpException
      *
@@ -130,7 +129,7 @@ class TagController
      *
      * @ApiDoc(
      *  requirements={
-     *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="tag identifier"}
+     *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="Tag identifier"}
      *  },
      *  input={"class"="sonata_classification_api_form_tag", "name"="", "groups"={"sonata_api_write"}},
      *  output={"class"="Sonata\ClassificationBundle\Model\Tag", "groups"={"sonata_api_read"}},
@@ -141,8 +140,8 @@ class TagController
      *  }
      * )
      *
-     * @param int     $id      A Tag identifier
-     * @param Request $request A Symfony request
+     * @param int     $id      Tag identifier
+     * @param Request $request Symfony request
      *
      * @throws NotFoundHttpException
      *
@@ -158,7 +157,7 @@ class TagController
      *
      * @ApiDoc(
      *  requirements={
-     *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="tag identifier"}
+     *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="Tag identifier"}
      *  },
      *  statusCodes={
      *      200="Returned when tag is successfully deleted",
@@ -167,11 +166,11 @@ class TagController
      *  }
      * )
      *
-     * @param int $id A Tag identifier
+     * @param int $id Tag identifier
      *
      * @throws NotFoundHttpException
      *
-     * @return View
+     * @return Rest\View
      */
     public function deleteTagAction($id)
     {
@@ -205,7 +204,7 @@ class TagController
     /**
      * Retrieves tag with id $id or throws an exception if it doesn't exist.
      *
-     * @param int $id A Tag identifier
+     * @param int $id Tag identifier
      *
      * @throws NotFoundHttpException
      *
@@ -226,7 +225,7 @@ class TagController
      * Write a tag, this method is used by both POST and PUT action methods.
      *
      * @param Request  $request Symfony request
-     * @param int|null $id      A tag identifier
+     * @param int|null $id      Tag identifier
      *
      * @return FormInterface
      */
@@ -249,7 +248,7 @@ class TagController
             $context = new Context();
             $context->setGroups(['sonata_api_read']);
 
-            $view = FOSRestView::create($tag);
+            $view = View::create($tag);
             $view->setContext($context);
 
             return $view;

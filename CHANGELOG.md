@@ -2,6 +2,61 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.13.1](https://github.com/sonata-project/SonataClassificationBundle/compare/3.13.0...3.13.1) - 2020-08-23
+### Fixed
+- [[#554](https://github.com/sonata-project/SonataClassificationBundle/pull/554)]
+  Make admin dependency optional for block rendering
+([@core23](https://github.com/core23))
+
+## [3.13.0](https://github.com/sonata-project/SonataClassificationBundle/compare/3.12.1...3.13.0) - 2020-08-05
+### Added
+- [[#545](https://github.com/sonata-project/SonataClassificationBundle/pull/545)]
+  Added support for "friendsofsymfony/rest-bundle:^3.0"
+([@wbloszyk](https://github.com/wbloszyk))
+- [[#542](https://github.com/sonata-project/SonataClassificationBundle/pull/542)]
+  Added public alias
+`Sonata\ClassificationBundle\Controller\Api\CategoryController` for
+`sonata.classification.controller.api.category` service
+([@wbloszyk](https://github.com/wbloszyk))
+- [[#542](https://github.com/sonata-project/SonataClassificationBundle/pull/542)]
+  Added public alias
+`Sonata\ClassificationBundle\Controller\Api\CollectionController` for
+`sonata.classification.controller.api.collection` service
+([@wbloszyk](https://github.com/wbloszyk))
+- [[#542](https://github.com/sonata-project/SonataClassificationBundle/pull/542)]
+  Added public alias `Sonata\ClassificationBundle\Controller\Api\TagController`
+for `sonata.classification.controller.api.tag` service
+([@wbloszyk](https://github.com/wbloszyk))
+- [[#542](https://github.com/sonata-project/SonataClassificationBundle/pull/542)]
+  Added public alias
+`Sonata\ClassificationBundle\Controller\Api\ContextController` for
+`sonata.classification.controller.api.context` service
+([@wbloszyk](https://github.com/wbloszyk))
+
+### Change
+- [[#545](https://github.com/sonata-project/SonataClassificationBundle/pull/545)]
+  Support for deprecated "rest" routing type in favor for xml
+([@wbloszyk](https://github.com/wbloszyk))
+
+### Changed
+- [[#536](https://github.com/sonata-project/SonataClassificationBundle/pull/536)]
+  SonataEasyExtendsBundle is now optional, using SonataDoctrineBundle is
+preferred ([@jordisala1991](https://github.com/jordisala1991))
+
+### Deprecated
+- [[#536](https://github.com/sonata-project/SonataClassificationBundle/pull/536)]
+  Using SonataEasyExtendsBundle to add Doctrine mapping information
+([@jordisala1991](https://github.com/jordisala1991))
+
+### Fixed
+- [[#542](https://github.com/sonata-project/SonataClassificationBundle/pull/542)]
+  Fix RestFul API - `Class could not be determined for Controller identified`
+Error ([@wbloszyk](https://github.com/wbloszyk))
+
+### Removed
+- [[#544](https://github.com/sonata-project/SonataClassificationBundle/pull/544)]
+  Support for Symfony < 4.4 ([@wbloszyk](https://github.com/wbloszyk))
+
 ## [3.12.1](https://github.com/sonata-project/SonataClassificationBundle/compare/3.12.0...3.12.1) - 2020-06-21
 ### Fixed
 - [[#539](https://github.com/sonata-project/SonataClassificationBundle/pull/539)]

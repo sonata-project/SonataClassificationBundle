@@ -111,7 +111,7 @@ class SonataClassificationExtension extends Extension
     public function registerDoctrineMapping(array $config): void
     {
         @trigger_error(
-            'Using SonataEasyExtendsBundle is deprecated since sonata-project/classification-bundle 3.x. Please register SonataDoctrineBundle as a bundle instead.',
+            'Using SonataEasyExtendsBundle is deprecated since sonata-project/classification-bundle 3.13. Please register SonataDoctrineBundle as a bundle instead.',
             E_USER_DEPRECATED
         );
 

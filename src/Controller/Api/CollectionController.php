@@ -80,7 +80,7 @@ class CollectionController
      *
      * @ApiDoc(
      *  requirements={
-     *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="Collection identifier"}
+     *      {"name"="id", "dataType"="string", "description"="Collection identifier"}
      *  },
      *  output={"class"="Sonata\ClassificationBundle\Model\Collection", "groups"={"sonata_api_read"}},
      *  statusCodes={
@@ -91,7 +91,7 @@ class CollectionController
      *
      * @Rest\View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
      *
-     * @param mixed $id Collection identifier
+     * @param string $id Collection identifier
      *
      * @return CollectionInterface
      */
@@ -129,7 +129,7 @@ class CollectionController
      *
      * @ApiDoc(
      *  requirements={
-     *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="Collection identifier"}
+     *      {"name"="id", "dataType"="string", "description"="Collection identifier"}
      *  },
      *  input={"class"="sonata_classification_api_form_collection", "name"="", "groups"={"sonata_api_write"}},
      *  output={"class"="Sonata\ClassificationBundle\Model\Collection", "groups"={"sonata_api_read"}},
@@ -140,7 +140,7 @@ class CollectionController
      *  }
      * )
      *
-     * @param int     $id      Collection identifier
+     * @param string  $id      Collection identifier
      * @param Request $request Symfony request
      *
      * @throws NotFoundHttpException
@@ -157,7 +157,7 @@ class CollectionController
      *
      * @ApiDoc(
      *  requirements={
-     *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="Collection identifier"}
+     *      {"name"="id", "dataType"="string", "description"="Collection identifier"}
      *  },
      *  statusCodes={
      *      200="Returned when collection is successfully deleted",
@@ -166,7 +166,7 @@ class CollectionController
      *  }
      * )
      *
-     * @param int $id Collection identifier
+     * @param string $id Collection identifier
      *
      * @throws NotFoundHttpException
      *
@@ -204,7 +204,7 @@ class CollectionController
     /**
      * Retrieves collection with id $id or throws an exception if it doesn't exist.
      *
-     * @param int $id Collection identifier
+     * @param string $id Collection identifier
      *
      * @throws NotFoundHttpException
      *
@@ -224,8 +224,8 @@ class CollectionController
     /**
      * Write a collection, this method is used by both POST and PUT action methods.
      *
-     * @param Request  $request Symfony request
-     * @param int|null $id      Collection identifier
+     * @param Request     $request Symfony request
+     * @param string|null $id      Collection identifier
      *
      * @return Rest\View|FormInterface
      */

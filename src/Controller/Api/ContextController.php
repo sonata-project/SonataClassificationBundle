@@ -80,7 +80,7 @@ class ContextController
      *
      * @ApiDoc(
      *  requirements={
-     *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="Context identifier"}
+     *      {"name"="id", "dataType"="string", "description"="Context identifier"}
      *  },
      *  output={"class"="Sonata\ClassificationBundle\Model\Context", "groups"={"sonata_api_read"}},
      *  statusCodes={
@@ -91,7 +91,7 @@ class ContextController
      *
      * @Rest\View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
      *
-     * @param mixed $id Context identifier
+     * @param string $id Context identifier
      *
      * @return ContextInterface
      */
@@ -129,7 +129,7 @@ class ContextController
      *
      * @ApiDoc(
      *  requirements={
-     *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="Context identifier"}
+     *      {"name"="id", "dataType"="string", "description"="Context identifier"}
      *  },
      *  input={"class"="sonata_classification_api_form_context", "name"="", "groups"={"sonata_api_write"}},
      *  output={"class"="Sonata\ClassificationBundle\Model\Context", "groups"={"sonata_api_read"}},
@@ -140,7 +140,7 @@ class ContextController
      *  }
      * )
      *
-     * @param int     $id      Context identifier
+     * @param string  $id      Context identifier
      * @param Request $request Symfony request
      *
      * @throws NotFoundHttpException
@@ -157,7 +157,7 @@ class ContextController
      *
      * @ApiDoc(
      *  requirements={
-     *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="Context identifier"}
+     *      {"name"="id", "dataType"="string", "description"="Context identifier"}
      *  },
      *  statusCodes={
      *      200="Returned when context is successfully deleted",
@@ -166,7 +166,7 @@ class ContextController
      *  }
      * )
      *
-     * @param int $id Context identifier
+     * @param string $id Context identifier
      *
      * @throws NotFoundHttpException
      *
@@ -204,7 +204,7 @@ class ContextController
     /**
      * Retrieves context with id $id or throws an exception if it doesn't exist.
      *
-     * @param int $id Context identifier
+     * @param string $id Context identifier
      *
      * @throws NotFoundHttpException
      *
@@ -224,8 +224,8 @@ class ContextController
     /**
      * Write a context, this method is used by both POST and PUT action methods.
      *
-     * @param Request  $request Symfony request
-     * @param int|null $id      context identifier
+     * @param Request     $request Symfony request
+     * @param string|null $id      context identifier
      *
      * @return FormInterface
      */

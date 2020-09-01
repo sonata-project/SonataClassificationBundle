@@ -81,7 +81,7 @@ class CategoryController
      *
      * @ApiDoc(
      *  requirements={
-     *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="Category identifier"}
+     *      {"name"="id", "dataType"="string", "description"="Category identifier"}
      *  },
      *  output={"class"="Sonata\ClassificationBundle\Model\Category", "groups"={"sonata_api_read"}},
      *  statusCodes={
@@ -92,7 +92,7 @@ class CategoryController
      *
      * @Rest\View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
      *
-     * @param mixed $id Category identifier
+     * @param string $id Category identifier
      *
      * @return CategoryInterface
      */
@@ -130,7 +130,7 @@ class CategoryController
      *
      * @ApiDoc(
      *  requirements={
-     *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="Category identifier"}
+     *      {"name"="id", "dataType"="string", "description"="Category identifier"}
      *  },
      *  input={"class"="sonata_classification_api_form_category", "name"="", "groups"={"sonata_api_write"}},
      *  output={"class"="Sonata\ClassificationBundle\Model\Category", "groups"={"sonata_api_read"}},
@@ -141,7 +141,7 @@ class CategoryController
      *  }
      * )
      *
-     * @param int     $id      Category identifier
+     * @param string  $id      Category identifier
      * @param Request $request Symfony request
      *
      * @throws NotFoundHttpException
@@ -158,7 +158,7 @@ class CategoryController
      *
      * @ApiDoc(
      *  requirements={
-     *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="Category identifier"}
+     *      {"name"="id", "dataType"="string", "description"="Category identifier"}
      *  },
      *  statusCodes={
      *      200="Returned when category is successfully deleted",
@@ -167,7 +167,7 @@ class CategoryController
      *  }
      * )
      *
-     * @param int $id Category identifier
+     * @param string $id Category identifier
      *
      * @throws NotFoundHttpException
      *
@@ -205,7 +205,7 @@ class CategoryController
     /**
      * Retrieves category with id $id or throws an exception if it doesn't exist.
      *
-     * @param int $id Category identifier
+     * @param string $id Category identifier
      *
      * @throws NotFoundHttpException
      *
@@ -225,8 +225,8 @@ class CategoryController
     /**
      * Write a category, this method is used by both POST and PUT action methods.
      *
-     * @param Request  $request Symfony request
-     * @param int|null $id      category identifier
+     * @param Request     $request Symfony request
+     * @param string|null $id      category identifier
      *
      * @return Rest\View|FormInterface
      */

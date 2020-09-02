@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sonata\ClassificationBundle\Tests\DependencyInjection;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
+use Nelmio\ApiDocBundle\Annotation\Operation;
 use Sonata\ClassificationBundle\Admin\CategoryAdmin;
 use Sonata\ClassificationBundle\Admin\CollectionAdmin;
 use Sonata\ClassificationBundle\Admin\ContextAdmin;
@@ -24,6 +25,10 @@ use Sonata\ClassificationBundle\Command\FixContextCommand;
 use Sonata\ClassificationBundle\Controller\Api\CategoryController;
 use Sonata\ClassificationBundle\Controller\Api\CollectionController;
 use Sonata\ClassificationBundle\Controller\Api\ContextController;
+use Sonata\ClassificationBundle\Controller\Api\Legacy\CategoryController as LegacyCategoryController;
+use Sonata\ClassificationBundle\Controller\Api\Legacy\CollectionController as LegacyCollectionController;
+use Sonata\ClassificationBundle\Controller\Api\Legacy\ContextController as LegacyContextController;
+use Sonata\ClassificationBundle\Controller\Api\Legacy\TagController as LegacyTagController;
 use Sonata\ClassificationBundle\Controller\Api\TagController;
 use Sonata\ClassificationBundle\DependencyInjection\SonataClassificationExtension;
 use Sonata\ClassificationBundle\Entity\CategoryManager;
@@ -67,10 +72,17 @@ final class SonataClassificationExtensionTest extends AbstractExtensionTestCase
         $this->assertContainerBuilderHasService('sonata.classification.admin.context', ContextAdmin::class);
         $this->assertContainerBuilderHasService(CategoryFilter::class);
         $this->assertContainerBuilderHasService(CollectionFilter::class);
-        $this->assertContainerBuilderHasService('sonata.classification.controller.api.category', CategoryController::class);
-        $this->assertContainerBuilderHasService('sonata.classification.controller.api.collection', CollectionController::class);
-        $this->assertContainerBuilderHasService('sonata.classification.controller.api.tag', TagController::class);
-        $this->assertContainerBuilderHasService('sonata.classification.controller.api.context', ContextController::class);
+        if (class_exists(Operation::class)) {
+            $this->assertContainerBuilderHasService('sonata.classification.controller.api.category', CategoryController::class);
+            $this->assertContainerBuilderHasService('sonata.classification.controller.api.collection', CollectionController::class);
+            $this->assertContainerBuilderHasService('sonata.classification.controller.api.tag', TagController::class);
+            $this->assertContainerBuilderHasService('sonata.classification.controller.api.context', ContextController::class);
+        } else {
+            $this->assertContainerBuilderHasService('sonata.classification.controller.api.category', LegacyCategoryController::class);
+            $this->assertContainerBuilderHasService('sonata.classification.controller.api.collection', LegacyCollectionController::class);
+            $this->assertContainerBuilderHasService('sonata.classification.controller.api.tag', LegacyTagController::class);
+            $this->assertContainerBuilderHasService('sonata.classification.controller.api.context', LegacyContextController::class);
+        }
         $this->assertContainerBuilderHasService('sonata.classification.api.form.type.category', ApiCategoryType::class);
         $this->assertContainerBuilderHasService('sonata.classification.api.form.type.collection', ApiCollectionType::class);
         $this->assertContainerBuilderHasService('sonata.classification.api.form.type.tag', ApiTagType::class);

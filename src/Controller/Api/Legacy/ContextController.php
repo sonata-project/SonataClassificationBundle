@@ -11,26 +11,24 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Sonata\ClassificationBundle\Controller\Api;
+namespace Sonata\ClassificationBundle\Controller\Api\Legacy;
 
 use FOS\RestBundle\Context\Context;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Request\ParamFetcherInterface;
 use FOS\RestBundle\View\View;
-use Nelmio\ApiDocBundle\Annotation\Model;
-use Nelmio\ApiDocBundle\Annotation\Operation;
+use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Sonata\ClassificationBundle\Form\FormHelper;
 use Sonata\ClassificationBundle\Model\ContextInterface;
 use Sonata\ClassificationBundle\Model\ContextManagerInterface;
 use Sonata\DatagridBundle\Pager\PagerInterface;
-use Swagger\Annotations as SWG;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
- * @final since sonata-project/classification-bundle 3.x
+ * @deprecated since sonata-project/classification-bundle 3.x, to be removed in 4.0.
  *
  * @author Thomas Rabaix <thomas.rabaix@gmail.com>
  */
@@ -55,35 +53,9 @@ class ContextController
     /**
      * Retrieves the list of contexts (paginated) based on criteria.
      *
-     * @Operation(
-     *     tags={"/api/classification/contexts"},
-     *     summary="Retrieves the list of contexts (paginated) based on criteria.",
-     *     @SWG\Parameter(
-     *         name="page",
-     *         in="query",
-     *         description="Page for context list pagination",
-     *         required=false,
-     *         type="string"
-     *     ),
-     *     @SWG\Parameter(
-     *         name="count",
-     *         in="query",
-     *         description="Number of contexts per page",
-     *         required=false,
-     *         type="string"
-     *     ),
-     *     @SWG\Parameter(
-     *         name="enabled",
-     *         in="query",
-     *         description="Enables or disables the contexts filter",
-     *         required=false,
-     *         type="string"
-     *     ),
-     *     @SWG\Response(
-     *         response="200",
-     *         description="Returned when successful",
-     *         @SWG\Schema(ref=@Model(type="Sonata\DatagridBundle\Pager\PagerInterface"))
-     *     )
+     * @ApiDoc(
+     *  resource=true,
+     *  output={"class"="Sonata\DatagridBundle\Pager\PagerInterface", "groups"={"sonata_api_read"}}
      * )
      *
      * @Rest\QueryParam(name="page", requirements="\d+", default="1", description="Page for context list pagination")
@@ -108,18 +80,15 @@ class ContextController
     /**
      * Retrieves a specific context.
      *
-     * @Operation(
-     *     tags={"/api/classification/contexts"},
-     *     summary="Retrieves a specific context.",
-     *     @SWG\Response(
-     *         response="200",
-     *         description="Returned when successful",
-     *         @SWG\Schema(ref=@Model(type="Sonata\ClassificationBundle\Model\Context"))
-     *     ),
-     *     @SWG\Response(
-     *         response="404",
-     *         description="Returned when context is not found"
-     *     )
+     * @ApiDoc(
+     *  requirements={
+     *      {"name"="id", "dataType"="string", "description"="Context identifier"}
+     *  },
+     *  output={"class"="Sonata\ClassificationBundle\Model\Context", "groups"={"sonata_api_read"}},
+     *  statusCodes={
+     *      200="Returned when successful",
+     *      404="Returned when context is not found"
+     *  }
      * )
      *
      * @Rest\View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
@@ -136,22 +105,14 @@ class ContextController
     /**
      * Adds a context.
      *
-     * @Operation(
-     *     tags={"/api/classification/contexts"},
-     *     summary="Adds a context.",
-     *     @SWG\Response(
-     *         response="200",
-     *         description="Returned when successful",
-     *         @SWG\Schema(ref=@Model(type="Sonata\ClassificationBundle\Model\Context"))
-     *     ),
-     *     @SWG\Response(
-     *         response="400",
-     *         description="Returned when an error has occurred while context creation"
-     *     ),
-     *     @SWG\Response(
-     *         response="404",
-     *         description="Returned when unable to find context"
-     *     )
+     * @ApiDoc(
+     *  input={"class"="sonata_classification_api_form_context", "name"="", "groups"={"sonata_api_write"}},
+     *  output={"class"="Sonata\ClassificationBundle\Model\Context", "groups"={"sonata_api_read"}},
+     *  statusCodes={
+     *      200="Returned when successful",
+     *      400="Returned when an error has occurred while context creation",
+     *      404="Returned when unable to find context"
+     *  }
      * )
      *
      * @param Request $request Symfony request
@@ -168,22 +129,17 @@ class ContextController
     /**
      * Updates a context.
      *
-     * @Operation(
-     *     tags={"/api/classification/contexts"},
-     *     summary="Updates a context.",
-     *     @SWG\Response(
-     *         response="200",
-     *         description="Returned when successful",
-     *         @SWG\Schema(ref=@Model(type="Sonata\ClassificationBundle\Model\Context"))
-     *     ),
-     *     @SWG\Response(
-     *         response="400",
-     *         description="Returned when an error has occurred while context update"
-     *     ),
-     *     @SWG\Response(
-     *         response="404",
-     *         description="Returned when unable to find context"
-     *     )
+     * @ApiDoc(
+     *  requirements={
+     *      {"name"="id", "dataType"="string", "description"="Context identifier"}
+     *  },
+     *  input={"class"="sonata_classification_api_form_context", "name"="", "groups"={"sonata_api_write"}},
+     *  output={"class"="Sonata\ClassificationBundle\Model\Context", "groups"={"sonata_api_read"}},
+     *  statusCodes={
+     *      200="Returned when successful",
+     *      400="Returned when an error has occurred while context update",
+     *      404="Returned when unable to find context"
+     *  }
      * )
      *
      * @param string  $id      Context identifier
@@ -201,21 +157,15 @@ class ContextController
     /**
      * Deletes a context.
      *
-     * @Operation(
-     *     tags={"/api/classification/contexts"},
-     *     summary="Deletes a context.",
-     *     @SWG\Response(
-     *         response="200",
-     *         description="Returned when context is successfully deleted"
-     *     ),
-     *     @SWG\Response(
-     *         response="400",
-     *         description="Returned when an error has occurred while context deletion"
-     *     ),
-     *     @SWG\Response(
-     *         response="404",
-     *         description="Returned when unable to find context"
-     *     )
+     * @ApiDoc(
+     *  requirements={
+     *      {"name"="id", "dataType"="string", "description"="Context identifier"}
+     *  },
+     *  statusCodes={
+     *      200="Returned when context is successfully deleted",
+     *      400="Returned when an error has occurred while context deletion",
+     *      404="Returned when unable to find context"
+     *  }
      * )
      *
      * @param string $id Context identifier

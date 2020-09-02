@@ -14,3 +14,4 @@ Classification Bundle
    reference/advanced_usage
    reference/media_bundle_integration
    reference/block_bundle_integration
+   reference/api

@@ -13,8 +13,6 @@ declare(strict_types=1);
 
 namespace Sonata\ClassificationBundle\Model;
 
-use Sonata\MediaBundle\Model\MediaInterface;
-
 interface CollectionInterface
 {
     /**

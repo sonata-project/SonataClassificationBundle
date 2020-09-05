@@ -97,7 +97,7 @@ abstract class AbstractTagsBlockService extends AbstractClassificationBlockServi
         ], $response);
     }
 
-    public function buildEditForm(FormMapper $formMapper, BlockInterface $block): void
+    public function buildEditForm(FormMapper $formMapper, BlockInterface $block)
     {
         if (null === $this->tagAdmin) {
             throw new BadMethodCallException('You need the sonata-project/admin-bundle library to edit this block.');
@@ -147,7 +147,7 @@ abstract class AbstractTagsBlockService extends AbstractClassificationBlockServi
         );
     }
 
-    public function configureSettings(OptionsResolver $resolver): void
+    public function configureSettings(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'title' => null,
@@ -161,19 +161,19 @@ abstract class AbstractTagsBlockService extends AbstractClassificationBlockServi
         ]);
     }
 
-    public function load(BlockInterface $block): void
+    public function load(BlockInterface $block)
     {
         if (is_numeric($block->getSetting('tagId'))) {
             $block->setSetting('tagId', $this->getTag($block->getSetting('tagId')));
         }
     }
 
-    public function prePersist(BlockInterface $block): void
+    public function prePersist(BlockInterface $block)
     {
         $this->resolveIds($block);
     }
 
-    public function preUpdate(BlockInterface $block): void
+    public function preUpdate(BlockInterface $block)
     {
         $this->resolveIds($block);
     }
@@ -210,7 +210,7 @@ abstract class AbstractTagsBlockService extends AbstractClassificationBlockServi
         return null;
     }
 
-    private function resolveIds(BlockInterface $block): void
+    private function resolveIds(BlockInterface $block)
     {
         $block->setSetting(
             'tagId',

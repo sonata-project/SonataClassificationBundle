@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sonata\ClassificationBundle\Model;
 
-use Sonata\AdminBundle\Datagrid\PagerInterface;
+use Sonata\DatagridBundle\Pager\PagerInterface;
 use Sonata\Doctrine\Model\ManagerInterface;
 use Sonata\Doctrine\Model\PageableManagerInterface;
 
@@ -28,71 +28,4 @@ use Sonata\Doctrine\Model\PageableManagerInterface;
  */
 interface CategoryManagerInterface extends ManagerInterface, PageableManagerInterface
 {
-    /**
-     * Returns a pager to iterate over the root category.
-     *
-     * @param int   $page
-     * @param int   $limit
-     * @param array $criteria
-     *
-     * @return PagerInterface
-     */
-    public function getRootCategoriesPager($page = 1, $limit = 25, $criteria = []);
-
-    /**
-     * @param int   $categoryId
-     * @param int   $page
-     * @param int   $limit
-     * @param array $criteria
-     *
-     * @return PagerInterface
-     */
-    public function getSubCategoriesPager($categoryId, $page = 1, $limit = 25, $criteria = []);
-
-    /**
-     * @return CategoryInterface
-     */
-    public function getRootCategoryWithChildren(CategoryInterface $category);
-
-    /**
-     * @param bool $loadChildren
-     *
-     * @return CategoryInterface[]
-     */
-    public function getRootCategories($loadChildren = true);
-
-    /**
-     * @param ContextInterface|string $context
-     *
-     * @return CategoryInterface[]
-     */
-    public function getCategories($context = null);
-
-    /**
-     * @param ContextInterface|string $context
-     *
-     * @return CategoryInterface
-     */
-    public function getRootCategory($context = null);
-
-    /**
-     * @param ContextInterface $context
-     *
-     * @return CategoryInterface[]
-     */
-    public function getRootCategoriesForContext(?ContextInterface $context = null);
-
-    /**
-     * @param bool|true $loadChildren
-     *
-     * @return CategoryInterface[]
-     */
-    public function getAllRootCategories($loadChildren = true);
-
-    /**
-     * @param bool|true $loadChildren
-     *
-     * @return array
-     */
-    public function getRootCategoriesSplitByContexts($loadChildren = true);
 }

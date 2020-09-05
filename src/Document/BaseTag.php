@@ -17,7 +17,7 @@ use Sonata\ClassificationBundle\Model\Tag as ModelTag;
 
 abstract class BaseTag extends ModelTag
 {
-    public function prePersist(): void
+    public function prePersist()
     {
         $this->setCreatedAt(new \DateTime());
         $this->setUpdatedAt(new \DateTime());

@@ -31,6 +31,7 @@ final class ConfigurationTest extends AbstractExtensionConfigurationTestCase
             'class' => [
                 'category' => 'Application\Sonata\ClassificationBundle\Entity\Category',
                 'tag' => 'Application\Sonata\ClassificationBundle\Entity\Tag',
+                'media' => null,
                 'collection' => 'Application\Sonata\ClassificationBundle\Entity\Collection',
                 'context' => 'Application\Sonata\ClassificationBundle\Entity\Context',
             ],

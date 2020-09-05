@@ -118,6 +118,10 @@
                 <source>filter.label_parent</source>
                 <target>Pai</target>
             </trans-unit>
+            <trans-unit id="form.label_media">
+                <source>form.label_media</source>
+                <target>Mídia</target>
+            </trans-unit>
             <trans-unit id="breadcrumb.link_context_list">
                 <source>breadcrumb.link_context_list</source>
                 <target>Contextos</target>

@@ -24,12 +24,12 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class SonataClassificationBundle extends Bundle
 {
-    public function build(ContainerBuilder $container): void
+    public function build(ContainerBuilder $container)
     {
         $this->registerFormMapping();
     }
 
-    public function boot(): void
+    public function boot()
     {
         $this->registerFormMapping();
     }
@@ -39,7 +39,7 @@ class SonataClassificationBundle extends Bundle
      *
      * NEXT_MAJOR: remove this method
      */
-    public function registerFormMapping(): void
+    public function registerFormMapping()
     {
         if (class_exists(FormHelper::class)) {
             FormHelper::registerFormTypeMapping([

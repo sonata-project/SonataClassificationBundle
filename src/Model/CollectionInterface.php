@@ -13,13 +13,10 @@ declare(strict_types=1);
 
 namespace Sonata\ClassificationBundle\Model;
 
+use Sonata\MediaBundle\Model\MediaInterface;
+
 interface CollectionInterface
 {
-    /**
-     * @return mixed
-     */
-    public function getId();
-
     /**
      * Set name.
      *

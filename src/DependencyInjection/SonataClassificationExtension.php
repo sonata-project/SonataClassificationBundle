@@ -32,7 +32,7 @@ class SonataClassificationExtension extends Extension
     /**
      * @throws \InvalidArgumentException
      */
-    public function load(array $configs, ContainerBuilder $container): void
+    public function load(array $configs, ContainerBuilder $container)
     {
         $processor = new Processor();
         $configuration = new Configuration();
@@ -68,7 +68,7 @@ class SonataClassificationExtension extends Extension
     /**
      * @param array $config
      */
-    public function configureClass($config, ContainerBuilder $container): void
+    public function configureClass($config, ContainerBuilder $container)
     {
         // admin configuration
         $container->setParameter('sonata.classification.admin.tag.entity', $config['class']['tag']);
@@ -86,7 +86,7 @@ class SonataClassificationExtension extends Extension
     /**
      * @param array $config
      */
-    public function configureAdmin($config, ContainerBuilder $container): void
+    public function configureAdmin($config, ContainerBuilder $container)
     {
         $container->setParameter('sonata.classification.admin.category.class', $config['admin']['category']['class']);
         $container->setParameter('sonata.classification.admin.category.controller', $config['admin']['category']['controller']);
@@ -108,7 +108,7 @@ class SonataClassificationExtension extends Extension
     /**
      * NEXT_MAJOR: Remove this method.
      */
-    public function registerDoctrineMapping(array $config): void
+    public function registerDoctrineMapping(array $config)
     {
         @trigger_error(
             'Using SonataEasyExtendsBundle is deprecated since sonata-project/classification-bundle 3.13. Please register SonataDoctrineBundle as a bundle instead.',
@@ -116,7 +116,7 @@ class SonataClassificationExtension extends Extension
         );
 
         foreach ($config['class'] as $type => $class) {
-            if (!class_exists($class)) {
+            if ('media' !== $type && !class_exists($class)) {
                 return;
             }
         }
@@ -169,7 +169,6 @@ class SonataClassificationExtension extends Extension
                 [
                     'name' => 'context',
                     'referencedColumnName' => 'id',
-                    'nullable' => false,
                 ],
             ],
             'orphanRemoval' => false,
@@ -187,7 +186,6 @@ class SonataClassificationExtension extends Extension
                 [
                     'name' => 'context',
                     'referencedColumnName' => 'id',
-                    'nullable' => false,
                 ],
             ],
             'orphanRemoval' => false,
@@ -207,19 +205,56 @@ class SonataClassificationExtension extends Extension
                 [
                     'name' => 'context',
                     'referencedColumnName' => 'id',
-                    'nullable' => false,
                 ],
             ],
             'orphanRemoval' => false,
         ]);
 
         $collector->addUnique($config['class']['collection'], 'tag_collection', ['slug', 'context']);
+
+        if (null !== $config['class']['media']) {
+            $collector->addAssociation($config['class']['collection'], 'mapManyToOne', [
+                'fieldName' => 'media',
+                'targetEntity' => $config['class']['media'],
+                'cascade' => [
+                    'persist',
+                ],
+                'mappedBy' => null,
+                'inversedBy' => null,
+                'joinColumns' => [
+                    [
+                     'name' => 'media_id',
+                     'referencedColumnName' => 'id',
+                     'onDelete' => 'SET NULL',
+                    ],
+                ],
+                'orphanRemoval' => false,
+            ]);
+
+            $collector->addAssociation($config['class']['category'], 'mapManyToOne', [
+                'fieldName' => 'media',
+                'targetEntity' => $config['class']['media'],
+                'cascade' => [
+                    'persist',
+                ],
+                'mappedBy' => null,
+                'inversedBy' => null,
+                'joinColumns' => [
+                    [
+                     'name' => 'media_id',
+                     'referencedColumnName' => 'id',
+                     'onDelete' => 'SET NULL',
+                    ],
+                ],
+                'orphanRemoval' => false,
+            ]);
+        }
     }
 
     private function registerSonataDoctrineMapping(array $config): void
     {
         foreach ($config['class'] as $type => $class) {
-            if (!class_exists($class)) {
+            if ('media' !== $type && !class_exists($class)) {
                 return;
             }
         }
@@ -262,5 +297,18 @@ class SonataClassificationExtension extends Extension
 
         $collector->addUnique($config['class']['tag'], 'tag_context', ['slug', 'context']);
         $collector->addUnique($config['class']['collection'], 'tag_collection', ['slug', 'context']);
+
+        if (null !== $config['class']['media']) {
+            $mediaOptions = OptionsBuilder::createManyToOne('media', $config['class']['media'])
+                ->cascade(['persist'])
+                ->addJoin([
+                    'name' => 'media_id',
+                    'referencedColumnName' => 'id',
+                    'onDelete' => 'SET NULL',
+                ]);
+
+            $collector->addAssociation($config['class']['collection'], 'mapManyToOne', $mediaOptions);
+            $collector->addAssociation($config['class']['category'], 'mapManyToOne', $mediaOptions);
+        }
     }
 }

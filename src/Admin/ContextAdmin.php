@@ -23,7 +23,7 @@ class ContextAdmin extends AbstractAdmin
 {
     protected $classnameLabel = 'Context';
 
-    protected function configureFormFields(FormMapper $formMapper): void
+    protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
             ->ifTrue(!($this->hasSubject() && null !== $this->getSubject()->getId()))
@@ -36,7 +36,7 @@ class ContextAdmin extends AbstractAdmin
         ;
     }
 
-    protected function configureDatagridFilters(DatagridMapper $datagridMapper): void
+    protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
             ->add('id')
@@ -45,7 +45,7 @@ class ContextAdmin extends AbstractAdmin
         ;
     }
 
-    protected function configureListFields(ListMapper $listMapper): void
+    protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
             ->addIdentifier('name')

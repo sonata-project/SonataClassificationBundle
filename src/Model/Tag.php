@@ -52,7 +52,7 @@ abstract class Tag implements TagInterface
         return $this->getName() ?: 'n/a';
     }
 
-    public function setName($name): void
+    public function setName($name)
     {
         $this->name = $name;
 
@@ -64,7 +64,7 @@ abstract class Tag implements TagInterface
         return $this->name;
     }
 
-    public function setEnabled($enabled): void
+    public function setEnabled($enabled)
     {
         $this->enabled = $enabled;
     }
@@ -74,7 +74,7 @@ abstract class Tag implements TagInterface
         return $this->enabled;
     }
 
-    public function setSlug($slug): void
+    public function setSlug($slug)
     {
         $this->slug = self::slugify($slug);
     }
@@ -84,7 +84,7 @@ abstract class Tag implements TagInterface
         return $this->slug;
     }
 
-    public function setCreatedAt(?\DateTime $createdAt = null): void
+    public function setCreatedAt(?\DateTime $createdAt = null)
     {
         $this->createdAt = $createdAt;
     }
@@ -94,7 +94,7 @@ abstract class Tag implements TagInterface
         return $this->createdAt;
     }
 
-    public function setUpdatedAt(?\DateTime $updatedAt = null): void
+    public function setUpdatedAt(?\DateTime $updatedAt = null)
     {
         $this->updatedAt = $updatedAt;
     }
@@ -104,7 +104,7 @@ abstract class Tag implements TagInterface
         return $this->updatedAt;
     }
 
-    public function preUpdate(): void
+    public function preUpdate()
     {
         $this->setUpdatedAt(new \DateTime());
     }
@@ -129,7 +129,7 @@ abstract class Tag implements TagInterface
         return $text;
     }
 
-    public function setContext(ContextInterface $context): void
+    public function setContext(ContextInterface $context)
     {
         $this->context = $context;
     }

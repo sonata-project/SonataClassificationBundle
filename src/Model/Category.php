@@ -15,6 +15,7 @@ namespace Sonata\ClassificationBundle\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection as DoctrineCollection;
+use Sonata\MediaBundle\Model\MediaInterface;
 
 abstract class Category implements CategoryInterface
 {
@@ -64,6 +65,11 @@ abstract class Category implements CategoryInterface
     protected $parent;
 
     /**
+     * @var MediaInterface
+     */
+    protected $media;
+
+    /**
      * @var ContextInterface
      */
     protected $context;
@@ -78,7 +84,7 @@ abstract class Category implements CategoryInterface
         return $this->getName() ?: 'n/a';
     }
 
-    public function setName($name): void
+    public function setName($name)
     {
         $this->name = $name;
 
@@ -90,7 +96,7 @@ abstract class Category implements CategoryInterface
         return $this->name;
     }
 
-    public function setEnabled($enabled): void
+    public function setEnabled($enabled)
     {
         $this->enabled = $enabled;
     }
@@ -100,7 +106,7 @@ abstract class Category implements CategoryInterface
         return $this->enabled;
     }
 
-    public function setSlug($slug): void
+    public function setSlug($slug)
     {
         $this->slug = Tag::slugify($slug);
     }
@@ -110,7 +116,7 @@ abstract class Category implements CategoryInterface
         return $this->slug;
     }
 
-    public function setDescription($description): void
+    public function setDescription($description)
     {
         $this->description = $description;
     }
@@ -120,18 +126,18 @@ abstract class Category implements CategoryInterface
         return $this->description;
     }
 
-    public function prePersist(): void
+    public function prePersist()
     {
         $this->setCreatedAt(new \DateTime());
         $this->setUpdatedAt(new \DateTime());
     }
 
-    public function preUpdate(): void
+    public function preUpdate()
     {
         $this->setUpdatedAt(new \DateTime());
     }
 
-    public function setCreatedAt(\DateTime $createdAt): void
+    public function setCreatedAt(\DateTime $createdAt)
     {
         $this->createdAt = $createdAt;
     }
@@ -141,7 +147,7 @@ abstract class Category implements CategoryInterface
         return $this->createdAt;
     }
 
-    public function setUpdatedAt(\DateTime $updatedAt): void
+    public function setUpdatedAt(\DateTime $updatedAt)
     {
         $this->updatedAt = $updatedAt;
     }
@@ -151,7 +157,7 @@ abstract class Category implements CategoryInterface
         return $this->updatedAt;
     }
 
-    public function setPosition($position): void
+    public function setPosition($position)
     {
         $this->position = $position;
     }
@@ -167,12 +173,12 @@ abstract class Category implements CategoryInterface
     /**
      * @deprecated only used by the AdminHelper
      */
-    public function addChildren(CategoryInterface $child): void
+    public function addChildren(CategoryInterface $child)
     {
         $this->addChild($child, true);
     }
 
-    public function addChild(CategoryInterface $child, $nested = false): void
+    public function addChild(CategoryInterface $child, $nested = false)
     {
         $this->children[] = $child;
 
@@ -185,7 +191,7 @@ abstract class Category implements CategoryInterface
         }
     }
 
-    public function removeChild(CategoryInterface $childToDelete): void
+    public function removeChild(CategoryInterface $childToDelete)
     {
         foreach ($this->getChildren() as $pos => $child) {
             if ($childToDelete->getId() && $child->getId() === $childToDelete->getId()) {
@@ -207,7 +213,7 @@ abstract class Category implements CategoryInterface
         return $this->children;
     }
 
-    public function setChildren($children): void
+    public function setChildren($children)
     {
         $this->children = new ArrayCollection();
 
@@ -221,7 +227,7 @@ abstract class Category implements CategoryInterface
         return \count($this->children) > 0;
     }
 
-    public function setParent(?CategoryInterface $parent = null, $nested = false): void
+    public function setParent(?CategoryInterface $parent = null, $nested = false)
     {
         $this->parent = $parent;
 
@@ -235,7 +241,17 @@ abstract class Category implements CategoryInterface
         return $this->parent;
     }
 
-    public function setContext(ContextInterface $context): void
+    public function setMedia(?MediaInterface $media = null)
+    {
+        $this->media = $media;
+    }
+
+    public function getMedia()
+    {
+        return $this->media;
+    }
+
+    public function setContext(ContextInterface $context)
     {
         $this->context = $context;
     }

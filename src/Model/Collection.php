@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Sonata\ClassificationBundle\Model;
 
+use Sonata\MediaBundle\Model\MediaInterface;
+
 abstract class Collection implements CollectionInterface
 {
     /**
@@ -46,6 +48,11 @@ abstract class Collection implements CollectionInterface
     protected $updatedAt;
 
     /**
+     * @var MediaInterface
+     */
+    protected $media;
+
+    /**
      * @var ContextInterface
      */
     protected $context;
@@ -55,7 +62,7 @@ abstract class Collection implements CollectionInterface
         return $this->getName() ?: 'n/a';
     }
 
-    public function setName($name): void
+    public function setName($name)
     {
         $this->name = $name;
 
@@ -67,7 +74,7 @@ abstract class Collection implements CollectionInterface
         return $this->name;
     }
 
-    public function setEnabled($enabled): void
+    public function setEnabled($enabled)
     {
         $this->enabled = $enabled;
     }
@@ -77,7 +84,7 @@ abstract class Collection implements CollectionInterface
         return $this->enabled;
     }
 
-    public function setSlug($slug): void
+    public function setSlug($slug)
     {
         $this->slug = Tag::slugify($slug);
     }
@@ -87,7 +94,7 @@ abstract class Collection implements CollectionInterface
         return $this->slug;
     }
 
-    public function setDescription($description): void
+    public function setDescription($description)
     {
         $this->description = $description;
     }
@@ -97,18 +104,18 @@ abstract class Collection implements CollectionInterface
         return $this->description;
     }
 
-    public function prePersist(): void
+    public function prePersist()
     {
         $this->setCreatedAt(new \DateTime());
         $this->setUpdatedAt(new \DateTime());
     }
 
-    public function preUpdate(): void
+    public function preUpdate()
     {
         $this->setUpdatedAt(new \DateTime());
     }
 
-    public function setCreatedAt(\DateTime $createdAt): void
+    public function setCreatedAt(\DateTime $createdAt)
     {
         $this->createdAt = $createdAt;
     }
@@ -118,7 +125,7 @@ abstract class Collection implements CollectionInterface
         return $this->createdAt;
     }
 
-    public function setUpdatedAt(\DateTime $updatedAt): void
+    public function setUpdatedAt(\DateTime $updatedAt)
     {
         $this->updatedAt = $updatedAt;
     }
@@ -128,7 +135,20 @@ abstract class Collection implements CollectionInterface
         return $this->updatedAt;
     }
 
-    public function setContext(ContextInterface $context): void
+    public function setMedia(?MediaInterface $media = null)
+    {
+        $this->media = $media;
+    }
+
+    /**
+     * @return MediaInterface
+     */
+    public function getMedia()
+    {
+        return $this->media;
+    }
+
+    public function setContext(ContextInterface $context)
     {
         $this->context = $context;
     }

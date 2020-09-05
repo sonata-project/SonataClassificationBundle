@@ -20,13 +20,13 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class FixContextCommand extends ContainerAwareCommand
 {
-    public function configure(): void
+    public function configure()
     {
         $this->setName('sonata:classification:fix-context');
         $this->setDescription('Generate the default context if none defined and attach the context to all elements');
     }
 
-    public function execute(InputInterface $input, OutputInterface $output): void
+    public function execute(InputInterface $input, OutputInterface $output)
     {
         $contextManager = $this->getContainer()->get('sonata.classification.manager.context');
         $tagManager = $this->getContainer()->get('sonata.classification.manager.tag');

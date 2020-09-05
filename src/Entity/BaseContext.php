@@ -17,7 +17,7 @@ use Sonata\ClassificationBundle\Model\Context as ModelContext;
 
 abstract class BaseContext extends ModelContext
 {
-    public function prePersist(): void
+    public function prePersist()
     {
         $this->setCreatedAt(new \DateTime());
         $this->setUpdatedAt(new \DateTime());

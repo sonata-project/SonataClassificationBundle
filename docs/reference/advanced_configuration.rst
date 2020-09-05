@@ -13,6 +13,7 @@ Advanced Configuration
                 tag: App\Entity\SonataClassificationTag
                 category: App\Entity\SonataClassificationCategory
                 collection: App\Entity\SonataClassificationCollection
+                media: App\Entity\SonataMediaMedia
                 context: App\Entity\SonataClassificationContext
 
             admin:

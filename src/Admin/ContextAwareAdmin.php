@@ -85,7 +85,7 @@ abstract class ContextAwareAdmin extends AbstractAdmin
         return $parameters;
     }
 
-    protected function configureDatagridFilters(DatagridMapper $datagridMapper): void
+    protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $options = [];
 

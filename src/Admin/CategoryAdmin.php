@@ -16,8 +16,10 @@ namespace Sonata\ClassificationBundle\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Form\Type\ModelListType;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\ClassificationBundle\Form\Type\CategorySelectorType;
+use Sonata\MediaBundle\Model\MediaInterface;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -32,7 +34,7 @@ class CategoryAdmin extends ContextAwareAdmin
         'cascade_validation' => true,
     ];
 
-    public function configureRoutes(RouteCollection $routes): void
+    public function configureRoutes(RouteCollection $routes)
     {
         $routes->add('tree', 'tree');
     }
@@ -54,7 +56,7 @@ EOT
         return parent::getFormBuilder();
     }
 
-    protected function configureFormFields(FormMapper $formMapper): void
+    protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
             ->with('group_general', ['class' => 'col-md-6'])
@@ -92,9 +94,23 @@ EOT
                 ])
             ->end()
         ;
+
+        if (interface_exists(MediaInterface::class)) {
+            $formMapper
+                ->with('group_general')
+                    ->add('media', ModelListType::class, [
+                        'required' => false,
+                    ], [
+                        'link_parameters' => [
+                            'provider' => 'sonata.media.provider.image',
+                            'context' => 'sonata_category',
+                        ],
+                    ])
+                ->end();
+        }
     }
 
-    protected function configureDatagridFilters(DatagridMapper $datagridMapper): void
+    protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         parent::configureDatagridFilters($datagridMapper);
 
@@ -104,7 +120,7 @@ EOT
         ;
     }
 
-    protected function configureListFields(ListMapper $listMapper): void
+    protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
             ->addIdentifier('name')

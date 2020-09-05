@@ -46,12 +46,12 @@ class CategorySelectorType extends AbstractType
      *
      * @deprecated since sonata-project/classification-bundle 3.10, to be removed in version 4.0.
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver): void
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $this->configureOptions($resolver);
     }
 
-    public function configureOptions(OptionsResolver $resolver): void
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'context' => null,
@@ -111,7 +111,7 @@ class CategorySelectorType extends AbstractType
     /**
      * @param int $level
      */
-    private function childWalker(CategoryInterface $category, Options $options, array &$choices, $level = 2): void
+    private function childWalker(CategoryInterface $category, Options $options, array &$choices, $level = 2)
     {
         if (null === $category->getChildren()) {
             return;

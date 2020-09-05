@@ -126,7 +126,7 @@ class CategoryAdminController extends Controller
      *
      * @param string $theme
      */
-    private function setFormTheme(FormView $formView, $theme): void
+    private function setFormTheme(FormView $formView, $theme)
     {
         $twig = $this->get('twig');
 

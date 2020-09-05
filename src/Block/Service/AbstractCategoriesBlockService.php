@@ -94,7 +94,7 @@ abstract class AbstractCategoriesBlockService extends AbstractClassificationBloc
         ], $response);
     }
 
-    public function buildEditForm(FormMapper $formMapper, BlockInterface $block): void
+    public function buildEditForm(FormMapper $formMapper, BlockInterface $block)
     {
         if (null === $this->categoryAdmin) {
             throw new BadMethodCallException('You need the sonata-project/admin-bundle library to edit this block.');
@@ -145,7 +145,7 @@ abstract class AbstractCategoriesBlockService extends AbstractClassificationBloc
         );
     }
 
-    public function configureSettings(OptionsResolver $resolver): void
+    public function configureSettings(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'title' => null,
@@ -159,19 +159,19 @@ abstract class AbstractCategoriesBlockService extends AbstractClassificationBloc
         ]);
     }
 
-    public function load(BlockInterface $block): void
+    public function load(BlockInterface $block)
     {
         if (is_numeric($block->getSetting('categoryId'))) {
             $block->setSetting('categoryId', $this->getCategory($block->getSetting('categoryId')));
         }
     }
 
-    public function prePersist(BlockInterface $block): void
+    public function prePersist(BlockInterface $block)
     {
         $this->resolveIds($block);
     }
 
-    public function preUpdate(BlockInterface $block): void
+    public function preUpdate(BlockInterface $block)
     {
         $this->resolveIds($block);
     }
@@ -208,7 +208,7 @@ abstract class AbstractCategoriesBlockService extends AbstractClassificationBloc
         return null;
     }
 
-    private function resolveIds(BlockInterface $block): void
+    private function resolveIds(BlockInterface $block)
     {
         $block->setSetting(
             'categoryId',

@@ -45,7 +45,7 @@ abstract class Context implements ContextInterface
         return $this->getName() ?: 'n/a';
     }
 
-    public function setName($name): void
+    public function setName($name)
     {
         $this->name = $name;
     }
@@ -55,7 +55,7 @@ abstract class Context implements ContextInterface
         return $this->name;
     }
 
-    public function setEnabled($enabled): void
+    public function setEnabled($enabled)
     {
         $this->enabled = $enabled;
     }
@@ -65,7 +65,7 @@ abstract class Context implements ContextInterface
         return $this->enabled;
     }
 
-    public function setCreatedAt(?\DateTime $createdAt = null): void
+    public function setCreatedAt(?\DateTime $createdAt = null)
     {
         $this->createdAt = $createdAt;
     }
@@ -75,7 +75,7 @@ abstract class Context implements ContextInterface
         return $this->createdAt;
     }
 
-    public function setUpdatedAt(?\DateTime $updatedAt = null): void
+    public function setUpdatedAt(?\DateTime $updatedAt = null)
     {
         $this->updatedAt = $updatedAt;
     }
@@ -85,12 +85,12 @@ abstract class Context implements ContextInterface
         return $this->updatedAt;
     }
 
-    public function preUpdate(): void
+    public function preUpdate()
     {
         $this->setUpdatedAt(new \DateTime());
     }
 
-    public function setId($id): void
+    public function setId($id)
     {
         $this->id = $id;
     }

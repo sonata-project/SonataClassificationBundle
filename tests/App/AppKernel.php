@@ -18,6 +18,7 @@ use FOS\RestBundle\FOSRestBundle;
 use JMS\SerializerBundle\JMSSerializerBundle;
 use Nelmio\ApiDocBundle\NelmioApiDocBundle;
 use Sonata\ClassificationBundle\SonataClassificationBundle;
+use Sonata\ClassificationMediaBundle\SonataClassificationMediaBundle;
 use Sonata\Doctrine\Bridge\Symfony\SonataDoctrineBundle;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
@@ -45,6 +46,7 @@ final class AppKernel extends Kernel
             new TwigBundle(),
             new FOSRestBundle(),
             new SonataClassificationBundle(),
+            new SonataClassificationMediaBundle(),
             new JMSSerializerBundle(),
             new DoctrineBundle(),
             new NelmioApiDocBundle(),

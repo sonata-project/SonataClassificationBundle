@@ -14,7 +14,8 @@ declare(strict_types=1);
 namespace Sonata\ClassificationBundle\Tests\App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Sonata\ClassificationBundle\Entity\BaseCategory;
+use Sonata\ClassificationMediaBundle\Entity\BaseCategory;
+use Sonata\MediaBundle\Model\MediaInterface;
 
 /**
  * @ORM\Entity
@@ -30,10 +31,22 @@ class Category extends BaseCategory
     protected $id;
 
     /**
-     * Get id.
+     * @var MediaInterface|null
      */
+    private $media;
+
     public function getId(): int
     {
         return $this->id;
+    }
+
+    public function setMedia(?MediaInterface $media = null): void
+    {
+        $this->media = $media;
+    }
+
+    public function getMedia(): ?MediaInterface
+    {
+        return $this->media;
     }
 }

@@ -20,7 +20,6 @@ sonata_classification:
         category: Sonata\ClassificationBundle\Tests\App\Entity\Category
         context: Sonata\ClassificationBundle\Tests\App\Entity\Context
         collection: Sonata\ClassificationBundle\Tests\App\Entity\Collection
-        media: Sonata\ClassificationBundle\Tests\App\Entity\Media
 
 fos_rest:
     param_fetcher_listener: true

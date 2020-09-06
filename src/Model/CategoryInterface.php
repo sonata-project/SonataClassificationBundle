@@ -132,13 +132,6 @@ interface CategoryInterface
      */
     public function getParent();
 
-    public function setMedia(?MediaInterface $media = null);
-
-    /**
-     * @return MediaInterface
-     */
-    public function getMedia();
-
     public function setContext(ContextInterface $context);
 
     /**

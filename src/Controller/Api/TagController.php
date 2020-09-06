@@ -80,7 +80,7 @@ class TagController
      *
      * @ApiDoc(
      *  requirements={
-     *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="Tag identifier"}
+     *      {"name"="id", "dataType"="string", "description"="Tag identifier"}
      *  },
      *  output={"class"="Sonata\ClassificationBundle\Model\Tag", "groups"={"sonata_api_read"}},
      *  statusCodes={
@@ -91,9 +91,9 @@ class TagController
      *
      * @Rest\View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
      *
-     * @param mixed $id Tag identifier
+     * @param string $id Tag identifier
      *
-     * @return Tag
+     * @return TagInterface
      */
     public function getTagAction($id)
     {
@@ -129,7 +129,7 @@ class TagController
      *
      * @ApiDoc(
      *  requirements={
-     *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="Tag identifier"}
+     *      {"name"="id", "dataType"="string", "description"="Tag identifier"}
      *  },
      *  input={"class"="sonata_classification_api_form_tag", "name"="", "groups"={"sonata_api_write"}},
      *  output={"class"="Sonata\ClassificationBundle\Model\Tag", "groups"={"sonata_api_read"}},
@@ -140,7 +140,7 @@ class TagController
      *  }
      * )
      *
-     * @param int     $id      Tag identifier
+     * @param string  $id      Tag identifier
      * @param Request $request Symfony request
      *
      * @throws NotFoundHttpException
@@ -157,7 +157,7 @@ class TagController
      *
      * @ApiDoc(
      *  requirements={
-     *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="Tag identifier"}
+     *      {"name"="id", "dataType"="string", "description"="Tag identifier"}
      *  },
      *  statusCodes={
      *      200="Returned when tag is successfully deleted",
@@ -166,7 +166,7 @@ class TagController
      *  }
      * )
      *
-     * @param int $id Tag identifier
+     * @param string $id Tag identifier
      *
      * @throws NotFoundHttpException
      *
@@ -204,7 +204,7 @@ class TagController
     /**
      * Retrieves tag with id $id or throws an exception if it doesn't exist.
      *
-     * @param int $id Tag identifier
+     * @param string $id Tag identifier
      *
      * @throws NotFoundHttpException
      *
@@ -224,8 +224,8 @@ class TagController
     /**
      * Write a tag, this method is used by both POST and PUT action methods.
      *
-     * @param Request  $request Symfony request
-     * @param int|null $id      Tag identifier
+     * @param Request     $request Symfony request
+     * @param string|null $id      Tag identifier
      *
      * @return FormInterface
      */

@@ -2,6 +2,19 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.13.2](https://github.com/sonata-project/SonataClassificationBundle/compare/3.13.1...3.13.2) - 2020-09-05
+### Fixed
+- [[#573](https://github.com/sonata-project/SonataClassificationBundle/pull/573)]
+  Fixed support for string model identifiers at Open API definitions.
+([@wbloszyk](https://github.com/wbloszyk))
+- [[#567](https://github.com/sonata-project/SonataClassificationBundle/pull/567)]
+  Fix loading CategoryFilter items ([@core23](https://github.com/core23))
+
+### Removed
+- [[#573](https://github.com/sonata-project/SonataClassificationBundle/pull/573)]
+  Removed requirements that were only allowing integers for model identifiers
+at Open API definitions. ([@wbloszyk](https://github.com/wbloszyk))
+
 ## [3.13.1](https://github.com/sonata-project/SonataClassificationBundle/compare/3.13.0...3.13.1) - 2020-08-23
 ### Fixed
 - [[#554](https://github.com/sonata-project/SonataClassificationBundle/pull/554)]

@@ -16,7 +16,8 @@ namespace Sonata\ClassificationBundle\Tests\Admin\Filter;
 use PHPUnit\Framework\TestCase;
 use Sonata\ClassificationBundle\Admin\Filter\CategoryFilter;
 use Sonata\ClassificationBundle\Entity\CategoryManager;
-use Sonata\ClassificationBundle\Model\CategoryInterface;
+use Sonata\ClassificationBundle\Tests\Fixtures\Category;
+use Sonata\ClassificationBundle\Tests\Fixtures\Context;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class CategoryFilterTest extends TestCase
@@ -34,7 +35,7 @@ class CategoryFilterTest extends TestCase
     public function testRenderSettings(): void
     {
         $this->categoryManager->method('getAllRootCategories')->willReturn([
-            $category = $this->createCategoryMock(),
+            $category = $this->createCategory(),
         ]);
 
         $filter = new CategoryFilter($this->categoryManager);
@@ -44,36 +45,32 @@ class CategoryFilterTest extends TestCase
         $options = $filter->getRenderSettings()[1];
 
         $this->assertSame(ChoiceType::class, $options['field_type']);
-        $this->assertSame([
-            $category,
-        ], $options['field_options']['choices']);
+        $this->assertCount(1, $options['field_options']['choices']);
     }
 
     public function testRenderSettingsWithContext(): void
     {
         $this->categoryManager->method('getCategories')->willReturn([
-            $category = $this->createCategoryMock(),
+            $category = $this->createCategory(),
         ]);
 
         $filter = new CategoryFilter($this->categoryManager);
         $filter->initialize('field_name', [
+            'context' => 'foo',
             'field_options' => [
                 'class' => 'FooBar',
-                'context' => 'foo',
             ],
         ]);
         $options = $filter->getRenderSettings()[1];
 
         $this->assertSame(ChoiceType::class, $options['field_type']);
-        $this->assertSame([
-            $category,
-        ], $options['field_options']['choices']);
+        $this->assertCount(1, $options['field_options']['choices']);
     }
 
-    private function createCategoryMock(): CategoryInterface
+    private function createCategory(): Category
     {
-        $category = $this->createMock(CategoryInterface::class);
-        $category->method('getId')->willReturn(1);
+        $category = new Category();
+        $category->setContext(new Context());
 
         return $category;
     }

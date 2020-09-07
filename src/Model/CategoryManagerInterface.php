@@ -20,7 +20,7 @@ use Sonata\Doctrine\Model\PageableManagerInterface;
 /**
  * @method PagerInterface         getRootCategoriesPager(int $page = 1, int $limit = 25, array $criteria = [])
  * @method PagerInterface         getSubCategoriesPager(int $categoryId, int $page = 1, int $limit = 25, array $criteria = [])
- * @method CategoryInterface[]    getRootCategoriesForContext(ContextInterface|string|null $context)
+ * @method CategoryInterface[]    getRootCategoriesForContext(ContextInterface|null $context)
  * @method CategoryInterface[]    getAllRootCategories(bool $loadChildren = true)
  * @method CategoryInterface[]    getRootCategoriesSplitByContexts(bool $loadChildren = true)
  * @method CategoryInterface[]    getCategories(ContextInterface|string|null $context)

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<routes xmlns="http://symfony.com/schema/routing" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/routing https://symfony.com/schema/routing/routing-1.0.xsd">
+    <route id="get_tags" path="/tags.{_format}" methods="GET" controller="Sonata\ClassificationBundle\Controller\Api\TagController::getTagsAction" format="json">
+        <requirement key="_format">json|xml|html</requirement>
+    </route>
+    <route id="get_tag" path="/tags/{id}.{_format}" methods="GET" controller="Sonata\ClassificationBundle\Controller\Api\TagController::getTagAction" format="json">
+        <requirement key="_format">json|xml|html</requirement>
+    </route>
+    <route id="post_tag" path="/tags.{_format}" methods="POST" controller="Sonata\ClassificationBundle\Controller\Api\TagController::postTagAction" format="json">
+        <requirement key="_format">json|xml|html</requirement>
+    </route>
+    <route id="put_tag" path="/tags/{id}.{_format}" methods="PUT" controller="Sonata\ClassificationBundle\Controller\Api\TagController::putTagAction" format="json">
+        <requirement key="_format">json|xml|html</requirement>
+    </route>
+    <route id="delete_tag" path="/tags/{id}.{_format}" methods="DELETE" controller="Sonata\ClassificationBundle\Controller\Api\TagController::deleteTagAction" format="json">
+        <requirement key="_format">json|xml|html</requirement>
+    </route>
+</routes>

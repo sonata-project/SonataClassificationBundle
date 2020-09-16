@@ -11,26 +11,24 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Sonata\ClassificationBundle\Controller\Api;
+namespace Sonata\ClassificationBundle\Controller\Api\Legacy;
 
 use FOS\RestBundle\Context\Context;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Request\ParamFetcherInterface;
 use FOS\RestBundle\View\View;
-use Nelmio\ApiDocBundle\Annotation\Model;
-use Nelmio\ApiDocBundle\Annotation\Operation;
+use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Sonata\ClassificationBundle\Form\FormHelper;
 use Sonata\ClassificationBundle\Model\TagInterface;
 use Sonata\ClassificationBundle\Model\TagManagerInterface;
 use Sonata\DatagridBundle\Pager\PagerInterface;
-use Swagger\Annotations as SWG;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
- * @final since sonata-project/classification-bundle 3.x
+ * @deprecated since sonata-project/classification-bundle 3.x, to be removed in 4.0.
  *
  * @author Vincent Composieux <vincent.composieux@gmail.com>
  */
@@ -55,35 +53,9 @@ class TagController
     /**
      * Retrieves the list of tags (paginated) based on criteria.
      *
-     * @Operation(
-     *     tags={"/api/classification/tags"},
-     *     summary="Retrieves the list of tags (paginated) based on criteria.",
-     *     @SWG\Parameter(
-     *         name="page",
-     *         in="query",
-     *         description="Page for tag list pagination",
-     *         required=false,
-     *         type="string"
-     *     ),
-     *     @SWG\Parameter(
-     *         name="count",
-     *         in="query",
-     *         description="Number of tags per page",
-     *         required=false,
-     *         type="string"
-     *     ),
-     *     @SWG\Parameter(
-     *         name="enabled",
-     *         in="query",
-     *         description="Enables or disables the tags filter",
-     *         required=false,
-     *         type="string"
-     *     ),
-     *     @SWG\Response(
-     *         response="200",
-     *         description="Returned when successful",
-     *         @SWG\Schema(ref=@Model(type="Sonata\DatagridBundle\Pager\PagerInterface"))
-     *     )
+     * @ApiDoc(
+     *  resource=true,
+     *  output={"class"="Sonata\DatagridBundle\Pager\PagerInterface", "groups"={"sonata_api_read"}}
      * )
      *
      * @Rest\QueryParam(name="page", requirements="\d+", default="1", description="Page for tag list pagination")
@@ -108,18 +80,15 @@ class TagController
     /**
      * Retrieves a tag.
      *
-     * @Operation(
-     *     tags={"/api/classification/tags"},
-     *     summary="Retrieves a specific tag.",
-     *     @SWG\Response(
-     *         response="200",
-     *         description="Returned when successful",
-     *         @SWG\Schema(ref=@Model(type="Sonata\ClassificationBundle\Model\Tag"))
-     *     ),
-     *     @SWG\Response(
-     *         response="404",
-     *         description="Returned when tag is not found"
-     *     )
+     * @ApiDoc(
+     *  requirements={
+     *      {"name"="id", "dataType"="string", "description"="Tag identifier"}
+     *  },
+     *  output={"class"="Sonata\ClassificationBundle\Model\Tag", "groups"={"sonata_api_read"}},
+     *  statusCodes={
+     *      200="Returned when successful",
+     *      404="Returned when tag is not found"
+     *  }
      * )
      *
      * @Rest\View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
@@ -136,22 +105,14 @@ class TagController
     /**
      * Adds a tag.
      *
-     * @Operation(
-     *     tags={"/api/classification/tags"},
-     *     summary="Adds a tag.",
-     *     @SWG\Response(
-     *         response="200",
-     *         description="Returned when successful",
-     *         @SWG\Schema(ref=@Model(type="Sonata\ClassificationBundle\Model\Tag"))
-     *     ),
-     *     @SWG\Response(
-     *         response="400",
-     *         description="Returned when an error has occurred while tag creation"
-     *     ),
-     *     @SWG\Response(
-     *         response="404",
-     *         description="Returned when unable to find tag"
-     *     )
+     * @ApiDoc(
+     *  input={"class"="sonata_classification_api_form_tag", "name"="", "groups"={"sonata_api_write"}},
+     *  output={"class"="Sonata\ClassificationBundle\Model\Tag", "groups"={"sonata_api_read"}},
+     *  statusCodes={
+     *      200="Returned when successful",
+     *      400="Returned when an error has occurred while tag creation",
+     *      404="Returned when unable to find tag"
+     *  }
      * )
      *
      * @param Request $request Symfony request
@@ -168,22 +129,17 @@ class TagController
     /**
      * Updates a tag.
      *
-     * @Operation(
-     *     tags={"/api/classification/tags"},
-     *     summary="Updates a tag.",
-     *     @SWG\Response(
-     *         response="200",
-     *         description="Returned when successful",
-     *         @SWG\Schema(ref=@Model(type="Sonata\ClassificationBundle\Model\Tag"))
-     *     ),
-     *     @SWG\Response(
-     *         response="400",
-     *         description="Returned when an error has occurred while tag update"
-     *     ),
-     *     @SWG\Response(
-     *         response="404",
-     *         description="Returned when unable to find tag"
-     *     )
+     * @ApiDoc(
+     *  requirements={
+     *      {"name"="id", "dataType"="string", "description"="Tag identifier"}
+     *  },
+     *  input={"class"="sonata_classification_api_form_tag", "name"="", "groups"={"sonata_api_write"}},
+     *  output={"class"="Sonata\ClassificationBundle\Model\Tag", "groups"={"sonata_api_read"}},
+     *  statusCodes={
+     *      200="Returned when successful",
+     *      400="Returned when an error has occurred while tag update",
+     *      404="Returned when unable to find tag"
+     *  }
      * )
      *
      * @param string  $id      Tag identifier
@@ -201,21 +157,15 @@ class TagController
     /**
      * Deletes a tag.
      *
-     * @Operation(
-     *     tags={"/api/classification/tags"},
-     *     summary="Deletes a tag.",
-     *     @SWG\Response(
-     *         response="200",
-     *         description="Returned when tag is successfully deleted"
-     *     ),
-     *     @SWG\Response(
-     *         response="400",
-     *         description="Returned when an error has occurred while tag deletion"
-     *     ),
-     *     @SWG\Response(
-     *         response="404",
-     *         description="Returned when unable to find tag"
-     *     )
+     * @ApiDoc(
+     *  requirements={
+     *      {"name"="id", "dataType"="string", "description"="Tag identifier"}
+     *  },
+     *  statusCodes={
+     *      200="Returned when tag is successfully deleted",
+     *      400="Returned when an error has occurred while tag deletion",
+     *      404="Returned when unable to find tag"
+     *  }
      * )
      *
      * @param string $id Tag identifier

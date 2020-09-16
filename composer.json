@@ -39,6 +39,7 @@
         "doctrine/mongodb-odm": "<2.0",
         "friendsofsymfony/rest-bundle": "<2.3",
         "jms/serializer": "<0.13",
+        "nelmio/api-doc-bundle": "<2.13 || >=4.0",
         "sonata-project/admin-bundle": "<3.68",
         "sonata-project/block-bundle": "<3.19 || >=4.0",
         "sonata-project/core-bundle": "<3.20",
@@ -51,13 +52,13 @@
         "jms/serializer-bundle": "^2.0 || ^3.0",
         "matthiasnoback/symfony-config-test": "^4.0",
         "matthiasnoback/symfony-dependency-injection-test": "^4.0",
-        "nelmio/api-doc-bundle": "^2.13.4",
+        "nelmio/api-doc-bundle": "^2.13.4 || ^3.6",
         "sonata-project/admin-bundle": "^3.68",
         "sonata-project/block-bundle": "^3.19",
         "sonata-project/doctrine-orm-admin-bundle": "^3.16",
         "sonata-project/media-bundle": "^3.20",
         "symfony/browser-kit": "^4.4 || ^5.1",
-        "symfony/phpunit-bridge": "^5.1",
+        "symfony/phpunit-bridge": "^5.1.1",
         "symfony/yaml": "^4.4"
     },
     "suggest": {

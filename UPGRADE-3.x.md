@@ -4,9 +4,9 @@ UPGRADE 3.x
 UPGRADE FROM 3.x to 3.x
 =======================
 
- ### Support for NelmioApiDocBundle > 3.6 is added
+### Support for NelmioApiDocBundle > 3.6 is added
 
- Since version 3.x, support for nelmio/api-doc-bundle > 3.6 is added. Controllers for NelmioApiDocBundle v2 were moved under the `Sonata\ClassificationBundle\Controller\Api\Legacy` namespace and controllers for NelmioApiDocBundle v3 were added as replacement. If you are extending them, you must change the inherited class in order to use the correct controller.
+Since version 3.x, support for nelmio/api-doc-bundle > 3.6 is added. Controllers for NelmioApiDocBundle v2 were moved under `Sonata\ClassificationBundle\Controller\Api\Legacy\` namespace and controllers for NelmioApiDocBundle v3 were added as replacement. If you extend them, you must ensure they are using the corresponding inheritance.
 
 UPGRADE FROM 3.12 to 3.13
 =========================

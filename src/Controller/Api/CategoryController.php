@@ -164,8 +164,6 @@ class CategoryController
      *     )
      * )
      *
-     * @param Request $request Symfony request
-     *
      * @throws NotFoundHttpException
      *
      * @return CategoryInterface
@@ -196,8 +194,7 @@ class CategoryController
      *     )
      * )
      *
-     * @param string  $id      Category identifier
-     * @param Request $request Symfony request
+     * @param string $id Category identifier
      *
      * @throws NotFoundHttpException
      *

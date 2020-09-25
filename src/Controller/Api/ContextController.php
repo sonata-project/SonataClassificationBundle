@@ -156,8 +156,6 @@ class ContextController
      *     )
      * )
      *
-     * @param Request $request Symfony request
-     *
      * @throws NotFoundHttpException
      *
      * @return ContextInterface
@@ -188,8 +186,7 @@ class ContextController
      *     )
      * )
      *
-     * @param string  $id      Context identifier
-     * @param Request $request Symfony request
+     * @param string $id  Context identifier
      *
      * @throws NotFoundHttpException
      *

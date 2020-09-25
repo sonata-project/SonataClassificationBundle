@@ -156,8 +156,6 @@ class TagController
      *     )
      * )
      *
-     * @param Request $request Symfony request
-     *
      * @throws NotFoundHttpException
      *
      * @return TagInterface
@@ -188,8 +186,7 @@ class TagController
      *     )
      * )
      *
-     * @param string  $id      Tag identifier
-     * @param Request $request Symfony request
+     * @param string $id Tag identifier
      *
      * @throws NotFoundHttpException
      *

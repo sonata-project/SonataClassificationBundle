@@ -156,8 +156,6 @@ class CollectionController
      *     )
      * )
      *
-     * @param Request $request Symfony request
-     *
      * @throws NotFoundHttpException
      *
      * @return CollectionInterface
@@ -188,8 +186,7 @@ class CollectionController
      *     )
      * )
      *
-     * @param string  $id      Collection identifier
-     * @param Request $request Symfony request
+     * @param string $id Collection identifier
      *
      * @throws NotFoundHttpException
      *

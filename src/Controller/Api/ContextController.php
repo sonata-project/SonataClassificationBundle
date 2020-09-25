@@ -186,7 +186,7 @@ class ContextController
      *     )
      * )
      *
-     * @param string $id  Context identifier
+     * @param string $id Context identifier
      *
      * @throws NotFoundHttpException
      *

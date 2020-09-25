@@ -91,7 +91,7 @@ class CategoryController
      *     @SWG\Response(
      *         response="200",
      *         description="Returned when successful",
-     *         @SWG\Schema(ref=@Model(type=BasePager::class))
+     *         @SWG\Schema(ref=@Model(type=BasePager::class, groups={"sonata_api_read"}))
      *     )
      * )
      *
@@ -124,7 +124,7 @@ class CategoryController
      *     @SWG\Response(
      *         response="200",
      *         description="Returned when successful",
-     *         @SWG\Schema(ref=@Model(type=Category::class))
+     *         @SWG\Schema(ref=@Model(type=Category::class, groups={"sonata_api_read"}))
      *     ),
      *     @SWG\Response(
      *         response="404",
@@ -152,7 +152,7 @@ class CategoryController
      *     @SWG\Response(
      *         response="200",
      *         description="Returned when successful",
-     *         @SWG\Schema(ref=@Model(type=Category::class))
+     *         @SWG\Schema(ref=@Model(type=Category::class, groups={"sonata_api_read"}))
      *     ),
      *     @SWG\Response(
      *         response="400",
@@ -184,7 +184,7 @@ class CategoryController
      *     @SWG\Response(
      *         response="200",
      *         description="Returned when successful",
-     *         @SWG\Schema(ref=@Model(type=Category::class))
+     *         @SWG\Schema(ref=@Model(type=Category::class, groups={"sonata_api_read"}))
      *     ),
      *     @SWG\Response(
      *         response="400",

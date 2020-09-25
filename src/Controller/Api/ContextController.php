@@ -84,7 +84,7 @@ class ContextController
      *     @SWG\Response(
      *         response="200",
      *         description="Returned when successful",
-     *         @SWG\Schema(ref=@Model(type=BasePager::class))
+     *         @SWG\Schema(ref=@Model(type=BasePager::class, groups={"sonata_api_read"}))
      *     )
      * )
      *
@@ -116,7 +116,7 @@ class ContextController
      *     @SWG\Response(
      *         response="200",
      *         description="Returned when successful",
-     *         @SWG\Schema(ref=@Model(type=Context::class))
+     *         @SWG\Schema(ref=@Model(type=Context::class, groups={"sonata_api_read"}))
      *     ),
      *     @SWG\Response(
      *         response="404",
@@ -144,7 +144,7 @@ class ContextController
      *     @SWG\Response(
      *         response="200",
      *         description="Returned when successful",
-     *         @SWG\Schema(ref=@Model(type=Context::class))
+     *         @SWG\Schema(ref=@Model(type=Context::class, groups={"sonata_api_read"}))
      *     ),
      *     @SWG\Response(
      *         response="400",
@@ -176,7 +176,7 @@ class ContextController
      *     @SWG\Response(
      *         response="200",
      *         description="Returned when successful",
-     *         @SWG\Schema(ref=@Model(type=Context::class))
+     *         @SWG\Schema(ref=@Model(type=Context::class, groups={"sonata_api_read"}))
      *     ),
      *     @SWG\Response(
      *         response="400",

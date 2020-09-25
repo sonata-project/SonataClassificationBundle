@@ -54,12 +54,28 @@ class CollectionControllerTest extends TestCase
         $this->assertSame($collection, $this->createCollectionController($collectionManager)->getCollectionAction(1));
     }
 
-    public function testGetCollectionNotFoundExceptionAction(): void
+    /**
+     * @dataProvider getIdsForNotFound
+     */
+    public function testGetCollectionNotFoundExceptionAction($identifier, string $message): void
     {
         $this->expectException(NotFoundHttpException::class);
-        $this->expectExceptionMessage('Collection (42) not found');
+        $this->expectExceptionMessage($message);
 
-        $this->createCollectionController()->getCollectionAction(42);
+        $this->createCollectionController()->getCollectionAction($identifier);
+    }
+
+    /**
+     * @phpstan-return list<array{mixed, string}>
+     */
+    public function getIdsForNotFound(): array
+    {
+        return [
+            [42, 'Collection not found for identifier 42.'],
+            ['42', "Collection not found for identifier '42'."],
+            [null, 'Collection not found for identifier NULL.'],
+            ['', "Collection not found for identifier ''."],
+        ];
     }
 
     public function testPostCollectionAction(): void

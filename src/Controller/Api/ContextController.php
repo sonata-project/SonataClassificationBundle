@@ -267,7 +267,7 @@ class ContextController
         $context = $this->contextManager->find($id);
 
         if (null === $context) {
-            throw new NotFoundHttpException(sprintf('Context (%s) not found', $id));
+            throw new NotFoundHttpException(sprintf('Context not found for identifier %s.', var_export($id, true)));
         }
 
         return $context;

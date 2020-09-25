@@ -54,14 +54,33 @@ class ContextControllerTest extends TestCase
         $this->assertSame($context, $this->createContextController($contextManager)->getContextAction(1));
     }
 
-    public function testGetContextNotFoundExceptionAction(): void
+    /**
+     * @dataProvider getIdsForNotFound
+     */
+    public function testGetContextNotFoundExceptionAction($identifier, string $message): void
     {
         $this->expectException(NotFoundHttpException::class);
-        $this->expectExceptionMessage('Context (42) not found');
+        $this->expectExceptionMessage($message);
 
-        $this->createContextController()->getContextAction(42);
+        $this->createContextController()->getContextAction($identifier);
     }
 
+    /**
+     * @phpstan-return list<array{mixed, string}>
+     */
+    public function getIdsForNotFound(): array
+    {
+        return [
+            [42, 'Context not found for identifier 42.'],
+            ['42', "Context not found for identifier '42'."],
+            [null, 'Context not found for identifier NULL.'],
+            ['', "Context not found for identifier ''."],
+        ];
+    }
+
+    /**
+     * @phpstan-return list<array{mixed, string}>
+     */
     public function testPostContextAction(): void
     {
         $context = $this->createMock(ContextInterface::class);

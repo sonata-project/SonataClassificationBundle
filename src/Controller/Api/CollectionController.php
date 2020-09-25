@@ -267,7 +267,7 @@ class CollectionController
         $collection = $this->collectionManager->find($id);
 
         if (null === $collection) {
-            throw new NotFoundHttpException(sprintf('Collection (%s) not found', $id));
+            throw new NotFoundHttpException(sprintf('Collection not found for identifier %s.', var_export($id, true)));
         }
 
         return $collection;

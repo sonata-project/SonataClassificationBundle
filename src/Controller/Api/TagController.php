@@ -263,7 +263,7 @@ class TagController
         $tag = $this->tagManager->find($id);
 
         if (null === $tag) {
-            throw new NotFoundHttpException(sprintf('Tag (%s) not found', $id));
+            throw new NotFoundHttpException(sprintf('Tag not found for identifier %s.', var_export($id, true)));
         }
 
         return $tag;

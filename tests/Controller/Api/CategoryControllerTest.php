@@ -54,12 +54,28 @@ class CategoryControllerTest extends TestCase
         $this->assertSame($category, $this->createCategoryController($categoryManager)->getCategoryAction(1));
     }
 
-    public function testGetCategoryNotFoundExceptionAction(): void
+    /**
+     * @dataProvider getIdsForNotFound
+     */
+    public function testGetCategoryNotFoundExceptionAction($identifier, string $message): void
     {
         $this->expectException(NotFoundHttpException::class);
-        $this->expectExceptionMessage('Category (42) not found');
+        $this->expectExceptionMessage($message);
 
-        $this->createCategoryController()->getCategoryAction(42);
+        $this->createCategoryController()->getCategoryAction($identifier);
+    }
+
+    /**
+     * @phpstan-return list<array{mixed, string}>
+     */
+    public function getIdsForNotFound(): array
+    {
+        return [
+            [42, 'Category not found for identifier 42.'],
+            ['42', "Category not found for identifier '42'."],
+            [null, 'Category not found for identifier NULL.'],
+            ['', "Category not found for identifier ''."],
+        ];
     }
 
     public function testPostCategoryAction(): void

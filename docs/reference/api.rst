@@ -26,11 +26,9 @@ Here's the configuration we used, you may adapt it to your needs:
             validate: true
 
     sensio_framework_extra:
+        view: { annotations: false }
         router: { annotations: true }
         request: { converters: true }
-        format_listener:
-            rules:
-                - { path: '^/', priorities: ['json'], fallback_format: json, prefer_extension: false }
 
     twig:
         exception_controller: null
@@ -42,18 +40,9 @@ In order to activate the APIs, you'll also need to add this to your routing:
 
 .. code-block:: yaml
 
-    NelmioApiDocBundle:
-        prefix: /api/doc
-        resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
-
     sonata_api_classification:
         prefix: /api/classification
-        resource: "@SonataClassificationBundle/Resources/config/routing/api.xml"
-
-    # or for nelmio/api-doc-bundle v3
-    #sonata_api_classification:
-    #    prefix: /api/classification
-    #    resource: "@SonataClassificationBundle/Resources/config/routing/api_nelmio_v3.xml"
+        resource: "@SonataClassificationBundle/Resources/config/routing/api_nelmio_v3.xml"
 
 Serialization
 -------------

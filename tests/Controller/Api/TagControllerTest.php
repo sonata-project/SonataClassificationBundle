@@ -54,12 +54,28 @@ class TagControllerTest extends TestCase
         $this->assertSame($tag, $this->createTagController($tagManager)->getTagAction(1));
     }
 
-    public function testGetTagNotFoundExceptionAction(): void
+    /**
+     * @dataProvider getIdsForNotFound
+     */
+    public function testGetTagNotFoundExceptionAction($identifier, string $message): void
     {
         $this->expectException(NotFoundHttpException::class);
-        $this->expectExceptionMessage('Tag (42) not found');
+        $this->expectExceptionMessage($message);
 
-        $this->createTagController()->getTagAction(42);
+        $this->createTagController()->getTagAction($identifier);
+    }
+
+    /**
+     * @phpstan-return list<array{mixed, string}>
+     */
+    public function getIdsForNotFound(): array
+    {
+        return [
+            [42, 'Tag not found for identifier 42.'],
+            ['42', "Tag not found for identifier '42'."],
+            [null, 'Tag not found for identifier NULL.'],
+            ['', "Tag not found for identifier ''."],
+        ];
     }
 
     public function testPostTagAction(): void

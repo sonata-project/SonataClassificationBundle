@@ -218,7 +218,7 @@ class CategoryController
         $category = $this->categoryManager->find($id);
 
         if (null === $category) {
-            throw new NotFoundHttpException(sprintf('Category (%s) not found', $id));
+            throw new NotFoundHttpException(sprintf('Category not found for identifier %s.', var_export($id, true)));
         }
 
         return $category;

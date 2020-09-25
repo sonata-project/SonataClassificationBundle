@@ -20,8 +20,10 @@ use FOS\RestBundle\View\View;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Operation;
 use Sonata\ClassificationBundle\Form\FormHelper;
+use Sonata\ClassificationBundle\Model\Category;
 use Sonata\ClassificationBundle\Model\CategoryInterface;
 use Sonata\ClassificationBundle\Model\CategoryManagerInterface;
+use Sonata\DatagridBundle\Pager\BasePager;
 use Sonata\DatagridBundle\Pager\PagerInterface;
 use Swagger\Annotations as SWG;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -89,7 +91,7 @@ class CategoryController
      *     @SWG\Response(
      *         response="200",
      *         description="Returned when successful",
-     *         @SWG\Schema(ref=@Model(type="Sonata\DatagridBundle\Pager\PagerInterface"))
+     *         @SWG\Schema(ref=@Model(type=BasePager::class))
      *     )
      * )
      *
@@ -122,7 +124,7 @@ class CategoryController
      *     @SWG\Response(
      *         response="200",
      *         description="Returned when successful",
-     *         @SWG\Schema(ref=@Model(type="Sonata\ClassificationBundle\Model\Category"))
+     *         @SWG\Schema(ref=@Model(type=Category::class))
      *     ),
      *     @SWG\Response(
      *         response="404",
@@ -150,7 +152,7 @@ class CategoryController
      *     @SWG\Response(
      *         response="200",
      *         description="Returned when successful",
-     *         @SWG\Schema(ref=@Model(type="Sonata\ClassificationBundle\Model\Category"))
+     *         @SWG\Schema(ref=@Model(type=Category::class))
      *     ),
      *     @SWG\Response(
      *         response="400",
@@ -182,7 +184,7 @@ class CategoryController
      *     @SWG\Response(
      *         response="200",
      *         description="Returned when successful",
-     *         @SWG\Schema(ref=@Model(type="Sonata\ClassificationBundle\Model\Category"))
+     *         @SWG\Schema(ref=@Model(type=Category::class))
      *     ),
      *     @SWG\Response(
      *         response="400",

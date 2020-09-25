@@ -20,8 +20,10 @@ use FOS\RestBundle\View\View;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Operation;
 use Sonata\ClassificationBundle\Form\FormHelper;
+use Sonata\ClassificationBundle\Model\Collection;
 use Sonata\ClassificationBundle\Model\CollectionInterface;
 use Sonata\ClassificationBundle\Model\CollectionManagerInterface;
+use Sonata\DatagridBundle\Pager\BasePager;
 use Sonata\DatagridBundle\Pager\PagerInterface;
 use Swagger\Annotations as SWG;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -82,7 +84,7 @@ class CollectionController
      *     @SWG\Response(
      *         response="200",
      *         description="Returned when successful",
-     *         @SWG\Schema(ref=@Model(type="Sonata\DatagridBundle\Pager\PagerInterface"))
+     *         @SWG\Schema(ref=@Model(type=BasePager::class))
      *     )
      * )
      *
@@ -114,7 +116,7 @@ class CollectionController
      *     @SWG\Response(
      *         response="200",
      *         description="Returned when successful",
-     *         @SWG\Schema(ref=@Model(type="Sonata\ClassificationBundle\Model\Collection"))
+     *         @SWG\Schema(ref=@Model(type=Collection::class))
      *     ),
      *     @SWG\Response(
      *         response="404",
@@ -142,7 +144,7 @@ class CollectionController
      *     @SWG\Response(
      *         response="200",
      *         description="Returned when successful",
-     *         @SWG\Schema(ref=@Model(type="Sonata\ClassificationBundle\Model\Collection"))
+     *         @SWG\Schema(ref=@Model(type=Collection::class))
      *     ),
      *     @SWG\Response(
      *         response="400",
@@ -174,7 +176,7 @@ class CollectionController
      *     @SWG\Response(
      *         response="200",
      *         description="Returned when successful",
-     *         @SWG\Schema(ref=@Model(type="Sonata\ClassificationBundle\Model\Collection"))
+     *         @SWG\Schema(ref=@Model(type=Collection::class))
      *     ),
      *     @SWG\Response(
      *         response="400",

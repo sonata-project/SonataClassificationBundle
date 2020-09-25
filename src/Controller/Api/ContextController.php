@@ -13,15 +13,17 @@ declare(strict_types=1);
 
 namespace Sonata\ClassificationBundle\Controller\Api;
 
-use FOS\RestBundle\Context\Context;
+use FOS\RestBundle\Context\Context as RestContext;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Request\ParamFetcherInterface;
 use FOS\RestBundle\View\View;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Operation;
 use Sonata\ClassificationBundle\Form\FormHelper;
+use Sonata\ClassificationBundle\Model\Context;
 use Sonata\ClassificationBundle\Model\ContextInterface;
 use Sonata\ClassificationBundle\Model\ContextManagerInterface;
+use Sonata\DatagridBundle\Pager\BasePager;
 use Sonata\DatagridBundle\Pager\PagerInterface;
 use Swagger\Annotations as SWG;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -82,7 +84,7 @@ class ContextController
      *     @SWG\Response(
      *         response="200",
      *         description="Returned when successful",
-     *         @SWG\Schema(ref=@Model(type="Sonata\DatagridBundle\Pager\PagerInterface"))
+     *         @SWG\Schema(ref=@Model(type=BasePager::class))
      *     )
      * )
      *
@@ -114,7 +116,7 @@ class ContextController
      *     @SWG\Response(
      *         response="200",
      *         description="Returned when successful",
-     *         @SWG\Schema(ref=@Model(type="Sonata\ClassificationBundle\Model\Context"))
+     *         @SWG\Schema(ref=@Model(type=Context::class))
      *     ),
      *     @SWG\Response(
      *         response="404",
@@ -142,7 +144,7 @@ class ContextController
      *     @SWG\Response(
      *         response="200",
      *         description="Returned when successful",
-     *         @SWG\Schema(ref=@Model(type="Sonata\ClassificationBundle\Model\Context"))
+     *         @SWG\Schema(ref=@Model(type=Context::class))
      *     ),
      *     @SWG\Response(
      *         response="400",
@@ -174,7 +176,7 @@ class ContextController
      *     @SWG\Response(
      *         response="200",
      *         description="Returned when successful",
-     *         @SWG\Schema(ref=@Model(type="Sonata\ClassificationBundle\Model\Context"))
+     *         @SWG\Schema(ref=@Model(type=Context::class))
      *     ),
      *     @SWG\Response(
      *         response="400",
@@ -297,7 +299,7 @@ class ContextController
             $context = $form->getData();
             $this->contextManager->save($context);
 
-            $context = new Context();
+            $context = new RestContext();
             $context->setGroups(['sonata_api_read']);
 
             $view = View::create($context);

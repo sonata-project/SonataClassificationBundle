@@ -36,6 +36,7 @@
         "twig/twig": "^2.12.1"
     },
     "conflict": {
+        "doctrine/mongodb-odm": "<2.0",
         "friendsofsymfony/rest-bundle": "<2.3",
         "jms/serializer": "<0.13",
         "nelmio/api-doc-bundle": "<2.13 || >=4.0",

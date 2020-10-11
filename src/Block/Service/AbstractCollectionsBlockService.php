@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sonata\ClassificationBundle\Block\Service;
 
-use BadMethodCallException;
 use Sonata\AdminBundle\Admin\AdminInterface;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\BlockBundle\Block\BlockContextInterface;
@@ -102,7 +101,7 @@ abstract class AbstractCollectionsBlockService extends AbstractClassificationBlo
     public function buildEditForm(FormMapper $formMapper, BlockInterface $block)
     {
         if (null === $this->collectionAdmin) {
-            throw new BadMethodCallException('You need the sonata-project/admin-bundle library to edit this block.');
+            throw new \BadMethodCallException('You need the sonata-project/admin-bundle library to edit this block.');
         }
 
         $adminField = $this->getFormAdminType($formMapper, $this->collectionAdmin, 'collectionId', 'collection', [

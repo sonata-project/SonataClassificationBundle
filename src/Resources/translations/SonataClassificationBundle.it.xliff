@@ -222,6 +222,26 @@
                 <source>Options</source>
                 <target>Opzioni</target>
             </trans-unit>
+            <trans-unit id="form.label_translation_domain">
+                <source>form.label_translation_domain</source>
+                <target>Dominio di traduzione</target>
+            </trans-unit>
+            <trans-unit id="form.label_icon">
+                <source>form.label_icon</source>
+                <target>Icona</target>
+            </trans-unit>
+            <trans-unit id="form.label_class">
+                <source>form.label_class</source>
+                <target>Classe CSS</target>
+            </trans-unit>
+            <trans-unit id="group_general">
+                <source>group_general</source>
+                <target>Generale</target>
+            </trans-unit>
+            <trans-unit id="group_options">
+                <source>group_options</source>
+                <target>Opzioni</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

@@ -2,6 +2,22 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.14.0](https://github.com/sonata-project/SonataClassificationBundle/compare/3.13.2...3.14.0) - 2020-11-27
+### Added
+- [[#599](https://github.com/sonata-project/SonataClassificationBundle/pull/599)]
+  Added support for "doctrine/persistence:^2.0".
+([@awurth](https://github.com/awurth))
+- [[#607](https://github.com/sonata-project/SonataClassificationBundle/pull/607)]
+  Missing translation keys ([@gremo](https://github.com/gremo))
+- [[#574](https://github.com/sonata-project/SonataClassificationBundle/pull/574)]
+  Support for `nelmio/api-doc-bundle` >= 3.6
+([@wbloszyk](https://github.com/wbloszyk))
+
+### Removed
+- [[#585](https://github.com/sonata-project/SonataClassificationBundle/pull/585)]
+  Remove support for `doctrine/mongodb-odm` <2.0
+([@franmomu](https://github.com/franmomu))
+
 ## [3.13.2](https://github.com/sonata-project/SonataClassificationBundle/compare/3.13.1...3.13.2) - 2020-09-05
 ### Fixed
 - [[#573](https://github.com/sonata-project/SonataClassificationBundle/pull/573)]

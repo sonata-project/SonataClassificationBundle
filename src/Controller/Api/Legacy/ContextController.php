@@ -28,7 +28,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
- * @deprecated since sonata-project/classification-bundle 3.x, to be removed in 4.0.
+ * @deprecated since sonata-project/classification-bundle 3.14, to be removed in 4.0.
  *
  * @author Thomas Rabaix <thomas.rabaix@gmail.com>
  */

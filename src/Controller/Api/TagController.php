@@ -30,7 +30,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
- * @final since sonata-project/classification-bundle 3.x
+ * @final since sonata-project/classification-bundle 3.14
  *
  * @author Vincent Composieux <vincent.composieux@gmail.com>
  */

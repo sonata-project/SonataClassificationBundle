@@ -232,7 +232,7 @@ class CategoryAdminControllerTest extends TestCase
     public function testListAction($context): void
     {
         $this->request->query->set('_list_mode', 'list');
-        $this->request->query->set('filter', 'filter[context][value]='.($context ? $context : ''));
+        $this->request->query->set('filter', 'filter[context][value]='.($context ?: ''));
 
         $datagrid = $this->createMock(DatagridInterface::class);
 

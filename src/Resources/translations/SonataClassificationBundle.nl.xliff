@@ -168,31 +168,75 @@
             </trans-unit>
             <trans-unit id="form.label_category">
                 <source>form.label_category</source>
-                <target>form.label_category</target>
+                <target>Categorie</target>
             </trans-unit>
             <trans-unit id="form.label_collection">
                 <source>form.label_collection</source>
-                <target>form.label_collection</target>
+                <target>Verzamelingen</target>
             </trans-unit>
             <trans-unit id="form.label_tag">
                 <source>form.label_tag</source>
-                <target>form.label_tag</target>
+                <target>Tag</target>
             </trans-unit>
             <trans-unit id="form.label_title">
                 <source>form.label_title</source>
-                <target>form.label_title</target>
+                <target>Titel</target>
             </trans-unit>
             <trans-unit id="no_collections_found">
                 <source>no_collections_found</source>
-                <target>no_collections_found</target>
+                <target>Geen verzamelingen gevonden.</target>
             </trans-unit>
             <trans-unit id="no_categories_found">
                 <source>no_categories_found</source>
-                <target>no_categories_found</target>
+                <target>Geen categorieën gevonden</target>
             </trans-unit>
             <trans-unit id="no_tags_found">
                 <source>no_tags_found</source>
-                <target>no_tags_found</target>
+                <target>Geen tags gevonden.</target>
+            </trans-unit>
+            <trans-unit id="breadcrumb.link_category_create">
+                <source>breadcrumb.link_category_create</source>
+                <target>Aanmaken</target>
+            </trans-unit>
+            <trans-unit id="breadcrumb.link_tag_create">
+                <source>breadcrumb.link_tag_create</source>
+                <target>Aangemaken</target>
+            </trans-unit>
+            <trans-unit id="breadcrumb.link_collection_create">
+                <source>breadcrumb.link_collection_create</source>
+                <target>Aanmaken</target>
+            </trans-unit>
+            <trans-unit id="breadcrumb.link_context_create">
+                <source>breadcrumb.link_context_create</source>
+                <target>Aanmaken</target>
+            </trans-unit>
+            <trans-unit id="form_general">
+                <source>General</source>
+                <target>Algemeen</target>
+            </trans-unit>
+            <trans-unit id="form_options">
+                <source>Options</source>
+                <target>Opties</target>
+            </trans-unit>
+            <trans-unit id="form.label_translation_domain">
+                <source>form.label_translation_domain</source>
+                <target>Vertaling domein</target>
+            </trans-unit>
+            <trans-unit id="form.label_icon">
+                <source>form.label_icon</source>
+                <target>Icoon</target>
+            </trans-unit>
+            <trans-unit id="form.label_class">
+                <source>form.label_class</source>
+                <target>CSS Class</target>
+            </trans-unit>
+            <trans-unit id="group_general">
+                <source>group_general</source>
+                <target>Algemeen</target>
+            </trans-unit>
+            <trans-unit id="group_options">
+                <source>group_options</source>
+                <target>Opties</target>
             </trans-unit>
         </body>
     </file>

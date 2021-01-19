@@ -50,7 +50,7 @@ class CategoryAdmin extends ContextAwareAdmin
 Unsetting cascade_validation is deprecated since 3.2, and will give an error in 4.0.
 Override getFormBuilder() and remove the "Valid" constraint instead.
 EOT
-            , E_USER_DEPRECATED);
+            , \E_USER_DEPRECATED);
         }
 
         return parent::getFormBuilder();

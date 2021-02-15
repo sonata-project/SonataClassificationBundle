@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.15.0](https://github.com/sonata-project/SonataClassificationBundle/compare/3.14.0...3.15.0) - 2021-02-15
+### Changed
+- [[#611](https://github.com/sonata-project/SonataClassificationBundle/pull/611)] Updated Dutch translations ([@zghosts](https://github.com/zghosts))
+
 ## [3.14.0](https://github.com/sonata-project/SonataClassificationBundle/compare/3.13.2...3.14.0) - 2020-11-27
 ### Added
 - [[#599](https://github.com/sonata-project/SonataClassificationBundle/pull/599)]

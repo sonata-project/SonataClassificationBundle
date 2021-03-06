@@ -73,10 +73,10 @@ class AdminTest extends TestCase
     public function testGetPersistentParametersWithValidExtension(): void
     {
         $expected = [
-            'tl' => 'de',
-            'abc' => 123,
             'context' => '',
             'hide_context' => 0,
+            'tl' => 'de',
+            'abc' => 123,
         ];
 
         $extensionParams = [

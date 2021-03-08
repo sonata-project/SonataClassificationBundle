@@ -13,6 +13,12 @@ declare(strict_types=1);
 
 namespace Sonata\ClassificationBundle\DependencyInjection;
 
+use Sonata\AdminBundle\Controller\CRUDController;
+use Sonata\ClassificationBundle\Admin\CategoryAdmin;
+use Sonata\ClassificationBundle\Admin\CollectionAdmin;
+use Sonata\ClassificationBundle\Admin\ContextAdmin;
+use Sonata\ClassificationBundle\Admin\TagAdmin;
+use Sonata\ClassificationBundle\Controller\CategoryAdminController;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
@@ -46,32 +52,32 @@ class Configuration implements ConfigurationInterface
                         ->arrayNode('category')
                             ->addDefaultsIfNotSet()
                             ->children()
-                                ->scalarNode('class')->cannotBeEmpty()->defaultValue('Sonata\\ClassificationBundle\\Admin\\CategoryAdmin')->end()
-                                ->scalarNode('controller')->cannotBeEmpty()->defaultValue('SonataClassificationBundle:CategoryAdmin')->end()
+                                ->scalarNode('class')->cannotBeEmpty()->defaultValue(CategoryAdmin::class)->end()
+                                ->scalarNode('controller')->cannotBeEmpty()->defaultValue(CategoryAdminController::class)->end()
                                 ->scalarNode('translation')->cannotBeEmpty()->defaultValue('SonataClassificationBundle')->end()
                             ->end()
                         ->end()
                         ->arrayNode('tag')
                             ->addDefaultsIfNotSet()
                             ->children()
-                                ->scalarNode('class')->cannotBeEmpty()->defaultValue('Sonata\\ClassificationBundle\\Admin\\TagAdmin')->end()
-                                ->scalarNode('controller')->cannotBeEmpty()->defaultValue('SonataAdminBundle:CRUD')->end()
+                                ->scalarNode('class')->cannotBeEmpty()->defaultValue(TagAdmin::class)->end()
+                                ->scalarNode('controller')->cannotBeEmpty()->defaultValue(CRUDController::class)->end()
                                 ->scalarNode('translation')->cannotBeEmpty()->defaultValue('SonataClassificationBundle')->end()
                             ->end()
                         ->end()
                         ->arrayNode('collection')
                             ->addDefaultsIfNotSet()
                             ->children()
-                                ->scalarNode('class')->cannotBeEmpty()->defaultValue('Sonata\\ClassificationBundle\\Admin\\CollectionAdmin')->end()
-                                ->scalarNode('controller')->cannotBeEmpty()->defaultValue('SonataAdminBundle:CRUD')->end()
+                                ->scalarNode('class')->cannotBeEmpty()->defaultValue(CollectionAdmin::class)->end()
+                                ->scalarNode('controller')->cannotBeEmpty()->defaultValue(CRUDController::class)->end()
                                 ->scalarNode('translation')->cannotBeEmpty()->defaultValue('SonataClassificationBundle')->end()
                             ->end()
                         ->end()
                         ->arrayNode('context')
                             ->addDefaultsIfNotSet()
                             ->children()
-                                ->scalarNode('class')->cannotBeEmpty()->defaultValue('Sonata\\ClassificationBundle\\Admin\\ContextAdmin')->end()
-                                ->scalarNode('controller')->cannotBeEmpty()->defaultValue('SonataAdminBundle:CRUD')->end()
+                                ->scalarNode('class')->cannotBeEmpty()->defaultValue(ContextAdmin::class)->end()
+                                ->scalarNode('controller')->cannotBeEmpty()->defaultValue(CRUDController::class)->end()
                                 ->scalarNode('translation')->cannotBeEmpty()->defaultValue('SonataClassificationBundle')->end()
                             ->end()
                         ->end()

@@ -15,6 +15,7 @@ namespace Sonata\ClassificationBundle\Tests\DependencyInjection;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
 use Nelmio\ApiDocBundle\Annotation\Operation;
+use Sonata\AdminBundle\Controller\CRUDController;
 use Sonata\ClassificationBundle\Admin\CategoryAdmin;
 use Sonata\ClassificationBundle\Admin\CollectionAdmin;
 use Sonata\ClassificationBundle\Admin\ContextAdmin;
@@ -30,6 +31,7 @@ use Sonata\ClassificationBundle\Controller\Api\Legacy\CollectionController as Le
 use Sonata\ClassificationBundle\Controller\Api\Legacy\ContextController as LegacyContextController;
 use Sonata\ClassificationBundle\Controller\Api\Legacy\TagController as LegacyTagController;
 use Sonata\ClassificationBundle\Controller\Api\TagController;
+use Sonata\ClassificationBundle\Controller\CategoryAdminController;
 use Sonata\ClassificationBundle\DependencyInjection\SonataClassificationExtension;
 use Sonata\ClassificationBundle\Entity\CategoryManager;
 use Sonata\ClassificationBundle\Entity\CollectionManager;
@@ -104,19 +106,19 @@ final class SonataClassificationExtensionTest extends AbstractExtensionTestCase
 
         $this->assertContainerBuilderHasParameter('sonata.classification.admin.category.entity', 'Application\Sonata\ClassificationBundle\Entity\Category');
         $this->assertContainerBuilderHasParameter('sonata.classification.admin.category.class', CategoryAdmin::class);
-        $this->assertContainerBuilderHasParameter('sonata.classification.admin.category.controller', 'SonataClassificationBundle:CategoryAdmin');
+        $this->assertContainerBuilderHasParameter('sonata.classification.admin.category.controller', CategoryAdminController::class);
         $this->assertContainerBuilderHasParameter('sonata.classification.admin.category.translation_domain', 'SonataClassificationBundle');
         $this->assertContainerBuilderHasParameter('sonata.classification.admin.tag.entity', 'Application\Sonata\ClassificationBundle\Entity\Tag');
         $this->assertContainerBuilderHasParameter('sonata.classification.admin.tag.class', TagAdmin::class);
-        $this->assertContainerBuilderHasParameter('sonata.classification.admin.tag.controller', 'SonataAdminBundle:CRUD');
+        $this->assertContainerBuilderHasParameter('sonata.classification.admin.tag.controller', CRUDController::class);
         $this->assertContainerBuilderHasParameter('sonata.classification.admin.tag.translation_domain', 'SonataClassificationBundle');
         $this->assertContainerBuilderHasParameter('sonata.classification.admin.collection.entity', 'Application\Sonata\ClassificationBundle\Entity\Collection');
         $this->assertContainerBuilderHasParameter('sonata.classification.admin.collection.class', CollectionAdmin::class);
-        $this->assertContainerBuilderHasParameter('sonata.classification.admin.collection.controller', 'SonataAdminBundle:CRUD');
+        $this->assertContainerBuilderHasParameter('sonata.classification.admin.collection.controller', CRUDController::class);
         $this->assertContainerBuilderHasParameter('sonata.classification.admin.collection.translation_domain', 'SonataClassificationBundle');
         $this->assertContainerBuilderHasParameter('sonata.classification.admin.context.entity', 'Application\Sonata\ClassificationBundle\Entity\Context');
         $this->assertContainerBuilderHasParameter('sonata.classification.admin.context.class', ContextAdmin::class);
-        $this->assertContainerBuilderHasParameter('sonata.classification.admin.context.controller', 'SonataAdminBundle:CRUD');
+        $this->assertContainerBuilderHasParameter('sonata.classification.admin.context.controller', CRUDController::class);
         $this->assertContainerBuilderHasParameter('sonata.classification.admin.context.translation_domain', 'SonataClassificationBundle');
         $this->assertContainerBuilderHasParameter('sonata.classification.admin.groupname', 'sonata_classification');
         $this->assertContainerBuilderHasParameter('sonata.classification.admin.groupicon', "<i class='fa fa-tags'></i>");

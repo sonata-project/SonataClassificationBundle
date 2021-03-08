@@ -37,10 +37,8 @@ abstract class ContextAwareAdmin extends AbstractAdmin
         $this->contextManager = $contextManager;
     }
 
-    public function getNewInstance()
+    protected function alterNewInstance(object $object): void
     {
-        $instance = parent::getNewInstance();
-
         if ($contextId = $this->getPersistentParameter('context')) {
             $context = $this->contextManager->find($contextId);
 
@@ -54,21 +52,16 @@ abstract class ContextAwareAdmin extends AbstractAdmin
                 $this->contextManager->save($context);
             }
 
-            $instance->setContext($context);
+            $object->setContext($context);
         }
-
-        return $instance;
     }
 
-    public function getPersistentParameters()
+    protected function configurePersistentParameters(): array
     {
-        $parameters = array_merge(
-            parent::getPersistentParameters(),
-            [
-                'context' => '',
-                'hide_context' => $this->hasRequest() ? (int) $this->getRequest()->get('hide_context', 0) : 0,
-            ]
-        );
+        $parameters = [
+            'context' => '',
+            'hide_context' => $this->hasRequest() ? (int) $this->getRequest()->get('hide_context', 0) : 0,
+        ];
 
         if ($this->hasSubject()) {
             $parameters['context'] = $this->getSubject()->getContext() ? $this->getSubject()->getContext()->getId() : '';

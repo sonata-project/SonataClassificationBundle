@@ -2,6 +2,11 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.15.1](https://github.com/sonata-project/SonataClassificationBundle/compare/3.15.0...3.15.1) - 2021-03-21
+### Removed
+- [[#659](https://github.com/sonata-project/SonataClassificationBundle/pull/659)] Remove controller deprecations ([@core23](https://github.com/core23))
+- [[#660](https://github.com/sonata-project/SonataClassificationBundle/pull/660)] Remove admin deprecations ([@core23](https://github.com/core23))
+
 ## [3.15.0](https://github.com/sonata-project/SonataClassificationBundle/compare/3.14.0...3.15.0) - 2021-02-15
 ### Changed
 - [[#611](https://github.com/sonata-project/SonataClassificationBundle/pull/611)] Updated Dutch translations ([@zghosts](https://github.com/zghosts))

@@ -26,8 +26,7 @@ class TagAdmin extends ContextAwareAdmin
     {
         $formMapper
             ->add('name')
-            ->add('context')
-        ;
+            ->add('context');
 
         if ($this->hasSubject() && $this->getSubject()->getId()) {
             $formMapper->add('slug');
@@ -44,8 +43,7 @@ class TagAdmin extends ContextAwareAdmin
 
         $datagridMapper
             ->add('name')
-            ->add('enabled')
-        ;
+            ->add('enabled');
     }
 
     protected function configureListFields(ListMapper $listMapper)
@@ -58,7 +56,6 @@ class TagAdmin extends ContextAwareAdmin
             ])
             ->add('enabled', null, ['editable' => true])
             ->add('createdAt')
-            ->add('updatedAt')
-        ;
+            ->add('updatedAt');
     }
 }

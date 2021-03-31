@@ -58,8 +58,7 @@ EOT
             ->add('context')
             ->add('enabled', CheckboxType::class, [
                 'required' => false,
-            ])
-        ;
+            ]);
 
         if (interface_exists(MediaInterface::class)) {
             $formMapper->add('media', ModelListType::class, [
@@ -79,8 +78,7 @@ EOT
 
         $datagridMapper
             ->add('name')
-            ->add('enabled')
-        ;
+            ->add('enabled');
     }
 
     protected function configureListFields(ListMapper $listMapper)
@@ -93,7 +91,6 @@ EOT
             ])
             ->add('enabled', null, [
                 'editable' => true,
-            ])
-        ;
+            ]);
     }
 }

@@ -41,8 +41,7 @@ final class CategoryFilter extends Filter
         if (null !== $data['value']) {
             $queryBuilder
                 ->andWhere(sprintf('%s.%s = :category', $alias, $field))
-                ->setParameter('category', $data['value'])
-            ;
+                ->setParameter('category', $data['value']);
         }
 
         $this->active = null !== $data['value'];

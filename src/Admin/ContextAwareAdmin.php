@@ -87,7 +87,6 @@ abstract class ContextAwareAdmin extends AbstractAdmin
         }
 
         $datagridMapper
-            ->add('context', null, [], null, $options)
-        ;
+            ->add('context', null, [], null, $options);
     }
 }

@@ -40,8 +40,7 @@ final class CollectionFilter extends Filter
         if ($data['value']) {
             $queryBuilder
                 ->andWhere(sprintf('%s.%s = :collection', $alias, $field))
-                ->setParameter('collection', $data['value'])
-            ;
+                ->setParameter('collection', $data['value']);
         }
 
         $this->active = null !== $data['value'];

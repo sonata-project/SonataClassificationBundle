@@ -32,8 +32,7 @@ class ContextAdmin extends AbstractAdmin
             ->add('name')
             ->add('enabled', CheckboxType::class, [
                 'required' => false,
-            ])
-        ;
+            ]);
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper): void
@@ -41,8 +40,7 @@ class ContextAdmin extends AbstractAdmin
         $datagridMapper
             ->add('id')
             ->add('name')
-            ->add('enabled')
-        ;
+            ->add('enabled');
     }
 
     protected function configureListFields(ListMapper $listMapper): void
@@ -54,7 +52,6 @@ class ContextAdmin extends AbstractAdmin
                 'editable' => true,
             ])
             ->add('createdAt')
-            ->add('updatedAt')
-        ;
+            ->add('updatedAt');
     }
 }

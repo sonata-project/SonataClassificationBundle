@@ -61,8 +61,7 @@ EOT
                 ->add('name')
                 ->add('description', TextareaType::class, [
                     'required' => false,
-                ])
-        ;
+                ]);
 
         if ($this->hasSubject()) {
             if (null !== $this->getSubject()->getParent() || null === $this->getSubject()->getId()) { // root category cannot have a parent
@@ -73,8 +72,7 @@ EOT
                         'class' => $this->getClass(),
                         'required' => true,
                         'context' => $this->getSubject()->getContext(),
-                    ])
-                ;
+                    ]);
             }
         }
 
@@ -90,8 +88,7 @@ EOT
                     'required' => false,
                     'data' => $position,
                 ])
-            ->end()
-        ;
+            ->end();
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper): void
@@ -100,8 +97,7 @@ EOT
 
         $datagridMapper
             ->add('name')
-            ->add('enabled')
-        ;
+            ->add('enabled');
     }
 
     protected function configureListFields(ListMapper $listMapper): void
@@ -117,7 +113,6 @@ EOT
             ->add('position')
             ->add('parent', null, [
                 'sortable' => 'parent.name',
-            ])
-        ;
+            ]);
     }
 }

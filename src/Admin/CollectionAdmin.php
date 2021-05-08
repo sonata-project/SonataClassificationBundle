@@ -56,8 +56,7 @@ EOT
             ->add('context')
             ->add('enabled', CheckboxType::class, [
                 'required' => false,
-            ])
-        ;
+            ]);
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper): void
@@ -66,8 +65,7 @@ EOT
 
         $datagridMapper
             ->add('name')
-            ->add('enabled')
-        ;
+            ->add('enabled');
     }
 
     protected function configureListFields(ListMapper $listMapper): void
@@ -80,7 +78,6 @@ EOT
             ])
             ->add('enabled', null, [
                 'editable' => true,
-            ])
-        ;
+            ]);
     }
 }

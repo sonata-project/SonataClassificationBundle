@@ -11,7 +11,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Sonata\ClassificationBundle\Tests;
+namespace Sonata\ClassificationBundle\Tests\Controller;
 
 use PHPUnit\Framework\TestCase;
 use Sonata\AdminBundle\Admin\AdminInterface;
@@ -149,7 +149,7 @@ class CategoryAdminControllerTest extends TestCase
             ->method('get')
             ->willReturnCallback(function ($id) use ($twig) {
                 switch ($id) {
-                    case 'sonata.admin.pool':
+                    case 'sonata.admin.pool.do-not-use':
                         return $this->pool;
                     case 'request':
                         return $this->request;

@@ -13,9 +13,10 @@ declare(strict_types=1);
 
 namespace Sonata\ClassificationBundle\Admin\Filter;
 
-use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
+use Sonata\AdminBundle\Filter\Model\FilterData;
 use Sonata\AdminBundle\Form\Type\Filter\DefaultType;
 use Sonata\ClassificationBundle\Model\CollectionManagerInterface;
+use Sonata\DoctrineORMAdminBundle\Datagrid\ProxyQueryInterface;
 use Sonata\DoctrineORMAdminBundle\Filter\Filter;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
@@ -31,51 +32,43 @@ final class CollectionFilter extends Filter
         $this->collectionManager = $collectionManager;
     }
 
-    public function filter(ProxyQueryInterface $queryBuilder, $alias, $field, $data): void
+    public function filter(ProxyQueryInterface $queryBuilder, string $alias, string $field, FilterData $data): void
     {
-        if (null === $data || !\is_array($data) || !\array_key_exists('value', $data)) {
+        if (!$data->hasValue()) {
             return;
         }
 
-        if ($data['value']) {
+        $value = $data->getValue();
+        if ($value) {
             $queryBuilder
                 ->andWhere(sprintf('%s.%s = :collection', $alias, $field))
-                ->setParameter('collection', $data['value']);
+                ->setParameter('collection', $value);
         }
 
-        $this->active = null !== $data['value'];
+        $this->setActive($value);
     }
 
     public function getDefaultOptions(): array
     {
         return [
             'context' => null,
+            'field_type' => ChoiceType::class,
         ];
-    }
-
-    public function getFieldType(): string
-    {
-        return $this->getOption('field_type', ChoiceType::class);
-    }
-
-    public function getFieldOptions(): array
-    {
-        return $this->getOption('choices', [
-            'choices' => $this->getChoices(),
-            'choice_translation_domain' => false,
-        ]);
     }
 
     public function getRenderSettings(): array
     {
         return [DefaultType::class, [
             'field_type' => $this->getFieldType(),
-            'field_options' => $this->getFieldOptions(),
+            'field_options' => $this->getOption('choices', [
+                'choices' => $this->getChoices(),
+                'choice_translation_domain' => false,
+            ]),
             'label' => $this->getLabel(),
         ]];
     }
 
-    protected function association(ProxyQueryInterface $queryBuilder, $data): array
+    protected function association(ProxyQueryInterface $queryBuilder, FilterData $data): array
     {
         $alias = $queryBuilder->entityJoin($this->getParentAssociationMappings());
         $part = strrchr('.'.$this->getFieldName(), '.');

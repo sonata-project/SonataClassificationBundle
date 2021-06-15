@@ -24,26 +24,12 @@ class CollectionAdmin extends ContextAwareAdmin
 {
     protected $classnameLabel = 'Collection';
 
-    // NEXT_MAJOR: remove this override
-    protected $formOptions = [
-        'cascade_validation' => true,
-    ];
-
-    public function getFormBuilder()
+    /**
+     * @param array<string, mixed> $formOptions
+     */
+    protected function configureFormOptions(array &$formOptions): void
     {
-        // NEXT_MAJOR: set constraints unconditionally
-        if (isset($this->formOptions['cascade_validation'])) {
-            unset($this->formOptions['cascade_validation']);
-            $this->formOptions['constraints'][] = new Valid();
-        } else {
-            @trigger_error(<<<'EOT'
-Unsetting cascade_validation is deprecated since 3.2, and will give an error in 4.0.
-Override getFormBuilder() and remove the "Valid" constraint instead.
-EOT
-            , \E_USER_DEPRECATED);
-        }
-
-        return parent::getFormBuilder();
+        $formOptions['constraints'][] = new Valid();
     }
 
     protected function configureFormFields(FormMapper $formMapper): void

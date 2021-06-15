@@ -21,7 +21,6 @@ use Symfony\Component\Form\FormView;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Twig\Environment;
 
 /**
  * Category Admin Controller.
@@ -35,7 +34,6 @@ class CategoryAdminController extends Controller
         return [
             'sonata.classification.manager.category' => CategoryManagerInterface::class,
             'sonata.classification.manager.context' => ContextManagerInterface::class,
-            'twig' => Environment::class,
         ] + parent::getSubscribedServices();
     }
 

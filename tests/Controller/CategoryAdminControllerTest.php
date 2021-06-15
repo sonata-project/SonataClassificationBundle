@@ -17,8 +17,7 @@ use PHPUnit\Framework\TestCase;
 use Sonata\AdminBundle\Admin\AdminInterface;
 use Sonata\AdminBundle\Admin\Pool;
 use Sonata\AdminBundle\Datagrid\DatagridInterface;
-use Sonata\AdminBundle\Templating\TemplateRegistry;
-use Sonata\ClassificationBundle\Admin\CategoryAdmin;
+use Sonata\AdminBundle\Templating\MutableTemplateRegistryInterface;
 use Sonata\ClassificationBundle\Controller\CategoryAdminController;
 use Sonata\ClassificationBundle\Entity\CategoryManager;
 use Sonata\ClassificationBundle\Entity\ContextManager;
@@ -26,6 +25,7 @@ use Sonata\ClassificationBundle\Model\Category;
 use Sonata\ClassificationBundle\Model\CategoryManagerInterface;
 use Sonata\ClassificationBundle\Model\ContextInterface;
 use Sonata\ClassificationBundle\Model\ContextManagerInterface;
+use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormRenderer;
@@ -103,17 +103,17 @@ class CategoryAdminControllerTest extends TestCase
      */
     protected function setUp(): void
     {
-        $this->container = $this->createMock(ContainerInterface::class);
+        $this->container = new Container();
         $this->csrfProvider = $this->createMock(CsrfTokenManagerInterface::class);
-        $this->admin = $this->createMock(CategoryAdmin::class);
+        $this->admin = $this->createMock(AdminInterface::class);
         $this->categoryManager = $this->createMock(CategoryManager::class);
         $this->contextManager = $this->createMock(ContextManager::class);
 
         $this->request = new Request();
         $this->requestStack = new RequestStack();
         $this->requestStack->push($this->request);
-        $this->pool = new Pool($this->container, ['foo.admin']);
-        $this->request->attributes->set('_sonata_admin', 'foo.admin');
+        $this->pool = new Pool($this->container, ['admin_code' => 'admin_code']);
+        $this->request->attributes->set('_sonata_admin', 'admin_code');
         $this->parameters = [];
         $this->template = '';
 
@@ -144,48 +144,15 @@ class CategoryAdminControllerTest extends TestCase
             ->method('getCode')
             ->willReturn('admin_code');
 
-        $this->container->expects($this->any())
-            ->method('get')
-            ->willReturnCallback(function ($id) use ($twig) {
-                switch ($id) {
-                    case 'sonata.admin.pool.do-not-use':
-                        return $this->pool;
-                    case 'request':
-                        return $this->request;
-                    case 'request_stack':
-                        return $this->requestStack;
-                    case 'foo.admin':
-                        return $this->admin;
-                    case 'twig':
-                        return $twig;
-                    case 'form.csrf_provider':
-                    case 'security.csrf.token_manager':
-                        return $this->csrfProvider;
-                    case 'sonata.classification.manager.category':
-                        return $this->categoryManager;
-                    case 'sonata.classification.manager.context':
-                        return $this->contextManager;
-                    case 'admin_code.template_registry':
-                        return new TemplateRegistry();
-                }
-            });
+        $this->container->set('admin_code', $this->admin);
+        $this->container->set('sonata.admin.pool', $this->pool);
+        $this->container->set('sonata.classification.manager.category', $this->categoryManager);
+        $this->container->set('sonata.classification.manager.context', $this->contextManager);
+        $this->container->set('twig', $twig);
+        $this->container->set('request_stack', $this->requestStack);
 
         // php 5.3
         $tthis = $this;
-
-        $this->container->expects($this->any())
-            ->method('has')
-            ->willReturnCallback(static function ($id) use ($tthis) {
-                if ('security.csrf.token_manager' === $id && null !== $tthis->getCsrfProvider()) {
-                    return true;
-                }
-
-                if ('twig' === $id) {
-                    return true;
-                }
-
-                return false;
-            });
 
         $this->admin->expects($this->any())
             ->method('generateUrl')
@@ -200,12 +167,17 @@ class CategoryAdminControllerTest extends TestCase
                 }
             );
 
-        $this->admin->expects($this->any())
+        $templateRegistry = $this->createMock(MutableTemplateRegistryInterface::class);
+        $this->admin->method('hasTemplateRegistry')->willReturn(true);
+        $this->admin->method('getTemplateRegistry')->willReturn($templateRegistry);
+
+        $templateRegistry->expects($this->any())
             ->method('getTemplate')
             ->willReturn('@SonataClassification/CategoryAdmin/list.html.twig');
 
         $this->controller = new CategoryAdminController();
         $this->controller->setContainer($this->container);
+        $this->controller->configureAdmin($this->request);
     }
 
     protected function tearDown(): void

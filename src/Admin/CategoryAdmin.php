@@ -16,7 +16,7 @@ namespace Sonata\ClassificationBundle\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\AdminBundle\Route\RouteCollectionInterface;
 use Sonata\ClassificationBundle\Form\Type\CategorySelectorType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
@@ -27,31 +27,17 @@ class CategoryAdmin extends ContextAwareAdmin
 {
     protected $classnameLabel = 'Category';
 
-    // NEXT_MAJOR: remove this override
-    protected $formOptions = [
-        'cascade_validation' => true,
-    ];
-
-    public function configureRoutes(RouteCollection $routes): void
+    public function configureRoutes(RouteCollectionInterface $routes): void
     {
         $routes->add('tree', 'tree');
     }
 
-    public function getFormBuilder()
+    /**
+     * @param array<string, mixed> $formOptions
+     */
+    protected function configureFormOptions(array &$formOptions): void
     {
-        // NEXT_MAJOR: set constraints unconditionally
-        if (isset($this->formOptions['cascade_validation'])) {
-            unset($this->formOptions['cascade_validation']);
-            $this->formOptions['constraints'][] = new Valid();
-        } else {
-            @trigger_error(<<<'EOT'
-Unsetting cascade_validation is deprecated since 3.2, and will give an error in 4.0.
-Override getFormBuilder() and remove the "Valid" constraint instead.
-EOT
-            , \E_USER_DEPRECATED);
-        }
-
-        return parent::getFormBuilder();
+        $formOptions['constraints'][] = new Valid();
     }
 
     protected function configureFormFields(FormMapper $formMapper): void

@@ -285,7 +285,7 @@ class ContextController
     {
         $context = $id ? $this->getContext($id) : null;
 
-        $form = $this->formFactory->createNamed(null, 'sonata_classification_api_form_context', $context, [
+        $form = $this->formFactory->createNamed('', 'sonata_classification_api_form_context', $context, [
             'csrf_protection' => false,
         ]);
 

@@ -293,7 +293,7 @@ class CategoryController
     {
         $category = $id ? $this->getCategory($id) : null;
 
-        $form = $this->formFactory->createNamed(null, 'sonata_classification_api_form_category', $category, [
+        $form = $this->formFactory->createNamed('', 'sonata_classification_api_form_category', $category, [
             'csrf_protection' => false,
         ]);
 

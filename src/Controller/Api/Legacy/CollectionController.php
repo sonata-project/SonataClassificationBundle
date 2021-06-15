@@ -235,7 +235,7 @@ class CollectionController
     {
         $collection = $id ? $this->getCollection($id) : null;
 
-        $form = $this->formFactory->createNamed(null, 'sonata_classification_api_form_collection', $collection, [
+        $form = $this->formFactory->createNamed('', 'sonata_classification_api_form_collection', $collection, [
             'csrf_protection' => false,
         ]);
 

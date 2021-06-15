@@ -5,8 +5,6 @@ framework:
         enabled: true
     translator:
         enabled: true
-    templating:
-        engines: ['twig']
 
 twig:
     exception_controller: null

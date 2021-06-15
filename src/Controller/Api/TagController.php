@@ -281,7 +281,7 @@ class TagController
     {
         $tag = $id ? $this->getTag($id) : null;
 
-        $form = $this->formFactory->createNamed(null, 'sonata_classification_api_form_tag', $tag, [
+        $form = $this->formFactory->createNamed('', 'sonata_classification_api_form_tag', $tag, [
             'csrf_protection' => false,
         ]);
 

@@ -112,8 +112,7 @@ class CategoryAdminControllerTest extends TestCase
         $this->request = new Request();
         $this->requestStack = new RequestStack();
         $this->requestStack->push($this->request);
-        $this->pool = new Pool($this->container, 'title', 'logo.png');
-        $this->pool->setAdminServiceIds(['foo.admin']);
+        $this->pool = new Pool($this->container, ['foo.admin']);
         $this->request->attributes->set('_sonata_admin', 'foo.admin');
         $this->parameters = [];
         $this->template = '';

@@ -22,7 +22,6 @@ use Sonata\ClassificationBundle\Model\ContextManagerInterface;
 use Sonata\ClassificationBundle\Model\TagInterface;
 use Sonata\ClassificationBundle\Model\TagManagerInterface;
 use Sonata\Form\Type\ImmutableArrayType;
-use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Response;
@@ -44,12 +43,6 @@ abstract class AbstractTagsBlockService extends AbstractClassificationBlockServi
      */
     private $tagAdmin;
 
-    /**
-     * @param Environment             $twig
-     * @param ContextManagerInterface $contextManager
-     * @param TagManagerInterface     $tagManager
-     * @param AdminInterface|null     $tagAdmin
-     */
     public function __construct(
         Environment $twig,
         ContextManagerInterface $contextManager,

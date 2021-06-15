@@ -43,13 +43,6 @@ abstract class AbstractCollectionsBlockService extends AbstractClassificationBlo
      */
     private $collectionAdmin;
 
-    /**
-     *
-     * @param Environment                $twig
-     * @param ContextManagerInterface    $contextManager
-     * @param CollectionManagerInterface $collectionManager
-     * @param AdminInterface|null        $collectionAdmin
-     */
     public function __construct(
         Environment $twig,
         ContextManagerInterface $contextManager,

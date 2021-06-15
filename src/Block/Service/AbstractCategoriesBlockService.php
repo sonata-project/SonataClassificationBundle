@@ -43,12 +43,6 @@ abstract class AbstractCategoriesBlockService extends AbstractClassificationBloc
      */
     private $categoryAdmin;
 
-    /**
-     * @param Environment              $twig
-     * @param ContextManagerInterface  $contextManager
-     * @param CategoryManagerInterface $categoryManager
-     * @param AdminInterface|null      $categoryAdmin
-     */
     public function __construct(
         Environment $twig,
         ContextManagerInterface $contextManager,

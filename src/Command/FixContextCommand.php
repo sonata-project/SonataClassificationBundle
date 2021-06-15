@@ -52,8 +52,7 @@ class FixContextCommand extends Command
         TagManagerInterface $tagManager,
         CollectionManagerInterface $collectionManager,
         CategoryManagerInterface $categoryManager
-    )
-    {
+    ) {
         parent::__construct();
 
         $this->contextManager = $contextManager;

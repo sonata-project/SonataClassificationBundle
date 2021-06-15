@@ -54,45 +54,23 @@ class AdminTest extends TestCase
         $this->assertSame($expected, $admin->getPersistentParameters());
     }
 
-    public function testGetPersistentParametersWithInvalidExtension(): void
+    public function testGetPersistentParametersWithValidExtension(): void
     {
-        $this->expectException(\RuntimeException::class);
-
         $admin = $this->getMockForAbstractClass(ContextAwareAdmin::class, [
             'admin.my_code', 'My\Class', 'MyBundle:ClassAdmin', $this->contextManager,
         ]);
 
         $extension = $this->createMock(AdminExtensionInterface::class);
-        $extension->expects($this->once())->method('configurePersistentParameters')->willReturn(null);
+        $extension->expects($this->once())->method('configurePersistentParameters')->with(
+            $this->anything(),
+            [
+                'context' => '',
+                'hide_context' => 0,
+            ],
+        )->willReturn([]);
 
         $admin->addExtension($extension);
 
         $admin->getPersistentParameters();
-    }
-
-    public function testGetPersistentParametersWithValidExtension(): void
-    {
-        $expected = [
-            'context' => '',
-            'hide_context' => 0,
-            'tl' => 'de',
-            'abc' => 123,
-        ];
-
-        $extensionParams = [
-            'tl' => 'de',
-            'abc' => 123,
-        ];
-
-        $admin = $this->getMockForAbstractClass(ContextAwareAdmin::class, [
-            'admin.my_code', 'My\Class', 'MyBundle:ClassAdmin', $this->contextManager,
-        ]);
-
-        $extension = $this->createMock(AdminExtensionInterface::class);
-        $extension->expects($this->once())->method('configurePersistentParameters')->willReturn($extensionParams);
-
-        $admin->addExtension($extension);
-
-        $this->assertSame($expected, $admin->getPersistentParameters());
     }
 }

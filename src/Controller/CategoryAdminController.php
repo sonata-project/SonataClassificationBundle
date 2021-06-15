@@ -27,12 +27,7 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class CategoryAdminController extends Controller
 {
-    /**
-     * @param Request $request
-     *
-     * @return Response
-     */
-    public function listAction(?Request $request = null)
+    public function listAction(Request $request): Response
     {
         if (!$request->get('filter') && !$request->get('filters')) {
             return new RedirectResponse($this->admin->generateUrl('tree', $request->query->all()));
@@ -65,10 +60,7 @@ class CategoryAdminController extends Controller
         ]);
     }
 
-    /**
-     * @return Response
-     */
-    public function treeAction(Request $request)
+    public function treeAction(Request $request): Response
     {
         $categoryManager = $this->get('sonata.classification.manager.category');
         $currentContext = false;

@@ -3,6 +3,10 @@
     <services>
         <service id="Sonata\ClassificationBundle\Command\FixContextCommand" class="Sonata\ClassificationBundle\Command\FixContextCommand" public="true">
             <tag name="console.command"/>
+            <argument type="service" id="sonata.classification.manager.context"/>
+            <argument type="service" id="sonata.classification.manager.tag"/>
+            <argument type="service" id="sonata.classification.manager.collection"/>
+            <argument type="service" id="sonata.classification.manager.category"/>
         </service>
     </services>
 </container>

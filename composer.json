@@ -44,7 +44,7 @@
         "sonata-project/admin-bundle": "<=4.0.0-alpha-1",
         "sonata-project/block-bundle": "<4.0",
         "sonata-project/core-bundle": "<3.20",
-        "sonata-project/doctrine-orm-admin-bundle": "<3.16"
+        "sonata-project/doctrine-orm-admin-bundle": "<=4.0.0-alpha-1"
     },
     "require-dev": {
         "doctrine/annotations": "^1.7",

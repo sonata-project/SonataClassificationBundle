@@ -22,7 +22,6 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\ChoiceList\Loader\ChoiceLoaderInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * Select a category.
@@ -39,16 +38,6 @@ class CategorySelectorType extends AbstractType
     public function __construct(ManagerInterface $manager)
     {
         $this->manager = $manager;
-    }
-
-    /**
-     * NEXT_MAJOR: Remove this method.
-     *
-     * @deprecated since sonata-project/classification-bundle 3.10, to be removed in version 4.0.
-     */
-    public function setDefaultOptions(OptionsResolverInterface $resolver): void
-    {
-        $this->configureOptions($resolver);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
@@ -96,16 +85,6 @@ class CategorySelectorType extends AbstractType
     public function getBlockPrefix()
     {
         return 'sonata_category_selector';
-    }
-
-    /**
-     * NEXT_MAJOR: Remove this method.
-     *
-     * @deprecated since sonata-project/classification-bundle 3.10, to be removed in version 4.0.
-     */
-    public function getName()
-    {
-        return $this->getBlockPrefix();
     }
 
     /**

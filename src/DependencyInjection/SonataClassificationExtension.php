@@ -16,7 +16,6 @@ namespace Sonata\ClassificationBundle\DependencyInjection;
 use Nelmio\ApiDocBundle\Annotation\Operation;
 use Sonata\Doctrine\Mapper\Builder\OptionsBuilder;
 use Sonata\Doctrine\Mapper\DoctrineCollector;
-use Sonata\EasyExtendsBundle\Mapper\DoctrineCollector as DeprecatedDoctrineCollector;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -108,117 +107,6 @@ class SonataClassificationExtension extends Extension
         $container->setParameter('sonata.classification.admin.context.class', $config['admin']['context']['class']);
         $container->setParameter('sonata.classification.admin.context.controller', $config['admin']['context']['controller']);
         $container->setParameter('sonata.classification.admin.context.translation_domain', $config['admin']['context']['translation']);
-    }
-
-    /**
-     * NEXT_MAJOR: Remove this method.
-     */
-    public function registerDoctrineMapping(array $config): void
-    {
-        @trigger_error(
-            'Using SonataEasyExtendsBundle is deprecated since sonata-project/classification-bundle 3.13. Please register SonataDoctrineBundle as a bundle instead.',
-            \E_USER_DEPRECATED
-        );
-
-        foreach ($config['class'] as $type => $class) {
-            if (!class_exists($class)) {
-                return;
-            }
-        }
-
-        $collector = DeprecatedDoctrineCollector::getInstance();
-
-        $collector->addAssociation($config['class']['category'], 'mapOneToMany', [
-            'fieldName' => 'children',
-            'targetEntity' => $config['class']['category'],
-            'cascade' => [
-                'persist',
-            ],
-            'mappedBy' => 'parent',
-            'orphanRemoval' => true,
-            'orderBy' => [
-                'position' => 'ASC',
-            ],
-        ]);
-
-        $collector->addAssociation($config['class']['category'], 'mapManyToOne', [
-            'fieldName' => 'parent',
-            'targetEntity' => $config['class']['category'],
-            'cascade' => [
-                'persist',
-                'refresh',
-                'merge',
-                'detach',
-            ],
-            'mappedBy' => null,
-            'inversedBy' => 'children',
-            'joinColumns' => [
-                [
-                 'name' => 'parent_id',
-                 'referencedColumnName' => 'id',
-                 'onDelete' => 'CASCADE',
-                ],
-            ],
-            'orphanRemoval' => false,
-        ]);
-
-        $collector->addAssociation($config['class']['category'], 'mapManyToOne', [
-            'fieldName' => 'context',
-            'targetEntity' => $config['class']['context'],
-            'cascade' => [
-                'persist',
-            ],
-            'mappedBy' => null,
-            'inversedBy' => null,
-            'joinColumns' => [
-                [
-                    'name' => 'context',
-                    'referencedColumnName' => 'id',
-                    'nullable' => false,
-                ],
-            ],
-            'orphanRemoval' => false,
-        ]);
-
-        $collector->addAssociation($config['class']['tag'], 'mapManyToOne', [
-            'fieldName' => 'context',
-            'targetEntity' => $config['class']['context'],
-            'cascade' => [
-                'persist',
-            ],
-            'mappedBy' => null,
-            'inversedBy' => null,
-            'joinColumns' => [
-                [
-                    'name' => 'context',
-                    'referencedColumnName' => 'id',
-                    'nullable' => false,
-                ],
-            ],
-            'orphanRemoval' => false,
-        ]);
-
-        $collector->addUnique($config['class']['tag'], 'tag_context', ['slug', 'context']);
-
-        $collector->addAssociation($config['class']['collection'], 'mapManyToOne', [
-            'fieldName' => 'context',
-            'targetEntity' => $config['class']['context'],
-            'cascade' => [
-                'persist',
-            ],
-            'mappedBy' => null,
-            'inversedBy' => null,
-            'joinColumns' => [
-                [
-                    'name' => 'context',
-                    'referencedColumnName' => 'id',
-                    'nullable' => false,
-                ],
-            ],
-            'orphanRemoval' => false,
-        ]);
-
-        $collector->addUnique($config['class']['collection'], 'tag_collection', ['slug', 'context']);
     }
 
     private function registerSonataDoctrineMapping(array $config): void

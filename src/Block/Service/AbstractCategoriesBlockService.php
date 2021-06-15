@@ -22,7 +22,6 @@ use Sonata\ClassificationBundle\Model\CategoryInterface;
 use Sonata\ClassificationBundle\Model\CategoryManagerInterface;
 use Sonata\ClassificationBundle\Model\ContextManagerInterface;
 use Sonata\Form\Type\ImmutableArrayType;
-use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Response;
@@ -45,41 +44,24 @@ abstract class AbstractCategoriesBlockService extends AbstractClassificationBloc
     private $categoryAdmin;
 
     /**
-     * @param string|Environment                               $twigOrDeprecatedName
-     * @param EngineInterface|ContextManagerInterface          $contextManagerOrDeprecatedTemplating
-     * @param ContextManagerInterface|CategoryManagerInterface $categoryManagerOrDeprecatedContextManager
-     * @param CategoryManagerInterface|AdminInterface|null     $categoryAdminOrDeprecatedCategoryManager
-     * @param AdminInterface|null                              $deprecatedCategoryAdmin
+     * @param Environment              $twig
+     * @param ContextManagerInterface  $contextManager
+     * @param CategoryManagerInterface $categoryManager
+     * @param AdminInterface|null      $categoryAdmin
      */
     public function __construct(
-        $twigOrDeprecatedName,
-        $contextManagerOrDeprecatedTemplating,
-        $categoryManagerOrDeprecatedContextManager,
-        $categoryAdminOrDeprecatedCategoryManager,
-        $deprecatedCategoryAdmin = null
+        Environment $twig,
+        ContextManagerInterface $contextManager,
+        CategoryManagerInterface $categoryManager,
+        ?AdminInterface $categoryAdmin
     ) {
-        // NEXT_MAJOR: remove the if block
-        if (\is_string($twigOrDeprecatedName)) {
-            parent::__construct(
-                $twigOrDeprecatedName,
-                $contextManagerOrDeprecatedTemplating,
-                $categoryManagerOrDeprecatedContextManager
-            );
+        parent::__construct($twig, $contextManager);
 
-            $this->categoryManager = $categoryAdminOrDeprecatedCategoryManager;
-            $this->categoryAdmin = $deprecatedCategoryAdmin;
-        } else {
-            parent::__construct(
-                $twigOrDeprecatedName,
-                $contextManagerOrDeprecatedTemplating
-            );
-
-            $this->categoryManager = $categoryManagerOrDeprecatedContextManager;
-            $this->categoryAdmin = $categoryAdminOrDeprecatedCategoryManager;
-        }
+        $this->categoryManager = $categoryManager;
+        $this->categoryAdmin = $categoryAdmin;
     }
 
-    public function execute(BlockContextInterface $blockContext, ?Response $response = null)
+    public function execute(BlockContextInterface $blockContext, ?Response $response = null): Response
     {
         $category = $this->getCategory($blockContext->getSetting('categoryId'), $blockContext->getSetting('category'));
         $root = $this->categoryManager->getRootCategory($blockContext->getSetting('context'));
@@ -113,6 +95,7 @@ abstract class AbstractCategoriesBlockService extends AbstractClassificationBloc
         ]);
 
         $formMapper->add(
+            'settings',
             ImmutableArrayType::class,
             [
                 'keys' => [

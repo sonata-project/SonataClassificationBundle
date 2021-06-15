@@ -22,7 +22,6 @@ use Sonata\ClassificationBundle\Model\CollectionInterface;
 use Sonata\ClassificationBundle\Model\CollectionManagerInterface;
 use Sonata\ClassificationBundle\Model\ContextManagerInterface;
 use Sonata\Form\Type\ImmutableArrayType;
-use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Response;
@@ -45,43 +44,25 @@ abstract class AbstractCollectionsBlockService extends AbstractClassificationBlo
     private $collectionAdmin;
 
     /**
-     * AbstractCollectionsBlockService constructor.
      *
-     * @param string|Environment                                 $twigOrDeprecatedName
-     * @param EngineInterface|ContextManagerInterface            $contextManagerOrDeprecatedTemplating
-     * @param ContextManagerInterface|CollectionManagerInterface $collectionManagerOrDeprecatedContextManager
-     * @param CollectionManagerInterface|AdminInterface|null     $collectionAdminOrDeprecatedCollectionManager
-     * @param AdminInterface|null                                $deprecatedCollectionAdmin
+     * @param Environment                $twig
+     * @param ContextManagerInterface    $contextManager
+     * @param CollectionManagerInterface $collectionManager
+     * @param AdminInterface|null        $collectionAdmin
      */
     public function __construct(
-        $twigOrDeprecatedName,
-        $contextManagerOrDeprecatedTemplating,
-        $collectionManagerOrDeprecatedContextManager,
-        $collectionAdminOrDeprecatedCollectionManager,
-        $deprecatedCollectionAdmin = null
+        Environment $twig,
+        ContextManagerInterface $contextManager,
+        CollectionManagerInterface $collectionManager,
+        ?AdminInterface $collectionAdmin
     ) {
-        // NEXT_MAJOR: remove the if block
-        if (\is_string($twigOrDeprecatedName)) {
-            parent::__construct(
-                $twigOrDeprecatedName,
-                $contextManagerOrDeprecatedTemplating,
-                $collectionManagerOrDeprecatedContextManager
-            );
+        parent::__construct($twig, $contextManager);
 
-            $this->collectionManager = $collectionAdminOrDeprecatedCollectionManager;
-            $this->collectionAdmin = $deprecatedCollectionAdmin;
-        } else {
-            parent::__construct(
-                $twigOrDeprecatedName,
-                $contextManagerOrDeprecatedTemplating
-            );
-
-            $this->collectionManager = $collectionManagerOrDeprecatedContextManager;
-            $this->collectionAdmin = $collectionAdminOrDeprecatedCollectionManager;
-        }
+        $this->collectionManager = $collectionManager;
+        $this->collectionAdmin = $collectionAdmin;
     }
 
-    public function execute(BlockContextInterface $blockContext, ?Response $response = null)
+    public function execute(BlockContextInterface $blockContext, ?Response $response = null): Response
     {
         $collection = $this->getCollection($blockContext->getSetting('collectionId'), $blockContext->getSetting('collection'));
         $collections = $this->collectionManager->findBy([

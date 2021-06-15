@@ -45,41 +45,24 @@ abstract class AbstractTagsBlockService extends AbstractClassificationBlockServi
     private $tagAdmin;
 
     /**
-     * @param string|Environment                          $twigOrDeprecatedName
-     * @param EngineInterface|ContextManagerInterface     $contextManagerOrDeprecatedTemplating
-     * @param ContextManagerInterface|TagManagerInterface $tagManagerOrDeprecatedContextManager
-     * @param TagManagerInterface|AdminInterface|null     $tagAdminOrDeprecatedTagManager
-     * @param AdminInterface|null                         $deprecatedTagAdmin
+     * @param Environment             $twig
+     * @param ContextManagerInterface $contextManager
+     * @param TagManagerInterface     $tagManager
+     * @param AdminInterface|null     $tagAdmin
      */
     public function __construct(
-        $twigOrDeprecatedName,
-        $contextManagerOrDeprecatedTemplating,
-        $tagManagerOrDeprecatedContextManager,
-        $tagAdminOrDeprecatedTagManager,
-        $deprecatedTagAdmin = null
+        Environment $twig,
+        ContextManagerInterface $contextManager,
+        TagManagerInterface $tagManager,
+        ?AdminInterface $tagAdmin
     ) {
-        // NEXT_MAJOR: remove the if block
-        if (\is_string($twigOrDeprecatedName)) {
-            parent::__construct(
-                $twigOrDeprecatedName,
-                $contextManagerOrDeprecatedTemplating,
-                $tagManagerOrDeprecatedContextManager
-            );
+        parent::__construct($twig, $contextManager);
 
-            $this->tagManager = $tagAdminOrDeprecatedTagManager;
-            $this->tagAdmin = $deprecatedTagAdmin;
-        } else {
-            parent::__construct(
-                $twigOrDeprecatedName,
-                $contextManagerOrDeprecatedTemplating
-            );
-
-            $this->tagManager = $tagManagerOrDeprecatedContextManager;
-            $this->tagAdmin = $tagAdminOrDeprecatedTagManager;
-        }
+        $this->tagManager = $tagManager;
+        $this->tagAdmin = $tagAdmin;
     }
 
-    public function execute(BlockContextInterface $blockContext, ?Response $response = null)
+    public function execute(BlockContextInterface $blockContext, ?Response $response = null): Response
     {
         $tag = $this->getTag($blockContext->getSetting('tagId'), $blockContext->getSetting('tag'));
         $tags = $this->tagManager->findBy([

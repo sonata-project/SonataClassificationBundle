@@ -16,18 +16,17 @@ namespace Sonata\ClassificationBundle\Block\Service;
 use Doctrine\ORM\Mapping\ClassMetadataInfo;
 use Sonata\AdminBundle\Admin\AdminInterface;
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Form\Type\ModelTypeList;
-use Sonata\BlockBundle\Block\Service\AbstractAdminBlockService;
+use Sonata\AdminBundle\Form\Type\ModelListType;
+use Sonata\BlockBundle\Block\Service\AbstractBlockService;
 use Sonata\ClassificationBundle\Model\ContextInterface;
 use Sonata\ClassificationBundle\Model\ContextManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\Form\FormBuilder;
 use Twig\Environment;
 
 /**
  * @author Christian Gripp <mail@core23.de>
  */
-abstract class AbstractClassificationBlockService extends AbstractAdminBlockService
+abstract class AbstractClassificationBlockService extends AbstractBlockService
 {
     /**
      * @var ContextManagerInterface
@@ -35,25 +34,14 @@ abstract class AbstractClassificationBlockService extends AbstractAdminBlockServ
     protected $contextManager;
 
     /**
-     * @param string|Environment                      $twigOrDeprecatedName
-     * @param EngineInterface|ContextManagerInterface $contextManagerOrDeprecatedTemplating
-     * @param ContextManagerInterface|null            $deprecatedContextManager
+     * @param Environment             $twig
+     * @param ContextManagerInterface $contextManager
      */
-    public function __construct(
-        $twigOrDeprecatedName,
-        $contextManagerOrDeprecatedTemplating,
-        $deprecatedContextManager = null
-    ) {
-        // NEXT_MAJOR: remove the if block
-        if (\is_string($twigOrDeprecatedName)) {
-            parent::__construct($twigOrDeprecatedName, $contextManagerOrDeprecatedTemplating);
+    public function __construct(Environment $twig, ContextManagerInterface $contextManager)
+    {
+        parent::__construct($twig);
 
-            $this->contextManager = $deprecatedContextManager;
-        } else {
-            parent::__construct($twigOrDeprecatedName);
-
-            $this->contextManager = $contextManagerOrDeprecatedTemplating;
-        }
+        $this->contextManager = $contextManager;
     }
 
     /**
@@ -86,7 +74,7 @@ abstract class AbstractClassificationBlockService extends AbstractAdminBlockServ
             'required' => false,
         ], $fieldOptions);
 
-        return $formMapper->create($formField, ModelTypeList::class, $fieldOptions);
+        return $formMapper->create($formField, ModelListType::class, $fieldOptions);
     }
 
     /**

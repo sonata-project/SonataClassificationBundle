@@ -14,11 +14,14 @@ declare(strict_types=1);
 namespace Sonata\ClassificationBundle\Controller;
 
 use Sonata\AdminBundle\Controller\CRUDController as Controller;
+use Sonata\ClassificationBundle\Model\CategoryManagerInterface;
+use Sonata\ClassificationBundle\Model\ContextManagerInterface;
 use Symfony\Component\Form\FormRenderer;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Twig\Environment;
 
 /**
  * Category Admin Controller.
@@ -27,6 +30,15 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class CategoryAdminController extends Controller
 {
+    public static function getSubscribedServices(): array
+    {
+        return [
+            'sonata.classification.manager.category' => CategoryManagerInterface::class,
+            'sonata.classification.manager.context' => ContextManagerInterface::class,
+            'twig' => Environment::class,
+        ] + parent::getSubscribedServices();
+    }
+
     public function listAction(Request $request): Response
     {
         if (!$request->get('filter') && !$request->get('filters')) {
@@ -52,7 +64,7 @@ class CategoryAdminController extends Controller
         // set the theme for the current Admin Form
         $this->setFormTheme($formView, $this->admin->getFilterTheme());
 
-        return $this->renderWithExtraParams($this->admin->getTemplate('list'), [
+        return $this->renderWithExtraParams($this->admin->getTemplateRegistry()->getTemplate('list'), [
             'action' => 'list',
             'form' => $formView,
             'datagrid' => $datagrid,
@@ -103,7 +115,7 @@ class CategoryAdminController extends Controller
 
         $this->setFormTheme($formView, $this->admin->getFilterTheme());
 
-        return $this->renderWithExtraParams($this->admin->getTemplate('tree'), [
+        return $this->renderWithExtraParams($this->admin->getTemplateRegistry()->getTemplate('tree'), [
             'action' => 'tree',
             'current_categories' => $currentCategories,
             'root_categories' => $rootCategoriesSplitByContexts,

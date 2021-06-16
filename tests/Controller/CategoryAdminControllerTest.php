@@ -17,6 +17,7 @@ use PHPUnit\Framework\TestCase;
 use Sonata\AdminBundle\Admin\AdminInterface;
 use Sonata\AdminBundle\Admin\Pool;
 use Sonata\AdminBundle\Datagrid\DatagridInterface;
+use Sonata\AdminBundle\Request\AdminFetcherInterface;
 use Sonata\AdminBundle\Templating\MutableTemplateRegistryInterface;
 use Sonata\ClassificationBundle\Controller\CategoryAdminController;
 use Sonata\ClassificationBundle\Entity\CategoryManager;
@@ -144,7 +145,11 @@ class CategoryAdminControllerTest extends TestCase
             ->method('getCode')
             ->willReturn('admin_code');
 
+        $adminFetcher = $this->createMock(AdminFetcherInterface::class);
+        $adminFetcher->method('get')->willReturn($this->admin);
+
         $this->container->set('admin_code', $this->admin);
+        $this->container->set('sonata.admin.request.fetcher', $adminFetcher);
         $this->container->set('sonata.admin.pool', $this->pool);
         $this->container->set('sonata.classification.manager.category', $this->categoryManager);
         $this->container->set('sonata.classification.manager.context', $this->contextManager);

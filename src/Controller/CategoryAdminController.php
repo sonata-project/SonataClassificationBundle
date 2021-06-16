@@ -16,8 +16,6 @@ namespace Sonata\ClassificationBundle\Controller;
 use Sonata\AdminBundle\Controller\CRUDController as Controller;
 use Sonata\ClassificationBundle\Model\CategoryManagerInterface;
 use Sonata\ClassificationBundle\Model\ContextManagerInterface;
-use Symfony\Component\Form\FormRenderer;
-use Symfony\Component\Form\FormView;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -121,17 +119,5 @@ class CategoryAdminController extends Controller
             'form' => $formView,
             'csrf_token' => $this->getCsrfToken('sonata.batch'),
         ]);
-    }
-
-    /**
-     * Sets the admin form theme to form view. Used for compatibility between Symfony versions.
-     *
-     * @param string $theme
-     */
-    private function setFormTheme(FormView $formView, $theme): void
-    {
-        $twig = $this->get('twig');
-
-        $twig->getRuntime(FormRenderer::class)->setTheme($formView, $theme);
     }
 }

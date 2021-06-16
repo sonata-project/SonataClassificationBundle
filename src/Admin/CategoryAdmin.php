@@ -32,9 +32,6 @@ class CategoryAdmin extends ContextAwareAdmin
         $routes->add('tree', 'tree');
     }
 
-    /**
-     * @param array<string, mixed> $formOptions
-     */
     protected function configureFormOptions(array &$formOptions): void
     {
         $formOptions['constraints'][] = new Valid();

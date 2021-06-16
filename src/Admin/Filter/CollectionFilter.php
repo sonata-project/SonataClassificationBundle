@@ -34,18 +34,15 @@ final class CollectionFilter extends Filter
 
     public function filter(ProxyQueryInterface $queryBuilder, string $alias, string $field, FilterData $data): void
     {
-        if (!$data->hasValue()) {
+        if (!$data->hasValue() || null === $data->getValue()) {
             return;
         }
 
-        $value = $data->getValue();
-        if ($value) {
-            $queryBuilder
-                ->andWhere(sprintf('%s.%s = :collection', $alias, $field))
-                ->setParameter('collection', $value);
-        }
+        $queryBuilder
+            ->andWhere(sprintf('%s.%s = :collection', $alias, $field))
+            ->setParameter('collection', $data->getValue());
 
-        $this->setActive($value);
+        $this->setActive(true);
     }
 
     public function getDefaultOptions(): array

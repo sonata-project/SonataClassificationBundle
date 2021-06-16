@@ -24,9 +24,6 @@ class CollectionAdmin extends ContextAwareAdmin
 {
     protected $classnameLabel = 'Collection';
 
-    /**
-     * @param array<string, mixed> $formOptions
-     */
     protected function configureFormOptions(array &$formOptions): void
     {
         $formOptions['constraints'][] = new Valid();

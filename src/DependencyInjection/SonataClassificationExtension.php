@@ -44,6 +44,7 @@ class SonataClassificationExtension extends Extension
         $loader->load('form.xml');
         $loader->load('serializer.xml');
         $loader->load('command.xml');
+        $loader->load('controllers.xml');
 
         if (isset($bundles['FOSRestBundle'], $bundles['NelmioApiDocBundle'])) {
             if (class_exists(Operation::class)) {
@@ -61,8 +62,7 @@ class SonataClassificationExtension extends Extension
         if (isset($bundles['SonataDoctrineBundle'])) {
             $this->registerSonataDoctrineMapping($config);
         } else {
-            // NEXT MAJOR: Remove next line and throw error when not registering SonataDoctrineBundle
-            $this->registerDoctrineMapping($config);
+            throw new \Exception('You MUST register the SonataDoctrineBundle.');
         }
 
         $this->configureClass($config, $container);

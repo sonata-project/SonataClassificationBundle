@@ -151,9 +151,6 @@ class CategoryAdminControllerTest extends TestCase
         $this->container->set('twig', $twig);
         $this->container->set('request_stack', $this->requestStack);
 
-        // php 5.3
-        $tthis = $this;
-
         $this->admin->expects($this->any())
             ->method('generateUrl')
             ->willReturnCallback(

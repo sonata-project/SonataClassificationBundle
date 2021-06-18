@@ -4,7 +4,7 @@
         <service public="true" id="sonata.classification.controller.category_admin" class="Sonata\ClassificationBundle\Controller\CategoryAdminController">
             <tag name="container.service_subscriber"/>
             <call method="setContainer">
-                <argument type="service" id="Symfony\Component\DependencyInjection\ContainerInterface"/>
+                <argument type="service" id="Psr\Container\ContainerInterface"/>
             </call>
         </service>
     </services>

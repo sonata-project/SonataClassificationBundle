@@ -51,6 +51,8 @@
         "doctrine/mongodb-odm": "^2.0",
         "friendsofsymfony/rest-bundle": "^2.3 || ^3.0",
         "jms/serializer-bundle": "^2.0 || ^3.0",
+        "knplabs/knp-menu": "^3.0",
+        "knplabs/knp-menu-bundle": "^3.0",
         "matthiasnoback/symfony-config-test": "^4.2",
         "matthiasnoback/symfony-dependency-injection-test": "^4.0",
         "nelmio/api-doc-bundle": "^2.13.4 || ^3.6",

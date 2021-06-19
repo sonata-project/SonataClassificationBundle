@@ -18,6 +18,7 @@ use FOS\RestBundle\FOSRestBundle;
 use JMS\SerializerBundle\JMSSerializerBundle;
 use Nelmio\ApiDocBundle\Annotation\Operation;
 use Nelmio\ApiDocBundle\NelmioApiDocBundle;
+use Sonata\AdminBundle\SonataAdminBundle;
 use Sonata\ClassificationBundle\SonataClassificationBundle;
 use Sonata\Doctrine\Bridge\Symfony\SonataDoctrineBundle;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
@@ -50,6 +51,7 @@ final class AppKernel extends Kernel
             new DoctrineBundle(),
             new NelmioApiDocBundle(),
             new SonataDoctrineBundle(),
+            new SonataAdminBundle(),
         ];
     }
 

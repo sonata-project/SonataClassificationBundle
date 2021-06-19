@@ -16,6 +16,7 @@ namespace Sonata\ClassificationBundle\Tests\App;
 use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
 use FOS\RestBundle\FOSRestBundle;
 use JMS\SerializerBundle\JMSSerializerBundle;
+use Knp\Bundle\MenuBundle\KnpMenuBundle;
 use Nelmio\ApiDocBundle\Annotation\Operation;
 use Nelmio\ApiDocBundle\NelmioApiDocBundle;
 use Sonata\AdminBundle\SonataAdminBundle;
@@ -54,6 +55,7 @@ final class AppKernel extends Kernel
             new SonataDoctrineBundle(),
             new SonataAdminBundle(),
             new SonataDoctrineORMAdminBundle(),
+            new KnpMenuBundle(),
         ];
     }
 

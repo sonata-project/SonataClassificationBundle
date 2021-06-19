@@ -21,6 +21,7 @@ use Nelmio\ApiDocBundle\NelmioApiDocBundle;
 use Sonata\AdminBundle\SonataAdminBundle;
 use Sonata\ClassificationBundle\SonataClassificationBundle;
 use Sonata\Doctrine\Bridge\Symfony\SonataDoctrineBundle;
+use Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Bundle\SecurityBundle\SecurityBundle;
@@ -52,6 +53,7 @@ final class AppKernel extends Kernel
             new NelmioApiDocBundle(),
             new SonataDoctrineBundle(),
             new SonataAdminBundle(),
+            new SonataDoctrineORMAdminBundle(),
         ];
     }
 

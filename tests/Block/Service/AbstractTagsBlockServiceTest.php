@@ -74,7 +74,7 @@ final class AbstractTagsBlockServiceTest extends BlockServiceTestCase
     public function testLoad(): void
     {
         $tag = $this->getMockBuilder(TagInterface::class)
-            ->setMethods(['getId'])
+            ->addMethods(['getId'])
             ->disableOriginalConstructor()
             ->getMockForAbstractClass();
         $tag->expects($this->any())->method('getId')->willReturn(23);
@@ -102,7 +102,7 @@ final class AbstractTagsBlockServiceTest extends BlockServiceTestCase
     public function testPrePersist(): void
     {
         $tag = $this->getMockBuilder(TagInterface::class)
-            ->setMethods(['getId'])
+            ->addMethods(['getId'])
             ->disableOriginalConstructor()
             ->getMockForAbstractClass();
         $tag->expects($this->any())->method('getId')->willReturn(23);
@@ -125,7 +125,7 @@ final class AbstractTagsBlockServiceTest extends BlockServiceTestCase
     public function testPreUpdate(): void
     {
         $tag = $this->getMockBuilder(TagInterface::class)
-            ->setMethods(['getId'])
+            ->addMethods(['getId'])
             ->disableOriginalConstructor()
             ->getMockForAbstractClass();
         $tag->expects($this->any())->method('getId')->willReturn(23);

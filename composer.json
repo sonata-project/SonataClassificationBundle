@@ -54,13 +54,21 @@
         "matthiasnoback/symfony-config-test": "^4.2",
         "matthiasnoback/symfony-dependency-injection-test": "^4.0",
         "nelmio/api-doc-bundle": "^2.13.4 || ^3.6",
+        "phpstan/extension-installer": "^1.0",
+        "phpstan/phpstan": "^0.12.84",
+        "phpstan/phpstan-phpunit": "^0.12.16",
+        "phpstan/phpstan-symfony": "^0.12.21",
+        "psalm/plugin-phpunit": "^0.15",
+        "psalm/plugin-symfony": "^2.0",
+        "sensio/framework-extra-bundle": "^6.1",
         "sonata-project/admin-bundle": "^3.98.2",
         "sonata-project/block-bundle": "^3.19",
         "sonata-project/doctrine-orm-admin-bundle": "^3.16",
         "sonata-project/media-bundle": "^3.20",
         "symfony/browser-kit": "^4.4 || ^5.1",
         "symfony/phpunit-bridge": "^5.1.8",
-        "symfony/yaml": "^4.4"
+        "symfony/yaml": "^4.4",
+        "vimeo/psalm": "^4.7.2"
     },
     "suggest": {
         "sonata-project/block-bundle": "For rendering dynamic list blocks on a page.",
@@ -83,5 +91,13 @@
         "psr-4": {
             "Sonata\\ClassificationBundle\\Tests\\": "tests/"
         }
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "[ $COMPOSER_DEV_MODE -eq 0 ] || vendor/bin/simple-phpunit install"
+        ],
+        "post-update-cmd": [
+            "[ $COMPOSER_DEV_MODE -eq 0 ] || vendor/bin/simple-phpunit install"
+        ]
     }
 }

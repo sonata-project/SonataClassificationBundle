@@ -20,6 +20,7 @@ use FOS\RestBundle\View\View;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Operation;
 use Sonata\ClassificationBundle\Form\FormHelper;
+use Sonata\ClassificationBundle\Form\Type\ApiCollectionType;
 use Sonata\ClassificationBundle\Model\CollectionInterface;
 use Sonata\ClassificationBundle\Model\CollectionManagerInterface;
 use Sonata\DatagridBundle\Pager\PagerInterface;
@@ -285,7 +286,7 @@ class CollectionController
     {
         $collection = $id ? $this->getCollection($id) : null;
 
-        $form = $this->formFactory->createNamed(null, 'sonata_classification_api_form_collection', $collection, [
+        $form = $this->formFactory->createNamed(null, ApiCollectionType::class, $collection, [
             'csrf_protection' => false,
         ]);
 

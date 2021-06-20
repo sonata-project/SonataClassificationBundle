@@ -74,7 +74,6 @@ final class AbstractCategoriesBlockServiceTest extends BlockServiceTestCase
     public function testLoad(): void
     {
         $category = $this->getMockBuilder(CategoryInterface::class)
-            ->addMethods(['getId'])
             ->disableOriginalConstructor()
             ->getMockForAbstractClass();
         $category->expects($this->any())->method('getId')->willReturn(23);
@@ -102,7 +101,6 @@ final class AbstractCategoriesBlockServiceTest extends BlockServiceTestCase
     public function testPrePersist(): void
     {
         $category = $this->getMockBuilder(CategoryInterface::class)
-            ->addMethods(['getId'])
             ->disableOriginalConstructor()
             ->getMockForAbstractClass();
         $category->expects($this->any())->method('getId')->willReturn(23);
@@ -125,7 +123,6 @@ final class AbstractCategoriesBlockServiceTest extends BlockServiceTestCase
     public function testPreUpdate(): void
     {
         $category = $this->getMockBuilder(CategoryInterface::class)
-            ->addMethods(['getId'])
             ->disableOriginalConstructor()
             ->getMockForAbstractClass();
         $category->expects($this->any())->method('getId')->willReturn(23);

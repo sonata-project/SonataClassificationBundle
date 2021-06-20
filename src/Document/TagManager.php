@@ -13,12 +13,13 @@ declare(strict_types=1);
 
 use Sonata\ClassificationBundle\Model\TagManagerInterface;
 use Sonata\DatagridBundle\Pager\Doctrine\Pager;
+use Sonata\DatagridBundle\Pager\PagerInterface;
 use Sonata\DatagridBundle\ProxyQuery\Doctrine\ProxyQuery;
 use Sonata\Doctrine\Document\BaseDocumentManager;
 
 class TagManager extends BaseDocumentManager implements TagManagerInterface
 {
-    public function getPager(array $criteria, $page, $limit = 10, array $sort = [])
+    public function getPager(array $criteria, int $page, int $limit = 10, array $sort = []): PagerInterface
     {
         $parameters = [];
 

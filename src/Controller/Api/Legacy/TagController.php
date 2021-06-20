@@ -173,7 +173,7 @@ class TagController
      *
      * @throws NotFoundHttpException
      *
-     * @return Rest\View
+     * @return View
      */
     public function deleteTagAction($id)
     {
@@ -181,7 +181,7 @@ class TagController
 
         $this->tagManager->delete($tag);
 
-        return ['deleted' => true];
+        return View::create(['deleted' => true]);
     }
 
     /**
@@ -226,7 +226,7 @@ class TagController
      * @param Request     $request Symfony request
      * @param string|null $id      Tag identifier
      *
-     * @return FormInterface
+     * @return View|FormInterface
      */
     protected function handleWriteTag($request, $id = null)
     {

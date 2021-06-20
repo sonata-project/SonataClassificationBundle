@@ -15,12 +15,13 @@ namespace Sonata\ClassificationBundle\Entity;
 
 use Sonata\ClassificationBundle\Model\ContextManagerInterface;
 use Sonata\DatagridBundle\Pager\Doctrine\Pager;
+use Sonata\DatagridBundle\Pager\PagerInterface;
 use Sonata\DatagridBundle\ProxyQuery\Doctrine\ProxyQuery;
 use Sonata\Doctrine\Entity\BaseEntityManager;
 
 class ContextManager extends BaseEntityManager implements ContextManagerInterface
 {
-    public function getPager(array $criteria, $page, $limit = 10, array $sort = [])
+    public function getPager(array $criteria, int $page, int $limit = 10, array $sort = []): PagerInterface
     {
         $parameters = [];
 

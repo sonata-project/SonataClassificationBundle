@@ -231,7 +231,7 @@ class CategoryController
      *
      * @throws NotFoundHttpException
      *
-     * @return Rest\View
+     * @return View
      */
     public function deleteCategoryAction($id)
     {
@@ -239,7 +239,7 @@ class CategoryController
 
         $this->categoryManager->delete($category);
 
-        return ['deleted' => true];
+        return View::create(['deleted' => true]);
     }
 
     /**
@@ -288,7 +288,7 @@ class CategoryController
      * @param Request     $request Symfony request
      * @param string|null $id      category identifier
      *
-     * @return Rest\View|FormInterface
+     * @return View|FormInterface
      */
     protected function handleWriteCategory($request, $id = null)
     {

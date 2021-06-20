@@ -223,7 +223,7 @@ class ContextController
      *
      * @throws NotFoundHttpException
      *
-     * @return Rest\View
+     * @return View
      */
     public function deleteContextAction($id)
     {
@@ -231,7 +231,7 @@ class ContextController
 
         $this->contextManager->delete($context);
 
-        return ['deleted' => true];
+        return View::create(['deleted' => true]);
     }
 
     /**
@@ -280,7 +280,7 @@ class ContextController
      * @param Request     $request Symfony request
      * @param string|null $id      context identifier
      *
-     * @return FormInterface
+     * @return View|FormInterface
      */
     protected function handleWriteContext($request, $id = null)
     {

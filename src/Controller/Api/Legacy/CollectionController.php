@@ -173,7 +173,7 @@ class CollectionController
      *
      * @throws NotFoundHttpException
      *
-     * @return Rest\View
+     * @return View
      */
     public function deleteCollectionAction($id)
     {
@@ -181,7 +181,7 @@ class CollectionController
 
         $this->collectionManager->delete($collection);
 
-        return ['deleted' => true];
+        return View::create(['deleted' => true]);
     }
 
     /**
@@ -230,7 +230,7 @@ class CollectionController
      * @param Request     $request Symfony request
      * @param string|null $id      Collection identifier
      *
-     * @return Rest\View|FormInterface
+     * @return View|FormInterface
      */
     protected function handleWriteCollection($request, $id = null)
     {

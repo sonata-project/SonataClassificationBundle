@@ -10,6 +10,7 @@ Symfony SonataClassificationBundle
 
 [![Latest Stable Version](https://poser.pugx.org/sonata-project/classification-bundle/v/stable)](https://packagist.org/packages/sonata-project/classification-bundle)
 [![Latest Unstable Version](https://poser.pugx.org/sonata-project/classification-bundle/v/unstable)](https://packagist.org/packages/sonata-project/classification-bundle)
+[![Psalm Type Coverage][shepherd_stable_badge]][shepherd_stable_link]
 [![License](https://poser.pugx.org/sonata-project/classification-bundle/license)](https://packagist.org/packages/sonata-project/classification-bundle)
 
 [![Total Downloads](https://poser.pugx.org/sonata-project/classification-bundle/downloads)](https://packagist.org/packages/sonata-project/classification-bundle)
@@ -45,3 +46,5 @@ This package is available under the [MIT license](LICENSE).
 [coverage_stable_link]: https://codecov.io/gh/sonata-project/SonataClassificationBundle/branch/3.x
 [coverage_unstable_badge]: https://codecov.io/gh/sonata-project/SonataClassificationBundle/branch/master/graph/badge.svg
 [coverage_unstable_link]: https://codecov.io/gh/sonata-project/SonataClassificationBundle/branch/master
+[shepherd_stable_badge]: https://shepherd.dev/github/sonata-project/SonataClassificationBundle/coverage.svg
+[shepherd_stable_link]: https://shepherd.dev/github/sonata-project/SonataClassificationBundle

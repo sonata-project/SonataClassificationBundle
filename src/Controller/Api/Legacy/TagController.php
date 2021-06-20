@@ -19,6 +19,7 @@ use FOS\RestBundle\Request\ParamFetcherInterface;
 use FOS\RestBundle\View\View;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Sonata\ClassificationBundle\Form\FormHelper;
+use Sonata\ClassificationBundle\Form\Type\ApiTagType;
 use Sonata\ClassificationBundle\Model\TagInterface;
 use Sonata\ClassificationBundle\Model\TagManagerInterface;
 use Sonata\DatagridBundle\Pager\PagerInterface;
@@ -231,7 +232,7 @@ class TagController
     {
         $tag = $id ? $this->getTag($id) : null;
 
-        $form = $this->formFactory->createNamed('', 'sonata_classification_api_form_tag', $tag, [
+        $form = $this->formFactory->createNamed('', ApiTagType::class, $tag, [
             'csrf_protection' => false,
         ]);
 

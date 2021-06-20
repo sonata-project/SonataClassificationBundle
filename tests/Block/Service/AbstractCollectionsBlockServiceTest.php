@@ -74,7 +74,7 @@ final class AbstractCollectionsBlockServiceTest extends BlockServiceTestCase
     public function testLoad(): void
     {
         $collection = $this->getMockBuilder(CollectionInterface::class)
-            ->setMethods(['getId'])
+            ->addMethods(['getId'])
             ->disableOriginalConstructor()
             ->getMockForAbstractClass();
         $collection->expects($this->any())->method('getId')->willReturn(23);
@@ -102,7 +102,7 @@ final class AbstractCollectionsBlockServiceTest extends BlockServiceTestCase
     public function testPrePersist(): void
     {
         $collection = $this->getMockBuilder(CollectionInterface::class)
-            ->setMethods(['getId'])
+            ->addMethods(['getId'])
             ->disableOriginalConstructor()
             ->getMockForAbstractClass();
         $collection->expects($this->any())->method('getId')->willReturn(23);
@@ -125,7 +125,7 @@ final class AbstractCollectionsBlockServiceTest extends BlockServiceTestCase
     public function testPreUpdate(): void
     {
         $collection = $this->getMockBuilder(CollectionInterface::class)
-            ->setMethods(['getId'])
+            ->addMethods(['getId'])
             ->disableOriginalConstructor()
             ->getMockForAbstractClass();
         $collection->expects($this->any())->method('getId')->willReturn(23);

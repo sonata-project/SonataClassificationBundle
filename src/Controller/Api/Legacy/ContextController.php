@@ -19,6 +19,7 @@ use FOS\RestBundle\Request\ParamFetcherInterface;
 use FOS\RestBundle\View\View;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Sonata\ClassificationBundle\Form\FormHelper;
+use Sonata\ClassificationBundle\Form\Type\ApiContextType;
 use Sonata\ClassificationBundle\Model\ContextInterface;
 use Sonata\ClassificationBundle\Model\ContextManagerInterface;
 use Sonata\DatagridBundle\Pager\PagerInterface;
@@ -235,7 +236,7 @@ class ContextController
     {
         $context = $id ? $this->getContext($id) : null;
 
-        $form = $this->formFactory->createNamed('', 'sonata_classification_api_form_context', $context, [
+        $form = $this->formFactory->createNamed('', ApiContextType::class, $context, [
             'csrf_protection' => false,
         ]);
 

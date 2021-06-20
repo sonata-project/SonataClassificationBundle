@@ -19,6 +19,7 @@ use FOS\RestBundle\Request\ParamFetcherInterface;
 use FOS\RestBundle\View\View;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Sonata\ClassificationBundle\Form\FormHelper;
+use Sonata\ClassificationBundle\Form\Type\ApiCategoryType;
 use Sonata\ClassificationBundle\Model\CategoryInterface;
 use Sonata\ClassificationBundle\Model\CategoryManagerInterface;
 use Sonata\DatagridBundle\Pager\PagerInterface;
@@ -236,7 +237,7 @@ class CategoryController
     {
         $category = $id ? $this->getCategory($id) : null;
 
-        $form = $this->formFactory->createNamed('', 'sonata_classification_api_form_category', $category, [
+        $form = $this->formFactory->createNamed('', ApiCategoryType::class, $category, [
             'csrf_protection' => false,
         ]);
 

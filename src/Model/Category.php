@@ -64,7 +64,7 @@ abstract class Category implements CategoryInterface
     protected $parent;
 
     /**
-     * @var ContextInterface
+     * @var ContextInterface|null
      */
     protected $context;
 

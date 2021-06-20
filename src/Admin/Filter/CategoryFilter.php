@@ -85,7 +85,7 @@ final class CategoryFilter extends Filter
         if (null === $context) {
             $categories = $this->categoryManager->getAllRootCategories();
         } else {
-            $categories = $this->categoryManager->getCategories($context);
+            $categories = $this->categoryManager->getRootCategoriesForContext($context);
         }
 
         $choices = [];

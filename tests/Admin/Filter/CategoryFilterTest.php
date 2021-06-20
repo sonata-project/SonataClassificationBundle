@@ -51,13 +51,13 @@ class CategoryFilterTest extends TestCase
 
     public function testRenderSettingsWithContext(): void
     {
-        $this->categoryManager->method('getCategories')->willReturn([
+        $this->categoryManager->method('getRootCategoriesForContext')->willReturn([
             $category = $this->createCategory(),
         ]);
 
         $filter = new CategoryFilter($this->categoryManager);
         $filter->initialize('field_name', [
-            'context' => 'foo',
+            'context' => new Context(),
             'field_options' => [
                 'class' => 'FooBar',
             ],

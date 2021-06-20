@@ -57,6 +57,7 @@ jobs:
                       allowed-to-fail: false
                       symfony-require: 5.3.*
                       variant: 'symfony/symfony:"5.3.*"'
+
         steps:
             - name: Checkout
               uses: actions/checkout@v2

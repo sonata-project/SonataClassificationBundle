@@ -16,10 +16,10 @@ namespace Sonata\ClassificationBundle\Tests\Controller\Api;
 use FOS\RestBundle\Request\ParamFetcherInterface;
 use FOS\RestBundle\View\View;
 use PHPUnit\Framework\TestCase;
-use Sonata\AdminBundle\Datagrid\Pager;
 use Sonata\ClassificationBundle\Controller\Api\TagController;
 use Sonata\ClassificationBundle\Model\TagInterface;
 use Sonata\ClassificationBundle\Model\TagManagerInterface;
+use Sonata\DatagridBundle\Pager\PagerInterface;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
@@ -34,9 +34,13 @@ class TagControllerTest extends TestCase
     public function testGetTagsAction(): void
     {
         $paramFetcher = $this->createMock(ParamFetcherInterface::class);
+        $paramFetcher->method('get')->willReturnMap([
+            ['page', null, 1],
+            ['count', null, 25],
+        ]);
         $paramFetcher->expects($this->once())->method('all')->willReturn([]);
 
-        $pager = $this->createMock(Pager::class);
+        $pager = $this->createMock(PagerInterface::class);
 
         $tagManager = $this->createMock(TagManagerInterface::class);
         $tagManager->expects($this->once())->method('getPager')->willReturn($pager);
@@ -156,7 +160,7 @@ class TagControllerTest extends TestCase
 
         $view = $this->createTagController($tagManager)->deleteTagAction(1);
 
-        $this->assertSame(['deleted' => true], $view);
+        $this->assertSame(['deleted' => true], $view->getData());
     }
 
     public function testDeleteTagInvalidAction(): void

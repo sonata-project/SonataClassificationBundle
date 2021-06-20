@@ -16,10 +16,10 @@ namespace Sonata\ClassificationBundle\Tests\Controller\Api;
 use FOS\RestBundle\Request\ParamFetcherInterface;
 use FOS\RestBundle\View\View;
 use PHPUnit\Framework\TestCase;
-use Sonata\AdminBundle\Datagrid\Pager;
 use Sonata\ClassificationBundle\Controller\Api\ContextController;
 use Sonata\ClassificationBundle\Model\ContextInterface;
 use Sonata\ClassificationBundle\Model\ContextManagerInterface;
+use Sonata\DatagridBundle\Pager\PagerInterface;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
@@ -34,9 +34,13 @@ class ContextControllerTest extends TestCase
     public function testGetContextsAction(): void
     {
         $paramFetcher = $this->createMock(ParamFetcherInterface::class);
+        $paramFetcher->method('get')->willReturnMap([
+            ['page', null, 1],
+            ['count', null, 25],
+        ]);
         $paramFetcher->expects($this->once())->method('all')->willReturn([]);
 
-        $pager = $this->createMock(Pager::class);
+        $pager = $this->createMock(PagerInterface::class);
 
         $contextManager = $this->createMock(ContextManagerInterface::class);
         $contextManager->expects($this->once())->method('getPager')->willReturn($pager);
@@ -154,7 +158,7 @@ class ContextControllerTest extends TestCase
 
         $view = $this->createContextController($contextManager)->deleteContextAction(1);
 
-        $this->assertSame(['deleted' => true], $view);
+        $this->assertSame(['deleted' => true], $view->getData());
     }
 
     public function testDeleteContextInvalidAction(): void

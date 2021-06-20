@@ -18,6 +18,7 @@ use Sonata\Doctrine\Model\ManagerInterface;
 
 /**
  * @phpstan-extends ManagerInterface<ContextInterface>
+ * @phpstan-extends PageableInterface<ContextInterface>
  */
 interface ContextManagerInterface extends ManagerInterface, PageableInterface
 {

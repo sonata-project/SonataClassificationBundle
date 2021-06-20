@@ -21,6 +21,7 @@ use Sonata\Doctrine\Model\ManagerInterface;
  * @method CollectionInterface[]    getByContext(ContextInterface|string $context, bool $enabled = true)
  *
  * @phpstan-extends ManagerInterface<CollectionInterface>
+ * @phpstan-extends PageableInterface<CollectionInterface>
  */
 interface CollectionManagerInterface extends ManagerInterface, PageableInterface
 {

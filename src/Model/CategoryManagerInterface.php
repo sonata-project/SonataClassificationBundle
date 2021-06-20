@@ -27,6 +27,7 @@ use Sonata\Doctrine\Model\ManagerInterface;
  * @method CategoryInterface|null getBySlug(string $slug, ContextInterface|string|null $context, bool $enabled = true)
  *
  * @phpstan-extends ManagerInterface<CategoryInterface>
+ * @phpstan-extends PageableInterface<CategoryInterface>
  */
 interface CategoryManagerInterface extends ManagerInterface, PageableInterface
 {

@@ -21,6 +21,7 @@ use Sonata\Doctrine\Model\ManagerInterface;
  * @method TagInterface[]    getByContext(ContextInterface|string $context, bool $enabled = true)
  *
  * @phpstan-extends ManagerInterface<TagInterface>
+ * @phpstan-extends PageableInterface<TagInterface>
  */
 interface TagManagerInterface extends ManagerInterface, PageableInterface
 {

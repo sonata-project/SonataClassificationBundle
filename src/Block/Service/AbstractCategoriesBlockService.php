@@ -17,6 +17,7 @@ use Sonata\AdminBundle\Admin\AdminInterface;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\BlockBundle\Block\BlockContextInterface;
 use Sonata\BlockBundle\Meta\Metadata;
+use Sonata\BlockBundle\Meta\MetadataInterface;
 use Sonata\BlockBundle\Model\BlockInterface;
 use Sonata\ClassificationBundle\Model\CategoryInterface;
 use Sonata\ClassificationBundle\Model\CategoryManagerInterface;
@@ -152,11 +153,9 @@ abstract class AbstractCategoriesBlockService extends AbstractClassificationBloc
         $this->resolveIds($block);
     }
 
-    public function getBlockMetadata($code = null)
+    public function getMetadata(): MetadataInterface
     {
-        $description = (null !== $code ? $code : $this->getName());
-
-        return new Metadata($this->getName(), $description, false, 'SonataClassificationBundle', [
+        return new Metadata('sonata.classification.block.categories', null, null, 'SonataClassificationBundle', [
             'class' => 'fa fa-folder-open-o',
         ]);
     }

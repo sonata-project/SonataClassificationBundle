@@ -15,6 +15,6 @@ namespace Sonata\ClassificationBundle\Document;
 
 use Sonata\ClassificationBundle\Model\Category as ModelCategory;
 
-class BaseCategory extends ModelCategory
+abstract class BaseCategory extends ModelCategory
 {
 }

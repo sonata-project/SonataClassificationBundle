@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="4.7.3@38c452ae584467e939d55377aaf83b5a26f19dd1">
-    <!-- NEXT_MAJOR: Remove this issue -->
-    <file src="src/DependencyInjection/SonataClassificationExtension.php">
-        <UndefinedClass occurrences="1">
-            <code>DeprecatedDoctrineCollector</code>
-        </UndefinedClass>
-    </file>
-</files>

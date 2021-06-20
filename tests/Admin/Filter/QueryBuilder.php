@@ -15,8 +15,9 @@ namespace Sonata\ClassificationBundle\Tests\Admin\Filter;
 
 use Doctrine\ORM\Query\Expr\Andx;
 use Doctrine\ORM\Query\Expr\Orx;
+use Doctrine\ORM\QueryBuilder as BaseQueryBuilder;
 
-final class QueryBuilder extends \Doctrine\ORM\QueryBuilder
+final class QueryBuilder extends BaseQueryBuilder
 {
     public $parameters = [];
 
@@ -26,10 +27,7 @@ final class QueryBuilder extends \Doctrine\ORM\QueryBuilder
     {
     }
 
-    /**
-     * @param mixed $value
-     */
-    public function setParameter(string $key, $value, $type = null)
+    public function setParameter($key, $value, $type = null)
     {
         $this->parameters[$key] = $value;
     }

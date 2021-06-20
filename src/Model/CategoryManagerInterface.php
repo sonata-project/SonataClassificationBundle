@@ -18,14 +18,6 @@ use Sonata\DatagridBundle\Pager\PageableInterface;
 use Sonata\Doctrine\Model\ManagerInterface;
 
 /**
- * @method PagerInterface         getRootCategoriesPager(int $page = 1, int $limit = 25, array $criteria = [])
- * @method PagerInterface         getSubCategoriesPager(int $categoryId, int $page = 1, int $limit = 25, array $criteria = [])
- * @method CategoryInterface[]    getRootCategoriesForContext(ContextInterface|null $context)
- * @method CategoryInterface[]    getAllRootCategories(bool $loadChildren = true)
- * @method CategoryInterface[]    getRootCategoriesSplitByContexts(bool $loadChildren = true)
- * @method CategoryInterface[]    getCategories(ContextInterface|string|null $context)
- * @method CategoryInterface|null getBySlug(string $slug, ContextInterface|string|null $context, bool $enabled = true)
- *
  * @phpstan-extends ManagerInterface<CategoryInterface>
  * @phpstan-extends PageableInterface<CategoryInterface>
  */
@@ -58,27 +50,6 @@ interface CategoryManagerInterface extends ManagerInterface, PageableInterface
     public function getRootCategoryWithChildren(CategoryInterface $category);
 
     /**
-     * @param bool $loadChildren
-     *
-     * @return CategoryInterface[]
-     */
-    public function getRootCategories($loadChildren = true);
-
-    /**
-     * @param ContextInterface|string $context
-     *
-     * @return CategoryInterface[]
-     */
-    public function getCategories($context = null);
-
-    /**
-     * @param ContextInterface|string $context
-     *
-     * @return CategoryInterface
-     */
-    public function getRootCategory($context = null);
-
-    /**
      * @param ContextInterface $context
      *
      * @return CategoryInterface[]
@@ -98,4 +69,11 @@ interface CategoryManagerInterface extends ManagerInterface, PageableInterface
      * @return array
      */
     public function getRootCategoriesSplitByContexts($loadChildren = true);
+
+    /**
+     * @param ContextInterface|string|null $context
+     *
+     * @return CategoryInterface|null
+     */
+    public function getBySlug(string $slug, $context = null, ?bool $enabled = true);
 }

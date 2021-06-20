@@ -76,38 +76,6 @@ class CategoryManagerTest extends TestCase
             ], 1);
     }
 
-    public function testGetCategoriesWithMultipleRootsInContext(): void
-    {
-        /** @var ContextTest $context */
-        $context = $this->getMockForAbstractClass(ContextTest::class);
-        $context->setId(1);
-        $context->setName('default');
-        $context->setEnabled(true);
-
-        /** @var CategoryTest $categoryFoo */
-        $categoryFoo = $this->getMockForAbstractClass(CategoryTest::class);
-        $categoryFoo->setId(1);
-        $categoryFoo->setName('foo');
-        $categoryFoo->setContext($context);
-        $categoryFoo->setParent(null);
-        $categoryFoo->setEnabled(true);
-
-        /** @var CategoryTest $categoryBar */
-        $categoryBar = $this->getMockForAbstractClass(CategoryTest::class);
-        $categoryBar->setId(2);
-        $categoryBar->setName('bar');
-        $categoryBar->setContext($context);
-        $categoryBar->setParent(null);
-        $categoryBar->setEnabled(true);
-
-        $categories = [$categoryFoo, $categoryBar];
-
-        $categoryManager = $this->getCategoryManager(static function (MockObject $qb): void {
-        }, $categories);
-
-        $this->assertSame($categoryManager->getCategories($context), $categories);
-    }
-
     public function testGetRootCategoryWithChildren(): void
     {
         /** @var ContextTest $context */
@@ -137,29 +105,6 @@ class CategoryManagerTest extends TestCase
 
         $categoryFoo = $categoryManager->getRootCategoryWithChildren($categoryFoo);
         $this->assertContains($categoryBar, $categoryFoo->getChildren());
-    }
-
-    public function testGetRootCategory(): void
-    {
-        /** @var ContextTest $context */
-        $context = $this->getMockForAbstractClass(ContextTest::class);
-        $context->setId(1);
-        $context->setName('default');
-        $context->setEnabled(true);
-
-        /** @var CategoryTest $categoryFoo */
-        $categoryFoo = $this->getMockForAbstractClass(CategoryTest::class);
-        $categoryFoo->setId(1);
-        $categoryFoo->setName('foo');
-        $categoryFoo->setContext($context);
-        $categoryFoo->setParent(null);
-        $categoryFoo->setEnabled(true);
-
-        $categoryManager = $this->getCategoryManager(static function (MockObject $qb): void {
-        }, [$categoryFoo]);
-
-        $categoryBar = $categoryManager->getRootCategory($context);
-        $this->assertSame($categoryFoo, $categoryBar);
     }
 
     public function testGetRootCategoriesForContext(): void
@@ -192,46 +137,6 @@ class CategoryManagerTest extends TestCase
         $categories = $categoryManager->getRootCategoriesForContext($context);
         $this->assertCount(1, $categories);
         $this->assertContains($categoryFoo, $categories);
-    }
-
-    public function testGetRootCategories(): void
-    {
-        /** @var ContextTest $contextFoo */
-        $contextFoo = $this->getMockForAbstractClass(ContextTest::class);
-        $contextFoo->setId(1);
-        $contextFoo->setName('foo');
-        $contextFoo->setEnabled(true);
-
-        /** @var ContextTest $contextBar */
-        $contextBar = $this->getMockForAbstractClass(ContextTest::class);
-        $contextBar->setId(2);
-        $contextBar->setName('bar');
-        $contextBar->setEnabled(true);
-
-        /** @var CategoryTest $categoryFoo */
-        $categoryFoo = $this->getMockForAbstractClass(CategoryTest::class);
-        $categoryFoo->setId(1);
-        $categoryFoo->setName('foo');
-        $categoryFoo->setContext($contextFoo);
-        $categoryFoo->setParent(null);
-        $categoryFoo->setEnabled(true);
-
-        /** @var CategoryTest $categoryBar */
-        $categoryBar = $this->getMockForAbstractClass(CategoryTest::class);
-        $categoryBar->setId(2);
-        $categoryBar->setName('bar');
-        $categoryBar->setContext($contextBar);
-        $categoryBar->setParent(null);
-        $categoryBar->setEnabled(true);
-
-        $categoryManager = $this->getCategoryManager(static function (MockObject $qb): void {
-        }, [$categoryFoo, $categoryBar]);
-
-        $categories = $categoryManager->getRootCategories(false);
-        $this->assertArrayHasKey($contextFoo->getId(), $categories);
-        $this->assertArrayHasKey($contextBar->getId(), $categories);
-        $this->assertSame($categoryFoo, $categories[$contextFoo->getId()]);
-        $this->assertSame($categoryBar, $categories[$contextBar->getId()]);
     }
 
     public function testGetRootCategoriesSplitByContexts(): void

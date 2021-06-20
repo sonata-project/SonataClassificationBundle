@@ -46,9 +46,6 @@ class CategoryManager extends BaseDocumentManager implements CategoryManagerInte
         $this->categories = [];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getRootCategoriesPager($page = 1, $limit = 25, $criteria = [])
     {
         $queryBuilder = $this->getObjectManager()->createQueryBuilder()
@@ -64,9 +61,6 @@ class CategoryManager extends BaseDocumentManager implements CategoryManagerInte
         return $pager;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getSubCategoriesPager($categoryId, $page = 1, $limit = 25, $criteria = [])
     {
         $queryBuilder = $this->getObjectManager()->createQueryBuilder()
@@ -81,51 +75,6 @@ class CategoryManager extends BaseDocumentManager implements CategoryManagerInte
         $pager->init();
 
         return $pager;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getRootCategory($context = null)
-    {
-        $context = $this->getContext($context);
-
-        $this->loadCategories($context);
-
-        return current($this->categories[$context->getId()]);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getRootCategories($loadChildren = true)
-    {
-        $rootCategories = $this->getObjectManager()->createQuery(sprintf('SELECT c FROM %s c WHERE c.parent IS NULL', $this->getClass()))
-            ->execute();
-
-        $categories = [];
-
-        foreach ($rootCategories as $category) {
-            if (null === $category->getContext()) {
-                throw new \RuntimeException('Context cannot be null');
-            }
-
-            $categories[$category->getContext()->getId()] = $loadChildren ? $this->getRootCategory($category->getContext()) : $category;
-        }
-
-        return $categories;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCategories($context = null)
-    {
-        $context = $this->getContext($context);
-
-        $this->loadCategories($context);
-
-        return $this->categories[$context->getId()];
     }
 
     public function getPager(array $criteria, int $page, int $limit = 10, array $sort = []): PagerInterface
@@ -157,36 +106,85 @@ class CategoryManager extends BaseDocumentManager implements CategoryManagerInte
         return $pager;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getRootCategoryWithChildren(CategoryInterface $category): void
+    public function getRootCategoryWithChildren(CategoryInterface $category)
     {
-        throw new \RuntimeException('Not Implemented yet');
+        if (null === $category->getContext()) {
+            throw new \RuntimeException('Context cannot be null');
+        }
+        if (null !== $category->getParent()) {
+            throw new \RuntimeException('Method can be called only for root categories');
+        }
+
+        $context = $category->getContext();
+
+        $this->loadCategories($context);
+
+        foreach ($this->categories[$context->getId()] as $contextRootCategory) {
+            if ($category->getId() === $contextRootCategory->getId()) {
+                return $contextRootCategory;
+            }
+        }
+
+        throw new \RuntimeException('Category does not exist');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getRootCategoriesForContext(?ContextInterface $context = null): void
+    public function getRootCategoriesForContext(?ContextInterface $context = null)
     {
-        throw new \RuntimeException('Not Implemented yet');
+        $context = $this->getContext($context);
+
+        $this->loadCategories($context);
+
+        return $this->categories[$context->getId()];
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getAllRootCategories($loadChildren = true): void
+    public function getAllRootCategories($loadChildren = true)
     {
-        throw new \RuntimeException('Not Implemented yet');
+        $class = $this->getClass();
+
+        $rootCategories = $this->getObjectManager()->createQuery(sprintf('SELECT c FROM %s c WHERE c.parent IS NULL', $class))
+            ->execute();
+
+        $categories = [];
+
+        foreach ($rootCategories as $category) {
+            if (null === $category->getContext()) {
+                throw new \RuntimeException('Context cannot be null');
+            }
+
+            $categories[] = $loadChildren ? $this->getRootCategoryWithChildren($category) : $category;
+        }
+
+        return $categories;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getRootCategoriesSplitByContexts($loadChildren = true): void
+    public function getRootCategoriesSplitByContexts($loadChildren = true)
     {
-        throw new \RuntimeException('Not Implemented yet');
+        $rootCategories = $this->getAllRootCategories($loadChildren);
+
+        $splitCategories = [];
+
+        foreach ($rootCategories as $category) {
+            $splitCategories[$category->getContext()->getId()][] = $category;
+        }
+
+        return $splitCategories;
+    }
+
+    public function getBySlug(string $slug, $context = null, ?bool $enabled = true): ?CategoryInterface
+    {
+        $queryBuilder = $this->getRepository()
+            ->createQueryBuilder('c')
+            ->select('c')
+            ->andWhere('c.slug = :slug')->setParameter('slug', $slug);
+
+        if (null !== $context) {
+            $queryBuilder->andWhere('c.context = :context')->setParameter('context', $context);
+        }
+        if (null !== $enabled) {
+            $queryBuilder->andWhere('c.enabled = :enabled')->setParameter('enabled', $enabled);
+        }
+
+        return $queryBuilder->getQuery()->getOneOrNullResult();
     }
 
     /**

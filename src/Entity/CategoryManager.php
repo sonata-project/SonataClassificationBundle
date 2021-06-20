@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sonata\ClassificationBundle\Entity;
 
+use Doctrine\DBAL\Types\Types;
 use Doctrine\Persistence\ManagerRegistry;
 use Sonata\ClassificationBundle\Model\CategoryInterface;
 use Sonata\ClassificationBundle\Model\CategoryManagerInterface;
@@ -104,22 +105,6 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
         throw new \RuntimeException('Category does not exist');
     }
 
-    /**
-     * @deprecated since sonata-project/classification-bundle 3.9, to be removed in 4.0.
-     *
-     * @param ContextInterface|string|null $context
-     *
-     * @return CategoryInterface
-     */
-    public function getRootCategory($context = null)
-    {
-        $context = $this->getContext($context);
-
-        $this->loadCategories($context);
-
-        return $this->categories[$context->getId()][0];
-    }
-
     public function getRootCategoriesForContext(?ContextInterface $context = null)
     {
         if (null === $context) {
@@ -129,33 +114,6 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
         $this->loadCategories($context);
 
         return $this->categories[$context->getId()];
-    }
-
-    /**
-     * @deprecated since sonata-project/classification-bundle 3.9, to be removed in 4.0.
-     *
-     * @param bool|true $loadChildren
-     *
-     * @return CategoryInterface[]
-     */
-    public function getRootCategories($loadChildren = true)
-    {
-        $class = $this->getClass();
-
-        $rootCategories = $this->getObjectManager()->createQuery(sprintf('SELECT c FROM %s c WHERE c.parent IS NULL', $class))
-            ->execute();
-
-        $categories = [];
-
-        foreach ($rootCategories as $category) {
-            if (null === $category->getContext()) {
-                throw new \RuntimeException('Context cannot be null');
-            }
-
-            $categories[$category->getContext()->getId()] = $loadChildren ? $this->getRootCategory($category->getContext()) : $category;
-        }
-
-        return $categories;
     }
 
     public function getAllRootCategories($loadChildren = true)
@@ -189,15 +147,6 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
         }
 
         return $splitCategories;
-    }
-
-    public function getCategories($context = null)
-    {
-        $context = $this->getContext($context);
-
-        $this->loadCategories($context);
-
-        return $this->categories[$context->getId()];
     }
 
     public function getPager(array $criteria, int $page, int $limit = 10, array $sort = []): PagerInterface
@@ -237,7 +186,7 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
             ->andWhere('c.slug = :slug')->setParameter('slug', $slug);
 
         if (null !== $context) {
-            $queryBuilder->andWhere('c.context = :context')->setParameter('context', $context);
+            $queryBuilder->andWhere('c.context = :context')->setParameter('context', $context, Types::OBJECT);
         }
         if (null !== $enabled) {
             $queryBuilder->andWhere('c.enabled = :enabled')->setParameter('enabled', $enabled);

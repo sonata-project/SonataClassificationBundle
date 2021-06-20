@@ -135,7 +135,7 @@ interface CategoryInterface
     public function setContext(ContextInterface $context);
 
     /**
-     * @return ContextInterface
+     * @return ContextInterface|null
      */
     public function getContext();
 }

@@ -86,10 +86,10 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
     public function getRootCategoryWithChildren(CategoryInterface $category)
     {
         if (null === $category->getContext()) {
-            throw new \RuntimeException('Context cannot be null');
+            throw new \InvalidArgumentException('Context cannot be null.');
         }
         if (null !== $category->getParent()) {
-            throw new \RuntimeException('Method can be called only for root categories');
+            throw new \InvalidArgumentException('Method can be called only for root categories.');
         }
 
         $context = $category->getContext();
@@ -102,7 +102,7 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
             }
         }
 
-        throw new \RuntimeException('Category does not exist');
+        throw new \InvalidArgumentException(sprintf('Category "%s" does not exist.', $category->getId()));
     }
 
     public function getRootCategoriesForContext(?ContextInterface $context = null)
@@ -127,7 +127,7 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
 
         foreach ($rootCategories as $category) {
             if (null === $category->getContext()) {
-                throw new \RuntimeException('Context cannot be null');
+                throw new \LogicException('Context cannot be null.');
             }
 
             $categories[] = $loadChildren ? $this->getRootCategoryWithChildren($category) : $category;

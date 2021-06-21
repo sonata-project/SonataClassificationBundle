@@ -109,10 +109,10 @@ class CategoryManager extends BaseDocumentManager implements CategoryManagerInte
     public function getRootCategoryWithChildren(CategoryInterface $category)
     {
         if (null === $category->getContext()) {
-            throw new \RuntimeException('Context cannot be null');
+            throw new \InvalidArgumentException('Context cannot be null.');
         }
         if (null !== $category->getParent()) {
-            throw new \RuntimeException('Method can be called only for root categories');
+            throw new \InvalidArgumentException('Method can be called only for root categories.');
         }
 
         $context = $category->getContext();
@@ -125,7 +125,7 @@ class CategoryManager extends BaseDocumentManager implements CategoryManagerInte
             }
         }
 
-        throw new \RuntimeException('Category does not exist');
+        throw new \InvalidArgumentException(sprintf('Category "%s" does not exist.', $category->getId()));
     }
 
     public function getRootCategoriesForContext(?ContextInterface $context = null)
@@ -148,7 +148,7 @@ class CategoryManager extends BaseDocumentManager implements CategoryManagerInte
 
         foreach ($rootCategories as $category) {
             if (null === $category->getContext()) {
-                throw new \RuntimeException('Context cannot be null');
+                throw new \LogicException('Context cannot be null.');
             }
 
             $categories[] = $loadChildren ? $this->getRootCategoryWithChildren($category) : $category;
@@ -215,7 +215,7 @@ class CategoryManager extends BaseDocumentManager implements CategoryManagerInte
 
         foreach ($categories as $pos => $category) {
             if (0 === $pos && $category->getParent()) {
-                throw new \RuntimeException('The first category must be the root');
+                throw new \LogicException('The first category must be the root.');
             }
 
             if (0 === $pos) {

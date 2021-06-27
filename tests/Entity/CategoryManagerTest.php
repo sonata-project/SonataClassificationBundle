@@ -14,18 +14,18 @@ declare(strict_types=1);
 namespace Sonata\ClassificationBundle\Tests\Entity;
 
 use Doctrine\ORM\AbstractQuery;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sonata\ClassificationBundle\Entity\BaseCategory;
 use Sonata\ClassificationBundle\Entity\CategoryManager;
 use Sonata\ClassificationBundle\Model\ContextManagerInterface;
-use Sonata\Doctrine\Test\EntityManagerMockFactoryTrait;
 
 class CategoryManagerTest extends TestCase
 {
-    use EntityManagerMockFactoryTrait;
-
     public function testGetPager(): void
     {
         $self = $this;
@@ -198,16 +198,26 @@ class CategoryManagerTest extends TestCase
             ->getBySlug('theslug', 'contextA', false);
     }
 
-    private function getCategoryManager($qbCallback, $createQueryResult = null): CategoryManager
+    private function getCategoryManager($qbCallback, $createQueryResult = []): CategoryManager
     {
-        $em = $this->createEntityManagerMock($qbCallback, []);
+        $query = $this->createMock(AbstractQuery::class);
+        $query->method('getResult')->willReturn($createQueryResult);
 
-        if (null !== $createQueryResult) {
-            $query = $this->createMock(AbstractQuery::class);
-            $query->expects($this->once())->method('execute')->willReturn($createQueryResult);
-            $query->method('setParameter')->willReturn($query);
-            $em->expects($this->once())->method('createQuery')->willReturn($query);
-        }
+        $qb = $this->createMock(QueryBuilder::class);
+
+        $qb->method('select')->willReturn($qb);
+        $qb->method('getQuery')->willReturn($query);
+        $qb->method('where')->willReturn($qb);
+        $qb->method('orderBy')->willReturn($qb);
+        $qb->method('setParameter')->willReturn($qb);
+
+        $qbCallback($qb);
+
+        $repository = $this->createMock(EntityRepository::class);
+        $repository->method('createQueryBuilder')->willReturn($qb);
+
+        $em = $this->createMock(EntityManager::class);
+        $em->method('getRepository')->willReturn($repository);
 
         $registry = $this->getMockForAbstractClass(ManagerRegistry::class);
         $registry->method('getManagerForClass')->willReturn($em);

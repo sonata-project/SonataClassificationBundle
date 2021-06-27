@@ -111,7 +111,10 @@ class CategoryManager extends BaseDocumentManager implements CategoryManagerInte
     public function getRootCategoryWithChildren(CategoryInterface $category)
     {
         if (null === $category->getContext()) {
-            throw new \InvalidArgumentException('Context cannot be null.');
+            throw new \InvalidArgumentException(sprintf(
+                'Context of category "%s" cannot be null.',
+                $category->getId()
+            ));
         }
         if (null !== $category->getParent()) {
             throw new \InvalidArgumentException('Method can be called only for root categories.');
@@ -152,7 +155,10 @@ class CategoryManager extends BaseDocumentManager implements CategoryManagerInte
 
         foreach ($rootCategories as $category) {
             if (null === $category->getContext()) {
-                throw new \LogicException('Context cannot be null.');
+                throw new \LogicException(sprintf(
+                    'Context of category "%s" cannot be null.',
+                    $category->getId()
+                ));
             }
 
             $categories[] = $loadChildren ? $this->getRootCategoryWithChildren($category) : $category;

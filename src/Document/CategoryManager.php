@@ -48,9 +48,10 @@ class CategoryManager extends BaseDocumentManager implements CategoryManagerInte
 
     public function getRootCategoriesPager($page = 1, $limit = 25, $criteria = [])
     {
-        $queryBuilder = $this->getObjectManager()->createQueryBuilder()
+        $queryBuilder = $this->getDocumentManager()
+            ->getRepository($this->class)
+            ->createQueryBuilder()
             ->select('c')
-            ->from($this->class, 'c')
             ->andWhere('c.parent IS NULL');
 
         $pager = new Pager($limit);
@@ -63,9 +64,10 @@ class CategoryManager extends BaseDocumentManager implements CategoryManagerInte
 
     public function getSubCategoriesPager($categoryId, $page = 1, $limit = 25, $criteria = [])
     {
-        $queryBuilder = $this->getObjectManager()->createQueryBuilder()
+        $queryBuilder = $this->getDocumentManager()
+            ->getRepository($this->class)
+            ->createQueryBuilder()
             ->select('c')
-            ->from($this->class, 'c')
             ->where('c.parent = :categoryId')
             ->setParameter('categoryId', $categoryId);
 
@@ -139,9 +141,11 @@ class CategoryManager extends BaseDocumentManager implements CategoryManagerInte
 
     public function getAllRootCategories($loadChildren = true)
     {
-        $class = $this->getClass();
-
-        $rootCategories = $this->getObjectManager()->createQuery(sprintf('SELECT c FROM %s c WHERE c.parent IS NULL', $class))
+        $rootCategories = $this->getDocumentManager()
+            ->getRepository($this->class)
+            ->createQueryBuilder('c')
+            ->where('c.parent IS NULL')
+            ->getQuery()
             ->execute();
 
         $categories = [];
@@ -196,8 +200,13 @@ class CategoryManager extends BaseDocumentManager implements CategoryManagerInte
             return;
         }
 
-        $categories = $this->getObjectManager()->createQuery(sprintf('SELECT c FROM %s c WHERE c.context = :context ORDER BY c.parent ASC', $this->getClass()))
+        $categories = $this->getDocumentManager()
+            ->getRepository($this->class)
+            ->createQueryBuilder('c')
+            ->where('c.context = :context')
+            ->orderBy('c.parent')
             ->setParameter('context', $context->getId())
+            ->getQuery()
             ->execute();
 
         if (0 === \count($categories)) {

@@ -118,9 +118,10 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
 
     public function getAllRootCategories($loadChildren = true)
     {
-        $class = $this->getClass();
-
-        $rootCategories = $this->getObjectManager()->createQuery(sprintf('SELECT c FROM %s c WHERE c.parent IS NULL', $class))
+        $rootCategories = $this->getRepository()
+            ->createQueryBuilder('c')
+            ->where('c.parent IS NULL')
+            ->getQuery()
             ->execute();
 
         $categories = [];
@@ -204,10 +205,12 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
             return;
         }
 
-        $class = $this->getClass();
-
-        $categories = $this->getObjectManager()->createQuery(sprintf('SELECT c FROM %s c WHERE c.context = :context ORDER BY c.parent ASC', $class))
+        $categories = $this->getRepository()
+            ->createQueryBuilder('c')
+            ->where('c.context = :context')
+            ->orderBy('c.parent')
             ->setParameter('context', $context->getId())
+            ->getQuery()
             ->execute();
 
         if (0 === \count($categories)) {

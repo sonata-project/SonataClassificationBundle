@@ -122,7 +122,7 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
             ->createQueryBuilder('c')
             ->where('c.parent IS NULL')
             ->getQuery()
-            ->execute();
+            ->getResult();
 
         $categories = [];
 
@@ -211,7 +211,7 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
             ->orderBy('c.parent')
             ->setParameter('context', $context->getId())
             ->getQuery()
-            ->execute();
+            ->getResult();
 
         if (0 === \count($categories)) {
             // no category, create one for the provided context

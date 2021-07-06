@@ -21,79 +21,63 @@ interface CollectionInterface
     public function getId();
 
     /**
-     * Set name.
-     *
      * @param string $name
      */
     public function setName($name);
 
     /**
-     * Get name.
-     *
-     * @return string $name
+     * @return string|null
      */
     public function getName();
 
     /**
-     * Set enabled.
-     *
      * @param bool $enabled
      */
     public function setEnabled($enabled);
 
     /**
-     * Get enabled.
-     *
-     * @return bool $enabled
+     * @return bool
      */
     public function getEnabled();
 
     /**
-     * Set slug.
-     *
-     * @param int $slug
+     * @param string $slug
      */
     public function setSlug($slug);
 
     /**
-     * Get slug.
-     *
-     * @return string $slug
+     * @return string|null
      */
     public function getSlug();
 
     /**
-     * Set description.
-     *
      * @param string|null $description
      */
     public function setDescription($description);
 
     /**
-     * Get description.
-     *
-     * @return string|null $description
+     * @return string|null
      */
     public function getDescription();
 
     public function setCreatedAt(\DateTime $createdAt);
 
     /**
-     * @return \DateTime
+     * @return \DateTime|null
      */
     public function getCreatedAt();
 
     public function setUpdatedAt(\DateTime $updatedAt);
 
     /**
-     * @return \DateTime
+     * @return \DateTime|null
      */
     public function getUpdatedAt();
 
     public function setContext(ContextInterface $context);
 
     /**
-     * @return ContextInterface
+     * @return ContextInterface|null
      */
     public function getContext();
 }

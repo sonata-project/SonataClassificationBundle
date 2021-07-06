@@ -57,14 +57,14 @@ interface CategoryManagerInterface extends ManagerInterface, PageableInterface
     public function getRootCategoriesForContext(?ContextInterface $context = null);
 
     /**
-     * @param bool|true $loadChildren
+     * @param bool $loadChildren
      *
      * @return CategoryInterface[]
      */
     public function getAllRootCategories($loadChildren = true);
 
     /**
-     * @param bool|true $loadChildren
+     * @param bool $loadChildren
      *
      * @return array
      */

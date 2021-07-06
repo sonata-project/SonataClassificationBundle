@@ -16,19 +16,19 @@ namespace Sonata\ClassificationBundle\Model;
 abstract class Collection implements CollectionInterface
 {
     /**
-     * @var string
+     * @var string|null
      */
     protected $name;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $slug;
 
     /**
      * @var bool
      */
-    protected $enabled;
+    protected $enabled = false;
 
     /**
      * @var string|null
@@ -36,17 +36,17 @@ abstract class Collection implements CollectionInterface
     protected $description;
 
     /**
-     * @var \DateTime
+     * @var \DateTime|null
      */
     protected $createdAt;
 
     /**
-     * @var \DateTime
+     * @var \DateTime|null
      */
     protected $updatedAt;
 
     /**
-     * @var ContextInterface
+     * @var ContextInterface|null
      */
     protected $context;
 
@@ -133,9 +133,6 @@ abstract class Collection implements CollectionInterface
         $this->context = $context;
     }
 
-    /**
-     * @return ContextInterface
-     */
     public function getContext()
     {
         return $this->context;

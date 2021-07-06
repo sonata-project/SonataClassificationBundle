@@ -18,32 +18,32 @@ use Cocur\Slugify\Slugify;
 abstract class Tag implements TagInterface
 {
     /**
-     * @var string
+     * @var string|null
      */
     protected $name;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $slug;
 
     /**
-     * @var \DateTime
+     * @var \DateTime|null
      */
     protected $createdAt;
 
     /**
-     * @var \DateTime
+     * @var \DateTime|null
      */
     protected $updatedAt;
 
     /**
      * @var bool
      */
-    protected $enabled;
+    protected $enabled = false;
 
     /**
-     * @var ContextInterface
+     * @var ContextInterface|null
      */
     protected $context;
 
@@ -84,7 +84,7 @@ abstract class Tag implements TagInterface
         return $this->slug;
     }
 
-    public function setCreatedAt(?\DateTime $createdAt = null): void
+    public function setCreatedAt(\DateTime $createdAt): void
     {
         $this->createdAt = $createdAt;
     }
@@ -94,7 +94,7 @@ abstract class Tag implements TagInterface
         return $this->createdAt;
     }
 
-    public function setUpdatedAt(?\DateTime $updatedAt = null): void
+    public function setUpdatedAt(\DateTime $updatedAt): void
     {
         $this->updatedAt = $updatedAt;
     }

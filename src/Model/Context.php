@@ -16,29 +16,29 @@ namespace Sonata\ClassificationBundle\Model;
 abstract class Context implements ContextInterface
 {
     /**
-     * @var string
+     * @var string|null
      */
     protected $id;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $name;
 
     /**
-     * @var \DateTime
+     * @var \DateTime|null
      */
     protected $createdAt;
 
     /**
-     * @var \DateTime
+     * @var \DateTime|null
      */
     protected $updatedAt;
 
     /**
      * @var bool
      */
-    protected $enabled;
+    protected $enabled = false;
 
     public function __toString()
     {
@@ -65,7 +65,7 @@ abstract class Context implements ContextInterface
         return $this->enabled;
     }
 
-    public function setCreatedAt(?\DateTime $createdAt = null): void
+    public function setCreatedAt(\DateTime $createdAt): void
     {
         $this->createdAt = $createdAt;
     }
@@ -75,7 +75,7 @@ abstract class Context implements ContextInterface
         return $this->createdAt;
     }
 
-    public function setUpdatedAt(?\DateTime $updatedAt = null): void
+    public function setUpdatedAt(\DateTime $updatedAt): void
     {
         $this->updatedAt = $updatedAt;
     }

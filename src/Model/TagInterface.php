@@ -21,79 +21,53 @@ interface TagInterface
     public function getId();
 
     /**
-     * Set name.
-     *
      * @param string $name
      */
     public function setName($name);
 
     /**
-     * Get name.
-     *
-     * @return string $name
+     * @return string|null
      */
     public function getName();
 
     /**
-     * Set enabled.
-     *
      * @param bool $enabled
      */
     public function setEnabled($enabled);
 
     /**
-     * Get enabled.
-     *
-     * @return bool $enabled
+     * @return bool
      */
     public function getEnabled();
 
     /**
-     * Set slug.
-     *
-     * @param int $slug
+     * @param string $slug
      */
     public function setSlug($slug);
 
     /**
-     * Get slug.
-     *
-     * @return string $slug
+     * @return string|null
      */
     public function getSlug();
 
-    /**
-     * Set created_at.
-     *
-     * @param \DateTime $createdAt
-     */
-    public function setCreatedAt(?\DateTime $createdAt = null);
+    public function setCreatedAt(\DateTime $createdAt);
 
     /**
-     * Get created_at.
-     *
-     * @return \DateTime $createdAt
+     * @return \DateTime|null
      */
     public function getCreatedAt();
 
-    /**
-     * Set updated_at.
-     *
-     * @param \DateTime $updatedAt
-     */
-    public function setUpdatedAt(?\DateTime $updatedAt = null);
+    public function setUpdatedAt(\DateTime $updatedAt);
 
     /**
-     * Get updated_at.
-     *
-     * @return \DateTime $updatedAt
+     * @return \DateTime|null
      */
     public function getUpdatedAt();
 
     public function setContext(ContextInterface $context);
 
     /**
-     * @return ContextInterface
+     * @return ContextInterface|null
      */
     public function getContext();
 }

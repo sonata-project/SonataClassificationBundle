@@ -19,19 +19,19 @@ use Doctrine\Common\Collections\Collection as DoctrineCollection;
 abstract class Category implements CategoryInterface
 {
     /**
-     * @var string
+     * @var string|null
      */
     protected $name;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $slug;
 
     /**
      * @var bool
      */
-    protected $enabled;
+    protected $enabled = false;
 
     /**
      * @var string|null
@@ -39,12 +39,12 @@ abstract class Category implements CategoryInterface
     protected $description;
 
     /**
-     * @var \DateTime
+     * @var \DateTime|null
      */
     protected $createdAt;
 
     /**
-     * @var \DateTime
+     * @var \DateTime|null
      */
     protected $updatedAt;
 

@@ -30,6 +30,8 @@ final class QueryBuilder extends BaseQueryBuilder
     public function setParameter($key, $value, $type = null)
     {
         $this->parameters[$key] = $value;
+
+        return $this;
     }
 
     public function andWhere()
@@ -37,6 +39,8 @@ final class QueryBuilder extends BaseQueryBuilder
         $query = \func_get_args();
 
         $this->query[] = $query;
+
+        return $this;
     }
 
     public function expr(): self
@@ -69,6 +73,8 @@ final class QueryBuilder extends BaseQueryBuilder
     public function leftJoin($join, $alias, $conditionType = null, $condition = null, $indexBy = null)
     {
         $this->query[] = $join;
+
+        return $this;
     }
 
     public function orX($x = null): Orx

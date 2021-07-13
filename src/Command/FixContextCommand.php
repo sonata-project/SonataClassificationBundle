@@ -91,5 +91,7 @@ class FixContextCommand extends ContainerAwareCommand
         }
 
         $output->writeln('Done!');
+
+        return 0;
     }
 }

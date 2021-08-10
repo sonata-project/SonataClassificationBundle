@@ -66,7 +66,7 @@ class FixContextCommand extends Command
         $this->setDescription(static::$defaultDescription);
     }
 
-    public function execute(InputInterface $input, OutputInterface $output): void
+    public function execute(InputInterface $input, OutputInterface $output): int
     {
         $output->writeln('1. Checking default context');
 

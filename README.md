@@ -17,14 +17,14 @@ Symfony SonataClassificationBundle
 [![Monthly Downloads](https://poser.pugx.org/sonata-project/classification-bundle/d/monthly)](https://packagist.org/packages/sonata-project/classification-bundle)
 [![Daily Downloads](https://poser.pugx.org/sonata-project/classification-bundle/d/daily)](https://packagist.org/packages/sonata-project/classification-bundle)
 
-Branch | Github Actions | Code Coverage |
------- | -------------- | ------------- |
-3.x    | [![Test][test_stable_badge]][test_stable_link]     | [![Coverage Status][coverage_stable_badge]][coverage_stable_link]     |
-master | [![Test][test_unstable_badge]][test_unstable_link] | [![Coverage Status][coverage_unstable_badge]][coverage_unstable_link] |
+Branch | Github Actions | Code Coverage | Documentation |
+------ | -------------- | ------------- | ------------- |
+3.x    | [![Test][test_stable_badge]][test_stable_link]     | [![Coverage Status][coverage_stable_badge]][coverage_stable_link]     | [![Documentation Status][documentation_stable_badge]][documentation_stable_link]     |
+master | [![Test][test_unstable_badge]][test_unstable_link] | [![Coverage Status][coverage_unstable_badge]][coverage_unstable_link] | [![Documentation Status][documentation_unstable_badge]][documentation_unstable_link] |
 
 ## Documentation
 
-Check out the documentation on the [official website](https://sonata-project.org/bundles/classification).
+Check out the documentation on the [official website](https://docs.sonata-project.org/projects/SonataClassificationBundle).
 
 ## Support
 
@@ -48,3 +48,8 @@ This package is available under the [MIT license](LICENSE).
 [coverage_unstable_link]: https://codecov.io/gh/sonata-project/SonataClassificationBundle/branch/master
 [shepherd_stable_badge]: https://shepherd.dev/github/sonata-project/SonataClassificationBundle/coverage.svg
 [shepherd_stable_link]: https://shepherd.dev/github/sonata-project/SonataClassificationBundle
+
+[documentation_stable_badge]: https://readthedocs.org/projects/sonataclassificationbundle/badge/?version=3.x
+[documentation_stable_link]: https://docs.sonata-project.org/projects/SonataClassificationBundle/en/3.x/?badge=3.x
+[documentation_unstable_badge]: https://readthedocs.org/projects/sonataclassificationbundle/badge/?version=master
+[documentation_unstable_link]: https://docs.readthedocs.org/projects/SonataClassificationBundle/en/master/?badge=master

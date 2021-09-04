@@ -35,14 +35,14 @@ class ContextTest extends TestCase
         $context->setUpdatedAt($time);
         $context->setEnabled(true);
 
-        $this->assertSame('Hello World', $context->getName());
-        $this->assertSame('Hello World', $context->__toString());
-        $this->assertSame($time, $context->getCreatedAt());
-        $this->assertSame($time, $context->getUpdatedAt());
-        $this->assertTrue($context->getEnabled());
+        static::assertSame('Hello World', $context->getName());
+        static::assertSame('Hello World', $context->__toString());
+        static::assertSame($time, $context->getCreatedAt());
+        static::assertSame($time, $context->getUpdatedAt());
+        static::assertTrue($context->getEnabled());
 
         $context->setName('');
-        $this->assertSame('n/a', $context->__toString());
+        static::assertSame('n/a', $context->__toString());
     }
 
     public function testPreUpdate(): void
@@ -51,6 +51,6 @@ class ContextTest extends TestCase
         $context = $this->getMockForAbstractClass(Context::class);
         $context->preUpdate();
 
-        $this->assertInstanceOf(\DateTime::class, $context->getUpdatedAt());
+        static::assertInstanceOf(\DateTime::class, $context->getUpdatedAt());
     }
 }

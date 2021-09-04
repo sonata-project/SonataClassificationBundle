@@ -77,21 +77,21 @@ final class AbstractCategoriesBlockServiceTest extends BlockServiceTestCase
             ->addMethods(['getId'])
             ->disableOriginalConstructor()
             ->getMockForAbstractClass();
-        $category->expects($this->any())->method('getId')->willReturn(23);
+        $category->expects(static::any())->method('getId')->willReturn(23);
 
-        $this->categoryManager->expects($this->any())
+        $this->categoryManager->expects(static::any())
             ->method('find')
-            ->with($this->equalTo('23'))
+            ->with(static::equalTo('23'))
             ->willReturn($category);
 
         $block = $this->createMock(BlockInterface::class);
-        $block->expects($this->any())
+        $block->expects(static::any())
             ->method('getSetting')
-            ->with($this->equalTo('categoryId'))
+            ->with(static::equalTo('categoryId'))
             ->willReturn(23);
-        $block->expects($this->once())
+        $block->expects(static::once())
             ->method('setSetting')
-            ->with($this->equalTo('categoryId'), $this->equalTo($category));
+            ->with(static::equalTo('categoryId'), static::equalTo($category));
 
         $blockService = $this->getMockForAbstractClass(AbstractCategoriesBlockService::class, [
             $this->twig, $this->contextManager, $this->categoryManager, $this->categoryAdmin,
@@ -105,16 +105,16 @@ final class AbstractCategoriesBlockServiceTest extends BlockServiceTestCase
             ->addMethods(['getId'])
             ->disableOriginalConstructor()
             ->getMockForAbstractClass();
-        $category->expects($this->any())->method('getId')->willReturn(23);
+        $category->expects(static::any())->method('getId')->willReturn(23);
 
         $block = $this->createMock(BlockInterface::class);
-        $block->expects($this->any())
+        $block->expects(static::any())
             ->method('getSetting')
-            ->with($this->equalTo('categoryId'))
+            ->with(static::equalTo('categoryId'))
             ->willReturn($category);
-        $block->expects($this->once())
+        $block->expects(static::once())
             ->method('setSetting')
-            ->with($this->equalTo('categoryId'), $this->equalTo(23));
+            ->with(static::equalTo('categoryId'), static::equalTo(23));
 
         $blockService = $this->getMockForAbstractClass(AbstractCategoriesBlockService::class, [
             $this->twig, $this->contextManager, $this->categoryManager, $this->categoryAdmin,
@@ -128,16 +128,16 @@ final class AbstractCategoriesBlockServiceTest extends BlockServiceTestCase
             ->addMethods(['getId'])
             ->disableOriginalConstructor()
             ->getMockForAbstractClass();
-        $category->expects($this->any())->method('getId')->willReturn(23);
+        $category->expects(static::any())->method('getId')->willReturn(23);
 
         $block = $this->createMock(BlockInterface::class);
-        $block->expects($this->any())
+        $block->expects(static::any())
             ->method('getSetting')
-            ->with($this->equalTo('categoryId'))
+            ->with(static::equalTo('categoryId'))
             ->willReturn($category);
-        $block->expects($this->once())
+        $block->expects(static::once())
             ->method('setSetting')
-            ->with($this->equalTo('categoryId'), $this->equalTo(23));
+            ->with(static::equalTo('categoryId'), static::equalTo(23));
 
         $blockService = $this->getMockForAbstractClass(AbstractCategoriesBlockService::class, [
             $this->twig, $this->contextManager, $this->categoryManager, $this->categoryAdmin,

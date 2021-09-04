@@ -45,8 +45,8 @@ class CategoryFilterTest extends TestCase
             ]);
         $options = $filter->getRenderSettings()[1];
 
-        $this->assertSame(ChoiceType::class, $options['field_type']);
-        $this->assertCount(1, $options['field_options']['choices']);
+        static::assertSame(ChoiceType::class, $options['field_type']);
+        static::assertCount(1, $options['field_options']['choices']);
     }
 
     public function testRenderSettingsWithContext(): void
@@ -64,8 +64,8 @@ class CategoryFilterTest extends TestCase
         ]);
         $options = $filter->getRenderSettings()[1];
 
-        $this->assertSame(ChoiceType::class, $options['field_type']);
-        $this->assertCount(1, $options['field_options']['choices']);
+        static::assertSame(ChoiceType::class, $options['field_type']);
+        static::assertCount(1, $options['field_options']['choices']);
     }
 
     private function createCategory(): Category

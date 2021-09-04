@@ -121,17 +121,17 @@ class CategoryAdminControllerTest extends TestCase
         $twig = $this->createMock(Environment::class);
         $formRenderer = $this->createMock(FormRenderer::class);
 
-        $twig->expects($this->any())
+        $twig->expects(static::any())
             ->method('getRuntime')
             ->willReturn($formRenderer);
 
-        $this->csrfProvider->expects($this->any())
+        $this->csrfProvider->expects(static::any())
             ->method('getToken')
             ->willReturnCallback(static function ($intention) {
                 return new CsrfToken($intention, 'csrf-token-123_'.$intention);
             });
 
-        $this->csrfProvider->expects($this->any())
+        $this->csrfProvider->expects(static::any())
             ->method('isTokenValid')
             ->willReturnCallback(static function (CsrfToken $token) {
                 if ($token->getValue() === 'csrf-token-123_'.$token->getId()) {
@@ -141,11 +141,11 @@ class CategoryAdminControllerTest extends TestCase
                 return false;
             });
 
-        $this->admin->expects($this->any())
+        $this->admin->expects(static::any())
             ->method('getCode')
             ->willReturn('admin_code');
 
-        $this->container->expects($this->any())
+        $this->container->expects(static::any())
             ->method('get')
             ->willReturnCallback(function ($id) use ($twig) {
                 switch ($id) {
@@ -174,7 +174,7 @@ class CategoryAdminControllerTest extends TestCase
         // php 5.3
         $tthis = $this;
 
-        $this->container->expects($this->any())
+        $this->container->expects(static::any())
             ->method('has')
             ->willReturnCallback(static function ($id) use ($tthis) {
                 if ('security.csrf.token_manager' === $id && null !== $tthis->getCsrfProvider()) {
@@ -188,7 +188,7 @@ class CategoryAdminControllerTest extends TestCase
                 return false;
             });
 
-        $this->admin->expects($this->any())
+        $this->admin->expects(static::any())
             ->method('generateUrl')
             ->willReturnCallback(
                 static function ($name, array $parameters = [], $absolute = false) {
@@ -201,7 +201,7 @@ class CategoryAdminControllerTest extends TestCase
                 }
             );
 
-        $this->admin->expects($this->any())
+        $this->admin->expects(static::any())
             ->method('getTemplate')
             ->willReturn('@SonataClassification/CategoryAdmin/list.html.twig');
 
@@ -219,11 +219,11 @@ class CategoryAdminControllerTest extends TestCase
         $this->request->query->set('hide_context', '0');
 
         $result = $this->controller->listAction($this->request);
-        $this->assertInstanceOf(
+        static::assertInstanceOf(
             RedirectResponse::class,
             $result
         );
-        $this->assertSame('tree?hide_context=0', $result->getTargetUrl());
+        static::assertSame('tree?hide_context=0', $result->getTargetUrl());
     }
 
     /**
@@ -240,19 +240,19 @@ class CategoryAdminControllerTest extends TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $form->expects($this->once())
+        $form->expects(static::once())
              ->method('createView')
              ->willReturn(new FormView());
 
-        $this->admin->expects($this->once())
+        $this->admin->expects(static::once())
             ->method('getDatagrid')
             ->willReturn($datagrid);
 
-        $datagrid->expects($this->once())
+        $datagrid->expects(static::once())
             ->method('getForm')
             ->willReturn($form);
 
-        $datagrid->expects($this->once())
+        $datagrid->expects(static::once())
             ->method('getValues')
             ->willReturn([
                 'context' => [
@@ -260,11 +260,11 @@ class CategoryAdminControllerTest extends TestCase
                 ],
             ]);
 
-        $this->admin->expects($this->any())
+        $this->admin->expects(static::any())
             ->method('getPersistentParameter')
             ->willReturn($context);
 
-        $this->assertInstanceOf(
+        static::assertInstanceOf(
             Response::class,
             $this->controller->listAction($this->request)
         );
@@ -287,31 +287,31 @@ class CategoryAdminControllerTest extends TestCase
 
         $form = $this->createMock(Form::class);
 
-        $form->expects($this->once())
+        $form->expects(static::once())
             ->method('createView')
             ->willReturn(new FormView());
 
-        $this->admin->expects($this->once())
+        $this->admin->expects(static::once())
             ->method('getDatagrid')
             ->willReturn($datagrid);
 
-        $datagrid->expects($this->once())
+        $datagrid->expects(static::once())
             ->method('getForm')
             ->willReturn($form);
 
-        $this->admin->expects($this->any())
+        $this->admin->expects(static::any())
             ->method('getPersistentParameter')
             ->willReturn('default');
 
         if ($context) {
             $contextMock = $this->getContextMock($context);
             $this->request->query->set('context', $contextMock->getId());
-            $this->contextManager->expects($this->any())
+            $this->contextManager->expects(static::any())
                 ->method('find')
                 ->willReturn($contextMock);
         } else {
             $this->request->query->remove('context');
-            $this->contextManager->expects($this->any())
+            $this->contextManager->expects(static::any())
                 ->method('find')
                 ->willReturn(false);
         }
@@ -327,11 +327,11 @@ class CategoryAdminControllerTest extends TestCase
             $categoriesMock[$categoryMock->getContext()->getId()][] = $categoryMock;
         }
 
-        $this->categoryManager->expects($this->any())
+        $this->categoryManager->expects(static::any())
             ->method('getRootCategoriesSplitByContexts')
             ->willReturn($categoriesMock);
 
-        $this->assertInstanceOf(
+        static::assertInstanceOf(
             Response::class,
             $this->controller->treeAction($this->request)
         );
@@ -361,7 +361,7 @@ class CategoryAdminControllerTest extends TestCase
     private function getContextMock($id)
     {
         $contextMock = $this->createMock(ContextInterface::class);
-        $contextMock->expects($this->any())->method('getId')->willReturn($id);
+        $contextMock->expects(static::any())->method('getId')->willReturn($id);
         $contextMock->setName($id);
         $contextMock->setEnabled(true);
 

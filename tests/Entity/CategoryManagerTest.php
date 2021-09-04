@@ -105,7 +105,7 @@ class CategoryManagerTest extends TestCase
         $categoryManager = $this->getCategoryManager(static function (MockObject $qb): void {
         }, $categories);
 
-        $this->assertSame($categoryManager->getCategories($context), $categories);
+        static::assertSame($categoryManager->getCategories($context), $categories);
     }
 
     public function testGetRootCategoryWithChildren(): void
@@ -136,7 +136,7 @@ class CategoryManagerTest extends TestCase
         }, [$categoryFoo, $categoryBar]);
 
         $categoryFoo = $categoryManager->getRootCategoryWithChildren($categoryFoo);
-        $this->assertContains($categoryBar, $categoryFoo->getChildren());
+        static::assertContains($categoryBar, $categoryFoo->getChildren());
     }
 
     public function testGetRootCategory(): void
@@ -159,7 +159,7 @@ class CategoryManagerTest extends TestCase
         }, [$categoryFoo]);
 
         $categoryBar = $categoryManager->getRootCategory($context);
-        $this->assertSame($categoryFoo, $categoryBar);
+        static::assertSame($categoryFoo, $categoryBar);
     }
 
     public function testGetRootCategoriesForContext(): void
@@ -190,8 +190,8 @@ class CategoryManagerTest extends TestCase
         }, [$categoryFoo, $categoryBar]);
 
         $categories = $categoryManager->getRootCategoriesForContext($context);
-        $this->assertCount(1, $categories);
-        $this->assertContains($categoryFoo, $categories);
+        static::assertCount(1, $categories);
+        static::assertContains($categoryFoo, $categories);
     }
 
     public function testGetRootCategories(): void
@@ -228,10 +228,10 @@ class CategoryManagerTest extends TestCase
         }, [$categoryFoo, $categoryBar]);
 
         $categories = $categoryManager->getRootCategories(false);
-        $this->assertArrayHasKey($contextFoo->getId(), $categories);
-        $this->assertArrayHasKey($contextBar->getId(), $categories);
-        $this->assertSame($categoryFoo, $categories[$contextFoo->getId()]);
-        $this->assertSame($categoryBar, $categories[$contextBar->getId()]);
+        static::assertArrayHasKey($contextFoo->getId(), $categories);
+        static::assertArrayHasKey($contextBar->getId(), $categories);
+        static::assertSame($categoryFoo, $categories[$contextFoo->getId()]);
+        static::assertSame($categoryBar, $categories[$contextBar->getId()]);
     }
 
     public function testGetRootCategoriesSplitByContexts(): void
@@ -268,10 +268,10 @@ class CategoryManagerTest extends TestCase
         }, [$categoryFoo, $categoryBar]);
 
         $categories = $categoryManager->getRootCategoriesSplitByContexts(false);
-        $this->assertArrayHasKey($contextFoo->getId(), $categories);
-        $this->assertArrayHasKey($contextBar->getId(), $categories);
-        $this->assertContains($categoryFoo, $categories[$contextFoo->getId()]);
-        $this->assertContains($categoryBar, $categories[$contextBar->getId()]);
+        static::assertArrayHasKey($contextFoo->getId(), $categories);
+        static::assertArrayHasKey($contextBar->getId(), $categories);
+        static::assertContains($categoryFoo, $categories[$contextFoo->getId()]);
+        static::assertContains($categoryBar, $categories[$contextBar->getId()]);
     }
 
     public function testGetBySlug(): void
@@ -299,9 +299,9 @@ class CategoryManagerTest extends TestCase
 
         if (null !== $createQueryResult) {
             $query = $this->createMock(AbstractQuery::class);
-            $query->expects($this->once())->method('execute')->willReturn($createQueryResult);
+            $query->expects(static::once())->method('execute')->willReturn($createQueryResult);
             $query->method('setParameter')->willReturn($query);
-            $em->expects($this->once())->method('createQuery')->willReturn($query);
+            $em->expects(static::once())->method('createQuery')->willReturn($query);
         }
 
         $registry = $this->getMockForAbstractClass(ManagerRegistry::class);

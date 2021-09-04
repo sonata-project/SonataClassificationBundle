@@ -44,27 +44,27 @@ class CategoryTest extends TestCase
         $category->setMedia($media);
         $category->setContext($context);
 
-        $this->assertSame('Hello World', $category->getName());
-        $this->assertSame('Hello World', $category->__toString());
-        $this->assertSame('hello-world', $category->getSlug());
-        $this->assertTrue($category->getEnabled());
-        $this->assertSame('My description', $category->getDescription());
-        $this->assertSame($time, $category->getCreatedAt());
-        $this->assertSame($time, $category->getUpdatedAt());
-        $this->assertSame(2, $category->getPosition());
-        $this->assertSame($media, $category->getMedia());
-        $this->assertSame($context, $category->getContext());
+        static::assertSame('Hello World', $category->getName());
+        static::assertSame('Hello World', $category->__toString());
+        static::assertSame('hello-world', $category->getSlug());
+        static::assertTrue($category->getEnabled());
+        static::assertSame('My description', $category->getDescription());
+        static::assertSame($time, $category->getCreatedAt());
+        static::assertSame($time, $category->getUpdatedAt());
+        static::assertSame(2, $category->getPosition());
+        static::assertSame($media, $category->getMedia());
+        static::assertSame($context, $category->getContext());
 
         $category->setName('');
-        $this->assertSame('n-a', $category->getSlug());
-        $this->assertSame('n/a', $category->__toString());
+        static::assertSame('n-a', $category->getSlug());
+        static::assertSame('n/a', $category->__toString());
 
         $category->setName('Привет мир');
-        $this->assertSame('privet-mir', $category->getSlug());
-        $this->assertSame('Привет мир', $category->__toString());
+        static::assertSame('privet-mir', $category->getSlug());
+        static::assertSame('Привет мир', $category->__toString());
 
         $category->setSlug('Custom Slug');
-        $this->assertSame('custom-slug', $category->getSlug());
+        static::assertSame('custom-slug', $category->getSlug());
     }
 
     public function testParent(): void
@@ -75,8 +75,8 @@ class CategoryTest extends TestCase
         /** @var Category $category */
         $category = $this->getMockForAbstractClass(Category::class);
         $category->setParent($parent);
-        $this->assertSame($parent, $category->getParent());
-        $this->assertCount(1, $parent->getChildren());
+        static::assertSame($parent, $category->getParent());
+        static::assertCount(1, $parent->getChildren());
     }
 
     public function testChildren(): void
@@ -94,23 +94,23 @@ class CategoryTest extends TestCase
         /** @var Category $category */
         $category = $this->getMockForAbstractClass(Category::class);
         $category->setContext($context);
-        $this->assertFalse($category->hasChildren());
+        static::assertFalse($category->hasChildren());
 
         $category->addChild($cat1);
         $category->addChild($cat2);
         $category->addChild($cat3);
-        $this->assertSame($context, $cat1->getContext()); // child context set to parent
-        $this->assertSame($category, $cat1->getParent());
-        $this->assertTrue($category->hasChildren());
-        $this->assertCount(3, $category->getChildren());
+        static::assertSame($context, $cat1->getContext()); // child context set to parent
+        static::assertSame($category, $cat1->getParent());
+        static::assertTrue($category->hasChildren());
+        static::assertCount(3, $category->getChildren());
 
         // Category::removeChild implementation use getId() which is not a part of interface nor model, skipping
 
         // No type hint in interface so assume basic array.
         $category->setChildren([]);
-        $this->assertCount(0, $category->getChildren());
+        static::assertCount(0, $category->getChildren());
         $category->setChildren([$cat1, $cat2, $cat3]);
-        $this->assertCount(3, $category->getChildren());
+        static::assertCount(3, $category->getChildren());
     }
 
     public function testPrePersist(): void
@@ -119,8 +119,8 @@ class CategoryTest extends TestCase
         $category = $this->getMockForAbstractClass(Category::class);
         $category->prePersist();
 
-        $this->assertInstanceOf(\DateTime::class, $category->getCreatedAt());
-        $this->assertInstanceOf(\DateTime::class, $category->getUpdatedAt());
+        static::assertInstanceOf(\DateTime::class, $category->getCreatedAt());
+        static::assertInstanceOf(\DateTime::class, $category->getUpdatedAt());
     }
 
     public function testPreUpdate(): void
@@ -129,6 +129,6 @@ class CategoryTest extends TestCase
         $category = $this->getMockForAbstractClass(Category::class);
         $category->preUpdate();
 
-        $this->assertInstanceOf(\DateTime::class, $category->getUpdatedAt());
+        static::assertInstanceOf(\DateTime::class, $category->getUpdatedAt());
     }
 }

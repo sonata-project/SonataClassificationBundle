@@ -34,14 +34,14 @@ class ContextControllerTest extends TestCase
     public function testGetContextsAction(): void
     {
         $paramFetcher = $this->createMock(ParamFetcherInterface::class);
-        $paramFetcher->expects($this->once())->method('all')->willReturn([]);
+        $paramFetcher->expects(static::once())->method('all')->willReturn([]);
 
         $pager = $this->createMock(Pager::class);
 
         $contextManager = $this->createMock(ContextManagerInterface::class);
-        $contextManager->expects($this->once())->method('getPager')->willReturn($pager);
+        $contextManager->expects(static::once())->method('getPager')->willReturn($pager);
 
-        $this->assertSame($pager, $this->createContextController($contextManager)->getContextsAction($paramFetcher));
+        static::assertSame($pager, $this->createContextController($contextManager)->getContextsAction($paramFetcher));
     }
 
     public function testGetContextAction(): void
@@ -49,9 +49,9 @@ class ContextControllerTest extends TestCase
         $context = $this->createMock(ContextInterface::class);
 
         $contextManager = $this->createMock(ContextManagerInterface::class);
-        $contextManager->expects($this->once())->method('find')->willReturn($context);
+        $contextManager->expects(static::once())->method('find')->willReturn($context);
 
-        $this->assertSame($context, $this->createContextController($contextManager)->getContextAction(1));
+        static::assertSame($context, $this->createContextController($contextManager)->getContextAction(1));
     }
 
     public function testGetContextNotFoundExceptionAction(): void
@@ -67,38 +67,38 @@ class ContextControllerTest extends TestCase
         $context = $this->createMock(ContextInterface::class);
 
         $contextManager = $this->createMock(ContextManagerInterface::class);
-        $contextManager->expects($this->once())->method('save')->willReturn($context);
+        $contextManager->expects(static::once())->method('save')->willReturn($context);
 
         $form = $this->createMock(Form::class);
-        $form->expects($this->once())->method('handleRequest');
-        $form->expects($this->once())->method('isValid')->willReturn(true);
-        $form->expects($this->once())->method('getData')->willReturn($context);
-        $form->expects($this->once())->method('all')->willReturn([]);
+        $form->expects(static::once())->method('handleRequest');
+        $form->expects(static::once())->method('isValid')->willReturn(true);
+        $form->expects(static::once())->method('getData')->willReturn($context);
+        $form->expects(static::once())->method('all')->willReturn([]);
 
         $formFactory = $this->createMock(FormFactoryInterface::class);
-        $formFactory->expects($this->once())->method('createNamed')->willReturn($form);
+        $formFactory->expects(static::once())->method('createNamed')->willReturn($form);
 
         $view = $this->createContextController($contextManager, $formFactory)->postContextAction(new Request());
 
-        $this->assertInstanceOf(View::class, $view);
+        static::assertInstanceOf(View::class, $view);
     }
 
     public function testPostContextInvalidAction(): void
     {
         $contextManager = $this->createMock(ContextManagerInterface::class);
-        $contextManager->expects($this->never())->method('save')->willReturn($contextManager);
+        $contextManager->expects(static::never())->method('save')->willReturn($contextManager);
 
         $form = $this->createMock(Form::class);
-        $form->expects($this->once())->method('handleRequest');
-        $form->expects($this->once())->method('isValid')->willReturn(false);
-        $form->expects($this->once())->method('all')->willReturn([]);
+        $form->expects(static::once())->method('handleRequest');
+        $form->expects(static::once())->method('isValid')->willReturn(false);
+        $form->expects(static::once())->method('all')->willReturn([]);
 
         $formFactory = $this->createMock(FormFactoryInterface::class);
-        $formFactory->expects($this->once())->method('createNamed')->willReturn($form);
+        $formFactory->expects(static::once())->method('createNamed')->willReturn($form);
 
         $view = $this->createContextController($contextManager, $formFactory)->postContextAction(new Request());
 
-        $this->assertInstanceOf(FormInterface::class, $view);
+        static::assertInstanceOf(FormInterface::class, $view);
     }
 
     public function testPutContextAction(): void
@@ -106,21 +106,21 @@ class ContextControllerTest extends TestCase
         $context = $this->createMock(ContextInterface::class);
 
         $contextManager = $this->createMock(ContextManagerInterface::class);
-        $contextManager->expects($this->once())->method('find')->willReturn($context);
-        $contextManager->expects($this->once())->method('save')->willReturn($context);
+        $contextManager->expects(static::once())->method('find')->willReturn($context);
+        $contextManager->expects(static::once())->method('save')->willReturn($context);
 
         $form = $this->createMock(Form::class);
-        $form->expects($this->once())->method('handleRequest');
-        $form->expects($this->once())->method('isValid')->willReturn(true);
-        $form->expects($this->once())->method('getData')->willReturn($context);
-        $form->expects($this->once())->method('all')->willReturn([]);
+        $form->expects(static::once())->method('handleRequest');
+        $form->expects(static::once())->method('isValid')->willReturn(true);
+        $form->expects(static::once())->method('getData')->willReturn($context);
+        $form->expects(static::once())->method('all')->willReturn([]);
 
         $formFactory = $this->createMock(FormFactoryInterface::class);
-        $formFactory->expects($this->once())->method('createNamed')->willReturn($form);
+        $formFactory->expects(static::once())->method('createNamed')->willReturn($form);
 
         $view = $this->createContextController($contextManager, $formFactory)->putContextAction(1, new Request());
 
-        $this->assertInstanceOf(View::class, $view);
+        static::assertInstanceOf(View::class, $view);
     }
 
     public function testPutPostInvalidAction(): void
@@ -128,20 +128,20 @@ class ContextControllerTest extends TestCase
         $context = $this->createMock(ContextInterface::class);
 
         $contextManager = $this->createMock(ContextManagerInterface::class);
-        $contextManager->expects($this->once())->method('find')->willReturn($context);
-        $contextManager->expects($this->never())->method('save')->willReturn($context);
+        $contextManager->expects(static::once())->method('find')->willReturn($context);
+        $contextManager->expects(static::never())->method('save')->willReturn($context);
 
         $form = $this->createMock(Form::class);
-        $form->expects($this->once())->method('handleRequest');
-        $form->expects($this->once())->method('isValid')->willReturn(false);
-        $form->expects($this->once())->method('all')->willReturn([]);
+        $form->expects(static::once())->method('handleRequest');
+        $form->expects(static::once())->method('isValid')->willReturn(false);
+        $form->expects(static::once())->method('all')->willReturn([]);
 
         $formFactory = $this->createMock(FormFactoryInterface::class);
-        $formFactory->expects($this->once())->method('createNamed')->willReturn($form);
+        $formFactory->expects(static::once())->method('createNamed')->willReturn($form);
 
         $view = $this->createContextController($contextManager, $formFactory)->putContextAction(1, new Request());
 
-        $this->assertInstanceOf(FormInterface::class, $view);
+        static::assertInstanceOf(FormInterface::class, $view);
     }
 
     public function testDeleteContextAction(): void
@@ -149,12 +149,12 @@ class ContextControllerTest extends TestCase
         $context = $this->createMock(ContextInterface::class);
 
         $contextManager = $this->createMock(ContextManagerInterface::class);
-        $contextManager->expects($this->once())->method('find')->willReturn($context);
-        $contextManager->expects($this->once())->method('delete');
+        $contextManager->expects(static::once())->method('find')->willReturn($context);
+        $contextManager->expects(static::once())->method('delete');
 
         $view = $this->createContextController($contextManager)->deleteContextAction(1);
 
-        $this->assertSame(['deleted' => true], $view);
+        static::assertSame(['deleted' => true], $view);
     }
 
     public function testDeleteContextInvalidAction(): void
@@ -162,8 +162,8 @@ class ContextControllerTest extends TestCase
         $this->expectException(NotFoundHttpException::class);
 
         $contextManager = $this->createMock(ContextManagerInterface::class);
-        $contextManager->expects($this->once())->method('find')->willReturn(null);
-        $contextManager->expects($this->never())->method('delete');
+        $contextManager->expects(static::once())->method('find')->willReturn(null);
+        $contextManager->expects(static::never())->method('delete');
 
         $this->createContextController($contextManager)->deleteContextAction(1);
     }

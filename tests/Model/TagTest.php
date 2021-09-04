@@ -37,24 +37,24 @@ class TagTest extends TestCase
         $tag->setEnabled(true);
         $tag->setContext($context);
 
-        $this->assertSame('Hello World', $tag->getName());
-        $this->assertSame('Hello World', $tag->__toString());
-        $this->assertSame('hello-world', $tag->getSlug());
-        $this->assertSame($time, $tag->getCreatedAt());
-        $this->assertSame($time, $tag->getUpdatedAt());
-        $this->assertTrue($tag->getEnabled());
-        $this->assertSame($context, $tag->getContext());
+        static::assertSame('Hello World', $tag->getName());
+        static::assertSame('Hello World', $tag->__toString());
+        static::assertSame('hello-world', $tag->getSlug());
+        static::assertSame($time, $tag->getCreatedAt());
+        static::assertSame($time, $tag->getUpdatedAt());
+        static::assertTrue($tag->getEnabled());
+        static::assertSame($context, $tag->getContext());
 
         $tag->setName('');
-        $this->assertSame('n-a', $tag->getSlug());
-        $this->assertSame('n/a', $tag->__toString());
+        static::assertSame('n-a', $tag->getSlug());
+        static::assertSame('n/a', $tag->__toString());
 
         $tag->setName('Привет мир');
-        $this->assertSame('privet-mir', $tag->getSlug());
-        $this->assertSame('Привет мир', $tag->__toString());
+        static::assertSame('privet-mir', $tag->getSlug());
+        static::assertSame('Привет мир', $tag->__toString());
 
         $tag->setSlug('Custom Slug');
-        $this->assertSame('custom-slug', $tag->getSlug());
+        static::assertSame('custom-slug', $tag->getSlug());
     }
 
     public function testPreUpdate(): void
@@ -63,6 +63,6 @@ class TagTest extends TestCase
         $tag = $this->getMockForAbstractClass(Tag::class);
         $tag->preUpdate();
 
-        $this->assertInstanceOf(\DateTime::class, $tag->getUpdatedAt());
+        static::assertInstanceOf(\DateTime::class, $tag->getUpdatedAt());
     }
 }

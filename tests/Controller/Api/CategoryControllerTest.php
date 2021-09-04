@@ -34,14 +34,14 @@ class CategoryControllerTest extends TestCase
     public function testGetCategoriesAction(): void
     {
         $paramFetcher = $this->createMock(ParamFetcherInterface::class);
-        $paramFetcher->expects($this->once())->method('all')->willReturn([]);
+        $paramFetcher->expects(static::once())->method('all')->willReturn([]);
 
         $pager = $this->createMock(Pager::class);
 
         $categoryManager = $this->createMock(CategoryManagerInterface::class);
-        $categoryManager->expects($this->once())->method('getPager')->willReturn($pager);
+        $categoryManager->expects(static::once())->method('getPager')->willReturn($pager);
 
-        $this->assertSame($pager, $this->createCategoryController($categoryManager)->getCategoriesAction($paramFetcher));
+        static::assertSame($pager, $this->createCategoryController($categoryManager)->getCategoriesAction($paramFetcher));
     }
 
     public function testGetCategoryAction(): void
@@ -49,9 +49,9 @@ class CategoryControllerTest extends TestCase
         $category = $this->createMock(CategoryInterface::class);
 
         $categoryManager = $this->createMock(CategoryManagerInterface::class);
-        $categoryManager->expects($this->once())->method('find')->willReturn($category);
+        $categoryManager->expects(static::once())->method('find')->willReturn($category);
 
-        $this->assertSame($category, $this->createCategoryController($categoryManager)->getCategoryAction(1));
+        static::assertSame($category, $this->createCategoryController($categoryManager)->getCategoryAction(1));
     }
 
     public function testGetCategoryNotFoundExceptionAction(): void
@@ -67,38 +67,38 @@ class CategoryControllerTest extends TestCase
         $category = $this->createMock(CategoryInterface::class);
 
         $categoryManager = $this->createMock(CategoryManagerInterface::class);
-        $categoryManager->expects($this->once())->method('save')->willReturn($category);
+        $categoryManager->expects(static::once())->method('save')->willReturn($category);
 
         $form = $this->createMock(Form::class);
-        $form->expects($this->once())->method('handleRequest');
-        $form->expects($this->once())->method('isValid')->willReturn(true);
-        $form->expects($this->once())->method('getData')->willReturn($category);
-        $form->expects($this->once())->method('all')->willReturn([]);
+        $form->expects(static::once())->method('handleRequest');
+        $form->expects(static::once())->method('isValid')->willReturn(true);
+        $form->expects(static::once())->method('getData')->willReturn($category);
+        $form->expects(static::once())->method('all')->willReturn([]);
 
         $formFactory = $this->createMock(FormFactoryInterface::class);
-        $formFactory->expects($this->once())->method('createNamed')->willReturn($form);
+        $formFactory->expects(static::once())->method('createNamed')->willReturn($form);
 
         $view = $this->createCategoryController($categoryManager, $formFactory)->postCategoryAction(new Request());
 
-        $this->assertInstanceOf(View::class, $view);
+        static::assertInstanceOf(View::class, $view);
     }
 
     public function testPostCategoryInvalidAction(): void
     {
         $categoryManager = $this->createMock(CategoryManagerInterface::class);
-        $categoryManager->expects($this->never())->method('save')->willReturn($categoryManager);
+        $categoryManager->expects(static::never())->method('save')->willReturn($categoryManager);
 
         $form = $this->createMock(Form::class);
-        $form->expects($this->once())->method('handleRequest');
-        $form->expects($this->once())->method('isValid')->willReturn(false);
-        $form->expects($this->once())->method('all')->willReturn([]);
+        $form->expects(static::once())->method('handleRequest');
+        $form->expects(static::once())->method('isValid')->willReturn(false);
+        $form->expects(static::once())->method('all')->willReturn([]);
 
         $formFactory = $this->createMock(FormFactoryInterface::class);
-        $formFactory->expects($this->once())->method('createNamed')->willReturn($form);
+        $formFactory->expects(static::once())->method('createNamed')->willReturn($form);
 
         $view = $this->createCategoryController($categoryManager, $formFactory)->postCategoryAction(new Request());
 
-        $this->assertInstanceOf(FormInterface::class, $view);
+        static::assertInstanceOf(FormInterface::class, $view);
     }
 
     public function testPutCategoryAction(): void
@@ -106,21 +106,21 @@ class CategoryControllerTest extends TestCase
         $category = $this->createMock(CategoryInterface::class);
 
         $categoryManager = $this->createMock(CategoryManagerInterface::class);
-        $categoryManager->expects($this->once())->method('find')->willReturn($category);
-        $categoryManager->expects($this->once())->method('save')->willReturn($category);
+        $categoryManager->expects(static::once())->method('find')->willReturn($category);
+        $categoryManager->expects(static::once())->method('save')->willReturn($category);
 
         $form = $this->createMock(Form::class);
-        $form->expects($this->once())->method('handleRequest');
-        $form->expects($this->once())->method('isValid')->willReturn(true);
-        $form->expects($this->once())->method('getData')->willReturn($category);
-        $form->expects($this->once())->method('all')->willReturn([]);
+        $form->expects(static::once())->method('handleRequest');
+        $form->expects(static::once())->method('isValid')->willReturn(true);
+        $form->expects(static::once())->method('getData')->willReturn($category);
+        $form->expects(static::once())->method('all')->willReturn([]);
 
         $formFactory = $this->createMock(FormFactoryInterface::class);
-        $formFactory->expects($this->once())->method('createNamed')->willReturn($form);
+        $formFactory->expects(static::once())->method('createNamed')->willReturn($form);
 
         $view = $this->createCategoryController($categoryManager, $formFactory)->putCategoryAction(1, new Request());
 
-        $this->assertInstanceOf(View::class, $view);
+        static::assertInstanceOf(View::class, $view);
     }
 
     public function testPutPostInvalidAction(): void
@@ -128,20 +128,20 @@ class CategoryControllerTest extends TestCase
         $category = $this->createMock(CategoryInterface::class);
 
         $categoryManager = $this->createMock(CategoryManagerInterface::class);
-        $categoryManager->expects($this->once())->method('find')->willReturn($category);
-        $categoryManager->expects($this->never())->method('save')->willReturn($category);
+        $categoryManager->expects(static::once())->method('find')->willReturn($category);
+        $categoryManager->expects(static::never())->method('save')->willReturn($category);
 
         $form = $this->createMock(Form::class);
-        $form->expects($this->once())->method('handleRequest');
-        $form->expects($this->once())->method('isValid')->willReturn(false);
-        $form->expects($this->once())->method('all')->willReturn([]);
+        $form->expects(static::once())->method('handleRequest');
+        $form->expects(static::once())->method('isValid')->willReturn(false);
+        $form->expects(static::once())->method('all')->willReturn([]);
 
         $formFactory = $this->createMock(FormFactoryInterface::class);
-        $formFactory->expects($this->once())->method('createNamed')->willReturn($form);
+        $formFactory->expects(static::once())->method('createNamed')->willReturn($form);
 
         $view = $this->createCategoryController($categoryManager, $formFactory)->putCategoryAction(1, new Request());
 
-        $this->assertInstanceOf(FormInterface::class, $view);
+        static::assertInstanceOf(FormInterface::class, $view);
     }
 
     public function testDeleteCategoryAction(): void
@@ -149,12 +149,12 @@ class CategoryControllerTest extends TestCase
         $category = $this->createMock(CategoryInterface::class);
 
         $categoryManager = $this->createMock(CategoryManagerInterface::class);
-        $categoryManager->expects($this->once())->method('find')->willReturn($category);
-        $categoryManager->expects($this->once())->method('delete');
+        $categoryManager->expects(static::once())->method('find')->willReturn($category);
+        $categoryManager->expects(static::once())->method('delete');
 
         $view = $this->createCategoryController($categoryManager)->deleteCategoryAction(1);
 
-        $this->assertSame(['deleted' => true], $view);
+        static::assertSame(['deleted' => true], $view);
     }
 
     public function testDeleteCategoryInvalidAction(): void
@@ -162,8 +162,8 @@ class CategoryControllerTest extends TestCase
         $this->expectException(NotFoundHttpException::class);
 
         $categoryManager = $this->createMock(CategoryManagerInterface::class);
-        $categoryManager->expects($this->once())->method('find')->willReturn(null);
-        $categoryManager->expects($this->never())->method('delete');
+        $categoryManager->expects(static::once())->method('find')->willReturn(null);
+        $categoryManager->expects(static::never())->method('delete');
 
         $this->createCategoryController($categoryManager)->deleteCategoryAction(1);
     }

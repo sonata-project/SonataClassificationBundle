@@ -30,7 +30,7 @@ class CategoryChoiceLoaderTest extends TestCase
 
         $categoryLoader = new CategoryChoiceLoader(array_flip($choices));
 
-        $this->assertSame($choices, $categoryLoader->loadChoiceList()->getOriginalKeys());
+        static::assertSame($choices, $categoryLoader->loadChoiceList()->getOriginalKeys());
     }
 
     public function testLoadChoicesForValues(): void
@@ -42,7 +42,7 @@ class CategoryChoiceLoaderTest extends TestCase
 
         $categoryLoader = new CategoryChoiceLoader(array_flip($choices));
 
-        $this->assertSame(array_keys($choices), $categoryLoader->loadChoicesForValues([1, 2, 3]));
+        static::assertSame(array_keys($choices), $categoryLoader->loadChoicesForValues([1, 2, 3]));
     }
 
     public function testLoadValuesForChoices(): void
@@ -62,6 +62,6 @@ class CategoryChoiceLoaderTest extends TestCase
 
         $choices['3'] = 'extra';
 
-        $this->assertSame($expectedChoices, $categoryLoader->loadValuesForChoices(array_flip($choices)));
+        static::assertSame($expectedChoices, $categoryLoader->loadValuesForChoices(array_flip($choices)));
     }
 }

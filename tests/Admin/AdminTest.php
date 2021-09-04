@@ -35,9 +35,9 @@ class AdminTest extends TestCase
     public function testAbstractAdminChildren(): void
     {
         $contextAwareAdmin = $this->createMock(ContextAwareAdmin::class);
-        $this->assertInstanceOf(AbstractAdmin::class, $contextAwareAdmin);
+        static::assertInstanceOf(AbstractAdmin::class, $contextAwareAdmin);
         $contextAdmin = $this->createMock(ContextAdmin::class);
-        $this->assertInstanceOf(AbstractAdmin::class, $contextAdmin);
+        static::assertInstanceOf(AbstractAdmin::class, $contextAdmin);
     }
 
     public function testGetPersistentParametersWithNoExtension(): void
@@ -51,7 +51,7 @@ class AdminTest extends TestCase
             'admin.my_code', 'My\Class', 'MyBundle:ClassAdmin', $this->contextManager,
         ]);
 
-        $this->assertSame($expected, $admin->getPersistentParameters());
+        static::assertSame($expected, $admin->getPersistentParameters());
     }
 
     public function testGetPersistentParametersWithValidExtension(): void
@@ -61,8 +61,8 @@ class AdminTest extends TestCase
         ]);
 
         $extension = $this->createMock(AdminExtensionInterface::class);
-        $extension->expects($this->once())->method('configurePersistentParameters')->with(
-            $this->anything(),
+        $extension->expects(static::once())->method('configurePersistentParameters')->with(
+            static::anything(),
             [
                 'context' => '',
                 'hide_context' => 0,

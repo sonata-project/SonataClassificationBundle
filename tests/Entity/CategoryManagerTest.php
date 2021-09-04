@@ -104,7 +104,7 @@ class CategoryManagerTest extends TestCase
         }, [$categoryFoo, $categoryBar]);
 
         $categoryFoo = $categoryManager->getRootCategoryWithChildren($categoryFoo);
-        $this->assertContains($categoryBar, $categoryFoo->getChildren());
+        static::assertContains($categoryBar, $categoryFoo->getChildren());
     }
 
     public function testGetRootCategoriesForContext(): void
@@ -135,8 +135,8 @@ class CategoryManagerTest extends TestCase
         }, [$categoryFoo, $categoryBar]);
 
         $categories = $categoryManager->getRootCategoriesForContext($context);
-        $this->assertCount(1, $categories);
-        $this->assertContains($categoryFoo, $categories);
+        static::assertCount(1, $categories);
+        static::assertContains($categoryFoo, $categories);
     }
 
     public function testGetRootCategoriesSplitByContexts(): void
@@ -173,10 +173,10 @@ class CategoryManagerTest extends TestCase
         }, [$categoryFoo, $categoryBar]);
 
         $categories = $categoryManager->getRootCategoriesSplitByContexts(false);
-        $this->assertArrayHasKey($contextFoo->getId(), $categories);
-        $this->assertArrayHasKey($contextBar->getId(), $categories);
-        $this->assertContains($categoryFoo, $categories[$contextFoo->getId()]);
-        $this->assertContains($categoryBar, $categories[$contextBar->getId()]);
+        static::assertArrayHasKey($contextFoo->getId(), $categories);
+        static::assertArrayHasKey($contextBar->getId(), $categories);
+        static::assertContains($categoryFoo, $categories[$contextFoo->getId()]);
+        static::assertContains($categoryBar, $categories[$contextBar->getId()]);
     }
 
     public function testGetBySlug(): void

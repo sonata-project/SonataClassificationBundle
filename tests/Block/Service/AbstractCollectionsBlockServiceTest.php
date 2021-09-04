@@ -76,21 +76,21 @@ final class AbstractCollectionsBlockServiceTest extends BlockServiceTestCase
         $collection = $this->getMockBuilder(CollectionInterface::class)
             ->disableOriginalConstructor()
             ->getMockForAbstractClass();
-        $collection->expects($this->any())->method('getId')->willReturn(23);
+        $collection->expects(static::any())->method('getId')->willReturn(23);
 
-        $this->collectionManager->expects($this->any())
+        $this->collectionManager->expects(static::any())
             ->method('find')
-            ->with($this->equalTo('23'))
+            ->with(static::equalTo('23'))
             ->willReturn($collection);
 
         $block = $this->createMock(BlockInterface::class);
-        $block->expects($this->any())
+        $block->expects(static::any())
             ->method('getSetting')
-            ->with($this->equalTo('collectionId'))
+            ->with(static::equalTo('collectionId'))
             ->willReturn(23);
-        $block->expects($this->once())
+        $block->expects(static::once())
             ->method('setSetting')
-            ->with($this->equalTo('collectionId'), $this->equalTo($collection));
+            ->with(static::equalTo('collectionId'), static::equalTo($collection));
 
         $blockService = $this->getMockForAbstractClass(AbstractCollectionsBlockService::class, [
             $this->twig, $this->contextManager, $this->collectionManager, $this->collectionAdmin,
@@ -103,16 +103,16 @@ final class AbstractCollectionsBlockServiceTest extends BlockServiceTestCase
         $collection = $this->getMockBuilder(CollectionInterface::class)
             ->disableOriginalConstructor()
             ->getMockForAbstractClass();
-        $collection->expects($this->any())->method('getId')->willReturn(23);
+        $collection->expects(static::any())->method('getId')->willReturn(23);
 
         $block = $this->createMock(BlockInterface::class);
-        $block->expects($this->any())
+        $block->expects(static::any())
             ->method('getSetting')
-            ->with($this->equalTo('collectionId'))
+            ->with(static::equalTo('collectionId'))
             ->willReturn($collection);
-        $block->expects($this->once())
+        $block->expects(static::once())
             ->method('setSetting')
-            ->with($this->equalTo('collectionId'), $this->equalTo(23));
+            ->with(static::equalTo('collectionId'), static::equalTo(23));
 
         $blockService = $this->getMockForAbstractClass(AbstractCollectionsBlockService::class, [
             $this->twig, $this->contextManager, $this->collectionManager, $this->collectionAdmin,
@@ -125,16 +125,16 @@ final class AbstractCollectionsBlockServiceTest extends BlockServiceTestCase
         $collection = $this->getMockBuilder(CollectionInterface::class)
             ->disableOriginalConstructor()
             ->getMockForAbstractClass();
-        $collection->expects($this->any())->method('getId')->willReturn(23);
+        $collection->expects(static::any())->method('getId')->willReturn(23);
 
         $block = $this->createMock(BlockInterface::class);
-        $block->expects($this->any())
+        $block->expects(static::any())
             ->method('getSetting')
-            ->with($this->equalTo('collectionId'))
+            ->with(static::equalTo('collectionId'))
             ->willReturn($collection);
-        $block->expects($this->once())
+        $block->expects(static::once())
             ->method('setSetting')
-            ->with($this->equalTo('collectionId'), $this->equalTo(23));
+            ->with(static::equalTo('collectionId'), static::equalTo(23));
 
         $blockService = $this->getMockForAbstractClass(AbstractCollectionsBlockService::class, [
             $this->twig, $this->contextManager, $this->collectionManager, $this->collectionAdmin,

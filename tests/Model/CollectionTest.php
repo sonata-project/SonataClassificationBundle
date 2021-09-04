@@ -38,25 +38,25 @@ class CollectionTest extends TestCase
         $collection->setDescription('My description');
         $collection->setContext($context);
 
-        $this->assertSame('Hello World', $collection->getName());
-        $this->assertSame('Hello World', $collection->__toString());
-        $this->assertSame('hello-world', $collection->getSlug());
-        $this->assertSame($time, $collection->getCreatedAt());
-        $this->assertSame($time, $collection->getUpdatedAt());
-        $this->assertTrue($collection->getEnabled());
-        $this->assertSame('My description', $collection->getDescription());
-        $this->assertSame($context, $collection->getContext());
+        static::assertSame('Hello World', $collection->getName());
+        static::assertSame('Hello World', $collection->__toString());
+        static::assertSame('hello-world', $collection->getSlug());
+        static::assertSame($time, $collection->getCreatedAt());
+        static::assertSame($time, $collection->getUpdatedAt());
+        static::assertTrue($collection->getEnabled());
+        static::assertSame('My description', $collection->getDescription());
+        static::assertSame($context, $collection->getContext());
 
         $collection->setName('');
-        $this->assertSame('n-a', $collection->getSlug());
-        $this->assertSame('n/a', $collection->__toString());
+        static::assertSame('n-a', $collection->getSlug());
+        static::assertSame('n/a', $collection->__toString());
 
         $collection->setName('Привет мир');
-        $this->assertSame('privet-mir', $collection->getSlug());
-        $this->assertSame('Привет мир', $collection->__toString());
+        static::assertSame('privet-mir', $collection->getSlug());
+        static::assertSame('Привет мир', $collection->__toString());
 
         $collection->setSlug('Custom Slug');
-        $this->assertSame('custom-slug', $collection->getSlug());
+        static::assertSame('custom-slug', $collection->getSlug());
     }
 
     public function testPrePersist(): void
@@ -65,8 +65,8 @@ class CollectionTest extends TestCase
         $collection = $this->getMockForAbstractClass(Collection::class);
         $collection->prePersist();
 
-        $this->assertInstanceOf(\DateTime::class, $collection->getCreatedAt());
-        $this->assertInstanceOf(\DateTime::class, $collection->getUpdatedAt());
+        static::assertInstanceOf(\DateTime::class, $collection->getCreatedAt());
+        static::assertInstanceOf(\DateTime::class, $collection->getUpdatedAt());
     }
 
     public function testPreUpdate(): void
@@ -75,6 +75,6 @@ class CollectionTest extends TestCase
         $collection = $this->getMockForAbstractClass(Collection::class);
         $collection->preUpdate();
 
-        $this->assertInstanceOf(\DateTime::class, $collection->getUpdatedAt());
+        static::assertInstanceOf(\DateTime::class, $collection->getUpdatedAt());
     }
 }

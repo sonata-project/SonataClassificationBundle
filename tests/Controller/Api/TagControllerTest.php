@@ -38,14 +38,14 @@ class TagControllerTest extends TestCase
             ['page', null, 1],
             ['count', null, 25],
         ]);
-        $paramFetcher->expects($this->once())->method('all')->willReturn([]);
+        $paramFetcher->expects(static::once())->method('all')->willReturn([]);
 
         $pager = $this->createMock(PagerInterface::class);
 
         $tagManager = $this->createMock(TagManagerInterface::class);
-        $tagManager->expects($this->once())->method('getPager')->willReturn($pager);
+        $tagManager->expects(static::once())->method('getPager')->willReturn($pager);
 
-        $this->assertSame($pager, $this->createTagController($tagManager)->getTagsAction($paramFetcher));
+        static::assertSame($pager, $this->createTagController($tagManager)->getTagsAction($paramFetcher));
     }
 
     public function testGetTagAction(): void
@@ -53,9 +53,9 @@ class TagControllerTest extends TestCase
         $tag = $this->createMock(TagInterface::class);
 
         $tagManager = $this->createMock(TagManagerInterface::class);
-        $tagManager->expects($this->once())->method('find')->willReturn($tag);
+        $tagManager->expects(static::once())->method('find')->willReturn($tag);
 
-        $this->assertSame($tag, $this->createTagController($tagManager)->getTagAction(1));
+        static::assertSame($tag, $this->createTagController($tagManager)->getTagAction(1));
     }
 
     public function testGetTagNotFoundExceptionAction(): void
@@ -71,20 +71,20 @@ class TagControllerTest extends TestCase
         $tag = $this->createMock(TagInterface::class);
 
         $tagManager = $this->createMock(TagManagerInterface::class);
-        $tagManager->expects($this->once())->method('save')->willReturn($tag);
+        $tagManager->expects(static::once())->method('save')->willReturn($tag);
 
         $form = $this->createMock(Form::class);
-        $form->expects($this->once())->method('handleRequest');
-        $form->expects($this->once())->method('isValid')->willReturn(true);
-        $form->expects($this->once())->method('getData')->willReturn($tag);
-        $form->expects($this->once())->method('all')->willReturn([]);
+        $form->expects(static::once())->method('handleRequest');
+        $form->expects(static::once())->method('isValid')->willReturn(true);
+        $form->expects(static::once())->method('getData')->willReturn($tag);
+        $form->expects(static::once())->method('all')->willReturn([]);
 
         $formFactory = $this->createMock(FormFactoryInterface::class);
-        $formFactory->expects($this->once())->method('createNamed')->willReturn($form);
+        $formFactory->expects(static::once())->method('createNamed')->willReturn($form);
 
         $view = $this->createTagController($tagManager, $formFactory)->postTagAction(new Request());
 
-        $this->assertInstanceOf(View::class, $view);
+        static::assertInstanceOf(View::class, $view);
     }
 
     public function testPostTagInvalidAction(): void
@@ -92,19 +92,19 @@ class TagControllerTest extends TestCase
         $tag = $this->createMock(TagInterface::class);
 
         $tagManager = $this->createMock(TagManagerInterface::class);
-        $tagManager->expects($this->never())->method('save')->willReturn($tagManager);
+        $tagManager->expects(static::never())->method('save')->willReturn($tagManager);
 
         $form = $this->createMock(Form::class);
-        $form->expects($this->once())->method('handleRequest');
-        $form->expects($this->once())->method('isValid')->willReturn(false);
-        $form->expects($this->once())->method('all')->willReturn([]);
+        $form->expects(static::once())->method('handleRequest');
+        $form->expects(static::once())->method('isValid')->willReturn(false);
+        $form->expects(static::once())->method('all')->willReturn([]);
 
         $formFactory = $this->createMock(FormFactoryInterface::class);
-        $formFactory->expects($this->once())->method('createNamed')->willReturn($form);
+        $formFactory->expects(static::once())->method('createNamed')->willReturn($form);
 
         $view = $this->createTagController($tagManager, $formFactory)->postTagAction(new Request());
 
-        $this->assertInstanceOf(FormInterface::class, $view);
+        static::assertInstanceOf(FormInterface::class, $view);
     }
 
     public function testPutTagAction(): void
@@ -112,21 +112,21 @@ class TagControllerTest extends TestCase
         $tag = $this->createMock(TagInterface::class);
 
         $tagManager = $this->createMock(TagManagerInterface::class);
-        $tagManager->expects($this->once())->method('find')->willReturn($tag);
-        $tagManager->expects($this->once())->method('save')->willReturn($tag);
+        $tagManager->expects(static::once())->method('find')->willReturn($tag);
+        $tagManager->expects(static::once())->method('save')->willReturn($tag);
 
         $form = $this->createMock(Form::class);
-        $form->expects($this->once())->method('handleRequest');
-        $form->expects($this->once())->method('isValid')->willReturn(true);
-        $form->expects($this->once())->method('getData')->willReturn($tag);
-        $form->expects($this->once())->method('all')->willReturn([]);
+        $form->expects(static::once())->method('handleRequest');
+        $form->expects(static::once())->method('isValid')->willReturn(true);
+        $form->expects(static::once())->method('getData')->willReturn($tag);
+        $form->expects(static::once())->method('all')->willReturn([]);
 
         $formFactory = $this->createMock(FormFactoryInterface::class);
-        $formFactory->expects($this->once())->method('createNamed')->willReturn($form);
+        $formFactory->expects(static::once())->method('createNamed')->willReturn($form);
 
         $view = $this->createTagController($tagManager, $formFactory)->putTagAction(1, new Request());
 
-        $this->assertInstanceOf(View::class, $view);
+        static::assertInstanceOf(View::class, $view);
     }
 
     public function testPutPostInvalidAction(): void
@@ -134,20 +134,20 @@ class TagControllerTest extends TestCase
         $tag = $this->createMock(TagInterface::class);
 
         $tagManager = $this->createMock(TagManagerInterface::class);
-        $tagManager->expects($this->once())->method('find')->willReturn($tag);
-        $tagManager->expects($this->never())->method('save')->willReturn($tag);
+        $tagManager->expects(static::once())->method('find')->willReturn($tag);
+        $tagManager->expects(static::never())->method('save')->willReturn($tag);
 
         $form = $this->createMock(Form::class);
-        $form->expects($this->once())->method('handleRequest');
-        $form->expects($this->once())->method('isValid')->willReturn(false);
-        $form->expects($this->once())->method('all')->willReturn([]);
+        $form->expects(static::once())->method('handleRequest');
+        $form->expects(static::once())->method('isValid')->willReturn(false);
+        $form->expects(static::once())->method('all')->willReturn([]);
 
         $formFactory = $this->createMock(FormFactoryInterface::class);
-        $formFactory->expects($this->once())->method('createNamed')->willReturn($form);
+        $formFactory->expects(static::once())->method('createNamed')->willReturn($form);
 
         $view = $this->createTagController($tagManager, $formFactory)->putTagAction(1, new Request());
 
-        $this->assertInstanceOf(FormInterface::class, $view);
+        static::assertInstanceOf(FormInterface::class, $view);
     }
 
     public function testDeleteTagAction(): void
@@ -155,12 +155,12 @@ class TagControllerTest extends TestCase
         $tag = $this->createMock(TagInterface::class);
 
         $tagManager = $this->createMock(TagManagerInterface::class);
-        $tagManager->expects($this->once())->method('find')->willReturn($tag);
-        $tagManager->expects($this->once())->method('delete');
+        $tagManager->expects(static::once())->method('find')->willReturn($tag);
+        $tagManager->expects(static::once())->method('delete');
 
         $view = $this->createTagController($tagManager)->deleteTagAction(1);
 
-        $this->assertSame(['deleted' => true], $view->getData());
+        static::assertSame(['deleted' => true], $view->getData());
     }
 
     public function testDeleteTagInvalidAction(): void
@@ -168,8 +168,8 @@ class TagControllerTest extends TestCase
         $this->expectException(NotFoundHttpException::class);
 
         $tagManager = $this->createMock(TagManagerInterface::class);
-        $tagManager->expects($this->once())->method('find')->willReturn(null);
-        $tagManager->expects($this->never())->method('delete');
+        $tagManager->expects(static::once())->method('find')->willReturn(null);
+        $tagManager->expects(static::never())->method('delete');
 
         $this->createTagController($tagManager)->deleteTagAction(1);
     }

@@ -32,14 +32,14 @@ class CategorySelectorTypeTest extends TestCase
         $categorySelectorType->configureOptions($optionsResolver);
 
         $definedOptions = $optionsResolver->getDefinedOptions();
-        $this->assertContains('category', $definedOptions);
-        $this->assertContains('context', $definedOptions);
+        static::assertContains('category', $definedOptions);
+        static::assertContains('context', $definedOptions);
         if (interface_exists(ChoiceLoaderInterface::class)) {
-            $this->assertContains('choice_loader', $definedOptions);
-            $this->assertNotContains('choice_list', $definedOptions);
+            static::assertContains('choice_loader', $definedOptions);
+            static::assertNotContains('choice_list', $definedOptions);
         } else {
-            $this->assertContains('choice_list', $definedOptions);
-            $this->assertNotContains('choice_loader', $definedOptions);
+            static::assertContains('choice_list', $definedOptions);
+            static::assertNotContains('choice_loader', $definedOptions);
         }
     }
 }

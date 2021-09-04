@@ -43,7 +43,7 @@ class XliffTest extends TestCase
         $this->validatePath($path);
 
         if (\count($this->errors) > 0) {
-            $this->fail(sprintf('Unable to parse xliff files: %s', implode(', ', $this->errors)));
+            static::fail(sprintf('Unable to parse xliff files: %s', implode(', ', $this->errors)));
         }
     }
 
@@ -62,7 +62,7 @@ class XliffTest extends TestCase
     {
         try {
             $this->loader->load($file, 'en');
-            $this->assertTrue(true, sprintf('Successful loading file: %s', $file));
+            static::assertTrue(true, sprintf('Successful loading file: %s', $file));
         } catch (InvalidResourceException $e) {
             $this->errors[] = sprintf('%s => %s', $file, $e->getMessage());
         }

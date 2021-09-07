@@ -18,57 +18,41 @@ use Sonata\MediaBundle\Model\MediaInterface;
 interface CollectionInterface
 {
     /**
-     * Set name.
-     *
      * @param string $name
      */
     public function setName($name);
 
     /**
-     * Get name.
-     *
-     * @return string $name
+     * @return string|null $name
      */
     public function getName();
 
     /**
-     * Set enabled.
-     *
      * @param bool $enabled
      */
     public function setEnabled($enabled);
 
     /**
-     * Get enabled.
-     *
      * @return bool $enabled
      */
     public function getEnabled();
 
     /**
-     * Set slug.
-     *
-     * @param int $slug
+     * @param string $slug
      */
     public function setSlug($slug);
 
     /**
-     * Get slug.
-     *
-     * @return string $slug
+     * @return string|null $slug
      */
     public function getSlug();
 
     /**
-     * Set description.
-     *
      * @param string|null $description
      */
     public function setDescription($description);
 
     /**
-     * Get description.
-     *
      * @return string|null $description
      */
     public function getDescription();
@@ -76,31 +60,28 @@ interface CollectionInterface
     public function setCreatedAt(\DateTime $createdAt);
 
     /**
-     * @return \DateTime
+     * @return \DateTime|null
      */
     public function getCreatedAt();
 
     public function setUpdatedAt(\DateTime $updatedAt);
 
     /**
-     * @return \DateTime
+     * @return \DateTime|null
      */
     public function getUpdatedAt();
 
-    /**
-     * @param MediaInterface $media
-     */
     public function setMedia(?MediaInterface $media = null);
 
     /**
-     * @return MediaInterface
+     * @return MediaInterface|null
      */
     public function getMedia();
 
     public function setContext(ContextInterface $context);
 
     /**
-     * @return ContextInterface
+     * @return ContextInterface|null
      */
     public function getContext();
 }

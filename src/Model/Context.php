@@ -16,22 +16,22 @@ namespace Sonata\ClassificationBundle\Model;
 abstract class Context implements ContextInterface
 {
     /**
-     * @var string
+     * @var string|null
      */
     protected $id;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $name;
 
     /**
-     * @var \DateTime
+     * @var \DateTime|null
      */
     protected $createdAt;
 
     /**
-     * @var \DateTime
+     * @var \DateTime|null
      */
     protected $updatedAt;
 

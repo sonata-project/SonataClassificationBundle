@@ -13,63 +13,47 @@ declare(strict_types=1);
 
 namespace Sonata\ClassificationBundle\Model;
 
-use Doctrine\Common\Collections\Collection as DoctrineCollection;
+use Doctrine\Common\Collections\Collection;
 use Sonata\MediaBundle\Model\MediaInterface;
 
 interface CategoryInterface
 {
     /**
-     * Set name.
-     *
      * @param string $name
      */
     public function setName($name);
 
     /**
-     * Get name.
-     *
-     * @return string $name
+     * @return string|null $name
      */
     public function getName();
 
     /**
-     * Set enabled.
-     *
      * @param bool $enabled
      */
     public function setEnabled($enabled);
 
     /**
-     * Get enabled.
-     *
      * @return bool $enabled
      */
     public function getEnabled();
 
     /**
-     * Set slug.
-     *
      * @param int $slug
      */
     public function setSlug($slug);
 
     /**
-     * Get slug.
-     *
-     * @return string $slug
+     * @return string|null $slug
      */
     public function getSlug();
 
     /**
-     * Set description.
-     *
      * @param string|null $description
      */
     public function setDescription($description);
 
     /**
-     * Get description.
-     *
      * @return string|null $description
      */
     public function getDescription();
@@ -85,63 +69,46 @@ interface CategoryInterface
     public function getPosition();
 
     /**
-     * Add Children.
-     *
-     * @param CategoryInterface $children
-     * @param bool              $nested
+     * @param bool $nested
      */
     public function addChild(self $children, $nested = false);
 
     /**
-     * Get Children.
-     *
-     * @return DoctrineCollection|CategoryInterface[] $children
+     * @return Collection<int, self> $children
      */
     public function getChildren();
 
     /**
-     * Set children.
-     *
-     * @param array $children
+     * @param iterable<self> $children
      */
     public function setChildren($children);
 
     /**
-     * Return true if category has children.
-     *
      * @return bool
      */
     public function hasChildren();
 
     /**
-     * Set Parent.
-     *
-     * @param CategoryInterface|null $parent
-     * @param bool                   $nested
+     * @param bool $nested
      */
     public function setParent(?self $parent = null, $nested = false);
 
     /**
-     * Get Parent.
-     *
-     * @return CategoryInterface|null $parent
+     * @return self|null
      */
     public function getParent();
 
-    /**
-     * @param MediaInterface $media
-     */
     public function setMedia(?MediaInterface $media = null);
 
     /**
-     * @return MediaInterface
+     * @return MediaInterface|null
      */
     public function getMedia();
 
     public function setContext(ContextInterface $context);
 
     /**
-     * @return ContextInterface
+     * @return ContextInterface|null
      */
     public function getContext();
 }

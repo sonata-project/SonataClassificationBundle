@@ -16,79 +16,53 @@ namespace Sonata\ClassificationBundle\Model;
 interface TagInterface
 {
     /**
-     * Set name.
-     *
      * @param string $name
      */
     public function setName($name);
 
     /**
-     * Get name.
-     *
-     * @return string $name
+     * @return string|null $name
      */
     public function getName();
 
     /**
-     * Set enabled.
-     *
      * @param bool $enabled
      */
     public function setEnabled($enabled);
 
     /**
-     * Get enabled.
-     *
      * @return bool $enabled
      */
     public function getEnabled();
 
     /**
-     * Set slug.
-     *
      * @param int $slug
      */
     public function setSlug($slug);
 
     /**
-     * Get slug.
-     *
-     * @return string $slug
+     * @return string|null $slug
      */
     public function getSlug();
 
-    /**
-     * Set created_at.
-     *
-     * @param \DateTime $createdAt
-     */
     public function setCreatedAt(?\DateTime $createdAt = null);
 
     /**
-     * Get created_at.
-     *
-     * @return \DateTime $createdAt
+     * @return \DateTime|null $createdAt
      */
     public function getCreatedAt();
 
-    /**
-     * Set updated_at.
-     *
-     * @param \DateTime $updatedAt
-     */
     public function setUpdatedAt(?\DateTime $updatedAt = null);
 
     /**
-     * Get updated_at.
-     *
-     * @return \DateTime $updatedAt
+     * @return \DateTime|null $updatedAt
      */
     public function getUpdatedAt();
 
     public function setContext(ContextInterface $context);
 
     /**
-     * @return ContextInterface
+     * @return ContextInterface|null
      */
     public function getContext();
 }

@@ -18,12 +18,12 @@ use Sonata\MediaBundle\Model\MediaInterface;
 abstract class Collection implements CollectionInterface
 {
     /**
-     * @var string
+     * @var string|null
      */
     protected $name;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $slug;
 
@@ -38,22 +38,22 @@ abstract class Collection implements CollectionInterface
     protected $description;
 
     /**
-     * @var \DateTime
+     * @var \DateTime|null
      */
     protected $createdAt;
 
     /**
-     * @var \DateTime
+     * @var \DateTime|null
      */
     protected $updatedAt;
 
     /**
-     * @var MediaInterface
+     * @var MediaInterface|null
      */
     protected $media;
 
     /**
-     * @var ContextInterface
+     * @var ContextInterface|null
      */
     protected $context;
 
@@ -140,9 +140,6 @@ abstract class Collection implements CollectionInterface
         $this->media = $media;
     }
 
-    /**
-     * @return MediaInterface
-     */
     public function getMedia()
     {
         return $this->media;
@@ -153,9 +150,6 @@ abstract class Collection implements CollectionInterface
         $this->context = $context;
     }
 
-    /**
-     * @return ContextInterface
-     */
     public function getContext()
     {
         return $this->context;

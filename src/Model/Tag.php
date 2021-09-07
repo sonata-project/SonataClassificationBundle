@@ -18,22 +18,22 @@ use Cocur\Slugify\Slugify;
 abstract class Tag implements TagInterface
 {
     /**
-     * @var string
+     * @var string|null
      */
     protected $name;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $slug;
 
     /**
-     * @var \DateTime
+     * @var \DateTime|null
      */
     protected $createdAt;
 
     /**
-     * @var \DateTime
+     * @var \DateTime|null
      */
     protected $updatedAt;
 
@@ -43,7 +43,7 @@ abstract class Tag implements TagInterface
     protected $enabled;
 
     /**
-     * @var ContextInterface
+     * @var ContextInterface|null
      */
     protected $context;
 
@@ -110,13 +110,13 @@ abstract class Tag implements TagInterface
     }
 
     /**
-     * source : http://snipplr.com/view/22741/slugify-a-string-in-php/.
+     * @see http://snipplr.com/view/22741/slugify-a-string-in-php/.
      *
      * @static
      *
      * @param string $text
      *
-     * @return mixed|string
+     * @return string
      */
     public static function slugify($text)
     {

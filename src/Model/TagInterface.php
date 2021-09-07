@@ -13,8 +13,17 @@ declare(strict_types=1);
 
 namespace Sonata\ClassificationBundle\Model;
 
+/**
+ * @method mixed getId()
+ */
 interface TagInterface
 {
+    // NEXT_MAJOR: Uncomment this method.
+    // /**
+    // * @return mixed
+    // */
+    // public function getId();
+
     /**
      * @param string $name
      */

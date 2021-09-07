@@ -13,10 +13,11 @@ declare(strict_types=1);
 
 namespace Sonata\ClassificationBundle\Admin\Filter;
 
-use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
+use Sonata\AdminBundle\Datagrid\ProxyQueryInterface as BaseProxyQueryInterface;
 use Sonata\AdminBundle\Form\Type\Filter\DefaultType;
 use Sonata\ClassificationBundle\Model\CategoryInterface;
 use Sonata\ClassificationBundle\Model\CategoryManagerInterface;
+use Sonata\DoctrineORMAdminBundle\Datagrid\ProxyQueryInterface;
 use Sonata\DoctrineORMAdminBundle\Filter\Filter;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
@@ -32,14 +33,18 @@ final class CategoryFilter extends Filter
         $this->categoryManager = $categoryManager;
     }
 
-    public function filter(ProxyQueryInterface $queryBuilder, $alias, $field, $data): void
+    public function filter(BaseProxyQueryInterface $proxyQuery, $alias, $field, $data): void
     {
+        // NEXT_MAJOR: Remove the call to `assert()` and use this class as argument type declaration.
+        \assert($proxyQuery instanceof ProxyQueryInterface);
+
         if (null === $data || !\is_array($data) || !\array_key_exists('value', $data)) {
             return;
         }
 
         if (null !== $data['value']) {
-            $queryBuilder
+            $proxyQuery
+                ->getQueryBuilder()
                 ->andWhere(sprintf('%s.%s = :category', $alias, $field))
                 ->setParameter('category', $data['value']);
         }
@@ -76,7 +81,7 @@ final class CategoryFilter extends Filter
         ]];
     }
 
-    protected function association(ProxyQueryInterface $queryBuilder, $data): array
+    protected function association(BaseProxyQueryInterface $queryBuilder, $data): array
     {
         $alias = $queryBuilder->entityJoin($this->getParentAssociationMappings());
         $part = strrchr('.'.$this->getFieldName(), '.');
@@ -116,7 +121,7 @@ final class CategoryFilter extends Filter
         }
 
         foreach ($category->getChildren() as $child) {
-            $choices[sprintf('%s %s', str_repeat('-', 1 * $level), (string) $child)] = $child->getId();
+            $choices[sprintf('%s %s', str_repeat('-', 1 * $level), $child->__toString())] = $child->getId();
 
             $this->visitChild($child, $choices, $level + 1);
         }

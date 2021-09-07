@@ -4,6 +4,24 @@ UPGRADE 3.x
 UPGRADE FROM 3.x to 3.x
 =======================
 
+### `Sonata\ClassificationBundle\Model\CategoryInterface`
+
+The classes implementing the interface `CategoryInterface` SHOULD declare the methods
+`__toString()` and `getId()`, as they will be required in version 4.x.
+
+### `Sonata\ClassificationBundle\Model\CollectionInterface`
+
+The classes implementing the interface `CollectionInterface` SHOULD declare the method
+`getId()`, as it will be required in version 4.x.
+
+### `Sonata\ClassificationBundle\Model\TagInterface`
+
+The classes implementing the interface `TagInterface` SHOULD declare the method
+`getId()`, as it will be required in version 4.x.
+
+UPGRADE FROM 3.13 to 3.14
+=========================
+
 ### Support for NelmioApiDocBundle > 3.6 is added
 
 Since version 3.x, support for nelmio/api-doc-bundle > 3.6 is added. Controllers for NelmioApiDocBundle v2 were moved under `Sonata\ClassificationBundle\Controller\Api\Legacy\` namespace and controllers for NelmioApiDocBundle v3 were added as replacement. If you extend them, you must ensure they are using the corresponding inheritance.

@@ -13,9 +13,10 @@ declare(strict_types=1);
 
 namespace Sonata\ClassificationBundle\Admin\Filter;
 
-use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
+use Sonata\AdminBundle\Datagrid\ProxyQueryInterface as BaseProxyQueryInterface;
 use Sonata\AdminBundle\Form\Type\Filter\DefaultType;
 use Sonata\ClassificationBundle\Model\CollectionManagerInterface;
+use Sonata\DoctrineORMAdminBundle\Datagrid\ProxyQueryInterface;
 use Sonata\DoctrineORMAdminBundle\Filter\Filter;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
@@ -31,14 +32,18 @@ final class CollectionFilter extends Filter
         $this->collectionManager = $collectionManager;
     }
 
-    public function filter(ProxyQueryInterface $queryBuilder, $alias, $field, $data): void
+    public function filter(BaseProxyQueryInterface $proxyQuery, $alias, $field, $data): void
     {
+        // NEXT_MAJOR: Remove the call to `assert()` and use this class as argument type declaration.
+        \assert($proxyQuery instanceof ProxyQueryInterface);
+
         if (null === $data || !\is_array($data) || !\array_key_exists('value', $data)) {
             return;
         }
 
         if ($data['value']) {
-            $queryBuilder
+            $proxyQuery
+                ->getQueryBuilder()
                 ->andWhere(sprintf('%s.%s = :collection', $alias, $field))
                 ->setParameter('collection', $data['value']);
         }
@@ -75,7 +80,7 @@ final class CollectionFilter extends Filter
         ]];
     }
 
-    protected function association(ProxyQueryInterface $queryBuilder, $data): array
+    protected function association(BaseProxyQueryInterface $queryBuilder, $data): array
     {
         $alias = $queryBuilder->entityJoin($this->getParentAssociationMappings());
         $part = strrchr('.'.$this->getFieldName(), '.');

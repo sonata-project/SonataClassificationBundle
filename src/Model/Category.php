@@ -14,18 +14,18 @@ declare(strict_types=1);
 namespace Sonata\ClassificationBundle\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection as DoctrineCollection;
+use Doctrine\Common\Collections\Collection;
 use Sonata\MediaBundle\Model\MediaInterface;
 
 abstract class Category implements CategoryInterface
 {
     /**
-     * @var string
+     * @var string|null
      */
     protected $name;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $slug;
 
@@ -40,12 +40,12 @@ abstract class Category implements CategoryInterface
     protected $description;
 
     /**
-     * @var \DateTime
+     * @var \DateTime|null
      */
     protected $createdAt;
 
     /**
-     * @var \DateTime
+     * @var \DateTime|null
      */
     protected $updatedAt;
 
@@ -55,7 +55,7 @@ abstract class Category implements CategoryInterface
     protected $position;
 
     /**
-     * @var DoctrineCollection|CategoryInterface[]
+     * @var Collection<int, CategoryInterface>
      */
     protected $children;
 
@@ -65,7 +65,7 @@ abstract class Category implements CategoryInterface
     protected $parent;
 
     /**
-     * @var MediaInterface
+     * @var MediaInterface|null
      */
     protected $media;
 
@@ -162,9 +162,6 @@ abstract class Category implements CategoryInterface
         $this->position = $position;
     }
 
-    /**
-     * @return mixed
-     */
     public function getPosition()
     {
         return $this->position;

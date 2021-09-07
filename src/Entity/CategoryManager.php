@@ -52,7 +52,7 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
     {
         $page = 0 === (int) $page ? 1 : (int) $page;
 
-        $queryBuilder = $this->getObjectManager()->createQueryBuilder()
+        $queryBuilder = $this->getEntityManager()->createQueryBuilder()
             ->select('c')
             ->from($this->class, 'c')
             ->andWhere('c.parent IS NULL');
@@ -67,7 +67,7 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
 
     public function getSubCategoriesPager($categoryId, $page = 1, $limit = 25, $criteria = [])
     {
-        $queryBuilder = $this->getObjectManager()->createQueryBuilder()
+        $queryBuilder = $this->getEntityManager()->createQueryBuilder()
             ->select('c')
             ->from($this->class, 'c')
             ->where('c.parent = :categoryId')
@@ -141,7 +141,7 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
     {
         $class = $this->getClass();
 
-        $rootCategories = $this->getObjectManager()->createQuery(sprintf('SELECT c FROM %s c WHERE c.parent IS NULL', $class))
+        $rootCategories = $this->getEntityManager()->createQuery(sprintf('SELECT c FROM %s c WHERE c.parent IS NULL', $class))
             ->execute();
 
         $categories = [];
@@ -161,7 +161,7 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
     {
         $class = $this->getClass();
 
-        $rootCategories = $this->getObjectManager()->createQuery(sprintf('SELECT c FROM %s c WHERE c.parent IS NULL', $class))
+        $rootCategories = $this->getEntityManager()->createQuery(sprintf('SELECT c FROM %s c WHERE c.parent IS NULL', $class))
             ->execute();
 
         $categories = [];
@@ -256,7 +256,7 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
 
         $class = $this->getClass();
 
-        $categories = $this->getObjectManager()->createQuery(sprintf('SELECT c FROM %s c WHERE c.context = :context ORDER BY c.parent ASC', $class))
+        $categories = $this->getEntityManager()->createQuery(sprintf('SELECT c FROM %s c WHERE c.context = :context ORDER BY c.parent ASC', $class))
             ->setParameter('context', $context->getId())
             ->execute();
 

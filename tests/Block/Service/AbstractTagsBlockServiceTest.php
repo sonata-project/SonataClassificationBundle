@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sonata\ClassificationBundle\Tests\Block\Service;
 
+use PHPUnit\Framework\MockObject\MockObject;
 use Sonata\BlockBundle\Model\BlockInterface;
 use Sonata\BlockBundle\Test\BlockServiceTestCase;
 use Sonata\ClassificationBundle\Admin\TagAdmin;
@@ -28,17 +29,17 @@ use Twig\Environment;
 final class AbstractTagsBlockServiceTest extends BlockServiceTestCase
 {
     /**
-     * @var ContextManagerInterface
+     * @var ContextManagerInterface&MockObject
      */
     private $contextManager;
 
     /**
-     * @var TagManagerInterface
+     * @var TagManagerInterface&MockObject
      */
     private $tagManager;
 
     /**
-     * @var TagAdmin
+     * @var TagAdmin&MockObject
      */
     private $tagAdmin;
 

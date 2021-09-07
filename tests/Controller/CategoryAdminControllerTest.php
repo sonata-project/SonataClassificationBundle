@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sonata\ClassificationBundle\Tests\Controller;
 
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sonata\AdminBundle\Admin\AdminInterface;
 use Sonata\AdminBundle\Admin\Pool;
@@ -54,7 +55,7 @@ class CategoryAdminControllerTest extends TestCase
     private $requestStack;
 
     /**
-     * @var AdminInterface
+     * @var AdminInterface&MockObject
      */
     private $admin;
 
@@ -69,7 +70,7 @@ class CategoryAdminControllerTest extends TestCase
     private $parameters;
 
     /**
-     * @var ContainerInterface
+     * @var ContainerInterface&MockObject
      */
     private $container;
 
@@ -79,7 +80,7 @@ class CategoryAdminControllerTest extends TestCase
     private $template;
 
     /**
-     * @var CsrfTokenManagerInterface
+     * @var CsrfTokenManagerInterface&MockObject
      */
     private $csrfProvider;
 
@@ -89,12 +90,12 @@ class CategoryAdminControllerTest extends TestCase
     private $controller;
 
     /**
-     * @var CategoryManagerInterface
+     * @var CategoryManagerInterface&MockObject
      */
     private $categoryManager;
 
     /**
-     * @var ContextManagerInterface
+     * @var ContextManagerInterface&MockObject
      */
     private $contextManager;
 

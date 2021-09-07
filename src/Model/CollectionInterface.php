@@ -15,8 +15,17 @@ namespace Sonata\ClassificationBundle\Model;
 
 use Sonata\MediaBundle\Model\MediaInterface;
 
+/**
+ * @method mixed getId()
+ */
 interface CollectionInterface
 {
+    // NEXT_MAJOR: Uncomment this method.
+    // /**
+    // * @return mixed
+    // */
+    // public function getId();
+
     /**
      * @param string $name
      */

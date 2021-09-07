@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sonata\ClassificationBundle\Serializer;
 
 use JMS\Serializer\Context;
+use JMS\Serializer\Visitor\SerializationVisitorInterface;
 use JMS\Serializer\VisitorInterface;
 use Sonata\Form\Serializer\BaseSerializerHandler;
 
@@ -22,20 +23,15 @@ use Sonata\Form\Serializer\BaseSerializerHandler;
  */
 class ContextSerializerHandler extends BaseSerializerHandler
 {
-    /**
-     * Serialize data object to id.
-     *
-     * @param object $data
-     *
-     * @return int|null
-     */
     public function serializeObjectToId(VisitorInterface $visitor, $data, array $type, Context $context)
     {
         $className = $this->manager->getClass();
 
-        if ($data instanceof $className) {
-            return $visitor->visitString($data->getId(), $type, $context);
+        if ($data instanceof $className && $visitor instanceof SerializationVisitorInterface) {
+            return $visitor->visitString($data->getId(), $type);
         }
+
+        return null;
     }
 
     public static function getType()

@@ -16,8 +16,21 @@ namespace Sonata\ClassificationBundle\Model;
 use Doctrine\Common\Collections\Collection;
 use Sonata\MediaBundle\Model\MediaInterface;
 
+/**
+ * @method string __toString()
+ * @method mixed  getId()
+ */
 interface CategoryInterface
 {
+    // NEXT_MAJOR: Uncomment this method.
+    // public function __toString(): string;
+
+    // NEXT_MAJOR: Uncomment this method.
+    // /**
+    // * @return mixed
+    // */
+    // public function getId();
+
     /**
      * @param string $name
      */

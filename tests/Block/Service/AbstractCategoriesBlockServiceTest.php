@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sonata\ClassificationBundle\Tests\Block\Service;
 
+use PHPUnit\Framework\MockObject\MockObject;
 use Sonata\BlockBundle\Model\BlockInterface;
 use Sonata\BlockBundle\Test\BlockServiceTestCase;
 use Sonata\ClassificationBundle\Admin\CategoryAdmin;
@@ -28,17 +29,17 @@ use Twig\Environment;
 final class AbstractCategoriesBlockServiceTest extends BlockServiceTestCase
 {
     /**
-     * @var ContextManagerInterface
+     * @var ContextManagerInterface&MockObject
      */
     private $contextManager;
 
     /**
-     * @var CategoryManagerInterface
+     * @var CategoryManagerInterface&MockObject
      */
     private $categoryManager;
 
     /**
-     * @var CategoryAdmin
+     * @var CategoryAdmin&MockObject
      */
     private $categoryAdmin;
 

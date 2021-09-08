@@ -49,10 +49,9 @@ class CategoryManager extends BaseDocumentManager implements CategoryManagerInte
     public function getRootCategoriesPager($page = 1, $limit = 25, $criteria = [])
     {
         $queryBuilder = $this->getDocumentManager()
-            ->getRepository($this->class)
-            ->createQueryBuilder()
-            ->select('c')
-            ->andWhere('c.parent IS NULL');
+            ->createQueryBuilder($this->getClass())
+            ->field('parent')
+            ->equals(null);
 
         $pager = new Pager($limit);
         $pager->setQuery(new ProxyQuery($queryBuilder));
@@ -65,11 +64,9 @@ class CategoryManager extends BaseDocumentManager implements CategoryManagerInte
     public function getSubCategoriesPager($categoryId, $page = 1, $limit = 25, $criteria = [])
     {
         $queryBuilder = $this->getDocumentManager()
-            ->getRepository($this->class)
-            ->createQueryBuilder()
-            ->select('c')
-            ->where('c.parent = :categoryId')
-            ->setParameter('categoryId', $categoryId);
+            ->createQueryBuilder($this->getClass())
+            ->field('parent')
+            ->equals($categoryId);
 
         $pager = new Pager($limit);
         $pager->setQuery(new ProxyQuery($queryBuilder));
@@ -81,23 +78,16 @@ class CategoryManager extends BaseDocumentManager implements CategoryManagerInte
 
     public function getPager(array $criteria, int $page, int $limit = 10, array $sort = []): PagerInterface
     {
-        $parameters = [];
-
-        $query = $this->getRepository()
-            ->createQueryBuilder('c')
-            ->select('c');
+        $query = $this->getDocumentManager()
+            ->createQueryBuilder($this->getClass())
+            ->field('enabled')
+            ->equals((bool) ($criteria['enabled'] ?? true));
 
         if (isset($criteria['context'])) {
-            $query->andWhere('c.context = :context');
-            $parameters['context'] = $criteria['context'];
+            $query
+                ->field('context')
+                ->equals($criteria['context']);
         }
-
-        if (isset($criteria['enabled'])) {
-            $query->andWhere('c.enabled = :enabled');
-            $parameters['enabled'] = (bool) $criteria['enabled'];
-        }
-
-        $query->setParameters($parameters);
 
         $pager = new Pager();
         $pager->setMaxPerPage($limit);
@@ -145,11 +135,11 @@ class CategoryManager extends BaseDocumentManager implements CategoryManagerInte
     public function getAllRootCategories($loadChildren = true)
     {
         $rootCategories = $this->getDocumentManager()
-            ->getRepository($this->class)
-            ->createQueryBuilder('c')
-            ->where('c.parent IS NULL')
+            ->createQueryBuilder($this->getClass())
+            ->field('parent')
+            ->equals(null)
             ->getQuery()
-            ->getResult();
+            ->execute();
 
         $categories = [];
 
@@ -182,19 +172,23 @@ class CategoryManager extends BaseDocumentManager implements CategoryManagerInte
 
     public function getBySlug(string $slug, $context = null, ?bool $enabled = true): ?CategoryInterface
     {
-        $queryBuilder = $this->getRepository()
-            ->createQueryBuilder('c')
-            ->select('c')
-            ->andWhere('c.slug = :slug')->setParameter('slug', $slug);
+        $queryBuilder = $this->getDocumentManager()
+            ->createQueryBuilder($this->getClass())
+            ->field('slug')
+            ->equals($slug);
 
         if (null !== $context) {
-            $queryBuilder->andWhere('c.context = :context')->setParameter('context', $context);
+            $queryBuilder
+                ->field('context')
+                ->equals($context);
         }
         if (null !== $enabled) {
-            $queryBuilder->andWhere('c.enabled = :enabled')->setParameter('enabled', $enabled);
+            $queryBuilder
+                ->field('enabled')
+                ->equals($enabled);
         }
 
-        return $queryBuilder->getQuery()->getOneOrNullResult();
+        return $queryBuilder->getQuery()->execute();
     }
 
     /**
@@ -207,13 +201,12 @@ class CategoryManager extends BaseDocumentManager implements CategoryManagerInte
         }
 
         $categories = $this->getDocumentManager()
-            ->getRepository($this->class)
-            ->createQueryBuilder('c')
-            ->where('c.context = :context')
-            ->orderBy('c.parent')
-            ->setParameter('context', $context->getId())
+            ->createQueryBuilder($this->getClass())
+            ->field('context')
+            ->equals($context->getId())
+            ->sort('parent')
             ->getQuery()
-            ->getResult();
+            ->execute();
 
         if (0 === \count($categories)) {
             // no category, create one for the provided context
@@ -227,6 +220,8 @@ class CategoryManager extends BaseDocumentManager implements CategoryManagerInte
 
             $categories = [$category];
         }
+
+        $root = null;
 
         foreach ($categories as $pos => $category) {
             if (0 === $pos && $category->getParent()) {
@@ -248,9 +243,11 @@ class CategoryManager extends BaseDocumentManager implements CategoryManagerInte
             }
         }
 
-        $this->categories[$context->getId()] = [
-            0 => $root,
-        ];
+        if (null !== $root) {
+            $this->categories[$context->getId()] = [
+                0 => $root,
+            ];
+        }
     }
 
     /**

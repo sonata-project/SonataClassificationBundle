@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sonata\ClassificationBundle\Block\Service;
 
-use Doctrine\ORM\Mapping\ClassMetadataInfo;
 use Sonata\AdminBundle\Admin\AdminInterface;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Form\Type\ModelListType;
@@ -55,13 +54,9 @@ abstract class AbstractClassificationBlockService extends AbstractBlockService
             'translation_domain' => 'SonataClassificationBundle',
         ], $adminOptions);
 
-        $fieldDescription = $admin->getModelManager()->getNewFieldDescriptionInstance($admin->getClass(), $field, $adminOptions);
+        $fieldDescription = $admin->createFieldDescription($field, $adminOptions);
         $fieldDescription->setAssociationAdmin($admin);
         $fieldDescription->setAdmin($formMapper->getAdmin());
-        $fieldDescription->setAssociationMapping([
-            'fieldName' => $field,
-            'type' => ClassMetadataInfo::MANY_TO_ONE,
-        ]);
 
         $fieldOptions = array_merge([
             'sonata_field_description' => $fieldDescription,

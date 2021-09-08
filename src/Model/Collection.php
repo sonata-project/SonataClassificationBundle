@@ -50,7 +50,7 @@ abstract class Collection implements CollectionInterface
      */
     protected $context;
 
-    public function __toString()
+    public function __toString(): string
     {
         return $this->getName() ?: 'n/a';
     }

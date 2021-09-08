@@ -13,10 +13,12 @@ declare(strict_types=1);
 
 namespace Sonata\ClassificationBundle\Model;
 
-use Doctrine\Common\Collections\Collection as DoctrineCollection;
+use Doctrine\Common\Collections\Collection;
 
 interface CategoryInterface
 {
+    public function __toString(): string;
+
     /**
      * @return mixed
      */
@@ -73,18 +75,17 @@ interface CategoryInterface
     public function getPosition();
 
     /**
-     * @param CategoryInterface $children
-     * @param bool              $nested
+     * @param bool $nested
      */
     public function addChild(self $children, $nested = false);
 
     /**
-     * @return DoctrineCollection|CategoryInterface[]
+     * @return Collection<int, self> $children
      */
     public function getChildren();
 
     /**
-     * @param array $children
+     * @param iterable<self> $children
      */
     public function setChildren($children);
 
@@ -94,13 +95,12 @@ interface CategoryInterface
     public function hasChildren();
 
     /**
-     * @param CategoryInterface|null $parent
-     * @param bool                   $nested
+     * @param bool $nested
      */
     public function setParent(?self $parent = null, $nested = false);
 
     /**
-     * @return CategoryInterface|null
+     * @return self|null
      */
     public function getParent();
 

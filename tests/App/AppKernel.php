@@ -56,9 +56,6 @@ final class AppKernel extends Kernel
             new DoctrineBundle(),
             new NelmioApiDocBundle(),
             new SonataDoctrineBundle(),
-            new SonataAdminBundle(),
-            new SonataDoctrineORMAdminBundle(),
-            new KnpMenuBundle(),
         ];
     }
 

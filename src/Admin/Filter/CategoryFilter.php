@@ -33,13 +33,14 @@ final class CategoryFilter extends Filter
         $this->categoryManager = $categoryManager;
     }
 
-    public function filter(ProxyQueryInterface $queryBuilder, string $alias, string $field, FilterData $data): void
+    public function filter(ProxyQueryInterface $proxyQuery, string $alias, string $field, FilterData $data): void
     {
         if (!$data->hasValue() || null === $data->getValue()) {
             return;
         }
 
-        $queryBuilder
+        $proxyQuery
+            ->getQueryBuilder()
             ->andWhere(sprintf('%s.%s = :category', $alias, $field))
             ->setParameter('category', $data->getValue());
 
@@ -106,7 +107,7 @@ final class CategoryFilter extends Filter
         }
 
         foreach ($category->getChildren() as $child) {
-            $choices[sprintf('%s %s', str_repeat('-', 1 * $level), (string) $child)] = $child->getId();
+            $choices[sprintf('%s %s', str_repeat('-', 1 * $level), $child->__toString())] = $child->getId();
 
             $this->visitChild($child, $choices, $level + 1);
         }

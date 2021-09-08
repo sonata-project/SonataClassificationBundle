@@ -16,6 +16,11 @@ namespace Sonata\ClassificationBundle\Model;
 interface CollectionInterface
 {
     /**
+     * @return string
+     */
+    public function __toString();
+
+    /**
      * @return mixed
      */
     public function getId();

@@ -21,17 +21,10 @@ class TagManager extends BaseDocumentManager implements TagManagerInterface
 {
     public function getPager(array $criteria, int $page, int $limit = 10, array $sort = []): PagerInterface
     {
-        $parameters = [];
-
-        $query = $this->getRepository()
-            ->createQueryBuilder('t')
-            ->select('t');
-
-        $criteria['enabled'] = $criteria['enabled'] ?? true;
-        $query->andWhere('t.enabled = :enabled');
-        $parameters['enabled'] = $criteria['enabled'];
-
-        $query->setParameters($parameters);
+        $query = $this->getDocumentManager()
+            ->createQueryBuilder($this->getClass())
+            ->field('enabled')
+            ->equals($criteria['enabled'] ?? true);
 
         $pager = new Pager();
         $pager->setMaxPerPage($limit);

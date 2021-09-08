@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sonata\ClassificationBundle\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection as DoctrineCollection;
+use Doctrine\Common\Collections\Collection;
 
 abstract class Category implements CategoryInterface
 {
@@ -54,7 +54,7 @@ abstract class Category implements CategoryInterface
     protected $position;
 
     /**
-     * @var DoctrineCollection|CategoryInterface[]
+     * @var Collection<int, CategoryInterface>
      */
     protected $children;
 
@@ -73,7 +73,7 @@ abstract class Category implements CategoryInterface
         $this->children = new ArrayCollection();
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         return $this->getName() ?: 'n/a';
     }
@@ -156,9 +156,6 @@ abstract class Category implements CategoryInterface
         $this->position = $position;
     }
 
-    /**
-     * @return mixed
-     */
     public function getPosition()
     {
         return $this->position;

@@ -110,13 +110,13 @@ abstract class Tag implements TagInterface
     }
 
     /**
-     * source : http://snipplr.com/view/22741/slugify-a-string-in-php/.
+     * @see http://snipplr.com/view/22741/slugify-a-string-in-php/.
      *
      * @static
      *
      * @param string $text
      *
-     * @return mixed|string
+     * @return string
      */
     public static function slugify($text)
     {

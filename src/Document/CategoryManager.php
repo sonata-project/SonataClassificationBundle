@@ -22,17 +22,10 @@ class CategoryManager extends BaseDocumentManager implements CategoryManagerInte
 {
     public function getPager(array $criteria, $page, $limit = 10, array $sort = [])
     {
-        $parameters = [];
-
-        $query = $this->getRepository()
-            ->createQueryBuilder('c')
-            ->select('c');
-
-        $criteria['enabled'] = $criteria['enabled'] ?? true;
-        $query->andWhere('c.enabled = :enabled');
-        $parameters['enabled'] = $criteria['enabled'];
-
-        $query->setParameters($parameters);
+        $query = $this->getDocumentManager()
+            ->createQueryBuilder($this->getClass())
+            ->field('enabled')
+            ->equals($criteria['enabled'] ?? true);
 
         $pager = new Pager();
         $pager->setMaxPerPage($limit);

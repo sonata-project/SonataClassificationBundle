@@ -107,12 +107,9 @@ class CategorySelectorType extends AbstractType
         return $this->getBlockPrefix();
     }
 
-    /**
-     * @param int $level
-     */
-    private function childWalker(CategoryInterface $category, Options $options, array &$choices, $level = 2)
+    private function childWalker(CategoryInterface $category, Options $options, array &$choices, int $level = 2)
     {
-        if (null === $category->getChildren()) {
+        if ($category->getChildren()->isEmpty()) {
             return;
         }
 

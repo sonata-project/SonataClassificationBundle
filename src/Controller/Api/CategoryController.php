@@ -167,7 +167,7 @@ class CategoryController
      *
      * @throws NotFoundHttpException
      *
-     * @return Rest\View|FormInterface
+     * @return View|FormInterface
      */
     public function postCategoryAction(Request $request)
     {
@@ -200,7 +200,7 @@ class CategoryController
      *
      * @throws NotFoundHttpException
      *
-     * @return Rest\View|FormInterface
+     * @return View|FormInterface
      */
     public function putCategoryAction($id, Request $request)
     {

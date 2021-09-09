@@ -15,18 +15,18 @@ namespace Sonata\ClassificationBundle\Tests\Form\Type;
 
 use PHPUnit\Framework\TestCase;
 use Sonata\ClassificationBundle\Form\Type\CategorySelectorType;
-use Sonata\Doctrine\Model\ManagerInterface;
+use Sonata\ClassificationBundle\Model\CategoryManagerInterface;
 use Symfony\Component\Form\ChoiceList\Loader\ChoiceLoaderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Anton Zlotnikov <exp.razor@gmail.com>
  */
-class CategorySelectorTypeTest extends TestCase
+final class CategorySelectorTypeTest extends TestCase
 {
     public function testConfigureOptions(): void
     {
-        $manager = $this->createMock(ManagerInterface::class);
+        $manager = $this->createStub(CategoryManagerInterface::class);
         $categorySelectorType = new CategorySelectorType($manager);
         $optionsResolver = new OptionsResolver();
         $categorySelectorType->configureOptions($optionsResolver);

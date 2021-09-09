@@ -17,7 +17,6 @@ use Sonata\AdminBundle\Form\Type\ModelType;
 use Sonata\ClassificationBundle\Form\ChoiceList\CategoryChoiceLoader;
 use Sonata\ClassificationBundle\Model\CategoryInterface;
 use Sonata\ClassificationBundle\Model\CategoryManagerInterface;
-use Sonata\Doctrine\Model\ManagerInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\ChoiceList\Loader\ChoiceLoaderInterface;
 use Symfony\Component\OptionsResolver\Options;
@@ -36,7 +35,7 @@ class CategorySelectorType extends AbstractType
      */
     protected $manager;
 
-    public function __construct(ManagerInterface $manager)
+    public function __construct(CategoryManagerInterface $manager)
     {
         $this->manager = $manager;
     }

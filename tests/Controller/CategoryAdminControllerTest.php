@@ -85,7 +85,7 @@ class CategoryAdminControllerTest extends TestCase
     private $csrfProvider;
 
     /**
-     * @var CategoryAdminController
+     * @var CategoryAdminController|null
      */
     private $controller;
 

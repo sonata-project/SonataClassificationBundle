@@ -187,10 +187,8 @@ abstract class AbstractCategoriesBlockService extends AbstractClassificationBloc
     /**
      * @param CategoryInterface|int $id
      * @param mixed                 $default
-     *
-     * @return CategoryInterface
      */
-    final protected function getCategory($id, $default = null)
+    final protected function getCategory($id, $default = null): ?CategoryInterface
     {
         if ($id instanceof CategoryInterface) {
             return $id;

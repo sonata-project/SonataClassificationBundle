@@ -167,7 +167,7 @@ class CategoryController
      *
      * @throws NotFoundHttpException
      *
-     * @return CategoryInterface
+     * @return Rest\View|FormInterface
      */
     public function postCategoryAction(Request $request)
     {
@@ -200,7 +200,7 @@ class CategoryController
      *
      * @throws NotFoundHttpException
      *
-     * @return CategoryInterface
+     * @return Rest\View|FormInterface
      */
     public function putCategoryAction($id, Request $request)
     {
@@ -231,7 +231,7 @@ class CategoryController
      *
      * @throws NotFoundHttpException
      *
-     * @return Rest\View
+     * @return array<string, bool>
      */
     public function deleteCategoryAction($id)
     {
@@ -288,11 +288,11 @@ class CategoryController
      * @param Request     $request Symfony request
      * @param string|null $id      category identifier
      *
-     * @return Rest\View|FormInterface
+     * @return View|FormInterface
      */
     protected function handleWriteCategory($request, $id = null)
     {
-        $category = $id ? $this->getCategory($id) : null;
+        $category = null !== $id ? $this->getCategory($id) : null;
 
         $form = $this->formFactory->createNamed(null, ApiCategoryType::class, $category, [
             'csrf_protection' => false,

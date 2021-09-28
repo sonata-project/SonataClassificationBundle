@@ -18,6 +18,8 @@ use Sonata\Doctrine\Model\ManagerInterface;
 use Sonata\Doctrine\Model\PageableManagerInterface;
 
 /**
+ * NEXT_MAJOR: Remove PageableManagerInterface extension.
+ *
  * @method PagerInterface         getRootCategoriesPager(int $page = 1, int $limit = 25, array $criteria = [])
  * @method PagerInterface         getSubCategoriesPager(int $categoryId, int $page = 1, int $limit = 25, array $criteria = [])
  * @method CategoryInterface[]    getRootCategoriesForContext(ContextInterface|null $context)

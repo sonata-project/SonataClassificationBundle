@@ -43,9 +43,11 @@ class SonataClassificationExtension extends Extension
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('orm.xml');
         $loader->load('form.xml');
+        // NEXT_MAJOR: Remove next line and the file.
         $loader->load('serializer.xml');
         $loader->load('command.xml');
 
+        // NEXT_MAJOR: Remove this condition and remove all configuration files related to this.
         if (isset($bundles['FOSRestBundle'], $bundles['NelmioApiDocBundle'])) {
             if (class_exists(Operation::class)) {
                 $loader->load('api_controllers.xml');

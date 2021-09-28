@@ -20,6 +20,11 @@ use Sonata\Doctrine\Document\BaseDocumentManager;
 
 class CollectionManager extends BaseDocumentManager implements CollectionManagerInterface
 {
+    /**
+     * NEXT_MAJOR: remove this method.
+     *
+     * @deprecated since sonata-project/classification-bundle 3.x, to be removed in 4.0.
+     */
     public function getPager(array $criteria, $page, $limit = 10, array $sort = [])
     {
         $query = $this->getDocumentManager()

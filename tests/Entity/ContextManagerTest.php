@@ -25,7 +25,7 @@ class ContextManagerTest extends TestCase
     use EntityManagerMockFactoryTrait;
 
     /**
-     * NEXT_MAJOR: Remove this class.
+     * NEXT_MAJOR: Remove this test.
      *
      * @group legacy
      */
@@ -42,7 +42,7 @@ class ContextManagerTest extends TestCase
     }
 
     /**
-     * NEXT_MAJOR: Remove this class.
+     * NEXT_MAJOR: Remove this test.
      *
      * @group legacy
      */
@@ -61,7 +61,7 @@ class ContextManagerTest extends TestCase
     }
 
     /**
-     * NEXT_MAJOR: Remove this class.
+     * NEXT_MAJOR: Remove this test.
      *
      * @group legacy
      */

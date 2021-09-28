@@ -27,7 +27,7 @@ class CategoryManagerTest extends TestCase
     use EntityManagerMockFactoryTrait;
 
     /**
-     * NEXT_MAJOR: Remove this class.
+     * NEXT_MAJOR: Remove this test.
      *
      * @group legacy
      */
@@ -46,7 +46,7 @@ class CategoryManagerTest extends TestCase
     }
 
     /**
-     * NEXT_MAJOR: Remove this class.
+     * NEXT_MAJOR: Remove this test.
      *
      * @group legacy
      */
@@ -69,7 +69,7 @@ class CategoryManagerTest extends TestCase
     }
 
     /**
-     * NEXT_MAJOR: Remove this class.
+     * NEXT_MAJOR: Remove this test.
      *
      * @group legacy
      */

@@ -27,7 +27,11 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
+ * NEXT_MAJOR: Remove this class.
+ *
  * @author Thomas Rabaix <thomas.rabaix@gmail.com>
+ *
+ * @group legacy
  */
 class ContextControllerTest extends TestCase
 {

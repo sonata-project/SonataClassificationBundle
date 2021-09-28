@@ -17,6 +17,8 @@ use Sonata\Doctrine\Model\ManagerInterface;
 use Sonata\Doctrine\Model\PageableManagerInterface;
 
 /**
+ * NEXT_MAJOR: Remove PageableManagerInterface extension.
+ *
  * @method CollectionInterface|null getBySlug(string $slug, ContextInterface|string|null $context, bool $enabled = true)
  * @method CollectionInterface[]    getByContext(ContextInterface|string $context, bool $enabled = true)
  */

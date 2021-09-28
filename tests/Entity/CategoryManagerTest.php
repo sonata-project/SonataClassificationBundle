@@ -26,6 +26,11 @@ class CategoryManagerTest extends TestCase
 {
     use EntityManagerMockFactoryTrait;
 
+    /**
+     * NEXT_MAJOR: Remove this class.
+     *
+     * @group legacy
+     */
     public function testGetPager(): void
     {
         $self = $this;
@@ -40,6 +45,11 @@ class CategoryManagerTest extends TestCase
             ->getPager(['context' => 'default'], 1);
     }
 
+    /**
+     * NEXT_MAJOR: Remove this class.
+     *
+     * @group legacy
+     */
     public function testGetPagerWithEnabledCategories(): void
     {
         $self = $this;
@@ -58,6 +68,11 @@ class CategoryManagerTest extends TestCase
             ], 1);
     }
 
+    /**
+     * NEXT_MAJOR: Remove this class.
+     *
+     * @group legacy
+     */
     public function testGetPagerWithDisabledCategories(): void
     {
         $self = $this;

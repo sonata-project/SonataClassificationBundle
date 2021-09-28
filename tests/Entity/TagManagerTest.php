@@ -24,6 +24,11 @@ class TagManagerTest extends TestCase
 {
     use EntityManagerMockFactoryTrait;
 
+    /**
+     * NEXT_MAJOR: Remove this class.
+     *
+     * @group legacy
+     */
     public function testGetPager(): void
     {
         $self = $this;
@@ -36,6 +41,11 @@ class TagManagerTest extends TestCase
             ->getPager([], 1);
     }
 
+    /**
+     * NEXT_MAJOR: Remove this class.
+     *
+     * @group legacy
+     */
     public function testGetPagerWithEnabledTags(): void
     {
         $self = $this;
@@ -50,6 +60,11 @@ class TagManagerTest extends TestCase
             ], 1);
     }
 
+    /**
+     * NEXT_MAJOR: Remove this class.
+     *
+     * @group legacy
+     */
     public function testGetPagerWithDisabledTags(): void
     {
         $self = $this;

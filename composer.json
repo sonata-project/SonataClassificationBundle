@@ -54,7 +54,7 @@
         "phpstan/phpstan-symfony": "^0.12.21",
         "psalm/plugin-phpunit": "^0.15",
         "psalm/plugin-symfony": "^2.0",
-        "sonata-project/admin-bundle": "^4.0@dev",
+        "sonata-project/admin-bundle": "^4.0",
         "sonata-project/block-bundle": "^4.0",
         "sonata-project/doctrine-mongodb-admin-bundle": "^4.0",
         "sonata-project/doctrine-orm-admin-bundle": "^4.0",

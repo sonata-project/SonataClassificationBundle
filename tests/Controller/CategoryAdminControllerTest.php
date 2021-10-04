@@ -71,7 +71,7 @@ class CategoryAdminControllerTest extends TestCase
     private $parameters;
 
     /**
-     * @var ContainerInterface&MockObject
+     * @var ContainerInterface
      */
     private $container;
 

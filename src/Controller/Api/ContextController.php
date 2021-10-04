@@ -31,9 +31,11 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
- * @final since sonata-project/classification-bundle 3.14
+ * NEXT_MAJOR: Remove this file.
  *
  * @author Thomas Rabaix <thomas.rabaix@gmail.com>
+ *
+ * @deprecated since sonata-project/classification-bundle 3.x, to be removed in 4.0.
  */
 class ContextController
 {
@@ -159,7 +161,7 @@ class ContextController
      *
      * @throws NotFoundHttpException
      *
-     * @return ContextInterface
+     * @return View|FormInterface
      */
     public function postContextAction(Request $request)
     {
@@ -192,7 +194,7 @@ class ContextController
      *
      * @throws NotFoundHttpException
      *
-     * @return ContextInterface
+     * @return View|FormInterface
      */
     public function putContextAction($id, Request $request)
     {

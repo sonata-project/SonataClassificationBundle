@@ -29,6 +29,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
+ * NEXT_MAJOR: Remove this file.
+ *
  * @deprecated since sonata-project/classification-bundle 3.14, to be removed in 4.0.
  *
  * @author Vincent Composieux <vincent.composieux@gmail.com>
@@ -120,7 +122,7 @@ class TagController
      *
      * @throws NotFoundHttpException
      *
-     * @return TagInterface
+     * @return View|FormInterface
      */
     public function postTagAction(Request $request)
     {
@@ -148,7 +150,7 @@ class TagController
      *
      * @throws NotFoundHttpException
      *
-     * @return TagInterface
+     * @return View|FormInterface
      */
     public function putTagAction($id, Request $request)
     {

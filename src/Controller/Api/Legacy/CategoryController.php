@@ -29,6 +29,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
+ * NEXT_MAJOR: Remove this file.
+ *
  * @deprecated since sonata-project/classification-bundle 3.14, to be removed in 4.0.
  *
  * @author Vincent Composieux <vincent.composieux@gmail.com>
@@ -121,7 +123,7 @@ class CategoryController
      *
      * @throws NotFoundHttpException
      *
-     * @return CategoryInterface
+     * @return View|FormInterface
      */
     public function postCategoryAction(Request $request)
     {
@@ -149,7 +151,7 @@ class CategoryController
      *
      * @throws NotFoundHttpException
      *
-     * @return CategoryInterface
+     * @return View|FormInterface
      */
     public function putCategoryAction($id, Request $request)
     {

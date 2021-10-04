@@ -17,6 +17,8 @@ use Sonata\DatagridBundle\Pager\PageableInterface;
 use Sonata\Doctrine\Model\ManagerInterface;
 
 /**
+ * NEXT_MAJOR: Remove PageableManagerInterface extension.
+ *
  * @method TagInterface|null getBySlug(string $slug, ContextInterface|string|null $context, bool $enabled = true)
  * @method TagInterface[]    getByContext(ContextInterface|string $context, bool $enabled = true)
  *

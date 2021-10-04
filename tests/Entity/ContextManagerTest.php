@@ -24,6 +24,11 @@ class ContextManagerTest extends TestCase
 {
     use EntityManagerMockFactoryTrait;
 
+    /**
+     * NEXT_MAJOR: Remove this test.
+     *
+     * @group legacy
+     */
     public function testGetPager(): void
     {
         $self = $this;
@@ -36,6 +41,11 @@ class ContextManagerTest extends TestCase
             ->getPager([], 1);
     }
 
+    /**
+     * NEXT_MAJOR: Remove this test.
+     *
+     * @group legacy
+     */
     public function testGetPagerWithEnabledContexts(): void
     {
         $self = $this;
@@ -50,6 +60,11 @@ class ContextManagerTest extends TestCase
             ], 1);
     }
 
+    /**
+     * NEXT_MAJOR: Remove this test.
+     *
+     * @group legacy
+     */
     public function testGetPagerWithDisabledContexts(): void
     {
         $self = $this;

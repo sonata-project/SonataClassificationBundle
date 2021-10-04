@@ -44,10 +44,8 @@ abstract class AbstractClassificationBlockService extends AbstractBlockService
      * @param string $field
      * @param array  $fieldOptions
      * @param array  $adminOptions
-     *
-     * @return FormBuilder
      */
-    final protected function getFormAdminType(FormMapper $formMapper, AdminInterface $admin, $formField, $field, $fieldOptions = [], $adminOptions = [])
+    final protected function getFormAdminType(FormMapper $formMapper, AdminInterface $admin, $formField, $field, $fieldOptions = [], $adminOptions = []): FormBuilder
     {
         $adminOptions = array_merge([
             'edit' => 'list',

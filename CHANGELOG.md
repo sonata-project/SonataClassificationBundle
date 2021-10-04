@@ -2,6 +2,19 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.17.0](https://github.com/sonata-project/SonataClassificationBundle/compare/3.16.0...3.17.0) - 2021-09-21
+### Added
+- [[#721](https://github.com/sonata-project/SonataClassificationBundle/pull/721)] Missing methods in interfaces (through the `@method` annotation). ([@phansys](https://github.com/phansys))
+- [[#722](https://github.com/sonata-project/SonataClassificationBundle/pull/722)] Missing requirement for "doctrine/collections". ([@phansys](https://github.com/phansys))
+
+### Fixed
+- [[#727](https://github.com/sonata-project/SonataClassificationBundle/pull/727)] Some `@return` types at `Sonata\ClassificationBundle\Controller\Api\CategoryController`; ([@phansys](https://github.com/phansys))
+- [[#727](https://github.com/sonata-project/SonataClassificationBundle/pull/727)] Checking for an empty collection returned by `CategoryInterface::getChildren()` at `CategorySelectorType`. ([@phansys](https://github.com/phansys))
+- [[#726](https://github.com/sonata-project/SonataClassificationBundle/pull/726)] Several wrong types in arguments and return declarations. ([@phansys](https://github.com/phansys))
+- [[#721](https://github.com/sonata-project/SonataClassificationBundle/pull/721)] Calls to several undefined methods. ([@phansys](https://github.com/phansys))
+- [[#724](https://github.com/sonata-project/SonataClassificationBundle/pull/724)] Calls to undefined methods in ODM queries at `CategoryManager::getPager()`, `CollectionManager::getPager()` and `TagManager::getPager()`. ([@phansys](https://github.com/phansys))
+- [[#719](https://github.com/sonata-project/SonataClassificationBundle/pull/719)] Several docblock types for properties and methods under the `Sonata\ClassificationBundle\Model\` namespace. ([@phansys](https://github.com/phansys))
+
 ## [3.16.0](https://github.com/sonata-project/SonataClassificationBundle/compare/3.15.1...3.16.0) - 2021-04-06
 ### Added
 - [[#653](https://github.com/sonata-project/SonataClassificationBundle/pull/653)] Add support for PHP 8.x ([@Yozhef](https://github.com/Yozhef))

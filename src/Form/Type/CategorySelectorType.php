@@ -17,7 +17,6 @@ use Sonata\AdminBundle\Form\Type\ModelType;
 use Sonata\ClassificationBundle\Form\ChoiceList\CategoryChoiceLoader;
 use Sonata\ClassificationBundle\Model\CategoryInterface;
 use Sonata\ClassificationBundle\Model\CategoryManagerInterface;
-use Sonata\Doctrine\Model\ManagerInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\ChoiceList\Loader\ChoiceLoaderInterface;
 use Symfony\Component\OptionsResolver\Options;
@@ -35,7 +34,7 @@ class CategorySelectorType extends AbstractType
      */
     protected $manager;
 
-    public function __construct(ManagerInterface $manager)
+    public function __construct(CategoryManagerInterface $manager)
     {
         $this->manager = $manager;
     }
@@ -87,12 +86,9 @@ class CategorySelectorType extends AbstractType
         return 'sonata_category_selector';
     }
 
-    /**
-     * @param int $level
-     */
-    private function childWalker(CategoryInterface $category, Options $options, array &$choices, $level = 2): void
+    private function childWalker(CategoryInterface $category, Options $options, array &$choices, int $level = 2): void
     {
-        if (null === $category->getChildren()) {
+        if ($category->getChildren()->isEmpty()) {
             return;
         }
 

@@ -73,6 +73,9 @@ final class RoutingTest extends WebTestCase
         }
     }
 
+    /**
+     * NEXT_MAJOR: Remove ReST API routes.
+     */
     public function getRoutes(): iterable
     {
         // API

@@ -14,16 +14,12 @@ declare(strict_types=1);
 namespace Sonata\ClassificationBundle\Model;
 
 use Sonata\AdminBundle\Datagrid\PagerInterface;
-use Sonata\DatagridBundle\Pager\PageableInterface;
 use Sonata\Doctrine\Model\ManagerInterface;
 
 /**
- * NEXT_MAJOR: Remove PageableInterface extension.
- *
  * @phpstan-extends ManagerInterface<CategoryInterface>
- * @phpstan-extends PageableInterface<CategoryInterface>
  */
-interface CategoryManagerInterface extends ManagerInterface, PageableInterface
+interface CategoryManagerInterface extends ManagerInterface
 {
     /**
      * Returns a pager to iterate over the root category.

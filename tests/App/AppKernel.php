@@ -14,11 +14,8 @@ declare(strict_types=1);
 namespace Sonata\ClassificationBundle\Tests\App;
 
 use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
-use FOS\RestBundle\FOSRestBundle;
-use JMS\SerializerBundle\JMSSerializerBundle;
 use Knp\Bundle\MenuBundle\KnpMenuBundle;
 use Nelmio\ApiDocBundle\Annotation\Operation;
-use Nelmio\ApiDocBundle\NelmioApiDocBundle;
 use Sonata\AdminBundle\SonataAdminBundle;
 use Sonata\ClassificationBundle\SonataClassificationBundle;
 use Sonata\Doctrine\Bridge\Symfony\SonataDoctrineBundle;
@@ -47,14 +44,11 @@ final class AppKernel extends Kernel
             new FrameworkBundle(),
             new SecurityBundle(),
             new TwigBundle(),
-            new FOSRestBundle(),
             new SonataAdminBundle(),
             new KnpMenuBundle(),
             new SonataDoctrineORMAdminBundle(),
             new SonataClassificationBundle(),
-            new JMSSerializerBundle(),
             new DoctrineBundle(),
-            new NelmioApiDocBundle(),
             new SonataDoctrineBundle(),
         ];
     }

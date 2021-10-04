@@ -24,61 +24,6 @@ class CollectionManagerTest extends TestCase
 {
     use EntityManagerMockFactoryTrait;
 
-    /**
-     * NEXT_MAJOR: Remove this test.
-     *
-     * @group legacy
-     */
-    public function testGetPager(): void
-    {
-        $self = $this;
-        $this
-            ->getCollectionManager(static function (MockObject $qb) use ($self): void {
-                $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue([]));
-                $qb->expects($self->never())->method('andWhere');
-                $qb->expects($self->once())->method('setParameters')->with([]);
-            })
-            ->getPager([], 1);
-    }
-
-    /**
-     * NEXT_MAJOR: Remove this test.
-     *
-     * @group legacy
-     */
-    public function testGetPagerWithEnabledCollections(): void
-    {
-        $self = $this;
-        $this
-            ->getCollectionManager(static function (MockObject $qb) use ($self): void {
-                $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue([]));
-                $qb->expects($self->once())->method('andWhere')->with($self->equalTo('c.enabled = :enabled'));
-                $qb->expects($self->once())->method('setParameters')->with(['enabled' => true]);
-            })
-            ->getPager([
-                'enabled' => true,
-            ], 1);
-    }
-
-    /**
-     * NEXT_MAJOR: Remove this test.
-     *
-     * @group legacy
-     */
-    public function testGetPagerWithDisabledCollections(): void
-    {
-        $self = $this;
-        $this
-            ->getCollectionManager(static function (MockObject $qb) use ($self): void {
-                $qb->expects($self->once())->method('getRootAliases')->will($self->returnValue([]));
-                $qb->expects($self->once())->method('andWhere')->with($self->equalTo('c.enabled = :enabled'));
-                $qb->expects($self->once())->method('setParameters')->with(['enabled' => false]);
-            })
-            ->getPager([
-                'enabled' => false,
-            ], 1);
-    }
-
     public function testGetBySlug(): void
     {
         $self = $this;

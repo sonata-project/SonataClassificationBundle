@@ -11,32 +11,11 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
+namespace Sonata\ClassificationBundle\Document;
+
 use Sonata\ClassificationBundle\Model\TagManagerInterface;
-use Sonata\DatagridBundle\Pager\Doctrine\Pager;
-use Sonata\DatagridBundle\Pager\PagerInterface;
-use Sonata\DatagridBundle\ProxyQuery\Doctrine\ProxyQuery;
 use Sonata\Doctrine\Document\BaseDocumentManager;
 
 class TagManager extends BaseDocumentManager implements TagManagerInterface
 {
-    /**
-     * NEXT_MAJOR: remove this method.
-     *
-     * @deprecated since sonata-project/classification-bundle 3.x, to be removed in 4.0.
-     */
-    public function getPager(array $criteria, int $page, int $limit = 10, array $sort = []): PagerInterface
-    {
-        $query = $this->getDocumentManager()
-            ->createQueryBuilder($this->getClass())
-            ->field('enabled')
-            ->equals($criteria['enabled'] ?? true);
-
-        $pager = new Pager();
-        $pager->setMaxPerPage($limit);
-        $pager->setQuery(new ProxyQuery($query));
-        $pager->setPage($page);
-        $pager->init();
-
-        return $pager;
-    }
 }

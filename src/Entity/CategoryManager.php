@@ -19,10 +19,9 @@ use Sonata\ClassificationBundle\Model\CategoryInterface;
 use Sonata\ClassificationBundle\Model\CategoryManagerInterface;
 use Sonata\ClassificationBundle\Model\ContextInterface;
 use Sonata\ClassificationBundle\Model\ContextManagerInterface;
-use Sonata\DatagridBundle\Pager\Doctrine\Pager;
-use Sonata\DatagridBundle\Pager\PagerInterface;
-use Sonata\DatagridBundle\ProxyQuery\Doctrine\ProxyQuery;
 use Sonata\Doctrine\Entity\BaseEntityManager;
+use Sonata\DoctrineORMAdminBundle\Datagrid\Pager;
+use Sonata\DoctrineORMAdminBundle\Datagrid\ProxyQuery;
 
 class CategoryManager extends BaseEntityManager implements CategoryManagerInterface
 {
@@ -154,40 +153,6 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
         }
 
         return $splitCategories;
-    }
-
-    /**
-     * NEXT_MAJOR: remove this method.
-     *
-     * @deprecated since sonata-project/classification-bundle 3.x, to be removed in 4.0.
-     */
-    public function getPager(array $criteria, int $page, int $limit = 10, array $sort = []): PagerInterface
-    {
-        $parameters = [];
-
-        $query = $this->getRepository()
-            ->createQueryBuilder('c')
-            ->select('c');
-
-        if (isset($criteria['context'])) {
-            $query->andWhere('c.context = :context');
-            $parameters['context'] = $criteria['context'];
-        }
-
-        if (isset($criteria['enabled'])) {
-            $query->andWhere('c.enabled = :enabled');
-            $parameters['enabled'] = (bool) $criteria['enabled'];
-        }
-
-        $query->setParameters($parameters);
-
-        $pager = new Pager();
-        $pager->setMaxPerPage($limit);
-        $pager->setQuery(new ProxyQuery($query));
-        $pager->setPage($page);
-        $pager->init();
-
-        return $pager;
     }
 
     public function getBySlug(string $slug, $context = null, ?bool $enabled = true): ?CategoryInterface

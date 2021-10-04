@@ -19,21 +19,6 @@ sonata_classification:
         context: Sonata\ClassificationBundle\Tests\App\Entity\Context
         collection: Sonata\ClassificationBundle\Tests\App\Entity\Collection
 
-fos_rest:
-    param_fetcher_listener: true
-    body_listener: true
-    format_listener:
-        enabled: true
-        rules:
-            priorities: 'json'
-            fallback_format: 'json'
-            prefer_extension: false
-    view:
-        view_response_listener: true
-    body_converter:
-        enabled: false
-        validate: true
-
 doctrine:
     dbal:
         driver: pdo_sqlite

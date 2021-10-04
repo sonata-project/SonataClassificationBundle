@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sonata\ClassificationBundle\DependencyInjection;
 
-use Nelmio\ApiDocBundle\Annotation\Operation;
 use Sonata\Doctrine\Mapper\Builder\OptionsBuilder;
 use Sonata\Doctrine\Mapper\DoctrineCollector;
 use Symfony\Component\Config\Definition\Processor;
@@ -43,19 +42,8 @@ class SonataClassificationExtension extends Extension
         $loader->load('orm.xml');
         $loader->load('form.xml');
         // NEXT_MAJOR: Remove next line and the file.
-        $loader->load('serializer.xml');
         $loader->load('command.xml');
         $loader->load('controllers.xml');
-
-        // NEXT_MAJOR: Remove this condition and remove all configuration files related to this.
-        if (isset($bundles['FOSRestBundle'], $bundles['NelmioApiDocBundle'])) {
-            if (class_exists(Operation::class)) {
-                $loader->load('api_controllers.xml');
-            } else {
-                $loader->load('api_controllers_legacy.xml');
-            }
-            $loader->load('api_form.xml');
-        }
 
         if (isset($bundles['SonataAdminBundle'])) {
             $loader->load('admin.xml');

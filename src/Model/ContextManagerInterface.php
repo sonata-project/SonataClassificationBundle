@@ -13,15 +13,11 @@ declare(strict_types=1);
 
 namespace Sonata\ClassificationBundle\Model;
 
-use Sonata\DatagridBundle\Pager\PageableInterface;
 use Sonata\Doctrine\Model\ManagerInterface;
 
 /**
- * NEXT_MAJOR: Remove PageableInterface extension.
- *
  * @phpstan-extends ManagerInterface<ContextInterface>
- * @phpstan-extends PageableInterface<ContextInterface>
  */
-interface ContextManagerInterface extends ManagerInterface, PageableInterface
+interface ContextManagerInterface extends ManagerInterface
 {
 }

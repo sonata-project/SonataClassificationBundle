@@ -50,7 +50,7 @@ class CategoryAdmin extends ContextAwareAdmin
             if (null !== $this->getSubject()->getParent() || null === $this->getSubject()->getId()) { // root category cannot have a parent
                 $formMapper
                     ->add('parent', CategorySelectorType::class, [
-                        'category' => $this->getSubject() ?: null,
+                        'category' => $this->getSubject(),
                         'model_manager' => $this->getModelManager(),
                         'class' => $this->getClass(),
                         'required' => true,

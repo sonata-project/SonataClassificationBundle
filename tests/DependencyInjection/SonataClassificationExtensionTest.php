@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Sonata\ClassificationBundle\Tests\DependencyInjection;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
-use Nelmio\ApiDocBundle\Annotation\Operation;
 use Sonata\AdminBundle\Controller\CRUDController;
 use Sonata\ClassificationBundle\Admin\CategoryAdmin;
 use Sonata\ClassificationBundle\Admin\CollectionAdmin;
@@ -23,33 +22,17 @@ use Sonata\ClassificationBundle\Admin\Filter\CategoryFilter;
 use Sonata\ClassificationBundle\Admin\Filter\CollectionFilter;
 use Sonata\ClassificationBundle\Admin\TagAdmin;
 use Sonata\ClassificationBundle\Command\FixContextCommand;
-use Sonata\ClassificationBundle\Controller\Api\CategoryController;
-use Sonata\ClassificationBundle\Controller\Api\CollectionController;
-use Sonata\ClassificationBundle\Controller\Api\ContextController;
-use Sonata\ClassificationBundle\Controller\Api\Legacy\CategoryController as LegacyCategoryController;
-use Sonata\ClassificationBundle\Controller\Api\Legacy\CollectionController as LegacyCollectionController;
-use Sonata\ClassificationBundle\Controller\Api\Legacy\ContextController as LegacyContextController;
-use Sonata\ClassificationBundle\Controller\Api\Legacy\TagController as LegacyTagController;
-use Sonata\ClassificationBundle\Controller\Api\TagController;
 use Sonata\ClassificationBundle\Controller\CategoryAdminController;
 use Sonata\ClassificationBundle\DependencyInjection\SonataClassificationExtension;
 use Sonata\ClassificationBundle\Entity\CategoryManager;
 use Sonata\ClassificationBundle\Entity\CollectionManager;
 use Sonata\ClassificationBundle\Entity\ContextManager;
 use Sonata\ClassificationBundle\Entity\TagManager;
-use Sonata\ClassificationBundle\Form\Type\ApiCategoryType;
-use Sonata\ClassificationBundle\Form\Type\ApiCollectionType;
-use Sonata\ClassificationBundle\Form\Type\ApiContextType;
-use Sonata\ClassificationBundle\Form\Type\ApiTagType;
 use Sonata\ClassificationBundle\Form\Type\CategorySelectorType;
 use Sonata\ClassificationBundle\Model\CategoryManagerInterface;
 use Sonata\ClassificationBundle\Model\CollectionManagerInterface;
 use Sonata\ClassificationBundle\Model\ContextManagerInterface;
 use Sonata\ClassificationBundle\Model\TagManagerInterface;
-use Sonata\ClassificationBundle\Serializer\CategorySerializerHandler;
-use Sonata\ClassificationBundle\Serializer\CollectionSerializerHandler;
-use Sonata\ClassificationBundle\Serializer\ContextSerializerHandler;
-use Sonata\ClassificationBundle\Serializer\TagSerializerHandler;
 
 final class SonataClassificationExtensionTest extends AbstractExtensionTestCase
 {
@@ -59,8 +42,6 @@ final class SonataClassificationExtensionTest extends AbstractExtensionTestCase
         $this->container->setParameter('kernel.bundles', [
             'SonataDoctrineBundle' => true,
             'SonataAdminBundle' => true,
-            'FOSRestBundle' => true,
-            'NelmioApiDocBundle' => true,
         ]);
     }
 
@@ -74,21 +55,6 @@ final class SonataClassificationExtensionTest extends AbstractExtensionTestCase
         $this->assertContainerBuilderHasService('sonata.classification.admin.context', ContextAdmin::class);
         $this->assertContainerBuilderHasService(CategoryFilter::class);
         $this->assertContainerBuilderHasService(CollectionFilter::class);
-        if (class_exists(Operation::class)) {
-            $this->assertContainerBuilderHasService('sonata.classification.controller.api.category', CategoryController::class);
-            $this->assertContainerBuilderHasService('sonata.classification.controller.api.collection', CollectionController::class);
-            $this->assertContainerBuilderHasService('sonata.classification.controller.api.tag', TagController::class);
-            $this->assertContainerBuilderHasService('sonata.classification.controller.api.context', ContextController::class);
-        } else {
-            $this->assertContainerBuilderHasService('sonata.classification.controller.api.category', LegacyCategoryController::class);
-            $this->assertContainerBuilderHasService('sonata.classification.controller.api.collection', LegacyCollectionController::class);
-            $this->assertContainerBuilderHasService('sonata.classification.controller.api.tag', LegacyTagController::class);
-            $this->assertContainerBuilderHasService('sonata.classification.controller.api.context', LegacyContextController::class);
-        }
-        $this->assertContainerBuilderHasService('sonata.classification.api.form.type.category', ApiCategoryType::class);
-        $this->assertContainerBuilderHasService('sonata.classification.api.form.type.collection', ApiCollectionType::class);
-        $this->assertContainerBuilderHasService('sonata.classification.api.form.type.tag', ApiTagType::class);
-        $this->assertContainerBuilderHasService('sonata.classification.api.form.type.context', ApiContextType::class);
         $this->assertContainerBuilderHasService(FixContextCommand::class);
         $this->assertContainerBuilderHasService('sonata.classification.form.type.category_selector', CategorySelectorType::class);
         $this->assertContainerBuilderHasService('sonata.classification.manager.category', CategoryManager::class);
@@ -99,10 +65,6 @@ final class SonataClassificationExtensionTest extends AbstractExtensionTestCase
         $this->assertContainerBuilderHasService(TagManagerInterface::class);
         $this->assertContainerBuilderHasService(CollectionManagerInterface::class);
         $this->assertContainerBuilderHasService(ContextManagerInterface::class);
-        $this->assertContainerBuilderHasService('sonata.classification.serializer.handler.category', CategorySerializerHandler::class);
-        $this->assertContainerBuilderHasService('sonata.classification.serializer.handler.collection', CollectionSerializerHandler::class);
-        $this->assertContainerBuilderHasService('sonata.classification.serializer.handler.tag', TagSerializerHandler::class);
-        $this->assertContainerBuilderHasService('sonata.classification.serializer.handler.context', ContextSerializerHandler::class);
 
         $this->assertContainerBuilderHasParameter('sonata.classification.admin.category.entity', 'Application\Sonata\ClassificationBundle\Entity\Category');
         $this->assertContainerBuilderHasParameter('sonata.classification.admin.category.class', CategoryAdmin::class);

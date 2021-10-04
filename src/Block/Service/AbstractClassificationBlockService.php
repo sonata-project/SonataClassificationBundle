@@ -19,7 +19,7 @@ use Sonata\AdminBundle\Form\Type\ModelListType;
 use Sonata\BlockBundle\Block\Service\AbstractBlockService;
 use Sonata\ClassificationBundle\Model\ContextInterface;
 use Sonata\ClassificationBundle\Model\ContextManagerInterface;
-use Symfony\Component\Form\FormBuilder;
+use Symfony\Component\Form\FormBuilderInterface;
 use Twig\Environment;
 
 /**
@@ -45,7 +45,7 @@ abstract class AbstractClassificationBlockService extends AbstractBlockService
      * @param array  $fieldOptions
      * @param array  $adminOptions
      */
-    final protected function getFormAdminType(FormMapper $formMapper, AdminInterface $admin, $formField, $field, $fieldOptions = [], $adminOptions = []): FormBuilder
+    final protected function getFormAdminType(FormMapper $formMapper, AdminInterface $admin, $formField, $field, $fieldOptions = [], $adminOptions = []): FormBuilderInterface
     {
         $adminOptions = array_merge([
             'edit' => 'list',

@@ -14,39 +14,8 @@ declare(strict_types=1);
 namespace Sonata\ClassificationBundle\Entity;
 
 use Sonata\ClassificationBundle\Model\ContextManagerInterface;
-use Sonata\DatagridBundle\Pager\Doctrine\Pager;
-use Sonata\DatagridBundle\Pager\PagerInterface;
-use Sonata\DatagridBundle\ProxyQuery\Doctrine\ProxyQuery;
 use Sonata\Doctrine\Entity\BaseEntityManager;
 
 class ContextManager extends BaseEntityManager implements ContextManagerInterface
 {
-    /**
-     * NEXT_MAJOR: remove this method.
-     *
-     * @deprecated since sonata-project/classification-bundle 3.x, to be removed in 4.0.
-     */
-    public function getPager(array $criteria, int $page, int $limit = 10, array $sort = []): PagerInterface
-    {
-        $parameters = [];
-
-        $query = $this->getRepository()
-            ->createQueryBuilder('c')
-            ->select('c');
-
-        if (isset($criteria['enabled'])) {
-            $query->andWhere('c.enabled = :enabled');
-            $parameters['enabled'] = (bool) $criteria['enabled'];
-        }
-
-        $query->setParameters($parameters);
-
-        $pager = new Pager();
-        $pager->setMaxPerPage($limit);
-        $pager->setQuery(new ProxyQuery($query));
-        $pager->setPage($page);
-        $pager->init();
-
-        return $pager;
-    }
 }

@@ -20,7 +20,7 @@ use Sonata\MediaBundle\Entity\BaseMedia;
  * @ORM\Entity
  * @ORM\Table(name="media__media")
  */
-final class Media extends BaseMedia
+class Media extends BaseMedia
 {
     /**
      * @ORM\Id

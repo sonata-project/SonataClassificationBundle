@@ -20,7 +20,7 @@ use Sonata\ClassificationBundle\Entity\BaseCategory;
  * @ORM\Entity
  * @ORM\Table(name="classification__category")
  */
-final class Category extends BaseCategory
+class Category extends BaseCategory
 {
     /**
      * @ORM\Id

@@ -20,7 +20,7 @@ use Sonata\ClassificationBundle\Entity\BaseTag;
  * @ORM\Entity
  * @ORM\Table(name="classification__tag")
  */
-final class Tag extends BaseTag
+class Tag extends BaseTag
 {
     /**
      * @ORM\Id

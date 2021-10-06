@@ -20,7 +20,7 @@ use Sonata\ClassificationBundle\Entity\BaseContext;
  * @ORM\Entity
  * @ORM\Table(name="classification__context")
  */
-final class Context extends BaseContext
+class Context extends BaseContext
 {
     /**
      * @ORM\Id

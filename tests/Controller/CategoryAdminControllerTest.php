@@ -42,7 +42,7 @@ use Twig\Environment;
 /**
  * @author Dariusz Markowicz <dmarkowicz77@gmail.com>
  */
-class CategoryAdminControllerTest extends TestCase
+final class CategoryAdminControllerTest extends TestCase
 {
     /**
      * @var Request

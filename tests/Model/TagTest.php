@@ -20,7 +20,7 @@ use Sonata\ClassificationBundle\Model\Tag;
 /**
  * @author Dariusz Markowicz <dmarkowicz77@gmail.com>
  */
-class TagTest extends TestCase
+final class TagTest extends TestCase
 {
     public function testSetterGetter(): void
     {

@@ -33,7 +33,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  *
  * @group legacy
  */
-class TagControllerTest extends TestCase
+final class TagControllerTest extends TestCase
 {
     public function testGetTagsAction(): void
     {

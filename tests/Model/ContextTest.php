@@ -19,7 +19,7 @@ use Sonata\ClassificationBundle\Model\Context;
 /**
  * @author Dariusz Markowicz <dmarkowicz77@gmail.com>
  */
-class ContextTest extends TestCase
+final class ContextTest extends TestCase
 {
     public function testSetterGetter(): void
     {

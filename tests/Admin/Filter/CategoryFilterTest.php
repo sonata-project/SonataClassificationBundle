@@ -21,7 +21,7 @@ use Sonata\ClassificationBundle\Tests\Fixtures\Category;
 use Sonata\ClassificationBundle\Tests\Fixtures\Context;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
-class CategoryFilterTest extends TestCase
+final class CategoryFilterTest extends TestCase
 {
     /**
      * @var MockObject&CategoryManager

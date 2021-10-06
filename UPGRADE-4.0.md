@@ -27,12 +27,34 @@ If you have implemented a custom model, you must adapt the signature of the foll
  * `getAllRootCategories`
  * `getRootCategoriesSplitByContexts`
 
+## Final classes
+
+Some classes  are now `final` and should not be overridden:
+
+* `Sonata\ClassificationBundle\Admin\CategoryAdmin`
+* `Sonata\ClassificationBundle\Admin\CollectionAdmin`
+* `Sonata\ClassificationBundle\Admin\ContextAdmin`
+* `Sonata\ClassificationBundle\Admin\TagAdmin`
+* `Sonata\ClassificationBundle\Command\FixContextCommand`
+* `Sonata\ClassificationBundle\Controller\CategoryAdminController`
+* `Sonata\ClassificationBundle\DependencyInjection\Configuration`
+* `Sonata\ClassificationBundle\DependencyInjection\SonataClassificationExtension`
+* `Sonata\ClassificationBundle\Document\CategoryManager`
+* `Sonata\ClassificationBundle\Document\CollectionManager`
+* `Sonata\ClassificationBundle\Document\TagManager`
+* `Sonata\ClassificationBundle\Entity\CategoryManager`
+* `Sonata\ClassificationBundle\Entity\CollectionManager`
+* `Sonata\ClassificationBundle\Entity\ContextManager`
+* `Sonata\ClassificationBundle\Entity\TagManager`
+* `Sonata\ClassificationBundle\Form\Type\Category\SelectorType`
+* `Sonata\ClassificationBundle\SonataClassificationBundle`
+
 ## Doctrine schema update
 Disallowed null value on foreign keys for associations with Context for
 Category, Tag and Collection entities.
 
 ## Removed media previews
 
-The media features were removed, to resolve internal circular dependency issues. 
+The media features were removed, to resolve internal circular dependency issues.
 If you still need these, please have a look at the [ClassificationMediaBundle](https://github.com/sonata-project/SonataClassificationMediaBundle).
 

@@ -21,7 +21,7 @@ use Sonata\MediaBundle\Model\MediaInterface;
 /**
  * @author Dariusz Markowicz <dmarkowicz77@gmail.com>
  */
-class CollectionTest extends TestCase
+final class CollectionTest extends TestCase
 {
     public function testSetterGetter(): void
     {

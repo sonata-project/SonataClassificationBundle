@@ -33,7 +33,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  *
  * @group legacy
  */
-class ContextControllerTest extends TestCase
+final class ContextControllerTest extends TestCase
 {
     public function testGetContextsAction(): void
     {

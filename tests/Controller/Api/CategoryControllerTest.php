@@ -33,7 +33,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  *
  * @group legacy
  */
-class CategoryControllerTest extends TestCase
+final class CategoryControllerTest extends TestCase
 {
     public function testGetCategoriesAction(): void
     {

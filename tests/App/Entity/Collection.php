@@ -20,7 +20,7 @@ use Sonata\ClassificationBundle\Entity\BaseCollection;
  * @ORM\Entity
  * @ORM\Table(name="classification__collection")
  */
-class Collection extends BaseCollection
+final class Collection extends BaseCollection
 {
     /**
      * @ORM\Id

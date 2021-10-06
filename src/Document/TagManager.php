@@ -16,6 +16,9 @@ use Sonata\DatagridBundle\Pager\Doctrine\Pager;
 use Sonata\DatagridBundle\ProxyQuery\Doctrine\ProxyQuery;
 use Sonata\Doctrine\Document\BaseDocumentManager;
 
+/**
+ * @final since sonata-project/classification-bundle 3.x
+ */
 class TagManager extends BaseDocumentManager implements TagManagerInterface
 {
     /**

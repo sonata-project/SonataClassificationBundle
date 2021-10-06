@@ -20,7 +20,7 @@ use Sonata\ClassificationBundle\Admin\ContextAdmin;
 use Sonata\ClassificationBundle\Admin\ContextAwareAdmin;
 use Sonata\ClassificationBundle\Model\ContextManagerInterface;
 
-class AdminTest extends TestCase
+final class AdminTest extends TestCase
 {
     /**
      * @var ContextManagerInterface

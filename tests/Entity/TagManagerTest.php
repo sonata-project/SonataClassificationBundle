@@ -20,7 +20,7 @@ use Sonata\ClassificationBundle\Entity\BaseTag;
 use Sonata\ClassificationBundle\Entity\TagManager;
 use Sonata\Doctrine\Test\EntityManagerMockFactoryTrait;
 
-class TagManagerTest extends TestCase
+final class TagManagerTest extends TestCase
 {
     use EntityManagerMockFactoryTrait;
 

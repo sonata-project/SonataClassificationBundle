@@ -29,7 +29,7 @@ If you have implemented a custom model, you must adapt the signature of the foll
 
 ## Final classes
 
-Some classes  are now `final` and should not be overridden:
+Some classes are declared as `final` and MUST NOT be overridden:
 
 * `Sonata\ClassificationBundle\Admin\CategoryAdmin`
 * `Sonata\ClassificationBundle\Admin\CollectionAdmin`

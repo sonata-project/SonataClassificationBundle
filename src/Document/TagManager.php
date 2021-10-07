@@ -16,6 +16,9 @@ namespace Sonata\ClassificationBundle\Document;
 use Sonata\ClassificationBundle\Model\TagManagerInterface;
 use Sonata\Doctrine\Document\BaseDocumentManager;
 
+/**
+ * @final since sonata-project/classification-bundle 3.x
+ */
 class TagManager extends BaseDocumentManager implements TagManagerInterface
 {
 }

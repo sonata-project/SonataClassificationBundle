@@ -19,7 +19,7 @@ use Sonata\ClassificationBundle\Form\ChoiceList\CategoryChoiceLoader;
 /**
  * @author Anton Zlotnikov <exp.razor@gmail.com>
  */
-class CategoryChoiceLoaderTest extends TestCase
+final class CategoryChoiceLoaderTest extends TestCase
 {
     public function testLoadChoiceList(): void
     {

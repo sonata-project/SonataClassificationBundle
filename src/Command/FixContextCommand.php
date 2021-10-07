@@ -22,6 +22,9 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
+/**
+ * @final since sonata-project/classification-bundle 3.x
+ */
 class FixContextCommand extends Command
 {
     protected static $defaultName = 'sonata:classification:fix-context';

@@ -17,6 +17,9 @@ use Sonata\ClassificationBundle\Model\TagInterface;
 use Sonata\ClassificationBundle\Model\TagManagerInterface;
 use Sonata\Doctrine\Entity\BaseEntityManager;
 
+/**
+ * @final since sonata-project/classification-bundle 3.x
+ */
 class TagManager extends BaseEntityManager implements TagManagerInterface
 {
     public function getBySlug(string $slug, $context = null, ?bool $enabled = true): ?TagInterface

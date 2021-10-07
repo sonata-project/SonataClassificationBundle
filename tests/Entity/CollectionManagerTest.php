@@ -20,7 +20,7 @@ use Sonata\ClassificationBundle\Entity\BaseCollection;
 use Sonata\ClassificationBundle\Entity\CollectionManager;
 use Sonata\Doctrine\Test\EntityManagerMockFactoryTrait;
 
-class CollectionManagerTest extends TestCase
+final class CollectionManagerTest extends TestCase
 {
     use EntityManagerMockFactoryTrait;
 

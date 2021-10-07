@@ -26,6 +26,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  * Select a category.
  *
  * @author Thomas Rabaix <thomas.rabaix@sonata-project.org>
+ *
+ * @final since sonata-project/classification-bundle 3.x
  */
 class CategorySelectorType extends AbstractType
 {

@@ -18,6 +18,9 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
+/**
+ * @final since sonata-project/classification-bundle 3.x
+ */
 class TagAdmin extends ContextAwareAdmin
 {
     protected $classnameLabel = 'Tag';

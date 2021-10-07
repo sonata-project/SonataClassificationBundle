@@ -19,7 +19,7 @@ use Sonata\ClassificationBundle\Admin\Filter\CollectionFilter;
 use Sonata\ClassificationBundle\Model\CollectionManagerInterface;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
-class CollectionFilterTest extends TestCase
+final class CollectionFilterTest extends TestCase
 {
     /**
      * @var MockObject&CollectionManagerInterface

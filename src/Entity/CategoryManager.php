@@ -23,10 +23,7 @@ use Sonata\Doctrine\Entity\BaseEntityManager;
 use Sonata\DoctrineORMAdminBundle\Datagrid\Pager;
 use Sonata\DoctrineORMAdminBundle\Datagrid\ProxyQuery;
 
-/**
- * @final since sonata-project/classification-bundle 3.x
- */
-class CategoryManager extends BaseEntityManager implements CategoryManagerInterface
+final class CategoryManager extends BaseEntityManager implements CategoryManagerInterface
 {
     /**
      * @var array

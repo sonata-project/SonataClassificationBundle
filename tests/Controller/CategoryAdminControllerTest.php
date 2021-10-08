@@ -22,8 +22,6 @@ use Sonata\AdminBundle\Datagrid\DatagridInterface;
 use Sonata\AdminBundle\Request\AdminFetcherInterface;
 use Sonata\AdminBundle\Templating\MutableTemplateRegistryInterface;
 use Sonata\ClassificationBundle\Controller\CategoryAdminController;
-use Sonata\ClassificationBundle\Entity\CategoryManager;
-use Sonata\ClassificationBundle\Entity\ContextManager;
 use Sonata\ClassificationBundle\Model\Category;
 use Sonata\ClassificationBundle\Model\CategoryManagerInterface;
 use Sonata\ClassificationBundle\Model\ContextInterface;
@@ -108,8 +106,8 @@ final class CategoryAdminControllerTest extends TestCase
         $this->container = new Container();
         $this->csrfProvider = $this->createMock(CsrfTokenManagerInterface::class);
         $this->admin = $this->createMock(AdminInterface::class);
-        $this->categoryManager = $this->createMock(CategoryManager::class);
-        $this->contextManager = $this->createMock(ContextManager::class);
+        $this->categoryManager = $this->createMock(CategoryManagerInterface::class);
+        $this->contextManager = $this->createMock(ContextManagerInterface::class);
 
         $this->request = new Request();
         $this->requestStack = new RequestStack();

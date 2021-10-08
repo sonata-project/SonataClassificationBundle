@@ -16,7 +16,7 @@ namespace Sonata\ClassificationBundle\Tests\Admin\Filter;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sonata\ClassificationBundle\Admin\Filter\CategoryFilter;
-use Sonata\ClassificationBundle\Entity\CategoryManager;
+use Sonata\ClassificationBundle\Model\CategoryManagerInterface;
 use Sonata\ClassificationBundle\Tests\Fixtures\Category;
 use Sonata\ClassificationBundle\Tests\Fixtures\Context;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -24,13 +24,13 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 final class CategoryFilterTest extends TestCase
 {
     /**
-     * @var MockObject&CategoryManager
+     * @var MockObject&CategoryManagerInterface
      */
     private $categoryManager;
 
     protected function setUp(): void
     {
-        $this->categoryManager = $this->createStub(CategoryManager::class);
+        $this->categoryManager = $this->createStub(CategoryManagerInterface::class);
     }
 
     public function testRenderSettings(): void

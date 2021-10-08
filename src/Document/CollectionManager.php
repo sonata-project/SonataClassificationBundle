@@ -16,9 +16,6 @@ namespace Sonata\ClassificationBundle\Document;
 use Sonata\ClassificationBundle\Model\CollectionManagerInterface;
 use Sonata\Doctrine\Document\BaseDocumentManager;
 
-/**
- * @final since sonata-project/classification-bundle 3.x
- */
-class CollectionManager extends BaseDocumentManager implements CollectionManagerInterface
+final class CollectionManager extends BaseDocumentManager implements CollectionManagerInterface
 {
 }

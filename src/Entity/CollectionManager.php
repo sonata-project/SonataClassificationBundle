@@ -17,10 +17,7 @@ use Sonata\ClassificationBundle\Model\CollectionInterface;
 use Sonata\ClassificationBundle\Model\CollectionManagerInterface;
 use Sonata\Doctrine\Entity\BaseEntityManager;
 
-/**
- * @final since sonata-project/classification-bundle 3.x
- */
-class CollectionManager extends BaseEntityManager implements CollectionManagerInterface
+final class CollectionManager extends BaseEntityManager implements CollectionManagerInterface
 {
     public function getBySlug(string $slug, $context = null, ?bool $enabled = true): ?CollectionInterface
     {

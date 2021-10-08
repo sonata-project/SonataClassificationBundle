@@ -39,7 +39,7 @@ final class AbstractTagsBlockServiceTest extends BlockServiceTestCase
     private $tagManager;
 
     /**
-     * @var TagAdmin&MockObject
+     * @var TagAdmin
      */
     private $tagAdmin;
 
@@ -50,7 +50,7 @@ final class AbstractTagsBlockServiceTest extends BlockServiceTestCase
         $this->twig = $this->createMock(Environment::class);
         $this->contextManager = $this->createMock(ContextManagerInterface::class);
         $this->tagManager = $this->createMock(TagManagerInterface::class);
-        $this->tagAdmin = $this->createMock(TagAdmin::class);
+        $this->tagAdmin = new TagAdmin('code', 'class', 'controller', $this->contextManager);
     }
 
     public function testDefaultSettings(): void

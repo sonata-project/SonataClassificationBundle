@@ -39,7 +39,7 @@ final class AbstractCategoriesBlockServiceTest extends BlockServiceTestCase
     private $categoryManager;
 
     /**
-     * @var CategoryAdmin&MockObject
+     * @var CategoryAdmin
      */
     private $categoryAdmin;
 
@@ -50,7 +50,7 @@ final class AbstractCategoriesBlockServiceTest extends BlockServiceTestCase
         $this->twig = $this->createMock(Environment::class);
         $this->contextManager = $this->createMock(ContextManagerInterface::class);
         $this->categoryManager = $this->createMock(CategoryManagerInterface::class);
-        $this->categoryAdmin = $this->createMock(CategoryAdmin::class);
+        $this->categoryAdmin = new CategoryAdmin('code', 'class', 'controller', $this->contextManager);
     }
 
     public function testDefaultSettings(): void

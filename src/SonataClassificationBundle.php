@@ -15,9 +15,6 @@ namespace Sonata\ClassificationBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-/**
- * @final since sonata-project/classification-bundle 3.x
- */
-class SonataClassificationBundle extends Bundle
+final class SonataClassificationBundle extends Bundle
 {
 }

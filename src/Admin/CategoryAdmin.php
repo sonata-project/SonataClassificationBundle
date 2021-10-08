@@ -23,10 +23,7 @@ use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Validator\Constraints\Valid;
 
-/**
- * @final since sonata-project/classification-bundle 3.x
- */
-class CategoryAdmin extends ContextAwareAdmin
+final class CategoryAdmin extends ContextAwareAdmin
 {
     protected $classnameLabel = 'Category';
 

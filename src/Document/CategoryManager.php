@@ -22,10 +22,7 @@ use Sonata\Doctrine\Document\BaseDocumentManager;
 use Sonata\DoctrineMongoDBAdminBundle\Datagrid\Pager;
 use Sonata\DoctrineMongoDBAdminBundle\Datagrid\ProxyQuery;
 
-/**
- * @final since sonata-project/classification-bundle 3.x
- */
-class CategoryManager extends BaseDocumentManager implements CategoryManagerInterface
+final class CategoryManager extends BaseDocumentManager implements CategoryManagerInterface
 {
     /**
      * @var array<string, CategoryInterface[]>

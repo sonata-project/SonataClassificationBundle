@@ -39,7 +39,7 @@ final class AbstractCollectionsBlockServiceTest extends BlockServiceTestCase
     private $collectionManager;
 
     /**
-     * @var CollectionAdmin&MockObject
+     * @var CollectionAdmin
      */
     private $collectionAdmin;
 
@@ -50,7 +50,7 @@ final class AbstractCollectionsBlockServiceTest extends BlockServiceTestCase
         $this->twig = $this->createMock(Environment::class);
         $this->contextManager = $this->createMock(ContextManagerInterface::class);
         $this->collectionManager = $this->createMock(CollectionManagerInterface::class);
-        $this->collectionAdmin = $this->createMock(CollectionAdmin::class);
+        $this->collectionAdmin = new CollectionAdmin('code', 'class', 'controller', $this->contextManager);
     }
 
     public function testDefaultSettings(): void

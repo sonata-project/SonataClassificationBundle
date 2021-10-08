@@ -36,7 +36,7 @@ final class AdminTest extends TestCase
     {
         $contextAwareAdmin = $this->createMock(ContextAwareAdmin::class);
         static::assertInstanceOf(AbstractAdmin::class, $contextAwareAdmin);
-        $contextAdmin = $this->createMock(ContextAdmin::class);
+        $contextAdmin = new ContextAdmin('code', \stdClass::class, 'controller');
         static::assertInstanceOf(AbstractAdmin::class, $contextAdmin);
     }
 

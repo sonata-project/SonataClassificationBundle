@@ -24,10 +24,8 @@ use Symfony\Component\HttpFoundation\Response;
  * Category Admin Controller.
  *
  * @author Thomas Rabaix <thomas.rabaix@sonata-project.org>
- *
- * @final since sonata-project/classification-bundle 3.x
  */
-class CategoryAdminController extends Controller
+final class CategoryAdminController extends Controller
 {
     public static function getSubscribedServices(): array
     {

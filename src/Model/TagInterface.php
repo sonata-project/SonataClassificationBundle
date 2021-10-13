@@ -20,47 +20,23 @@ interface TagInterface extends ContextAwareInterface
      */
     public function getId();
 
-    /**
-     * @param string $name
-     */
-    public function setName($name);
+    public function setName(?string $name): void;
 
-    /**
-     * @return string|null
-     */
-    public function getName();
+    public function getName(): ?string;
 
-    /**
-     * @param bool $enabled
-     */
-    public function setEnabled($enabled);
+    public function setEnabled(bool $enabled): void;
 
-    /**
-     * @return bool
-     */
-    public function getEnabled();
+    public function getEnabled(): bool;
 
-    /**
-     * @param string $slug
-     */
-    public function setSlug($slug);
+    public function setSlug(?string $slug): void;
 
-    /**
-     * @return string|null
-     */
-    public function getSlug();
+    public function getSlug(): ?string;
 
-    public function setCreatedAt(\DateTime $createdAt);
+    public function setCreatedAt(?\DateTimeInterface $createdAt): void;
 
-    /**
-     * @return \DateTime|null
-     */
-    public function getCreatedAt();
+    public function getCreatedAt(): ?\DateTimeInterface;
 
-    public function setUpdatedAt(\DateTime $updatedAt);
+    public function setUpdatedAt(?\DateTimeInterface $updatedAt): void;
 
-    /**
-     * @return \DateTime|null
-     */
-    public function getUpdatedAt();
+    public function getUpdatedAt(): ?\DateTimeInterface;
 }

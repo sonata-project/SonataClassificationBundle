@@ -22,23 +22,20 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 final class CollectionFilter extends Filter
 {
-    /**
-     * @var CollectionManagerInterface
-     */
-    private $collectionManager;
+    private CollectionManagerInterface $collectionManager;
 
     public function __construct(CollectionManagerInterface $collectionManager)
     {
         $this->collectionManager = $collectionManager;
     }
 
-    public function filter(ProxyQueryInterface $proxyQuery, string $alias, string $field, FilterData $data): void
+    public function filter(ProxyQueryInterface $query, string $alias, string $field, FilterData $data): void
     {
         if (!$data->hasValue() || null === $data->getValue()) {
             return;
         }
 
-        $proxyQuery
+        $query
             ->getQueryBuilder()
             ->andWhere(sprintf('%s.%s = :collection', $alias, $field))
             ->setParameter('collection', $data->getValue());
@@ -66,9 +63,9 @@ final class CollectionFilter extends Filter
         ]];
     }
 
-    protected function association(ProxyQueryInterface $queryBuilder, FilterData $data): array
+    protected function association(ProxyQueryInterface $query, FilterData $data): array
     {
-        $alias = $queryBuilder->entityJoin($this->getParentAssociationMappings());
+        $alias = $query->entityJoin($this->getParentAssociationMappings());
         $part = strrchr('.'.$this->getFieldName(), '.');
         $fieldName = substr(false === $part ? $this->getFieldType() : $part, 1);
 

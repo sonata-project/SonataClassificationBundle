@@ -27,7 +27,7 @@ class Category extends BaseCategory
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    protected $id;
+    protected int $id;
 
     /**
      * Get id.

@@ -27,12 +27,12 @@ class Context extends BaseContext
      * @ORM\GeneratedValue
      * @ORM\Column(type="string")
      */
-    protected $id;
+    protected ?string $id = null;
 
     /**
      * Get id.
      */
-    public function getId(): string
+    public function getId(): ?string
     {
         return $this->id;
     }

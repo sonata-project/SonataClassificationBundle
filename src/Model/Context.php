@@ -15,72 +15,57 @@ namespace Sonata\ClassificationBundle\Model;
 
 abstract class Context implements ContextInterface
 {
-    /**
-     * @var string|null
-     */
-    protected $id;
+    protected ?string $id = null;
 
-    /**
-     * @var string|null
-     */
-    protected $name;
+    protected ?string $name = null;
 
-    /**
-     * @var \DateTime|null
-     */
-    protected $createdAt;
+    protected ?\DateTimeInterface $createdAt = null;
 
-    /**
-     * @var \DateTime|null
-     */
-    protected $updatedAt;
+    protected ?\DateTimeInterface $updatedAt = null;
 
-    /**
-     * @var bool
-     */
-    protected $enabled = false;
+    protected bool $enabled = false;
 
-    public function __toString()
+    public function __toString(): string
     {
         return $this->getName() ?: 'n/a';
     }
 
-    public function setName($name): void
+    public function setName(?string $name): void
     {
         $this->name = $name;
     }
 
-    public function getName()
+    public function getName(): ?string
     {
         return $this->name;
     }
 
-    public function setEnabled($enabled): void
+    public function setEnabled(bool $enabled): void
     {
         $this->enabled = $enabled;
     }
 
-    public function getEnabled()
+    public function getEnabled(): bool
     {
         return $this->enabled;
     }
 
-    public function setCreatedAt(\DateTime $createdAt): void
+    public function setCreatedAt(?\DateTimeInterface $createdAt): void
     {
         $this->createdAt = $createdAt;
     }
 
-    public function getCreatedAt()
+    public function getCreatedAt(): ?\DateTimeInterface
     {
         return $this->createdAt;
     }
 
-    public function setUpdatedAt(\DateTime $updatedAt): void
+    public function setUpdatedAt(?\DateTimeInterface $updatedAt): void
     {
         $this->updatedAt = $updatedAt;
     }
 
-    public function getUpdatedAt()
+    public function getUpdatedAt(): ?\DateTimeInterface
     {
         return $this->updatedAt;
     }
@@ -90,12 +75,12 @@ abstract class Context implements ContextInterface
         $this->setUpdatedAt(new \DateTime());
     }
 
-    public function setId($id): void
+    public function setId(?string $id): void
     {
         $this->id = $id;
     }
 
-    public function getId()
+    public function getId(): ?string
     {
         return $this->id;
     }

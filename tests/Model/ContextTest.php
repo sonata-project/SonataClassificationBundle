@@ -29,7 +29,7 @@ final class ContextTest extends TestCase
         $context = $this->getMockForAbstractClass(Context::class);
         // id is an int in ContextInterface and Context but used as string in implementation
         // see ContextInterface::DEFAULT_CONTEXT
-        $context->setId(2);
+        $context->setId('2');
         $context->setName('Hello World');
         $context->setCreatedAt($time);
         $context->setUpdatedAt($time);

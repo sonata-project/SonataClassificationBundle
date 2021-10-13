@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sonata\ClassificationBundle\Tests\Admin\Filter;
 
-use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
 use Sonata\ClassificationBundle\Admin\Filter\CollectionFilter;
 use Sonata\ClassificationBundle\Model\CollectionManagerInterface;
@@ -22,7 +22,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 final class CollectionFilterTest extends TestCase
 {
     /**
-     * @var MockObject&CollectionManagerInterface
+     * @var Stub&CollectionManagerInterface
      */
     private $collectionManager;
 

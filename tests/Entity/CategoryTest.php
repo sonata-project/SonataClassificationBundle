@@ -17,8 +17,14 @@ use Sonata\ClassificationBundle\Entity\BaseCategory;
 
 abstract class CategoryTest extends BaseCategory
 {
+    /**
+     * @var mixed
+     */
     private $id;
 
+    /**
+     * @param mixed $id
+     */
     public function setId($id): void
     {
         $this->id = $id;

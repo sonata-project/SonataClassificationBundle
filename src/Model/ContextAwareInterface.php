@@ -15,7 +15,7 @@ namespace Sonata\ClassificationBundle\Model;
 
 interface ContextAwareInterface
 {
-    public function setContext(?ContextInterface $context);
+    public function setContext(?ContextInterface $context): void;
 
     public function getContext(): ?ContextInterface;
 }

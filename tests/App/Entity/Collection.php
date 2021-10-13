@@ -27,7 +27,7 @@ class Collection extends BaseCollection
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    protected $id;
+    protected int $id;
 
     /**
      * Get id.

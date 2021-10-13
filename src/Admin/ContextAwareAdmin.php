@@ -25,17 +25,12 @@ use Sonata\ClassificationBundle\Model\ContextManagerInterface;
  */
 abstract class ContextAwareAdmin extends AbstractAdmin
 {
-    /**
-     * @var ContextManagerInterface
-     */
-    protected $contextManager;
+    protected ContextManagerInterface $contextManager;
 
     /**
-     * @param string $code
-     * @param string $class
-     * @param string $baseControllerName
+     * @phpstan-param class-string<T> $class
      */
-    public function __construct($code, $class, $baseControllerName, ContextManagerInterface $contextManager)
+    public function __construct(string $code, string $class, string $baseControllerName, ContextManagerInterface $contextManager)
     {
         parent::__construct($code, $class, $baseControllerName);
 
@@ -69,7 +64,9 @@ abstract class ContextAwareAdmin extends AbstractAdmin
         ];
 
         if ($this->hasSubject()) {
-            $parameters['context'] = $this->getSubject()->getContext() ? $this->getSubject()->getContext()->getId() : '';
+            $context = $this->getSubject()->getContext();
+
+            $parameters['context'] = null !== $context ? $context->getId() : '';
 
             return $parameters;
         }
@@ -83,7 +80,7 @@ abstract class ContextAwareAdmin extends AbstractAdmin
         return $parameters;
     }
 
-    protected function configureDatagridFilters(DatagridMapper $datagridMapper): void
+    protected function configureDatagridFilters(DatagridMapper $filter): void
     {
         $options = [];
 
@@ -91,6 +88,6 @@ abstract class ContextAwareAdmin extends AbstractAdmin
             $options['disabled'] = true;
         }
 
-        $datagridMapper->add('context', null, [], $options);
+        $filter->add('context', null, [], $options);
     }
 }

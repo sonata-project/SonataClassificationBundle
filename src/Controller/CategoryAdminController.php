@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sonata\ClassificationBundle\Controller;
 
 use Sonata\AdminBundle\Controller\CRUDController as Controller;
+use Sonata\ClassificationBundle\Model\CategoryInterface;
 use Sonata\ClassificationBundle\Model\CategoryManagerInterface;
 use Sonata\ClassificationBundle\Model\ContextManagerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -24,6 +25,8 @@ use Symfony\Component\HttpFoundation\Response;
  * Category Admin Controller.
  *
  * @author Thomas Rabaix <thomas.rabaix@sonata-project.org>
+ *
+ * @phpstan-extends Controller<CategoryInterface>
  */
 final class CategoryAdminController extends Controller
 {

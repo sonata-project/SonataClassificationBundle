@@ -23,22 +23,22 @@ use Sonata\Doctrine\Entity\BaseEntityManager;
 use Sonata\DoctrineORMAdminBundle\Datagrid\Pager;
 use Sonata\DoctrineORMAdminBundle\Datagrid\ProxyQuery;
 
+/**
+ * @phpstan-extends BaseEntityManager<CategoryInterface>
+ */
 final class CategoryManager extends BaseEntityManager implements CategoryManagerInterface
 {
     /**
-     * @var array
+     * @var array<string, CategoryInterface[]>
      */
-    protected $categories;
+    protected array $categories;
+
+    protected ContextManagerInterface $contextManager;
 
     /**
-     * @var ContextManagerInterface
+     * @phpstan-param class-string<CategoryInterface> $class
      */
-    protected $contextManager;
-
-    /**
-     * @param string $class
-     */
-    public function __construct($class, ManagerRegistry $registry, ContextManagerInterface $contextManager)
+    public function __construct(string $class, ManagerRegistry $registry, ContextManagerInterface $contextManager)
     {
         parent::__construct($class, $registry);
 
@@ -49,9 +49,9 @@ final class CategoryManager extends BaseEntityManager implements CategoryManager
     /**
      * Returns a pager to iterate over the root category.
      */
-    public function getRootCategoriesPager($page = 1, $limit = 25, $criteria = [])
+    public function getRootCategoriesPager(int $page = 1, int $limit = 25, array $criteria = []): Pager
     {
-        $page = 0 === (int) $page ? 1 : (int) $page;
+        $page = 0 === $page ? 1 : $page;
 
         $queryBuilder = $this->getEntityManager()->createQueryBuilder()
             ->select('c')
@@ -66,7 +66,7 @@ final class CategoryManager extends BaseEntityManager implements CategoryManager
         return $pager;
     }
 
-    public function getSubCategoriesPager($categoryId, $page = 1, $limit = 25, $criteria = [])
+    public function getSubCategoriesPager($categoryId, int $page = 1, int $limit = 25, array $criteria = []): Pager
     {
         $queryBuilder = $this->getEntityManager()->createQueryBuilder()
             ->select('c')
@@ -82,7 +82,7 @@ final class CategoryManager extends BaseEntityManager implements CategoryManager
         return $pager;
     }
 
-    public function getRootCategoryWithChildren(CategoryInterface $category)
+    public function getRootCategoryWithChildren(CategoryInterface $category): CategoryInterface
     {
         if (null === $category->getContext()) {
             throw new \InvalidArgumentException(sprintf(
@@ -107,7 +107,7 @@ final class CategoryManager extends BaseEntityManager implements CategoryManager
         throw new \InvalidArgumentException(sprintf('Category "%s" does not exist.', $category->getId()));
     }
 
-    public function getRootCategoriesForContext(?ContextInterface $context = null)
+    public function getRootCategoriesForContext(?ContextInterface $context = null): array
     {
         if (null === $context) {
             $context = $this->getContext();
@@ -118,7 +118,7 @@ final class CategoryManager extends BaseEntityManager implements CategoryManager
         return $this->categories[$context->getId()];
     }
 
-    public function getAllRootCategories($loadChildren = true)
+    public function getAllRootCategories(bool $loadChildren = true): array
     {
         $rootCategories = $this->getRepository()
             ->createQueryBuilder('c')
@@ -142,14 +142,18 @@ final class CategoryManager extends BaseEntityManager implements CategoryManager
         return $categories;
     }
 
-    public function getRootCategoriesSplitByContexts($loadChildren = true)
+    public function getRootCategoriesSplitByContexts(bool $loadChildren = true): array
     {
         $rootCategories = $this->getAllRootCategories($loadChildren);
 
         $splitCategories = [];
 
         foreach ($rootCategories as $category) {
-            $splitCategories[$category->getContext()->getId()][] = $category;
+            $context = $category->getContext();
+
+            \assert(null !== $context);
+
+            $splitCategories[(string) $context->getId()][] = $category;
         }
 
         return $splitCategories;
@@ -203,12 +207,12 @@ final class CategoryManager extends BaseEntityManager implements CategoryManager
         }
 
         $rootCategories = [];
-        foreach ($categories as $pos => $category) {
+        foreach ($categories as $category) {
             if (null === $category->getParent()) {
                 $rootCategories[] = $category;
             }
 
-            $this->categories[$context->getId()][$category->getId()] = $category;
+            $this->categories[(string) $context->getId()][$category->getId()] = $category;
 
             $parent = $category->getParent();
 
@@ -219,33 +223,18 @@ final class CategoryManager extends BaseEntityManager implements CategoryManager
             }
         }
 
-        $this->categories[$context->getId()] = $rootCategories;
+        $this->categories[(string) $context->getId()] = $rootCategories;
     }
 
-    private function getContext($context = null): ContextInterface
+    private function getContext(): ContextInterface
     {
-        if ($context instanceof ContextInterface) {
-            return $context;
-        }
-
-        if (null === $context) {
-            $context = ContextInterface::DEFAULT_CONTEXT;
-        }
-
-        if (!\is_string($context)) {
-            throw new \InvalidArgumentException(sprintf(
-                'Invalid parameter given: %s',
-                (string) $context
-            ));
-        }
-
-        $contextObj = $this->contextManager->find($context);
+        $contextObj = $this->contextManager->find(ContextInterface::DEFAULT_CONTEXT);
 
         if (!$contextObj instanceof ContextInterface) {
             $contextObj = $this->contextManager->create();
 
-            $contextObj->setId($context);
-            $contextObj->setName($context);
+            $contextObj->setId(ContextInterface::DEFAULT_CONTEXT);
+            $contextObj->setName(ContextInterface::DEFAULT_CONTEXT);
             $contextObj->setEnabled(true);
 
             $this->contextManager->save($contextObj);

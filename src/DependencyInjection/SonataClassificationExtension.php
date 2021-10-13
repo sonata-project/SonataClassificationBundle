@@ -36,6 +36,8 @@ final class SonataClassificationExtension extends Extension
         $processor = new Processor();
         $configuration = new Configuration();
         $config = $processor->processConfiguration($configuration, $configs);
+
+        /** @var array<string, mixed> $bundles */
         $bundles = $container->getParameter('kernel.bundles');
 
         $loader = new Loader\PhpFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
@@ -59,9 +61,9 @@ final class SonataClassificationExtension extends Extension
     }
 
     /**
-     * @param array $config
+     * @param array<string, array<string, string>> $config
      */
-    private function configureClass($config, ContainerBuilder $container): void
+    private function configureClass(array $config, ContainerBuilder $container): void
     {
         // admin configuration
         $container->setParameter('sonata.classification.admin.tag.entity', $config['class']['tag']);
@@ -77,9 +79,9 @@ final class SonataClassificationExtension extends Extension
     }
 
     /**
-     * @param array $config
+     * @param array<string, array<string, array<string, string>>> $config
      */
-    private function configureAdmin($config, ContainerBuilder $container): void
+    private function configureAdmin(array $config, ContainerBuilder $container): void
     {
         $container->setParameter('sonata.classification.admin.category.class', $config['admin']['category']['class']);
         $container->setParameter('sonata.classification.admin.category.controller', $config['admin']['category']['controller']);
@@ -98,6 +100,9 @@ final class SonataClassificationExtension extends Extension
         $container->setParameter('sonata.classification.admin.context.translation_domain', $config['admin']['context']['translation']);
     }
 
+    /**
+     * @param array<string, array<string, string>> $config
+     */
     private function registerSonataDoctrineMapping(array $config): void
     {
         foreach ($config['class'] as $type => $class) {

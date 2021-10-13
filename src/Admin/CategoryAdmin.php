@@ -31,9 +31,9 @@ final class CategoryAdmin extends ContextAwareAdmin
 {
     protected $classnameLabel = 'Category';
 
-    public function configureRoutes(RouteCollectionInterface $routes): void
+    public function configureRoutes(RouteCollectionInterface $collection): void
     {
-        $routes->add('tree', 'tree');
+        $collection->add('tree', 'tree');
     }
 
     protected function configureFormOptions(array &$formOptions): void
@@ -41,9 +41,9 @@ final class CategoryAdmin extends ContextAwareAdmin
         $formOptions['constraints'][] = new Valid();
     }
 
-    protected function configureFormFields(FormMapper $formMapper): void
+    protected function configureFormFields(FormMapper $form): void
     {
-        $formMapper
+        $form
             ->with('group_general', ['class' => 'col-md-6'])
                 ->add('name')
                 ->add('description', TextareaType::class, [
@@ -52,7 +52,7 @@ final class CategoryAdmin extends ContextAwareAdmin
 
         if ($this->hasSubject()) {
             if (null !== $this->getSubject()->getParent() || null === $this->getSubject()->getId()) { // root category cannot have a parent
-                $formMapper
+                $form
                     ->add('parent', CategorySelectorType::class, [
                         'category' => $this->getSubject(),
                         'model_manager' => $this->getModelManager(),
@@ -65,7 +65,7 @@ final class CategoryAdmin extends ContextAwareAdmin
 
         $position = $this->hasSubject() && null !== $this->getSubject()->getPosition() ? $this->getSubject()->getPosition() : 0;
 
-        $formMapper
+        $form
             ->end()
             ->with('group_options', ['class' => 'col-md-6'])
                 ->add('enabled', CheckboxType::class, [
@@ -78,18 +78,18 @@ final class CategoryAdmin extends ContextAwareAdmin
             ->end();
     }
 
-    protected function configureDatagridFilters(DatagridMapper $datagridMapper): void
+    protected function configureDatagridFilters(DatagridMapper $filter): void
     {
-        parent::configureDatagridFilters($datagridMapper);
+        parent::configureDatagridFilters($filter);
 
-        $datagridMapper
+        $filter
             ->add('name')
             ->add('enabled');
     }
 
-    protected function configureListFields(ListMapper $listMapper): void
+    protected function configureListFields(ListMapper $list): void
     {
-        $listMapper
+        $list
             ->addIdentifier('name')
             ->add('context', null, [
                 'sortable' => 'context.name',

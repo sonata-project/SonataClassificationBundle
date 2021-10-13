@@ -25,13 +25,14 @@ use Twig\Environment;
 
 /**
  * @author Christian Gripp <mail@core23.de>
+ *
+ * @phpstan-import-type FieldDescriptionOptions from \Sonata\AdminBundle\FieldDescription\FieldDescriptionInterface
+ *
+ * @phpstan-template T of ContextAwareInterface
  */
 abstract class AbstractClassificationBlockService extends AbstractBlockService
 {
-    /**
-     * @var ContextManagerInterface
-     */
-    protected $contextManager;
+    protected ContextManagerInterface $contextManager;
 
     public function __construct(Environment $twig, ContextManagerInterface $contextManager)
     {
@@ -41,15 +42,15 @@ abstract class AbstractClassificationBlockService extends AbstractBlockService
     }
 
     /**
-     * @param string $formField
-     * @param string $field
-     * @param array  $fieldOptions
-     * @param array  $adminOptions
+     * @param array<string, mixed> $fieldOptions
+     * @param array<string, mixed> $adminOptions
      *
-     * @phpstan-param AdminInterface<ContextAwareInterface> $admin
+     * @phpstan-param FormMapper<T> $formMapper
+     * @phpstan-param AdminInterface<T> $admin
      */
-    final protected function getFormAdminType(FormMapper $formMapper, AdminInterface $admin, $formField, $field, $fieldOptions = [], $adminOptions = []): FormBuilderInterface
+    final protected function getFormAdminType(FormMapper $formMapper, AdminInterface $admin, string $formField, string $field, array $fieldOptions = [], array $adminOptions = []): FormBuilderInterface
     {
+        /** @phpstan-var FieldDescriptionOptions $adminOptions */
         $adminOptions = array_merge([
             'edit' => 'list',
             'translation_domain' => 'SonataClassificationBundle',
@@ -72,14 +73,14 @@ abstract class AbstractClassificationBlockService extends AbstractBlockService
     /**
      * Returns a context choice array.
      *
-     * @return string[]
+     * @return array<string, string>
      */
-    final protected function getContextChoices()
+    final protected function getContextChoices(): array
     {
         $contextChoices = [];
         /* @var ContextInterface $context */
         foreach ($this->contextManager->findAll() as $context) {
-            $contextChoices[$context->getId()] = $context->getName();
+            $contextChoices[(string) $context->getId()] = (string) $context->getName();
         }
 
         return $contextChoices;

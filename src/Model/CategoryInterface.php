@@ -24,83 +24,41 @@ interface CategoryInterface extends ContextAwareInterface
      */
     public function getId();
 
-    /**
-     * @param string $name
-     */
-    public function setName($name);
+    public function setName(?string $name): void;
 
-    /**
-     * @return string|null $name
-     */
-    public function getName();
+    public function getName(): ?string;
 
-    /**
-     * @param bool $enabled
-     */
-    public function setEnabled($enabled);
+    public function setEnabled(bool $enabled): void;
 
-    /**
-     * @return bool
-     */
-    public function getEnabled();
+    public function getEnabled(): bool;
 
-    /**
-     * @param string $slug
-     */
-    public function setSlug($slug);
+    public function setSlug(?string $slug): void;
 
-    /**
-     * @return string|null
-     */
-    public function getSlug();
+    public function getSlug(): ?string;
 
-    /**
-     * @param string|null $description
-     */
-    public function setDescription($description);
+    public function setDescription(?string $description): void;
 
-    /**
-     * @return string|null
-     */
-    public function getDescription();
+    public function getDescription(): ?string;
 
-    /**
-     * @param int|null $position
-     */
-    public function setPosition($position);
+    public function setPosition(?int $position): void;
 
-    /**
-     * @return int|null
-     */
-    public function getPosition();
+    public function getPosition(): ?int;
 
-    /**
-     * @param bool $nested
-     */
-    public function addChild(self $children, $nested = false);
+    public function addChild(self $child, bool $nested = false): void;
 
     /**
      * @return Collection<int, self> $children
      */
-    public function getChildren();
+    public function getChildren(): Collection;
 
     /**
-     * @param iterable<self> $children
+     * @param CategoryInterface[] $children
      */
-    public function setChildren($children);
+    public function setChildren(array $children): void;
 
-    /**
-     * @return bool
-     */
-    public function hasChildren();
+    public function hasChildren(): bool;
 
-    /**
-     * @param bool $nested
-     */
-    public function setParent(?self $parent = null, $nested = false);
+    public function setParent(?self $parent = null, bool $nested = false): void;
 
-    /**
-     * @return self|null
-     */
-    public function getParent();
+    public function getParent(): ?self;
 }

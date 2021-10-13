@@ -60,7 +60,7 @@ final class TagManagerTest extends TestCase
             ->getByContext('contextA', false);
     }
 
-    private function getTagManager($qbCallback): TagManager
+    private function getTagManager(\Closure $qbCallback): TagManager
     {
         $em = $this->createEntityManagerMock($qbCallback, []);
 

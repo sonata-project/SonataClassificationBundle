@@ -15,84 +15,63 @@ namespace Sonata\ClassificationBundle\Model;
 
 abstract class Collection implements CollectionInterface
 {
-    /**
-     * @var string|null
-     */
-    protected $name;
+    protected ?string $name = null;
 
-    /**
-     * @var string|null
-     */
-    protected $slug;
+    protected ?string $slug = null;
 
-    /**
-     * @var bool
-     */
-    protected $enabled = false;
+    protected bool $enabled = false;
 
-    /**
-     * @var string|null
-     */
-    protected $description;
+    protected ?string $description = null;
 
-    /**
-     * @var \DateTime|null
-     */
-    protected $createdAt;
+    protected ?\DateTimeInterface $createdAt = null;
 
-    /**
-     * @var \DateTime|null
-     */
-    protected $updatedAt;
+    protected ?\DateTimeInterface $updatedAt = null;
 
-    /**
-     * @var ContextInterface|null
-     */
-    protected $context;
+    protected ?ContextInterface $context = null;
 
     public function __toString(): string
     {
         return $this->getName() ?: 'n/a';
     }
 
-    public function setName($name): void
+    public function setName(?string $name): void
     {
         $this->name = $name;
 
         $this->setSlug($name);
     }
 
-    public function getName()
+    public function getName(): ?string
     {
         return $this->name;
     }
 
-    public function setEnabled($enabled): void
+    public function setEnabled(bool $enabled): void
     {
         $this->enabled = $enabled;
     }
 
-    public function getEnabled()
+    public function getEnabled(): bool
     {
         return $this->enabled;
     }
 
-    public function setSlug($slug): void
+    public function setSlug(?string $slug): void
     {
-        $this->slug = Tag::slugify($slug);
+        $this->slug = Tag::slugify($slug ?? '');
     }
 
-    public function getSlug()
+    public function getSlug(): ?string
     {
         return $this->slug;
     }
 
-    public function setDescription($description): void
+    public function setDescription(?string $description): void
     {
         $this->description = $description;
     }
 
-    public function getDescription()
+    public function getDescription(): ?string
     {
         return $this->description;
     }
@@ -108,22 +87,22 @@ abstract class Collection implements CollectionInterface
         $this->setUpdatedAt(new \DateTime());
     }
 
-    public function setCreatedAt(\DateTime $createdAt): void
+    public function setCreatedAt(?\DateTimeInterface $createdAt): void
     {
         $this->createdAt = $createdAt;
     }
 
-    public function getCreatedAt()
+    public function getCreatedAt(): ?\DateTimeInterface
     {
         return $this->createdAt;
     }
 
-    public function setUpdatedAt(\DateTime $updatedAt): void
+    public function setUpdatedAt(?\DateTimeInterface $updatedAt): void
     {
         $this->updatedAt = $updatedAt;
     }
 
-    public function getUpdatedAt()
+    public function getUpdatedAt(): ?\DateTimeInterface
     {
         return $this->updatedAt;
     }

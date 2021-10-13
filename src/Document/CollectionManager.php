@@ -17,6 +17,9 @@ use Sonata\ClassificationBundle\Model\CollectionInterface;
 use Sonata\ClassificationBundle\Model\CollectionManagerInterface;
 use Sonata\Doctrine\Document\BaseDocumentManager;
 
+/**
+ * @phpstan-extends BaseDocumentManager<CollectionInterface>
+ */
 final class CollectionManager extends BaseDocumentManager implements CollectionManagerInterface
 {
     public function getBySlug(string $slug, ?string $contextId = null, ?bool $enabled = true): ?CollectionInterface
@@ -57,6 +60,10 @@ final class CollectionManager extends BaseDocumentManager implements CollectionM
                 ->equals($enabled);
         }
 
-        return $queryBuilder->getQuery()->execute();
+        $result = $queryBuilder->getQuery()->execute();
+
+        \assert(null !== $result);
+
+        return $result;
     }
 }

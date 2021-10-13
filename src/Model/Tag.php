@@ -17,89 +17,71 @@ use Cocur\Slugify\Slugify;
 
 abstract class Tag implements TagInterface
 {
-    /**
-     * @var string|null
-     */
-    protected $name;
+    protected ?string $name = null;
 
-    /**
-     * @var string|null
-     */
-    protected $slug;
+    protected ?string $slug = null;
 
-    /**
-     * @var \DateTime|null
-     */
-    protected $createdAt;
+    protected ?\DateTimeInterface $createdAt = null;
 
-    /**
-     * @var \DateTime|null
-     */
-    protected $updatedAt;
+    protected ?\DateTimeInterface $updatedAt = null;
 
-    /**
-     * @var bool
-     */
-    protected $enabled = false;
+    protected bool $enabled = false;
 
-    /**
-     * @var ContextInterface|null
-     */
-    protected $context;
+    protected ?ContextInterface $context = null;
 
-    public function __toString()
+    public function __toString(): string
     {
         return $this->getName() ?: 'n/a';
     }
 
-    public function setName($name): void
+    public function setName(?string $name): void
     {
         $this->name = $name;
 
         $this->setSlug($name);
     }
 
-    public function getName()
+    public function getName(): ?string
     {
         return $this->name;
     }
 
-    public function setEnabled($enabled): void
+    public function setEnabled(bool $enabled): void
     {
         $this->enabled = $enabled;
     }
 
-    public function getEnabled()
+    public function getEnabled(): bool
     {
         return $this->enabled;
     }
 
-    public function setSlug($slug): void
+    public function setSlug(?string $slug): void
     {
-        $this->slug = self::slugify($slug);
+        $this->slug = self::slugify($slug ?? '');
     }
 
-    public function getSlug()
+    public function getSlug(): ?string
     {
         return $this->slug;
     }
 
-    public function setCreatedAt(\DateTime $createdAt): void
+    public function setCreatedAt(?\DateTimeInterface $createdAt): void
     {
         $this->createdAt = $createdAt;
     }
 
-    public function getCreatedAt()
+    public function getCreatedAt(): ?\DateTimeInterface
     {
         return $this->createdAt;
     }
 
-    public function setUpdatedAt(\DateTime $updatedAt): void
+    public function setUpdatedAt(?\DateTimeInterface $updatedAt): void
     {
         $this->updatedAt = $updatedAt;
     }
 
-    public function getUpdatedAt()
+    public function getUpdatedAt(): ?\DateTimeInterface
     {
         return $this->updatedAt;
     }
@@ -113,12 +95,8 @@ abstract class Tag implements TagInterface
      * @see http://snipplr.com/view/22741/slugify-a-string-in-php/.
      *
      * @static
-     *
-     * @param string $text
-     *
-     * @return string
      */
-    public static function slugify($text)
+    public static function slugify(string $text): string
     {
         $text = Slugify::create()->slugify($text);
 

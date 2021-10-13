@@ -33,24 +33,26 @@ use Twig\Environment;
 
 /**
  * @author Christian Gripp <mail@core23.de>
+ *
+ * @phpstan-extends AbstractClassificationBlockService<TagInterface>
  */
 abstract class AbstractTagsBlockService extends AbstractClassificationBlockService implements EditableBlockService
 {
-    /**
-     * @var TagManagerInterface
-     */
-    private $tagManager;
+    private TagManagerInterface $tagManager;
 
     /**
-     * @var AdminInterface|null
+     * @phpstan-var AdminInterface<TagInterface>|null
      */
-    private $tagAdmin;
+    private ?AdminInterface $tagAdmin;
 
+    /**
+     * @phpstan-param AdminInterface<TagInterface>|null $tagAdmin
+     */
     public function __construct(
         Environment $twig,
         ContextManagerInterface $contextManager,
         TagManagerInterface $tagManager,
-        ?AdminInterface $tagAdmin
+        ?AdminInterface $tagAdmin = null
     ) {
         parent::__construct($twig, $contextManager);
 
@@ -66,7 +68,11 @@ abstract class AbstractTagsBlockService extends AbstractClassificationBlockServi
             'context' => $blockContext->getSetting('context'),
         ]);
 
-        return $this->renderResponse($blockContext->getTemplate(), [
+        $template = $blockContext->getTemplate();
+
+        \assert(\is_string($template));
+
+        return $this->renderResponse($template, [
             'context' => $blockContext,
             'settings' => $blockContext->getSettings(),
             'block' => $blockContext->getBlock(),
@@ -175,10 +181,8 @@ abstract class AbstractTagsBlockService extends AbstractClassificationBlockServi
     /**
      * @param TagInterface|int $id
      * @param mixed            $default
-     *
-     * @return TagInterface|null
      */
-    final protected function getTag($id, $default = null)
+    final protected function getTag($id, $default = null): ?TagInterface
     {
         if ($id instanceof TagInterface) {
             return $id;

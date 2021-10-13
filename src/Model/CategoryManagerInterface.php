@@ -24,49 +24,33 @@ interface CategoryManagerInterface extends ManagerInterface
     /**
      * Returns a pager to iterate over the root category.
      *
-     * @param int   $page
-     * @param int   $limit
-     * @param array $criteria
-     *
-     * @return PagerInterface
+     * @phpstan-param array<string, mixed> $criteria
      */
-    public function getRootCategoriesPager($page = 1, $limit = 25, $criteria = []);
+    public function getRootCategoriesPager(int $page = 1, int $limit = 25, array $criteria = []): PagerInterface;
 
     /**
-     * @param int   $categoryId
-     * @param int   $page
-     * @param int   $limit
-     * @param array $criteria
+     * @param mixed $categoryId
      *
-     * @return PagerInterface
+     * @phpstan-param array<string, mixed> $criteria
      */
-    public function getSubCategoriesPager($categoryId, $page = 1, $limit = 25, $criteria = []);
+    public function getSubCategoriesPager($categoryId, int $page = 1, int $limit = 25, array $criteria = []): PagerInterface;
+
+    public function getRootCategoryWithChildren(CategoryInterface $category): CategoryInterface;
 
     /**
-     * @return CategoryInterface
-     */
-    public function getRootCategoryWithChildren(CategoryInterface $category);
-
-    /**
-     * @param ContextInterface $context
-     *
      * @return CategoryInterface[]
      */
-    public function getRootCategoriesForContext(?ContextInterface $context = null);
+    public function getRootCategoriesForContext(?ContextInterface $context = null): array;
 
     /**
-     * @param bool $loadChildren
-     *
      * @return CategoryInterface[]
      */
-    public function getAllRootCategories($loadChildren = true);
+    public function getAllRootCategories(bool $loadChildren = true): array;
 
     /**
-     * @param bool $loadChildren
-     *
-     * @return array
+     * @return array<string, CategoryInterface[]>
      */
-    public function getRootCategoriesSplitByContexts($loadChildren = true);
+    public function getRootCategoriesSplitByContexts(bool $loadChildren = true): array;
 
     public function getBySlug(string $slug, ?string $contextId = null, ?bool $enabled = true): ?CategoryInterface;
 }

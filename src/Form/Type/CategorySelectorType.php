@@ -29,10 +29,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 final class CategorySelectorType extends AbstractType
 {
-    /**
-     * @var CategoryManagerInterface
-     */
-    protected $manager;
+    protected CategoryManagerInterface $manager;
 
     public function __construct(CategoryManagerInterface $manager)
     {
@@ -51,9 +48,9 @@ final class CategorySelectorType extends AbstractType
     }
 
     /**
-     * @return array
+     * @return array<array-key, string>
      */
-    public function getChoices(Options $options)
+    public function getChoices(Options $options): array
     {
         if (!$options['category'] instanceof CategoryInterface) {
             return [];
@@ -76,16 +73,19 @@ final class CategorySelectorType extends AbstractType
         return $choices;
     }
 
-    public function getParent()
+    public function getParent(): string
     {
         return ModelType::class;
     }
 
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'sonata_category_selector';
     }
 
+    /**
+     * @param array<array-key, string> $choices
+     */
     private function childWalker(CategoryInterface $category, Options $options, array &$choices, int $level = 2): void
     {
         if ($category->getChildren()->isEmpty()) {
@@ -97,7 +97,7 @@ final class CategorySelectorType extends AbstractType
                 continue;
             }
 
-            $choices[$child->getId()] = sprintf('%s %s', str_repeat('-', 1 * $level), $child);
+            $choices[$child->getId()] = sprintf('%s %s', str_repeat('-', 1 * $level), $child->getName());
 
             $this->childWalker($child, $options, $choices, $level + 1);
         }

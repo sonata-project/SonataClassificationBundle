@@ -42,7 +42,7 @@ final class CategoryChoiceLoaderTest extends TestCase
 
         $categoryLoader = new CategoryChoiceLoader(array_flip($choices));
 
-        static::assertSame(array_keys($choices), $categoryLoader->loadChoicesForValues([1, 2, 3]));
+        static::assertSame(array_keys($choices), $categoryLoader->loadChoicesForValues(['1', '2', '3']));
     }
 
     public function testLoadValuesForChoices(): void

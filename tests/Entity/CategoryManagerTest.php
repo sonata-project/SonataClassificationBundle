@@ -30,7 +30,7 @@ class CategoryManagerTest extends TestCase
     {
         /** @var ContextTest $context */
         $context = $this->getMockForAbstractClass(ContextTest::class);
-        $context->setId(1);
+        $context->setId('1');
         $context->setName('default');
         $context->setEnabled(true);
 
@@ -61,7 +61,7 @@ class CategoryManagerTest extends TestCase
     {
         /** @var ContextTest $context */
         $context = $this->getMockForAbstractClass(ContextTest::class);
-        $context->setId(1);
+        $context->setId('1');
         $context->setName('default');
         $context->setEnabled(true);
 
@@ -93,13 +93,13 @@ class CategoryManagerTest extends TestCase
     {
         /** @var ContextTest $contextFoo */
         $contextFoo = $this->getMockForAbstractClass(ContextTest::class);
-        $contextFoo->setId(1);
+        $contextFoo->setId('1');
         $contextFoo->setName('foo');
         $contextFoo->setEnabled(true);
 
         /** @var ContextTest $contextBar */
         $contextBar = $this->getMockForAbstractClass(ContextTest::class);
-        $contextBar->setId(2);
+        $contextBar->setId('2');
         $contextBar->setName('bar');
         $contextBar->setEnabled(true);
 
@@ -123,7 +123,9 @@ class CategoryManagerTest extends TestCase
         }, [$categoryFoo, $categoryBar]);
 
         $categories = $categoryManager->getRootCategoriesSplitByContexts(false);
+        static::assertNotNull($contextFoo->getId());
         static::assertArrayHasKey($contextFoo->getId(), $categories);
+        static::assertNotNull($contextBar->getId());
         static::assertArrayHasKey($contextBar->getId(), $categories);
         static::assertContains($categoryFoo, $categories[$contextFoo->getId()]);
         static::assertContains($categoryBar, $categories[$contextBar->getId()]);
@@ -148,7 +150,10 @@ class CategoryManagerTest extends TestCase
             ->getBySlug('theslug', 'contextA', false);
     }
 
-    private function getCategoryManager($qbCallback, $createQueryResult = []): CategoryManager
+    /**
+     * @param object[] $createQueryResult
+     */
+    private function getCategoryManager(\Closure $qbCallback, array $createQueryResult = []): CategoryManager
     {
         $query = $this->createMock(AbstractQuery::class);
         $query->method('getResult')->willReturn($createQueryResult);

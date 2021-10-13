@@ -17,6 +17,9 @@ use Sonata\ClassificationBundle\Model\TagInterface;
 use Sonata\ClassificationBundle\Model\TagManagerInterface;
 use Sonata\Doctrine\Document\BaseDocumentManager;
 
+/**
+ * @phpstan-extends BaseDocumentManager<TagInterface>
+ */
 final class TagManager extends BaseDocumentManager implements TagManagerInterface
 {
     public function getBySlug(string $slug, ?string $contextId = null, ?bool $enabled = true): ?TagInterface
@@ -57,6 +60,10 @@ final class TagManager extends BaseDocumentManager implements TagManagerInterfac
                 ->equals($enabled);
         }
 
-        return $queryBuilder->getQuery()->execute();
+        $result = $queryBuilder->getQuery()->execute();
+
+        \assert(null !== $result);
+
+        return $result;
     }
 }

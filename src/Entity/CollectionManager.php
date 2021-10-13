@@ -17,6 +17,9 @@ use Sonata\ClassificationBundle\Model\CollectionInterface;
 use Sonata\ClassificationBundle\Model\CollectionManagerInterface;
 use Sonata\Doctrine\Entity\BaseEntityManager;
 
+/**
+ * @phpstan-extends BaseEntityManager<CollectionInterface>
+ */
 final class CollectionManager extends BaseEntityManager implements CollectionManagerInterface
 {
     public function getBySlug(string $slug, ?string $contextId = null, ?bool $enabled = true): ?CollectionInterface

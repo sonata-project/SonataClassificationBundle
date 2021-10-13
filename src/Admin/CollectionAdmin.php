@@ -33,9 +33,9 @@ final class CollectionAdmin extends ContextAwareAdmin
         $formOptions['constraints'][] = new Valid();
     }
 
-    protected function configureFormFields(FormMapper $formMapper): void
+    protected function configureFormFields(FormMapper $form): void
     {
-        $formMapper
+        $form
             ->add('name')
             ->add('description', TextareaType::class, [
                 'required' => false,
@@ -46,18 +46,18 @@ final class CollectionAdmin extends ContextAwareAdmin
             ]);
     }
 
-    protected function configureDatagridFilters(DatagridMapper $datagridMapper): void
+    protected function configureDatagridFilters(DatagridMapper $filter): void
     {
-        parent::configureDatagridFilters($datagridMapper);
+        parent::configureDatagridFilters($filter);
 
-        $datagridMapper
+        $filter
             ->add('name')
             ->add('enabled');
     }
 
-    protected function configureListFields(ListMapper $listMapper): void
+    protected function configureListFields(ListMapper $list): void
     {
-        $listMapper
+        $list
             ->addIdentifier('name')
             ->add('slug')
             ->add('context', null, [

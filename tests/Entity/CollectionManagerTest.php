@@ -60,7 +60,7 @@ final class CollectionManagerTest extends TestCase
             ->getByContext('contextA', false);
     }
 
-    private function getCollectionManager($qbCallback): CollectionManager
+    private function getCollectionManager(\Closure $qbCallback): CollectionManager
     {
         $em = $this->createEntityManagerMock($qbCallback, []);
 

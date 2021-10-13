@@ -18,55 +18,28 @@ use Doctrine\Common\Collections\Collection;
 
 abstract class Category implements CategoryInterface
 {
-    /**
-     * @var string|null
-     */
-    protected $name;
+    protected ?string $name = null;
 
-    /**
-     * @var string|null
-     */
-    protected $slug;
+    protected ?string $slug = null;
 
-    /**
-     * @var bool
-     */
-    protected $enabled = false;
+    protected bool $enabled = false;
 
-    /**
-     * @var string|null
-     */
-    protected $description;
+    protected ?string $description = null;
 
-    /**
-     * @var \DateTime|null
-     */
-    protected $createdAt;
+    protected ?\DateTimeInterface $createdAt = null;
 
-    /**
-     * @var \DateTime|null
-     */
-    protected $updatedAt;
+    protected ?\DateTimeInterface $updatedAt = null;
 
-    /**
-     * @var int|null
-     */
-    protected $position;
+    protected ?int $position;
 
     /**
      * @var Collection<int, CategoryInterface>
      */
-    protected $children;
+    protected Collection $children;
 
-    /**
-     * @var CategoryInterface|null
-     */
-    protected $parent;
+    protected ?CategoryInterface $parent = null;
 
-    /**
-     * @var ContextInterface|null
-     */
-    protected $context;
+    protected ?ContextInterface $context = null;
 
     public function __construct()
     {
@@ -78,44 +51,44 @@ abstract class Category implements CategoryInterface
         return $this->getName() ?: 'n/a';
     }
 
-    public function setName($name): void
+    public function setName(?string $name): void
     {
         $this->name = $name;
 
         $this->setSlug($name);
     }
 
-    public function getName()
+    public function getName(): ?string
     {
         return $this->name;
     }
 
-    public function setEnabled($enabled): void
+    public function setEnabled(bool $enabled): void
     {
         $this->enabled = $enabled;
     }
 
-    public function getEnabled()
+    public function getEnabled(): bool
     {
         return $this->enabled;
     }
 
-    public function setSlug($slug): void
+    public function setSlug(?string $slug): void
     {
-        $this->slug = Tag::slugify($slug);
+        $this->slug = Tag::slugify($slug ?? '');
     }
 
-    public function getSlug()
+    public function getSlug(): ?string
     {
         return $this->slug;
     }
 
-    public function setDescription($description): void
+    public function setDescription(?string $description): void
     {
         $this->description = $description;
     }
 
-    public function getDescription()
+    public function getDescription(): ?string
     {
         return $this->description;
     }
@@ -131,37 +104,37 @@ abstract class Category implements CategoryInterface
         $this->setUpdatedAt(new \DateTime());
     }
 
-    public function setCreatedAt(\DateTime $createdAt): void
+    public function setCreatedAt(?\DateTimeInterface $createdAt): void
     {
         $this->createdAt = $createdAt;
     }
 
-    public function getCreatedAt()
+    public function getCreatedAt(): ?\DateTimeInterface
     {
         return $this->createdAt;
     }
 
-    public function setUpdatedAt(\DateTime $updatedAt): void
+    public function setUpdatedAt(?\DateTimeInterface $updatedAt): void
     {
         $this->updatedAt = $updatedAt;
     }
 
-    public function getUpdatedAt()
+    public function getUpdatedAt(): ?\DateTimeInterface
     {
         return $this->updatedAt;
     }
 
-    public function setPosition($position): void
+    public function setPosition(?int $position): void
     {
         $this->position = $position;
     }
 
-    public function getPosition()
+    public function getPosition(): ?int
     {
         return $this->position;
     }
 
-    public function addChild(CategoryInterface $child, $nested = false): void
+    public function addChild(CategoryInterface $child, bool $nested = false): void
     {
         $this->children[] = $child;
 
@@ -191,12 +164,12 @@ abstract class Category implements CategoryInterface
         }
     }
 
-    public function getChildren()
+    public function getChildren(): Collection
     {
         return $this->children;
     }
 
-    public function setChildren($children): void
+    public function setChildren(array $children): void
     {
         $this->children = new ArrayCollection();
 
@@ -205,12 +178,12 @@ abstract class Category implements CategoryInterface
         }
     }
 
-    public function hasChildren()
+    public function hasChildren(): bool
     {
         return \count($this->children) > 0;
     }
 
-    public function setParent(?CategoryInterface $parent = null, $nested = false): void
+    public function setParent(?CategoryInterface $parent = null, bool $nested = false): void
     {
         $this->parent = $parent;
 
@@ -219,7 +192,7 @@ abstract class Category implements CategoryInterface
         }
     }
 
-    public function getParent()
+    public function getParent(): ?CategoryInterface
     {
         return $this->parent;
     }

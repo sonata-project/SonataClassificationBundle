@@ -33,19 +33,21 @@ use Twig\Environment;
 
 /**
  * @author Christian Gripp <mail@core23.de>
+ *
+ * @phpstan-extends AbstractClassificationBlockService<CategoryInterface>
  */
 abstract class AbstractCategoriesBlockService extends AbstractClassificationBlockService implements EditableBlockService
 {
-    /**
-     * @var CategoryManagerInterface
-     */
-    private $categoryManager;
+    private CategoryManagerInterface $categoryManager;
 
     /**
-     * @var AdminInterface|null
+     * @phpstan-var AdminInterface<CategoryInterface>|null
      */
-    private $categoryAdmin;
+    private ?AdminInterface $categoryAdmin;
 
+    /**
+     * @phpstan-param AdminInterface<CategoryInterface>|null $categoryAdmin
+     */
     public function __construct(
         Environment $twig,
         ContextManagerInterface $contextManager,
@@ -63,7 +65,11 @@ abstract class AbstractCategoriesBlockService extends AbstractClassificationBloc
         $category = $this->getCategory($blockContext->getSetting('categoryId'), $blockContext->getSetting('category'));
         $root = current($this->categoryManager->getRootCategoriesForContext($blockContext->getSetting('context')));
 
-        return $this->renderResponse($blockContext->getTemplate(), [
+        $template = $blockContext->getTemplate();
+
+        \assert(\is_string($template));
+
+        return $this->renderResponse($template, [
             'context' => $blockContext,
             'settings' => $blockContext->getSettings(),
             'block' => $blockContext->getBlock(),

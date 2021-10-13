@@ -17,15 +17,19 @@ use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\ClassificationBundle\Model\ContextInterface;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
+/**
+ * @phpstan-extends AbstractAdmin<ContextInterface>
+ */
 final class ContextAdmin extends AbstractAdmin
 {
     protected $classnameLabel = 'Context';
 
-    protected function configureFormFields(FormMapper $formMapper): void
+    protected function configureFormFields(FormMapper $form): void
     {
-        $formMapper
+        $form
             ->ifTrue(!($this->hasSubject() && null !== $this->getSubject()->getId()))
                 ->add('id')
             ->ifEnd()
@@ -35,17 +39,17 @@ final class ContextAdmin extends AbstractAdmin
             ]);
     }
 
-    protected function configureDatagridFilters(DatagridMapper $datagridMapper): void
+    protected function configureDatagridFilters(DatagridMapper $filter): void
     {
-        $datagridMapper
+        $filter
             ->add('id')
             ->add('name')
             ->add('enabled');
     }
 
-    protected function configureListFields(ListMapper $listMapper): void
+    protected function configureListFields(ListMapper $list): void
     {
-        $listMapper
+        $list
             ->addIdentifier('name')
             ->addIdentifier('id')
             ->add('enabled', null, [

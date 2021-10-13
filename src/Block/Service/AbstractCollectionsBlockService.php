@@ -33,24 +33,26 @@ use Twig\Environment;
 
 /**
  * @author Christian Gripp <mail@core23.de>
+ *
+ * @phpstan-extends AbstractClassificationBlockService<CollectionInterface>
  */
 abstract class AbstractCollectionsBlockService extends AbstractClassificationBlockService implements EditableBlockService
 {
-    /**
-     * @var CollectionManagerInterface
-     */
-    private $collectionManager;
+    private CollectionManagerInterface $collectionManager;
 
     /**
-     * @var AdminInterface|null
+     * @phpstan-var AdminInterface<CollectionInterface>|null
      */
-    private $collectionAdmin;
+    private ?AdminInterface $collectionAdmin;
 
+    /**
+     * @phpstan-param AdminInterface<CollectionInterface>|null $collectionAdmin
+     */
     public function __construct(
         Environment $twig,
         ContextManagerInterface $contextManager,
         CollectionManagerInterface $collectionManager,
-        ?AdminInterface $collectionAdmin
+        ?AdminInterface $collectionAdmin = null
     ) {
         parent::__construct($twig, $contextManager);
 
@@ -66,7 +68,11 @@ abstract class AbstractCollectionsBlockService extends AbstractClassificationBlo
             'context' => $blockContext->getSetting('context'),
         ]);
 
-        return $this->renderResponse($blockContext->getTemplate(), [
+        $template = $blockContext->getTemplate();
+
+        \assert(\is_string($template));
+
+        return $this->renderResponse($template, [
             'context' => $blockContext,
             'settings' => $blockContext->getSettings(),
             'block' => $blockContext->getBlock(),
@@ -175,10 +181,8 @@ abstract class AbstractCollectionsBlockService extends AbstractClassificationBlo
     /**
      * @param CollectionInterface|int $id
      * @param mixed                   $default
-     *
-     * @return CollectionInterface|null
      */
-    final protected function getCollection($id, $default = null)
+    final protected function getCollection($id, $default = null): ?CollectionInterface
     {
         if ($id instanceof CollectionInterface) {
             return $id;

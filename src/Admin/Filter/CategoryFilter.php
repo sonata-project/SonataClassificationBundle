@@ -23,23 +23,20 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 final class CategoryFilter extends Filter
 {
-    /**
-     * @var CategoryManagerInterface
-     */
-    private $categoryManager;
+    private CategoryManagerInterface $categoryManager;
 
     public function __construct(CategoryManagerInterface $categoryManager)
     {
         $this->categoryManager = $categoryManager;
     }
 
-    public function filter(ProxyQueryInterface $proxyQuery, string $alias, string $field, FilterData $data): void
+    public function filter(ProxyQueryInterface $query, string $alias, string $field, FilterData $data): void
     {
         if (!$data->hasValue() || null === $data->getValue()) {
             return;
         }
 
-        $proxyQuery
+        $query
             ->getQueryBuilder()
             ->andWhere(sprintf('%s.%s = :category', $alias, $field))
             ->setParameter('category', $data->getValue());
@@ -67,9 +64,9 @@ final class CategoryFilter extends Filter
         ]];
     }
 
-    protected function association(ProxyQueryInterface $queryBuilder, FilterData $data): array
+    protected function association(ProxyQueryInterface $query, FilterData $data): array
     {
-        $alias = $queryBuilder->entityJoin($this->getParentAssociationMappings());
+        $alias = $query->entityJoin($this->getParentAssociationMappings());
         $part = strrchr('.'.$this->getFieldName(), '.');
         $fieldName = substr(false === $part ? $this->getFieldType() : $part, 1);
 
@@ -92,7 +89,11 @@ final class CategoryFilter extends Filter
         $choices = [];
 
         foreach ($categories as $category) {
-            $choices[sprintf('%s (%s)', $category->getName(), $category->getContext()->getId())] = $category->getId();
+            $catContext = $category->getContext();
+
+            \assert(null !== $catContext);
+
+            $choices[sprintf('%s (%s)', $category->getName(), $catContext->getId())] = $category->getId();
 
             $this->visitChild($category, $choices);
         }
@@ -100,6 +101,9 @@ final class CategoryFilter extends Filter
         return $choices;
     }
 
+    /**
+     * @param array<string, mixed> $choices
+     */
     private function visitChild(CategoryInterface $category, array &$choices, int $level = 2): void
     {
         if (0 === \count($category->getChildren())) {

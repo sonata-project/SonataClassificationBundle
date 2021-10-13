@@ -17,6 +17,9 @@ use Sonata\ClassificationBundle\Model\TagInterface;
 use Sonata\ClassificationBundle\Model\TagManagerInterface;
 use Sonata\Doctrine\Entity\BaseEntityManager;
 
+/**
+ * @phpstan-extends BaseEntityManager<TagInterface>
+ */
 final class TagManager extends BaseEntityManager implements TagManagerInterface
 {
     public function getBySlug(string $slug, ?string $contextId = null, ?bool $enabled = true): ?TagInterface

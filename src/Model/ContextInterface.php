@@ -17,47 +17,23 @@ interface ContextInterface
 {
     public const DEFAULT_CONTEXT = 'default';
 
-    /**
-     * @param string $name
-     */
-    public function setName($name);
+    public function setName(?string $name): void;
 
-    /**
-     * @return string|null $name
-     */
-    public function getName();
+    public function getName(): ?string;
 
-    /**
-     * @param bool $enabled
-     */
-    public function setEnabled($enabled);
+    public function setEnabled(bool $enabled): void;
 
-    /**
-     * @return bool
-     */
-    public function getEnabled();
+    public function getEnabled(): bool;
 
-    /**
-     * @param string $id
-     */
-    public function setId($id);
+    public function setId(?string $id): void;
 
-    /**
-     * @return string|null
-     */
-    public function getId();
+    public function getId(): ?string;
 
-    public function setCreatedAt(\DateTime $createdAt);
+    public function setCreatedAt(?\DateTimeInterface $createdAt): void;
 
-    /**
-     * @return \DateTime|null
-     */
-    public function getCreatedAt();
+    public function getCreatedAt(): ?\DateTimeInterface;
 
-    public function setUpdatedAt(\DateTime $updatedAt);
+    public function setUpdatedAt(?\DateTimeInterface $updatedAt): void;
 
-    /**
-     * @return \DateTime|null
-     */
-    public function getUpdatedAt();
+    public function getUpdatedAt(): ?\DateTimeInterface;
 }

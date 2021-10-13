@@ -23,6 +23,7 @@ use Sonata\AdminBundle\Request\AdminFetcherInterface;
 use Sonata\AdminBundle\Templating\MutableTemplateRegistryInterface;
 use Sonata\ClassificationBundle\Controller\CategoryAdminController;
 use Sonata\ClassificationBundle\Model\Category;
+use Sonata\ClassificationBundle\Model\CategoryInterface;
 use Sonata\ClassificationBundle\Model\CategoryManagerInterface;
 use Sonata\ClassificationBundle\Model\ContextInterface;
 use Sonata\ClassificationBundle\Model\ContextManagerInterface;
@@ -43,50 +44,27 @@ use Twig\Environment;
  */
 final class CategoryAdminControllerTest extends TestCase
 {
-    /**
-     * @var Request
-     */
-    private $request;
+    private Request $request;
+
+    private RequestStack $requestStack;
 
     /**
-     * @var RequestStack
-     */
-    private $requestStack;
-
-    /**
-     * @var AdminInterface&MockObject
+     * @var AdminInterface<CategoryInterface>&MockObject
      */
     private $admin;
 
-    /**
-     * @var Pool
-     */
-    private $pool;
+    private Pool $pool;
 
-    /**
-     * @var array
-     */
-    private $parameters;
+    private ContainerInterface $container;
 
-    /**
-     * @var ContainerInterface
-     */
-    private $container;
-
-    /**
-     * @var string
-     */
-    private $template;
+    private string $template;
 
     /**
      * @var CsrfTokenManagerInterface&MockObject
      */
     private $csrfProvider;
 
-    /**
-     * @var CategoryAdminController|null
-     */
-    private $controller;
+    private ?CategoryAdminController $controller = null;
 
     /**
      * @var CategoryManagerInterface&MockObject
@@ -114,7 +92,6 @@ final class CategoryAdminControllerTest extends TestCase
         $this->requestStack->push($this->request);
         $this->pool = new Pool($this->container, ['admin_code' => 'admin_code']);
         $this->request->attributes->set('_sonata_admin', 'admin_code');
-        $this->parameters = [];
         $this->template = '';
 
         $twig = $this->createMock(Environment::class);
@@ -158,7 +135,7 @@ final class CategoryAdminControllerTest extends TestCase
         $this->admin->expects(static::any())
             ->method('generateUrl')
             ->willReturnCallback(
-                static function ($name, array $parameters = [], $absolute = false) {
+                static function ($name, array $parameters = []) {
                     $result = $name;
                     if (!empty($parameters)) {
                         $result .= '?'.http_build_query($parameters);
@@ -200,6 +177,8 @@ final class CategoryAdminControllerTest extends TestCase
 
     /**
      * @dataProvider listActionData
+     *
+     * @param string|false $context
      */
     public function testListAction($context): void
     {
@@ -242,7 +221,10 @@ final class CategoryAdminControllerTest extends TestCase
         );
     }
 
-    public function listActionData()
+    /**
+     * @return array<string, mixed>
+     */
+    public function listActionData(): array
     {
         return [
             'context' => ['default'],
@@ -252,8 +234,11 @@ final class CategoryAdminControllerTest extends TestCase
 
     /**
      * @dataProvider treeActionData
+     *
+     * @param string|false          $context
+     * @param array<string, string> $categories
      */
-    public function testTreeAction($context, $categories): void
+    public function testTreeAction($context, array $categories): void
     {
         $datagrid = $this->createMock(DatagridInterface::class);
 
@@ -309,7 +294,10 @@ final class CategoryAdminControllerTest extends TestCase
         );
     }
 
-    public function treeActionData()
+    /**
+     * @return array<string, mixed>
+     */
+    public function treeActionData(): array
     {
         return [
             'context and no categories' => ['default', []],
@@ -325,12 +313,10 @@ final class CategoryAdminControllerTest extends TestCase
         ];
     }
 
-    public function getCsrfProvider()
-    {
-        return $this->csrfProvider;
-    }
-
-    private function getContextMock($id)
+    /**
+     * @return ContextInterface&MockObject
+     */
+    private function getContextMock(?string $id): ContextInterface
     {
         $contextMock = $this->createMock(ContextInterface::class);
         $contextMock->expects(static::any())->method('getId')->willReturn($id);

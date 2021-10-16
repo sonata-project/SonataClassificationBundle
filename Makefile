@@ -77,11 +77,11 @@ build:
 	mkdir $@
 
 test:
-	vendor/bin/simple-phpunit -c phpunit.xml.dist
+	vendor/bin/phpunit -c phpunit.xml.dist
 .PHONY: test
 
 coverage:
-	vendor/bin/simple-phpunit -c phpunit.xml.dist --coverage-clover build/logs/clover.xml
+	vendor/bin/phpunit -c phpunit.xml.dist --coverage-clover build/logs/clover.xml
 .PHONY: coverage
 
 docs:

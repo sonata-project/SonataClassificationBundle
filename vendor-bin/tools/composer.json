@@ -1,0 +1,23 @@
+{
+    "name": "sonata-project/dev-tools",
+    "type": "project",
+    "description": "Development tools that do not conflict the project dependencies",
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.0",
+        "phpspec/prophecy-phpunit": "^2.0",
+        "phpstan/extension-installer": "^1.0",
+        "phpstan/phpstan": "^0.12.84",
+        "phpstan/phpstan-phpunit": "^0.12.16",
+        "phpstan/phpstan-symfony": "^0.12.21",
+        "phpunit/phpunit": "^8.5 || ^9.0",
+        "psalm/plugin-phpunit": "^0.16",
+        "psalm/plugin-symfony": "^3.0",
+        "symfony/phpunit-bridge": "^5.3",
+        "vimeo/psalm": "^4.3.1"
+    },
+    "config": {
+        "platform": {
+            "php": "7.4"
+        }
+    }
+}

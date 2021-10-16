@@ -11,3 +11,5 @@ phpunit.xml
 phpstan.neon
 /.phpunit.result.cache
 /docs/_build/
+!/vendor-bin/tools/composer.lock
+/vendor-bin/tools/vendor/

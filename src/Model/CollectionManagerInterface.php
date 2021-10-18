@@ -16,11 +16,19 @@ namespace Sonata\ClassificationBundle\Model;
 use Sonata\Doctrine\Model\ManagerInterface;
 
 /**
- * @method CollectionInterface|null getBySlug(string $slug, ContextInterface|string|null $context, bool $enabled = true)
- * @method CollectionInterface[]    getByContext(ContextInterface|string $context, bool $enabled = true)
- *
  * @phpstan-extends ManagerInterface<CollectionInterface>
  */
 interface CollectionManagerInterface extends ManagerInterface
 {
+    /**
+     * @param ContextInterface|string|null $context
+     */
+    public function getBySlug(string $slug, $context = null, ?bool $enabled = true): ?CollectionInterface;
+
+    /**
+     * @param ContextInterface|string $context
+     *
+     * @return CollectionInterface[]
+     */
+    public function getByContext($context, ?bool $enabled = true): array;
 }

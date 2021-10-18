@@ -13,9 +13,50 @@ declare(strict_types=1);
 
 namespace Sonata\ClassificationBundle\Document;
 
+use Sonata\ClassificationBundle\Model\CollectionInterface;
 use Sonata\ClassificationBundle\Model\CollectionManagerInterface;
 use Sonata\Doctrine\Document\BaseDocumentManager;
 
 final class CollectionManager extends BaseDocumentManager implements CollectionManagerInterface
 {
+    public function getBySlug(string $slug, $context = null, ?bool $enabled = true): ?CollectionInterface
+    {
+        $queryBuilder = $this->getDocumentManager()
+            ->createQueryBuilder($this->getClass())
+            ->field('slug')
+            ->equals($slug);
+
+        if (null !== $context) {
+            $queryBuilder
+                ->field('context')
+                ->equals($context);
+        }
+        if (null !== $enabled) {
+            $queryBuilder
+                ->field('enabled')
+                ->equals($enabled);
+        }
+
+        $collection = $queryBuilder->getQuery()->execute();
+
+        \assert(null === $collection || $collection instanceof CollectionInterface);
+
+        return $collection;
+    }
+
+    public function getByContext($context, ?bool $enabled = true): array
+    {
+        $queryBuilder = $this->getDocumentManager()
+            ->createQueryBuilder($this->getClass())
+            ->field('context')
+            ->equals($context);
+
+        if (null !== $enabled) {
+            $queryBuilder
+                ->field('enabled')
+                ->equals($enabled);
+        }
+
+        return $queryBuilder->getQuery()->execute();
+    }
 }

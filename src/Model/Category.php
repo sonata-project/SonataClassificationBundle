@@ -161,14 +161,6 @@ abstract class Category implements CategoryInterface
         return $this->position;
     }
 
-    /**
-     * @deprecated only used by the AdminHelper
-     */
-    public function addChildren(CategoryInterface $child): void
-    {
-        $this->addChild($child, true);
-    }
-
     public function addChild(CategoryInterface $child, $nested = false): void
     {
         $this->children[] = $child;

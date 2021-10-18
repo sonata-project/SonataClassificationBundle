@@ -39,10 +39,10 @@
     "conflict": {
         "doctrine/mongodb-odm": "<2.2",
         "doctrine/orm": "<2.7.5",
-        "sonata-project/admin-bundle": "<=4.0.0-rc.2",
+        "sonata-project/admin-bundle": "<4.0.1",
         "sonata-project/block-bundle": "<4.0",
-        "sonata-project/doctrine-mongodb-admin-bundle": "<=4.0.0-rc.1",
-        "sonata-project/doctrine-orm-admin-bundle": "<=4.0.0-rc.2"
+        "sonata-project/doctrine-mongodb-admin-bundle": "<4.0",
+        "sonata-project/doctrine-orm-admin-bundle": "<4.0"
     },
     "require-dev": {
         "doctrine/annotations": "^1.7",
@@ -59,7 +59,7 @@
         "phpunit/phpunit": "^9.5",
         "psalm/plugin-phpunit": "^0.16",
         "psalm/plugin-symfony": "^3.0",
-        "sonata-project/admin-bundle": "^4.0",
+        "sonata-project/admin-bundle": "^4.0.1",
         "sonata-project/block-bundle": "^4.0",
         "sonata-project/doctrine-mongodb-admin-bundle": "^4.0",
         "sonata-project/doctrine-orm-admin-bundle": "^4.0",

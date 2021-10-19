@@ -19,7 +19,7 @@ use Sonata\Doctrine\Document\BaseDocumentManager;
 
 final class TagManager extends BaseDocumentManager implements TagManagerInterface
 {
-    public function getBySlug(string $slug, $context = null, ?bool $enabled = true): ?TagInterface
+    public function getBySlug(string $slug, ?string $context = null, ?bool $enabled = true): ?TagInterface
     {
         $queryBuilder = $this->getDocumentManager()
             ->createQueryBuilder($this->getClass())
@@ -44,7 +44,7 @@ final class TagManager extends BaseDocumentManager implements TagManagerInterfac
         return $tag;
     }
 
-    public function getByContext($context, ?bool $enabled = true): array
+    public function getByContext(string $context, ?bool $enabled = true): array
     {
         $queryBuilder = $this->getDocumentManager()
             ->createQueryBuilder($this->getClass())

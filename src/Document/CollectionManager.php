@@ -19,7 +19,7 @@ use Sonata\Doctrine\Document\BaseDocumentManager;
 
 final class CollectionManager extends BaseDocumentManager implements CollectionManagerInterface
 {
-    public function getBySlug(string $slug, $context = null, ?bool $enabled = true): ?CollectionInterface
+    public function getBySlug(string $slug, ?string $context = null, ?bool $enabled = true): ?CollectionInterface
     {
         $queryBuilder = $this->getDocumentManager()
             ->createQueryBuilder($this->getClass())
@@ -44,7 +44,7 @@ final class CollectionManager extends BaseDocumentManager implements CollectionM
         return $collection;
     }
 
-    public function getByContext($context, ?bool $enabled = true): array
+    public function getByContext(string $context, ?bool $enabled = true): array
     {
         $queryBuilder = $this->getDocumentManager()
             ->createQueryBuilder($this->getClass())

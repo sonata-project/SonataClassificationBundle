@@ -155,7 +155,7 @@ final class CategoryManager extends BaseEntityManager implements CategoryManager
         return $splitCategories;
     }
 
-    public function getBySlug(string $slug, $context = null, ?bool $enabled = true): ?CategoryInterface
+    public function getBySlug(string $slug, ?string $context = null, ?bool $enabled = true): ?CategoryInterface
     {
         $queryBuilder = $this->getRepository()
             ->createQueryBuilder('c')

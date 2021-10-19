@@ -19,7 +19,7 @@ use Sonata\Doctrine\Entity\BaseEntityManager;
 
 final class TagManager extends BaseEntityManager implements TagManagerInterface
 {
-    public function getBySlug(string $slug, $context = null, ?bool $enabled = true): ?TagInterface
+    public function getBySlug(string $slug, ?string $context = null, ?bool $enabled = true): ?TagInterface
     {
         $queryBuilder = $this->getRepository()
             ->createQueryBuilder('t')
@@ -36,7 +36,7 @@ final class TagManager extends BaseEntityManager implements TagManagerInterface
         return $queryBuilder->getQuery()->getOneOrNullResult();
     }
 
-    public function getByContext($context, ?bool $enabled = true): array
+    public function getByContext(string $context, ?bool $enabled = true): array
     {
         $queryBuilder = $this->getRepository()
             ->createQueryBuilder('t')

@@ -147,7 +147,7 @@ final class CategoryManager extends BaseDocumentManager implements CategoryManag
         return $splitCategories;
     }
 
-    public function getBySlug(string $slug, $context = null, ?bool $enabled = true): ?CategoryInterface
+    public function getBySlug(string $slug, ?string $context = null, ?bool $enabled = true): ?CategoryInterface
     {
         $queryBuilder = $this->getDocumentManager()
             ->createQueryBuilder($this->getClass())

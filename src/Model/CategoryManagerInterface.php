@@ -68,10 +68,5 @@ interface CategoryManagerInterface extends ManagerInterface
      */
     public function getRootCategoriesSplitByContexts($loadChildren = true);
 
-    /**
-     * @param ContextInterface|string|null $context
-     *
-     * @return CategoryInterface|null
-     */
-    public function getBySlug(string $slug, $context = null, ?bool $enabled = true);
+    public function getBySlug(string $slug, ?string $context = null, ?bool $enabled = true): ?CategoryInterface;
 }

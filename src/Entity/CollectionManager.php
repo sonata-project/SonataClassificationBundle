@@ -19,7 +19,7 @@ use Sonata\Doctrine\Entity\BaseEntityManager;
 
 final class CollectionManager extends BaseEntityManager implements CollectionManagerInterface
 {
-    public function getBySlug(string $slug, $context = null, ?bool $enabled = true): ?CollectionInterface
+    public function getBySlug(string $slug, ?string $context = null, ?bool $enabled = true): ?CollectionInterface
     {
         $queryBuilder = $this->getRepository()
             ->createQueryBuilder('c')
@@ -36,7 +36,7 @@ final class CollectionManager extends BaseEntityManager implements CollectionMan
         return $queryBuilder->getQuery()->getOneOrNullResult();
     }
 
-    public function getByContext($context, ?bool $enabled = true): array
+    public function getByContext(string $context, ?bool $enabled = true): array
     {
         $queryBuilder = $this->getRepository()
             ->createQueryBuilder('c')

@@ -14,8 +14,9 @@ declare(strict_types=1);
 namespace Sonata\ClassificationBundle\Block\Service;
 
 use Sonata\AdminBundle\Admin\AdminInterface;
-use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\BlockBundle\Block\BlockContextInterface;
+use Sonata\BlockBundle\Block\Service\EditableBlockService;
+use Sonata\BlockBundle\Form\Mapper\FormMapper;
 use Sonata\BlockBundle\Meta\Metadata;
 use Sonata\BlockBundle\Meta\MetadataInterface;
 use Sonata\BlockBundle\Model\BlockInterface;
@@ -23,6 +24,7 @@ use Sonata\ClassificationBundle\Model\ContextManagerInterface;
 use Sonata\ClassificationBundle\Model\TagInterface;
 use Sonata\ClassificationBundle\Model\TagManagerInterface;
 use Sonata\Form\Type\ImmutableArrayType;
+use Sonata\Form\Validator\ErrorElement;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Response;
@@ -32,7 +34,7 @@ use Twig\Environment;
 /**
  * @author Christian Gripp <mail@core23.de>
  */
-abstract class AbstractTagsBlockService extends AbstractClassificationBlockService
+abstract class AbstractTagsBlockService extends AbstractClassificationBlockService implements EditableBlockService
 {
     /**
      * @var TagManagerInterface
@@ -73,13 +75,18 @@ abstract class AbstractTagsBlockService extends AbstractClassificationBlockServi
         ], $response);
     }
 
-    public function buildEditForm(FormMapper $formMapper, BlockInterface $block): void
+    public function configureCreateForm(FormMapper $form, BlockInterface $block): void
+    {
+        $this->configureEditForm($form, $block);
+    }
+
+    public function configureEditForm(FormMapper $form, BlockInterface $block): void
     {
         if (null === $this->tagAdmin) {
             throw new \BadMethodCallException('You need the sonata-project/admin-bundle library to edit this block.');
         }
 
-        $adminField = $this->getFormAdminType($formMapper, $this->tagAdmin, 'tagId', 'tag', [
+        $adminField = $this->getFormAdminType($form, $this->tagAdmin, 'tagId', 'tag', [
             'label' => 'form.label_tag',
         ], [
             'translation_domain' => 'SonataClassificationBundle',
@@ -90,7 +97,7 @@ abstract class AbstractTagsBlockService extends AbstractClassificationBlockServi
             ],
         ]);
 
-        $formMapper->add(
+        $form->add(
             'settings',
             ImmutableArrayType::class,
             [
@@ -121,6 +128,10 @@ abstract class AbstractTagsBlockService extends AbstractClassificationBlockServi
                 'translation_domain' => 'SonataClassificationBundle',
             ]
         );
+    }
+
+    public function validate(ErrorElement $errorElement, BlockInterface $block): void
+    {
     }
 
     public function configureSettings(OptionsResolver $resolver): void

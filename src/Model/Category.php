@@ -173,7 +173,7 @@ abstract class Category implements CategoryInterface
     {
         $this->children[] = $child;
 
-        if ($this->getContext()) {
+        if (null !== $this->getContext()) {
             $child->setContext($this->getContext());
         }
 
@@ -232,12 +232,12 @@ abstract class Category implements CategoryInterface
         return $this->parent;
     }
 
-    public function setContext(ContextInterface $context): void
+    public function setContext(?ContextInterface $context): void
     {
         $this->context = $context;
     }
 
-    public function getContext()
+    public function getContext(): ?ContextInterface
     {
         return $this->context;
     }

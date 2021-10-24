@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sonata\ClassificationBundle\Model;
 
-interface CollectionInterface
+interface CollectionInterface extends ContextAwareInterface
 {
     /**
      * @return string
@@ -78,11 +78,4 @@ interface CollectionInterface
      * @return \DateTime|null
      */
     public function getUpdatedAt();
-
-    public function setContext(ContextInterface $context);
-
-    /**
-     * @return ContextInterface|null
-     */
-    public function getContext();
 }

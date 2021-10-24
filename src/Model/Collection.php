@@ -128,12 +128,12 @@ abstract class Collection implements CollectionInterface
         return $this->updatedAt;
     }
 
-    public function setContext(ContextInterface $context): void
+    public function setContext(?ContextInterface $context): void
     {
         $this->context = $context;
     }
 
-    public function getContext()
+    public function getContext(): ?ContextInterface
     {
         return $this->context;
     }

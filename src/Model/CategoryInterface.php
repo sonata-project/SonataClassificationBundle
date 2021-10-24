@@ -15,7 +15,7 @@ namespace Sonata\ClassificationBundle\Model;
 
 use Doctrine\Common\Collections\Collection;
 
-interface CategoryInterface
+interface CategoryInterface extends ContextAwareInterface
 {
     public function __toString(): string;
 
@@ -103,11 +103,4 @@ interface CategoryInterface
      * @return self|null
      */
     public function getParent();
-
-    public function setContext(ContextInterface $context);
-
-    /**
-     * @return ContextInterface|null
-     */
-    public function getContext();
 }

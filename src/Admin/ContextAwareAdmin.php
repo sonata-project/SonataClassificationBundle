@@ -15,9 +15,14 @@ namespace Sonata\ClassificationBundle\Admin;
 
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
+use Sonata\ClassificationBundle\Model\ContextAwareInterface;
 use Sonata\ClassificationBundle\Model\ContextInterface;
 use Sonata\ClassificationBundle\Model\ContextManagerInterface;
 
+/**
+ * @phpstan-template T of ContextAwareInterface
+ * @phpstan-extends AbstractAdmin<T>
+ */
 abstract class ContextAwareAdmin extends AbstractAdmin
 {
     /**

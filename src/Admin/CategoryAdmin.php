@@ -18,11 +18,15 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollectionInterface;
 use Sonata\ClassificationBundle\Form\Type\CategorySelectorType;
+use Sonata\ClassificationBundle\Model\CategoryInterface;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Validator\Constraints\Valid;
 
+/**
+ * @phpstan-extends ContextAwareAdmin<CategoryInterface>
+ */
 final class CategoryAdmin extends ContextAwareAdmin
 {
     protected $classnameLabel = 'Category';

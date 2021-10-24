@@ -17,6 +17,7 @@ use Sonata\AdminBundle\Admin\AdminInterface;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Form\Type\ModelListType;
 use Sonata\BlockBundle\Block\Service\AbstractBlockService;
+use Sonata\ClassificationBundle\Model\ContextAwareInterface;
 use Sonata\ClassificationBundle\Model\ContextInterface;
 use Sonata\ClassificationBundle\Model\ContextManagerInterface;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -44,6 +45,8 @@ abstract class AbstractClassificationBlockService extends AbstractBlockService
      * @param string $field
      * @param array  $fieldOptions
      * @param array  $adminOptions
+     *
+     * @phpstan-param AdminInterface<ContextAwareInterface> $admin
      */
     final protected function getFormAdminType(FormMapper $formMapper, AdminInterface $admin, $formField, $field, $fieldOptions = [], $adminOptions = []): FormBuilderInterface
     {

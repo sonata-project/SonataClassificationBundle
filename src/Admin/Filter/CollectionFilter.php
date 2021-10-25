@@ -80,12 +80,12 @@ final class CollectionFilter extends Filter
      */
     private function getChoices(): array
     {
-        $context = $this->getOption('context');
+        $contextId = $this->getOption('context');
 
-        if (null === $context) {
+        if (null === $contextId) {
             $collections = $this->collectionManager->findAll();
         } else {
-            $collections = $this->collectionManager->getByContext($context);
+            $collections = $this->collectionManager->getByContext($contextId);
         }
 
         $choices = [];

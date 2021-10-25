@@ -72,8 +72,8 @@ final class CategoryAdminController extends Controller
     {
         $categoryManager = $this->get('sonata.classification.manager.category');
         $currentContext = false;
-        if ($context = $request->get('context')) {
-            $currentContext = $this->get('sonata.classification.manager.context')->find($context);
+        if ($contextId = $request->get('context')) {
+            $currentContext = $this->get('sonata.classification.manager.context')->find($contextId);
         }
 
         // all root categories.

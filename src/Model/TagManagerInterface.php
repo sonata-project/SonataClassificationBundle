@@ -20,10 +20,10 @@ use Sonata\Doctrine\Model\ManagerInterface;
  */
 interface TagManagerInterface extends ManagerInterface
 {
-    public function getBySlug(string $slug, ?string $context = null, ?bool $enabled = true): ?TagInterface;
+    public function getBySlug(string $slug, ?string $contextId = null, ?bool $enabled = true): ?TagInterface;
 
     /**
      * @return TagInterface[]
      */
-    public function getByContext(string $context, ?bool $enabled = true): array;
+    public function getByContext(string $contextId, ?bool $enabled = true): array;
 }

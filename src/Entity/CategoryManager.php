@@ -155,15 +155,15 @@ final class CategoryManager extends BaseEntityManager implements CategoryManager
         return $splitCategories;
     }
 
-    public function getBySlug(string $slug, ?string $context = null, ?bool $enabled = true): ?CategoryInterface
+    public function getBySlug(string $slug, ?string $contextId = null, ?bool $enabled = true): ?CategoryInterface
     {
         $queryBuilder = $this->getRepository()
             ->createQueryBuilder('c')
             ->select('c')
             ->andWhere('c.slug = :slug')->setParameter('slug', $slug);
 
-        if (null !== $context) {
-            $queryBuilder->andWhere('c.context = :context')->setParameter('context', $context, Types::OBJECT);
+        if (null !== $contextId) {
+            $queryBuilder->andWhere('c.context = :context')->setParameter('context', $contextId, Types::OBJECT);
         }
         if (null !== $enabled) {
             $queryBuilder->andWhere('c.enabled = :enabled')->setParameter('enabled', $enabled);

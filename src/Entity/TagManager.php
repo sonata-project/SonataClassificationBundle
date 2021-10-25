@@ -19,15 +19,15 @@ use Sonata\Doctrine\Entity\BaseEntityManager;
 
 final class TagManager extends BaseEntityManager implements TagManagerInterface
 {
-    public function getBySlug(string $slug, ?string $context = null, ?bool $enabled = true): ?TagInterface
+    public function getBySlug(string $slug, ?string $contextId = null, ?bool $enabled = true): ?TagInterface
     {
         $queryBuilder = $this->getRepository()
             ->createQueryBuilder('t')
             ->select('t')
             ->andWhere('t.slug = :slug')->setParameter('slug', $slug);
 
-        if (null !== $context) {
-            $queryBuilder->andWhere('t.context = :context')->setParameter('context', $context);
+        if (null !== $contextId) {
+            $queryBuilder->andWhere('t.context = :context')->setParameter('context', $contextId);
         }
         if (null !== $enabled) {
             $queryBuilder->andWhere('t.enabled = :enabled')->setParameter('enabled', $enabled);
@@ -36,12 +36,12 @@ final class TagManager extends BaseEntityManager implements TagManagerInterface
         return $queryBuilder->getQuery()->getOneOrNullResult();
     }
 
-    public function getByContext(string $context, ?bool $enabled = true): array
+    public function getByContext(string $contextId, ?bool $enabled = true): array
     {
         $queryBuilder = $this->getRepository()
             ->createQueryBuilder('t')
             ->select('t')
-            ->andWhere('t.context = :context')->setParameter('context', $context);
+            ->andWhere('t.context = :context')->setParameter('context', $contextId);
 
         if (null !== $enabled) {
             $queryBuilder->andWhere('t.enabled = :enabled')->setParameter('enabled', $enabled);

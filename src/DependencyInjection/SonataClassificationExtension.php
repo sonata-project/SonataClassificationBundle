@@ -61,7 +61,7 @@ final class SonataClassificationExtension extends Extension
     /**
      * @param array $config
      */
-    public function configureClass($config, ContainerBuilder $container): void
+    private function configureClass($config, ContainerBuilder $container): void
     {
         // admin configuration
         $container->setParameter('sonata.classification.admin.tag.entity', $config['class']['tag']);
@@ -79,7 +79,7 @@ final class SonataClassificationExtension extends Extension
     /**
      * @param array $config
      */
-    public function configureAdmin($config, ContainerBuilder $container): void
+    private function configureAdmin($config, ContainerBuilder $container): void
     {
         $container->setParameter('sonata.classification.admin.category.class', $config['admin']['category']['class']);
         $container->setParameter('sonata.classification.admin.category.controller', $config['admin']['category']['controller']);

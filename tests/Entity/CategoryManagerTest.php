@@ -123,12 +123,15 @@ class CategoryManagerTest extends TestCase
         }, [$categoryFoo, $categoryBar]);
 
         $categories = $categoryManager->getRootCategoriesSplitByContexts(false);
-        static::assertNotNull($contextFoo->getId());
-        static::assertArrayHasKey($contextFoo->getId(), $categories);
-        static::assertNotNull($contextBar->getId());
-        static::assertArrayHasKey($contextBar->getId(), $categories);
-        static::assertContains($categoryFoo, $categories[$contextFoo->getId()]);
-        static::assertContains($categoryBar, $categories[$contextBar->getId()]);
+
+        $fooId = $contextFoo->getId();
+        static::assertNotNull($fooId);
+        static::assertArrayHasKey($fooId, $categories);
+        $barId = $contextBar->getId();
+        static::assertNotNull($barId);
+        static::assertArrayHasKey($barId, $categories);
+        static::assertContains($categoryFoo, $categories[$fooId]);
+        static::assertContains($categoryBar, $categories[$barId]);
     }
 
     public function testGetBySlug(): void

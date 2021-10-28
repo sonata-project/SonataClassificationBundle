@@ -35,6 +35,7 @@ use Twig\Environment;
  * @author Christian Gripp <mail@core23.de>
  *
  * @phpstan-extends AbstractClassificationBlockService<CollectionInterface>
+ * @phpstan-implements EditableBlockService<\Sonata\AdminBundle\Form\FormMapper<CollectionInterface>>
  */
 abstract class AbstractCollectionsBlockService extends AbstractClassificationBlockService implements EditableBlockService
 {
@@ -157,7 +158,7 @@ abstract class AbstractCollectionsBlockService extends AbstractClassificationBlo
     public function load(BlockInterface $block): void
     {
         if (is_numeric($block->getSetting('collectionId'))) {
-            $block->setSetting('collectionId', $this->getCollection($block->getSetting('collectionId')));
+            $block->setSetting('collectionId', $this->getCollection((int) $block->getSetting('collectionId')));
         }
     }
 
@@ -203,7 +204,9 @@ abstract class AbstractCollectionsBlockService extends AbstractClassificationBlo
     {
         $block->setSetting(
             'collectionId',
-            \is_object($block->getSetting('collectionId')) ? $block->getSetting('collectionId')->getId() : null
+            $block->getSetting('collectionId') instanceof CollectionInterface
+                ? $block->getSetting('collectionId')->getId()
+                : null
         );
     }
 }

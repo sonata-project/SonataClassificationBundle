@@ -51,6 +51,7 @@ final class FixContextCommand extends Command
 
     public function configure(): void
     {
+        \assert(null !== static::$defaultDescription);
         $this->setDescription(static::$defaultDescription);
     }
 
@@ -81,7 +82,10 @@ final class FixContextCommand extends Command
                 continue;
             }
 
-            $output->writeln(sprintf(' > attach default context to tag: %s (%s)', $tag->getSlug(), $tag->getId()));
+            $tagId = $tag->getId();
+            \assert(null !== $tagId);
+
+            $output->writeln(sprintf(' > attach default context to tag: %s (%s)', $tag->getSlug() ?? '', $tagId));
             $tag->setContext($defaultContext);
 
             $this->tagManager->save($tag);
@@ -94,7 +98,10 @@ final class FixContextCommand extends Command
                 continue;
             }
 
-            $output->writeln(sprintf(' > attach default context to collection: %s (%s)', $collection->getSlug(), $collection->getId()));
+            $collectionId = $collection->getId();
+            \assert(null !== $collectionId);
+
+            $output->writeln(sprintf(' > attach default context to collection: %s (%s)', $collection->getSlug() ?? '', $collectionId));
             $collection->setContext($defaultContext);
 
             $this->collectionManager->save($collection);
@@ -107,7 +114,10 @@ final class FixContextCommand extends Command
                 continue;
             }
 
-            $output->writeln(sprintf(' > attach default context to collection: %s (%s)', $category->getSlug(), $category->getId()));
+            $categoryId = $category->getId();
+            \assert(null !== $categoryId);
+
+            $output->writeln(sprintf(' > attach default context to collection: %s (%s)', $category->getSlug() ?? '', $categoryId));
             $category->setContext($defaultContext);
 
             $this->categoryManager->save($category);

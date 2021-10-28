@@ -74,9 +74,16 @@ final class CategoryAdminController extends Controller
     public function treeAction(Request $request): Response
     {
         $categoryManager = $this->get('sonata.classification.manager.category');
-        $currentContext = false;
-        if ($contextId = $request->get('context')) {
-            $currentContext = $this->get('sonata.classification.manager.context')->find($contextId);
+        \assert($categoryManager instanceof CategoryManagerInterface);
+
+        $currentContext = null;
+
+        $contextId = $request->get('context');
+        if ($contextId) {
+            $contextManager = $this->get('sonata.classification.manager.context');
+            \assert($contextManager instanceof ContextManagerInterface);
+
+            $currentContext = $contextManager->find($contextId);
         }
 
         // all root categories.
@@ -85,17 +92,19 @@ final class CategoryAdminController extends Controller
         // root categories inside the current context
         $currentCategories = [];
 
-        if (!$currentContext && !empty($rootCategoriesSplitByContexts)) {
+        if (null === $currentContext && [] !== $rootCategoriesSplitByContexts) {
             $currentCategories = current($rootCategoriesSplitByContexts);
+            \assert([] !== $currentCategories);
             $currentContext = current($currentCategories)->getContext();
-        } else {
+        } elseif (null !== $currentContext) {
             foreach ($rootCategoriesSplitByContexts as $contextId => $contextCategories) {
                 if ($currentContext->getId() !== $contextId) {
                     continue;
                 }
 
                 foreach ($contextCategories as $category) {
-                    if ($currentContext->getId() !== $category->getContext()->getId()) {
+                    $catContext = $category->getContext();
+                    if (null === $catContext || $currentContext->getId() !== $catContext->getId()) {
                         continue;
                     }
 

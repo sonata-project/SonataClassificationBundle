@@ -76,9 +76,13 @@ abstract class AbstractClassificationBlockService extends AbstractBlockService
     final protected function getContextChoices(): array
     {
         $contextChoices = [];
+
         /* @var ContextInterface $context */
         foreach ($this->contextManager->findAll() as $context) {
-            $contextChoices[(string) $context->getId()] = (string) $context->getName();
+            $contextId = $context->getId();
+            \assert(null !== $contextId);
+
+            $contextChoices[$contextId] = $context->getName() ?? '';
         }
 
         return $contextChoices;

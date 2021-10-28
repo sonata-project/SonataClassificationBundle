@@ -35,6 +35,7 @@ use Twig\Environment;
  * @author Christian Gripp <mail@core23.de>
  *
  * @phpstan-extends AbstractClassificationBlockService<TagInterface>
+ * @phpstan-implements EditableBlockService<\Sonata\AdminBundle\Form\FormMapper<TagInterface>>
  */
 abstract class AbstractTagsBlockService extends AbstractClassificationBlockService implements EditableBlockService
 {
@@ -157,7 +158,7 @@ abstract class AbstractTagsBlockService extends AbstractClassificationBlockServi
     public function load(BlockInterface $block): void
     {
         if (is_numeric($block->getSetting('tagId'))) {
-            $block->setSetting('tagId', $this->getTag($block->getSetting('tagId')));
+            $block->setSetting('tagId', $this->getTag((int) $block->getSetting('tagId')));
         }
     }
 
@@ -203,7 +204,9 @@ abstract class AbstractTagsBlockService extends AbstractClassificationBlockServi
     {
         $block->setSetting(
             'tagId',
-            \is_object($block->getSetting('tagId')) ? $block->getSetting('tagId')->getId() : null
+            $block->getSetting('tagId') instanceof TagInterface
+                ? $block->getSetting('tagId')->getId()
+                : null
         );
     }
 }

@@ -73,7 +73,7 @@ final class CollectionFilter extends Filter
     }
 
     /**
-     * @return array<string, int>
+     * @return array<string, int|string>
      */
     private function getChoices(): array
     {
@@ -88,7 +88,10 @@ final class CollectionFilter extends Filter
         $choices = [];
 
         foreach ($collections as $collection) {
-            $choices[(string) $collection] = $collection->getId();
+            $id = $collection->getId();
+            \assert(null !== $id);
+
+            $choices[(string) $collection] = $id;
         }
 
         return $choices;

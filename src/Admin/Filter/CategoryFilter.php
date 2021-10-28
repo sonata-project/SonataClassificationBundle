@@ -93,7 +93,7 @@ final class CategoryFilter extends Filter
 
             \assert(null !== $catContext);
 
-            $choices[sprintf('%s (%s)', $category->getName(), $catContext->getId())] = $category->getId();
+            $choices[sprintf('%s (%s)', $category->getName() ?? '', $catContext->getId() ?? '')] = $category->getId();
 
             $this->visitChild($category, $choices);
         }

@@ -35,6 +35,7 @@ use Twig\Environment;
  * @author Christian Gripp <mail@core23.de>
  *
  * @phpstan-extends AbstractClassificationBlockService<CategoryInterface>
+ * @phpstan-implements EditableBlockService<\Sonata\AdminBundle\Form\FormMapper<CategoryInterface>>
  */
 abstract class AbstractCategoriesBlockService extends AbstractClassificationBlockService implements EditableBlockService
 {
@@ -156,7 +157,7 @@ abstract class AbstractCategoriesBlockService extends AbstractClassificationBloc
     public function load(BlockInterface $block): void
     {
         if (is_numeric($block->getSetting('categoryId'))) {
-            $block->setSetting('categoryId', $this->getCategory($block->getSetting('categoryId')));
+            $block->setSetting('categoryId', $this->getCategory((int) $block->getSetting('categoryId')));
         }
     }
 
@@ -202,7 +203,9 @@ abstract class AbstractCategoriesBlockService extends AbstractClassificationBloc
     {
         $block->setSetting(
             'categoryId',
-            \is_object($block->getSetting('categoryId')) ? $block->getSetting('categoryId')->getId() : null
+            $block->getSetting('categoryId') instanceof CategoryInterface
+                ? $block->getSetting('categoryId')->getId()
+                : null
         );
     }
 }

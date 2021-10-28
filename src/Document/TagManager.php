@@ -60,9 +60,8 @@ final class TagManager extends BaseDocumentManager implements TagManagerInterfac
                 ->equals($enabled);
         }
 
+        /** @var TagInterface[] $result */
         $result = $queryBuilder->getQuery()->execute();
-
-        \assert(null !== $result);
 
         return $result;
     }

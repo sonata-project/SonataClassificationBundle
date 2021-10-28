@@ -64,7 +64,7 @@ final class CategoryAdminControllerTest extends TestCase
      */
     private $csrfProvider;
 
-    private ?CategoryAdminController $controller = null;
+    private CategoryAdminController $controller;
 
     /**
      * @var CategoryManagerInterface&MockObject
@@ -160,7 +160,7 @@ final class CategoryAdminControllerTest extends TestCase
 
     protected function tearDown(): void
     {
-        $this->controller = null;
+        unset($this->controller);
     }
 
     public function testListActionWithoutFilter(): void
@@ -277,11 +277,12 @@ final class CategoryAdminControllerTest extends TestCase
         foreach ($categories as $category) {
             $categoryMock = $this->getMockForAbstractClass(Category::class);
             $categoryMock->setName($category[0]);
-            if ($category[1]) {
-                $categoryMock->setContext($this->getContextMock($category[1]));
-            }
+
+            $contextId = $category[1];
+            $contextMock = $this->getContextMock($contextId);
+            $categoryMock->setContext($contextMock);
             $categoryMock->setEnabled(true);
-            $categoriesMock[$categoryMock->getContext()->getId()][] = $categoryMock;
+            $categoriesMock[$contextId][] = $categoryMock;
         }
 
         $this->categoryManager->expects(static::any())
@@ -316,7 +317,7 @@ final class CategoryAdminControllerTest extends TestCase
     /**
      * @return ContextInterface&MockObject
      */
-    private function getContextMock(?string $id): ContextInterface
+    private function getContextMock(string $id): ContextInterface
     {
         $contextMock = $this->createMock(ContextInterface::class);
         $contextMock->expects(static::any())->method('getId')->willReturn($id);

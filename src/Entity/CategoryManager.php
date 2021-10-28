@@ -84,27 +84,35 @@ final class CategoryManager extends BaseEntityManager implements CategoryManager
 
     public function getRootCategoryWithChildren(CategoryInterface $category): CategoryInterface
     {
-        if (null === $category->getContext()) {
+        $context = $category->getContext();
+        if (null === $context) {
             throw new \InvalidArgumentException(sprintf(
                 'Context of category "%s" cannot be null.',
-                $category->getId()
+                $category->getId() ?? ''
             ));
         }
+
+        $contextId = $context->getId();
+        if (null === $contextId) {
+            throw new \InvalidArgumentException(sprintf(
+                'Context of category "%s" must have an not null identifier.',
+                $category->getId() ?? ''
+            ));
+        }
+
         if (null !== $category->getParent()) {
             throw new \InvalidArgumentException('Method can be called only for root categories.');
         }
 
-        $context = $category->getContext();
-
         $this->loadCategories($context);
 
-        foreach ($this->categories[$context->getId()] as $contextRootCategory) {
+        foreach ($this->categories[$contextId] as $contextRootCategory) {
             if ($category->getId() === $contextRootCategory->getId()) {
                 return $contextRootCategory;
             }
         }
 
-        throw new \InvalidArgumentException(sprintf('Category "%s" does not exist.', $category->getId()));
+        throw new \InvalidArgumentException(sprintf('Category "%s" does not exist.', $category->getId() ?? ''));
     }
 
     public function getRootCategoriesForContext(?ContextInterface $context = null): array
@@ -113,9 +121,17 @@ final class CategoryManager extends BaseEntityManager implements CategoryManager
             $context = $this->getContext();
         }
 
+        $contextId = $context->getId();
+        if (null === $contextId) {
+            throw new \InvalidArgumentException(sprintf(
+                'Context "%s" must have an not null identifier.',
+                $context->getName() ?? ''
+            ));
+        }
+
         $this->loadCategories($context);
 
-        return $this->categories[$context->getId()];
+        return $this->categories[$contextId];
     }
 
     public function getAllRootCategories(bool $loadChildren = true): array
@@ -181,7 +197,8 @@ final class CategoryManager extends BaseEntityManager implements CategoryManager
      */
     protected function loadCategories(ContextInterface $context): void
     {
-        if (\array_key_exists($context->getId(), $this->categories)) {
+        $contextId = $context->getId();
+        if (null === $contextId || \array_key_exists($contextId, $this->categories)) {
             return;
         }
 
@@ -189,7 +206,7 @@ final class CategoryManager extends BaseEntityManager implements CategoryManager
             ->createQueryBuilder('c')
             ->where('c.context = :context')
             ->orderBy('c.parent')
-            ->setParameter('context', $context->getId())
+            ->setParameter('context', $contextId)
             ->getQuery()
             ->getResult();
 
@@ -212,7 +229,7 @@ final class CategoryManager extends BaseEntityManager implements CategoryManager
                 $rootCategories[] = $category;
             }
 
-            $this->categories[(string) $context->getId()][$category->getId()] = $category;
+            $this->categories[$contextId][$category->getId()] = $category;
 
             $parent = $category->getParent();
 
@@ -223,7 +240,7 @@ final class CategoryManager extends BaseEntityManager implements CategoryManager
             }
         }
 
-        $this->categories[(string) $context->getId()] = $rootCategories;
+        $this->categories[$contextId] = $rootCategories;
     }
 
     private function getContext(): ContextInterface

@@ -14,9 +14,9 @@ declare(strict_types=1);
 namespace Sonata\ClassificationBundle\Block\Service;
 
 use Sonata\AdminBundle\Admin\AdminInterface;
-use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Form\Type\ModelListType;
 use Sonata\BlockBundle\Block\Service\AbstractBlockService;
+use Sonata\BlockBundle\Form\Mapper\FormMapper;
 use Sonata\ClassificationBundle\Model\ContextAwareInterface;
 use Sonata\ClassificationBundle\Model\ContextInterface;
 use Sonata\ClassificationBundle\Model\ContextManagerInterface;
@@ -57,7 +57,6 @@ abstract class AbstractClassificationBlockService extends AbstractBlockService
 
         $fieldDescription = $admin->createFieldDescription($field, $adminOptions);
         $fieldDescription->setAssociationAdmin($admin);
-        $fieldDescription->setAdmin($formMapper->getAdmin());
 
         $fieldOptions = array_merge([
             'sonata_field_description' => $fieldDescription,

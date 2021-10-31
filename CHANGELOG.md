@@ -2,6 +2,26 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [4.0.0-alpha1](https://github.com/sonata-project/SonataClassificationBundle/compare/3.17.0...4.0.0-alpha1) - 2021-11-03
+### Added
+- [[#752](https://github.com/sonata-project/SonataClassificationBundle/pull/752)] Make blocks editable ([@core23](https://github.com/core23))
+- [[#753](https://github.com/sonata-project/SonataClassificationBundle/pull/753)] `ContextAwareInterface` ([@core23](https://github.com/core23))
+
+### Changed
+- [[#754](https://github.com/sonata-project/SonataClassificationBundle/pull/754)] Added type hints to manager methods ([@core23](https://github.com/core23))
+- [[#745](https://github.com/sonata-project/SonataClassificationBundle/pull/745)] Added type hints to methods and properties ([@core23](https://github.com/core23))
+- [[#745](https://github.com/sonata-project/SonataClassificationBundle/pull/745)] Reduce visibility of config methods ([@core23](https://github.com/core23))
+
+### Fixed
+- [[#757](https://github.com/sonata-project/SonataClassificationBundle/pull/757)] Removed call to unknown `FormMapper::getAdmin` method ([@core23](https://github.com/core23))
+
+### Removed
+- [[#763](https://github.com/sonata-project/SonataClassificationBundle/pull/763)] Support for Symfony 5.2 ([@jordisala1991](https://github.com/jordisala1991))
+- [[#763](https://github.com/sonata-project/SonataClassificationBundle/pull/763)] Support for `doctrine/persistence` < 2 ([@jordisala1991](https://github.com/jordisala1991))
+- [[#763](https://github.com/sonata-project/SonataClassificationBundle/pull/763)] Support for `cocur/slugify` < 4.0 ([@jordisala1991](https://github.com/jordisala1991))
+- [[#745](https://github.com/sonata-project/SonataClassificationBundle/pull/745)] `Sonata\ClassificationBundle\Form\FormHelper` ([@core23](https://github.com/core23))
+- [[#744](https://github.com/sonata-project/SonataClassificationBundle/pull/744)] Support for PHP 7.3 ([@core23](https://github.com/core23))
+
 ## [3.17.0](https://github.com/sonata-project/SonataClassificationBundle/compare/3.16.0...3.17.0) - 2021-09-21
 ### Added
 - [[#721](https://github.com/sonata-project/SonataClassificationBundle/pull/721)] Missing methods in interfaces (through the `@method` annotation). ([@phansys](https://github.com/phansys))

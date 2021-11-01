@@ -49,7 +49,7 @@ final class CategoryTest extends TestCase
         static::assertSame(2, $category->getPosition());
         static::assertSame($context, $category->getContext());
 
-        $category->setName('');
+        $category->setName(null);
         static::assertSame('n-a', $category->getSlug());
         static::assertSame('n/a', $category->__toString());
 

@@ -312,8 +312,6 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
 
             $parent = $category->getParent();
 
-            $category->disableChildrenLazyLoading();
-
             if ($parent) {
                 $parent->addChild($category);
             }

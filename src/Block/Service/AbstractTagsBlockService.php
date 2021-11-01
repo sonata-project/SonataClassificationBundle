@@ -157,7 +157,7 @@ abstract class AbstractTagsBlockService extends AbstractClassificationBlockServi
     public function load(BlockInterface $block): void
     {
         $tagId = $block->getSetting('tagId');
-        if (is_int($tagId) || is_string($tagId)) {
+        if (\is_int($tagId) || \is_string($tagId)) {
             $block->setSetting('tagId', $this->getTag($tagId));
         }
     }

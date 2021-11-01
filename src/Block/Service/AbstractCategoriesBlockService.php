@@ -35,7 +35,6 @@ use Twig\Environment;
  * @author Christian Gripp <mail@core23.de>
  *
  * @phpstan-extends AbstractClassificationBlockService<CategoryInterface>
- * @phpstan-implements EditableBlockService<\Sonata\AdminBundle\Form\FormMapper<CategoryInterface>>
  */
 abstract class AbstractCategoriesBlockService extends AbstractClassificationBlockService implements EditableBlockService
 {

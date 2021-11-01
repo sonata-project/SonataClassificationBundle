@@ -20,8 +20,6 @@ use Sonata\ClassificationBundle\Model\CategoryManagerInterface;
 use Sonata\ClassificationBundle\Model\ContextInterface;
 use Sonata\ClassificationBundle\Model\ContextManagerInterface;
 use Sonata\Doctrine\Entity\BaseEntityManager;
-use Sonata\DoctrineORMAdminBundle\Datagrid\Pager;
-use Sonata\DoctrineORMAdminBundle\Datagrid\ProxyQuery;
 
 /**
  * @phpstan-extends BaseEntityManager<CategoryInterface>
@@ -44,42 +42,6 @@ final class CategoryManager extends BaseEntityManager implements CategoryManager
 
         $this->contextManager = $contextManager;
         $this->categories = [];
-    }
-
-    /**
-     * Returns a pager to iterate over the root category.
-     */
-    public function getRootCategoriesPager(int $page = 1, int $limit = 25, array $criteria = []): Pager
-    {
-        $page = 0 === $page ? 1 : $page;
-
-        $queryBuilder = $this->getEntityManager()->createQueryBuilder()
-            ->select('c')
-            ->from($this->class, 'c')
-            ->andWhere('c.parent IS NULL');
-
-        $pager = new Pager($limit);
-        $pager->setQuery(new ProxyQuery($queryBuilder));
-        $pager->setPage($page);
-        $pager->init();
-
-        return $pager;
-    }
-
-    public function getSubCategoriesPager($categoryId, int $page = 1, int $limit = 25, array $criteria = []): Pager
-    {
-        $queryBuilder = $this->getEntityManager()->createQueryBuilder()
-            ->select('c')
-            ->from($this->class, 'c')
-            ->where('c.parent = :categoryId')
-            ->setParameter('categoryId', $categoryId);
-
-        $pager = new Pager($limit);
-        $pager->setQuery(new ProxyQuery($queryBuilder));
-        $pager->setPage($page);
-        $pager->init();
-
-        return $pager;
     }
 
     public function getRootCategoryWithChildren(CategoryInterface $category): CategoryInterface
@@ -202,6 +164,7 @@ final class CategoryManager extends BaseEntityManager implements CategoryManager
             return;
         }
 
+        /** @var CategoryInterface[] $categories */
         $categories = $this->getRepository()
             ->createQueryBuilder('c')
             ->where('c.context = :context')
@@ -232,10 +195,7 @@ final class CategoryManager extends BaseEntityManager implements CategoryManager
             $this->categories[$contextId][$category->getId()] = $category;
 
             $parent = $category->getParent();
-
-            $category->disableChildrenLazyLoading();
-
-            if ($parent) {
+            if (null !== $parent) {
                 $parent->addChild($category);
             }
         }

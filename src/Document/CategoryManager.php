@@ -19,8 +19,6 @@ use Sonata\ClassificationBundle\Model\CategoryManagerInterface;
 use Sonata\ClassificationBundle\Model\ContextInterface;
 use Sonata\ClassificationBundle\Model\ContextManagerInterface;
 use Sonata\Doctrine\Document\BaseDocumentManager;
-use Sonata\DoctrineMongoDBAdminBundle\Datagrid\Pager;
-use Sonata\DoctrineMongoDBAdminBundle\Datagrid\ProxyQuery;
 
 /**
  * @phpstan-extends BaseDocumentManager<CategoryInterface>
@@ -43,36 +41,6 @@ final class CategoryManager extends BaseDocumentManager implements CategoryManag
 
         $this->contextManager = $contextManager;
         $this->categories = [];
-    }
-
-    public function getRootCategoriesPager(int $page = 1, int $limit = 25, array $criteria = []): Pager
-    {
-        $queryBuilder = $this->getDocumentManager()
-            ->createQueryBuilder($this->getClass())
-            ->field('parent')
-            ->equals(null);
-
-        $pager = new Pager($limit);
-        $pager->setQuery(new ProxyQuery($queryBuilder));
-        $pager->setPage($page);
-        $pager->init();
-
-        return $pager;
-    }
-
-    public function getSubCategoriesPager($categoryId, int $page = 1, int $limit = 25, array $criteria = []): Pager
-    {
-        $queryBuilder = $this->getDocumentManager()
-            ->createQueryBuilder($this->getClass())
-            ->field('parent')
-            ->equals($categoryId);
-
-        $pager = new Pager($limit);
-        $pager->setQuery(new ProxyQuery($queryBuilder));
-        $pager->setPage($page);
-        $pager->init();
-
-        return $pager;
     }
 
     public function getRootCategoryWithChildren(CategoryInterface $category): CategoryInterface
@@ -238,10 +206,7 @@ final class CategoryManager extends BaseDocumentManager implements CategoryManag
             $this->categories[$contextId][(int) $category->getId()] = $category;
 
             $parent = $category->getParent();
-
-            $category->disableChildrenLazyLoading();
-
-            if ($parent) {
+            if (null !== $parent) {
                 $parent->addChild($category);
             }
         }

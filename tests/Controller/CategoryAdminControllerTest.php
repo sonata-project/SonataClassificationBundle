@@ -57,8 +57,6 @@ final class CategoryAdminControllerTest extends TestCase
 
     private ContainerInterface $container;
 
-    private string $template;
-
     /**
      * @var CsrfTokenManagerInterface&MockObject
      */
@@ -92,7 +90,6 @@ final class CategoryAdminControllerTest extends TestCase
         $this->requestStack->push($this->request);
         $this->pool = new Pool($this->container, ['admin_code' => 'admin_code']);
         $this->request->attributes->set('_sonata_admin', 'admin_code');
-        $this->template = '';
 
         $twig = $this->createMock(Environment::class);
         $formRenderer = $this->createMock(FormRenderer::class);

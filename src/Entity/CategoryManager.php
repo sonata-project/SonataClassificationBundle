@@ -50,9 +50,19 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
 
     /**
      * Returns a pager to iterate over the root category.
+     *
+     * @deprecated since sonata-project/classification-bundle 3.x, to be removed in 4.0.
      */
     public function getRootCategoriesPager($page = 1, $limit = 25, $criteria = [])
     {
+        @trigger_error(
+            sprintf(
+                'The method %s is deprecated since sonata-project/classification-bundle 3.x and will be removed in 4.0.',
+                __METHOD__
+            ),
+            \E_USER_DEPRECATED
+        );
+
         $page = 0 === (int) $page ? 1 : (int) $page;
 
         $queryBuilder = $this->getEntityManager()->createQueryBuilder()
@@ -68,8 +78,19 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
         return $pager;
     }
 
+    /**
+     * @deprecated since sonata-project/classification-bundle 3.x, to be removed in 4.0.
+     */
     public function getSubCategoriesPager($categoryId, $page = 1, $limit = 25, $criteria = [])
     {
+        @trigger_error(
+            sprintf(
+                'The method %s is deprecated since sonata-project/classification-bundle 3.x and will be removed in 4.0.',
+                __METHOD__
+            ),
+            \E_USER_DEPRECATED
+        );
+
         $queryBuilder = $this->getEntityManager()->createQueryBuilder()
             ->select('c')
             ->from($this->class, 'c')

@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sonata\ClassificationBundle\Form\ChoiceList;
 
 use Symfony\Component\Form\ChoiceList\ArrayChoiceList;
+use Symfony\Component\Form\ChoiceList\ChoiceListInterface;
 use Symfony\Component\Form\ChoiceList\Loader\ChoiceLoaderInterface;
 
 final class CategoryChoiceLoader implements ChoiceLoaderInterface
@@ -36,7 +37,7 @@ final class CategoryChoiceLoader implements ChoiceLoaderInterface
         $this->choices = $choices;
     }
 
-    public function loadChoiceList($value = null)
+    public function loadChoiceList($value = null): ChoiceListInterface
     {
         if (null !== $this->choiceList) {
             return $this->choiceList;

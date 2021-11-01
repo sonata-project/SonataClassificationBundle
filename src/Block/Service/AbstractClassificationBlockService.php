@@ -45,7 +45,6 @@ abstract class AbstractClassificationBlockService extends AbstractBlockService
      * @param array<string, mixed> $fieldOptions
      * @param array<string, mixed> $adminOptions
      *
-     * @phpstan-param FormMapper<T> $formMapper
      * @phpstan-param AdminInterface<T> $admin
      */
     final protected function getFormAdminType(FormMapper $formMapper, AdminInterface $admin, string $formField, string $field, array $fieldOptions = [], array $adminOptions = []): FormBuilderInterface

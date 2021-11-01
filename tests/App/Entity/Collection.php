@@ -27,12 +27,12 @@ class Collection extends BaseCollection
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    protected int $id;
+    protected ?int $id = null;
 
     /**
      * Get id.
      */
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }

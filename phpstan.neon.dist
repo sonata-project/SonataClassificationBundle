@@ -6,6 +6,17 @@ parameters:
     paths:
         - src
         - tests
+    exceptions:
+        uncheckedExceptionRegexes: []
+        uncheckedExceptionClasses:
+            - Doctrine\ORM\ORMException
+            - Doctrine\ODM\MongoDB\MongoDBException
+            - Symfony\Component\Validator\Exception\ValidatorException
+            - LogicException
+            - Error
+        check:
+            missingCheckedExceptionInThrows: true
+            tooWideThrowType: true
     treatPhpDocTypesAsCertain: false
     checkGenericClassInNonGenericObjectType: true
     checkInternalClassCaseSensitivity: true

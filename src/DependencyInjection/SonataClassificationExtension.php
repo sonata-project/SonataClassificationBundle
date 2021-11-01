@@ -29,7 +29,7 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 final class SonataClassificationExtension extends Extension
 {
     /**
-     * @throws \InvalidArgumentException
+     * @throws \Exception
      */
     public function load(array $configs, ContainerBuilder $container): void
     {

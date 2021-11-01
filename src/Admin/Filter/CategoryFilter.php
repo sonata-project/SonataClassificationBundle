@@ -64,6 +64,9 @@ final class CategoryFilter extends Filter
         ]];
     }
 
+    /**
+     * @throws \RuntimeException
+     */
     protected function association(ProxyQueryInterface $query, FilterData $data): array
     {
         $alias = $query->entityJoin($this->getParentAssociationMappings());

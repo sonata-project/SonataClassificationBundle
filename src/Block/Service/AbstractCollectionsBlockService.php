@@ -31,6 +31,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Twig\Environment;
 
+use function is_string;
+
 /**
  * @author Christian Gripp <mail@core23.de>
  *
@@ -156,8 +158,9 @@ abstract class AbstractCollectionsBlockService extends AbstractClassificationBlo
 
     public function load(BlockInterface $block): void
     {
-        if (is_numeric($block->getSetting('collectionId'))) {
-            $block->setSetting('collectionId', $this->getCollection((int) $block->getSetting('collectionId')));
+        $collectionId = $block->getSetting('collectionId');
+        if (is_int($collectionId) || is_string($collectionId)) {
+            $block->setSetting('collectionId', $this->getCollection($collectionId));
         }
     }
 
@@ -179,8 +182,8 @@ abstract class AbstractCollectionsBlockService extends AbstractClassificationBlo
     }
 
     /**
-     * @param CollectionInterface|int $id
-     * @param mixed                   $default
+     * @param CollectionInterface|int|string|null $id
+     * @param mixed                               $default
      */
     final protected function getCollection($id, $default = null): ?CollectionInterface
     {
@@ -188,7 +191,7 @@ abstract class AbstractCollectionsBlockService extends AbstractClassificationBlo
             return $id;
         }
 
-        if (is_numeric($id)) {
+        if (null !== $id) {
             return $this->collectionManager->find($id);
         }
 

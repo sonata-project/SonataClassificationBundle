@@ -31,6 +31,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Twig\Environment;
 
+use function is_string;
+
 /**
  * @author Christian Gripp <mail@core23.de>
  *
@@ -155,8 +157,9 @@ abstract class AbstractCategoriesBlockService extends AbstractClassificationBloc
 
     public function load(BlockInterface $block): void
     {
-        if (is_numeric($block->getSetting('categoryId'))) {
-            $block->setSetting('categoryId', $this->getCategory((int) $block->getSetting('categoryId')));
+        $categoryId = $block->getSetting('categoryId');
+        if (is_int($categoryId) || is_string($categoryId)) {
+            $block->setSetting('categoryId', $this->getCategory($categoryId));
         }
     }
 
@@ -178,8 +181,8 @@ abstract class AbstractCategoriesBlockService extends AbstractClassificationBloc
     }
 
     /**
-     * @param CategoryInterface|int $id
-     * @param mixed                 $default
+     * @param CategoryInterface|int|string|null $id
+     * @param mixed                             $default
      */
     final protected function getCategory($id, $default = null): ?CategoryInterface
     {
@@ -187,7 +190,7 @@ abstract class AbstractCategoriesBlockService extends AbstractClassificationBloc
             return $id;
         }
 
-        if (is_numeric($id)) {
+        if (null !== $id) {
             return $this->categoryManager->find($id);
         }
 

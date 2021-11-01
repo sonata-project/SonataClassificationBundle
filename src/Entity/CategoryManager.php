@@ -192,7 +192,9 @@ final class CategoryManager extends BaseEntityManager implements CategoryManager
                 $rootCategories[] = $category;
             }
 
-            $this->categories[$contextId][$category->getId()] = $category;
+            $categoryId = $category->getId();
+            \assert(null !== $categoryId);
+            $this->categories[$contextId][$categoryId] = $category;
 
             $parent = $category->getParent();
             if (null !== $parent) {

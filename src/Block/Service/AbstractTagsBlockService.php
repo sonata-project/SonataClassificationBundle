@@ -156,8 +156,9 @@ abstract class AbstractTagsBlockService extends AbstractClassificationBlockServi
 
     public function load(BlockInterface $block): void
     {
-        if (is_numeric($block->getSetting('tagId'))) {
-            $block->setSetting('tagId', $this->getTag((int) $block->getSetting('tagId')));
+        $tagId = $block->getSetting('tagId');
+        if (is_int($tagId) || is_string($tagId)) {
+            $block->setSetting('tagId', $this->getTag($tagId));
         }
     }
 
@@ -179,8 +180,8 @@ abstract class AbstractTagsBlockService extends AbstractClassificationBlockServi
     }
 
     /**
-     * @param TagInterface|int $id
-     * @param mixed            $default
+     * @param TagInterface|int|string|null $id
+     * @param mixed                        $default
      */
     final protected function getTag($id, $default = null): ?TagInterface
     {
@@ -188,7 +189,7 @@ abstract class AbstractTagsBlockService extends AbstractClassificationBlockServi
             return $id;
         }
 
-        if (is_numeric($id)) {
+        if (null !== $id) {
             return $this->tagManager->find($id);
         }
 

@@ -63,7 +63,7 @@ final class FixContextCommand extends Command
             'id' => ContextInterface::DEFAULT_CONTEXT,
         ]);
 
-        if (!$defaultContext) {
+        if (null === $defaultContext) {
             $output->writeln(' > default context is missing, creating one');
             $defaultContext = $this->contextManager->create();
             $defaultContext->setId(ContextInterface::DEFAULT_CONTEXT);
@@ -78,7 +78,7 @@ final class FixContextCommand extends Command
         $output->writeln('2. Find tag without default context');
 
         foreach ($this->tagManager->findBy([]) as $tag) {
-            if ($tag->getContext()) {
+            if (null !== $tag->getContext()) {
                 continue;
             }
 
@@ -94,7 +94,7 @@ final class FixContextCommand extends Command
         $output->writeln('3. Find collection without default context');
 
         foreach ($this->collectionManager->findBy([]) as $collection) {
-            if ($collection->getContext()) {
+            if (null !== $collection->getContext()) {
                 continue;
             }
 
@@ -110,7 +110,7 @@ final class FixContextCommand extends Command
         $output->writeln('3. Find category without default context');
 
         foreach ($this->categoryManager->findBy([]) as $category) {
-            if ($category->getContext()) {
+            if (null !== $category->getContext()) {
                 continue;
             }
 

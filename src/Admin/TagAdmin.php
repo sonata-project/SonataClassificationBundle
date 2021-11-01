@@ -32,7 +32,7 @@ final class TagAdmin extends ContextAwareAdmin
             ->add('name')
             ->add('context');
 
-        if ($this->hasSubject() && $this->getSubject()->getId()) {
+        if ($this->hasSubject() && null !== $this->getSubject()->getId()) {
             $form->add('slug');
         }
 

@@ -39,11 +39,11 @@ abstract class ContextAwareAdmin extends AbstractAdmin
 
     protected function alterNewInstance(object $object): void
     {
-        if ($contextId = $this->getPersistentParameter('context')) {
+        $contextId = $this->getPersistentParameter('context', '');
+        if ('' !== $contextId) {
             $context = $this->contextManager->find($contextId);
 
-            if (!$context) {
-                /** @var ContextInterface $context */
+            if (null !== $context) {
                 $context = $this->contextManager->create();
                 $context->setEnabled(true);
                 $context->setId($contextId);

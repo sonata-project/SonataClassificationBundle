@@ -31,7 +31,7 @@ abstract class Tag implements TagInterface
 
     public function __toString(): string
     {
-        return $this->getName() ?: 'n/a';
+        return $this->getName() ?? 'n/a';
     }
 
     public function setName(?string $name): void
@@ -100,7 +100,7 @@ abstract class Tag implements TagInterface
     {
         $text = Slugify::create()->slugify($text);
 
-        if (empty($text)) {
+        if ('' === $text) {
             return 'n-a';
         }
 

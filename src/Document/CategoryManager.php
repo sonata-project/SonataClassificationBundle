@@ -195,7 +195,7 @@ final class CategoryManager extends BaseDocumentManager implements CategoryManag
         $root = null;
 
         foreach ($categories as $pos => $category) {
-            if (0 === $pos && $category->getParent()) {
+            if (0 === $pos && null !== $category->getParent()) {
                 throw new \LogicException('The first category must be the root.');
             }
 
@@ -225,7 +225,7 @@ final class CategoryManager extends BaseDocumentManager implements CategoryManag
      */
     private function getContext($context): ContextInterface
     {
-        if (empty($context)) {
+        if (null === $context) {
             $context = ContextInterface::DEFAULT_CONTEXT;
         }
 

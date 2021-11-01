@@ -134,7 +134,7 @@ final class CategoryAdminControllerTest extends TestCase
             ->willReturnCallback(
                 static function ($name, array $parameters = []) {
                     $result = $name;
-                    if (!empty($parameters)) {
+                    if ([] !== $parameters) {
                         $result .= '?'.http_build_query($parameters);
                     }
 
@@ -179,8 +179,10 @@ final class CategoryAdminControllerTest extends TestCase
      */
     public function testListAction($context): void
     {
+        $contextValue = false === $context ? '' : $context;
+
         $this->request->query->set('_list_mode', 'list');
-        $this->request->query->set('filter', 'filter[context][value]='.($context ?: ''));
+        $this->request->query->set('filter', 'filter[context][value]='.$contextValue);
 
         $datagrid = $this->createMock(DatagridInterface::class);
 
@@ -204,7 +206,7 @@ final class CategoryAdminControllerTest extends TestCase
             ->method('getValues')
             ->willReturn([
                 'context' => [
-                    'value' => $context ?: '',
+                    'value' => $contextValue,
                 ],
             ]);
 
@@ -257,7 +259,7 @@ final class CategoryAdminControllerTest extends TestCase
             ->method('getPersistentParameter')
             ->willReturn('default');
 
-        if ($context) {
+        if (false !== $context) {
             $contextMock = $this->getContextMock($context);
             $this->request->query->set('context', $contextMock->getId());
             $this->contextManager->expects(static::any())

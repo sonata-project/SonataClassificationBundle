@@ -30,7 +30,7 @@ abstract class Category implements CategoryInterface
 
     protected ?\DateTimeInterface $updatedAt = null;
 
-    protected ?int $position;
+    protected ?int $position = null;
 
     /**
      * @var Collection<int, CategoryInterface>

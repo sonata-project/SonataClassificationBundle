@@ -98,6 +98,7 @@ final class CategoryManager extends BaseEntityManager implements CategoryManager
 
     public function getAllRootCategories(bool $loadChildren = true): array
     {
+        /** @var CategoryInterface[] $rootCategories */
         $rootCategories = $this->getRepository()
             ->createQueryBuilder('c')
             ->where('c.parent IS NULL')
@@ -110,7 +111,7 @@ final class CategoryManager extends BaseEntityManager implements CategoryManager
             if (null === $category->getContext()) {
                 throw new \LogicException(sprintf(
                     'Context of category "%s" cannot be null.',
-                    $category->getId()
+                    $category->getId() ?? ''
                 ));
             }
 

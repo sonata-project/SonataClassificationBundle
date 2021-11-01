@@ -42,6 +42,7 @@ final class CollectionFilterTest extends TestCase
         $options = $filter->getRenderSettings()[1];
 
         static::assertSame(ChoiceType::class, $options['field_type']);
+        static::assertIsArray($options['field_options']);
         static::assertSame([], $options['field_options']['choices']);
     }
 }

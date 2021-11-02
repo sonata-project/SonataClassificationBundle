@@ -1,13 +1,5 @@
 parameters:
-	ignoreErrors:
-	    # We do not use the proxy query functionality of the PagerInterface
-		-
-			message: "#^Method Sonata\\\\ClassificationBundle\\\\Model\\\\CategoryManagerInterface\\:\\:getRootCategoriesPager\\(\\) return type with generic interface Sonata\\\\AdminBundle\\\\Datagrid\\\\PagerInterface does not specify its types\\: T$#"
-			count: 1
-			path: src/Model/CategoryManagerInterface.php
-
-		-
-			message: "#^Method Sonata\\\\ClassificationBundle\\\\Model\\\\CategoryManagerInterface\\:\\:getSubCategoriesPager\\(\\) return type with generic interface Sonata\\\\AdminBundle\\\\Datagrid\\\\PagerInterface does not specify its types\\: T$#"
-			count: 1
-			path: src/Model/CategoryManagerInterface.php
-
+    ignoreErrors:
+        - # https://github.com/phpstan/phpstan-strict-rules/issues/130
+            message: '#^Call to static method PHPUnit\\Framework\\Assert::.* will always evaluate to true\.$#'
+            path: tests/

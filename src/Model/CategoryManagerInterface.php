@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sonata\ClassificationBundle\Model;
 
-use Sonata\AdminBundle\Datagrid\PagerInterface;
 use Sonata\Doctrine\Model\ManagerInterface;
 
 /**
@@ -21,20 +20,6 @@ use Sonata\Doctrine\Model\ManagerInterface;
  */
 interface CategoryManagerInterface extends ManagerInterface
 {
-    /**
-     * Returns a pager to iterate over the root category.
-     *
-     * @phpstan-param array<string, mixed> $criteria
-     */
-    public function getRootCategoriesPager(int $page = 1, int $limit = 25, array $criteria = []): PagerInterface;
-
-    /**
-     * @param mixed $categoryId
-     *
-     * @phpstan-param array<string, mixed> $criteria
-     */
-    public function getSubCategoriesPager($categoryId, int $page = 1, int $limit = 25, array $criteria = []): PagerInterface;
-
     public function getRootCategoryWithChildren(CategoryInterface $category): CategoryInterface;
 
     /**

@@ -48,7 +48,7 @@ abstract class Category implements CategoryInterface
 
     public function __toString(): string
     {
-        return $this->getName() ?: 'n/a';
+        return $this->getName() ?? 'n/a';
     }
 
     public function setName(?string $name): void
@@ -150,13 +150,13 @@ abstract class Category implements CategoryInterface
     public function removeChild(CategoryInterface $childToDelete): void
     {
         foreach ($this->getChildren() as $pos => $child) {
-            if ($childToDelete->getId() && $child->getId() === $childToDelete->getId()) {
+            if (null !== $childToDelete->getId() && $child->getId() === $childToDelete->getId()) {
                 unset($this->children[$pos]);
 
                 return;
             }
 
-            if (!$childToDelete->getId() && $child === $childToDelete) {
+            if (null === $childToDelete->getId() && $child === $childToDelete) {
                 unset($this->children[$pos]);
 
                 return;
@@ -187,7 +187,7 @@ abstract class Category implements CategoryInterface
     {
         $this->parent = $parent;
 
-        if (!$nested && $parent) {
+        if (!$nested && null !== $parent) {
             $parent->addChild($this, true);
         }
     }

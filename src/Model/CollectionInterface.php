@@ -18,7 +18,7 @@ interface CollectionInterface extends ContextAwareInterface
     public function __toString(): string;
 
     /**
-     * @return mixed
+     * @return int|string|null
      */
     public function getId();
 

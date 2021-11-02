@@ -46,6 +46,7 @@ final class CategoryFilterTest extends TestCase
         $options = $filter->getRenderSettings()[1];
 
         static::assertSame(ChoiceType::class, $options['field_type']);
+        static::assertIsArray($options['field_options']);
         static::assertCount(1, $options['field_options']['choices']);
     }
 
@@ -65,6 +66,7 @@ final class CategoryFilterTest extends TestCase
         $options = $filter->getRenderSettings()[1];
 
         static::assertSame(ChoiceType::class, $options['field_type']);
+        static::assertIsArray($options['field_options']);
         static::assertCount(1, $options['field_options']['choices']);
     }
 

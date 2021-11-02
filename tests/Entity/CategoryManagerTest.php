@@ -123,28 +123,30 @@ class CategoryManagerTest extends TestCase
         }, [$categoryFoo, $categoryBar]);
 
         $categories = $categoryManager->getRootCategoriesSplitByContexts(false);
-        static::assertNotNull($contextFoo->getId());
-        static::assertArrayHasKey($contextFoo->getId(), $categories);
-        static::assertNotNull($contextBar->getId());
-        static::assertArrayHasKey($contextBar->getId(), $categories);
-        static::assertContains($categoryFoo, $categories[$contextFoo->getId()]);
-        static::assertContains($categoryBar, $categories[$contextBar->getId()]);
+
+        $fooId = $contextFoo->getId();
+        static::assertNotNull($fooId);
+        static::assertArrayHasKey($fooId, $categories);
+        $barId = $contextBar->getId();
+        static::assertNotNull($barId);
+        static::assertArrayHasKey($barId, $categories);
+        static::assertContains($categoryFoo, $categories[$fooId]);
+        static::assertContains($categoryBar, $categories[$barId]);
     }
 
     public function testGetBySlug(): void
     {
-        $self = $this;
         $this
-            ->getCategoryManager(static function (MockObject $qb) use ($self): void {
-                $qb->expects($self->exactly(3))->method('andWhere')->withConsecutive(
-                    [$self->equalTo('c.slug = :slug')],
-                    [$self->equalTo('c.context = :context')],
-                    [$self->equalTo('c.enabled = :enabled')]
+            ->getCategoryManager(static function (MockObject $qb): void {
+                $qb->expects(static::exactly(3))->method('andWhere')->withConsecutive(
+                    [static::equalTo('c.slug = :slug')],
+                    [static::equalTo('c.context = :context')],
+                    [static::equalTo('c.enabled = :enabled')]
                 )->willReturn($qb);
-                $qb->expects($self->exactly(3))->method('setParameter')->withConsecutive(
-                    [$self->equalTo('slug'), $self->equalTo('theslug')],
-                    [$self->equalTo('context'), $self->equalTo('contextA')],
-                    [$self->equalTo('enabled'), $self->equalTo(false)]
+                $qb->expects(static::exactly(3))->method('setParameter')->withConsecutive(
+                    [static::equalTo('slug'), static::equalTo('theslug')],
+                    [static::equalTo('context'), static::equalTo('contextA')],
+                    [static::equalTo('enabled'), static::equalTo(false)]
                 )->willReturn($qb);
             })
             ->getBySlug('theslug', 'contextA', false);

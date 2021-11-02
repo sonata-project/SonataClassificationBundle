@@ -45,7 +45,7 @@ final class TagTest extends TestCase
         static::assertTrue($tag->getEnabled());
         static::assertSame($context, $tag->getContext());
 
-        $tag->setName('');
+        $tag->setName(null);
         static::assertSame('n-a', $tag->getSlug());
         static::assertSame('n/a', $tag->__toString());
 

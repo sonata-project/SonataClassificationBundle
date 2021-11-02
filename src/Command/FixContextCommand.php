@@ -51,6 +51,7 @@ final class FixContextCommand extends Command
 
     public function configure(): void
     {
+        \assert(null !== static::$defaultDescription);
         $this->setDescription(static::$defaultDescription);
     }
 
@@ -62,7 +63,7 @@ final class FixContextCommand extends Command
             'id' => ContextInterface::DEFAULT_CONTEXT,
         ]);
 
-        if (!$defaultContext) {
+        if (null === $defaultContext) {
             $output->writeln(' > default context is missing, creating one');
             $defaultContext = $this->contextManager->create();
             $defaultContext->setId(ContextInterface::DEFAULT_CONTEXT);
@@ -77,11 +78,14 @@ final class FixContextCommand extends Command
         $output->writeln('2. Find tag without default context');
 
         foreach ($this->tagManager->findBy([]) as $tag) {
-            if ($tag->getContext()) {
+            if (null !== $tag->getContext()) {
                 continue;
             }
 
-            $output->writeln(sprintf(' > attach default context to tag: %s (%s)', $tag->getSlug(), $tag->getId()));
+            $tagId = $tag->getId();
+            \assert(null !== $tagId);
+
+            $output->writeln(sprintf(' > attach default context to tag: %s (%s)', $tag->getSlug() ?? '', $tagId));
             $tag->setContext($defaultContext);
 
             $this->tagManager->save($tag);
@@ -90,11 +94,14 @@ final class FixContextCommand extends Command
         $output->writeln('3. Find collection without default context');
 
         foreach ($this->collectionManager->findBy([]) as $collection) {
-            if ($collection->getContext()) {
+            if (null !== $collection->getContext()) {
                 continue;
             }
 
-            $output->writeln(sprintf(' > attach default context to collection: %s (%s)', $collection->getSlug(), $collection->getId()));
+            $collectionId = $collection->getId();
+            \assert(null !== $collectionId);
+
+            $output->writeln(sprintf(' > attach default context to collection: %s (%s)', $collection->getSlug() ?? '', $collectionId));
             $collection->setContext($defaultContext);
 
             $this->collectionManager->save($collection);
@@ -103,11 +110,14 @@ final class FixContextCommand extends Command
         $output->writeln('3. Find category without default context');
 
         foreach ($this->categoryManager->findBy([]) as $category) {
-            if ($category->getContext()) {
+            if (null !== $category->getContext()) {
                 continue;
             }
 
-            $output->writeln(sprintf(' > attach default context to collection: %s (%s)', $category->getSlug(), $category->getId()));
+            $categoryId = $category->getId();
+            \assert(null !== $categoryId);
+
+            $output->writeln(sprintf(' > attach default context to collection: %s (%s)', $category->getSlug() ?? '', $categoryId));
             $category->setContext($defaultContext);
 
             $this->categoryManager->save($category);

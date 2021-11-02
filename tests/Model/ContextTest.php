@@ -41,7 +41,7 @@ final class ContextTest extends TestCase
         static::assertSame($time, $context->getUpdatedAt());
         static::assertTrue($context->getEnabled());
 
-        $context->setName('');
+        $context->setName(null);
         static::assertSame('n/a', $context->__toString());
     }
 

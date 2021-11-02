@@ -20,8 +20,6 @@ use Sonata\ClassificationBundle\Model\CategoryManagerInterface;
 use Sonata\ClassificationBundle\Model\ContextInterface;
 use Sonata\ClassificationBundle\Model\ContextManagerInterface;
 use Sonata\Doctrine\Entity\BaseEntityManager;
-use Sonata\DoctrineORMAdminBundle\Datagrid\Pager;
-use Sonata\DoctrineORMAdminBundle\Datagrid\ProxyQuery;
 
 /**
  * @phpstan-extends BaseEntityManager<CategoryInterface>
@@ -46,65 +44,37 @@ final class CategoryManager extends BaseEntityManager implements CategoryManager
         $this->categories = [];
     }
 
-    /**
-     * Returns a pager to iterate over the root category.
-     */
-    public function getRootCategoriesPager(int $page = 1, int $limit = 25, array $criteria = []): Pager
-    {
-        $page = 0 === $page ? 1 : $page;
-
-        $queryBuilder = $this->getEntityManager()->createQueryBuilder()
-            ->select('c')
-            ->from($this->class, 'c')
-            ->andWhere('c.parent IS NULL');
-
-        $pager = new Pager($limit);
-        $pager->setQuery(new ProxyQuery($queryBuilder));
-        $pager->setPage($page);
-        $pager->init();
-
-        return $pager;
-    }
-
-    public function getSubCategoriesPager($categoryId, int $page = 1, int $limit = 25, array $criteria = []): Pager
-    {
-        $queryBuilder = $this->getEntityManager()->createQueryBuilder()
-            ->select('c')
-            ->from($this->class, 'c')
-            ->where('c.parent = :categoryId')
-            ->setParameter('categoryId', $categoryId);
-
-        $pager = new Pager($limit);
-        $pager->setQuery(new ProxyQuery($queryBuilder));
-        $pager->setPage($page);
-        $pager->init();
-
-        return $pager;
-    }
-
     public function getRootCategoryWithChildren(CategoryInterface $category): CategoryInterface
     {
-        if (null === $category->getContext()) {
+        $context = $category->getContext();
+        if (null === $context) {
             throw new \InvalidArgumentException(sprintf(
                 'Context of category "%s" cannot be null.',
-                $category->getId()
+                $category->getId() ?? ''
             ));
         }
+
+        $contextId = $context->getId();
+        if (null === $contextId) {
+            throw new \InvalidArgumentException(sprintf(
+                'Context of category "%s" must have an not null identifier.',
+                $category->getId() ?? ''
+            ));
+        }
+
         if (null !== $category->getParent()) {
             throw new \InvalidArgumentException('Method can be called only for root categories.');
         }
 
-        $context = $category->getContext();
-
         $this->loadCategories($context);
 
-        foreach ($this->categories[$context->getId()] as $contextRootCategory) {
+        foreach ($this->categories[$contextId] as $contextRootCategory) {
             if ($category->getId() === $contextRootCategory->getId()) {
                 return $contextRootCategory;
             }
         }
 
-        throw new \InvalidArgumentException(sprintf('Category "%s" does not exist.', $category->getId()));
+        throw new \InvalidArgumentException(sprintf('Category "%s" does not exist.', $category->getId() ?? ''));
     }
 
     public function getRootCategoriesForContext(?ContextInterface $context = null): array
@@ -113,13 +83,22 @@ final class CategoryManager extends BaseEntityManager implements CategoryManager
             $context = $this->getContext();
         }
 
+        $contextId = $context->getId();
+        if (null === $contextId) {
+            throw new \InvalidArgumentException(sprintf(
+                'Context "%s" must have an not null identifier.',
+                $context->getName() ?? ''
+            ));
+        }
+
         $this->loadCategories($context);
 
-        return $this->categories[$context->getId()];
+        return $this->categories[$contextId];
     }
 
     public function getAllRootCategories(bool $loadChildren = true): array
     {
+        /** @var CategoryInterface[] $rootCategories */
         $rootCategories = $this->getRepository()
             ->createQueryBuilder('c')
             ->where('c.parent IS NULL')
@@ -132,7 +111,7 @@ final class CategoryManager extends BaseEntityManager implements CategoryManager
             if (null === $category->getContext()) {
                 throw new \LogicException(sprintf(
                     'Context of category "%s" cannot be null.',
-                    $category->getId()
+                    $category->getId() ?? ''
                 ));
             }
 
@@ -181,15 +160,17 @@ final class CategoryManager extends BaseEntityManager implements CategoryManager
      */
     protected function loadCategories(ContextInterface $context): void
     {
-        if (\array_key_exists($context->getId(), $this->categories)) {
+        $contextId = $context->getId();
+        if (null === $contextId || \array_key_exists($contextId, $this->categories)) {
             return;
         }
 
+        /** @var CategoryInterface[] $categories */
         $categories = $this->getRepository()
             ->createQueryBuilder('c')
             ->where('c.context = :context')
             ->orderBy('c.parent')
-            ->setParameter('context', $context->getId())
+            ->setParameter('context', $contextId)
             ->getQuery()
             ->getResult();
 
@@ -212,18 +193,17 @@ final class CategoryManager extends BaseEntityManager implements CategoryManager
                 $rootCategories[] = $category;
             }
 
-            $this->categories[(string) $context->getId()][$category->getId()] = $category;
+            $categoryId = $category->getId();
+            \assert(null !== $categoryId);
+            $this->categories[$contextId][$categoryId] = $category;
 
             $parent = $category->getParent();
-
-            $category->disableChildrenLazyLoading();
-
-            if ($parent) {
+            if (null !== $parent) {
                 $parent->addChild($category);
             }
         }
 
-        $this->categories[(string) $context->getId()] = $rootCategories;
+        $this->categories[$contextId] = $rootCategories;
     }
 
     private function getContext(): ContextInterface

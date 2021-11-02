@@ -155,8 +155,9 @@ abstract class AbstractCategoriesBlockService extends AbstractClassificationBloc
 
     public function load(BlockInterface $block): void
     {
-        if (is_numeric($block->getSetting('categoryId'))) {
-            $block->setSetting('categoryId', $this->getCategory($block->getSetting('categoryId')));
+        $categoryId = $block->getSetting('categoryId');
+        if (\is_int($categoryId) || \is_string($categoryId)) {
+            $block->setSetting('categoryId', $this->getCategory($categoryId));
         }
     }
 
@@ -178,8 +179,8 @@ abstract class AbstractCategoriesBlockService extends AbstractClassificationBloc
     }
 
     /**
-     * @param CategoryInterface|int $id
-     * @param mixed                 $default
+     * @param CategoryInterface|int|string|null $id
+     * @param mixed                             $default
      */
     final protected function getCategory($id, $default = null): ?CategoryInterface
     {
@@ -187,7 +188,7 @@ abstract class AbstractCategoriesBlockService extends AbstractClassificationBloc
             return $id;
         }
 
-        if (is_numeric($id)) {
+        if (null !== $id) {
             return $this->categoryManager->find($id);
         }
 
@@ -202,7 +203,9 @@ abstract class AbstractCategoriesBlockService extends AbstractClassificationBloc
     {
         $block->setSetting(
             'categoryId',
-            \is_object($block->getSetting('categoryId')) ? $block->getSetting('categoryId')->getId() : null
+            $block->getSetting('categoryId') instanceof CategoryInterface
+                ? $block->getSetting('categoryId')->getId()
+                : null
         );
     }
 }

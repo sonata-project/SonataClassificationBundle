@@ -26,18 +26,17 @@ final class CollectionManagerTest extends TestCase
 
     public function testGetBySlug(): void
     {
-        $self = $this;
         $this
-            ->getCollectionManager(static function (MockObject $qb) use ($self): void {
-                $qb->expects($self->exactly(3))->method('andWhere')->withConsecutive(
-                    [$self->equalTo('c.slug = :slug')],
-                    [$self->equalTo('c.context = :context')],
-                    [$self->equalTo('c.enabled = :enabled')]
+            ->getCollectionManager(static function (MockObject $qb): void {
+                $qb->expects(static::exactly(3))->method('andWhere')->withConsecutive(
+                    [static::equalTo('c.slug = :slug')],
+                    [static::equalTo('c.context = :context')],
+                    [static::equalTo('c.enabled = :enabled')]
                 )->willReturn($qb);
-                $qb->expects($self->exactly(3))->method('setParameter')->withConsecutive(
-                    [$self->equalTo('slug'), $self->equalTo('theslug')],
-                    [$self->equalTo('context'), $self->equalTo('contextA')],
-                    [$self->equalTo('enabled'), $self->equalTo(false)]
+                $qb->expects(static::exactly(3))->method('setParameter')->withConsecutive(
+                    [static::equalTo('slug'), static::equalTo('theslug')],
+                    [static::equalTo('context'), static::equalTo('contextA')],
+                    [static::equalTo('enabled'), static::equalTo(false)]
                 )->willReturn($qb);
             })
             ->getBySlug('theslug', 'contextA', false);
@@ -45,16 +44,15 @@ final class CollectionManagerTest extends TestCase
 
     public function testGetByContext(): void
     {
-        $self = $this;
         $this
-            ->getCollectionManager(static function (MockObject $qb) use ($self): void {
-                $qb->expects($self->exactly(2))->method('andWhere')->withConsecutive(
-                    [$self->equalTo('c.context = :context')],
-                    [$self->equalTo('c.enabled = :enabled')]
+            ->getCollectionManager(static function (MockObject $qb): void {
+                $qb->expects(static::exactly(2))->method('andWhere')->withConsecutive(
+                    [static::equalTo('c.context = :context')],
+                    [static::equalTo('c.enabled = :enabled')]
                 )->willReturn($qb);
-                $qb->expects($self->exactly(2))->method('setParameter')->withConsecutive(
-                    [$self->equalTo('context'), $self->equalTo('contextA')],
-                    [$self->equalTo('enabled'), $self->equalTo(false)]
+                $qb->expects(static::exactly(2))->method('setParameter')->withConsecutive(
+                    [static::equalTo('context'), static::equalTo('contextA')],
+                    [static::equalTo('enabled'), static::equalTo(false)]
                 )->willReturn($qb);
             })
             ->getByContext('contextA', false);

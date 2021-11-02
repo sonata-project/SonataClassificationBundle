@@ -16,7 +16,6 @@ namespace Sonata\ClassificationBundle\Admin;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\ClassificationBundle\Model\ContextAwareInterface;
-use Sonata\ClassificationBundle\Model\ContextInterface;
 use Sonata\ClassificationBundle\Model\ContextManagerInterface;
 
 /**
@@ -39,11 +38,11 @@ abstract class ContextAwareAdmin extends AbstractAdmin
 
     protected function alterNewInstance(object $object): void
     {
-        if ($contextId = $this->getPersistentParameter('context')) {
+        $contextId = $this->getPersistentParameter('context', '');
+        if ('' !== $contextId) {
             $context = $this->contextManager->find($contextId);
 
-            if (!$context) {
-                /** @var ContextInterface $context */
+            if (null !== $context) {
                 $context = $this->contextManager->create();
                 $context->setEnabled(true);
                 $context->setId($contextId);

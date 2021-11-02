@@ -16,7 +16,7 @@ namespace Sonata\ClassificationBundle\Model;
 interface TagInterface extends ContextAwareInterface
 {
     /**
-     * @return mixed
+     * @return int|string|null
      */
     public function getId();
 

@@ -47,7 +47,7 @@ final class CollectionTest extends TestCase
         static::assertSame('My description', $collection->getDescription());
         static::assertSame($context, $collection->getContext());
 
-        $collection->setName('');
+        $collection->setName(null);
         static::assertSame('n-a', $collection->getSlug());
         static::assertSame('n/a', $collection->__toString());
 

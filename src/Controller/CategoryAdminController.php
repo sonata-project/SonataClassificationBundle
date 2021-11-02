@@ -40,21 +40,22 @@ final class CategoryAdminController extends Controller
 
     public function listAction(Request $request): Response
     {
-        if (!$request->get('filter') && !$request->get('filters')) {
+        if (null === $request->get('filter') && null === $request->get('filters')) {
             return new RedirectResponse($this->admin->generateUrl('tree', $request->query->all()));
         }
 
-        if ($listMode = $request->get('_list_mode')) {
+        $listMode = $request->get('_list_mode');
+        if (null !== $listMode) {
             $this->admin->setListMode($listMode);
         }
 
         $datagrid = $this->admin->getDatagrid();
         $datagridValues = $datagrid->getValues();
 
-        $datagridContextIsSet = isset($datagridValues['context']['value']) && !empty($datagridValues['context']['value']);
+        $datagridContextIsSet = isset($datagridValues['context']['value']) && '' !== $datagridValues['context']['value'];
 
         //ignore `context` persistent parameter if datagrid `context` value is set
-        if ($this->admin->getPersistentParameter('context') && !$datagridContextIsSet) {
+        if ('' !== $this->admin->getPersistentParameter('context', '') && !$datagridContextIsSet) {
             $datagrid->setValue('context', null, $this->admin->getPersistentParameter('context'));
         }
 
@@ -74,9 +75,16 @@ final class CategoryAdminController extends Controller
     public function treeAction(Request $request): Response
     {
         $categoryManager = $this->get('sonata.classification.manager.category');
-        $currentContext = false;
-        if ($contextId = $request->get('context')) {
-            $currentContext = $this->get('sonata.classification.manager.context')->find($contextId);
+        \assert($categoryManager instanceof CategoryManagerInterface);
+
+        $currentContext = null;
+
+        $contextId = $request->get('context');
+        if (null !== $contextId) {
+            $contextManager = $this->get('sonata.classification.manager.context');
+            \assert($contextManager instanceof ContextManagerInterface);
+
+            $currentContext = $contextManager->find($contextId);
         }
 
         // all root categories.
@@ -85,17 +93,19 @@ final class CategoryAdminController extends Controller
         // root categories inside the current context
         $currentCategories = [];
 
-        if (!$currentContext && !empty($rootCategoriesSplitByContexts)) {
+        if (null === $currentContext && [] !== $rootCategoriesSplitByContexts) {
             $currentCategories = current($rootCategoriesSplitByContexts);
+            \assert([] !== $currentCategories);
             $currentContext = current($currentCategories)->getContext();
-        } else {
-            foreach ($rootCategoriesSplitByContexts as $contextId => $contextCategories) {
-                if ($currentContext->getId() !== $contextId) {
+        } elseif (null !== $currentContext) {
+            foreach ($rootCategoriesSplitByContexts as $id => $contextCategories) {
+                if ($currentContext->getId() !== $id) {
                     continue;
                 }
 
                 foreach ($contextCategories as $category) {
-                    if ($currentContext->getId() !== $category->getContext()->getId()) {
+                    $catContext = $category->getContext();
+                    if (null === $catContext || $currentContext->getId() !== $catContext->getId()) {
                         continue;
                     }
 
@@ -106,8 +116,8 @@ final class CategoryAdminController extends Controller
 
         $datagrid = $this->admin->getDatagrid();
 
-        if ($this->admin->getPersistentParameter('context')) {
-            $datagrid->setValue('context', null, $this->admin->getPersistentParameter('context'));
+        if ('' !== $this->admin->getPersistentParameter('context', '')) {
+            $datagrid->setValue('context', null, $this->admin->getPersistentParameter('context', ''));
         }
 
         $formView = $datagrid->getForm()->createView();

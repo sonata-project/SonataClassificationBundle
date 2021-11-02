@@ -65,7 +65,11 @@ final class CategorySelectorType extends AbstractType
         $choices = [];
 
         foreach ($categories as $category) {
-            $choices[$category->getId()] = sprintf('%s (%s)', $category->getName(), $category->getContext()->getId());
+            $context = $category->getContext();
+            $categoryId = $category->getId();
+            \assert(null !== $context && null !== $categoryId);
+
+            $choices[$categoryId] = sprintf('%s (%s)', $category->getName() ?? '', $context->getId() ?? '');
 
             $this->childWalker($category, $options, $choices);
         }
@@ -93,11 +97,14 @@ final class CategorySelectorType extends AbstractType
         }
 
         foreach ($category->getChildren() as $child) {
-            if ($options['category'] && $options['category']->getId() === $child->getId()) {
+            $childId = $child->getId();
+            \assert(null !== $childId);
+
+            if ($options['category'] && $options['category']->getId() === $childId) {
                 continue;
             }
 
-            $choices[$child->getId()] = sprintf('%s %s', str_repeat('-', 1 * $level), $child->getName());
+            $choices[$childId] = sprintf('%s %s', str_repeat('-', 1 * $level), $child->getName() ?? '');
 
             $this->childWalker($child, $options, $choices, $level + 1);
         }

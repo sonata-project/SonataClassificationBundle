@@ -31,7 +31,7 @@ abstract class Collection implements CollectionInterface
 
     public function __toString(): string
     {
-        return $this->getName() ?: 'n/a';
+        return $this->getName() ?? 'n/a';
     }
 
     public function setName(?string $name): void

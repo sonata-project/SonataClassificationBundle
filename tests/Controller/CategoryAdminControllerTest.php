@@ -57,14 +57,12 @@ final class CategoryAdminControllerTest extends TestCase
 
     private ContainerInterface $container;
 
-    private string $template;
-
     /**
      * @var CsrfTokenManagerInterface&MockObject
      */
     private $csrfProvider;
 
-    private ?CategoryAdminController $controller = null;
+    private CategoryAdminController $controller;
 
     /**
      * @var CategoryManagerInterface&MockObject
@@ -92,7 +90,6 @@ final class CategoryAdminControllerTest extends TestCase
         $this->requestStack->push($this->request);
         $this->pool = new Pool($this->container, ['admin_code' => 'admin_code']);
         $this->request->attributes->set('_sonata_admin', 'admin_code');
-        $this->template = '';
 
         $twig = $this->createMock(Environment::class);
         $formRenderer = $this->createMock(FormRenderer::class);
@@ -137,7 +134,7 @@ final class CategoryAdminControllerTest extends TestCase
             ->willReturnCallback(
                 static function ($name, array $parameters = []) {
                     $result = $name;
-                    if (!empty($parameters)) {
+                    if ([] !== $parameters) {
                         $result .= '?'.http_build_query($parameters);
                     }
 
@@ -160,7 +157,7 @@ final class CategoryAdminControllerTest extends TestCase
 
     protected function tearDown(): void
     {
-        $this->controller = null;
+        unset($this->controller);
     }
 
     public function testListActionWithoutFilter(): void
@@ -182,8 +179,10 @@ final class CategoryAdminControllerTest extends TestCase
      */
     public function testListAction($context): void
     {
+        $contextValue = false === $context ? '' : $context;
+
         $this->request->query->set('_list_mode', 'list');
-        $this->request->query->set('filter', 'filter[context][value]='.($context ?: ''));
+        $this->request->query->set('filter', 'filter[context][value]='.$contextValue);
 
         $datagrid = $this->createMock(DatagridInterface::class);
 
@@ -207,7 +206,7 @@ final class CategoryAdminControllerTest extends TestCase
             ->method('getValues')
             ->willReturn([
                 'context' => [
-                    'value' => $context ?: '',
+                    'value' => $contextValue,
                 ],
             ]);
 
@@ -260,7 +259,7 @@ final class CategoryAdminControllerTest extends TestCase
             ->method('getPersistentParameter')
             ->willReturn('default');
 
-        if ($context) {
+        if (false !== $context) {
             $contextMock = $this->getContextMock($context);
             $this->request->query->set('context', $contextMock->getId());
             $this->contextManager->expects(static::any())
@@ -277,11 +276,12 @@ final class CategoryAdminControllerTest extends TestCase
         foreach ($categories as $category) {
             $categoryMock = $this->getMockForAbstractClass(Category::class);
             $categoryMock->setName($category[0]);
-            if ($category[1]) {
-                $categoryMock->setContext($this->getContextMock($category[1]));
-            }
+
+            $contextId = $category[1];
+            $contextMock = $this->getContextMock($contextId);
+            $categoryMock->setContext($contextMock);
             $categoryMock->setEnabled(true);
-            $categoriesMock[$categoryMock->getContext()->getId()][] = $categoryMock;
+            $categoriesMock[$contextId][] = $categoryMock;
         }
 
         $this->categoryManager->expects(static::any())
@@ -316,7 +316,7 @@ final class CategoryAdminControllerTest extends TestCase
     /**
      * @return ContextInterface&MockObject
      */
-    private function getContextMock(?string $id): ContextInterface
+    private function getContextMock(string $id): ContextInterface
     {
         $contextMock = $this->createMock(ContextInterface::class);
         $contextMock->expects(static::any())->method('getId')->willReturn($id);

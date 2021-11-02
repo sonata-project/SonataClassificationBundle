@@ -156,8 +156,9 @@ abstract class AbstractCollectionsBlockService extends AbstractClassificationBlo
 
     public function load(BlockInterface $block): void
     {
-        if (is_numeric($block->getSetting('collectionId'))) {
-            $block->setSetting('collectionId', $this->getCollection($block->getSetting('collectionId')));
+        $collectionId = $block->getSetting('collectionId');
+        if (\is_int($collectionId) || \is_string($collectionId)) {
+            $block->setSetting('collectionId', $this->getCollection($collectionId));
         }
     }
 
@@ -179,8 +180,8 @@ abstract class AbstractCollectionsBlockService extends AbstractClassificationBlo
     }
 
     /**
-     * @param CollectionInterface|int $id
-     * @param mixed                   $default
+     * @param CollectionInterface|int|string|null $id
+     * @param mixed                               $default
      */
     final protected function getCollection($id, $default = null): ?CollectionInterface
     {
@@ -188,7 +189,7 @@ abstract class AbstractCollectionsBlockService extends AbstractClassificationBlo
             return $id;
         }
 
-        if (is_numeric($id)) {
+        if (null !== $id) {
             return $this->collectionManager->find($id);
         }
 
@@ -203,7 +204,9 @@ abstract class AbstractCollectionsBlockService extends AbstractClassificationBlo
     {
         $block->setSetting(
             'collectionId',
-            \is_object($block->getSetting('collectionId')) ? $block->getSetting('collectionId')->getId() : null
+            $block->getSetting('collectionId') instanceof CollectionInterface
+                ? $block->getSetting('collectionId')->getId()
+                : null
         );
     }
 }

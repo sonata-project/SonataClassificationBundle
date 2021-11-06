@@ -52,6 +52,9 @@ abstract class Tag implements TagInterface
         return $this->getName() ?: 'n/a';
     }
 
+    /**
+     * @final since sonata-project/classification-bundle 3.18
+     */
     public function setName($name)
     {
         $this->name = $name;
@@ -59,46 +62,73 @@ abstract class Tag implements TagInterface
         $this->setSlug($name);
     }
 
+    /**
+     * @final since sonata-project/classification-bundle 3.18
+     */
     public function getName()
     {
         return $this->name;
     }
 
+    /**
+     * @final since sonata-project/classification-bundle 3.18
+     */
     public function setEnabled($enabled)
     {
         $this->enabled = $enabled;
     }
 
+    /**
+     * @final since sonata-project/classification-bundle 3.18
+     */
     public function getEnabled()
     {
         return $this->enabled;
     }
 
+    /**
+     * @final since sonata-project/classification-bundle 3.18
+     */
     public function setSlug($slug)
     {
         $this->slug = self::slugify($slug);
     }
 
+    /**
+     * @final since sonata-project/classification-bundle 3.18
+     */
     public function getSlug()
     {
         return $this->slug;
     }
 
+    /**
+     * @final since sonata-project/classification-bundle 3.18
+     */
     public function setCreatedAt(?\DateTime $createdAt = null)
     {
         $this->createdAt = $createdAt;
     }
 
+    /**
+     * @final since sonata-project/classification-bundle 3.18
+     */
     public function getCreatedAt()
     {
         return $this->createdAt;
     }
 
+    /**
+     * @final since sonata-project/classification-bundle 3.18
+     */
     public function setUpdatedAt(?\DateTime $updatedAt = null)
     {
         $this->updatedAt = $updatedAt;
     }
 
+    /**
+     * @final since sonata-project/classification-bundle 3.18
+     */
     public function getUpdatedAt()
     {
         return $this->updatedAt;
@@ -110,9 +140,9 @@ abstract class Tag implements TagInterface
     }
 
     /**
-     * @see http://snipplr.com/view/22741/slugify-a-string-in-php/.
+     * @final since sonata-project/classification-bundle 3.18
      *
-     * @static
+     * @see http://snipplr.com/view/22741/slugify-a-string-in-php/.
      *
      * @param string $text
      *
@@ -129,11 +159,17 @@ abstract class Tag implements TagInterface
         return $text;
     }
 
+    /**
+     * @final since sonata-project/classification-bundle 3.18
+     */
     public function setContext(ContextInterface $context)
     {
         $this->context = $context;
     }
 
+    /**
+     * @final since sonata-project/classification-bundle 3.18
+     */
     public function getContext()
     {
         return $this->context;

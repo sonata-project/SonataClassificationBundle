@@ -23,7 +23,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Validator\Constraints\Valid;
 
 /**
- * @final since sonata-project/classification-bundle 3.x
+ * @final since sonata-project/classification-bundle 3.18
  */
 class CollectionAdmin extends ContextAwareAdmin
 {

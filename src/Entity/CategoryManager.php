@@ -23,7 +23,7 @@ use Sonata\DatagridBundle\ProxyQuery\Doctrine\ProxyQuery;
 use Sonata\Doctrine\Entity\BaseEntityManager;
 
 /**
- * @final since sonata-project/classification-bundle 3.x
+ * @final since sonata-project/classification-bundle 3.18
  */
 class CategoryManager extends BaseEntityManager implements CategoryManagerInterface
 {
@@ -51,13 +51,13 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
     /**
      * Returns a pager to iterate over the root category.
      *
-     * @deprecated since sonata-project/classification-bundle 3.x, to be removed in 4.0.
+     * @deprecated since sonata-project/classification-bundle 3.18, to be removed in 4.0.
      */
     public function getRootCategoriesPager($page = 1, $limit = 25, $criteria = [])
     {
         @trigger_error(
             sprintf(
-                'The method %s is deprecated since sonata-project/classification-bundle 3.x and will be removed in 4.0.',
+                'The method %s is deprecated since sonata-project/classification-bundle 3.18 and will be removed in 4.0.',
                 __METHOD__
             ),
             \E_USER_DEPRECATED
@@ -79,13 +79,13 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
     }
 
     /**
-     * @deprecated since sonata-project/classification-bundle 3.x, to be removed in 4.0.
+     * @deprecated since sonata-project/classification-bundle 3.18, to be removed in 4.0.
      */
     public function getSubCategoriesPager($categoryId, $page = 1, $limit = 25, $criteria = [])
     {
         @trigger_error(
             sprintf(
-                'The method %s is deprecated since sonata-project/classification-bundle 3.x and will be removed in 4.0.',
+                'The method %s is deprecated since sonata-project/classification-bundle 3.18 and will be removed in 4.0.',
                 __METHOD__
             ),
             \E_USER_DEPRECATED
@@ -226,7 +226,7 @@ class CategoryManager extends BaseEntityManager implements CategoryManagerInterf
     /**
      * NEXT_MAJOR: remove this method.
      *
-     * @deprecated since sonata-project/classification-bundle 3.x, to be removed in 4.0.
+     * @deprecated since sonata-project/classification-bundle 3.18, to be removed in 4.0.
      */
     public function getPager(array $criteria, $page, $limit = 10, array $sort = [])
     {

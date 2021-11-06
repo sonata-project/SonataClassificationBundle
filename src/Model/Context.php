@@ -45,41 +45,65 @@ abstract class Context implements ContextInterface
         return $this->getName() ?: 'n/a';
     }
 
+    /**
+     * @final since sonata-project/classification-bundle 3.18
+     */
     public function setName($name)
     {
         $this->name = $name;
     }
 
+    /**
+     * @final since sonata-project/classification-bundle 3.18
+     */
     public function getName()
     {
         return $this->name;
     }
 
+    /**
+     * @final since sonata-project/classification-bundle 3.18
+     */
     public function setEnabled($enabled)
     {
         $this->enabled = $enabled;
     }
 
+    /**
+     * @final since sonata-project/classification-bundle 3.18
+     */
     public function getEnabled()
     {
         return $this->enabled;
     }
 
+    /**
+     * @final since sonata-project/classification-bundle 3.18
+     */
     public function setCreatedAt(?\DateTime $createdAt = null)
     {
         $this->createdAt = $createdAt;
     }
 
+    /**
+     * @final since sonata-project/classification-bundle 3.18
+     */
     public function getCreatedAt()
     {
         return $this->createdAt;
     }
 
+    /**
+     * @final since sonata-project/classification-bundle 3.18
+     */
     public function setUpdatedAt(?\DateTime $updatedAt = null)
     {
         $this->updatedAt = $updatedAt;
     }
 
+    /**
+     * @final since sonata-project/classification-bundle 3.18
+     */
     public function getUpdatedAt()
     {
         return $this->updatedAt;
@@ -90,11 +114,17 @@ abstract class Context implements ContextInterface
         $this->setUpdatedAt(new \DateTime());
     }
 
+    /**
+     * @final since sonata-project/classification-bundle 3.18
+     */
     public function setId($id)
     {
         $this->id = $id;
     }
 
+    /**
+     * @final since sonata-project/classification-bundle 3.18
+     */
     public function getId()
     {
         return $this->id;

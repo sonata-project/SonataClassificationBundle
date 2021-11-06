@@ -25,7 +25,7 @@ use Symfony\Component\HttpFoundation\Response;
  *
  * @author Thomas Rabaix <thomas.rabaix@sonata-project.org>
  *
- * @final since sonata-project/classification-bundle 3.x
+ * @final since sonata-project/classification-bundle 3.18
  */
 class CategoryAdminController extends Controller
 {

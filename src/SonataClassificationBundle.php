@@ -23,7 +23,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
- * @final since sonata-project/classification-bundle 3.x
+ * @final since sonata-project/classification-bundle 3.18
  */
 class SonataClassificationBundle extends Bundle
 {

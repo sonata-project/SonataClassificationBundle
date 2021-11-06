@@ -84,6 +84,9 @@ abstract class Category implements CategoryInterface
         return $this->getName() ?: 'n/a';
     }
 
+    /**
+     * @final since sonata-project/classification-bundle 3.18
+     */
     public function setName($name)
     {
         $this->name = $name;
@@ -91,36 +94,57 @@ abstract class Category implements CategoryInterface
         $this->setSlug($name);
     }
 
+    /**
+     * @final since sonata-project/classification-bundle 3.18
+     */
     public function getName()
     {
         return $this->name;
     }
 
+    /**
+     * @final since sonata-project/classification-bundle 3.18
+     */
     public function setEnabled($enabled)
     {
         $this->enabled = $enabled;
     }
 
+    /**
+     * @final since sonata-project/classification-bundle 3.18
+     */
     public function getEnabled()
     {
         return $this->enabled;
     }
 
+    /**
+     * @final since sonata-project/classification-bundle 3.18
+     */
     public function setSlug($slug)
     {
         $this->slug = Tag::slugify($slug);
     }
 
+    /**
+     * @final since sonata-project/classification-bundle 3.18
+     */
     public function getSlug()
     {
         return $this->slug;
     }
 
+    /**
+     * @final since sonata-project/classification-bundle 3.18
+     */
     public function setDescription($description)
     {
         $this->description = $description;
     }
 
+    /**
+     * @final since sonata-project/classification-bundle 3.18
+     */
     public function getDescription()
     {
         return $this->description;
@@ -137,31 +161,49 @@ abstract class Category implements CategoryInterface
         $this->setUpdatedAt(new \DateTime());
     }
 
+    /**
+     * @final since sonata-project/classification-bundle 3.18
+     */
     public function setCreatedAt(\DateTime $createdAt)
     {
         $this->createdAt = $createdAt;
     }
 
+    /**
+     * @final since sonata-project/classification-bundle 3.18
+     */
     public function getCreatedAt()
     {
         return $this->createdAt;
     }
 
+    /**
+     * @final since sonata-project/classification-bundle 3.18
+     */
     public function setUpdatedAt(\DateTime $updatedAt)
     {
         $this->updatedAt = $updatedAt;
     }
 
+    /**
+     * @final since sonata-project/classification-bundle 3.18
+     */
     public function getUpdatedAt()
     {
         return $this->updatedAt;
     }
 
+    /**
+     * @final since sonata-project/classification-bundle 3.18
+     */
     public function setPosition($position)
     {
         $this->position = $position;
     }
 
+    /**
+     * @final since sonata-project/classification-bundle 3.18
+     */
     public function getPosition()
     {
         return $this->position;
@@ -175,6 +217,9 @@ abstract class Category implements CategoryInterface
         $this->addChild($child, true);
     }
 
+    /**
+     * @final since sonata-project/classification-bundle 3.18
+     */
     public function addChild(CategoryInterface $child, $nested = false)
     {
         $this->children[] = $child;
@@ -188,6 +233,9 @@ abstract class Category implements CategoryInterface
         }
     }
 
+    /**
+     * @final since sonata-project/classification-bundle 3.18
+     */
     public function removeChild(CategoryInterface $childToDelete)
     {
         foreach ($this->getChildren() as $pos => $child) {
@@ -205,11 +253,17 @@ abstract class Category implements CategoryInterface
         }
     }
 
+    /**
+     * @final since sonata-project/classification-bundle 3.18
+     */
     public function getChildren()
     {
         return $this->children;
     }
 
+    /**
+     * @final since sonata-project/classification-bundle 3.18
+     */
     public function setChildren($children)
     {
         $this->children = new ArrayCollection();
@@ -219,11 +273,17 @@ abstract class Category implements CategoryInterface
         }
     }
 
+    /**
+     * @final since sonata-project/classification-bundle 3.18
+     */
     public function hasChildren()
     {
         return \count($this->children) > 0;
     }
 
+    /**
+     * @final since sonata-project/classification-bundle 3.18
+     */
     public function setParent(?CategoryInterface $parent = null, $nested = false)
     {
         $this->parent = $parent;
@@ -233,26 +293,41 @@ abstract class Category implements CategoryInterface
         }
     }
 
+    /**
+     * @final since sonata-project/classification-bundle 3.18
+     */
     public function getParent()
     {
         return $this->parent;
     }
 
+    /**
+     * @final since sonata-project/classification-bundle 3.18
+     */
     public function setMedia(?MediaInterface $media = null)
     {
         $this->media = $media;
     }
 
+    /**
+     * @final since sonata-project/classification-bundle 3.18
+     */
     public function getMedia()
     {
         return $this->media;
     }
 
+    /**
+     * @final since sonata-project/classification-bundle 3.18
+     */
     public function setContext(ContextInterface $context)
     {
         $this->context = $context;
     }
 
+    /**
+     * @final since sonata-project/classification-bundle 3.18
+     */
     public function getContext()
     {
         return $this->context;

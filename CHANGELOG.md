@@ -2,6 +2,31 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.18.0](https://github.com/sonata-project/SonataClassificationBundle/compare/3.17.0...3.18.0) - 2021-11-06
+### Deprecated
+- [[#765](https://github.com/sonata-project/SonataClassificationBundle/pull/765)] `BaseCategory::disableChildrenLazyLoading()` ([@VincentLanglet](https://github.com/VincentLanglet))
+- [[#760](https://github.com/sonata-project/SonataClassificationBundle/pull/760)] CategoryManager::getRootCategoriesPager() ([@VincentLanglet](https://github.com/VincentLanglet))
+- [[#760](https://github.com/sonata-project/SonataClassificationBundle/pull/760)] CategoryManager::getSubCategoriesPager() ([@VincentLanglet](https://github.com/VincentLanglet))
+- [[#735](https://github.com/sonata-project/SonataClassificationBundle/pull/735)] Deprecated ReST API with FOSRest, Nelmio Api Docs and JMS Serializer. ([@wbloszyk](https://github.com/wbloszyk))
+- [[#738](https://github.com/sonata-project/SonataClassificationBundle/pull/738)] Extending classes marked as final: ([@wbloszyk](https://github.com/wbloszyk))
+- [[#738](https://github.com/sonata-project/SonataClassificationBundle/pull/738)] `Sonata\ClassificationBundle\Admin\CategoryAdmin` ([@wbloszyk](https://github.com/wbloszyk))
+- [[#738](https://github.com/sonata-project/SonataClassificationBundle/pull/738)] `Sonata\ClassificationBundle\Admin\CollectionAdmin` ([@wbloszyk](https://github.com/wbloszyk))
+- [[#738](https://github.com/sonata-project/SonataClassificationBundle/pull/738)] `Sonata\ClassificationBundle\Admin\ContextAdmin` ([@wbloszyk](https://github.com/wbloszyk))
+- [[#738](https://github.com/sonata-project/SonataClassificationBundle/pull/738)] `Sonata\ClassificationBundle\Admin\TagAdmin` ([@wbloszyk](https://github.com/wbloszyk))
+- [[#738](https://github.com/sonata-project/SonataClassificationBundle/pull/738)] `Sonata\ClassificationBundle\Command\FixContextCommand` ([@wbloszyk](https://github.com/wbloszyk))
+- [[#738](https://github.com/sonata-project/SonataClassificationBundle/pull/738)] `Sonata\ClassificationBundle\Controller\CategoryAdminController` ([@wbloszyk](https://github.com/wbloszyk))
+- [[#738](https://github.com/sonata-project/SonataClassificationBundle/pull/738)] `Sonata\ClassificationBundle\DependencyInjection\Configuration` ([@wbloszyk](https://github.com/wbloszyk))
+- [[#738](https://github.com/sonata-project/SonataClassificationBundle/pull/738)] `Sonata\ClassificationBundle\DependencyInjection\SonataClassificationExtension` ([@wbloszyk](https://github.com/wbloszyk))
+- [[#738](https://github.com/sonata-project/SonataClassificationBundle/pull/738)] `Sonata\ClassificationBundle\Document\CategoryManager` ([@wbloszyk](https://github.com/wbloszyk))
+- [[#738](https://github.com/sonata-project/SonataClassificationBundle/pull/738)] `Sonata\ClassificationBundle\Document\CollectionManager` ([@wbloszyk](https://github.com/wbloszyk))
+- [[#738](https://github.com/sonata-project/SonataClassificationBundle/pull/738)] `Sonata\ClassificationBundle\Document\TagManager` ([@wbloszyk](https://github.com/wbloszyk))
+- [[#738](https://github.com/sonata-project/SonataClassificationBundle/pull/738)] `Sonata\ClassificationBundle\Entity\CategoryManager` ([@wbloszyk](https://github.com/wbloszyk))
+- [[#738](https://github.com/sonata-project/SonataClassificationBundle/pull/738)] `Sonata\ClassificationBundle\Entity\CollectionManager` ([@wbloszyk](https://github.com/wbloszyk))
+- [[#738](https://github.com/sonata-project/SonataClassificationBundle/pull/738)] `Sonata\ClassificationBundle\Entity\ContextManager` ([@wbloszyk](https://github.com/wbloszyk))
+- [[#738](https://github.com/sonata-project/SonataClassificationBundle/pull/738)] `Sonata\ClassificationBundle\Entity\TagManager` ([@wbloszyk](https://github.com/wbloszyk))
+- [[#738](https://github.com/sonata-project/SonataClassificationBundle/pull/738)] `Sonata\ClassificationBundle\Form\Type\Category\SelectorType` ([@wbloszyk](https://github.com/wbloszyk))
+- [[#738](https://github.com/sonata-project/SonataClassificationBundle/pull/738)] `Sonata\ClassificationBundle\SonataClassificationBundle` ([@wbloszyk](https://github.com/wbloszyk))
+
 ## [3.17.0](https://github.com/sonata-project/SonataClassificationBundle/compare/3.16.0...3.17.0) - 2021-09-21
 ### Added
 - [[#721](https://github.com/sonata-project/SonataClassificationBundle/pull/721)] Missing methods in interfaces (through the `@method` annotation). ([@phansys](https://github.com/phansys))

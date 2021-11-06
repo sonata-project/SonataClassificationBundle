@@ -20,14 +20,14 @@ use Sonata\DatagridBundle\ProxyQuery\Doctrine\ProxyQuery;
 use Sonata\Doctrine\Entity\BaseEntityManager;
 
 /**
- * @final since sonata-project/classification-bundle 3.x
+ * @final since sonata-project/classification-bundle 3.18
  */
 class CollectionManager extends BaseEntityManager implements CollectionManagerInterface
 {
     /**
      * NEXT_MAJOR: remove this method.
      *
-     * @deprecated since sonata-project/classification-bundle 3.x, to be removed in 4.0.
+     * @deprecated since sonata-project/classification-bundle 3.18, to be removed in 4.0.
      */
     public function getPager(array $criteria, $page, $limit = 10, array $sort = [])
     {

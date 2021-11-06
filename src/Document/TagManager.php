@@ -17,14 +17,14 @@ use Sonata\DatagridBundle\ProxyQuery\Doctrine\ProxyQuery;
 use Sonata\Doctrine\Document\BaseDocumentManager;
 
 /**
- * @final since sonata-project/classification-bundle 3.x
+ * @final since sonata-project/classification-bundle 3.18
  */
 class TagManager extends BaseDocumentManager implements TagManagerInterface
 {
     /**
      * NEXT_MAJOR: remove this method.
      *
-     * @deprecated since sonata-project/classification-bundle 3.x, to be removed in 4.0.
+     * @deprecated since sonata-project/classification-bundle 3.18, to be removed in 4.0.
      */
     public function getPager(array $criteria, $page, $limit = 10, array $sort = [])
     {

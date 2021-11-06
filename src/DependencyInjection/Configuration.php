@@ -27,7 +27,7 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
  *
  * To learn more see {@link http://symfony.com/doc/current/cookbook/bundles/extension.html#cookbook-bundles-extension-config-class}
  *
- * @final since sonata-project/classification-bundle 3.x
+ * @final since sonata-project/classification-bundle 3.18
  */
 class Configuration implements ConfigurationInterface
 {

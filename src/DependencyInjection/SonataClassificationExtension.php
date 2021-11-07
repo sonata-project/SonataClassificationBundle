@@ -25,6 +25,8 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
  * SonataClassificationBundleExtension.
  *
  * @author Thomas Rabaix <thomas.rabaix@sonata-project.org>
+ *
+ * @phpstan-import-type Config from Configuration
  */
 final class SonataClassificationExtension extends Extension
 {
@@ -35,6 +37,8 @@ final class SonataClassificationExtension extends Extension
     {
         $processor = new Processor();
         $configuration = new Configuration();
+
+        /** @phpstan-var Config $config */
         $config = $processor->processConfiguration($configuration, $configs);
 
         /** @var array<string, mixed> $bundles */
@@ -61,7 +65,8 @@ final class SonataClassificationExtension extends Extension
     }
 
     /**
-     * @param array<string, array<string, string>> $config
+     * @param array<string, mixed> $config
+     * @phpstan-param Config $config
      */
     private function configureClass(array $config, ContainerBuilder $container): void
     {
@@ -79,7 +84,8 @@ final class SonataClassificationExtension extends Extension
     }
 
     /**
-     * @param array<string, array<string, array<string, string>>> $config
+     * @param array<string, mixed> $config
+     * @phpstan-param Config $config
      */
     private function configureAdmin(array $config, ContainerBuilder $container): void
     {
@@ -101,24 +107,23 @@ final class SonataClassificationExtension extends Extension
     }
 
     /**
-     * @param array<string, array<string, string>> $config
+     * @param array<string, mixed> $config
+     * @phpstan-param Config $config
      */
     private function registerSonataDoctrineMapping(array $config): void
     {
-        $classes = $config['class'];
         foreach ($config['class'] as $class) {
             if (!class_exists($class)) {
                 return;
             }
         }
-        /** @var array<string, class-string> $classes */
 
         $collector = DoctrineCollector::getInstance();
 
         $collector->addAssociation(
-            $classes['category'],
+            $config['class']['category'],
             'mapOneToMany',
-            OptionsBuilder::createOneToMany('children', $classes['category'])
+            OptionsBuilder::createOneToMany('children', $config['class']['category'])
                 ->cascade(['persist'])
                 ->mappedBy('parent')
                 ->orphanRemoval()
@@ -126,9 +131,9 @@ final class SonataClassificationExtension extends Extension
         );
 
         $collector->addAssociation(
-            $classes['category'],
+            $config['class']['category'],
             'mapManyToOne',
-            OptionsBuilder::createManyToOne('parent', $classes['category'])
+            OptionsBuilder::createManyToOne('parent', $config['class']['category'])
                 ->cascade(['persist', 'refresh', 'merge', 'detach'])
                 ->inversedBy('children')
                 ->addJoin([
@@ -138,18 +143,18 @@ final class SonataClassificationExtension extends Extension
                 ])
         );
 
-        $contextOptions = OptionsBuilder::createManyToOne('context', $classes['context'])
+        $contextOptions = OptionsBuilder::createManyToOne('context', $config['class']['context'])
             ->cascade(['persist'])
             ->addJoin([
                 'name' => 'context',
                 'referencedColumnName' => 'id',
             ]);
 
-        $collector->addAssociation($classes['category'], 'mapManyToOne', $contextOptions);
-        $collector->addAssociation($classes['tag'], 'mapManyToOne', $contextOptions);
-        $collector->addAssociation($classes['collection'], 'mapManyToOne', $contextOptions);
+        $collector->addAssociation($config['class']['category'], 'mapManyToOne', $contextOptions);
+        $collector->addAssociation($config['class']['tag'], 'mapManyToOne', $contextOptions);
+        $collector->addAssociation($config['class']['collection'], 'mapManyToOne', $contextOptions);
 
-        $collector->addUnique($classes['tag'], 'tag_context', ['slug', 'context']);
-        $collector->addUnique($classes['collection'], 'tag_collection', ['slug', 'context']);
+        $collector->addUnique($config['class']['tag'], 'tag_context', ['slug', 'context']);
+        $collector->addUnique($config['class']['collection'], 'tag_collection', ['slug', 'context']);
     }
 }

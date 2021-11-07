@@ -25,6 +25,8 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
  * SonataClassificationBundleExtension.
  *
  * @author Thomas Rabaix <thomas.rabaix@sonata-project.org>
+ *
+ * @phpstan-import-type Config from Configuration
  */
 final class SonataClassificationExtension extends Extension
 {
@@ -35,6 +37,8 @@ final class SonataClassificationExtension extends Extension
     {
         $processor = new Processor();
         $configuration = new Configuration();
+
+        /** @phpstan-var Config $config */
         $config = $processor->processConfiguration($configuration, $configs);
 
         /** @var array<string, mixed> $bundles */
@@ -61,7 +65,8 @@ final class SonataClassificationExtension extends Extension
     }
 
     /**
-     * @param array<string, array<string, string>> $config
+     * @param array<string, mixed> $config
+     * @phpstan-param Config $config
      */
     private function configureClass(array $config, ContainerBuilder $container): void
     {
@@ -79,7 +84,8 @@ final class SonataClassificationExtension extends Extension
     }
 
     /**
-     * @param array<string, array<string, array<string, string>>> $config
+     * @param array<string, mixed> $config
+     * @phpstan-param Config $config
      */
     private function configureAdmin(array $config, ContainerBuilder $container): void
     {
@@ -101,11 +107,12 @@ final class SonataClassificationExtension extends Extension
     }
 
     /**
-     * @param array<string, array<string, string>> $config
+     * @param array<string, mixed> $config
+     * @phpstan-param Config $config
      */
     private function registerSonataDoctrineMapping(array $config): void
     {
-        foreach ($config['class'] as $type => $class) {
+        foreach ($config['class'] as $class) {
             if (!class_exists($class)) {
                 return;
             }

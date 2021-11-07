@@ -28,12 +28,4 @@ class Context extends BaseContext
      * @ORM\Column(type="string")
      */
     protected ?string $id = null;
-
-    /**
-     * Get id.
-     */
-    public function getId(): ?string
-    {
-        return $this->id;
-    }
 }

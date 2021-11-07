@@ -15,19 +15,19 @@ namespace Sonata\ClassificationBundle\Model;
 
 abstract class Collection implements CollectionInterface
 {
-    private ?string $name = null;
+    protected ?string $name = null;
 
-    private ?string $slug = null;
+    protected ?string $slug = null;
 
-    private bool $enabled = false;
+    protected bool $enabled = false;
 
-    private ?string $description = null;
+    protected ?string $description = null;
 
-    private ?\DateTimeInterface $createdAt = null;
+    protected ?\DateTimeInterface $createdAt = null;
 
-    private ?\DateTimeInterface $updatedAt = null;
+    protected ?\DateTimeInterface $updatedAt = null;
 
-    private ?ContextInterface $context = null;
+    protected ?ContextInterface $context = null;
 
     public function __toString(): string
     {

@@ -26,6 +26,21 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
  * This is the class that validates and merges configuration from your app/config files.
  *
  * To learn more see {@link http://symfony.com/doc/current/cookbook/bundles/extension.html#cookbook-bundles-extension-config-class}
+ *
+ * @phpstan-type Config = array{
+ *     class: array{
+ *         category: class-string,
+ *         collection: class-string,
+ *         context: class-string,
+ *         tag: class-string,
+ *     },
+ *     admin: array{
+ *         category: array{class: class-string, controller: class-string, translation: string},
+ *         collection: array{class: class-string, controller: class-string, translation: string},
+ *         context: array{class: class-string, controller: class-string, translation: string},
+ *         tag: array{class: class-string, controller: class-string, translation: string},
+ *     },
+ * }
  */
 final class Configuration implements ConfigurationInterface
 {

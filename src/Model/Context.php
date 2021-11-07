@@ -15,15 +15,15 @@ namespace Sonata\ClassificationBundle\Model;
 
 abstract class Context implements ContextInterface
 {
-    private ?string $id = null;
+    protected ?string $id = null;
 
-    private ?string $name = null;
+    protected ?string $name = null;
 
-    private ?\DateTimeInterface $createdAt = null;
+    protected ?\DateTimeInterface $createdAt = null;
 
-    private ?\DateTimeInterface $updatedAt = null;
+    protected ?\DateTimeInterface $updatedAt = null;
 
-    private bool $enabled = false;
+    protected bool $enabled = false;
 
     public function __toString(): string
     {

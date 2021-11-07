@@ -105,18 +105,20 @@ final class SonataClassificationExtension extends Extension
      */
     private function registerSonataDoctrineMapping(array $config): void
     {
-        foreach ($config['class'] as $type => $class) {
+        $classes = $config['class'];
+        foreach ($config['class'] as $class) {
             if (!class_exists($class)) {
                 return;
             }
         }
+        /** @var array<string, class-string> $classes */
 
         $collector = DoctrineCollector::getInstance();
 
         $collector->addAssociation(
-            $config['class']['category'],
+            $classes['category'],
             'mapOneToMany',
-            OptionsBuilder::createOneToMany('children', $config['class']['category'])
+            OptionsBuilder::createOneToMany('children', $classes['category'])
                 ->cascade(['persist'])
                 ->mappedBy('parent')
                 ->orphanRemoval()
@@ -124,9 +126,9 @@ final class SonataClassificationExtension extends Extension
         );
 
         $collector->addAssociation(
-            $config['class']['category'],
+            $classes['category'],
             'mapManyToOne',
-            OptionsBuilder::createManyToOne('parent', $config['class']['category'])
+            OptionsBuilder::createManyToOne('parent', $classes['category'])
                 ->cascade(['persist', 'refresh', 'merge', 'detach'])
                 ->inversedBy('children')
                 ->addJoin([
@@ -136,18 +138,18 @@ final class SonataClassificationExtension extends Extension
                 ])
         );
 
-        $contextOptions = OptionsBuilder::createManyToOne('context', $config['class']['context'])
+        $contextOptions = OptionsBuilder::createManyToOne('context', $classes['context'])
             ->cascade(['persist'])
             ->addJoin([
                 'name' => 'context',
                 'referencedColumnName' => 'id',
             ]);
 
-        $collector->addAssociation($config['class']['category'], 'mapManyToOne', $contextOptions);
-        $collector->addAssociation($config['class']['tag'], 'mapManyToOne', $contextOptions);
-        $collector->addAssociation($config['class']['collection'], 'mapManyToOne', $contextOptions);
+        $collector->addAssociation($classes['category'], 'mapManyToOne', $contextOptions);
+        $collector->addAssociation($classes['tag'], 'mapManyToOne', $contextOptions);
+        $collector->addAssociation($classes['collection'], 'mapManyToOne', $contextOptions);
 
-        $collector->addUnique($config['class']['tag'], 'tag_context', ['slug', 'context']);
-        $collector->addUnique($config['class']['collection'], 'tag_collection', ['slug', 'context']);
+        $collector->addUnique($classes['tag'], 'tag_context', ['slug', 'context']);
+        $collector->addUnique($classes['collection'], 'tag_collection', ['slug', 'context']);
     }
 }

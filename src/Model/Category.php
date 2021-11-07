@@ -51,44 +51,44 @@ abstract class Category implements CategoryInterface
         return $this->getName() ?? 'n/a';
     }
 
-    public function setName(?string $name): void
+    final public function setName(?string $name): void
     {
         $this->name = $name;
 
         $this->setSlug($name);
     }
 
-    public function getName(): ?string
+    final public function getName(): ?string
     {
         return $this->name;
     }
 
-    public function setEnabled(bool $enabled): void
+    final public function setEnabled(bool $enabled): void
     {
         $this->enabled = $enabled;
     }
 
-    public function getEnabled(): bool
+    final public function getEnabled(): bool
     {
         return $this->enabled;
     }
 
-    public function setSlug(?string $slug): void
+    final public function setSlug(?string $slug): void
     {
         $this->slug = Tag::slugify($slug ?? '');
     }
 
-    public function getSlug(): ?string
+    final public function getSlug(): ?string
     {
         return $this->slug;
     }
 
-    public function setDescription(?string $description): void
+    final public function setDescription(?string $description): void
     {
         $this->description = $description;
     }
 
-    public function getDescription(): ?string
+    final public function getDescription(): ?string
     {
         return $this->description;
     }
@@ -104,37 +104,37 @@ abstract class Category implements CategoryInterface
         $this->setUpdatedAt(new \DateTime());
     }
 
-    public function setCreatedAt(?\DateTimeInterface $createdAt): void
+    final public function setCreatedAt(?\DateTimeInterface $createdAt): void
     {
         $this->createdAt = $createdAt;
     }
 
-    public function getCreatedAt(): ?\DateTimeInterface
+    final public function getCreatedAt(): ?\DateTimeInterface
     {
         return $this->createdAt;
     }
 
-    public function setUpdatedAt(?\DateTimeInterface $updatedAt): void
+    final public function setUpdatedAt(?\DateTimeInterface $updatedAt): void
     {
         $this->updatedAt = $updatedAt;
     }
 
-    public function getUpdatedAt(): ?\DateTimeInterface
+    final public function getUpdatedAt(): ?\DateTimeInterface
     {
         return $this->updatedAt;
     }
 
-    public function setPosition(?int $position): void
+    final public function setPosition(?int $position): void
     {
         $this->position = $position;
     }
 
-    public function getPosition(): ?int
+    final public function getPosition(): ?int
     {
         return $this->position;
     }
 
-    public function addChild(CategoryInterface $child, bool $nested = false): void
+    final public function addChild(CategoryInterface $child, bool $nested = false): void
     {
         $this->children[] = $child;
 
@@ -147,7 +147,7 @@ abstract class Category implements CategoryInterface
         }
     }
 
-    public function removeChild(CategoryInterface $childToDelete): void
+    final public function removeChild(CategoryInterface $childToDelete): void
     {
         foreach ($this->getChildren() as $pos => $child) {
             if (null !== $childToDelete->getId() && $child->getId() === $childToDelete->getId()) {
@@ -164,12 +164,12 @@ abstract class Category implements CategoryInterface
         }
     }
 
-    public function getChildren(): Collection
+    final public function getChildren(): Collection
     {
         return $this->children;
     }
 
-    public function setChildren(array $children): void
+    final public function setChildren(array $children): void
     {
         $this->children = new ArrayCollection();
 
@@ -178,12 +178,12 @@ abstract class Category implements CategoryInterface
         }
     }
 
-    public function hasChildren(): bool
+    final public function hasChildren(): bool
     {
         return \count($this->children) > 0;
     }
 
-    public function setParent(?CategoryInterface $parent = null, bool $nested = false): void
+    final public function setParent(?CategoryInterface $parent = null, bool $nested = false): void
     {
         $this->parent = $parent;
 
@@ -192,17 +192,17 @@ abstract class Category implements CategoryInterface
         }
     }
 
-    public function getParent(): ?CategoryInterface
+    final public function getParent(): ?CategoryInterface
     {
         return $this->parent;
     }
 
-    public function setContext(?ContextInterface $context): void
+    final public function setContext(?ContextInterface $context): void
     {
         $this->context = $context;
     }
 
-    public function getContext(): ?ContextInterface
+    final public function getContext(): ?ContextInterface
     {
         return $this->context;
     }

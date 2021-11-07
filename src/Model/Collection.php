@@ -41,37 +41,37 @@ abstract class Collection implements CollectionInterface
         $this->setSlug($name);
     }
 
-    public function getName(): ?string
+    final public function getName(): ?string
     {
         return $this->name;
     }
 
-    public function setEnabled(bool $enabled): void
+    final public function setEnabled(bool $enabled): void
     {
         $this->enabled = $enabled;
     }
 
-    public function getEnabled(): bool
+    final public function getEnabled(): bool
     {
         return $this->enabled;
     }
 
-    public function setSlug(?string $slug): void
+    final public function setSlug(?string $slug): void
     {
         $this->slug = Tag::slugify($slug ?? '');
     }
 
-    public function getSlug(): ?string
+    final public function getSlug(): ?string
     {
         return $this->slug;
     }
 
-    public function setDescription(?string $description): void
+    final public function setDescription(?string $description): void
     {
         $this->description = $description;
     }
 
-    public function getDescription(): ?string
+    final public function getDescription(): ?string
     {
         return $this->description;
     }
@@ -87,32 +87,32 @@ abstract class Collection implements CollectionInterface
         $this->setUpdatedAt(new \DateTime());
     }
 
-    public function setCreatedAt(?\DateTimeInterface $createdAt): void
+    final public function setCreatedAt(?\DateTimeInterface $createdAt): void
     {
         $this->createdAt = $createdAt;
     }
 
-    public function getCreatedAt(): ?\DateTimeInterface
+    final public function getCreatedAt(): ?\DateTimeInterface
     {
         return $this->createdAt;
     }
 
-    public function setUpdatedAt(?\DateTimeInterface $updatedAt): void
+    final public function setUpdatedAt(?\DateTimeInterface $updatedAt): void
     {
         $this->updatedAt = $updatedAt;
     }
 
-    public function getUpdatedAt(): ?\DateTimeInterface
+    final public function getUpdatedAt(): ?\DateTimeInterface
     {
         return $this->updatedAt;
     }
 
-    public function setContext(?ContextInterface $context): void
+    final public function setContext(?ContextInterface $context): void
     {
         $this->context = $context;
     }
 
-    public function getContext(): ?ContextInterface
+    final public function getContext(): ?ContextInterface
     {
         return $this->context;
     }

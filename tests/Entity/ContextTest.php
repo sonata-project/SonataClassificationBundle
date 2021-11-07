@@ -17,8 +17,4 @@ use Sonata\ClassificationBundle\Entity\BaseContext;
 
 abstract class ContextTest extends BaseContext
 {
-    public function getId(): ?string
-    {
-        return $this->id;
-    }
 }

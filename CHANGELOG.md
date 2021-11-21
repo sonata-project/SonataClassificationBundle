@@ -2,6 +2,9 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [4.0.0-RC1](https://github.com/sonata-project/SonataClassificationBundle/compare/4.0.0-alpha1...4.0.0-RC1) - 2021-11-20
+- No significant changes
+
 ## [4.0.0-alpha1](https://github.com/sonata-project/SonataClassificationBundle/compare/3.17.0...4.0.0-alpha1) - 2021-11-03
 ### Added
 - [[#752](https://github.com/sonata-project/SonataClassificationBundle/pull/752)] Make blocks editable ([@core23](https://github.com/core23))

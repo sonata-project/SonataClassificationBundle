@@ -1,15 +1,26 @@
 framework:
     test: true
-    secret: '50n474.U53r'
+    secret: secret
     form:
         enabled: true
     translator:
         enabled: true
+    validation:
+        enable_annotations: false
+    router:
+        utf8: true
+
+security:
+    role_hierarchy: null
+
+    firewalls:
+        test:
+            security: false
+
+    access_control: null
 
 twig:
     exception_controller: null
-    paths:
-        - '%kernel.project_dir%/Resources/views'
     strict_variables: '%kernel.debug%'
 
 sonata_classification:

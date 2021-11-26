@@ -13,12 +13,10 @@ declare(strict_types=1);
 
 namespace Sonata\ClassificationBundle\DependencyInjection;
 
-use Sonata\AdminBundle\Controller\CRUDController;
 use Sonata\ClassificationBundle\Admin\CategoryAdmin;
 use Sonata\ClassificationBundle\Admin\CollectionAdmin;
 use Sonata\ClassificationBundle\Admin\ContextAdmin;
 use Sonata\ClassificationBundle\Admin\TagAdmin;
-use Sonata\ClassificationBundle\Controller\CategoryAdminController;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
@@ -73,7 +71,7 @@ final class Configuration implements ConfigurationInterface
                             ->addDefaultsIfNotSet()
                             ->children()
                                 ->scalarNode('class')->cannotBeEmpty()->defaultValue(CategoryAdmin::class)->end()
-                                ->scalarNode('controller')->cannotBeEmpty()->defaultValue(CategoryAdminController::class)->end()
+                                ->scalarNode('controller')->cannotBeEmpty()->defaultValue('sonata.classification.controller.category_admin')->end()
                                 ->scalarNode('translation')->cannotBeEmpty()->defaultValue('SonataClassificationBundle')->end()
                             ->end()
                         ->end()
@@ -81,7 +79,7 @@ final class Configuration implements ConfigurationInterface
                             ->addDefaultsIfNotSet()
                             ->children()
                                 ->scalarNode('class')->cannotBeEmpty()->defaultValue(TagAdmin::class)->end()
-                                ->scalarNode('controller')->cannotBeEmpty()->defaultValue(CRUDController::class)->end()
+                                ->scalarNode('controller')->cannotBeEmpty()->defaultValue('%sonata.admin.configuration.default_controller%')->end()
                                 ->scalarNode('translation')->cannotBeEmpty()->defaultValue('SonataClassificationBundle')->end()
                             ->end()
                         ->end()
@@ -89,7 +87,7 @@ final class Configuration implements ConfigurationInterface
                             ->addDefaultsIfNotSet()
                             ->children()
                                 ->scalarNode('class')->cannotBeEmpty()->defaultValue(CollectionAdmin::class)->end()
-                                ->scalarNode('controller')->cannotBeEmpty()->defaultValue(CRUDController::class)->end()
+                                ->scalarNode('controller')->cannotBeEmpty()->defaultValue('%sonata.admin.configuration.default_controller%')->end()
                                 ->scalarNode('translation')->cannotBeEmpty()->defaultValue('SonataClassificationBundle')->end()
                             ->end()
                         ->end()
@@ -97,7 +95,7 @@ final class Configuration implements ConfigurationInterface
                             ->addDefaultsIfNotSet()
                             ->children()
                                 ->scalarNode('class')->cannotBeEmpty()->defaultValue(ContextAdmin::class)->end()
-                                ->scalarNode('controller')->cannotBeEmpty()->defaultValue(CRUDController::class)->end()
+                                ->scalarNode('controller')->cannotBeEmpty()->defaultValue('%sonata.admin.configuration.default_controller%')->end()
                                 ->scalarNode('translation')->cannotBeEmpty()->defaultValue('SonataClassificationBundle')->end()
                             ->end()
                         ->end()

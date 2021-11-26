@@ -74,14 +74,14 @@ final class CategoryAdminController extends Controller
 
     public function treeAction(Request $request): Response
     {
-        $categoryManager = $this->get('sonata.classification.manager.category');
+        $categoryManager = $this->container->get('sonata.classification.manager.category');
         \assert($categoryManager instanceof CategoryManagerInterface);
 
         $currentContext = null;
 
         $contextId = $request->get('context');
         if (null !== $contextId) {
-            $contextManager = $this->get('sonata.classification.manager.context');
+            $contextManager = $this->container->get('sonata.classification.manager.context');
             \assert($contextManager instanceof ContextManagerInterface);
 
             $currentContext = $contextManager->find($contextId);

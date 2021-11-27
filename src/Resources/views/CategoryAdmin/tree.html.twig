@@ -32,8 +32,8 @@ file that was distributed with this source code.
                     {% endif %}
                     <i class="text-muted">{{ element.description }}</i>
                     {#<a class="label label-default pull-right" href="{{ admin.generateObjectUrl('edit', element) }}">edit <i class="fa fa-magic"></i></a>#}
-                    {% if element.enabled %}<span class="label label-success pull-right"><i class="fa fa-check"></i> {{ admin.trans('active', {}, admin.translationDomain) }}</span>{% endif %}
-                    {% if not element.enabled %}<span class="label label-danger pull-right"><i class="fa fa-times"></i> {{ admin.trans('disabled', {}, admin.translationDomain) }}</span>{% endif %}
+                    {% if element.enabled %}<span class="label label-success pull-right"><i class="fa fa-check"></i> {{ 'active'|trans({}, admin.translationDomain) }}</span>{% endif %}
+                    {% if not element.enabled %}<span class="label label-danger pull-right"><i class="fa fa-times"></i> {{ 'disabled'|trans({}, admin.translationDomain) }}</span>{% endif %}
                 </div>
 
                 {% if element.children|length %}
@@ -57,7 +57,7 @@ file that was distributed with this source code.
         <div class="box box-primary">
             <div class="box-header">
                 <h1 class="box-title">
-                    {{ admin.trans('tree_catalog_title', {}, admin.translationdomain) }}
+                    {{ 'tree_catalog_title'|trans({}, admin.translationdomain) }}
                     {% if not app.request.get('hide_context') and current_context is not empty %}
                         <div class="btn-group">
                             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">

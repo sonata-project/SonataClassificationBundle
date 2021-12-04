@@ -40,12 +40,12 @@ final class CategoryAdminController extends Controller
 
     public function listAction(Request $request): Response
     {
-        if (null === $request->get('filter') && null === $request->get('filters')) {
+        if (null === $request->query->get('filter') && null === $request->query->get('filters')) {
             return new RedirectResponse($this->admin->generateUrl('tree', $request->query->all()));
         }
 
-        $listMode = $request->get('_list_mode');
-        if (null !== $listMode) {
+        $listMode = $request->query->get('_list_mode');
+        if (\is_string($listMode)) {
             $this->admin->setListMode($listMode);
         }
 
@@ -79,7 +79,7 @@ final class CategoryAdminController extends Controller
 
         $currentContext = null;
 
-        $contextId = $request->get('context');
+        $contextId = $request->query->get('context');
         if (null !== $contextId) {
             $contextManager = $this->container->get('sonata.classification.manager.context');
             \assert($contextManager instanceof ContextManagerInterface);

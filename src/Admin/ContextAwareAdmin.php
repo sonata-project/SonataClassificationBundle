@@ -59,7 +59,7 @@ abstract class ContextAwareAdmin extends AbstractAdmin
     {
         $parameters = [
             'context' => '',
-            'hide_context' => $this->hasRequest() ? (int) $this->getRequest()->get('hide_context', 0) : 0,
+            'hide_context' => $this->hasRequest() ? $this->getRequest()->query->getInt('hide_context', 0) : 0,
         ];
 
         if ($this->hasSubject()) {
@@ -71,7 +71,7 @@ abstract class ContextAwareAdmin extends AbstractAdmin
         }
 
         if ($this->hasRequest()) {
-            $parameters['context'] = $this->getRequest()->get('context');
+            $parameters['context'] = $this->getRequest()->query->get('context');
 
             return $parameters;
         }

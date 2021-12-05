@@ -10,7 +10,7 @@ Here is a sample implementation for a custom category list block::
 
     class CustomCategoriesBlockService extends AbstractCategoriesBlockService
     {
-        public function configureSettings(OptionsResolver $resolver)
+        public function configureSettings(OptionsResolver $resolver): void
         {
             parent::configureSettings($resolver);
 
@@ -20,9 +20,9 @@ Here is a sample implementation for a custom category list block::
             ]);
         }
 
-        public function getBlockMetadata($code = null)
+        public function getMetadata(): Metadata
         {
-            return new Metadata($this->getName(), (!is_null($code) ? $code : $this->getName()), false, 'AcmeCustomBundle', [
+            return new Metadata('my_custom_block_title', null, null, 'AcmeCustomBundle', [
                 'class' => 'fa fa-folder-open-o',
             ]);
         }
@@ -36,4 +36,3 @@ Here is a sample implementation for a custom category list block::
     {% block link_category %}
         <a href="{{ path('acme_custom_category', { 'category': item.slug }) }}">{{ item.name }}</a>
     {% endblock %}
-

@@ -24,7 +24,6 @@ class Context extends BaseContext
 {
     /**
      * @ORM\Id
-     * @ORM\GeneratedValue
      * @ORM\Column(type="string")
      */
     protected ?string $id = null;

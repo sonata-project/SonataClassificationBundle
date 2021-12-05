@@ -1,14 +1,13 @@
 {
     "name": "sonata-project/classification-bundle",
-    "type": "symfony-bundle",
     "description": "Symfony SonataClassificationBundle",
+    "license": "MIT",
+    "type": "symfony-bundle",
     "keywords": [
         "category",
         "tag",
         "taxonomy"
     ],
-    "homepage": "https://docs.sonata-project.org/projects/SonataClassificationBundle",
-    "license": "MIT",
     "authors": [
         {
             "name": "Thomas Rabaix",
@@ -20,6 +19,7 @@
             "homepage": "https://github.com/sonata-project/SonataClassificationBundle/contributors"
         }
     ],
+    "homepage": "https://docs.sonata-project.org/projects/SonataClassificationBundle",
     "require": {
         "php": "^7.3 || ^8.0",
         "cocur/slugify": "^3.0 || ^4.0",
@@ -36,17 +36,6 @@
         "symfony/http-kernel": "^4.4",
         "symfony/options-resolver": "^4.4",
         "twig/twig": "^2.12.1"
-    },
-    "conflict": {
-        "doctrine/mongodb-odm": "<2.0",
-        "friendsofsymfony/rest-bundle": "<2.3",
-        "jms/serializer": "<0.13",
-        "nelmio/api-doc-bundle": "<2.13 || >=4.0",
-        "sonata-project/admin-bundle": "<3.91.1",
-        "sonata-project/block-bundle": "<3.19 || >=4.0",
-        "sonata-project/core-bundle": "<3.20",
-        "sonata-project/doctrine-orm-admin-bundle": "<3.16",
-        "sonata-project/media-bundle": "<3.20 || >=4.0"
     },
     "require-dev": {
         "doctrine/annotations": "^1.7",
@@ -79,17 +68,20 @@
         "symfony/yaml": "^4.4",
         "vimeo/psalm": "^4.7.2"
     },
+    "conflict": {
+        "doctrine/mongodb-odm": "<2.0",
+        "friendsofsymfony/rest-bundle": "<2.3",
+        "jms/serializer": "<0.13",
+        "nelmio/api-doc-bundle": "<2.13 || >=4.0",
+        "sonata-project/admin-bundle": "<3.91.1",
+        "sonata-project/block-bundle": "<3.19 || >=4.0",
+        "sonata-project/core-bundle": "<3.20",
+        "sonata-project/doctrine-orm-admin-bundle": "<3.16",
+        "sonata-project/media-bundle": "<3.20 || >=4.0"
+    },
     "suggest": {
         "sonata-project/block-bundle": "For rendering dynamic list blocks on a page.",
         "sonata-project/media-bundle": "For media management"
-    },
-    "config": {
-        "sort-packages": true
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "3.x-dev"
-        }
     },
     "autoload": {
         "psr-4": {
@@ -99,6 +91,14 @@
     "autoload-dev": {
         "psr-4": {
             "Sonata\\ClassificationBundle\\Tests\\": "tests/"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "3.x-dev"
         }
     }
 }

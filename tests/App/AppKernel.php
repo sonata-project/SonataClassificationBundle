@@ -43,17 +43,17 @@ final class AppKernel extends Kernel
     public function registerBundles(): iterable
     {
         return [
+            new DoctrineBundle(),
             new FrameworkBundle(),
+            new KnpMenuBundle(),
             new SecurityBundle(),
-            new TwigBundle(),
-            new SonataBlockBundle(),
             new SonataTwigBundle(),
             new SonataAdminBundle(),
-            new KnpMenuBundle(),
+            new SonataBlockBundle(),
+            new SonataDoctrineBundle(),
             new SonataDoctrineORMAdminBundle(),
             new SonataClassificationBundle(),
-            new DoctrineBundle(),
-            new SonataDoctrineBundle(),
+            new TwigBundle(),
         ];
     }
 

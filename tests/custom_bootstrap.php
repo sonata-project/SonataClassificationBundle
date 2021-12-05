@@ -23,15 +23,15 @@ $input = new ArrayInput([
     'command' => 'doctrine:database:drop',
     '--force' => true,
 ]);
-$application->run($input, new NullOutput());
+$application->run($input);
 
 $input = new ArrayInput([
     'command' => 'doctrine:database:create',
     '--no-interaction' => true,
 ]);
-$application->run($input, new NullOutput());
+$application->run($input);
 
 $input = new ArrayInput([
     'command' => 'doctrine:schema:create',
 ]);
-$application->run($input, new NullOutput());
+$application->run($input);

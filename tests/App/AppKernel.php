@@ -16,9 +16,11 @@ namespace Sonata\ClassificationBundle\Tests\App;
 use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
 use Knp\Bundle\MenuBundle\KnpMenuBundle;
 use Sonata\AdminBundle\SonataAdminBundle;
+use Sonata\BlockBundle\SonataBlockBundle;
 use Sonata\ClassificationBundle\SonataClassificationBundle;
 use Sonata\Doctrine\Bridge\Symfony\SonataDoctrineBundle;
 use Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle;
+use Sonata\Twig\Bridge\Symfony\SonataTwigBundle;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Bundle\SecurityBundle\SecurityBundle;
@@ -27,6 +29,7 @@ use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
+use Symfony\Component\Security\Http\Authentication\AuthenticatorManager;
 
 final class AppKernel extends Kernel
 {
@@ -40,15 +43,17 @@ final class AppKernel extends Kernel
     public function registerBundles(): iterable
     {
         return [
+            new DoctrineBundle(),
             new FrameworkBundle(),
-            new SecurityBundle(),
-            new TwigBundle(),
-            new SonataAdminBundle(),
             new KnpMenuBundle(),
+            new SecurityBundle(),
+            new SonataTwigBundle(),
+            new SonataAdminBundle(),
+            new SonataBlockBundle(),
+            new SonataDoctrineBundle(),
             new SonataDoctrineORMAdminBundle(),
             new SonataClassificationBundle(),
-            new DoctrineBundle(),
-            new SonataDoctrineBundle(),
+            new TwigBundle(),
         ];
     }
 
@@ -68,18 +73,25 @@ final class AppKernel extends Kernel
     }
 
     /**
-     * TODO: add typehint when support for Symfony < 5.1 is dropped.
+     * TODO: Add typehint when support for Symfony < 5.1 is dropped.
      *
      * @param RoutingConfigurator $routes
      */
     protected function configureRoutes($routes): void
     {
+        $routes->import(__DIR__.'/Resources/config/routing/routes.yaml');
     }
 
     protected function configureContainer(ContainerBuilder $container, LoaderInterface $loader): void
     {
-        $loader->load(__DIR__.'/Resources/config/config.yml');
-        $loader->load(__DIR__.'/Resources/config/security.yml');
+        $loader->load(__DIR__.'/Resources/config/config.yaml');
+
+        if (class_exists(AuthenticatorManager::class)) {
+            $loader->load(__DIR__.'/Resources/config/config_symfony_v5.yaml');
+        } else {
+            $loader->load(__DIR__.'/Resources/config/config_symfony_v4.yaml');
+        }
+
         $container->setParameter('app.base_dir', $this->getBaseDir());
     }
 

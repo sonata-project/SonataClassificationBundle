@@ -14,12 +14,10 @@ declare(strict_types=1);
 namespace Sonata\ClassificationBundle\Tests\DependencyInjection;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionConfigurationTestCase;
-use Sonata\AdminBundle\Controller\CRUDController;
 use Sonata\ClassificationBundle\Admin\CategoryAdmin;
 use Sonata\ClassificationBundle\Admin\CollectionAdmin;
 use Sonata\ClassificationBundle\Admin\ContextAdmin;
 use Sonata\ClassificationBundle\Admin\TagAdmin;
-use Sonata\ClassificationBundle\Controller\CategoryAdminController;
 use Sonata\ClassificationBundle\DependencyInjection\Configuration;
 use Sonata\ClassificationBundle\DependencyInjection\SonataClassificationExtension;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -39,22 +37,22 @@ final class ConfigurationTest extends AbstractExtensionConfigurationTestCase
             'admin' => [
                 'category' => [
                     'class' => CategoryAdmin::class,
-                    'controller' => CategoryAdminController::class,
+                    'controller' => 'sonata.classification.controller.category_admin',
                     'translation' => 'SonataClassificationBundle',
                 ],
                 'tag' => [
                     'class' => TagAdmin::class,
-                    'controller' => CRUDController::class,
+                    'controller' => '%sonata.admin.configuration.default_controller%',
                     'translation' => 'SonataClassificationBundle',
                 ],
                 'collection' => [
                     'class' => CollectionAdmin::class,
-                    'controller' => CRUDController::class,
+                    'controller' => '%sonata.admin.configuration.default_controller%',
                     'translation' => 'SonataClassificationBundle',
                 ],
                 'context' => [
                     'class' => ContextAdmin::class,
-                    'controller' => CRUDController::class,
+                    'controller' => '%sonata.admin.configuration.default_controller%',
                     'translation' => 'SonataClassificationBundle',
                 ],
             ],

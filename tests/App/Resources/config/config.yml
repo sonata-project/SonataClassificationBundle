@@ -23,6 +23,7 @@ doctrine:
     dbal:
         driver: pdo_sqlite
         path: '%app.base_dir%sonata_classification_test.db3'
+        logging: false
     orm:
         entity_managers:
             default:

@@ -261,7 +261,7 @@ final class CategoryAdminControllerTest extends TestCase
 
         if (false !== $context) {
             $contextMock = $this->getContextMock($context);
-            $this->request->query->set('context', $contextMock->getId());
+            $this->request->query->set('context', $context);
             $this->contextManager->expects(static::any())
                 ->method('find')
                 ->willReturn($contextMock);

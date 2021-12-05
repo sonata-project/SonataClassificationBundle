@@ -1,14 +1,13 @@
 {
     "name": "sonata-project/classification-bundle",
-    "type": "symfony-bundle",
     "description": "Symfony SonataClassificationBundle",
+    "license": "MIT",
+    "type": "symfony-bundle",
     "keywords": [
         "category",
         "tag",
         "taxonomy"
     ],
-    "homepage": "https://docs.sonata-project.org/projects/SonataClassificationBundle",
-    "license": "MIT",
     "authors": [
         {
             "name": "Thomas Rabaix",
@@ -20,6 +19,7 @@
             "homepage": "https://github.com/sonata-project/SonataClassificationBundle/contributors"
         }
     ],
+    "homepage": "https://docs.sonata-project.org/projects/SonataClassificationBundle",
     "require": {
         "php": "^7.4 || ^8.0",
         "cocur/slugify": "^4.0",
@@ -31,18 +31,14 @@
         "symfony/console": "^4.4 || ^5.3 || ^6.0",
         "symfony/dependency-injection": "^4.4 || ^5.3 || ^6.0",
         "symfony/form": "^4.4.12 || ^5.3 || ^6.0",
+        "symfony/framework-bundle": "^4.4.6 || ^5.3 || ^6.0",
         "symfony/http-foundation": "^4.4 || ^5.3 || ^6.0",
         "symfony/http-kernel": "^4.4 || ^5.3 || ^6.0",
         "symfony/options-resolver": "^4.4 || ^5.3 || ^6.0",
+        "symfony/routing": "^4.4 || ^5.3 || ^6.0",
+        "symfony/translation": "^4.4 || ^5.3 || ^6.0",
+        "symfony/validator": "^4.4 || ^5.3 || ^6.0",
         "twig/twig": "^2.14 || ^3.0"
-    },
-    "conflict": {
-        "doctrine/mongodb-odm": "<2.2",
-        "doctrine/orm": "<2.9",
-        "sonata-project/admin-bundle": "<4.0.1",
-        "sonata-project/block-bundle": "<4.0",
-        "sonata-project/doctrine-mongodb-admin-bundle": "<4.0",
-        "sonata-project/doctrine-orm-admin-bundle": "<4.0"
     },
     "require-dev": {
         "doctrine/annotations": "^1.13.2",
@@ -65,22 +61,26 @@
         "sonata-project/block-bundle": "^4.0",
         "sonata-project/doctrine-mongodb-admin-bundle": "^4.0",
         "sonata-project/doctrine-orm-admin-bundle": "^4.0",
+        "symfony/asset": "^4.4 || ^5.3 || ^6.0",
         "symfony/browser-kit": "^4.4 || ^5.3 || ^6.0",
         "symfony/phpunit-bridge": "^6.0",
-        "symfony/routing": "^4.4 || ^5.3 || ^6.0",
         "symfony/security-bundle": "^4.4 || ^5.3 || ^6.0",
         "symfony/security-csrf": "^4.4 || ^5.3 || ^6.0",
-        "symfony/translation": "^4.4 || ^5.3 || ^6.0",
         "symfony/twig-bundle": "^4.4 || ^5.3 || ^6.0",
         "symfony/yaml": "^4.4 || ^5.3 || ^6.0",
         "vimeo/psalm": "^4.7.2"
     },
+    "conflict": {
+        "doctrine/mongodb-odm": "<2.2",
+        "doctrine/orm": "<2.9",
+        "sonata-project/admin-bundle": "<4.0.1",
+        "sonata-project/block-bundle": "<4.0",
+        "sonata-project/doctrine-mongodb-admin-bundle": "<4.0",
+        "sonata-project/doctrine-orm-admin-bundle": "<4.0"
+    },
     "suggest": {
         "sonata-project/block-bundle": "For rendering dynamic list blocks on a page.",
         "sonata-project/classification-media-bundle": "For media previews of categories and collections."
-    },
-    "config": {
-        "sort-packages": true
     },
     "autoload": {
         "psr-4": {
@@ -91,5 +91,8 @@
         "psr-4": {
             "Sonata\\ClassificationBundle\\Tests\\": "tests/"
         }
+    },
+    "config": {
+        "sort-packages": true
     }
 }

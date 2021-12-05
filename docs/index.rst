@@ -13,4 +13,3 @@ Classification Bundle
    reference/advanced_configuration
    reference/advanced_usage
    reference/block_bundle_integration
-   reference/api

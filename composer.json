@@ -37,6 +37,7 @@
         "symfony/options-resolver": "^4.4 || ^5.3 || ^6.0",
         "symfony/routing": "^4.4 || ^5.3 || ^6.0",
         "symfony/translation": "^4.4 || ^5.3 || ^6.0",
+        "symfony/translation-contracts": "^1.0 || ^2.0",
         "symfony/validator": "^4.4 || ^5.3 || ^6.0",
         "twig/twig": "^2.14 || ^3.0"
     },

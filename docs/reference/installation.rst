@@ -8,8 +8,7 @@ Installation
 Prerequisites
 -------------
 
-PHP ^7.2 and Symfony ^4.4 are needed to make this bundle work, there are
-also some Sonata dependencies that need to be installed and configured beforehand.
+There are some Sonata dependencies that need to be installed and configured beforehand.
 
 Optional dependencies:
 
@@ -36,10 +35,6 @@ Enable the Bundle
 Add ``SonataClassificationBundle`` via composer::
 
     composer require sonata-project/classification-bundle
-
-If you want to use the REST API, you also need ``friendsofsymfony/rest-bundle`` and ``nelmio/api-doc-bundle``::
-
-    composer require friendsofsymfony/rest-bundle nelmio/api-doc-bundle
 
 Next, be sure to enable the bundles in your ``config/bundles.php`` file if they
 are not already enabled::

@@ -4,7 +4,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [4.0.0](https://github.com/sonata-project/SonataClassificationBundle/compare/4.0.0-RC1...4.0.0) - 2022-01-01
 ### Added
-- [[#778](https://github.com/sonata-project/SonataClassificationBundle/pull/778)] Support for Symfony 6. ([@jordisala1991](https://github.com/jordisala1991))
+- [[#778](https://github.com/sonata-project/SonataClassificationBundle/pull/778)] Support for Symfony 6 ([@jordisala1991](https://github.com/jordisala1991))
 
 ### Fixed
 - [[#786](https://github.com/sonata-project/SonataClassificationBundle/pull/786)] Admin controller configuration ([@core23](https://github.com/core23))

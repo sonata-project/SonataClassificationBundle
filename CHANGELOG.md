@@ -2,6 +2,15 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [4.0.0](https://github.com/sonata-project/SonataClassificationBundle/compare/4.0.0-RC1...4.0.0) - 2022-01-01
+### Added
+- [[#778](https://github.com/sonata-project/SonataClassificationBundle/pull/778)] Support for Symfony 6 ([@jordisala1991](https://github.com/jordisala1991))
+
+### Fixed
+- [[#786](https://github.com/sonata-project/SonataClassificationBundle/pull/786)] Admin controller configuration ([@core23](https://github.com/core23))
+- [[#786](https://github.com/sonata-project/SonataClassificationBundle/pull/786)] Calling removed admin translator ([@core23](https://github.com/core23))
+- [[#787](https://github.com/sonata-project/SonataClassificationBundle/pull/787)] Symfony deprecations ([@jordisala1991](https://github.com/jordisala1991))
+
 ## [4.0.0-RC1](https://github.com/sonata-project/SonataClassificationBundle/compare/4.0.0-alpha1...4.0.0-RC1) - 2021-11-20
 - No significant changes
 

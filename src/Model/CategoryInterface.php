@@ -52,7 +52,7 @@ interface CategoryInterface
     public function getEnabled();
 
     /**
-     * @param int $slug
+     * @param string|null $slug
      */
     public function setSlug($slug);
 

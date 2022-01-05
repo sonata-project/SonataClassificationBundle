@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.18.1](https://github.com/sonata-project/SonataClassificationBundle/compare/3.18.0...3.18.1) - 2022-01-05
+### Fixed
+- [[#812](https://github.com/sonata-project/SonataClassificationBundle/pull/812)] Fixed CategoryInterface::getSlug() PHPDoc return type. ([@kwizer15](https://github.com/kwizer15))
+
 ## [3.18.0](https://github.com/sonata-project/SonataClassificationBundle/compare/3.17.0...3.18.0) - 2021-11-06
 ### Deprecated
 - [[#765](https://github.com/sonata-project/SonataClassificationBundle/pull/765)] `BaseCategory::disableChildrenLazyLoading()` ([@VincentLanglet](https://github.com/VincentLanglet))

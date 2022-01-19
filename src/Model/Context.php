@@ -30,42 +30,42 @@ abstract class Context implements ContextInterface
         return $this->getName() ?? 'n/a';
     }
 
-    final public function setName(?string $name): void
+    public function setName(?string $name): void
     {
         $this->name = $name;
     }
 
-    final public function getName(): ?string
+    public function getName(): ?string
     {
         return $this->name;
     }
 
-    final public function setEnabled(bool $enabled): void
+    public function setEnabled(bool $enabled): void
     {
         $this->enabled = $enabled;
     }
 
-    final public function getEnabled(): bool
+    public function getEnabled(): bool
     {
         return $this->enabled;
     }
 
-    final public function setCreatedAt(?\DateTimeInterface $createdAt): void
+    public function setCreatedAt(?\DateTimeInterface $createdAt): void
     {
         $this->createdAt = $createdAt;
     }
 
-    final public function getCreatedAt(): ?\DateTimeInterface
+    public function getCreatedAt(): ?\DateTimeInterface
     {
         return $this->createdAt;
     }
 
-    final public function setUpdatedAt(?\DateTimeInterface $updatedAt): void
+    public function setUpdatedAt(?\DateTimeInterface $updatedAt): void
     {
         $this->updatedAt = $updatedAt;
     }
 
-    final public function getUpdatedAt(): ?\DateTimeInterface
+    public function getUpdatedAt(): ?\DateTimeInterface
     {
         return $this->updatedAt;
     }
@@ -75,12 +75,12 @@ abstract class Context implements ContextInterface
         $this->setUpdatedAt(new \DateTime());
     }
 
-    final public function setId(?string $id): void
+    public function setId(?string $id): void
     {
         $this->id = $id;
     }
 
-    final public function getId(): ?string
+    public function getId(): ?string
     {
         return $this->id;
     }

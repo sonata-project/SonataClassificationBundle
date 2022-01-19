@@ -34,54 +34,54 @@ abstract class Tag implements TagInterface
         return $this->getName() ?? 'n/a';
     }
 
-    final public function setName(?string $name): void
+    public function setName(?string $name): void
     {
         $this->name = $name;
 
         $this->setSlug($name);
     }
 
-    final public function getName(): ?string
+    public function getName(): ?string
     {
         return $this->name;
     }
 
-    final public function setEnabled(bool $enabled): void
+    public function setEnabled(bool $enabled): void
     {
         $this->enabled = $enabled;
     }
 
-    final public function getEnabled(): bool
+    public function getEnabled(): bool
     {
         return $this->enabled;
     }
 
-    final public function setSlug(?string $slug): void
+    public function setSlug(?string $slug): void
     {
         $this->slug = self::slugify($slug ?? '');
     }
 
-    final public function getSlug(): ?string
+    public function getSlug(): ?string
     {
         return $this->slug;
     }
 
-    final public function setCreatedAt(?\DateTimeInterface $createdAt): void
+    public function setCreatedAt(?\DateTimeInterface $createdAt): void
     {
         $this->createdAt = $createdAt;
     }
 
-    final public function getCreatedAt(): ?\DateTimeInterface
+    public function getCreatedAt(): ?\DateTimeInterface
     {
         return $this->createdAt;
     }
 
-    final public function setUpdatedAt(?\DateTimeInterface $updatedAt): void
+    public function setUpdatedAt(?\DateTimeInterface $updatedAt): void
     {
         $this->updatedAt = $updatedAt;
     }
 
-    final public function getUpdatedAt(): ?\DateTimeInterface
+    public function getUpdatedAt(): ?\DateTimeInterface
     {
         return $this->updatedAt;
     }
@@ -94,7 +94,7 @@ abstract class Tag implements TagInterface
     /**
      * @see http://snipplr.com/view/22741/slugify-a-string-in-php/.
      */
-    final public static function slugify(string $text): string
+    public static function slugify(string $text): string
     {
         $text = Slugify::create()->slugify($text);
 
@@ -105,12 +105,12 @@ abstract class Tag implements TagInterface
         return $text;
     }
 
-    final public function setContext(?ContextInterface $context): void
+    public function setContext(?ContextInterface $context): void
     {
         $this->context = $context;
     }
 
-    final public function getContext(): ?ContextInterface
+    public function getContext(): ?ContextInterface
     {
         return $this->context;
     }

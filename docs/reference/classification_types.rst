@@ -31,9 +31,6 @@ A `category` is a class or division of things regarded as having particular shar
 
 `Usage`: A product available through a shop belongs to one or many categories.
 
-For more practical examples, don't hesitate to test the public demo of `Sonata <http://demo.sonata-project.org>`_.
-If you want to know more, you can fork the `Sonata sandbox <https://github.com/sonata-project/sandbox>`_ from Github.com and analyse how it's built.
-
 
 Context
 =======

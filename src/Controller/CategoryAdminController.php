@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sonata\ClassificationBundle\Controller;
 
+use Sonata\AdminBundle\Bridge\Exporter\AdminExporter;
 use Sonata\AdminBundle\Controller\CRUDController as Controller;
 use Sonata\ClassificationBundle\Model\CategoryInterface;
 use Sonata\ClassificationBundle\Model\CategoryManagerInterface;
@@ -40,7 +41,16 @@ final class CategoryAdminController extends Controller
 
     public function listAction(Request $request): Response
     {
-        if (null === $request->query->get('filter') && null === $request->query->get('filters')) {
+        $this->assertObjectExists($request);
+
+        $this->admin->checkAccess('list');
+
+        $preResponse = $this->preList($request);
+        if (null !== $preResponse) {
+            return $preResponse;
+        }
+
+        if (!$request->query->has('filter') && !$request->query->has('filters')) {
             return new RedirectResponse($this->admin->generateUrl('tree', $request->query->all()));
         }
 
@@ -64,11 +74,18 @@ final class CategoryAdminController extends Controller
         // set the theme for the current Admin Form
         $this->setFormTheme($formView, $this->admin->getFilterTheme());
 
+        if ($this->container->has('sonata.admin.admin_exporter')) {
+            $exporter = $this->container->get('sonata.admin.admin_exporter');
+            \assert($exporter instanceof AdminExporter);
+            $exportFormats = $exporter->getAvailableFormats($this->admin);
+        }
+
         return $this->renderWithExtraParams($this->admin->getTemplateRegistry()->getTemplate('list'), [
             'action' => 'list',
             'form' => $formView,
             'datagrid' => $datagrid,
             'csrf_token' => $this->getCsrfToken('sonata.batch'),
+            'export_formats' => $exportFormats ?? $this->admin->getExportFormats(),
         ]);
     }
 

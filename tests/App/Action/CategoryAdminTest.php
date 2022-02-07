@@ -21,7 +21,7 @@ use Sonata\ClassificationBundle\Tests\App\Entity\Context;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpKernel\KernelInterface;
 
-final class CartegoryAdminTest extends WebTestCase
+final class CategoryAdminTest extends WebTestCase
 {
     /**
      * @dataProvider provideCrudUrlsCases
@@ -44,6 +44,7 @@ final class CartegoryAdminTest extends WebTestCase
      */
     public static function provideCrudUrlsCases(): iterable
     {
+        yield 'List' => ['/admin/tests/app/category/list?filter%5Bcontext%5D%5Bvalue%5D='];
         yield 'Tree' => ['/admin/tests/app/category/tree'];
         yield 'Create' => ['/admin/tests/app/category/create'];
         yield 'Edit' => ['/admin/tests/app/category/1/edit'];

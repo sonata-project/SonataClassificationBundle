@@ -206,12 +206,12 @@
         <source>form.label_class</source>
         <target>CSS Klasse</target>
       </trans-unit>
-      <trans-unit id="group_general">
-        <source>group_general</source>
+      <trans-unit id="form.group_general">
+        <source>form.group_general</source>
         <target>Allgemein</target>
       </trans-unit>
-      <trans-unit id="group_options">
-        <source>group_options</source>
+      <trans-unit id="form.group_options">
+        <source>form.group_options</source>
         <target>Optionen</target>
       </trans-unit>
     </body>

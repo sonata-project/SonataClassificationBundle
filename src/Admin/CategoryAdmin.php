@@ -44,7 +44,7 @@ final class CategoryAdmin extends ContextAwareAdmin
     protected function configureFormFields(FormMapper $form): void
     {
         $form
-            ->with('group_general', ['class' => 'col-md-6'])
+            ->with('general', ['class' => 'col-md-6'])
                 ->add('name')
                 ->add('description', TextareaType::class, [
                     'required' => false,
@@ -67,7 +67,7 @@ final class CategoryAdmin extends ContextAwareAdmin
 
         $form
             ->end()
-            ->with('group_options', ['class' => 'col-md-6'])
+            ->with('options', ['class' => 'col-md-6'])
                 ->add('enabled', CheckboxType::class, [
                     'required' => false,
                 ])

@@ -222,12 +222,12 @@
         <source>form.label_class</source>
         <target>Classe CSS</target>
       </trans-unit>
-      <trans-unit id="group_general">
-        <source>group_general</source>
+      <trans-unit id="form.group_general">
+        <source>form.group_general</source>
         <target>Général</target>
       </trans-unit>
-      <trans-unit id="group_options">
-        <source>group_options</source>
+      <trans-unit id="form.group_options">
+        <source>form.group_options</source>
         <target>Options</target>
       </trans-unit>
     </body>

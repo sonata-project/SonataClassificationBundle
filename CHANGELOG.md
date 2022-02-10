@@ -2,6 +2,11 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [4.0.2](https://github.com/sonata-project/SonataClassificationBundle/compare/4.0.1...4.0.2) - 2022-02-10
+### Fixed
+- [[#820](https://github.com/sonata-project/SonataClassificationBundle/pull/820)] Backport changes from AdminBundle to `CategoryAdminController` ([@core23](https://github.com/core23))
+- [[#821](https://github.com/sonata-project/SonataClassificationBundle/pull/821)] Fix edit group translation ([@core23](https://github.com/core23))
+
 ## [4.0.1](https://github.com/sonata-project/SonataClassificationBundle/compare/4.0.0...4.0.1) - 2022-01-19
 ### Removed
 - [[#816](https://github.com/sonata-project/SonataClassificationBundle/pull/816)] Final modifier on all the getters / setters of the entities. ([@VincentLanglet](https://github.com/VincentLanglet))

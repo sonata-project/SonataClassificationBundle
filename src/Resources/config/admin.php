@@ -32,7 +32,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             ->tag('sonata.admin', [
                 'manager_type' => 'orm',
                 'group' => '%sonata.classification.admin.groupname%',
-                'label_catalogue' => '%sonata.classification.admin.category.translation_domain%',
+                'translation_domain' => '%sonata.classification.admin.category.translation_domain%',
                 'label' => 'label_categories',
                 'label_translator_strategy' => 'sonata.admin.label.strategy.underscore',
                 'icon' => '%sonata.classification.admin.groupicon%',
@@ -43,7 +43,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
                 '%sonata.classification.admin.category.controller%',
                 new ReferenceConfigurator('sonata.classification.manager.context'),
             ])
-            ->call('setTranslationDomain', ['%sonata.classification.admin.category.translation_domain%'])
             ->call('setTemplates', [[
                 'list' => '@SonataClassification/CategoryAdmin/list.html.twig',
                 'tree' => '@SonataClassification/CategoryAdmin/tree.html.twig',
@@ -54,7 +53,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             ->tag('sonata.admin', [
                 'manager_type' => 'orm',
                 'group' => '%sonata.classification.admin.groupname%',
-                'label_catalogue' => '%sonata.classification.admin.tag.translation_domain%',
+                'translation_domain' => '%sonata.classification.admin.tag.translation_domain%',
                 'label' => 'label_tags',
                 'label_translator_strategy' => 'sonata.admin.label.strategy.underscore',
                 'icon' => '%sonata.classification.admin.groupicon%',
@@ -65,14 +64,13 @@ return static function (ContainerConfigurator $containerConfigurator): void {
                 '%sonata.classification.admin.tag.controller%',
                 new ReferenceConfigurator('sonata.classification.manager.context'),
             ])
-            ->call('setTranslationDomain', ['%sonata.classification.admin.tag.translation_domain%'])
 
         ->set('sonata.classification.admin.collection', '%sonata.classification.admin.collection.class%')
             ->public()
             ->tag('sonata.admin', [
                 'manager_type' => 'orm',
                 'group' => '%sonata.classification.admin.groupname%',
-                'label_catalogue' => '%sonata.classification.admin.collection.translation_domain%',
+                'translation_domain' => '%sonata.classification.admin.collection.translation_domain%',
                 'label' => 'label_collections',
                 'label_translator_strategy' => 'sonata.admin.label.strategy.underscore',
                 'icon' => '%sonata.classification.admin.groupicon%',
@@ -83,14 +81,13 @@ return static function (ContainerConfigurator $containerConfigurator): void {
                 '%sonata.classification.admin.collection.controller%',
                 new ReferenceConfigurator('sonata.classification.manager.context'),
             ])
-            ->call('setTranslationDomain', ['%sonata.classification.admin.collection.translation_domain%'])
 
         ->set('sonata.classification.admin.context', '%sonata.classification.admin.context.class%')
             ->public()
             ->tag('sonata.admin', [
                 'manager_type' => 'orm',
                 'group' => '%sonata.classification.admin.groupname%',
-                'label_catalogue' => '%sonata.classification.admin.context.translation_domain%',
+                'translation_domain' => '%sonata.classification.admin.context.translation_domain%',
                 'label' => 'label_contexts',
                 'label_translator_strategy' => 'sonata.admin.label.strategy.underscore',
                 'icon' => '%sonata.classification.admin.groupicon%',
@@ -100,7 +97,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
                 '%sonata.classification.admin.context.entity%',
                 '%sonata.classification.admin.context.controller%',
             ])
-            ->call('setTranslationDomain', ['%sonata.classification.admin.collection.translation_domain%'])
 
         ->set(CategoryFilter::class)
             ->tag('sonata.admin.filter.type')

@@ -21,7 +21,6 @@ use Sonata\ClassificationBundle\Block\Service\AbstractTagsBlockService;
 use Sonata\ClassificationBundle\Model\ContextManagerInterface;
 use Sonata\ClassificationBundle\Model\TagInterface;
 use Sonata\ClassificationBundle\Model\TagManagerInterface;
-use Sonata\ClassificationBundle\Tests\App\Entity\Tag;
 use Twig\Environment;
 
 /**
@@ -48,7 +47,7 @@ final class AbstractTagsBlockServiceTest extends BlockServiceTestCase
         $this->twig = $this->createMock(Environment::class);
         $this->contextManager = $this->createMock(ContextManagerInterface::class);
         $this->tagManager = $this->createMock(TagManagerInterface::class);
-        $this->tagAdmin = new TagAdmin('code', Tag::class, 'controller', $this->contextManager);
+        $this->tagAdmin = new TagAdmin($this->contextManager);
     }
 
     public function testDefaultSettings(): void

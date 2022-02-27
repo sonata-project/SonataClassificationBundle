@@ -19,7 +19,6 @@ use Sonata\AdminBundle\Admin\AdminExtensionInterface;
 use Sonata\ClassificationBundle\Admin\ContextAdmin;
 use Sonata\ClassificationBundle\Admin\ContextAwareAdmin;
 use Sonata\ClassificationBundle\Model\ContextManagerInterface;
-use Sonata\ClassificationBundle\Tests\App\Entity\Context;
 
 final class AdminTest extends TestCase
 {
@@ -37,7 +36,7 @@ final class AdminTest extends TestCase
     {
         $contextAwareAdmin = $this->createMock(ContextAwareAdmin::class);
         static::assertInstanceOf(AbstractAdmin::class, $contextAwareAdmin);
-        $contextAdmin = new ContextAdmin('code', Context::class, 'controller');
+        $contextAdmin = new ContextAdmin();
         static::assertInstanceOf(AbstractAdmin::class, $contextAdmin);
     }
 
@@ -49,7 +48,7 @@ final class AdminTest extends TestCase
         ];
 
         $admin = $this->getMockForAbstractClass(ContextAwareAdmin::class, [
-            'admin.my_code', 'My\Class', 'MyBundle:ClassAdmin', $this->contextManager,
+            $this->contextManager,
         ]);
 
         static::assertSame($expected, $admin->getPersistentParameters());
@@ -58,7 +57,7 @@ final class AdminTest extends TestCase
     public function testGetPersistentParametersWithValidExtension(): void
     {
         $admin = $this->getMockForAbstractClass(ContextAwareAdmin::class, [
-            'admin.my_code', 'My\Class', 'MyBundle:ClassAdmin', $this->contextManager,
+            $this->contextManager,
         ]);
 
         $extension = $this->createMock(AdminExtensionInterface::class);

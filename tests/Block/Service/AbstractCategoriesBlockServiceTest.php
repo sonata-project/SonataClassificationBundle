@@ -21,7 +21,6 @@ use Sonata\ClassificationBundle\Block\Service\AbstractCategoriesBlockService;
 use Sonata\ClassificationBundle\Model\CategoryInterface;
 use Sonata\ClassificationBundle\Model\CategoryManagerInterface;
 use Sonata\ClassificationBundle\Model\ContextManagerInterface;
-use Sonata\ClassificationBundle\Tests\App\Entity\Category;
 use Twig\Environment;
 
 /**
@@ -48,7 +47,7 @@ final class AbstractCategoriesBlockServiceTest extends BlockServiceTestCase
         $this->twig = $this->createMock(Environment::class);
         $this->contextManager = $this->createMock(ContextManagerInterface::class);
         $this->categoryManager = $this->createMock(CategoryManagerInterface::class);
-        $this->categoryAdmin = new CategoryAdmin('code', Category::class, 'controller', $this->contextManager);
+        $this->categoryAdmin = new CategoryAdmin($this->contextManager);
     }
 
     public function testDefaultSettings(): void

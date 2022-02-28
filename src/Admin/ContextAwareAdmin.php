@@ -27,13 +27,32 @@ abstract class ContextAwareAdmin extends AbstractAdmin
     protected ContextManagerInterface $contextManager;
 
     /**
-     * @phpstan-param class-string<T> $class
+     * NEXT_MAJOR: Change signature to (ContextManagerInterface).
+     *
+     * @param ContextManagerInterface|string $contextManager
+     *
+     * @phpstan-param class-string<T>|null $deprecatedClass
      */
-    public function __construct(string $code, string $class, string $baseControllerName, ContextManagerInterface $contextManager)
-    {
-        parent::__construct($code, $class, $baseControllerName);
+    public function __construct(
+        $contextManager,
+        ?string $deprecatedClass = null,
+        ?string $deprecatedBaseControllerName = null,
+        ?ContextManagerInterface $deprecatedContextManager = null
+    ) {
+        // NEXT_MAJOR: Keep the if part.
+        if ($contextManager instanceof ContextManagerInterface) {
+            parent::__construct();
 
-        $this->contextManager = $contextManager;
+            $this->contextManager = $contextManager;
+        } else {
+            \assert(\is_string($deprecatedClass));
+            \assert(\is_string($deprecatedBaseControllerName));
+            \assert(null !== $deprecatedContextManager);
+
+            parent::__construct($contextManager, $deprecatedClass, $deprecatedBaseControllerName);
+
+            $this->contextManager = $deprecatedContextManager;
+        }
     }
 
     protected function alterNewInstance(object $object): void

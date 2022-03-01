@@ -21,7 +21,6 @@ use Sonata\ClassificationBundle\Block\Service\AbstractCollectionsBlockService;
 use Sonata\ClassificationBundle\Model\CollectionInterface;
 use Sonata\ClassificationBundle\Model\CollectionManagerInterface;
 use Sonata\ClassificationBundle\Model\ContextManagerInterface;
-use Sonata\ClassificationBundle\Tests\App\Entity\Collection;
 use Twig\Environment;
 
 /**
@@ -48,7 +47,7 @@ final class AbstractCollectionsBlockServiceTest extends BlockServiceTestCase
         $this->twig = $this->createMock(Environment::class);
         $this->contextManager = $this->createMock(ContextManagerInterface::class);
         $this->collectionManager = $this->createMock(CollectionManagerInterface::class);
-        $this->collectionAdmin = new CollectionAdmin('code', Collection::class, 'controller', $this->contextManager);
+        $this->collectionAdmin = new CollectionAdmin($this->contextManager);
     }
 
     public function testDefaultSettings(): void

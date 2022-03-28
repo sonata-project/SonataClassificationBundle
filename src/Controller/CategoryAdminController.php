@@ -64,7 +64,7 @@ final class CategoryAdminController extends Controller
 
         $datagridContextIsSet = isset($datagridValues['context']['value']) && '' !== $datagridValues['context']['value'];
 
-        //ignore `context` persistent parameter if datagrid `context` value is set
+        // ignore `context` persistent parameter if datagrid `context` value is set
         if ('' !== $this->admin->getPersistentParameter('context', '') && !$datagridContextIsSet) {
             $datagrid->setValue('context', null, $this->admin->getPersistentParameter('context'));
         }

@@ -45,6 +45,7 @@
         "doctrine/doctrine-bundle": "^2.3.2",
         "doctrine/mongodb-odm": "^2.2",
         "doctrine/orm": "^2.9",
+        "friendsofphp/php-cs-fixer": "^3.4",
         "knplabs/knp-menu": "^3.0",
         "knplabs/knp-menu-bundle": "^3.0",
         "matthiasnoback/symfony-config-test": "^4.2",

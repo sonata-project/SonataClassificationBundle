@@ -54,7 +54,7 @@ final class CategoryChoiceLoaderTest extends TestCase
 
         $categoryLoader = new CategoryChoiceLoader(array_flip($choices));
 
-        //due to string typecast of values inside of ArrayChoiceList
+        // due to string typecast of values inside of ArrayChoiceList
         $expectedChoices = [
             'foo' => '1',
             'bar' => '2',

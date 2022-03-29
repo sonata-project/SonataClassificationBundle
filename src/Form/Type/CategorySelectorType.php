@@ -100,7 +100,7 @@ final class CategorySelectorType extends AbstractType
             $childId = $child->getId();
             \assert(null !== $childId);
 
-            if ($options['category'] && $options['category']->getId() === $childId) {
+            if ($options['category'] instanceof CategoryInterface && $options['category']->getId() === $childId) {
                 continue;
             }
 

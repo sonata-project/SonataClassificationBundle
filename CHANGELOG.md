@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [4.0.4](https://github.com/sonata-project/SonataClassificationBundle/compare/4.0.3...4.0.4) - 2022-04-29
+### Fixed
+- [[#838](https://github.com/sonata-project/SonataClassificationBundle/pull/838)] Create a new context only if it does not exist ([@jerome-fix](https://github.com/jerome-fix))
+
 ## [4.0.3](https://github.com/sonata-project/SonataClassificationBundle/compare/4.0.2...4.0.3) - 2022-02-28
 ### Fixed
 - [[#830](https://github.com/sonata-project/SonataClassificationBundle/pull/830)] Deprecations introduces by SonataAdminBundle 4.9.0 ([@VincentLanglet](https://github.com/VincentLanglet))

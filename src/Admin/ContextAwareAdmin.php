@@ -61,7 +61,7 @@ abstract class ContextAwareAdmin extends AbstractAdmin
         if ('' !== $contextId) {
             $context = $this->contextManager->find($contextId);
 
-            if (null !== $context) {
+            if (null === $context) {
                 $context = $this->contextManager->create();
                 $context->setEnabled(true);
                 $context->setId($contextId);

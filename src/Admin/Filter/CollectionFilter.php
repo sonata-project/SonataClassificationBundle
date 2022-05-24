@@ -63,15 +63,6 @@ final class CollectionFilter extends Filter
         ]];
     }
 
-    protected function association(ProxyQueryInterface $query, FilterData $data): array
-    {
-        $alias = $query->entityJoin($this->getParentAssociationMappings());
-        $part = strrchr('.'.$this->getFieldName(), '.');
-        $fieldName = substr(false === $part ? $this->getFieldType() : $part, 1);
-
-        return [$alias, $fieldName];
-    }
-
     /**
      * @return array<string, int|string>
      */

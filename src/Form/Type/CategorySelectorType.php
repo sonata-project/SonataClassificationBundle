@@ -41,9 +41,7 @@ final class CategorySelectorType extends AbstractType
         $resolver->setDefaults([
             'context' => null,
             'category' => null,
-            'choice_loader' => function (Options $opts): ChoiceLoaderInterface {
-                return new CategoryChoiceLoader(array_flip($this->getChoices($opts)));
-            },
+            'choice_loader' => fn (Options $opts): ChoiceLoaderInterface => new CategoryChoiceLoader(array_flip($this->getChoices($opts))),
         ]);
     }
 

@@ -22,10 +22,7 @@ use Sonata\ClassificationBundle\Model\ContextManagerInterface;
 
 final class AdminTest extends TestCase
 {
-    /**
-     * @var ContextManagerInterface
-     */
-    private $contextManager;
+    private ContextManagerInterface $contextManager;
 
     protected function setUp(): void
     {

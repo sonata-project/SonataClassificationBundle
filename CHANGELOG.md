@@ -2,6 +2,11 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [4.1.0](https://github.com/sonata-project/SonataClassificationBundle/compare/4.0.4...4.1.0) - 2022-06-25
+### Removed
+- [[#849](https://github.com/sonata-project/SonataClassificationBundle/pull/849)] Avoid deprecations for console commands on Symfony 6.1. ([@jordisala1991](https://github.com/jordisala1991))
+- [[#846](https://github.com/sonata-project/SonataClassificationBundle/pull/846)] Support of Symfony 5.3 ([@franmomu](https://github.com/franmomu))
+
 ## [4.0.4](https://github.com/sonata-project/SonataClassificationBundle/compare/4.0.3...4.0.4) - 2022-04-29
 ### Fixed
 - [[#838](https://github.com/sonata-project/SonataClassificationBundle/pull/838)] Create a new context only if it does not exist ([@jerome-fix](https://github.com/jerome-fix))

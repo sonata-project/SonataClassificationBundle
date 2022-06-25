@@ -26,7 +26,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 #[AsCommand(name: 'sonata:classification:fix-context', description: 'Generate the default context if none defined and attach the context to all elements')]
 final class FixContextCommand extends Command
 {
-    // TODO: Remove static properties when support for Symfony < 6.0 is dropped.
+    // TODO: Remove static properties when support for Symfony < 5.4 is dropped.
     protected static $defaultName = 'sonata:classification:fix-context';
     protected static $defaultDescription = 'Generate the default context if none defined and attach the context to all elements';
 

@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [4.2.0](https://github.com/sonata-project/SonataClassificationBundle/compare/4.1.0...4.2.0) - 2022-06-25
+### Added
+- [[#852](https://github.com/sonata-project/SonataClassificationBundle/pull/852)] Add support for `doctrine/persistence` ^3.0. ([@jordisala1991](https://github.com/jordisala1991))
+
 ## [4.1.0](https://github.com/sonata-project/SonataClassificationBundle/compare/4.0.4...4.1.0) - 2022-06-25
 ### Removed
 - [[#849](https://github.com/sonata-project/SonataClassificationBundle/pull/849)] Avoid deprecations for console commands on Symfony 6.1. ([@jordisala1991](https://github.com/jordisala1991))

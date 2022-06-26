@@ -18,12 +18,15 @@ use Sonata\ClassificationBundle\Model\CollectionManagerInterface;
 use Sonata\ClassificationBundle\Model\ContextInterface;
 use Sonata\ClassificationBundle\Model\ContextManagerInterface;
 use Sonata\ClassificationBundle\Model\TagManagerInterface;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
+#[AsCommand(name: 'sonata:classification:fix-context', description: 'Generate the default context if none defined and attach the context to all elements')]
 final class FixContextCommand extends Command
 {
+    // TODO: Remove static properties when support for Symfony < 5.4 is dropped.
     protected static $defaultName = 'sonata:classification:fix-context';
     protected static $defaultDescription = 'Generate the default context if none defined and attach the context to all elements';
 
@@ -52,6 +55,8 @@ final class FixContextCommand extends Command
     public function configure(): void
     {
         \assert(null !== static::$defaultDescription);
+
+        // TODO: Remove setDescription when support for Symfony < 5.4 is dropped.
         $this->setDescription(static::$defaultDescription);
     }
 

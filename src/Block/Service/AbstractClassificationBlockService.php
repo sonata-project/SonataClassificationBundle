@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sonata\ClassificationBundle\Block\Service;
 
 use Sonata\AdminBundle\Admin\AdminInterface;
+use Sonata\AdminBundle\FieldDescription\FieldDescriptionInterface;
 use Sonata\AdminBundle\Form\Type\ModelListType;
 use Sonata\BlockBundle\Block\Service\AbstractBlockService;
 use Sonata\BlockBundle\Form\Mapper\FormMapper;
@@ -26,7 +27,7 @@ use Twig\Environment;
 /**
  * @author Christian Gripp <mail@core23.de>
  *
- * @phpstan-import-type FieldDescriptionOptions from \Sonata\AdminBundle\FieldDescription\FieldDescriptionInterface
+ * @phpstan-import-type FieldDescriptionOptions from FieldDescriptionInterface
  *
  * @phpstan-template T of ContextAwareInterface
  */

@@ -18,7 +18,7 @@ use Sonata\Doctrine\Mapper\DoctrineCollector;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Loader;
+use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 /**
@@ -44,7 +44,7 @@ final class SonataClassificationExtension extends Extension
         /** @var array<string, mixed> $bundles */
         $bundles = $container->getParameter('kernel.bundles');
 
-        $loader = new Loader\PhpFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader = new PhpFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('orm.php');
         $loader->load('form.php');
         $loader->load('command.php');

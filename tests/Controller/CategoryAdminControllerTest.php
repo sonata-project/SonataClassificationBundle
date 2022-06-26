@@ -100,9 +100,9 @@ final class CategoryAdminControllerTest extends TestCase
 
         $this->csrfProvider->expects(static::any())
             ->method('getToken')
-            ->willReturnCallback(static function ($intention) {
-                return new CsrfToken($intention, 'csrf-token-123_'.$intention);
-            });
+            ->willReturnCallback(
+                static fn ($intention) => new CsrfToken($intention, 'csrf-token-123_'.$intention)
+            );
 
         $this->csrfProvider->expects(static::any())
             ->method('isTokenValid')

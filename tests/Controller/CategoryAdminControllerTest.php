@@ -269,7 +269,7 @@ final class CategoryAdminControllerTest extends TestCase
             $this->request->query->remove('context');
             $this->contextManager->expects(static::any())
                 ->method('find')
-                ->willReturn(false);
+                ->willReturn(null);
         }
 
         $categoriesMock = [];

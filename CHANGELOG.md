@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [4.3.0](https://github.com/sonata-project/SonataClassificationBundle/compare/4.2.0...4.3.0) - 2022-08-03
+### Added
+- [[#862](https://github.com/sonata-project/SonataClassificationBundle/pull/862)] Added support for sonata-project/doctrine-extensions ^2 ([@VincentLanglet](https://github.com/VincentLanglet))
+
 ## [4.2.0](https://github.com/sonata-project/SonataClassificationBundle/compare/4.1.0...4.2.0) - 2022-06-25
 ### Added
 - [[#852](https://github.com/sonata-project/SonataClassificationBundle/pull/852)] Add support for `doctrine/persistence` ^3.0. ([@jordisala1991](https://github.com/jordisala1991))

@@ -13,17 +13,18 @@ declare(strict_types=1);
 
 namespace Sonata\ClassificationBundle\Tests\Entity;
 
+use Doctrine\ORM\AbstractQuery;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sonata\ClassificationBundle\Entity\BaseCollection;
 use Sonata\ClassificationBundle\Entity\CollectionManager;
-use Sonata\Doctrine\Test\EntityManagerMockFactoryTrait;
 
 final class CollectionManagerTest extends TestCase
 {
-    use EntityManagerMockFactoryTrait;
-
     public function testGetBySlug(): void
     {
         $this
@@ -58,9 +59,29 @@ final class CollectionManagerTest extends TestCase
             ->getByContext('contextA', false);
     }
 
-    private function getCollectionManager(\Closure $qbCallback): CollectionManager
+    /**
+     * @param object[] $createQueryResult
+     */
+    private function getCollectionManager(\Closure $qbCallback, array $createQueryResult = []): CollectionManager
     {
-        $em = $this->createEntityManagerMock($qbCallback, []);
+        $query = $this->createMock(AbstractQuery::class);
+        $query->method('getResult')->willReturn($createQueryResult);
+
+        $qb = $this->createMock(QueryBuilder::class);
+
+        $qb->method('select')->willReturn($qb);
+        $qb->method('getQuery')->willReturn($query);
+        $qb->method('where')->willReturn($qb);
+        $qb->method('orderBy')->willReturn($qb);
+        $qb->method('setParameter')->willReturn($qb);
+
+        $qbCallback($qb);
+
+        $repository = $this->createMock(EntityRepository::class);
+        $repository->method('createQueryBuilder')->willReturn($qb);
+
+        $em = $this->createMock(EntityManager::class);
+        $em->method('getRepository')->willReturn($repository);
 
         $registry = $this->getMockForAbstractClass(ManagerRegistry::class);
         $registry->method('getManagerForClass')->willReturn($em);

@@ -14,12 +14,9 @@ declare(strict_types=1);
 namespace Sonata\ClassificationBundle\Tests\App\Action;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Generator;
-use Sonata\ClassificationBundle\Tests\App\AppKernel;
 use Sonata\ClassificationBundle\Tests\App\Entity\Context;
 use Sonata\ClassificationBundle\Tests\App\Entity\Tag;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use Symfony\Component\HttpKernel\KernelInterface;
 
 final class TagAdminTest extends WebTestCase
 {
@@ -40,21 +37,13 @@ final class TagAdminTest extends WebTestCase
     /**
      * @return iterable<string[]>
      *
-     * @phpstan-return Generator<array{string}>
+     * @phpstan-return \Generator<array{string}>
      */
     public static function provideCrudUrlsCases(): iterable
     {
         yield 'List' => ['/admin/tests/app/tag/list'];
         yield 'Create' => ['/admin/tests/app/tag/create'];
         yield 'Edit' => ['/admin/tests/app/tag/1/edit'];
-    }
-
-    /**
-     * @return class-string<KernelInterface>
-     */
-    protected static function getKernelClass(): string
-    {
-        return AppKernel::class;
     }
 
     /**

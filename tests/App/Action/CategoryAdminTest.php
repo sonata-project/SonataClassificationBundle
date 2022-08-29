@@ -15,11 +15,9 @@ namespace Sonata\ClassificationBundle\Tests\App\Action;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Generator;
-use Sonata\ClassificationBundle\Tests\App\AppKernel;
 use Sonata\ClassificationBundle\Tests\App\Entity\Category;
 use Sonata\ClassificationBundle\Tests\App\Entity\Context;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use Symfony\Component\HttpKernel\KernelInterface;
 
 final class CategoryAdminTest extends WebTestCase
 {
@@ -48,14 +46,6 @@ final class CategoryAdminTest extends WebTestCase
         yield 'Tree' => ['/admin/tests/app/category/tree'];
         yield 'Create' => ['/admin/tests/app/category/create'];
         yield 'Edit' => ['/admin/tests/app/category/1/edit'];
-    }
-
-    /**
-     * @return class-string<KernelInterface>
-     */
-    protected static function getKernelClass(): string
-    {
-        return AppKernel::class;
     }
 
     /**

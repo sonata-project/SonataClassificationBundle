@@ -33,6 +33,7 @@ class XliffTest extends TestCase
 
     /**
      * @dataProvider getXliffPaths
+     *
      * @doesNotPerformAssertions
      */
     public function testXliff(string $path): void

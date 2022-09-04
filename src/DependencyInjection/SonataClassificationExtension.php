@@ -66,6 +66,7 @@ final class SonataClassificationExtension extends Extension
 
     /**
      * @param array<string, mixed> $config
+     *
      * @phpstan-param Config $config
      */
     private function configureClass(array $config, ContainerBuilder $container): void
@@ -85,6 +86,7 @@ final class SonataClassificationExtension extends Extension
 
     /**
      * @param array<string, mixed> $config
+     *
      * @phpstan-param Config $config
      */
     private function configureAdmin(array $config, ContainerBuilder $container): void
@@ -108,6 +110,7 @@ final class SonataClassificationExtension extends Extension
 
     /**
      * @param array<string, mixed> $config
+     *
      * @phpstan-param Config $config
      */
     private function registerSonataDoctrineMapping(array $config): void

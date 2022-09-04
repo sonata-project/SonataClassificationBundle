@@ -14,12 +14,9 @@ declare(strict_types=1);
 namespace Sonata\ClassificationBundle\Tests\App\Action;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Generator;
-use Sonata\ClassificationBundle\Tests\App\AppKernel;
 use Sonata\ClassificationBundle\Tests\App\Entity\Collection;
 use Sonata\ClassificationBundle\Tests\App\Entity\Context;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use Symfony\Component\HttpKernel\KernelInterface;
 
 final class CollectionAdminTest extends WebTestCase
 {
@@ -40,21 +37,13 @@ final class CollectionAdminTest extends WebTestCase
     /**
      * @return iterable<string[]>
      *
-     * @phpstan-return Generator<array{string}>
+     * @phpstan-return \Generator<array{string}>
      */
     public static function provideCrudUrlsCases(): iterable
     {
         yield 'List' => ['/admin/tests/app/collection/list'];
         yield 'Create' => ['/admin/tests/app/collection/create'];
         yield 'Edit' => ['/admin/tests/app/collection/1/edit'];
-    }
-
-    /**
-     * @return class-string<KernelInterface>
-     */
-    protected static function getKernelClass(): string
-    {
-        return AppKernel::class;
     }
 
     /**

@@ -31,12 +31,12 @@ final class AbstractCollectionsBlockServiceTest extends BlockServiceTestCase
     /**
      * @var ContextManagerInterface&MockObject
      */
-    private $contextManager;
+    private ContextManagerInterface $contextManager;
 
     /**
      * @var CollectionManagerInterface&MockObject
      */
-    private $collectionManager;
+    private CollectionManagerInterface $collectionManager;
 
     private CollectionAdmin $collectionAdmin;
 

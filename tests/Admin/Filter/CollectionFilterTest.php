@@ -24,7 +24,7 @@ final class CollectionFilterTest extends TestCase
     /**
      * @var Stub&CollectionManagerInterface
      */
-    private $collectionManager;
+    private CollectionManagerInterface $collectionManager;
 
     protected function setUp(): void
     {

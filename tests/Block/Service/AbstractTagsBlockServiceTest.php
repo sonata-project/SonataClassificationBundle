@@ -31,12 +31,12 @@ final class AbstractTagsBlockServiceTest extends BlockServiceTestCase
     /**
      * @var ContextManagerInterface&MockObject
      */
-    private $contextManager;
+    private ContextManagerInterface $contextManager;
 
     /**
      * @var TagManagerInterface&MockObject
      */
-    private $tagManager;
+    private TagManagerInterface $tagManager;
 
     private TagAdmin $tagAdmin;
 

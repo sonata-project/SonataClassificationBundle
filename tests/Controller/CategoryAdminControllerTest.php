@@ -51,7 +51,7 @@ final class CategoryAdminControllerTest extends TestCase
     /**
      * @var AdminInterface<CategoryInterface>&MockObject
      */
-    private $admin;
+    private AdminInterface $admin;
 
     private Pool $pool;
 
@@ -60,19 +60,19 @@ final class CategoryAdminControllerTest extends TestCase
     /**
      * @var CsrfTokenManagerInterface&MockObject
      */
-    private $csrfProvider;
+    private CsrfTokenManagerInterface $csrfProvider;
 
     private CategoryAdminController $controller;
 
     /**
      * @var CategoryManagerInterface&MockObject
      */
-    private $categoryManager;
+    private CategoryManagerInterface $categoryManager;
 
     /**
      * @var ContextManagerInterface&MockObject
      */
-    private $contextManager;
+    private ContextManagerInterface $contextManager;
 
     /**
      * Based on Sonata\AdminBundle\Tests\Controller\CRUDControllerTest.

@@ -31,12 +31,12 @@ final class AbstractCategoriesBlockServiceTest extends BlockServiceTestCase
     /**
      * @var ContextManagerInterface&MockObject
      */
-    private $contextManager;
+    private ContextManagerInterface $contextManager;
 
     /**
      * @var CategoryManagerInterface&MockObject
      */
-    private $categoryManager;
+    private CategoryManagerInterface $categoryManager;
 
     private CategoryAdmin $categoryAdmin;
 

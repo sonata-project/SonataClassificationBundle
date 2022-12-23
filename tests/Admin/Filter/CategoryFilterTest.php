@@ -26,7 +26,7 @@ final class CategoryFilterTest extends TestCase
     /**
      * @var Stub&CategoryManagerInterface
      */
-    private $categoryManager;
+    private CategoryManagerInterface $categoryManager;
 
     protected function setUp(): void
     {

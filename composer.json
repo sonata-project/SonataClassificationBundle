@@ -23,7 +23,7 @@
     "require": {
         "php": "^7.4 || ^8.0",
         "cocur/slugify": "^4.0",
-        "doctrine/collections": "^1.6",
+        "doctrine/collections": "^1.6 || ^2.0",
         "doctrine/persistence": "^2.0 || ^3.0",
         "sonata-project/doctrine-extensions": "^1.13 || ^2.0",
         "sonata-project/form-extensions": "^1.4",

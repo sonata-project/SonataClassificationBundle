@@ -206,11 +206,6 @@ final class CategoryManager extends BaseDocumentManager implements CategoryManag
             $categoryId = $category->getId();
             \assert(null !== $categoryId);
             $this->categories[$contextId][$categoryId] = $category;
-
-            $parent = $category->getParent();
-            if (null !== $parent) {
-                $parent->addChild($category);
-            }
         }
 
         if (null !== $root) {

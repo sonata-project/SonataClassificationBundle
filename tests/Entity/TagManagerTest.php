@@ -13,79 +13,69 @@ declare(strict_types=1);
 
 namespace Sonata\ClassificationBundle\Tests\Entity;
 
-use Doctrine\ORM\AbstractQuery;
-use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\QueryBuilder;
-use Doctrine\Persistence\ManagerRegistry;
-use PHPUnit\Framework\MockObject\MockObject;
-use PHPUnit\Framework\TestCase;
-use Sonata\ClassificationBundle\Entity\BaseTag;
-use Sonata\ClassificationBundle\Entity\TagManager;
+use Doctrine\ORM\EntityManagerInterface;
+use Sonata\ClassificationBundle\Model\TagManagerInterface;
+use Sonata\ClassificationBundle\Tests\App\Entity\Context;
+use Sonata\ClassificationBundle\Tests\App\Entity\Tag;
+use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
-final class TagManagerTest extends TestCase
+final class TagManagerTest extends KernelTestCase
 {
     public function testGetBySlug(): void
     {
-        $this
-            ->getTagManager(static function (MockObject $qb): void {
-                $qb->expects(static::exactly(3))->method('andWhere')->withConsecutive(
-                    [static::equalTo('t.slug = :slug')],
-                    [static::equalTo('t.context = :context')],
-                    [static::equalTo('t.enabled = :enabled')]
-                )->willReturn($qb);
-                $qb->expects(static::exactly(3))->method('setParameter')->withConsecutive(
-                    [static::equalTo('slug'), static::equalTo('theslug')],
-                    [static::equalTo('context'), static::equalTo('contextA')],
-                    [static::equalTo('enabled'), static::equalTo(false)]
-                )->willReturn($qb);
-            })
-            ->getBySlug('theslug', 'contextA', false);
+        $this->prepareData();
+
+        $tag = $this->getTagManager()->getBySlug('tag', '1', false);
+
+        static::assertNotNull($tag);
     }
 
     public function testGetByContext(): void
     {
-        $this
-            ->getTagManager(static function (MockObject $qb): void {
-                $qb->expects(static::exactly(2))->method('andWhere')->withConsecutive(
-                    [static::equalTo('t.context = :context')],
-                    [static::equalTo('t.enabled = :enabled')]
-                )->willReturn($qb);
-                $qb->expects(static::exactly(2))->method('setParameter')->withConsecutive(
-                    [static::equalTo('context'), static::equalTo('contextA')],
-                    [static::equalTo('enabled'), static::equalTo(false)]
-                )->willReturn($qb);
-            })
-            ->getByContext('contextA', false);
+        $this->prepareData();
+
+        $tag = $this->getTagManager()->getByContext('1', false);
+
+        static::assertCount(1, $tag);
     }
 
     /**
-     * @param object[] $createQueryResult
+     * @psalm-suppress UndefinedPropertyFetch
      */
-    private function getTagManager(\Closure $qbCallback, array $createQueryResult = []): TagManager
+    private function prepareData(): void
     {
-        $query = $this->createMock(AbstractQuery::class);
-        $query->method('getResult')->willReturn($createQueryResult);
+        // TODO: Simplify this when dropping support for Symfony 4.
+        // @phpstan-ignore-next-line
+        $container = method_exists($this, 'getContainer') ? self::getContainer() : self::$container;
+        $manager = $container->get('doctrine.orm.entity_manager');
+        \assert($manager instanceof EntityManagerInterface);
 
-        $qb = $this->createMock(QueryBuilder::class);
+        $context = new Context();
+        $context->setId('1');
+        $context->setName('contextA');
 
-        $qb->method('select')->willReturn($qb);
-        $qb->method('getQuery')->willReturn($query);
-        $qb->method('where')->willReturn($qb);
-        $qb->method('orderBy')->willReturn($qb);
-        $qb->method('setParameter')->willReturn($qb);
+        $collection = new Tag();
+        $collection->setName('tag');
+        $collection->setEnabled(false);
+        $collection->setContext($context);
 
-        $qbCallback($qb);
+        $manager->persist($context);
+        $manager->persist($collection);
 
-        $repository = $this->createMock(EntityRepository::class);
-        $repository->method('createQueryBuilder')->willReturn($qb);
+        $manager->flush();
+    }
 
-        $em = $this->createMock(EntityManager::class);
-        $em->method('getRepository')->willReturn($repository);
+    /**
+     * @psalm-suppress UndefinedPropertyFetch
+     */
+    private function getTagManager(): TagManagerInterface
+    {
+        // TODO: Simplify this when dropping support for Symfony 4.
+        // @phpstan-ignore-next-line
+        $container = method_exists($this, 'getContainer') ? self::getContainer() : self::$container;
+        $tagManager = $container->get('sonata.classification.manager.tag');
+        \assert($tagManager instanceof TagManagerInterface);
 
-        $registry = $this->getMockForAbstractClass(ManagerRegistry::class);
-        $registry->method('getManagerForClass')->willReturn($em);
-
-        return new TagManager(BaseTag::class, $registry);
+        return $tagManager;
     }
 }

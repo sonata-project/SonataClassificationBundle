@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sonata\ClassificationBundle\Tests\App;
 
+use DAMA\DoctrineTestBundle\DAMADoctrineTestBundle;
 use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
 use Knp\Bundle\MenuBundle\KnpMenuBundle;
 use Sonata\AdminBundle\SonataAdminBundle;
@@ -42,6 +43,7 @@ final class AppKernel extends Kernel
     {
         return [
             new DoctrineBundle(),
+            new DAMADoctrineTestBundle(),
             new FrameworkBundle(),
             new KnpMenuBundle(),
             new SecurityBundle(),

@@ -13,79 +13,69 @@ declare(strict_types=1);
 
 namespace Sonata\ClassificationBundle\Tests\Entity;
 
-use Doctrine\ORM\AbstractQuery;
-use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\QueryBuilder;
-use Doctrine\Persistence\ManagerRegistry;
-use PHPUnit\Framework\MockObject\MockObject;
-use PHPUnit\Framework\TestCase;
-use Sonata\ClassificationBundle\Entity\BaseCollection;
-use Sonata\ClassificationBundle\Entity\CollectionManager;
+use Doctrine\ORM\EntityManagerInterface;
+use Sonata\ClassificationBundle\Model\CollectionManagerInterface;
+use Sonata\ClassificationBundle\Tests\App\Entity\Collection;
+use Sonata\ClassificationBundle\Tests\App\Entity\Context;
+use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
-final class CollectionManagerTest extends TestCase
+final class CollectionManagerTest extends KernelTestCase
 {
     public function testGetBySlug(): void
     {
-        $this
-            ->getCollectionManager(static function (MockObject $qb): void {
-                $qb->expects(static::exactly(3))->method('andWhere')->withConsecutive(
-                    [static::equalTo('c.slug = :slug')],
-                    [static::equalTo('c.context = :context')],
-                    [static::equalTo('c.enabled = :enabled')]
-                )->willReturn($qb);
-                $qb->expects(static::exactly(3))->method('setParameter')->withConsecutive(
-                    [static::equalTo('slug'), static::equalTo('theslug')],
-                    [static::equalTo('context'), static::equalTo('contextA')],
-                    [static::equalTo('enabled'), static::equalTo(false)]
-                )->willReturn($qb);
-            })
-            ->getBySlug('theslug', 'contextA', false);
+        $this->prepareData();
+
+        $collection = $this->getCollectionManager()->getBySlug('collection', '1', false);
+
+        static::assertNotNull($collection);
     }
 
     public function testGetByContext(): void
     {
-        $this
-            ->getCollectionManager(static function (MockObject $qb): void {
-                $qb->expects(static::exactly(2))->method('andWhere')->withConsecutive(
-                    [static::equalTo('c.context = :context')],
-                    [static::equalTo('c.enabled = :enabled')]
-                )->willReturn($qb);
-                $qb->expects(static::exactly(2))->method('setParameter')->withConsecutive(
-                    [static::equalTo('context'), static::equalTo('contextA')],
-                    [static::equalTo('enabled'), static::equalTo(false)]
-                )->willReturn($qb);
-            })
-            ->getByContext('contextA', false);
+        $this->prepareData();
+
+        $collection = $this->getCollectionManager()->getByContext('1', false);
+
+        static::assertCount(1, $collection);
     }
 
     /**
-     * @param object[] $createQueryResult
+     * @psalm-suppress UndefinedPropertyFetch
      */
-    private function getCollectionManager(\Closure $qbCallback, array $createQueryResult = []): CollectionManager
+    private function prepareData(): void
     {
-        $query = $this->createMock(AbstractQuery::class);
-        $query->method('getResult')->willReturn($createQueryResult);
+        // TODO: Simplify this when dropping support for Symfony 4.
+        // @phpstan-ignore-next-line
+        $container = method_exists($this, 'getContainer') ? self::getContainer() : self::$container;
+        $manager = $container->get('doctrine.orm.entity_manager');
+        \assert($manager instanceof EntityManagerInterface);
 
-        $qb = $this->createMock(QueryBuilder::class);
+        $context = new Context();
+        $context->setId('1');
+        $context->setName('contextA');
 
-        $qb->method('select')->willReturn($qb);
-        $qb->method('getQuery')->willReturn($query);
-        $qb->method('where')->willReturn($qb);
-        $qb->method('orderBy')->willReturn($qb);
-        $qb->method('setParameter')->willReturn($qb);
+        $collection = new Collection();
+        $collection->setName('collection');
+        $collection->setEnabled(false);
+        $collection->setContext($context);
 
-        $qbCallback($qb);
+        $manager->persist($context);
+        $manager->persist($collection);
 
-        $repository = $this->createMock(EntityRepository::class);
-        $repository->method('createQueryBuilder')->willReturn($qb);
+        $manager->flush();
+    }
 
-        $em = $this->createMock(EntityManager::class);
-        $em->method('getRepository')->willReturn($repository);
+    /**
+     * @psalm-suppress UndefinedPropertyFetch
+     */
+    private function getCollectionManager(): CollectionManagerInterface
+    {
+        // TODO: Simplify this when dropping support for Symfony 4.
+        // @phpstan-ignore-next-line
+        $container = method_exists($this, 'getContainer') ? self::getContainer() : self::$container;
+        $collectionManager = $container->get('sonata.classification.manager.collection');
+        \assert($collectionManager instanceof CollectionManagerInterface);
 
-        $registry = $this->getMockForAbstractClass(ManagerRegistry::class);
-        $registry->method('getManagerForClass')->willReturn($em);
-
-        return new CollectionManager(BaseCollection::class, $registry);
+        return $collectionManager;
     }
 }

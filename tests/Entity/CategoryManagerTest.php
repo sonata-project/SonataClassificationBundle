@@ -22,6 +22,16 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 class CategoryManagerTest extends KernelTestCase
 {
+    /**
+     * TODO: Manual boot the kernel is not needed when dropping support for Symfony 4.
+     */
+    protected function setUp(): void
+    {
+        if (!self::$booted) {
+            static::bootKernel();
+        }
+    }
+
     public function testGetRootCategoryWithChildren(): void
     {
         $rootCategory = $this->prepareData();

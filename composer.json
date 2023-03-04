@@ -48,6 +48,7 @@
         "friendsofphp/php-cs-fixer": "^3.4",
         "knplabs/knp-menu": "^3.0",
         "knplabs/knp-menu-bundle": "^3.0",
+        "masterminds/html5": "^2.7",
         "matthiasnoback/symfony-config-test": "^4.2",
         "matthiasnoback/symfony-dependency-injection-test": "^4.0",
         "phpstan/extension-installer": "^1.0",

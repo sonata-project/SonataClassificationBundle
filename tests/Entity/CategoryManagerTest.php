@@ -28,13 +28,11 @@ class CategoryManagerTest extends TestCase
 {
     public function testGetRootCategoryWithChildren(): void
     {
-        /** @var ContextTest $context */
         $context = $this->getMockForAbstractClass(ContextTest::class);
         $context->setId('1');
         $context->setName('default');
         $context->setEnabled(true);
 
-        /** @var CategoryTest $categoryFoo */
         $categoryFoo = $this->getMockForAbstractClass(CategoryTest::class);
         $categoryFoo->setId(1);
         $categoryFoo->setName('foo');
@@ -42,7 +40,6 @@ class CategoryManagerTest extends TestCase
         $categoryFoo->setParent(null);
         $categoryFoo->setEnabled(true);
 
-        /** @var CategoryTest $categoryBar */
         $categoryBar = $this->getMockForAbstractClass(CategoryTest::class);
         $categoryBar->setId(2);
         $categoryBar->setName('bar');
@@ -59,13 +56,11 @@ class CategoryManagerTest extends TestCase
 
     public function testGetRootCategoriesForContext(): void
     {
-        /** @var ContextTest $context */
         $context = $this->getMockForAbstractClass(ContextTest::class);
         $context->setId('1');
         $context->setName('default');
         $context->setEnabled(true);
 
-        /** @var CategoryTest $categoryFoo */
         $categoryFoo = $this->getMockForAbstractClass(CategoryTest::class);
         $categoryFoo->setId(1);
         $categoryFoo->setName('foo');
@@ -73,7 +68,6 @@ class CategoryManagerTest extends TestCase
         $categoryFoo->setParent(null);
         $categoryFoo->setEnabled(true);
 
-        /** @var CategoryTest $categoryBar */
         $categoryBar = $this->getMockForAbstractClass(CategoryTest::class);
         $categoryBar->setId(2);
         $categoryBar->setName('bar');
@@ -91,19 +85,16 @@ class CategoryManagerTest extends TestCase
 
     public function testGetRootCategoriesSplitByContexts(): void
     {
-        /** @var ContextTest $contextFoo */
         $contextFoo = $this->getMockForAbstractClass(ContextTest::class);
         $contextFoo->setId('1');
         $contextFoo->setName('foo');
         $contextFoo->setEnabled(true);
 
-        /** @var ContextTest $contextBar */
         $contextBar = $this->getMockForAbstractClass(ContextTest::class);
         $contextBar->setId('2');
         $contextBar->setName('bar');
         $contextBar->setEnabled(true);
 
-        /** @var CategoryTest $categoryFoo */
         $categoryFoo = $this->getMockForAbstractClass(CategoryTest::class);
         $categoryFoo->setId(1);
         $categoryFoo->setName('foo');
@@ -111,7 +102,6 @@ class CategoryManagerTest extends TestCase
         $categoryFoo->setParent(null);
         $categoryFoo->setEnabled(true);
 
-        /** @var CategoryTest $categoryBar */
         $categoryBar = $this->getMockForAbstractClass(CategoryTest::class);
         $categoryBar->setId(2);
         $categoryBar->setName('bar');

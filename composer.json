@@ -23,8 +23,8 @@
     "require": {
         "php": "^7.4 || ^8.0",
         "cocur/slugify": "^4.0",
-        "doctrine/collections": "^1.6",
-        "doctrine/persistence": "^2.0 || ^3.0",
+        "doctrine/collections": "^1.6 || ^2.0",
+        "doctrine/persistence": "^3.0.2",
         "sonata-project/doctrine-extensions": "^1.13 || ^2.0",
         "sonata-project/form-extensions": "^1.4",
         "symfony/config": "^4.4.11 || ^5.4 || ^6.0",
@@ -41,10 +41,9 @@
         "twig/twig": "^2.14 || ^3.0"
     },
     "require-dev": {
-        "doctrine/annotations": "^1.13.2",
-        "doctrine/doctrine-bundle": "^2.3.2",
-        "doctrine/mongodb-odm": "^2.2",
-        "doctrine/orm": "^2.9",
+        "doctrine/doctrine-bundle": "^2.7",
+        "doctrine/mongodb-odm": "^2.4",
+        "doctrine/orm": "^2.14",
         "friendsofphp/php-cs-fixer": "^3.4",
         "knplabs/knp-menu": "^3.0",
         "knplabs/knp-menu-bundle": "^3.0",
@@ -56,10 +55,10 @@
         "phpstan/phpstan-strict-rules": "^1.0",
         "phpstan/phpstan-symfony": "^1.0",
         "phpunit/phpunit": "^9.5",
-        "psalm/plugin-phpunit": "^0.17",
-        "psalm/plugin-symfony": "^3.0",
+        "psalm/plugin-phpunit": "^0.18",
+        "psalm/plugin-symfony": "^4.0 || ^5.0",
         "rector/rector": "^0.15",
-        "sonata-project/admin-bundle": "^4.9",
+        "sonata-project/admin-bundle": "^4.14",
         "sonata-project/block-bundle": "^4.11",
         "sonata-project/doctrine-orm-admin-bundle": "^4.0",
         "symfony/asset": "^4.4 || ^5.4 || ^6.0",
@@ -70,12 +69,12 @@
         "symfony/security-csrf": "^4.4 || ^5.4 || ^6.0",
         "symfony/twig-bundle": "^4.4 || ^5.4 || ^6.0",
         "symfony/yaml": "^4.4 || ^5.4 || ^6.0",
-        "vimeo/psalm": "^4.7.2"
+        "vimeo/psalm": "^4.7.2 || ^5.0"
     },
     "conflict": {
-        "doctrine/mongodb-odm": "<2.2",
-        "doctrine/orm": "<2.9",
-        "sonata-project/admin-bundle": "<4.9",
+        "doctrine/mongodb-odm": "<2.4",
+        "doctrine/orm": "<2.14",
+        "sonata-project/admin-bundle": "<4.14",
         "sonata-project/block-bundle": "<4.11",
         "sonata-project/doctrine-orm-admin-bundle": "<4.0"
     },

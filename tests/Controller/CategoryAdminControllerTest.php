@@ -101,7 +101,7 @@ final class CategoryAdminControllerTest extends TestCase
         $this->csrfProvider->expects(static::any())
             ->method('getToken')
             ->willReturnCallback(
-                static fn ($intention) => new CsrfToken($intention, 'csrf-token-123_'.$intention)
+                static fn (string $intention) => new CsrfToken($intention, 'csrf-token-123_'.$intention)
             );
 
         $this->csrfProvider->expects(static::any())
@@ -132,7 +132,7 @@ final class CategoryAdminControllerTest extends TestCase
         $this->admin->expects(static::any())
             ->method('generateUrl')
             ->willReturnCallback(
-                static function ($name, array $parameters = []) {
+                static function (string $name, array $parameters = []) {
                     $result = $name;
                     if ([] !== $parameters) {
                         $result .= '?'.http_build_query($parameters);

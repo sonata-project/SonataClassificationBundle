@@ -146,7 +146,7 @@ final class CategoryManager extends BaseEntityManager implements CategoryManager
             ->andWhere('c.slug = :slug')->setParameter('slug', $slug);
 
         if (null !== $contextId) {
-            $queryBuilder->andWhere('c.context = :context')->setParameter('context', $contextId, Types::OBJECT);
+            $queryBuilder->andWhere('c.context = :context')->setParameter('context', $contextId, Types::JSON);
         }
         if (null !== $enabled) {
             $queryBuilder->andWhere('c.enabled = :enabled')->setParameter('enabled', $enabled);

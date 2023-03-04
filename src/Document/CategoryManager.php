@@ -95,13 +95,13 @@ final class CategoryManager extends BaseDocumentManager implements CategoryManag
 
     public function getAllRootCategories(bool $loadChildren = true): array
     {
-        /** @var CategoryInterface[] $rootCategories */
         $rootCategories = $this->getDocumentManager()
             ->createQueryBuilder($this->getClass())
             ->field('parent')
             ->equals(null)
             ->getQuery()
             ->execute();
+        \assert(\is_array($rootCategories));
 
         $categories = [];
 
@@ -170,7 +170,6 @@ final class CategoryManager extends BaseDocumentManager implements CategoryManag
             return;
         }
 
-        /** @var CategoryInterface[] $categories */
         $categories = $this->getDocumentManager()
             ->createQueryBuilder($this->getClass())
             ->field('context')
@@ -178,6 +177,7 @@ final class CategoryManager extends BaseDocumentManager implements CategoryManag
             ->sort('parent')
             ->getQuery()
             ->execute();
+        \assert(\is_array($categories));
 
         if (0 === \count($categories)) {
             // no category, create one for the provided context

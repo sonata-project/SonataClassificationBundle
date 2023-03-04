@@ -47,13 +47,13 @@ final class CategorySelectorType extends AbstractType
     }
 
     /**
-     * @psalm-param Options $options
+     * @return array<array-key, string>
+     *
      * @phpstan-param Options<array{
      *     context: ContextInterface|null,
      *     category: CategoryInterface|null,
      * }> $options
-     *
-     * @return array<array-key, string>
+     * @psalm-param Options $options
      */
     public function getChoices(Options $options): array
     {

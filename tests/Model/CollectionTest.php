@@ -26,10 +26,8 @@ final class CollectionTest extends TestCase
     {
         $time = new \DateTime();
 
-        /** @var ContextInterface $context */
         $context = $this->createMock(ContextInterface::class);
 
-        /** @var Collection $collection */
         $collection = $this->getMockForAbstractClass(Collection::class);
         $collection->setName('Hello World');
         $collection->setCreatedAt($time);
@@ -61,7 +59,6 @@ final class CollectionTest extends TestCase
 
     public function testPrePersist(): void
     {
-        /** @var Collection $collection */
         $collection = $this->getMockForAbstractClass(Collection::class);
         $collection->prePersist();
 
@@ -71,7 +68,6 @@ final class CollectionTest extends TestCase
 
     public function testPreUpdate(): void
     {
-        /** @var Collection $collection */
         $collection = $this->getMockForAbstractClass(Collection::class);
         $collection->preUpdate();
 

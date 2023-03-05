@@ -60,8 +60,8 @@ final class CollectionManager extends BaseDocumentManager implements CollectionM
                 ->equals($enabled);
         }
 
-        /** @var CollectionInterface[] $result */
         $result = $queryBuilder->getQuery()->execute();
+        \assert(\is_array($result));
 
         return $result;
     }

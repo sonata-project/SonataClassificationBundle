@@ -26,10 +26,8 @@ final class CategoryTest extends TestCase
     {
         $time = new \DateTime();
 
-        /** @var ContextInterface $context */
         $context = $this->createMock(ContextInterface::class);
 
-        /** @var Category $category */
         $category = $this->getMockForAbstractClass(Category::class);
         $category->setName('Hello World');
         $category->setEnabled(true);
@@ -63,10 +61,8 @@ final class CategoryTest extends TestCase
 
     public function testParent(): void
     {
-        /** @var Category $parent */
         $parent = $this->getMockForAbstractClass(Category::class);
 
-        /** @var Category $category */
         $category = $this->getMockForAbstractClass(Category::class);
         $category->setParent($parent);
         static::assertSame($parent, $category->getParent());
@@ -75,17 +71,12 @@ final class CategoryTest extends TestCase
 
     public function testChildren(): void
     {
-        /** @var Category $cat1 */
         $cat1 = $this->getMockForAbstractClass(Category::class);
-        /** @var Category $cat2 */
         $cat2 = $this->getMockForAbstractClass(Category::class);
-        /** @var Category $cat3 */
         $cat3 = $this->getMockForAbstractClass(Category::class);
 
-        /** @var ContextInterface $context */
         $context = $this->createMock(ContextInterface::class);
 
-        /** @var Category $category */
         $category = $this->getMockForAbstractClass(Category::class);
         $category->setContext($context);
         static::assertFalse($category->hasChildren());
@@ -109,7 +100,6 @@ final class CategoryTest extends TestCase
 
     public function testPrePersist(): void
     {
-        /** @var Category $category */
         $category = $this->getMockForAbstractClass(Category::class);
         $category->prePersist();
 
@@ -119,7 +109,6 @@ final class CategoryTest extends TestCase
 
     public function testPreUpdate(): void
     {
-        /** @var Category $category */
         $category = $this->getMockForAbstractClass(Category::class);
         $category->preUpdate();
 

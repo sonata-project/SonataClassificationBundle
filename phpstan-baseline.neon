@@ -3,3 +3,11 @@ parameters:
         - # https://github.com/phpstan/phpstan-strict-rules/issues/130
             message: '#^Call to static method PHPUnit\\Framework\\Assert::.* will always evaluate to true\.$#'
             path: tests/
+        - # https://github.com/phpstan/phpstan-symfony/issues/322
+            message: "#^Parameter \\#1 \\$context of method Sonata\\\\ClassificationBundle\\\\Model\\\\CategoryManagerInterface\\:\\:getRootCategoriesForContext\\(\\) expects Sonata\\\\ClassificationBundle\\\\Model\\\\ContextInterface\\|null, Sonata\\\\ClassificationBundle\\\\Model\\\\CategoryInterface\\|Sonata\\\\ClassificationBundle\\\\Model\\\\ContextInterface given\\.$#"
+            count: 1
+            path: src/Form/Type/CategorySelectorType.php
+        - # https://github.com/phpstan/phpstan-symfony/issues/322
+            message: "#^Parameter \\#2 \\$category of method Sonata\\\\ClassificationBundle\\\\Form\\\\Type\\\\CategorySelectorType\\:\\:childWalker\\(\\) expects Sonata\\\\ClassificationBundle\\\\Model\\\\CategoryInterface, Sonata\\\\ClassificationBundle\\\\Model\\\\CategoryInterface\\|Sonata\\\\ClassificationBundle\\\\Model\\\\ContextInterface given\\.$#"
+            count: 1
+            path: src/Form/Type/CategorySelectorType.php

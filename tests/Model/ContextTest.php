@@ -25,7 +25,6 @@ final class ContextTest extends TestCase
     {
         $time = new \DateTime();
 
-        /** @var Context $context */
         $context = $this->getMockForAbstractClass(Context::class);
         // id is an int in ContextInterface and Context but used as string in implementation
         // see ContextInterface::DEFAULT_CONTEXT
@@ -47,7 +46,6 @@ final class ContextTest extends TestCase
 
     public function testPreUpdate(): void
     {
-        /** @var Context $context */
         $context = $this->getMockForAbstractClass(Context::class);
         $context->preUpdate();
 

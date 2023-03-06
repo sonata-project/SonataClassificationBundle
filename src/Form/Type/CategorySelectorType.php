@@ -17,15 +17,16 @@ use Sonata\AdminBundle\Form\Type\ModelType;
 use Sonata\ClassificationBundle\Form\ChoiceList\CategoryChoiceLoader;
 use Sonata\ClassificationBundle\Model\CategoryInterface;
 use Sonata\ClassificationBundle\Model\CategoryManagerInterface;
+use Sonata\ClassificationBundle\Model\ContextInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\ChoiceList\Loader\ChoiceLoaderInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Select a category.
- *
  * @author Thomas Rabaix <thomas.rabaix@sonata-project.org>
+ *
+ * @psalm-suppress MissingTemplateParam https://github.com/phpstan/phpstan-symfony/issues/320
  */
 final class CategorySelectorType extends AbstractType
 {
@@ -47,29 +48,39 @@ final class CategorySelectorType extends AbstractType
 
     /**
      * @return array<array-key, string>
+     *
+     * @phpstan-param Options<array{
+     *     context: ContextInterface|null,
+     *     category: CategoryInterface|null,
+     * }> $options
+     * @psalm-param Options $options
      */
     public function getChoices(Options $options): array
     {
-        if (!$options['category'] instanceof CategoryInterface) {
+        $category = $options['category'];
+
+        if (null === $category) {
             return [];
         }
 
-        if (null === $options['context']) {
-            $categories = $this->manager->getAllRootCategories();
+        $context = $options['context'];
+
+        if (null === $context) {
+            $rootCategories = $this->manager->getAllRootCategories();
         } else {
-            $categories = $this->manager->getRootCategoriesForContext($options['context']);
+            $rootCategories = $this->manager->getRootCategoriesForContext($context);
         }
 
         $choices = [];
 
-        foreach ($categories as $category) {
-            $context = $category->getContext();
-            $categoryId = $category->getId();
-            \assert(null !== $context && null !== $categoryId);
+        foreach ($rootCategories as $rootCategory) {
+            $context = $rootCategory->getContext();
+            $rootCategoryId = $rootCategory->getId();
+            \assert(null !== $context && null !== $rootCategoryId);
 
-            $choices[$categoryId] = sprintf('%s (%s)', $category->getName() ?? '', $context->getId() ?? '');
+            $choices[$rootCategoryId] = sprintf('%s (%s)', $rootCategory->getName() ?? '', $context->getId() ?? '');
 
-            $this->childWalker($category, $options, $choices);
+            $this->childWalker($rootCategory, $category, $choices);
         }
 
         return $choices;
@@ -88,23 +99,23 @@ final class CategorySelectorType extends AbstractType
     /**
      * @param array<array-key, string> $choices
      */
-    private function childWalker(CategoryInterface $category, Options $options, array &$choices, int $level = 2): void
+    private function childWalker(CategoryInterface $rootCategory, CategoryInterface $category, array &$choices, int $level = 2): void
     {
-        if ($category->getChildren()->isEmpty()) {
+        if ($rootCategory->getChildren()->isEmpty()) {
             return;
         }
 
-        foreach ($category->getChildren() as $child) {
-            $childId = $child->getId();
-            \assert(null !== $childId);
+        foreach ($rootCategory->getChildren() as $childCategory) {
+            $childCategoryId = $childCategory->getId();
+            \assert(null !== $childCategoryId);
 
-            if ($options['category'] instanceof CategoryInterface && $options['category']->getId() === $childId) {
+            if ($category->getId() === $childCategoryId) {
                 continue;
             }
 
-            $choices[$childId] = sprintf('%s %s', str_repeat('-', 1 * $level), $child->getName() ?? '');
+            $choices[$childCategoryId] = sprintf('%s %s', str_repeat('-', 1 * $level), $childCategory->getName() ?? '');
 
-            $this->childWalker($child, $options, $choices, $level + 1);
+            $this->childWalker($childCategory, $category, $choices, $level + 1);
         }
     }
 }

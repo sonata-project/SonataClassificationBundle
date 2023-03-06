@@ -51,6 +51,26 @@ final class CollectionFilter extends Filter
         ];
     }
 
+    /**
+     * @return array<string, mixed>
+     */
+    public function getFormOptions(): array
+    {
+        return [
+            'field_type' => $this->getFieldType(),
+            'field_options' => $this->getOption('choices', [
+                'choices' => $this->getChoices(),
+                'choice_translation_domain' => false,
+            ]),
+            'label' => $this->getLabel(),
+        ];
+    }
+
+    /**
+     * @psalm-suppress DeprecatedClass
+     *
+     * NEXT_MAJOR: Remove this method.
+     */
     public function getRenderSettings(): array
     {
         return [DefaultType::class, [

@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sonata\ClassificationBundle\Entity;
 
-use Doctrine\DBAL\Types\Types;
 use Doctrine\Persistence\ManagerRegistry;
 use Sonata\ClassificationBundle\Model\CategoryInterface;
 use Sonata\ClassificationBundle\Model\CategoryManagerInterface;
@@ -146,7 +145,7 @@ final class CategoryManager extends BaseEntityManager implements CategoryManager
             ->andWhere('c.slug = :slug')->setParameter('slug', $slug);
 
         if (null !== $contextId) {
-            $queryBuilder->andWhere('c.context = :context')->setParameter('context', $contextId, Types::OBJECT);
+            $queryBuilder->andWhere('c.context = :context')->setParameter('context', $contextId);
         }
         if (null !== $enabled) {
             $queryBuilder->andWhere('c.enabled = :enabled')->setParameter('enabled', $enabled);
@@ -196,11 +195,6 @@ final class CategoryManager extends BaseEntityManager implements CategoryManager
             $categoryId = $category->getId();
             \assert(null !== $categoryId);
             $this->categories[$contextId][$categoryId] = $category;
-
-            $parent = $category->getParent();
-            if (null !== $parent) {
-                $parent->addChild($category);
-            }
         }
 
         $this->categories[$contextId] = $rootCategories;

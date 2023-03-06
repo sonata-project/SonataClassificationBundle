@@ -15,6 +15,7 @@ namespace Sonata\ClassificationBundle\Block\Service;
 
 use Sonata\AdminBundle\Admin\AdminInterface;
 use Sonata\AdminBundle\FieldDescription\FieldDescriptionInterface;
+use Sonata\AdminBundle\Form\FormMapper as AdminFormMapper;
 use Sonata\AdminBundle\Form\Type\ModelListType;
 use Sonata\BlockBundle\Block\Service\AbstractBlockService;
 use Sonata\BlockBundle\Form\Mapper\FormMapper;
@@ -50,6 +51,10 @@ abstract class AbstractClassificationBlockService extends AbstractBlockService
      */
     final protected function getFormAdminType(FormMapper $formMapper, AdminInterface $admin, string $formField, string $field, array $fieldOptions = [], array $adminOptions = []): FormBuilderInterface
     {
+        if (!$formMapper instanceof AdminFormMapper) {
+            throw new \InvalidArgumentException('Classification blocks require to be used in the Admin context');
+        }
+
         /** @phpstan-var FieldDescriptionOptions $adminOptions */
         $adminOptions = array_merge([
             'edit' => 'list',
@@ -66,7 +71,7 @@ abstract class AbstractClassificationBlockService extends AbstractBlockService
             'required' => false,
         ], $fieldOptions);
 
-        return $formMapper->create($formField, ModelListType::class, $fieldOptions);
+        return $formMapper->getFormBuilder()->create($formField, ModelListType::class, $fieldOptions);
     }
 
     /**

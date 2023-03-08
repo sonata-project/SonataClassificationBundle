@@ -38,26 +38,16 @@ use Twig\Environment;
  */
 abstract class AbstractCollectionsBlockService extends AbstractClassificationBlockService implements EditableBlockService
 {
-    private CollectionManagerInterface $collectionManager;
-
-    /**
-     * @phpstan-var AdminInterface<CollectionInterface>|null
-     */
-    private ?AdminInterface $collectionAdmin;
-
     /**
      * @phpstan-param AdminInterface<CollectionInterface>|null $collectionAdmin
      */
     public function __construct(
         Environment $twig,
         ContextManagerInterface $contextManager,
-        CollectionManagerInterface $collectionManager,
-        ?AdminInterface $collectionAdmin = null
+        private CollectionManagerInterface $collectionManager,
+        private ?AdminInterface $collectionAdmin = null
     ) {
         parent::__construct($twig, $contextManager);
-
-        $this->collectionManager = $collectionManager;
-        $this->collectionAdmin = $collectionAdmin;
     }
 
     public function execute(BlockContextInterface $blockContext, ?Response $response = null): Response
@@ -181,9 +171,8 @@ abstract class AbstractCollectionsBlockService extends AbstractClassificationBlo
 
     /**
      * @param CollectionInterface|int|string|null $id
-     * @param mixed                               $default
      */
-    final protected function getCollection($id, $default = null): ?CollectionInterface
+    final protected function getCollection($id, mixed $default = null): ?CollectionInterface
     {
         if ($id instanceof CollectionInterface) {
             return $id;

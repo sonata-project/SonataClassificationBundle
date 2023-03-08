@@ -17,19 +17,10 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Sonata\ClassificationBundle\Entity\BaseTag;
 
-/**
- * @ORM\Entity
- * @ORM\Table(name="classification__tag")
- */
 #[ORM\Entity]
 #[ORM\Table(name: 'classification__tag')]
 class Tag extends BaseTag
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
     #[ORM\Id]
     #[ORM\Column(type: Types::INTEGER)]
     #[ORM\GeneratedValue]

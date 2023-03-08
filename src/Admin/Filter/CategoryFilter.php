@@ -23,11 +23,8 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 final class CategoryFilter extends Filter
 {
-    private CategoryManagerInterface $categoryManager;
-
-    public function __construct(CategoryManagerInterface $categoryManager)
+    public function __construct(private CategoryManagerInterface $categoryManager)
     {
-        $this->categoryManager = $categoryManager;
     }
 
     public function filter(ProxyQueryInterface $query, string $alias, string $field, FilterData $data): void

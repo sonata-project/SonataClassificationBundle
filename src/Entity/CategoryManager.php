@@ -30,16 +30,15 @@ final class CategoryManager extends BaseEntityManager implements CategoryManager
      */
     protected array $categories;
 
-    protected ContextManagerInterface $contextManager;
-
     /**
      * @phpstan-param class-string<CategoryInterface> $class
      */
-    public function __construct(string $class, ManagerRegistry $registry, ContextManagerInterface $contextManager)
-    {
+    public function __construct(
+        string $class,
+        ManagerRegistry $registry,
+        protected ContextManagerInterface $contextManager
+    ) {
         parent::__construct($class, $registry);
-
-        $this->contextManager = $contextManager;
         $this->categories = [];
     }
 

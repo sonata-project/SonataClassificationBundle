@@ -38,26 +38,16 @@ use Twig\Environment;
  */
 abstract class AbstractCategoriesBlockService extends AbstractClassificationBlockService implements EditableBlockService
 {
-    private CategoryManagerInterface $categoryManager;
-
-    /**
-     * @phpstan-var AdminInterface<CategoryInterface>|null
-     */
-    private ?AdminInterface $categoryAdmin;
-
     /**
      * @phpstan-param AdminInterface<CategoryInterface>|null $categoryAdmin
      */
     public function __construct(
         Environment $twig,
         ContextManagerInterface $contextManager,
-        CategoryManagerInterface $categoryManager,
-        ?AdminInterface $categoryAdmin
+        private CategoryManagerInterface $categoryManager,
+        private ?AdminInterface $categoryAdmin
     ) {
         parent::__construct($twig, $contextManager);
-
-        $this->categoryManager = $categoryManager;
-        $this->categoryAdmin = $categoryAdmin;
     }
 
     public function execute(BlockContextInterface $blockContext, ?Response $response = null): Response
@@ -180,9 +170,8 @@ abstract class AbstractCategoriesBlockService extends AbstractClassificationBloc
 
     /**
      * @param CategoryInterface|int|string|null $id
-     * @param mixed                             $default
      */
-    final protected function getCategory($id, $default = null): ?CategoryInterface
+    final protected function getCategory($id, mixed $default = null): ?CategoryInterface
     {
         if ($id instanceof CategoryInterface) {
             return $id;

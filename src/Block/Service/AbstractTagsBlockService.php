@@ -38,26 +38,16 @@ use Twig\Environment;
  */
 abstract class AbstractTagsBlockService extends AbstractClassificationBlockService implements EditableBlockService
 {
-    private TagManagerInterface $tagManager;
-
-    /**
-     * @phpstan-var AdminInterface<TagInterface>|null
-     */
-    private ?AdminInterface $tagAdmin;
-
     /**
      * @phpstan-param AdminInterface<TagInterface>|null $tagAdmin
      */
     public function __construct(
         Environment $twig,
         ContextManagerInterface $contextManager,
-        TagManagerInterface $tagManager,
-        ?AdminInterface $tagAdmin = null
+        private TagManagerInterface $tagManager,
+        private ?AdminInterface $tagAdmin = null
     ) {
         parent::__construct($twig, $contextManager);
-
-        $this->tagManager = $tagManager;
-        $this->tagAdmin = $tagAdmin;
     }
 
     public function execute(BlockContextInterface $blockContext, ?Response $response = null): Response
@@ -181,9 +171,8 @@ abstract class AbstractTagsBlockService extends AbstractClassificationBlockServi
 
     /**
      * @param TagInterface|int|string|null $id
-     * @param mixed                        $default
      */
-    final protected function getTag($id, $default = null): ?TagInterface
+    final protected function getTag($id, mixed $default = null): ?TagInterface
     {
         if ($id instanceof TagInterface) {
             return $id;

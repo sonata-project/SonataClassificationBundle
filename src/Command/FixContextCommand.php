@@ -30,26 +30,13 @@ final class FixContextCommand extends Command
     protected static $defaultName = 'sonata:classification:fix-context';
     protected static $defaultDescription = 'Generate the default context if none defined and attach the context to all elements';
 
-    private ContextManagerInterface $contextManager;
-
-    private TagManagerInterface $tagManager;
-
-    private CollectionManagerInterface $collectionManager;
-
-    private CategoryManagerInterface $categoryManager;
-
     public function __construct(
-        ContextManagerInterface $contextManager,
-        TagManagerInterface $tagManager,
-        CollectionManagerInterface $collectionManager,
-        CategoryManagerInterface $categoryManager
+        private ContextManagerInterface $contextManager,
+        private TagManagerInterface $tagManager,
+        private CollectionManagerInterface $collectionManager,
+        private CategoryManagerInterface $categoryManager
     ) {
         parent::__construct();
-
-        $this->contextManager = $contextManager;
-        $this->tagManager = $tagManager;
-        $this->collectionManager = $collectionManager;
-        $this->categoryManager = $categoryManager;
     }
 
     public function configure(): void

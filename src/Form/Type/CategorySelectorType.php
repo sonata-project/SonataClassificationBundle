@@ -30,11 +30,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 final class CategorySelectorType extends AbstractType
 {
-    protected CategoryManagerInterface $manager;
-
-    public function __construct(CategoryManagerInterface $manager)
+    public function __construct(private CategoryManagerInterface $manager)
     {
-        $this->manager = $manager;
     }
 
     public function configureOptions(OptionsResolver $resolver): void

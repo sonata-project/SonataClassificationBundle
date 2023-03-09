@@ -174,10 +174,8 @@ final class CategoryAdminControllerTest extends TestCase
 
     /**
      * @dataProvider listActionData
-     *
-     * @param string|false $context
      */
-    public function testListAction($context): void
+    public function testListAction(string|false $context): void
     {
         $contextValue = false === $context ? '' : $context;
 
@@ -234,10 +232,9 @@ final class CategoryAdminControllerTest extends TestCase
     /**
      * @dataProvider treeActionData
      *
-     * @param string|false          $context
      * @param array<string, string> $categories
      */
-    public function testTreeAction($context, array $categories): void
+    public function testTreeAction(string|false $context, array $categories): void
     {
         $datagrid = $this->createMock(DatagridInterface::class);
 

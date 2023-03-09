@@ -15,7 +15,7 @@ namespace Sonata\ClassificationBundle\Model;
 
 use Cocur\Slugify\Slugify;
 
-abstract class Tag implements TagInterface
+abstract class Tag implements TagInterface, \Stringable
 {
     protected ?string $name = null;
 

@@ -30,16 +30,15 @@ final class CategoryManager extends BaseDocumentManager implements CategoryManag
      */
     protected array $categories;
 
-    protected ContextManagerInterface $contextManager;
-
     /**
      * @phpstan-param class-string<CategoryInterface> $class
      */
-    public function __construct(string $class, ManagerRegistry $registry, ContextManagerInterface $contextManager)
-    {
+    public function __construct(
+        string $class,
+        ManagerRegistry $registry,
+        protected ContextManagerInterface $contextManager
+    ) {
         parent::__construct($class, $registry);
-
-        $this->contextManager = $contextManager;
         $this->categories = [];
     }
 
@@ -215,10 +214,7 @@ final class CategoryManager extends BaseDocumentManager implements CategoryManag
         }
     }
 
-    /**
-     * @param ContextInterface|string|null $context
-     */
-    private function getContext($context): ContextInterface
+    private function getContext(ContextInterface|string|null $context): ContextInterface
     {
         if (null === $context) {
             $context = ContextInterface::DEFAULT_CONTEXT;

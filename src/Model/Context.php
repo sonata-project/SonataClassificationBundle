@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sonata\ClassificationBundle\Model;
 
-abstract class Context implements ContextInterface
+abstract class Context implements ContextInterface, \Stringable
 {
     protected ?string $id = null;
 

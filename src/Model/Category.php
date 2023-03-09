@@ -16,7 +16,7 @@ namespace Sonata\ClassificationBundle\Model;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
-abstract class Category implements CategoryInterface
+abstract class Category implements CategoryInterface, \Stringable
 {
     protected ?string $name = null;
 

@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sonata\ClassificationBundle\Model;
 
-abstract class Collection implements CollectionInterface
+abstract class Collection implements CollectionInterface, \Stringable
 {
     protected ?string $name = null;
 

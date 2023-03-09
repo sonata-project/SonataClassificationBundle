@@ -34,13 +34,11 @@ use Twig\Environment;
  */
 abstract class AbstractClassificationBlockService extends AbstractBlockService
 {
-    protected ContextManagerInterface $contextManager;
-
-    public function __construct(Environment $twig, ContextManagerInterface $contextManager)
-    {
+    public function __construct(
+        Environment $twig,
+        protected ContextManagerInterface $contextManager
+    ) {
         parent::__construct($twig);
-
-        $this->contextManager = $contextManager;
     }
 
     /**

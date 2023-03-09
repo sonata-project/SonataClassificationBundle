@@ -22,11 +22,8 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 final class CollectionFilter extends Filter
 {
-    private CollectionManagerInterface $collectionManager;
-
-    public function __construct(CollectionManagerInterface $collectionManager)
+    public function __construct(private CollectionManagerInterface $collectionManager)
     {
-        $this->collectionManager = $collectionManager;
     }
 
     public function filter(ProxyQueryInterface $query, string $alias, string $field, FilterData $data): void

@@ -17,19 +17,10 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Sonata\ClassificationBundle\Entity\BaseCollection;
 
-/**
- * @ORM\Entity
- * @ORM\Table(name="classification__collection")
- */
 #[ORM\Entity]
 #[ORM\Table(name: 'classification__collection')]
 class Collection extends BaseCollection
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
     #[ORM\Id]
     #[ORM\Column(type: Types::INTEGER)]
     #[ORM\GeneratedValue]

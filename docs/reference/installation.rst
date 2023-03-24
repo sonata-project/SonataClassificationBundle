@@ -174,17 +174,13 @@ You have to create the corresponding documents, ``src/Document/SonataClassificat
 
     // src/Document/SonataClassificationTag.php
 
-    use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
+    use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
     use Sonata\ClassificationBundle\Document\BaseTag;
 
-    /**
-     * @MongoDB\Document
-     */
+    #[ODM\Document]
     class SonataClassificationTag extends BaseTag
     {
-        /**
-         * @MongoDB\Id
-         */
+        #[ODM\Id]
         protected $id;
     }
 
@@ -192,17 +188,13 @@ You have to create the corresponding documents, ``src/Document/SonataClassificat
 
     // src/Document/SonataClassificationCategory.php
 
-    use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
+    use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
     use Sonata\ClassificationBundle\Document\BaseCategory;
 
-    /**
-     * @MongoDB\Document
-     */
+    #[ODM\Document]
     class SonataClassificationCategory extends BaseCategory
     {
-        /**
-         * @MongoDB\Id
-         */
+        #[ODM\Id]
         protected $id;
     }
 
@@ -210,17 +202,13 @@ You have to create the corresponding documents, ``src/Document/SonataClassificat
 
     // src/Document/SonataClassificationCollection.php
 
-    use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
+    use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
     use Sonata\ClassificationBundle\Document\BaseCollection;
 
-    /**
-     * @MongoDB\Document
-     */
+    #[ODM\Document]
     class SonataClassificationCollection extends BaseCollection
     {
-        /**
-         * @MongoDB\Id
-         */
+        #[ODM\Id]
         protected $id;
     }
 
@@ -228,17 +216,13 @@ and ``src/Document/SonataClassificationContext``::
 
     // src/Document/SonataClassificationContext.php
 
-    use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
+    use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
     use Sonata\ClassificationBundle\Document\BaseContext;
 
-    /**
-     * @MongoDB\Document
-     */
+    #[ODM\Document]
     class SonataClassificationContext extends BaseContext
     {
-        /**
-         * @MongoDB\Id
-         */
+        #[ODM\Id]
         protected $id;
     }
 

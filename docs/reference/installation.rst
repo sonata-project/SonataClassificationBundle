@@ -77,7 +77,7 @@ Add these bundles in the config mapping definition (or enable `auto_mapping`_)::
                     mappings:
                         SonataClassificationBundle: ~
 
-And then create the corresponding entities, ``src/Entity/SonataClassificationTag``:: php
+And then create the corresponding entities, ``src/Entity/SonataClassificationTag``::
 
     // src/Entity/SonataClassificationTag.php
 

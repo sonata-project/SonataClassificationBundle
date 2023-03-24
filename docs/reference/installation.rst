@@ -81,84 +81,71 @@ And then create the corresponding entities, ``src/Entity/SonataClassificationTag
 
     // src/Entity/SonataClassificationTag.php
 
+    use Doctrine\DBAL\Types\Types;
     use Doctrine\ORM\Mapping as ORM;
     use Sonata\ClassificationBundle\Entity\BaseTag;
 
-    /**
-     * @ORM\Entity
-     * @ORM\Table(name="classification__tag")
-     */
+    #[ORM\Entity]
+    #[ORM\Table(name: 'classification__tag')]
     class SonataClassificationTag extends BaseTag
     {
-        /**
-         * @ORM\Id
-         * @ORM\GeneratedValue
-         * @ORM\Column(type="integer")
-         */
-        protected $id;
+        #[ORM\Id]
+        #[ORM\Column(type: Types::INTEGER)]
+        #[ORM\GeneratedValue]
+        protected ?int $id = null;
     }
 
 ``src/Entity/SonataClassificationCategory``::
 
     // src/Entity/SonataClassificationCategory.php
 
+    use Doctrine\DBAL\Types\Types;
     use Doctrine\ORM\Mapping as ORM;
     use Sonata\ClassificationBundle\Entity\BaseCategory;
 
-    /**
-     * @ORM\Entity
-     * @ORM\Table(name="classification__category")
-     */
+    #[ORM\Entity]
+    #[ORM\Table(name: 'classification__category')]
     class SonataClassificationCategory extends BaseCategory
     {
-        /**
-         * @ORM\Id
-         * @ORM\GeneratedValue
-         * @ORM\Column(type="integer")
-         */
-        protected $id;
+        #[ORM\Id]
+        #[ORM\Column(type: Types::INTEGER)]
+        #[ORM\GeneratedValue]
+        protected ?int $id = null;
     }
 
 ``src/Entity/SonataClassificationCollection``::
 
     // src/Entity/SonataClassificationCollection.php
 
+    use Doctrine\DBAL\Types\Types;
     use Doctrine\ORM\Mapping as ORM;
     use Sonata\ClassificationBundle\Entity\BaseCollection;
 
-    /**
-     * @ORM\Entity
-     * @ORM\Table(name="classification__collection")
-     */
+    #[ORM\Entity]
+    #[ORM\Table(name: 'classification__collection')]
     class SonataClassificationCollection extends BaseCollection
     {
-        /**
-         * @ORM\Id
-         * @ORM\GeneratedValue
-         * @ORM\Column(type="integer")
-         */
-        protected $id;
+        #[ORM\Id]
+        #[ORM\Column(type: Types::INTEGER)]
+        #[ORM\GeneratedValue]
+        protected ?int $id = null;
     }
 
 and ``src/Entity/SonataClassificationContext``::
 
     // src/Entity/SonataClassificationContext.php
 
+    use Doctrine\DBAL\Types\Types;
     use Doctrine\ORM\Mapping as ORM;
     use Sonata\ClassificationBundle\Entity\BaseContext;
 
-    /**
-     * @ORM\Entity
-     * @ORM\Table(name="classification__context")
-     */
+    #[ORM\Entity]
+    #[ORM\Table(name: 'classification__context')]
     class SonataClassificationContext extends BaseContext
     {
-        /**
-         * @ORM\Id
-         * @ORM\GeneratedValue
-         * @ORM\Column(type="integer")
-         */
-        protected $id;
+        #[ORM\Id]
+        #[ORM\Column(type: Types::STRING)]
+        protected ?string $id = null;
     }
 
 The only thing left is to update your schema::

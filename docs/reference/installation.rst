@@ -93,6 +93,11 @@ And then create the corresponding entities, ``src/Entity/SonataClassificationTag
         #[ORM\Column(type: Types::INTEGER)]
         #[ORM\GeneratedValue]
         protected ?int $id = null;
+
+        public function getId(): ?int
+        {
+            return $this->id;
+        }
     }
 
 ``src/Entity/SonataClassificationCategory``::
@@ -111,6 +116,11 @@ And then create the corresponding entities, ``src/Entity/SonataClassificationTag
         #[ORM\Column(type: Types::INTEGER)]
         #[ORM\GeneratedValue]
         protected ?int $id = null;
+
+        public function getId(): ?int
+        {
+            return $this->id;
+        }
     }
 
 ``src/Entity/SonataClassificationCollection``::
@@ -129,6 +139,11 @@ And then create the corresponding entities, ``src/Entity/SonataClassificationTag
         #[ORM\Column(type: Types::INTEGER)]
         #[ORM\GeneratedValue]
         protected ?int $id = null;
+
+        public function getId(): ?int
+        {
+            return $this->id;
+        }
     }
 
 and ``src/Entity/SonataClassificationContext``::

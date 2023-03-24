@@ -25,9 +25,4 @@ class Collection extends BaseCollection
     #[ORM\Column(type: Types::INTEGER)]
     #[ORM\GeneratedValue]
     protected ?int $id = null;
-
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
 }

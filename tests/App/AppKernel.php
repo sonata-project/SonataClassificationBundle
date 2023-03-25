@@ -98,12 +98,6 @@ final class AppKernel extends Kernel
             $loader->load(__DIR__.'/config/config_symfony_v4.yaml');
         }
 
-        if (version_compare(\PHP_VERSION, '8.0.0', '>=')) {
-            $loader->load(__DIR__.'/config/config_php8.yaml');
-        } else {
-            $loader->load(__DIR__.'/config/config_php7.yaml');
-        }
-
         if (class_exists(HttpCacheHandler::class)) {
             $loader->load(__DIR__.'/config/config_sonata_block_v4.yaml');
         }

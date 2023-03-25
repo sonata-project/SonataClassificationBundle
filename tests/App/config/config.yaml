@@ -36,4 +36,14 @@ sonata_classification:
 doctrine:
     dbal:
         driver: pdo_sqlite
+    orm:
+        entity_managers:
+            default:
+                mappings:
+                    SonataClassificationBundle: null
+                    SonataClassificationTest:
+                        type: attribute
+                        dir: '%kernel.project_dir%/Entity'
+                        is_bundle: false
+                        prefix: Sonata\ClassificationBundle\Tests\App\Entity        
         path: '%app.base_dir%sonata_classification_test.db3'

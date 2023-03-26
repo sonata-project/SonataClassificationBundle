@@ -81,84 +81,86 @@ And then create the corresponding entities, ``src/Entity/SonataClassificationTag
 
     // src/Entity/SonataClassificationTag.php
 
+    use Doctrine\DBAL\Types\Types;
     use Doctrine\ORM\Mapping as ORM;
     use Sonata\ClassificationBundle\Entity\BaseTag;
 
-    /**
-     * @ORM\Entity
-     * @ORM\Table(name="classification__tag")
-     */
+    #[ORM\Entity]
+    #[ORM\Table(name: 'classification__tag')]
     class SonataClassificationTag extends BaseTag
     {
-        /**
-         * @ORM\Id
-         * @ORM\GeneratedValue
-         * @ORM\Column(type="integer")
-         */
-        protected $id;
+        #[ORM\Id]
+        #[ORM\Column(type: Types::INTEGER)]
+        #[ORM\GeneratedValue]
+        protected ?int $id = null;
+
+        public function getId(): ?int
+        {
+            return $this->id;
+        }
     }
 
 ``src/Entity/SonataClassificationCategory``::
 
     // src/Entity/SonataClassificationCategory.php
 
+    use Doctrine\DBAL\Types\Types;
     use Doctrine\ORM\Mapping as ORM;
     use Sonata\ClassificationBundle\Entity\BaseCategory;
 
-    /**
-     * @ORM\Entity
-     * @ORM\Table(name="classification__category")
-     */
+    #[ORM\Entity]
+    #[ORM\Table(name: 'classification__category')]
     class SonataClassificationCategory extends BaseCategory
     {
-        /**
-         * @ORM\Id
-         * @ORM\GeneratedValue
-         * @ORM\Column(type="integer")
-         */
-        protected $id;
+        #[ORM\Id]
+        #[ORM\Column(type: Types::INTEGER)]
+        #[ORM\GeneratedValue]
+        protected ?int $id = null;
+
+        public function getId(): ?int
+        {
+            return $this->id;
+        }
     }
 
 ``src/Entity/SonataClassificationCollection``::
 
     // src/Entity/SonataClassificationCollection.php
 
+    use Doctrine\DBAL\Types\Types;
     use Doctrine\ORM\Mapping as ORM;
     use Sonata\ClassificationBundle\Entity\BaseCollection;
 
-    /**
-     * @ORM\Entity
-     * @ORM\Table(name="classification__collection")
-     */
+    #[ORM\Entity]
+    #[ORM\Table(name: 'classification__collection')]
     class SonataClassificationCollection extends BaseCollection
     {
-        /**
-         * @ORM\Id
-         * @ORM\GeneratedValue
-         * @ORM\Column(type="integer")
-         */
-        protected $id;
+        #[ORM\Id]
+        #[ORM\Column(type: Types::INTEGER)]
+        #[ORM\GeneratedValue]
+        protected ?int $id = null;
+
+        public function getId(): ?int
+        {
+            return $this->id;
+        }
     }
 
 and ``src/Entity/SonataClassificationContext``::
 
     // src/Entity/SonataClassificationContext.php
 
+    use Doctrine\DBAL\Types\Types;
     use Doctrine\ORM\Mapping as ORM;
     use Sonata\ClassificationBundle\Entity\BaseContext;
 
-    /**
-     * @ORM\Entity
-     * @ORM\Table(name="classification__context")
-     */
+    #[ORM\Entity]
+    #[ORM\Table(name: 'classification__context')]
     class SonataClassificationContext extends BaseContext
     {
-        /**
-         * @ORM\Id
-         * @ORM\GeneratedValue
-         * @ORM\Column(type="integer")
-         */
-        protected $id;
+        #[ORM\Id]
+        #[ORM\Column(type: Types::STRING)]
+        protected ?string $id = null;
     }
 
 The only thing left is to update your schema::
@@ -172,17 +174,13 @@ You have to create the corresponding documents, ``src/Document/SonataClassificat
 
     // src/Document/SonataClassificationTag.php
 
-    use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
+    use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
     use Sonata\ClassificationBundle\Document\BaseTag;
 
-    /**
-     * @MongoDB\Document
-     */
+    #[ODM\Document]
     class SonataClassificationTag extends BaseTag
     {
-        /**
-         * @MongoDB\Id
-         */
+        #[ODM\Id]
         protected $id;
     }
 
@@ -190,17 +188,13 @@ You have to create the corresponding documents, ``src/Document/SonataClassificat
 
     // src/Document/SonataClassificationCategory.php
 
-    use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
+    use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
     use Sonata\ClassificationBundle\Document\BaseCategory;
 
-    /**
-     * @MongoDB\Document
-     */
+    #[ODM\Document]
     class SonataClassificationCategory extends BaseCategory
     {
-        /**
-         * @MongoDB\Id
-         */
+        #[ODM\Id]
         protected $id;
     }
 
@@ -208,17 +202,13 @@ You have to create the corresponding documents, ``src/Document/SonataClassificat
 
     // src/Document/SonataClassificationCollection.php
 
-    use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
+    use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
     use Sonata\ClassificationBundle\Document\BaseCollection;
 
-    /**
-     * @MongoDB\Document
-     */
+    #[ODM\Document]
     class SonataClassificationCollection extends BaseCollection
     {
-        /**
-         * @MongoDB\Id
-         */
+        #[ODM\Id]
         protected $id;
     }
 
@@ -226,17 +216,13 @@ and ``src/Document/SonataClassificationContext``::
 
     // src/Document/SonataClassificationContext.php
 
-    use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
+    use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
     use Sonata\ClassificationBundle\Document\BaseContext;
 
-    /**
-     * @MongoDB\Document
-     */
+    #[ODM\Document]
     class SonataClassificationContext extends BaseContext
     {
-        /**
-         * @MongoDB\Id
-         */
+        #[ODM\Id]
         protected $id;
     }
 

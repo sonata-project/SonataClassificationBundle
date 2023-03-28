@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<doctrine-mongo-mapping xmlns="https://doctrine-project.org/schemas/odm/doctrine-mongo-mapping" xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://doctrine-project.org/schemas/odm/doctrine-mongo-mapping https://www.doctrine-project.org/schemas/odm/doctrine-mongo-mapping.xsd">
+<doctrine-mongo-mapping xmlns="https://doctrine-project.org/schemas/odm/doctrine-mongo-mapping" xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/odm/doctrine-mongo-mapping https://www.doctrine-project.org/schemas/odm/doctrine-mongo-mapping.xsd">
     <mapped-superclass name="Sonata\ClassificationBundle\Document\BaseContext">
         <field name="name" type="string" field-name="name"/>
-        <field name="enabled" type="boolean" field-name="enabled"/>
+        <field name="enabled" type="bool" field-name="enabled"/>
         <field name="createdAt" type="timestamp" field-name="createdAt"/>
         <field name="updatedAt" type="timestamp" field-name="updatedAt"/>
         <lifecycle-callbacks>

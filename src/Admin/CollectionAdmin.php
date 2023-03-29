@@ -65,6 +65,12 @@ final class CollectionAdmin extends ContextAwareAdmin
             ])
             ->add('enabled', null, [
                 'editable' => true,
+            ])
+            ->add(ListMapper::NAME_ACTIONS, ListMapper::TYPE_ACTIONS, [
+                'translation_domain' => 'SonataAdminBundle',
+                'actions' => [
+                    'edit' => [],
+                ],
             ]);
     }
 }

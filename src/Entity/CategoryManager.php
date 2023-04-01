@@ -103,6 +103,10 @@ final class CategoryManager extends BaseEntityManager implements CategoryManager
             ->getQuery()
             ->getResult();
 
+        if ($rootCategories === []) {
+            return $this->getRootCategoriesForContext(null);
+        }
+
         $categories = [];
 
         foreach ($rootCategories as $category) {

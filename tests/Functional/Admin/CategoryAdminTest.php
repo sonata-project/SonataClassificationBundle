@@ -96,13 +96,8 @@ final class CategoryAdminTest extends WebTestCase
     {
         $client = self::createClient();
 
-        $this->prepareMinimalData();
-
-        dump($this->countCategories());
-
         $client->request('GET', '/admin/tests/app/category/create', [
             'uniqid' => 'category',
-            'context' => 'default',
         ]);
         $client->submitForm('btn_create_and_list', [
             'category[name]' => 'Name',
@@ -110,10 +105,11 @@ final class CategoryAdminTest extends WebTestCase
         $client->followRedirect();
 
         self::assertResponseIsSuccessful();
-        
-        dump($client->request('GET', '/admin/tests/app/category/tree'));
 
-        dump($this->countCategories());
+        $client->request('GET', '/admin/tests/app/category/tree'));
+
+        self::assertResponseIsSuccessful();
+        static::assertSame(2, $this->countCategories());
     }
 
     /**
@@ -137,27 +133,6 @@ final class CategoryAdminTest extends WebTestCase
 
         $manager->persist($context);
         $manager->persist($category);
-
-        $manager->flush();
-    }
-
-    /**
-     * @psalm-suppress UndefinedPropertyFetch
-     */
-    private function prepareMinimalData(): void
-    {
-        // TODO: Simplify this when dropping support for Symfony 4.
-        // @phpstan-ignore-next-line
-        $container = method_exists($this, 'getContainer') ? self::getContainer() : self::$container;
-        $manager = $container->get('doctrine.orm.entity_manager');
-        \assert($manager instanceof EntityManagerInterface);
-
-        $context = new Context();
-        $context->setId('default');
-        $context->setName('default');
-        $context->setEnabled(true);
-
-        $manager->persist($context);
 
         $manager->flush();
     }

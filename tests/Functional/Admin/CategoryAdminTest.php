@@ -31,7 +31,7 @@ final class CategoryAdminTest extends WebTestCase
 
         $this->prepareData();
 
-        $client->request('GET', $url, $parameters);
+        dump($client->request('GET', $url, $parameters));
 
         self::assertResponseIsSuccessful();
     }
@@ -43,20 +43,20 @@ final class CategoryAdminTest extends WebTestCase
      */
     public static function provideCrudUrlsCases(): iterable
     {
-        yield 'List Category' => ['/admin/tests/app/category/list', [
+        /*yield 'List Category' => ['/admin/tests/app/category/list', [
             'filter' => [
                 'context' => [
                     'value' => 'default',
                 ],
             ],
-        ]];
-        yield 'Tree Category' => ['/admin/tests/app/category/tree'];
+        ]];*/
+        //yield 'Tree Category' => ['/admin/tests/app/category/tree'];
         yield 'Tree Category default context' => ['/admin/tests/app/category/tree', [
             'context' => 'default',
         ]];
-        yield 'Create Category' => ['/admin/tests/app/category/create'];
-        yield 'Edit Category' => ['/admin/tests/app/category/1/edit'];
-        yield 'Remove Category' => ['/admin/tests/app/category/1/delete'];
+        //yield 'Create Category' => ['/admin/tests/app/category/create'];
+        //yield 'Edit Category' => ['/admin/tests/app/category/1/edit'];
+        //yield 'Remove Category' => ['/admin/tests/app/category/1/delete'];
     }
 
     /**

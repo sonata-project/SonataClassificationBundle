@@ -96,17 +96,23 @@ final class CategoryAdminTest extends WebTestCase
     {
         $client = self::createClient();
 
-        dump($client->request('GET', '/admin/tests/app/category/create', [
+        dump($this->countContexts());
+
+        $client->request('GET', '/admin/tests/app/category/tree');
+
+        dump($this->countContexts());
+
+        $client->request('GET', '/admin/tests/app/category/create', [
             'uniqid' => 'category',
-        ]));
+        ]);
         $client->submitForm('btn_create_and_list', [
             'category[name]' => 'Name',
         ]);
         $client->followRedirect();
 
         self::assertResponseIsSuccessful();
-        
-        dump($client->request('GET', '/admin/tests/app/category/tree'));
+
+        dump($this->countContexts());
     }
 
     /**
@@ -132,5 +138,19 @@ final class CategoryAdminTest extends WebTestCase
         $manager->persist($category);
 
         $manager->flush();
+    }
+
+    /**
+     * @psalm-suppress UndefinedPropertyFetch
+     */
+    private function countContexts(): int
+    {
+        // TODO: Simplify this when dropping support for Symfony 4.
+        // @phpstan-ignore-next-line
+        $container = method_exists(static::class, 'getContainer') ? static::getContainer() : static::$container;
+        $manager = $container->get('doctrine.orm.entity_manager');
+        \assert($manager instanceof EntityManagerInterface);
+
+        return $manager->getRepository(Context::class)->count([]);
     }
 }

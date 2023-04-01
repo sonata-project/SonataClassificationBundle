@@ -96,8 +96,12 @@ final class CategoryAdminTest extends WebTestCase
     {
         $client = self::createClient();
 
-        $client->request('GET', $url, $parameters);
-        $client->submitForm($button, $fieldValues);
+        $client->request('GET', '/admin/tests/app/category/create', [
+            'uniqid' => 'category',
+        ]);
+        $client->submitForm('btn_create_and_list', [
+            'category[name]' => 'Name',
+        ]);
         $client->followRedirect();
 
         self::assertResponseIsSuccessful();

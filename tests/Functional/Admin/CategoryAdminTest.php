@@ -92,6 +92,17 @@ final class CategoryAdminTest extends WebTestCase
         yield 'Remove Category' => ['/admin/tests/app/category/1/delete', [], 'btn_delete'];
     }
 
+    public function testCreateFirstCategory(): void
+    {
+        $client = self::createClient();
+
+        $client->request('GET', $url, $parameters);
+        $client->submitForm($button, $fieldValues);
+        $client->followRedirect();
+
+        self::assertResponseIsSuccessful();
+    }
+
     /**
      * @psalm-suppress UndefinedPropertyFetch
      */

@@ -99,6 +99,9 @@ final class CategoryAdminTest extends WebTestCase
         $client->request('GET', '/admin/tests/app/category/create', [
             'uniqid' => 'category',
         ]);
+
+        static::assertSame(1, $this->countCategories());
+
         $client->submitForm('btn_create_and_list', [
             'category[name]' => 'Name',
         ]);

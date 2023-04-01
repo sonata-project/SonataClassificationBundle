@@ -51,6 +51,9 @@ final class CategoryAdminTest extends WebTestCase
             ],
         ]];
         yield 'Tree Category' => ['/admin/tests/app/category/tree'];
+        yield 'Tree Category default context' => ['/admin/tests/app/category/tree', [
+            'context' => 'default',
+        ]];
         yield 'Create Category' => ['/admin/tests/app/category/create'];
         yield 'Edit Category' => ['/admin/tests/app/category/1/edit'];
         yield 'Remove Category' => ['/admin/tests/app/category/1/delete'];

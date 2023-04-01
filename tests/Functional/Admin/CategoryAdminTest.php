@@ -105,6 +105,8 @@ final class CategoryAdminTest extends WebTestCase
         $client->followRedirect();
 
         self::assertResponseIsSuccessful();
+        
+        dump($client->request('GET', '/admin/tests/app/category/tree'));
     }
 
     /**

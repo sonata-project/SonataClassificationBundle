@@ -98,11 +98,11 @@ final class CategoryAdminTest extends WebTestCase
 
         $this->prepareMinimalData();
 
-        dump($this->countContexts());
+        dump($this->countCategories());
 
         dump($client->request('GET', '/admin/tests/app/category/tree'));
 
-        dump($this->countContexts());
+        dump($this->countCategories());
 
         $client->request('GET', '/admin/tests/app/category/create', [
             'uniqid' => 'category',
@@ -114,7 +114,7 @@ final class CategoryAdminTest extends WebTestCase
 
         self::assertResponseIsSuccessful();
 
-        dump($this->countContexts());
+        dump($this->countCategories());
     }
 
     /**
@@ -166,7 +166,7 @@ final class CategoryAdminTest extends WebTestCase
     /**
      * @psalm-suppress UndefinedPropertyFetch
      */
-    private function countContexts(): int
+    private function countCategories(): int
     {
         // TODO: Simplify this when dropping support for Symfony 4.
         // @phpstan-ignore-next-line
@@ -174,6 +174,6 @@ final class CategoryAdminTest extends WebTestCase
         $manager = $container->get('doctrine.orm.entity_manager');
         \assert($manager instanceof EntityManagerInterface);
 
-        return $manager->getRepository(Context::class)->count([]);
+        return $manager->getRepository(Category::class)->count([]);
     }
 }

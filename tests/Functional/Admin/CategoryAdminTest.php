@@ -106,7 +106,7 @@ final class CategoryAdminTest extends WebTestCase
 
         self::assertResponseIsSuccessful();
 
-        $client->request('GET', '/admin/tests/app/category/tree'));
+        $client->request('GET', '/admin/tests/app/category/tree');
 
         self::assertResponseIsSuccessful();
         static::assertSame(2, $this->countCategories());

@@ -98,7 +98,7 @@ final class CategoryAdminTest extends WebTestCase
 
         dump($this->countContexts());
 
-        $client->request('GET', '/admin/tests/app/category/tree');
+        dump($client->request('GET', '/admin/tests/app/category/tree'));
 
         dump($this->countContexts());
 

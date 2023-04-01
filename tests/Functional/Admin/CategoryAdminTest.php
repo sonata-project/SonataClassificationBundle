@@ -100,10 +100,6 @@ final class CategoryAdminTest extends WebTestCase
 
         dump($this->countCategories());
 
-        dump($client->request('GET', '/admin/tests/app/category/tree'));
-
-        dump($this->countCategories());
-
         $client->request('GET', '/admin/tests/app/category/create', [
             'uniqid' => 'category',
         ]);
@@ -113,6 +109,8 @@ final class CategoryAdminTest extends WebTestCase
         $client->followRedirect();
 
         self::assertResponseIsSuccessful();
+        
+        dump($client->request('GET', '/admin/tests/app/category/tree'));
 
         dump($this->countCategories());
     }

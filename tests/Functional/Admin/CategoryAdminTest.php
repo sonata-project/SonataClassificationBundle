@@ -102,6 +102,7 @@ final class CategoryAdminTest extends WebTestCase
 
         $client->request('GET', '/admin/tests/app/category/create', [
             'uniqid' => 'category',
+            'context' => 'default',
         ]);
         $client->submitForm('btn_create_and_list', [
             'category[name]' => 'Name',

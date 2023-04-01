@@ -102,6 +102,10 @@ final class CategoryManager extends BaseDocumentManager implements CategoryManag
             ->execute();
         \assert(\is_array($rootCategories));
 
+        if ([] === $rootCategories) {
+            return $this->getRootCategoriesForContext(null);
+        }
+
         $categories = [];
 
         foreach ($rootCategories as $category) {

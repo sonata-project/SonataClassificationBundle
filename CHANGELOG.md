@@ -11,7 +11,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - [[#907](https://github.com/sonata-project/SonataClassificationBundle/pull/907)] Create a category after a fresh install initializes the first context and the root category. ([@jordisala1991](https://github.com/jordisala1991))
 - [[#903](https://github.com/sonata-project/SonataClassificationBundle/pull/903)] Fix xml validation of MongoDB ODM mapping. ([@jordisala1991](https://github.com/jordisala1991))
 - [[#903](https://github.com/sonata-project/SonataClassificationBundle/pull/903)] Avoid deprecation for enabled boolean field on MongoDB ODM. ([@jordisala1991](https://github.com/jordisala1991))
-- [[#904](https://github.com/sonata-project/SonataClassificationBundle/pull/904)] Add always edit button for admin list pages. ([@jordisala1991](https://github.com/jordisala1991))
+- [[#904](https://github.com/sonata-project/SonataClassificationBundle/pull/904)] Not displaying the edit button in some cases for the admin list pages ([@jordisala1991](https://github.com/jordisala1991))
 
 ### Removed
 - [[#889](https://github.com/sonata-project/SonataClassificationBundle/pull/889)] Support for `doctrine/persistence` ^2.0 ([@jordisala1991](https://github.com/jordisala1991))

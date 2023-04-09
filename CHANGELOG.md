@@ -14,7 +14,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - [[#904](https://github.com/sonata-project/SonataClassificationBundle/pull/904)] Add always edit button for admin list pages. ([@jordisala1991](https://github.com/jordisala1991))
 
 ### Removed
-- [[#889](https://github.com/sonata-project/SonataClassificationBundle/pull/889)] Removed support for `doctrine/persistence` ^2.0. ([@jordisala1991](https://github.com/jordisala1991))
+- [[#889](https://github.com/sonata-project/SonataClassificationBundle/pull/889)] Support for `doctrine/persistence` ^2.0 ([@jordisala1991](https://github.com/jordisala1991))
 
 ## [4.3.0](https://github.com/sonata-project/SonataClassificationBundle/compare/4.2.0...4.3.0) - 2022-08-03
 ### Added

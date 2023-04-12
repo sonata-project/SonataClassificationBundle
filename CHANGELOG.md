@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [4.4.1](https://github.com/sonata-project/SonataClassificationBundle/compare/4.4.0...4.4.1) - 2023-04-12
+### Fixed
+- [[#911](https://github.com/sonata-project/SonataClassificationBundle/pull/911)] ORM schema mapping does not give validation errors ([@jordisala1991](https://github.com/jordisala1991))
+
 ## [4.4.0](https://github.com/sonata-project/SonataClassificationBundle/compare/4.3.0...4.4.0) - 2023-04-09
 ### Added
 - [[#889](https://github.com/sonata-project/SonataClassificationBundle/pull/889)] Added support for `doctrine/collections` ^2.0. ([@jordisala1991](https://github.com/jordisala1991))

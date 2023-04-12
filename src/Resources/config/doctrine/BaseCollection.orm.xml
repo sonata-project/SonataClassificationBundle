@@ -2,7 +2,7 @@
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://doctrine-project.org/schemas/orm/doctrine-mapping https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
     <mapped-superclass name="Sonata\ClassificationBundle\Entity\BaseCollection">
         <field name="name" type="string" column="name"/>
-        <field name="enabled" type="boolean" column="enabled" default="false"/>
+        <field name="enabled" type="boolean" column="enabled"/>
         <field name="slug" type="string" column="slug"/>
         <field name="description" type="string" column="description" nullable="true"/>
         <field name="createdAt" type="datetime" column="created_at"/>

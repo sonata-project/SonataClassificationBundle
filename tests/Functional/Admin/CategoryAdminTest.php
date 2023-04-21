@@ -115,15 +115,9 @@ final class CategoryAdminTest extends WebTestCase
         static::assertSame(2, $this->countCategories());
     }
 
-    /**
-     * @psalm-suppress UndefinedPropertyFetch
-     */
     private function prepareData(): void
     {
-        // TODO: Simplify this when dropping support for Symfony 4.
-        // @phpstan-ignore-next-line
-        $container = method_exists($this, 'getContainer') ? self::getContainer() : self::$container;
-        $manager = $container->get('doctrine.orm.entity_manager');
+        $manager = self::getContainer()->get('doctrine.orm.entity_manager');
         \assert($manager instanceof EntityManagerInterface);
 
         $context = new Context();
@@ -140,15 +134,9 @@ final class CategoryAdminTest extends WebTestCase
         $manager->flush();
     }
 
-    /**
-     * @psalm-suppress UndefinedPropertyFetch
-     */
     private function countCategories(): int
     {
-        // TODO: Simplify this when dropping support for Symfony 4.
-        // @phpstan-ignore-next-line
-        $container = method_exists(self::class, 'getContainer') ? static::getContainer() : static::$container;
-        $manager = $container->get('doctrine.orm.entity_manager');
+        $manager = static::getContainer()->get('doctrine.orm.entity_manager');
         \assert($manager instanceof EntityManagerInterface);
 
         return $manager->getRepository(Category::class)->count([]);

@@ -26,10 +26,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 #[AsCommand(name: 'sonata:classification:fix-context', description: 'Generate the default context if none defined and attach the context to all elements')]
 final class FixContextCommand extends Command
 {
-    // TODO: Remove static properties when support for Symfony < 5.4 is dropped.
-    protected static $defaultName = 'sonata:classification:fix-context';
-    protected static $defaultDescription = 'Generate the default context if none defined and attach the context to all elements';
-
     public function __construct(
         private ContextManagerInterface $contextManager,
         private TagManagerInterface $tagManager,
@@ -37,14 +33,6 @@ final class FixContextCommand extends Command
         private CategoryManagerInterface $categoryManager
     ) {
         parent::__construct();
-    }
-
-    public function configure(): void
-    {
-        \assert(null !== static::$defaultDescription);
-
-        // TODO: Remove setDescription when support for Symfony < 5.4 is dropped.
-        $this->setDescription(static::$defaultDescription);
     }
 
     public function execute(InputInterface $input, OutputInterface $output): int

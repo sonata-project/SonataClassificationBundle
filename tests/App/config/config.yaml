@@ -12,6 +12,8 @@ framework:
     router:
         utf8: true
     http_method_override: false
+    session:
+        storage_factory_id: session.storage.factory.mock_file
 
 security:
     role_hierarchy: null
@@ -36,7 +38,7 @@ sonata_classification:
 doctrine:
     dbal:
         driver: pdo_sqlite
-        path: '%app.base_dir%sonata_classification_test.db3'
+        path: "%app.base_dir%sonata_classification_test.db3"
     orm:
         entity_managers:
             default:
@@ -44,6 +46,6 @@ doctrine:
                     SonataClassificationBundle: null
                     SonataClassificationTest:
                         type: attribute
-                        dir: '%kernel.project_dir%/Entity'
+                        dir: "%kernel.project_dir%/Entity"
                         is_bundle: false
                         prefix: Sonata\ClassificationBundle\Tests\App\Entity

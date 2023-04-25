@@ -92,15 +92,32 @@ final class CategoryAdminTest extends WebTestCase
         yield 'Remove Category' => ['/admin/tests/app/category/1/delete', [], 'btn_delete'];
     }
 
-    /**
-     * @psalm-suppress UndefinedPropertyFetch
-     */
+    public function testCreateFirstCategory(): void
+    {
+        $client = self::createClient();
+
+        $client->request('GET', '/admin/tests/app/category/create', [
+            'uniqid' => 'category',
+        ]);
+
+        static::assertSame(1, $this->countCategories());
+
+        $client->submitForm('btn_create_and_list', [
+            'category[name]' => 'Name',
+        ]);
+        $client->followRedirect();
+
+        self::assertResponseIsSuccessful();
+
+        $client->request('GET', '/admin/tests/app/category/tree');
+
+        self::assertResponseIsSuccessful();
+        static::assertSame(2, $this->countCategories());
+    }
+
     private function prepareData(): void
     {
-        // TODO: Simplify this when dropping support for Symfony 4.
-        // @phpstan-ignore-next-line
-        $container = method_exists($this, 'getContainer') ? self::getContainer() : self::$container;
-        $manager = $container->get('doctrine.orm.entity_manager');
+        $manager = self::getContainer()->get('doctrine.orm.entity_manager');
         \assert($manager instanceof EntityManagerInterface);
 
         $context = new Context();
@@ -115,5 +132,13 @@ final class CategoryAdminTest extends WebTestCase
         $manager->persist($category);
 
         $manager->flush();
+    }
+
+    private function countCategories(): int
+    {
+        $manager = static::getContainer()->get('doctrine.orm.entity_manager');
+        \assert($manager instanceof EntityManagerInterface);
+
+        return $manager->getRepository(Category::class)->count([]);
     }
 }

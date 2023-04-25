@@ -22,16 +22,6 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 class CategoryManagerTest extends KernelTestCase
 {
-    /**
-     * TODO: Manual boot the kernel is not needed when dropping support for Symfony 4.
-     */
-    protected function setUp(): void
-    {
-        if (!self::$booted) {
-            static::bootKernel();
-        }
-    }
-
     public function testGetRootCategoryWithChildren(): void
     {
         $rootCategory = $this->prepareData();
@@ -71,15 +61,9 @@ class CategoryManagerTest extends KernelTestCase
         static::assertNotNull($category);
     }
 
-    /**
-     * @psalm-suppress UndefinedPropertyFetch
-     */
     private function prepareData(): CategoryInterface
     {
-        // TODO: Simplify this when dropping support for Symfony 4.
-        // @phpstan-ignore-next-line
-        $container = method_exists($this, 'getContainer') ? self::getContainer() : self::$container;
-        $manager = $container->get('doctrine.orm.entity_manager');
+        $manager = self::getContainer()->get('doctrine.orm.entity_manager');
         \assert($manager instanceof EntityManagerInterface);
 
         $context = new Context();
@@ -119,15 +103,9 @@ class CategoryManagerTest extends KernelTestCase
         return $rootCategory;
     }
 
-    /**
-     * @psalm-suppress UndefinedPropertyFetch
-     */
     private function getCategoryManager(): CategoryManagerInterface
     {
-        // TODO: Simplify this when dropping support for Symfony 4.
-        // @phpstan-ignore-next-line
-        $container = method_exists($this, 'getContainer') ? self::getContainer() : self::$container;
-        $categoryManager = $container->get('sonata.classification.manager.category');
+        $categoryManager = self::getContainer()->get('sonata.classification.manager.category');
         \assert($categoryManager instanceof CategoryManagerInterface);
 
         return $categoryManager;

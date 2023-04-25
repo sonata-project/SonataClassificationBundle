@@ -100,6 +100,12 @@ final class CategoryAdmin extends ContextAwareAdmin
             ->add('position')
             ->add('parent', null, [
                 'sortable' => 'parent.name',
+            ])
+            ->add(ListMapper::NAME_ACTIONS, ListMapper::TYPE_ACTIONS, [
+                'translation_domain' => 'SonataAdminBundle',
+                'actions' => [
+                    'edit' => [],
+                ],
             ]);
     }
 }

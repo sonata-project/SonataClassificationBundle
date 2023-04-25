@@ -11,14 +11,12 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
+namespace Symfony\Component\DependencyInjection\Loader\Configurator;
+
 use Sonata\ClassificationBundle\Admin\Filter\CategoryFilter;
 use Sonata\ClassificationBundle\Admin\Filter\CollectionFilter;
-use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-use Symfony\Component\DependencyInjection\Loader\Configurator\ReferenceConfigurator;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
-    // Use "service" function for creating references to services when dropping support for Symfony 4.4
-    // Use "param" function for creating references to parameters when dropping support for Symfony 5.1
     $containerConfigurator->parameters()
 
         ->set('sonata.classification.admin.groupname', 'sonata_classification')
@@ -27,80 +25,80 @@ return static function (ContainerConfigurator $containerConfigurator): void {
 
     $containerConfigurator->services()
 
-        ->set('sonata.classification.admin.category', '%sonata.classification.admin.category.class%')
+        ->set('sonata.classification.admin.category', (string) param('sonata.classification.admin.category.class'))
             ->public()
             ->tag('sonata.admin', [
-                'model_class' => '%sonata.classification.admin.category.entity%',
-                'controller' => '%sonata.classification.admin.category.controller%',
+                'model_class' => (string) param('sonata.classification.admin.category.entity'),
+                'controller' => (string) param('sonata.classification.admin.category.controller'),
                 'manager_type' => 'orm',
-                'group' => '%sonata.classification.admin.groupname%',
-                'translation_domain' => '%sonata.classification.admin.category.translation_domain%',
+                'group' => (string) param('sonata.classification.admin.groupname'),
+                'translation_domain' => (string) param('sonata.classification.admin.category.translation_domain'),
                 'label' => 'label_categories',
                 'label_translator_strategy' => 'sonata.admin.label.strategy.underscore',
-                'icon' => '%sonata.classification.admin.groupicon%',
+                'icon' => (string) param('sonata.classification.admin.groupicon'),
             ])
             ->args([
-                new ReferenceConfigurator('sonata.classification.manager.context'),
+                service('sonata.classification.manager.context'),
             ])
             ->call('setTemplates', [[
                 'list' => '@SonataClassification/CategoryAdmin/list.html.twig',
                 'tree' => '@SonataClassification/CategoryAdmin/tree.html.twig',
             ]])
 
-        ->set('sonata.classification.admin.tag', '%sonata.classification.admin.tag.class%')
+        ->set('sonata.classification.admin.tag', (string) param('sonata.classification.admin.tag.class'))
             ->public()
             ->tag('sonata.admin', [
-                'model_class' => '%sonata.classification.admin.tag.entity%',
-                'controller' => '%sonata.classification.admin.tag.controller%',
+                'model_class' => (string) param('sonata.classification.admin.tag.entity'),
+                'controller' => (string) param('sonata.classification.admin.tag.controller'),
                 'manager_type' => 'orm',
-                'group' => '%sonata.classification.admin.groupname%',
-                'translation_domain' => '%sonata.classification.admin.tag.translation_domain%',
+                'group' => (string) param('sonata.classification.admin.groupname'),
+                'translation_domain' => (string) param('sonata.classification.admin.tag.translation_domain'),
                 'label' => 'label_tags',
                 'label_translator_strategy' => 'sonata.admin.label.strategy.underscore',
-                'icon' => '%sonata.classification.admin.groupicon%',
+                'icon' => (string) param('sonata.classification.admin.groupicon'),
             ])
             ->args([
-                new ReferenceConfigurator('sonata.classification.manager.context'),
+                service('sonata.classification.manager.context'),
             ])
 
-        ->set('sonata.classification.admin.collection', '%sonata.classification.admin.collection.class%')
+        ->set('sonata.classification.admin.collection', (string) param('sonata.classification.admin.collection.class'))
             ->public()
             ->tag('sonata.admin', [
-                'model_class' => '%sonata.classification.admin.collection.entity%',
-                'controller' => '%sonata.classification.admin.collection.controller%',
+                'model_class' => (string) param('sonata.classification.admin.collection.entity'),
+                'controller' => (string) param('sonata.classification.admin.collection.controller'),
                 'manager_type' => 'orm',
-                'group' => '%sonata.classification.admin.groupname%',
-                'translation_domain' => '%sonata.classification.admin.collection.translation_domain%',
+                'group' => (string) param('sonata.classification.admin.groupname'),
+                'translation_domain' => (string) param('sonata.classification.admin.collection.translation_domain'),
                 'label' => 'label_collections',
                 'label_translator_strategy' => 'sonata.admin.label.strategy.underscore',
-                'icon' => '%sonata.classification.admin.groupicon%',
+                'icon' => (string) param('sonata.classification.admin.groupicon'),
             ])
             ->args([
-                new ReferenceConfigurator('sonata.classification.manager.context'),
+                service('sonata.classification.manager.context'),
             ])
 
-        ->set('sonata.classification.admin.context', '%sonata.classification.admin.context.class%')
+        ->set('sonata.classification.admin.context', (string) param('sonata.classification.admin.context.class'))
             ->public()
             ->tag('sonata.admin', [
-                'model_class' => '%sonata.classification.admin.context.entity%',
-                'controller' => '%sonata.classification.admin.context.controller%',
+                'model_class' => (string) param('sonata.classification.admin.context.entity'),
+                'controller' => (string) param('sonata.classification.admin.context.controller'),
                 'manager_type' => 'orm',
-                'group' => '%sonata.classification.admin.groupname%',
-                'translation_domain' => '%sonata.classification.admin.context.translation_domain%',
+                'group' => (string) param('sonata.classification.admin.groupname'),
+                'translation_domain' => (string) param('sonata.classification.admin.context.translation_domain'),
                 'label' => 'label_contexts',
                 'label_translator_strategy' => 'sonata.admin.label.strategy.underscore',
-                'icon' => '%sonata.classification.admin.groupicon%',
+                'icon' => (string) param('sonata.classification.admin.groupicon'),
             ])
 
         ->set(CategoryFilter::class)
             ->tag('sonata.admin.filter.type')
             ->args([
-                new ReferenceConfigurator('sonata.classification.manager.category'),
+                service('sonata.classification.manager.category'),
             ])
 
         ->set(CollectionFilter::class)
             ->tag('sonata.admin.filter.type')
             ->args([
-                new ReferenceConfigurator('sonata.classification.manager.collection'),
+                service('sonata.classification.manager.collection'),
             ]);
 };

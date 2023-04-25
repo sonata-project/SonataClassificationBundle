@@ -2,6 +2,29 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [4.5.0](https://github.com/sonata-project/SonataClassificationBundle/compare/4.4.1...4.5.0) - 2023-04-24
+### Removed
+- [[#914](https://github.com/sonata-project/SonataClassificationBundle/pull/914)] Support for Symfony 4.4 ([@jordisala1991](https://github.com/jordisala1991))
+- [[#914](https://github.com/sonata-project/SonataClassificationBundle/pull/914)] Support for Twig 2 ([@jordisala1991](https://github.com/jordisala1991))
+
+## [4.4.1](https://github.com/sonata-project/SonataClassificationBundle/compare/4.4.0...4.4.1) - 2023-04-12
+### Fixed
+- [[#911](https://github.com/sonata-project/SonataClassificationBundle/pull/911)] ORM schema mapping does not give validation errors ([@jordisala1991](https://github.com/jordisala1991))
+
+## [4.4.0](https://github.com/sonata-project/SonataClassificationBundle/compare/4.3.0...4.4.0) - 2023-04-09
+### Added
+- [[#889](https://github.com/sonata-project/SonataClassificationBundle/pull/889)] Added support for `doctrine/collections` ^2.0. ([@jordisala1991](https://github.com/jordisala1991))
+
+### Fixed
+- [[#889](https://github.com/sonata-project/SonataClassificationBundle/pull/889)] Deprecations for SonataAdminBundle filters ([@jordisala1991](https://github.com/jordisala1991))
+- [[#907](https://github.com/sonata-project/SonataClassificationBundle/pull/907)] Create a category after a fresh install initializes the first context and the root category. ([@jordisala1991](https://github.com/jordisala1991))
+- [[#903](https://github.com/sonata-project/SonataClassificationBundle/pull/903)] xml validation of MongoDB ODM mapping ([@jordisala1991](https://github.com/jordisala1991))
+- [[#903](https://github.com/sonata-project/SonataClassificationBundle/pull/903)] Deprecation for enabled boolean field on MongoDB ODM ([@jordisala1991](https://github.com/jordisala1991))
+- [[#904](https://github.com/sonata-project/SonataClassificationBundle/pull/904)] Not displaying the edit button in some cases for the admin list pages ([@jordisala1991](https://github.com/jordisala1991))
+
+### Removed
+- [[#889](https://github.com/sonata-project/SonataClassificationBundle/pull/889)] Support for `doctrine/persistence` ^2.0 ([@jordisala1991](https://github.com/jordisala1991))
+
 ## [4.3.0](https://github.com/sonata-project/SonataClassificationBundle/compare/4.2.0...4.3.0) - 2022-08-03
 ### Added
 - [[#862](https://github.com/sonata-project/SonataClassificationBundle/pull/862)] Added support for sonata-project/doctrine-extensions ^2 ([@VincentLanglet](https://github.com/VincentLanglet))

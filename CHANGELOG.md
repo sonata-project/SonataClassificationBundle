@@ -24,6 +24,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Removed
 - [[#889](https://github.com/sonata-project/SonataClassificationBundle/pull/889)] Support for `doctrine/persistence` ^2.0 ([@jordisala1991](https://github.com/jordisala1991))
+- [[#890](https://github.com/sonata-project/SonataClassificationBundle/pull/890)] Support for PHP 7.4 ([@SonataCI](https://github.com/SonataCI))
+- [[#890](https://github.com/sonata-project/SonataClassificationBundle/pull/890)] Support for Symfony 6.0 and 6.1 ([@SonataCI](https://github.com/SonataCI))
 
 ## [4.3.0](https://github.com/sonata-project/SonataClassificationBundle/compare/4.2.0...4.3.0) - 2022-08-03
 ### Added

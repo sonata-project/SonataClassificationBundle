@@ -84,6 +84,8 @@
         "sonata-project/block-bundle": "For rendering dynamic list blocks on a page.",
         "sonata-project/classification-media-bundle": "For media previews of categories and collections."
     },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "autoload": {
         "psr-4": {
             "Sonata\\ClassificationBundle\\": "src/"

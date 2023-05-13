@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [4.6.0](https://github.com/sonata-project/SonataClassificationBundle/compare/4.5.0...4.6.0) - 2023-05-13
+### Added
+- [[#927](https://github.com/sonata-project/SonataClassificationBundle/pull/927)] Support for `sonata-project/form-extensions` 2.0 ([@jordisala1991](https://github.com/jordisala1991))
+
 ## [4.5.0](https://github.com/sonata-project/SonataClassificationBundle/compare/4.4.1...4.5.0) - 2023-04-24
 ### Removed
 - [[#914](https://github.com/sonata-project/SonataClassificationBundle/pull/914)] Support for Symfony 4.4 ([@jordisala1991](https://github.com/jordisala1991))

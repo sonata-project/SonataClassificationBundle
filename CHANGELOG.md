@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [4.7.1](https://github.com/sonata-project/SonataClassificationBundle/compare/4.7.0...4.7.1) - 2023-07-24
+### Added
+- [[#939](https://github.com/sonata-project/SonataClassificationBundle/pull/939)] Translations (en/it) for tag, context and collection group ([@gremo](https://github.com/gremo))
+
 ## [4.7.0](https://github.com/sonata-project/SonataClassificationBundle/compare/4.6.0...4.7.0) - 2023-06-03
 ### Added
 - [[#931](https://github.com/sonata-project/SonataClassificationBundle/pull/931)] Support for SonataBlockBundle 5.0 ([@jordisala1991](https://github.com/jordisala1991))

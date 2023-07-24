@@ -57,8 +57,6 @@ abstract class AbstractCategoriesBlockService extends AbstractClassificationBloc
 
         $template = $blockContext->getTemplate();
 
-        \assert(\is_string($template));
-
         return $this->renderResponse($template, [
             'context' => $blockContext,
             'settings' => $blockContext->getSettings(),

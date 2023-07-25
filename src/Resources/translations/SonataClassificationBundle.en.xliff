@@ -234,6 +234,18 @@
         <source>form.group_general</source>
         <target>General</target>
       </trans-unit>
+      <trans-unit id="form.group_label_collections">
+        <source>form.group_label_collections</source>
+        <target>Collection</target>
+      </trans-unit>
+      <trans-unit id="form.group_label_contexts">
+        <source>form.group_label_contexts</source>
+        <target>Context</target>
+      </trans-unit>
+      <trans-unit id="form.group_label_tags">
+        <source>form.group_label_tags</source>
+        <target>Tag</target>
+      </trans-unit>
       <trans-unit id="form.group_options">
         <source>form.group_options</source>
         <target>Options</target>

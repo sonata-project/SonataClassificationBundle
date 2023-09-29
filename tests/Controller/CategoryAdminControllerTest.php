@@ -173,7 +173,7 @@ final class CategoryAdminControllerTest extends TestCase
     }
 
     /**
-     * @dataProvider listActionData
+     * @dataProvider provideListActionCases
      */
     public function testListAction(string|false $context): void
     {
@@ -184,9 +184,7 @@ final class CategoryAdminControllerTest extends TestCase
 
         $datagrid = $this->createMock(DatagridInterface::class);
 
-        $form = $this->getMockBuilder(Form::class)
-            ->disableOriginalConstructor()
-            ->getMock();
+        $form = $this->createMock(Form::class);
 
         $form->expects(static::once())
              ->method('createView')
@@ -219,20 +217,18 @@ final class CategoryAdminControllerTest extends TestCase
     }
 
     /**
-     * @return array<string, mixed>
+     * @return iterable<string, array{string|false}>
      */
-    public function listActionData(): array
+    public function provideListActionCases(): iterable
     {
-        return [
-            'context' => ['default'],
-            'no context' => [false],
-        ];
+        yield 'context' => ['default'];
+        yield 'no context' => [false];
     }
 
     /**
-     * @dataProvider treeActionData
+     * @dataProvider provideTreeActionCases
      *
-     * @param array<string, string> $categories
+     * @param array<array{string, string}> $categories
      */
     public function testTreeAction(string|false $context, array $categories): void
     {
@@ -292,22 +288,20 @@ final class CategoryAdminControllerTest extends TestCase
     }
 
     /**
-     * @return array<string, mixed>
+     * @return iterable<string, array{string|false, array<array{string, string}>}>
      */
-    public function treeActionData(): array
+    public function provideTreeActionCases(): iterable
     {
-        return [
-            'context and no categories' => ['default', []],
-            'no context and no categories' => [false, []],
-            'context and categories' => ['default', [
-                ['First Category', 'other'],
-                ['Second Category', 'default'],
-            ]],
-            'no context and categories' => [false, [
-                ['First Category', 'other'],
-                ['Second Category', 'default'],
-            ]],
-        ];
+        yield 'context and no categories' => ['default', []];
+        yield 'no context and no categories' => [false, []];
+        yield 'context and categories' => ['default', [
+            ['First Category', 'other'],
+            ['Second Category', 'default'],
+        ]];
+        yield 'no context and categories' => [false, [
+            ['First Category', 'other'],
+            ['Second Category', 'default'],
+        ]];
     }
 
     /**

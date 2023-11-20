@@ -80,7 +80,7 @@ final class CategoryAdminController extends Controller
             $exportFormats = $exporter->getAvailableFormats($this->admin);
         }
 
-        return $this->renderWithExtraParams($this->admin->getTemplateRegistry()->getTemplate('list'), [
+        return $this->render($this->admin->getTemplateRegistry()->getTemplate('list'), [
             'action' => 'list',
             'form' => $formView,
             'datagrid' => $datagrid,
@@ -141,7 +141,7 @@ final class CategoryAdminController extends Controller
 
         $this->setFormTheme($formView, $this->admin->getFilterTheme());
 
-        return $this->renderWithExtraParams($this->admin->getTemplateRegistry()->getTemplate('tree'), [
+        return $this->render($this->admin->getTemplateRegistry()->getTemplate('tree'), [
             'action' => 'tree',
             'current_categories' => $currentCategories,
             'root_categories' => $rootCategoriesSplitByContexts,

@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [4.7.2](https://github.com/sonata-project/SonataClassificationBundle/compare/4.7.1...4.7.2) - 2023-12-08
+### Fixed
+- [[#947](https://github.com/sonata-project/SonataClassificationBundle/pull/947)] Usage of deprecated `renderWithExtraParams` method ([@VincentLanglet](https://github.com/VincentLanglet))
+
 ## [4.7.1](https://github.com/sonata-project/SonataClassificationBundle/compare/4.7.0...4.7.1) - 2023-07-24
 ### Added
 - [[#939](https://github.com/sonata-project/SonataClassificationBundle/pull/939)] Translations (en/it) for tag, context and collection group ([@gremo](https://github.com/gremo))

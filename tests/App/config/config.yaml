@@ -7,8 +7,6 @@ framework:
         enabled: true
     translator:
         enabled: true
-    validation:
-        enable_annotations: false
     router:
         utf8: true
     http_method_override: false
@@ -39,6 +37,8 @@ doctrine:
     dbal:
         driver: pdo_sqlite
         path: "%app.base_dir%sonata_classification_test.db3"
+        # "dama/doctrine-test-bundle" relies on savepoints.
+        use_savepoints: true
     orm:
         entity_managers:
             default:

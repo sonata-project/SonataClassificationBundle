@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [4.8.0](https://github.com/sonata-project/SonataClassificationBundle/compare/4.7.2...4.8.0) - 2023-12-14
+### Added
+- [[#952](https://github.com/sonata-project/SonataClassificationBundle/pull/952)] Support for packages from `symfony/*` 7.x ([@phansys](https://github.com/phansys))
+
 ## [4.7.2](https://github.com/sonata-project/SonataClassificationBundle/compare/4.7.1...4.7.2) - 2023-12-08
 ### Fixed
 - [[#947](https://github.com/sonata-project/SonataClassificationBundle/pull/947)] Usage of deprecated `renderWithExtraParams` method ([@VincentLanglet](https://github.com/VincentLanglet))

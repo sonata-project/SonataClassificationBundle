@@ -38,7 +38,7 @@ final class CollectionFilterTest extends TestCase
         $filter = new CollectionFilter($this->collectionManager);
         $filter->initialize('field_name', [
             'field_options' => ['class' => 'FooBar'],
-            ]);
+        ]);
         $options = $filter->getRenderSettings()[1];
 
         static::assertSame(ChoiceType::class, $options['field_type']);

@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [4.8.1](https://github.com/sonata-project/SonataClassificationBundle/compare/4.8.0...4.8.1) - 2024-08-26
+### Fixed
+- [[#968](https://github.com/sonata-project/SonataClassificationBundle/pull/968)] Symfony 7.1 deprecation about `Symfony\Component\HttpKernel\DependencyInjection\Extension` usage ([@VincentLanglet](https://github.com/VincentLanglet))
+
 ## [4.8.0](https://github.com/sonata-project/SonataClassificationBundle/compare/4.7.2...4.8.0) - 2023-12-14
 ### Added
 - [[#952](https://github.com/sonata-project/SonataClassificationBundle/pull/952)] Support for packages from `symfony/*` 7.x ([@phansys](https://github.com/phansys))

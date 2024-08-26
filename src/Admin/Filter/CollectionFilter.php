@@ -34,7 +34,7 @@ final class CollectionFilter extends Filter
 
         $query
             ->getQueryBuilder()
-            ->andWhere(sprintf('%s.%s = :collection', $alias, $field))
+            ->andWhere(\sprintf('%s.%s = :collection', $alias, $field))
             ->setParameter('collection', $data->getValue());
 
         $this->setActive(true);

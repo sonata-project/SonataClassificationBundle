@@ -75,7 +75,7 @@ final class CategorySelectorType extends AbstractType
             $rootCategoryId = $rootCategory->getId();
             \assert(null !== $context && null !== $rootCategoryId);
 
-            $choices[$rootCategoryId] = sprintf('%s (%s)', $rootCategory->getName() ?? '', $context->getId() ?? '');
+            $choices[$rootCategoryId] = \sprintf('%s (%s)', $rootCategory->getName() ?? '', $context->getId() ?? '');
 
             $this->childWalker($rootCategory, $category, $choices);
         }
@@ -110,7 +110,7 @@ final class CategorySelectorType extends AbstractType
                 continue;
             }
 
-            $choices[$childCategoryId] = sprintf('%s %s', str_repeat('-', 1 * $level), $childCategory->getName() ?? '');
+            $choices[$childCategoryId] = \sprintf('%s %s', str_repeat('-', 1 * $level), $childCategory->getName() ?? '');
 
             $this->childWalker($childCategory, $category, $choices, $level + 1);
         }

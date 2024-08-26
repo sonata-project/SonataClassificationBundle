@@ -46,7 +46,7 @@ final class CategoryManager extends BaseEntityManager implements CategoryManager
     {
         $context = $category->getContext();
         if (null === $context) {
-            throw new \InvalidArgumentException(sprintf(
+            throw new \InvalidArgumentException(\sprintf(
                 'Context of category "%s" cannot be null.',
                 $category->getId() ?? ''
             ));
@@ -54,7 +54,7 @@ final class CategoryManager extends BaseEntityManager implements CategoryManager
 
         $contextId = $context->getId();
         if (null === $contextId) {
-            throw new \InvalidArgumentException(sprintf(
+            throw new \InvalidArgumentException(\sprintf(
                 'Context of category "%s" must have an not null identifier.',
                 $category->getId() ?? ''
             ));
@@ -72,7 +72,7 @@ final class CategoryManager extends BaseEntityManager implements CategoryManager
             }
         }
 
-        throw new \InvalidArgumentException(sprintf('Category "%s" does not exist.', $category->getId() ?? ''));
+        throw new \InvalidArgumentException(\sprintf('Category "%s" does not exist.', $category->getId() ?? ''));
     }
 
     public function getRootCategoriesForContext(?ContextInterface $context = null): array
@@ -83,7 +83,7 @@ final class CategoryManager extends BaseEntityManager implements CategoryManager
 
         $contextId = $context->getId();
         if (null === $contextId) {
-            throw new \InvalidArgumentException(sprintf(
+            throw new \InvalidArgumentException(\sprintf(
                 'Context "%s" must have an not null identifier.',
                 $context->getName() ?? ''
             ));
@@ -111,7 +111,7 @@ final class CategoryManager extends BaseEntityManager implements CategoryManager
 
         foreach ($rootCategories as $category) {
             if (null === $category->getContext()) {
-                throw new \LogicException(sprintf(
+                throw new \LogicException(\sprintf(
                     'Context of category "%s" cannot be null.',
                     $category->getId() ?? ''
                 ));

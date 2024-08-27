@@ -35,7 +35,7 @@ final class CategoryFilter extends Filter
 
         $query
             ->getQueryBuilder()
-            ->andWhere(sprintf('%s.%s = :category', $alias, $field))
+            ->andWhere(\sprintf('%s.%s = :category', $alias, $field))
             ->setParameter('category', $data->getValue());
 
         $this->setActive(true);
@@ -101,7 +101,7 @@ final class CategoryFilter extends Filter
 
             \assert(null !== $catContext);
 
-            $choices[sprintf('%s (%s)', $category->getName() ?? '', $catContext->getId() ?? '')] = $category->getId();
+            $choices[\sprintf('%s (%s)', $category->getName() ?? '', $catContext->getId() ?? '')] = $category->getId();
 
             $this->visitChild($category, $choices);
         }
@@ -119,7 +119,7 @@ final class CategoryFilter extends Filter
         }
 
         foreach ($category->getChildren() as $child) {
-            $choices[sprintf('%s %s', str_repeat('-', 1 * $level), $child->__toString())] = $child->getId();
+            $choices[\sprintf('%s %s', str_repeat('-', 1 * $level), $child->__toString())] = $child->getId();
 
             $this->visitChild($child, $choices, $level + 1);
         }

@@ -45,7 +45,7 @@ abstract class AbstractTagsBlockService extends AbstractClassificationBlockServi
         Environment $twig,
         ContextManagerInterface $contextManager,
         private TagManagerInterface $tagManager,
-        private ?AdminInterface $tagAdmin = null
+        private ?AdminInterface $tagAdmin = null,
     ) {
         parent::__construct($twig, $contextManager);
     }

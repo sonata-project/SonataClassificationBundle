@@ -36,7 +36,7 @@ abstract class AbstractClassificationBlockService extends AbstractBlockService
 {
     public function __construct(
         Environment $twig,
-        protected ContextManagerInterface $contextManager
+        protected ContextManagerInterface $contextManager,
     ) {
         parent::__construct($twig);
     }

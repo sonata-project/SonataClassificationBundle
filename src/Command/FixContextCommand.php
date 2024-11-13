@@ -30,7 +30,7 @@ final class FixContextCommand extends Command
         private ContextManagerInterface $contextManager,
         private TagManagerInterface $tagManager,
         private CollectionManagerInterface $collectionManager,
-        private CategoryManagerInterface $categoryManager
+        private CategoryManagerInterface $categoryManager,
     ) {
         parent::__construct();
     }

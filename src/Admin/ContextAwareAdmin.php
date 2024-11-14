@@ -37,7 +37,7 @@ abstract class ContextAwareAdmin extends AbstractAdmin
         $contextManager,
         ?string $deprecatedClass = null,
         ?string $deprecatedBaseControllerName = null,
-        ?ContextManagerInterface $deprecatedContextManager = null
+        ?ContextManagerInterface $deprecatedContextManager = null,
     ) {
         // NEXT_MAJOR: Keep the if part.
         if ($contextManager instanceof ContextManagerInterface) {

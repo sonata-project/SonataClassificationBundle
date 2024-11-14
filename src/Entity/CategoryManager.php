@@ -36,7 +36,7 @@ final class CategoryManager extends BaseEntityManager implements CategoryManager
     public function __construct(
         string $class,
         ManagerRegistry $registry,
-        protected ContextManagerInterface $contextManager
+        protected ContextManagerInterface $contextManager,
     ) {
         parent::__construct($class, $registry);
         $this->categories = [];

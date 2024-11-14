@@ -45,7 +45,7 @@ abstract class AbstractCollectionsBlockService extends AbstractClassificationBlo
         Environment $twig,
         ContextManagerInterface $contextManager,
         private CollectionManagerInterface $collectionManager,
-        private ?AdminInterface $collectionAdmin = null
+        private ?AdminInterface $collectionAdmin = null,
     ) {
         parent::__construct($twig, $contextManager);
     }

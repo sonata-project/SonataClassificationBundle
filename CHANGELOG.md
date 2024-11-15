@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [4.9.0](https://github.com/sonata-project/SonataClassificationBundle/compare/4.8.1...4.9.0) - 2024-11-14
+### Added
+- [[#972](https://github.com/sonata-project/SonataClassificationBundle/pull/972)] Slovak translations ([@fbuchlak](https://github.com/fbuchlak))
+
 ## [4.8.1](https://github.com/sonata-project/SonataClassificationBundle/compare/4.8.0...4.8.1) - 2024-08-26
 ### Fixed
 - [[#968](https://github.com/sonata-project/SonataClassificationBundle/pull/968)] Symfony 7.1 deprecation about `Symfony\Component\HttpKernel\DependencyInjection\Extension` usage ([@VincentLanglet](https://github.com/VincentLanglet))

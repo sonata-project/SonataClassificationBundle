@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="en" datatype="plaintext" original="file.ext">
+    <body>
+      <trans-unit id="sonata_classification">
+        <source>sonata_classification</source>
+        <target>Klasifikácia</target>
+      </trans-unit>
+      <trans-unit id="label_categories">
+        <source>label_categories</source>
+        <target>Kategórie</target>
+      </trans-unit>
+      <trans-unit id="label_tags">
+        <source>label_tags</source>
+        <target>Tagy</target>
+      </trans-unit>
+      <trans-unit id="label_collections">
+        <source>label_collections</source>
+        <target>Kolekcie</target>
+      </trans-unit>
+      <trans-unit id="breadcrumb.link_collection_list">
+        <source>breadcrumb.link_collection_list</source>
+        <target>Kolekcie</target>
+      </trans-unit>
+      <trans-unit id="breadcrumb.link_category_list">
+        <source>breadcrumb.link_category_list</source>
+        <target>Kategórie</target>
+      </trans-unit>
+      <trans-unit id="list.label_name">
+        <source>list.label_name</source>
+        <target>Názov</target>
+      </trans-unit>
+      <trans-unit id="list.label_slug">
+        <source>list.label_slug</source>
+        <target>Slug</target>
+      </trans-unit>
+      <trans-unit id="list.label_description">
+        <source>list.label_description</source>
+        <target>Popis</target>
+      </trans-unit>
+      <trans-unit id="list.label_enabled">
+        <source>list.label_enabled</source>
+        <target>Povolené</target>
+      </trans-unit>
+      <trans-unit id="filter.label_name">
+        <source>filter.label_name</source>
+        <target>Názov</target>
+      </trans-unit>
+      <trans-unit id="filter.label_enabled">
+        <source>filter.label_enabled</source>
+        <target>Povolené</target>
+      </trans-unit>
+      <trans-unit id="form.label_name">
+        <source>form.label_name</source>
+        <target>Názov</target>
+      </trans-unit>
+      <trans-unit id="form.label_description">
+        <source>form.label_description</source>
+        <target>Popis</target>
+      </trans-unit>
+      <trans-unit id="form.label_enabled">
+        <source>form.label_enabled</source>
+        <target>Povolené</target>
+      </trans-unit>
+      <trans-unit id="form.label_slug">
+        <source>form.label_slug</source>
+        <target>Slug</target>
+      </trans-unit>
+      <trans-unit id="breadcrumb.link_tag_list">
+        <source>breadcrumb.link_tag_list</source>
+        <target>Tagy</target>
+      </trans-unit>
+      <trans-unit id="form.label_created_at">
+        <source>form.label_created_at</source>
+        <target>Dátum vytvorenia</target>
+      </trans-unit>
+      <trans-unit id="form.label_updated_at">
+        <source>form.label_updated_at</source>
+        <target>Dátum poslednej úpravy</target>
+      </trans-unit>
+      <trans-unit id="list.label_created_at">
+        <source>list.label_created_at</source>
+        <target>Dátum vytvorenia</target>
+      </trans-unit>
+      <trans-unit id="list.label_updated_at">
+        <source>list.label_updated_at</source>
+        <target>Dátum poslednej úpravy</target>
+      </trans-unit>
+      <trans-unit id="form.label_position">
+        <source>form.label_position</source>
+        <target>Pozícia</target>
+      </trans-unit>
+      <trans-unit id="form.label_parent">
+        <source>form.label_parent</source>
+        <target>Rodič</target>
+      </trans-unit>
+      <trans-unit id="list.label_position">
+        <source>list.label_position</source>
+        <target>Pozícia</target>
+      </trans-unit>
+      <trans-unit id="list.label_parent">
+        <source>list.label_parent</source>
+        <target>Rodič</target>
+      </trans-unit>
+      <trans-unit id="filter.label_parent">
+        <source>filter.label_parent</source>
+        <target>Rodič</target>
+      </trans-unit>
+      <trans-unit id="breadcrumb.link_context_list">
+        <source>breadcrumb.link_context_list</source>
+        <target>Kontexty</target>
+      </trans-unit>
+      <trans-unit id="list.label_id">
+        <source>list.label_id</source>
+        <target>Code</target>
+      </trans-unit>
+      <trans-unit id="filter.label_id">
+        <source>filter.label_id</source>
+        <target>Kód</target>
+      </trans-unit>
+      <trans-unit id="label_contexts">
+        <source>label_contexts</source>
+        <target>Kontexty</target>
+      </trans-unit>
+      <trans-unit id="form.label_id">
+        <source>form.label_id</source>
+        <target>Kód</target>
+      </trans-unit>
+      <trans-unit id="filter.label_context">
+        <source>filter.label_context</source>
+        <target>Kontext</target>
+      </trans-unit>
+      <trans-unit id="list.label_context">
+        <source>list.label_context</source>
+        <target>Kontext</target>
+      </trans-unit>
+      <trans-unit id="form.label_context">
+        <source>form.label_context</source>
+        <target>Kontext</target>
+      </trans-unit>
+      <trans-unit id="tree_catalog_title">
+        <source>tree_catalog_title</source>
+        <target>Kategórie</target>
+      </trans-unit>
+      <trans-unit id="element.tree_site_label">
+        <source>element.tree_site_label</source>
+        <target>Kategórie</target>
+      </trans-unit>
+      <trans-unit id="classification.list_mode">
+        <source>classification.list_mode</source>
+        <target>Zoznam</target>
+      </trans-unit>
+      <trans-unit id="classification.tree_mode">
+        <source>classification.tree_mode</source>
+        <target>Strom</target>
+      </trans-unit>
+      <trans-unit id="breadcrumb.link_category_tree">
+        <source>breadcrumb.link_category_tree</source>
+        <target>Kategória</target>
+      </trans-unit>
+      <trans-unit id="active">
+        <source>active</source>
+        <target>aktívny</target>
+      </trans-unit>
+      <trans-unit id="disabled">
+        <source>disabled</source>
+        <target>neaktívny</target>
+      </trans-unit>
+      <trans-unit id="form.label_category">
+        <source>form.label_category</source>
+        <target>Kategória</target>
+      </trans-unit>
+      <trans-unit id="form.label_collection">
+        <source>form.label_collection</source>
+        <target>Kolekcia</target>
+      </trans-unit>
+      <trans-unit id="form.label_tag">
+        <source>form.label_tag</source>
+        <target>Tag</target>
+      </trans-unit>
+      <trans-unit id="form.label_title">
+        <source>form.label_title</source>
+        <target>Názov</target>
+      </trans-unit>
+      <trans-unit id="no_collections_found">
+        <source>no_collections_found</source>
+        <target>Nenašli sa žiadne kolekcie.</target>
+      </trans-unit>
+      <trans-unit id="no_categories_found">
+        <source>no_categories_found</source>
+        <target>Nenašli sa žiadne kategórie.</target>
+      </trans-unit>
+      <trans-unit id="no_tags_found">
+        <source>no_tags_found</source>
+        <target>Nenašli sa žiadne tagy.</target>
+      </trans-unit>
+      <trans-unit id="breadcrumb.link_category_create">
+        <source>breadcrumb.link_category_create</source>
+        <target>Vytvoriť</target>
+      </trans-unit>
+      <trans-unit id="breadcrumb.link_tag_create">
+        <source>breadcrumb.link_tag_create</source>
+        <target>Vytvoriť</target>
+      </trans-unit>
+      <trans-unit id="breadcrumb.link_collection_create">
+        <source>breadcrumb.link_collection_create</source>
+        <target>Vytvoriť</target>
+      </trans-unit>
+      <trans-unit id="breadcrumb.link_context_create">
+        <source>breadcrumb.link_context_create</source>
+        <target>Vytvoriť</target>
+      </trans-unit>
+      <trans-unit id="form_general">
+        <source>General</source>
+        <target>Všeobecné</target>
+      </trans-unit>
+      <trans-unit id="form_options">
+        <source>Options</source>
+        <target>Možnosti</target>
+      </trans-unit>
+      <trans-unit id="form.label_translation_domain">
+        <source>form.label_translation_domain</source>
+        <target>Prekladová doména</target>
+      </trans-unit>
+      <trans-unit id="form.label_icon">
+        <source>form.label_icon</source>
+        <target>Ikona</target>
+      </trans-unit>
+      <trans-unit id="form.label_class">
+        <source>form.label_class</source>
+        <target>CSS Trieda</target>
+      </trans-unit>
+      <trans-unit id="form.group_general">
+        <source>form.group_general</source>
+        <target>Všeobecné</target>
+      </trans-unit>
+      <trans-unit id="form.group_label_collections">
+        <source>form.group_label_collections</source>
+        <target>Kolekcie</target>
+      </trans-unit>
+      <trans-unit id="form.group_label_contexts">
+        <source>form.group_label_contexts</source>
+        <target>Kontexty</target>
+      </trans-unit>
+      <trans-unit id="form.group_label_tags">
+        <source>form.group_label_tags</source>
+        <target>Tagy</target>
+      </trans-unit>
+      <trans-unit id="form.group_options">
+        <source>form.group_options</source>
+        <target>Možnosti</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

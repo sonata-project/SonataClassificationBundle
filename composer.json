@@ -44,7 +44,7 @@
         "dama/doctrine-test-bundle": "^8.0.1",
         "doctrine/doctrine-bundle": "^2.7",
         "doctrine/mongodb-odm": "^2.4",
-        "doctrine/orm": "^2.14",
+        "doctrine/orm": "^2.14 || ^3.0",
         "friendsofphp/php-cs-fixer": "^3.4",
         "knplabs/knp-menu": "^3.0",
         "knplabs/knp-menu-bundle": "^3.0",

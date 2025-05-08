@@ -28,7 +28,7 @@ final class CollectionFilterTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->collectionManager = $this->createStub(CollectionManagerInterface::class);
+        $this->collectionManager = static::createStub(CollectionManagerInterface::class);
     }
 
     public function testRenderSettings(): void

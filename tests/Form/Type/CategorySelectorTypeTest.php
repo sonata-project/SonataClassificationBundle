@@ -26,7 +26,7 @@ final class CategorySelectorTypeTest extends TestCase
 {
     public function testConfigureOptions(): void
     {
-        $manager = $this->createStub(CategoryManagerInterface::class);
+        $manager = static::createStub(CategoryManagerInterface::class);
         $categorySelectorType = new CategorySelectorType($manager);
         $optionsResolver = new OptionsResolver();
         $categorySelectorType->configureOptions($optionsResolver);

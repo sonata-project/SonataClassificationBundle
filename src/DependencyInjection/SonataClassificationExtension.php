@@ -138,7 +138,7 @@ final class SonataClassificationExtension extends Extension
         $categoryCascade = ['persist', 'refresh', 'merge', 'detach'];
         $parents = class_parents($config['class']['category']);
         if (false !== $parents) {
-            $categoryIsEntity = \in_array(BaseCategory::class, class_parents($config['class']['category']), true);
+            $categoryIsEntity = \in_array(BaseCategory::class, $parents, true);
             if ($categoryIsEntity && class_exists(EntityManager::class) && !method_exists(EntityManager::class, 'merge')) { // @phpstan-ignore-line
                 unset($categoryCascade[array_search('merge', $categoryCascade, true)]);
             }

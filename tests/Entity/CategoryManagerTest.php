@@ -20,7 +20,7 @@ use Sonata\ClassificationBundle\Tests\App\Entity\Category;
 use Sonata\ClassificationBundle\Tests\App\Entity\Context;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
-class CategoryManagerTest extends KernelTestCase
+final class CategoryManagerTest extends KernelTestCase
 {
     public function testGetRootCategoryWithChildren(): void
     {

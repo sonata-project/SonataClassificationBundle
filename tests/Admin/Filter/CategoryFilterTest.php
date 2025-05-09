@@ -30,7 +30,7 @@ final class CategoryFilterTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->categoryManager = $this->createStub(CategoryManagerInterface::class);
+        $this->categoryManager = static::createStub(CategoryManagerInterface::class);
     }
 
     public function testRenderSettings(): void

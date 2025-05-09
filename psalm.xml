@@ -12,11 +12,7 @@
         <pluginClass class="Psalm\PhpUnitPlugin\Plugin"/>
     </plugins>
     <issueHandlers>
-        <InternalMethod>
-            <errorLevel type="suppress">
-                <directory name="tests/Controller"/>
-            </errorLevel>
-        </InternalMethod>
         <MissingClassConstType errorLevel="suppress"/>
+        <MissingOverrideAttribute errorLevel="suppress"/>
     </issueHandlers>
 </psalm>

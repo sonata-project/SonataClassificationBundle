@@ -11,6 +11,3 @@ parameters:
             message: "#^Parameter \\#2 \\$category of method Sonata\\\\ClassificationBundle\\\\Form\\\\Type\\\\CategorySelectorType\\:\\:childWalker\\(\\) expects Sonata\\\\ClassificationBundle\\\\Model\\\\CategoryInterface, Sonata\\\\ClassificationBundle\\\\Model\\\\CategoryInterface\\|Sonata\\\\ClassificationBundle\\\\Model\\\\ContextInterface given\\.$#"
             count: 1
             path: src/Form/Type/CategorySelectorType.php
-        -
-            message: '#^Call to method get\(\) of internal class Symfony\\Bundle\\FrameworkBundle\\Test\\TestContainer from outside its root namespace Symfony.$#'
-            path: tests/

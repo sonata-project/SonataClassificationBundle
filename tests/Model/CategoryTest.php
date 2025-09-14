@@ -29,7 +29,7 @@ final class CategoryTest extends TestCase
         $context = $this->createMock(ContextInterface::class);
 
         $category = new class extends Category {
-            public function getId()
+            public function getId(): int
             {
                 return 42;
             }
@@ -67,14 +67,14 @@ final class CategoryTest extends TestCase
     public function testParent(): void
     {
         $parent = new class extends Category {
-            public function getId()
+            public function getId(): int
             {
                 return 33;
             }
         };
 
         $category = new class extends Category {
-            public function getId()
+            public function getId(): int
             {
                 return 42;
             }
@@ -87,19 +87,19 @@ final class CategoryTest extends TestCase
     public function testChildren(): void
     {
         $cat1 = new class extends Category {
-            public function getId()
+            public function getId(): int
             {
                 return 1;
             }
         };
         $cat2 = new class extends Category {
-            public function getId()
+            public function getId(): int
             {
                 return 2;
             }
         };
         $cat3 = new class extends Category {
-            public function getId()
+            public function getId(): int
             {
                 return 3;
             }
@@ -108,7 +108,7 @@ final class CategoryTest extends TestCase
         $context = $this->createMock(ContextInterface::class);
 
         $category = new class extends Category {
-            public function getId()
+            public function getId(): int
             {
                 return 42;
             }
@@ -136,7 +136,7 @@ final class CategoryTest extends TestCase
     public function testPrePersist(): void
     {
         $category = new class extends Category {
-            public function getId()
+            public function getId(): int
             {
                 return 42;
             }
@@ -150,7 +150,7 @@ final class CategoryTest extends TestCase
     public function testPreUpdate(): void
     {
         $category = new class extends Category {
-            public function getId()
+            public function getId(): int
             {
                 return 42;
             }

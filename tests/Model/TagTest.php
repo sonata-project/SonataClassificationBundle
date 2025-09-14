@@ -29,7 +29,7 @@ final class TagTest extends TestCase
         $context = $this->createMock(ContextInterface::class);
 
         $tag = new class extends Tag {
-            public function getId()
+            public function getId(): int
             {
                 return 42;
             }
@@ -63,7 +63,7 @@ final class TagTest extends TestCase
     public function testPreUpdate(): void
     {
         $tag = new class extends Tag {
-            public function getId()
+            public function getId(): int
             {
                 return 42;
             }

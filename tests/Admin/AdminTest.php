@@ -13,11 +13,13 @@ declare(strict_types=1);
 
 namespace Sonata\ClassificationBundle\Tests\Admin;
 
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Admin\AdminExtensionInterface;
 use Sonata\ClassificationBundle\Admin\ContextAdmin;
 use Sonata\ClassificationBundle\Admin\ContextAwareAdmin;
+use Sonata\ClassificationBundle\Model\ContextAwareInterface;
 use Sonata\ClassificationBundle\Model\ContextManagerInterface;
 
 final class AdminTest extends TestCase
@@ -44,6 +46,7 @@ final class AdminTest extends TestCase
             'hide_context' => 0,
         ];
 
+        /** @phpstan-extends ContextAwareAdmin<ContextAwareInterface> */
         $admin = new class($this->contextManager) extends ContextAwareAdmin {};
 
         static::assertSame($expected, $admin->getPersistentParameters());
@@ -51,6 +54,7 @@ final class AdminTest extends TestCase
 
     public function testGetPersistentParametersWithValidExtension(): void
     {
+        /** @phpstan-extends ContextAwareAdmin<ContextAwareInterface> */
         $admin = new class($this->contextManager) extends ContextAwareAdmin {
             public function __construct(ContextManagerInterface $contextManager)
             {

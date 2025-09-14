@@ -266,7 +266,7 @@ final class CategoryAdminControllerTest extends TestCase
         $categoriesMock = [];
         foreach ($categories as $category) {
             $categoryMock = new class extends Category {
-                public function getId()
+                public function getId(): int
                 {
                     return 42;
                 }

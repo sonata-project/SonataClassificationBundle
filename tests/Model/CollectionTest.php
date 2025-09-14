@@ -29,7 +29,7 @@ final class CollectionTest extends TestCase
         $context = $this->createMock(ContextInterface::class);
 
         $collection = new class extends Collection {
-            public function getId()
+            public function getId(): int
             {
                 return 42;
             }
@@ -65,7 +65,7 @@ final class CollectionTest extends TestCase
     public function testPrePersist(): void
     {
         $collection = new class extends Collection {
-            public function getId()
+            public function getId(): int
             {
                 return 42;
             }
@@ -79,7 +79,7 @@ final class CollectionTest extends TestCase
     public function testPreUpdate(): void
     {
         $collection = new class extends Collection {
-            public function getId()
+            public function getId(): int
             {
                 return 42;
             }

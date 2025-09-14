@@ -26,7 +26,7 @@ final class ContextTest extends TestCase
         $time = new \DateTime();
 
         $context = new class extends Context {
-            public function getId(): ?string
+            public function getId(): string
             {
                 return '2';
             }
@@ -49,7 +49,7 @@ final class ContextTest extends TestCase
     public function testPreUpdate(): void
     {
         $context = new class extends Context {
-            public function getId(): ?string
+            public function getId(): string
             {
                 return '42';
             }

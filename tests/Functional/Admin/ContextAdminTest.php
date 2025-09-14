@@ -13,15 +13,14 @@ declare(strict_types=1);
 
 namespace Sonata\ClassificationBundle\Tests\Functional\Admin;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use Doctrine\ORM\EntityManagerInterface;
 use Sonata\ClassificationBundle\Tests\App\Entity\Context;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 final class ContextAdminTest extends WebTestCase
 {
-    /**
-     * @dataProvider provideCrudUrlsCases
-     */
+    #[DataProvider('provideCrudUrlsCases')]
     public function testCrudUrls(string $url): void
     {
         $client = self::createClient();
@@ -47,11 +46,11 @@ final class ContextAdminTest extends WebTestCase
     }
 
     /**
-     * @dataProvider provideFormsUrlsCases
      *
      * @param array<string, mixed> $parameters
      * @param array<string, mixed> $fieldValues
      */
+    #[DataProvider('provideFormsUrlsCases')]
     public function testFormsUrls(string $url, array $parameters, string $button, array $fieldValues = []): void
     {
         $client = self::createClient();

@@ -44,18 +44,19 @@ final class AdminTest extends TestCase
             'hide_context' => 0,
         ];
 
-        $admin = $this->getMockForAbstractClass(ContextAwareAdmin::class, [
-            $this->contextManager,
-        ]);
+        $admin = new class($this->contextManager) extends ContextAwareAdmin {};
 
         static::assertSame($expected, $admin->getPersistentParameters());
     }
 
     public function testGetPersistentParametersWithValidExtension(): void
     {
-        $admin = $this->getMockForAbstractClass(ContextAwareAdmin::class, [
-            $this->contextManager,
-        ]);
+        $admin = new class($this->contextManager) extends ContextAwareAdmin {
+            public function __construct(ContextManagerInterface $contextManager)
+            {
+                parent::__construct($contextManager);
+            }
+        };
 
         $extension = $this->createMock(AdminExtensionInterface::class);
         $extension->expects(static::once())->method('configurePersistentParameters')->with(

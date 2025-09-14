@@ -25,10 +25,12 @@ final class ContextTest extends TestCase
     {
         $time = new \DateTime();
 
-        $context = $this->getMockForAbstractClass(Context::class);
-        // id is an int in ContextInterface and Context but used as string in implementation
-        // see ContextInterface::DEFAULT_CONTEXT
-        $context->setId('2');
+        $context = new class extends Context {
+            public function getId(): ?string
+            {
+                return '2';
+            }
+        };
         $context->setName('Hello World');
         $context->setCreatedAt($time);
         $context->setUpdatedAt($time);
@@ -46,7 +48,12 @@ final class ContextTest extends TestCase
 
     public function testPreUpdate(): void
     {
-        $context = $this->getMockForAbstractClass(Context::class);
+        $context = new class extends Context {
+            public function getId(): ?string
+            {
+                return '42';
+            }
+        };
         $context->preUpdate();
 
         static::assertInstanceOf(\DateTime::class, $context->getUpdatedAt());

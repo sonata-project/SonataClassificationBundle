@@ -28,7 +28,12 @@ final class CollectionTest extends TestCase
 
         $context = $this->createMock(ContextInterface::class);
 
-        $collection = $this->getMockForAbstractClass(Collection::class);
+        $collection = new class extends Collection {
+            public function getId()
+            {
+                return 42;
+            }
+        };
         $collection->setName('Hello World');
         $collection->setCreatedAt($time);
         $collection->setUpdatedAt($time);
@@ -59,7 +64,12 @@ final class CollectionTest extends TestCase
 
     public function testPrePersist(): void
     {
-        $collection = $this->getMockForAbstractClass(Collection::class);
+        $collection = new class extends Collection {
+            public function getId()
+            {
+                return 42;
+            }
+        };
         $collection->prePersist();
 
         static::assertInstanceOf(\DateTime::class, $collection->getCreatedAt());
@@ -68,7 +78,12 @@ final class CollectionTest extends TestCase
 
     public function testPreUpdate(): void
     {
-        $collection = $this->getMockForAbstractClass(Collection::class);
+        $collection = new class extends Collection {
+            public function getId()
+            {
+                return 42;
+            }
+        };
         $collection->preUpdate();
 
         static::assertInstanceOf(\DateTime::class, $collection->getUpdatedAt());

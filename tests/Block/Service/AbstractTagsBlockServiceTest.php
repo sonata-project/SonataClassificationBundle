@@ -52,9 +52,7 @@ final class AbstractTagsBlockServiceTest extends BlockServiceTestCase
 
     public function testDefaultSettings(): void
     {
-        $blockService = $this->getMockForAbstractClass(AbstractTagsBlockService::class, [
-            $this->twig, $this->contextManager, $this->tagManager, $this->tagAdmin,
-        ]);
+        $blockService = new class($this->twig, $this->contextManager, $this->tagManager, $this->tagAdmin) extends AbstractTagsBlockService {};
         $blockContext = $this->getBlockContext($blockService);
 
         $this->assertSettings([
@@ -71,9 +69,7 @@ final class AbstractTagsBlockServiceTest extends BlockServiceTestCase
 
     public function testLoad(): void
     {
-        $tag = $this->getMockBuilder(TagInterface::class)
-            ->disableOriginalConstructor()
-            ->getMockForAbstractClass();
+        $tag = $this->createMock(TagInterface::class);
         $tag->expects(static::any())->method('getId')->willReturn(23);
 
         $this->tagManager->expects(static::any())
@@ -90,17 +86,13 @@ final class AbstractTagsBlockServiceTest extends BlockServiceTestCase
             ->method('setSetting')
             ->with(static::equalTo('tagId'), static::equalTo($tag));
 
-        $blockService = $this->getMockForAbstractClass(AbstractTagsBlockService::class, [
-            $this->twig, $this->contextManager, $this->tagManager, $this->tagAdmin,
-        ]);
+        $blockService = new class($this->twig, $this->contextManager, $this->tagManager, $this->tagAdmin) extends AbstractTagsBlockService {};
         $blockService->load($block);
     }
 
     public function testPrePersist(): void
     {
-        $tag = $this->getMockBuilder(TagInterface::class)
-            ->disableOriginalConstructor()
-            ->getMockForAbstractClass();
+        $tag = $this->createMock(TagInterface::class);
         $tag->expects(static::any())->method('getId')->willReturn(23);
 
         $block = $this->createMock(BlockInterface::class);
@@ -112,17 +104,13 @@ final class AbstractTagsBlockServiceTest extends BlockServiceTestCase
             ->method('setSetting')
             ->with(static::equalTo('tagId'), static::equalTo(23));
 
-        $blockService = $this->getMockForAbstractClass(AbstractTagsBlockService::class, [
-            $this->twig, $this->contextManager, $this->tagManager, $this->tagAdmin,
-        ]);
+        $blockService = new class($this->twig, $this->contextManager, $this->tagManager, $this->tagAdmin) extends AbstractTagsBlockService {};
         $blockService->prePersist($block);
     }
 
     public function testPreUpdate(): void
     {
-        $tag = $this->getMockBuilder(TagInterface::class)
-            ->disableOriginalConstructor()
-            ->getMockForAbstractClass();
+        $tag = $this->createMock(TagInterface::class);
         $tag->expects(static::any())->method('getId')->willReturn(23);
 
         $block = $this->createMock(BlockInterface::class);
@@ -134,9 +122,7 @@ final class AbstractTagsBlockServiceTest extends BlockServiceTestCase
             ->method('setSetting')
             ->with(static::equalTo('tagId'), static::equalTo(23));
 
-        $blockService = $this->getMockForAbstractClass(AbstractTagsBlockService::class, [
-            $this->twig, $this->contextManager, $this->tagManager, $this->tagAdmin,
-        ]);
+        $blockService = new class($this->twig, $this->contextManager, $this->tagManager, $this->tagAdmin) extends AbstractTagsBlockService {};
         $blockService->preUpdate($block);
     }
 }

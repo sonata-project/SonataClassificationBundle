@@ -265,7 +265,12 @@ final class CategoryAdminControllerTest extends TestCase
 
         $categoriesMock = [];
         foreach ($categories as $category) {
-            $categoryMock = $this->getMockForAbstractClass(Category::class);
+            $categoryMock = new class extends Category {
+                public function getId()
+                {
+                    return 42;
+                }
+            };
             $categoryMock->setName($category[0]);
 
             $contextId = $category[1];

@@ -28,7 +28,12 @@ final class TagTest extends TestCase
 
         $context = $this->createMock(ContextInterface::class);
 
-        $tag = $this->getMockForAbstractClass(Tag::class);
+        $tag = new class extends Tag {
+            public function getId()
+            {
+                return 42;
+            }
+        };
         $tag->setName('Hello World');
         $tag->setCreatedAt($time);
         $tag->setUpdatedAt($time);
@@ -57,7 +62,12 @@ final class TagTest extends TestCase
 
     public function testPreUpdate(): void
     {
-        $tag = $this->getMockForAbstractClass(Tag::class);
+        $tag = new class extends Tag {
+            public function getId()
+            {
+                return 42;
+            }
+        };
         $tag->preUpdate();
 
         static::assertInstanceOf(\DateTime::class, $tag->getUpdatedAt());

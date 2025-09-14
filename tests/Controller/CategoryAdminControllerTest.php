@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sonata\ClassificationBundle\Tests\Controller;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
@@ -172,9 +173,7 @@ final class CategoryAdminControllerTest extends TestCase
         static::assertSame('tree?hide_context=0', $result->getTargetUrl());
     }
 
-    /**
-     * @dataProvider provideListActionCases
-     */
+    #[DataProvider('provideListActionCases')]
     public function testListAction(string|false $context): void
     {
         $contextValue = false === $context ? '' : $context;
@@ -219,17 +218,16 @@ final class CategoryAdminControllerTest extends TestCase
     /**
      * @return iterable<string, array{string|false}>
      */
-    public function provideListActionCases(): iterable
+    public static function provideListActionCases(): iterable
     {
         yield 'context' => ['default'];
         yield 'no context' => [false];
     }
 
     /**
-     * @dataProvider provideTreeActionCases
-     *
      * @param array<array{string, string}> $categories
      */
+    #[DataProvider('provideTreeActionCases')]
     public function testTreeAction(string|false $context, array $categories): void
     {
         $datagrid = $this->createMock(DatagridInterface::class);
@@ -267,7 +265,12 @@ final class CategoryAdminControllerTest extends TestCase
 
         $categoriesMock = [];
         foreach ($categories as $category) {
-            $categoryMock = $this->getMockForAbstractClass(Category::class);
+            $categoryMock = new class extends Category {
+                public function getId(): int
+                {
+                    return 42;
+                }
+            };
             $categoryMock->setName($category[0]);
 
             $contextId = $category[1];
@@ -290,7 +293,7 @@ final class CategoryAdminControllerTest extends TestCase
     /**
      * @return iterable<string, array{string|false, array<array{string, string}>}>
      */
-    public function provideTreeActionCases(): iterable
+    public static function provideTreeActionCases(): iterable
     {
         yield 'context and no categories' => ['default', []];
         yield 'no context and no categories' => [false, []];

@@ -28,7 +28,12 @@ final class CategoryTest extends TestCase
 
         $context = $this->createMock(ContextInterface::class);
 
-        $category = $this->getMockForAbstractClass(Category::class);
+        $category = new class extends Category {
+            public function getId(): int
+            {
+                return 42;
+            }
+        };
         $category->setName('Hello World');
         $category->setEnabled(true);
         $category->setDescription('My description');
@@ -61,9 +66,19 @@ final class CategoryTest extends TestCase
 
     public function testParent(): void
     {
-        $parent = $this->getMockForAbstractClass(Category::class);
+        $parent = new class extends Category {
+            public function getId(): int
+            {
+                return 33;
+            }
+        };
 
-        $category = $this->getMockForAbstractClass(Category::class);
+        $category = new class extends Category {
+            public function getId(): int
+            {
+                return 42;
+            }
+        };
         $category->setParent($parent);
         static::assertSame($parent, $category->getParent());
         static::assertCount(1, $parent->getChildren());
@@ -71,13 +86,33 @@ final class CategoryTest extends TestCase
 
     public function testChildren(): void
     {
-        $cat1 = $this->getMockForAbstractClass(Category::class);
-        $cat2 = $this->getMockForAbstractClass(Category::class);
-        $cat3 = $this->getMockForAbstractClass(Category::class);
+        $cat1 = new class extends Category {
+            public function getId(): int
+            {
+                return 1;
+            }
+        };
+        $cat2 = new class extends Category {
+            public function getId(): int
+            {
+                return 2;
+            }
+        };
+        $cat3 = new class extends Category {
+            public function getId(): int
+            {
+                return 3;
+            }
+        };
 
         $context = $this->createMock(ContextInterface::class);
 
-        $category = $this->getMockForAbstractClass(Category::class);
+        $category = new class extends Category {
+            public function getId(): int
+            {
+                return 42;
+            }
+        };
         $category->setContext($context);
         static::assertFalse($category->hasChildren());
 
@@ -100,7 +135,12 @@ final class CategoryTest extends TestCase
 
     public function testPrePersist(): void
     {
-        $category = $this->getMockForAbstractClass(Category::class);
+        $category = new class extends Category {
+            public function getId(): int
+            {
+                return 42;
+            }
+        };
         $category->prePersist();
 
         static::assertInstanceOf(\DateTime::class, $category->getCreatedAt());
@@ -109,7 +149,12 @@ final class CategoryTest extends TestCase
 
     public function testPreUpdate(): void
     {
-        $category = $this->getMockForAbstractClass(Category::class);
+        $category = new class extends Category {
+            public function getId(): int
+            {
+                return 42;
+            }
+        };
         $category->preUpdate();
 
         static::assertInstanceOf(\DateTime::class, $category->getUpdatedAt());

@@ -52,9 +52,7 @@ final class AbstractCollectionsBlockServiceTest extends BlockServiceTestCase
 
     public function testDefaultSettings(): void
     {
-        $blockService = $this->getMockForAbstractClass(AbstractCollectionsBlockService::class, [
-            $this->twig, $this->contextManager, $this->collectionManager, $this->collectionAdmin,
-        ]);
+        $blockService = new class($this->twig, $this->contextManager, $this->collectionManager, $this->collectionAdmin) extends AbstractCollectionsBlockService {};
         $blockContext = $this->getBlockContext($blockService);
 
         $this->assertSettings([
@@ -71,9 +69,7 @@ final class AbstractCollectionsBlockServiceTest extends BlockServiceTestCase
 
     public function testLoad(): void
     {
-        $collection = $this->getMockBuilder(CollectionInterface::class)
-            ->disableOriginalConstructor()
-            ->getMockForAbstractClass();
+        $collection = $this->createMock(CollectionInterface::class);
         $collection->expects(static::any())->method('getId')->willReturn(23);
 
         $this->collectionManager->expects(static::any())
@@ -90,17 +86,13 @@ final class AbstractCollectionsBlockServiceTest extends BlockServiceTestCase
             ->method('setSetting')
             ->with(static::equalTo('collectionId'), static::equalTo($collection));
 
-        $blockService = $this->getMockForAbstractClass(AbstractCollectionsBlockService::class, [
-            $this->twig, $this->contextManager, $this->collectionManager, $this->collectionAdmin,
-        ]);
+        $blockService = new class($this->twig, $this->contextManager, $this->collectionManager, $this->collectionAdmin) extends AbstractCollectionsBlockService {};
         $blockService->load($block);
     }
 
     public function testPrePersist(): void
     {
-        $collection = $this->getMockBuilder(CollectionInterface::class)
-            ->disableOriginalConstructor()
-            ->getMockForAbstractClass();
+        $collection = $this->createMock(CollectionInterface::class);
         $collection->expects(static::any())->method('getId')->willReturn(23);
 
         $block = $this->createMock(BlockInterface::class);
@@ -112,17 +104,13 @@ final class AbstractCollectionsBlockServiceTest extends BlockServiceTestCase
             ->method('setSetting')
             ->with(static::equalTo('collectionId'), static::equalTo(23));
 
-        $blockService = $this->getMockForAbstractClass(AbstractCollectionsBlockService::class, [
-            $this->twig, $this->contextManager, $this->collectionManager, $this->collectionAdmin,
-        ]);
+        $blockService = new class($this->twig, $this->contextManager, $this->collectionManager, $this->collectionAdmin) extends AbstractCollectionsBlockService {};
         $blockService->prePersist($block);
     }
 
     public function testPreUpdate(): void
     {
-        $collection = $this->getMockBuilder(CollectionInterface::class)
-            ->disableOriginalConstructor()
-            ->getMockForAbstractClass();
+        $collection = $this->createMock(CollectionInterface::class);
         $collection->expects(static::any())->method('getId')->willReturn(23);
 
         $block = $this->createMock(BlockInterface::class);
@@ -134,9 +122,7 @@ final class AbstractCollectionsBlockServiceTest extends BlockServiceTestCase
             ->method('setSetting')
             ->with(static::equalTo('collectionId'), static::equalTo(23));
 
-        $blockService = $this->getMockForAbstractClass(AbstractCollectionsBlockService::class, [
-            $this->twig, $this->contextManager, $this->collectionManager, $this->collectionAdmin,
-        ]);
+        $blockService = new class($this->twig, $this->contextManager, $this->collectionManager, $this->collectionAdmin) extends AbstractCollectionsBlockService {};
         $blockService->preUpdate($block);
     }
 }

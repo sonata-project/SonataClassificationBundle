@@ -52,9 +52,7 @@ final class AbstractCategoriesBlockServiceTest extends BlockServiceTestCase
 
     public function testDefaultSettings(): void
     {
-        $blockService = $this->getMockForAbstractClass(AbstractCategoriesBlockService::class, [
-            $this->twig, $this->contextManager, $this->categoryManager, $this->categoryAdmin,
-        ]);
+        $blockService = new class($this->twig, $this->contextManager, $this->categoryManager, $this->categoryAdmin) extends AbstractCategoriesBlockService {};
         $blockContext = $this->getBlockContext($blockService);
 
         $this->assertSettings([
@@ -71,9 +69,7 @@ final class AbstractCategoriesBlockServiceTest extends BlockServiceTestCase
 
     public function testLoad(): void
     {
-        $category = $this->getMockBuilder(CategoryInterface::class)
-            ->disableOriginalConstructor()
-            ->getMockForAbstractClass();
+        $category = $this->createMock(CategoryInterface::class);
         $category->expects(static::any())->method('getId')->willReturn(23);
 
         $this->categoryManager->expects(static::any())
@@ -90,17 +86,13 @@ final class AbstractCategoriesBlockServiceTest extends BlockServiceTestCase
             ->method('setSetting')
             ->with(static::equalTo('categoryId'), static::equalTo($category));
 
-        $blockService = $this->getMockForAbstractClass(AbstractCategoriesBlockService::class, [
-            $this->twig, $this->contextManager, $this->categoryManager, $this->categoryAdmin,
-        ]);
+        $blockService = new class($this->twig, $this->contextManager, $this->categoryManager, $this->categoryAdmin) extends AbstractCategoriesBlockService {};
         $blockService->load($block);
     }
 
     public function testPrePersist(): void
     {
-        $category = $this->getMockBuilder(CategoryInterface::class)
-            ->disableOriginalConstructor()
-            ->getMockForAbstractClass();
+        $category = $this->createMock(CategoryInterface::class);
         $category->expects(static::any())->method('getId')->willReturn(23);
 
         $block = $this->createMock(BlockInterface::class);
@@ -112,17 +104,13 @@ final class AbstractCategoriesBlockServiceTest extends BlockServiceTestCase
             ->method('setSetting')
             ->with(static::equalTo('categoryId'), static::equalTo(23));
 
-        $blockService = $this->getMockForAbstractClass(AbstractCategoriesBlockService::class, [
-            $this->twig, $this->contextManager, $this->categoryManager, $this->categoryAdmin,
-        ]);
+        $blockService = new class($this->twig, $this->contextManager, $this->categoryManager, $this->categoryAdmin) extends AbstractCategoriesBlockService {};
         $blockService->prePersist($block);
     }
 
     public function testPreUpdate(): void
     {
-        $category = $this->getMockBuilder(CategoryInterface::class)
-            ->disableOriginalConstructor()
-            ->getMockForAbstractClass();
+        $category = $this->createMock(CategoryInterface::class);
         $category->expects(static::any())->method('getId')->willReturn(23);
 
         $block = $this->createMock(BlockInterface::class);
@@ -134,9 +122,7 @@ final class AbstractCategoriesBlockServiceTest extends BlockServiceTestCase
             ->method('setSetting')
             ->with(static::equalTo('categoryId'), static::equalTo(23));
 
-        $blockService = $this->getMockForAbstractClass(AbstractCategoriesBlockService::class, [
-            $this->twig, $this->contextManager, $this->categoryManager, $this->categoryAdmin,
-        ]);
+        $blockService = new class($this->twig, $this->contextManager, $this->categoryManager, $this->categoryAdmin) extends AbstractCategoriesBlockService {};
         $blockService->preUpdate($block);
     }
 }

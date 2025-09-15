@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sonata\ClassificationBundle\Tests\Functional\Admin;
 
 use Doctrine\ORM\EntityManagerInterface;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Sonata\ClassificationBundle\Tests\App\Entity\Category;
 use Sonata\ClassificationBundle\Tests\App\Entity\Context;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
@@ -22,9 +23,8 @@ final class CategoryAdminTest extends WebTestCase
 {
     /**
      * @param array<string, mixed> $parameters
-     *
-     * @dataProvider provideCrudUrlsCases
      */
+    #[DataProvider('provideCrudUrlsCases')]
     public function testCrudUrls(string $url, array $parameters = []): void
     {
         $client = self::createClient();
@@ -57,11 +57,10 @@ final class CategoryAdminTest extends WebTestCase
     }
 
     /**
-     * @dataProvider provideFormsUrlsCases
-     *
      * @param array<string, mixed> $parameters
      * @param array<string, mixed> $fieldValues
      */
+    #[DataProvider('provideFormsUrlsCases')]
     public function testFormsUrls(string $url, array $parameters, string $button, array $fieldValues = []): void
     {
         $client = self::createClient();

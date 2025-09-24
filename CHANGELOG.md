@@ -2,6 +2,14 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [4.10.0](https://github.com/sonata-project/SonataClassificationBundle/compare/4.9.1...4.10.0) - 2025-09-23
+### Added
+- [[#994](https://github.com/sonata-project/SonataClassificationBundle/pull/994)] Support for `doctrine/persistence` 4.0. ([@jordisala1991](https://github.com/jordisala1991))
+
+## [4.9.1](https://github.com/sonata-project/SonataClassificationBundle/compare/4.9.0...4.9.1) - 2024-11-14
+### Fixed
+- [[#979](https://github.com/sonata-project/SonataClassificationBundle/pull/979)] Use cascade `merge` only if it's available in `doctrine/orm` ([@fbuchlak](https://github.com/fbuchlak))
+
 ## [4.9.0](https://github.com/sonata-project/SonataClassificationBundle/compare/4.8.1...4.9.0) - 2024-11-14
 ### Added
 - [[#972](https://github.com/sonata-project/SonataClassificationBundle/pull/972)] Slovak translations ([@fbuchlak](https://github.com/fbuchlak))

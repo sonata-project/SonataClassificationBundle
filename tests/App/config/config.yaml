@@ -37,8 +37,6 @@ doctrine:
     dbal:
         driver: pdo_sqlite
         path: "%app.base_dir%sonata_classification_test.db3"
-        # "dama/doctrine-test-bundle" relies on savepoints.
-        use_savepoints: true
     orm:
         entity_managers:
             default:

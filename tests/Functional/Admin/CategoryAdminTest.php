@@ -117,7 +117,7 @@ final class CategoryAdminTest extends WebTestCase
     private function prepareData(): void
     {
         $manager = self::getContainer()->get('doctrine.orm.entity_manager');
-        \assert($manager instanceof EntityManagerInterface);
+        static::assertInstanceOf(EntityManagerInterface::class, $manager);
 
         $context = new Context();
         $context->setId('default');
@@ -136,7 +136,7 @@ final class CategoryAdminTest extends WebTestCase
     private function countCategories(): int
     {
         $manager = static::getContainer()->get('doctrine.orm.entity_manager');
-        \assert($manager instanceof EntityManagerInterface);
+        static::assertInstanceOf(EntityManagerInterface::class, $manager);
 
         return $manager->getRepository(Category::class)->count([]);
     }

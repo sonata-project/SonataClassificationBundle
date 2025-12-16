@@ -42,7 +42,7 @@ final class CollectionManagerTest extends KernelTestCase
     private function prepareData(): void
     {
         $manager = self::getContainer()->get('doctrine.orm.entity_manager');
-        \assert($manager instanceof EntityManagerInterface);
+        static::assertInstanceOf(EntityManagerInterface::class, $manager);
 
         $context = new Context();
         $context->setId('1');
@@ -62,7 +62,7 @@ final class CollectionManagerTest extends KernelTestCase
     private function getCollectionManager(): CollectionManagerInterface
     {
         $collectionManager = self::getContainer()->get('sonata.classification.manager.collection');
-        \assert($collectionManager instanceof CollectionManagerInterface);
+        static::assertInstanceOf(CollectionManagerInterface::class, $collectionManager);
 
         return $collectionManager;
     }

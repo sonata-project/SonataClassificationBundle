@@ -27,12 +27,12 @@ final class AdminTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->contextManager = $this->createMock(ContextManagerInterface::class);
+        $this->contextManager = static::createStub(ContextManagerInterface::class);
     }
 
     public function testAbstractAdminChildren(): void
     {
-        $contextAwareAdmin = $this->createMock(ContextAwareAdmin::class);
+        $contextAwareAdmin = static::createStub(ContextAwareAdmin::class);
         static::assertInstanceOf(AbstractAdmin::class, $contextAwareAdmin);
         $contextAdmin = new ContextAdmin();
         static::assertInstanceOf(AbstractAdmin::class, $contextAdmin);

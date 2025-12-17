@@ -42,7 +42,7 @@ final class TagManagerTest extends KernelTestCase
     private function prepareData(): void
     {
         $manager = self::getContainer()->get('doctrine.orm.entity_manager');
-        \assert($manager instanceof EntityManagerInterface);
+        static::assertInstanceOf(EntityManagerInterface::class, $manager);
 
         $context = new Context();
         $context->setId('1');
@@ -62,7 +62,7 @@ final class TagManagerTest extends KernelTestCase
     private function getTagManager(): TagManagerInterface
     {
         $tagManager = self::getContainer()->get('sonata.classification.manager.tag');
-        \assert($tagManager instanceof TagManagerInterface);
+        static::assertInstanceOf(TagManagerInterface::class, $tagManager);
 
         return $tagManager;
     }

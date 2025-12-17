@@ -64,7 +64,7 @@ final class CategoryManagerTest extends KernelTestCase
     private function prepareData(): CategoryInterface
     {
         $manager = self::getContainer()->get('doctrine.orm.entity_manager');
-        \assert($manager instanceof EntityManagerInterface);
+        static::assertInstanceOf(EntityManagerInterface::class, $manager);
 
         $context = new Context();
         $context->setId('1');
@@ -106,7 +106,7 @@ final class CategoryManagerTest extends KernelTestCase
     private function getCategoryManager(): CategoryManagerInterface
     {
         $categoryManager = self::getContainer()->get('sonata.classification.manager.category');
-        \assert($categoryManager instanceof CategoryManagerInterface);
+        static::assertInstanceOf(CategoryManagerInterface::class, $categoryManager);
 
         return $categoryManager;
     }

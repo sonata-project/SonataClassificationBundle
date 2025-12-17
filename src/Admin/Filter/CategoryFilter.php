@@ -65,8 +65,6 @@ final class CategoryFilter extends Filter
     }
 
     /**
-     * @psalm-suppress DeprecatedClass
-     *
      * NEXT_MAJOR: Remove this method.
      */
     public function getRenderSettings(): array

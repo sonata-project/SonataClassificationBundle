@@ -48,7 +48,6 @@ final class CategorySelectorType extends AbstractType
      *     context: ContextInterface|null,
      *     category: CategoryInterface|null,
      * }> $options
-     * @psalm-param Options $options
      */
     public function getChoices(Options $options): array
     {

@@ -2,6 +2,17 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [4.11.0](https://github.com/sonata-project/SonataClassificationBundle/compare/4.10.0...4.11.0) - 2025-12-19
+### Added
+- [[#1001](https://github.com/sonata-project/SonataClassificationBundle/pull/1001)] Symfony 8 support ([@VincentLanglet](https://github.com/VincentLanglet))
+
+### Removed
+- [[#999](https://github.com/sonata-project/SonataClassificationBundle/pull/999)] Support for PHP 8.1 ([@dmaicher](https://github.com/dmaicher))
+- [[#999](https://github.com/sonata-project/SonataClassificationBundle/pull/999)] Support for Symfony 7.1 and 7.2 ([@dmaicher](https://github.com/dmaicher))
+- [[#999](https://github.com/sonata-project/SonataClassificationBundle/pull/999)] Support for `sonata-project/block-bundle` v4 ([@dmaicher](https://github.com/dmaicher))
+- [[#999](https://github.com/sonata-project/SonataClassificationBundle/pull/999)] Support for `sonata-project/form-extensions` v1 ([@dmaicher](https://github.com/dmaicher))
+- [[#999](https://github.com/sonata-project/SonataClassificationBundle/pull/999)] Support for `sonata-project/doctrine-extensions` v1 ([@dmaicher](https://github.com/dmaicher))
+
 ## [4.10.0](https://github.com/sonata-project/SonataClassificationBundle/compare/4.9.1...4.10.0) - 2025-09-23
 ### Added
 - [[#994](https://github.com/sonata-project/SonataClassificationBundle/pull/994)] Support for `doctrine/persistence` 4.0. ([@jordisala1991](https://github.com/jordisala1991))

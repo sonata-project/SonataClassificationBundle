@@ -58,7 +58,7 @@ file that was distributed with this source code.
             <div class="box-header">
                 <h1 class="box-title">
                     {{ 'tree_catalog_title'|trans({}, admin.translationdomain) }}
-                    {% if not app.request.get('hide_context') and current_context is not empty %}
+                    {% if not app.request.query.get('hide_context') and current_context is not empty %}
                         <div class="btn-group">
                             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                                 <strong class="text-info">{{ current_context.name }}</strong> <span class="caret"></span>

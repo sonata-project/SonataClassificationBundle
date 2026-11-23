@@ -36,7 +36,7 @@ final class CategoryFilterTest extends TestCase
     public function testRenderSettings(): void
     {
         $this->categoryManager->method('getAllRootCategories')->willReturn([
-            $category = $this->createCategory(),
+            $this->createCategory(),
         ]);
 
         $filter = new CategoryFilter($this->categoryManager);
@@ -53,7 +53,7 @@ final class CategoryFilterTest extends TestCase
     public function testRenderSettingsWithContext(): void
     {
         $this->categoryManager->method('getRootCategoriesForContext')->willReturn([
-            $category = $this->createCategory(),
+            $this->createCategory(),
         ]);
 
         $filter = new CategoryFilter($this->categoryManager);

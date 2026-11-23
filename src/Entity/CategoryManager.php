@@ -77,9 +77,7 @@ final class CategoryManager extends BaseEntityManager implements CategoryManager
 
     public function getRootCategoriesForContext(?ContextInterface $context = null): array
     {
-        if (null === $context) {
-            $context = $this->getContext();
-        }
+        $context ??= $this->getContext();
 
         $contextId = $context->getId();
         if (null === $contextId) {

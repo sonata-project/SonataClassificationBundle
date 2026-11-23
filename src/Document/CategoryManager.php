@@ -220,9 +220,7 @@ final class CategoryManager extends BaseDocumentManager implements CategoryManag
 
     private function getContext(ContextInterface|string|null $context): ContextInterface
     {
-        if (null === $context) {
-            $context = ContextInterface::DEFAULT_CONTEXT;
-        }
+        $context ??= ContextInterface::DEFAULT_CONTEXT;
 
         if ($context instanceof ContextInterface) {
             return $context;

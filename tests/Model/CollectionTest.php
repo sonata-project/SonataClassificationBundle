@@ -26,7 +26,7 @@ final class CollectionTest extends TestCase
     {
         $time = new \DateTime();
 
-        $context = $this->createMock(ContextInterface::class);
+        $context = $this->createStub(ContextInterface::class);
 
         $collection = new class extends Collection {
             public function getId(): int

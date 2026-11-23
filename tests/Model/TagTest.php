@@ -26,7 +26,7 @@ final class TagTest extends TestCase
     {
         $time = new \DateTime();
 
-        $context = $this->createMock(ContextInterface::class);
+        $context = $this->createStub(ContextInterface::class);
 
         $tag = new class extends Tag {
             public function getId(): int

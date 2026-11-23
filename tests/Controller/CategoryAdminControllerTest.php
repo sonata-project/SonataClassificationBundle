@@ -93,11 +93,10 @@ final class CategoryAdminControllerTest extends TestCase
         $this->request->attributes->set('_sonata_admin', 'admin_code');
 
         $twig = $this->createMock(Environment::class);
-        $formRenderer = $this->createMock(FormRenderer::class);
 
         $twig->expects(static::any())
             ->method('getRuntime')
-            ->willReturn($formRenderer);
+            ->willReturn($this->createStub(FormRenderer::class));
 
         $this->csrfProvider->expects(static::any())
             ->method('getToken')
@@ -107,7 +106,7 @@ final class CategoryAdminControllerTest extends TestCase
 
         $this->csrfProvider->expects(static::any())
             ->method('isTokenValid')
-            ->willReturnCallback(static function (CsrfToken $token) {
+            ->willReturnCallback(static function (CsrfToken $token): bool {
                 if ($token->getValue() === 'csrf-token-123_'.$token->getId()) {
                     return true;
                 }
@@ -133,7 +132,7 @@ final class CategoryAdminControllerTest extends TestCase
         $this->admin->expects(static::any())
             ->method('generateUrl')
             ->willReturnCallback(
-                static function (string $name, array $parameters = []) {
+                static function (string $name, array $parameters = []): string {
                     $result = $name;
                     if ([] !== $parameters) {
                         $result .= '?'.http_build_query($parameters);

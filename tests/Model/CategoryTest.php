@@ -26,7 +26,7 @@ final class CategoryTest extends TestCase
     {
         $time = new \DateTime();
 
-        $context = $this->createMock(ContextInterface::class);
+        $context = $this->createStub(ContextInterface::class);
 
         $category = new class extends Category {
             public function getId(): int
@@ -105,7 +105,7 @@ final class CategoryTest extends TestCase
             }
         };
 
-        $context = $this->createMock(ContextInterface::class);
+        $context = $this->createStub(ContextInterface::class);
 
         $category = new class extends Category {
             public function getId(): int
